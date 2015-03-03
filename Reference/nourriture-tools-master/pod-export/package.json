@@ -1,0 +1,13 @@
+{
+  "name": "nourriture-tools-pod-export",
+  "version": "0.0.1",
+  "description": "Utility for exporting product data relevant for Nourriture from open POD database",
+  "author": "Nourriture (https://github.com/Nourriture)",
+  "dependencies": {
+    "async": "0.9.0",
+    "lodash": "2.4.1"
+  },
+  "engines": {
+    "node": "*"
+  }
+}

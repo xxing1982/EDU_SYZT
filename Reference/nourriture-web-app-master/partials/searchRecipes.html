@@ -1,0 +1,35 @@
+<div class="main-container container" id="main-container">
+    <section class="panel">
+
+        <div class="page-header">
+            <h1>Search Recipes</h1>
+        </div>
+
+        <label class="control-label col-sm-3 no-padding-right" >Recipes :</label>
+        <div class="col-sm-9">
+            <input type="text" id="search-bar" class="input-xlarge" ng-model="recipe.name" />
+            <input id="recipe-search" type="button" class="btn btn-default" ng-model="search.button" ng-click="search(recipe.name)" value="Search"/>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 col-xs-3"></div>
+            <div class="col-sm-9 col-xs-9">
+                <div ng-repeat="recipe in recipeslist" class="row list-recipe">
+                    <div class="col-sm-3 col-xs-3">
+                        <a href="/#/recipes/profile/{{recipe._id}}" class="profile-picture">
+                            <img class="img-responsive" ng-src="{{recipe.picture}}" />
+                        </a>
+                    </div>
+                    <div class="col-sm-9 col-xs-9">
+                        <a href="/#/recipes/profile/{{recipe._id}}" style="text-decoration: none">
+                            <h3>{{recipe.title}}</h3>
+                        </a>
+                        <p>{{recipe.description}}</p>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-default" value="Load more" ng-click="loadMore()" ng-hide="loadshow">
+            </div>
+        </div>
+
+    </section>
+</div>

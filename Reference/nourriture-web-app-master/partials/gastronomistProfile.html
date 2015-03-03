@@ -1,0 +1,205 @@
+<div class="main-container container" id="main-container">
+    <div>
+        <div id="user-profile-1" class="user-profile row">
+            <div class="col-xs-12 col-sm-3 center">
+                <div>
+				    <span class="profile-picture">
+                        <img id="avatar" class="editable img-responsive editable-empty" alt="Gastronomist's Avatar" ng-src={{gastronomist.picture}}></img>
+					</span>
+
+                    <div class="space-4"></div>
+
+                    <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                        <div class="inline position-relative">
+                                <span class="white">{{gastronomist.name}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-6"></div>
+
+                <div class="profile-contact-info">
+                    <div class="profile-contact-links align-left">
+
+                        <a href="mailto:{{gastronomist.email}}" class="btn btn-link">
+                            <i class="ace-icon fa fa-envelope bigger-120 green"></i>
+                            Send an email
+                        </a>
+
+                        <a href={{gastronomist.website}} class="btn btn-link" target="_blank">
+                            <i class="ace-icon fa fa-globe bigger-125 green"></i>
+                            {{gastronomist.website}}
+                        </a>
+                    </div>
+
+                    <div class="space-6"></div>
+                </div>
+
+                <div class="hr hr12 dotted"></div>
+
+                <div class="clearfix">
+                    <div class="grid1">
+                        <span class="bigger-175 green">7</span>
+
+                        <br>
+                        Recipes
+                    </div>
+                </div>
+
+                <div class="hr hr16 dotted"></div>
+            </div>
+
+            <div class="col-xs-12 col-sm-9">
+
+                <div class="profile-user-info profile-user-info-striped">
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Name </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{gastronomist.name}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedGastronomist.name" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Biography </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{gastronomist.bio}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedGastronomist.bio" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Occupation </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{gastronomist.occupation}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedGastronomist.occupation" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row" ng-if="!isEditing">
+                        <div class="profile-info-name"> Joined </div>
+
+                        <div class="profile-info-value">
+                            <span class="text-muted" id="signup">{{ gastronomist.created|formatDate:"Mo MMM YYYY" }}</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row" ng-if="isEditing">
+                        <div class="profile-info-name"> Email </div>
+
+                        <div class="profile-info-value">
+                            <input type="text" ng-model="editedGastronomist.email" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row" ng-if="isEditing">
+                        <div class="profile-info-name"> Website </div>
+
+                        <div class="profile-info-value">
+                            <input type="text" ng-model="editedGastronomist.website" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+                <div class="btn-group pull-right" ng-show="username == gastronomist.username" ng-cloak>
+                    <button type="button" class="pull-right btn btn-sm btn-danger" ng-if="!isEditing" ng-click="delete()">
+                        <i class="ace-icon fa fa-trash"></i>
+                        <span class="bigger-110">Delete Gastronomist</span>
+                    </button>
+
+                    <button type="button" class="pull-right btn btn-sm btn-primary" ng-if="!isEditing" ng-click="edit()">
+                        <i class="ace-icon fa fa-pencil"></i>
+                        <span class="bigger-110">Edit Gastronomist</span>
+                    </button>
+
+                    <button type="button" class="pull-right btn btn-sm btn-light" ng-if="isEditing" ng-click="abortEdit()">
+                        <i class="ace-icon fa fa-close"></i>
+                        <span class="bigger-110">Abort</span>
+                    </button>
+
+                    <button type="button" class="pull-right btn btn-sm btn-success" ng-if="isEditing" ng-click="confirmEdit()">
+                        <i class="ace-icon fa fa-check"></i>
+                        <span class="bigger-110">Confirm</span>
+                    </button>
+                </div>
+
+                <div class="space-20"></div>
+
+                <div class="page-header">
+                    <h1>Latest Recipes</h1>
+                </div>
+                <div ng-repeat="recipe in recipes" class="row list-recipe">
+                    <div class="col-sm-3 col-xs-3">
+                        <a href="/#/recipes/profile/{{recipe._id}}" class="profile-picture">
+                            <img ng-src="{{recipe.picture}}" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="col-sm-9 col-xs-9">
+                        <a href="/#/recipes/profile/{{recipe._id}}" style="text-decoration: none">
+                            <h3>{{recipe.title}}</h3>
+                        </a>
+                        <p>{{recipe.description}}</p>
+                    </div>
+                </div>
+                <div class="space-24"></div>
+                <button type="button" class="pull-right btn btn-sm btn-primary" ng-click="createRecipe()" ng-show="user && (user.username == id)" ng-cloak>
+                    <i class="ace-icon fa fa-plus"></i>
+                    <span class="bigger-110">Create Recipe</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="gastronomist-delete-confirm" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h2 class="modal-title">Deletion</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Are you sure you wish to delete?</p>
+                    <p>If you confirm, your company profile will be deleted permanently and you will be logged out of the system!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="ace-icon fa fa-mail-reply"></i>
+                        <span>Abort</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-click="confirmDelete()">
+                        <i class="ace-icon fa fa-exclamation-circle"></i>
+                        <span>Yes, delete!</span>
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="gastronomist-edit-confirm" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h2 class="modal-title">Confirmation</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Your profile has been updated</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="ace-icon fa fa-mail-reply"></i>
+                        <span>OK</span>
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>

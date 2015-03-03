@@ -1,0 +1,28 @@
+<div class="main-container container" id="main-container">
+    <section class="panel">
+
+        <h1>Search For Ingredients</h1>
+        <label class="col-sm-3 control-label no-padding-right" >Ingredients :</label>
+        <div class="col-sm-4">
+            <input type="text" class="input-xlarge" ng-model="ingredient.name" />
+        </div>
+        <div class="col-sm-1">
+            <input type="button" class="btn btn-default" ng-click="search(ingredient.name)"/ value="Search">
+        </div>
+        <ul ng-repeat="ingr in ingredientlist">
+            <li>
+            <div class="row">
+                <div class="col-sm-6">
+                <label>{{ingr.name}}</label>
+                </div>
+                <div class="col-sm-6">
+                    <input type="button" class="btn btn-success" value="Show" ng-click="toggleShow(ingr)">
+                </div>
+            </div>
+            </li>
+        </ul>
+        <input type="button" class="btn btn-default" value="Load more" ng-click="loadMore()">
+
+
+    </section>
+</div>

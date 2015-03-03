@@ -1,0 +1,198 @@
+#nameForm input {
+    width: 80px;
+    margin-left: 6px;
+    padding: 3px;
+}
+
+.navbar-form.form-search input[type=text] {
+    width: 220px;
+}
+
+@media (max-width: 991px) {
+    #main-container>div {
+        padding: 24px 30px 24px 30px;
+    }
+}
+@media (min-width: 991px) {
+    #main-container>div {
+        padding: 48px 60px 48px 60px;
+    }
+}
+
+#main-container > .jumbotron {
+    margin: 0;
+    border-radius: 0;
+}
+
+.bottom-button-group > button {
+    margin-left: 5px;
+}
+
+#users-table input {
+    width: 100%
+}
+
+#users-table .editing {
+    background-color: #F5F5F5;
+}
+
+#user-delete-confirm .deleted {
+    color: #777777;
+    text-decoration: line-through;
+}
+
+
+.nourFileUploader .progress[data-percent]:after {
+    padding-top: 17px;
+}
+.nourFileUploader .progressLow:after {
+    color: #393939;
+ }
+.nourFileUploader .progressHigh:after {
+    color: #FFFFFF;
+}
+.nourFileUploader .ace-file-container .error {
+    color: #a94442;
+}
+.nourFileUploader .ace-file-input .ace-file-container:before {
+    padding-top: 12px;
+}
+.nourFileUploader label {
+    height: 52px;
+}
+
+.tooltip-primary + .tooltip > .tooltip-inner,
+.tooltip.tooltip-primary > .tooltip-inner {
+    background-color: rgb(27, 106, 170);
+    text-shadow: 1px 1px 0 rgba(40,50,100,0.3);
+}
+.tooltip-primary + .tooltip.top .tooltip-arrow,
+.tooltip.tooltip-primary.top .tooltip-arrow {
+    border-top-color: rgb(27, 106, 170);
+    -moz-border-top-colors: rgb(27, 106, 170);
+}
+.tooltip-primary + .tooltip.right .tooltip-arrow,
+.tooltip.tooltip-primary.right .tooltip-arrow {
+    border-right-color: rgb(27, 106, 170);
+    -moz-border-right-colors: rgb(27, 106, 170);
+}
+.tooltip-primary + .tooltip.left .tooltip-arrow,
+.tooltip.tooltip-primary.left .tooltip-arrow {
+    border-left-color: rgb(27, 106, 170);
+    -moz-border-left-colors: rgb(27, 106, 170);
+}
+.tooltip-primary + .tooltip.bottom .tooltip-arrow,
+.tooltip.tooltip-primary.bottom .tooltip-arrow {
+    border-bottom-color: rgb(27, 106, 170);
+    -moz-border-bottom-colors: rgb(27, 106, 170);
+}
+
+#requestUser fieldset > div {
+    margin-bottom: 12px;
+}
+
+#requestUser fieldset textarea {
+    height: 80px;
+}
+
+/*--------- RECIPE CSS -----------*/
+
+.panel{
+    margin: 20px 20px 0 20px;
+}
+
+.panel ul{
+    list-style-type: none;
+}
+
+.form-recipe-create{
+    margin-top: 50px;
+}
+
+#search-bar{
+    width: 89%;
+}
+
+#loadmore{
+    display: block;
+    margin-left: auto; margin-right: auto;
+    width: 200px;
+    height: 42px;
+}
+
+#recipe-search{
+    width: 10%;
+    border: 0px;
+    margin-left: 0px;
+}
+
+.list-recipe label{
+    height: 42px;
+    line-height: 42px;
+}
+
+.list-recipe{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: -8px
+}
+
+
+
+.list-recipe-left{
+    border-right: 2px solid gray;
+}
+
+.unit{
+    display: block;
+    float: right;
+    width: 30px;
+}
+
+.quantity{
+    width: 65px;
+    height: 42px;
+}
+
+.input-width{
+    width: 100%;
+}
+
+.section-form .form-group input{
+    text-align: center;
+}
+
+.section-form-profile .form-group span{
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #e4e6e9;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.section-form-profile .form-group label{
+    height: 34px;
+    margin-top: 0px;
+    padding-top: 0px;
+    line-height: 34px;
+}
+
+.radius-btn{
+    border-radius: 200px;
+}
+.panel .section-form-profile .form-group span {
+    height: auto;
+}
+
+a {
+    color: #54CA42
+}
+
+a:hover {
+    color: #41B62A
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}

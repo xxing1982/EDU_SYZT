@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+    <!-- The name that follows "@drawable/" must be the name of a bitmap image you've saved in your project's "res/drawable/" directory -->
+    <!-- To request that an item appear directly in the action bar as an action button, include showAsAction="ifRoom" in the <item> tag -->
+    <item android:id="@+id/action_add_friend"
+        android:icon="@drawable/ic_action_add_person"
+        android:title="@string/action_add_friend"
+        app:showAsAction="ifRoom" />
+</menu>

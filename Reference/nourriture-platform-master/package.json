@@ -1,0 +1,39 @@
+{
+  "name": "nourriture-platform",
+  "version": "0.0.1",
+  "description": "Nourriture platform offers the most granular information available about foods, ingredients, products and recipes for building nutrition and recipe-based apps by providing RESTful web services to food supplier and food consumer",
+  "author": "Nourriture (https://github.com/Nourriture)",
+  "keywords": [
+    "food",
+    "ingredients",
+    "recipes",
+    "platform"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nourriture/nourriture-platform.git"
+  },
+  "dependencies": {
+    "restify": "2.8.3",
+    "cli-table": "0.3.1",
+    "save": "0.0.20",
+    "mongodb": "~2.0",
+    "mongoose": "3.8.16",
+    "nconf": "~0.6.9",
+    "async": "0.9.0",
+    "passport": "~0.2.1",
+    "passport-local": "~1.0.0",
+    "bcrypt": "~0.8.0",
+    "client-sessions": "~0.7.0",
+    "authorized": "~0.4.1",
+    "crypto": "0.0.3"
+  },
+  "devDependencies":{
+    "mocha": "~2.0.1",
+    "supertest": "~0.15.0",
+    "chai": "~1.10.0"
+  },
+  "engines": {
+    "node": "*"
+  }
+}

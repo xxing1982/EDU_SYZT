@@ -1,0 +1,15 @@
+{
+  "name": "nourriture-tools-pod-export-web",
+  "version": "0.0.1",
+  "description": "Web interface for pod-export, the utility for exporting product data relevant for Nourriture from open POD database",
+  "author": "Nourriture (https://github.com/Nourriture)",
+  "dependencies": {
+    "express": "4.10.2",
+    "knockout": "~3.2.0",
+    "jquery": "~2.1.1",
+    "lodash": "2.4.1"
+  },
+  "engines": {
+    "node": "*"
+  }
+}

@@ -1,0 +1,69 @@
+<div class="main-container container" id="main-container">
+    <div class="row">
+        <div class="col-md-6 widget-body" id="requestUser">
+            <h4 class="header blue lighter bigger">Account Request</h4>
+            <form>
+                <fieldset>
+                    <div>
+                        <label for="form-field-8" class="control-label">Name</label>
+                        <input type="text" ng-model="user.username" class="form-control" placeholder="ramsay">
+                    </div>
+                    <div>
+                        <label for="form-field-8" class="control-label">Name</label>
+                        <input type="text" ng-model="user.name" class="form-control" placeholder="Gordon Ramsay">
+                    </div>
+                    <div>
+                        <label for="form-field-8" class="control-label">Email</label>
+                        <input type="text" ng-model="user.email" class="form-control" placeholder="johndoe@example.com">
+                    </div>
+                    <div>
+                        <label for="form-field-8" class="control-label">Password</label>
+                        <input type="password" ng-model="user.password" class="form-control" placeholder="my5cat4has3a4red5hat">
+                    </div>
+                    <div>
+                        <label for="form-field-8" class="control-label">Motivation</label>
+                        <textarea class="form-control request" id="form-field-8" placeholder="You should have me in your community because I'm awesome. Checkout this delicous lasagne I posted on my food blog last week: ..."></textarea>
+                    </div>
+                    <div class="space-6"></div>
+                    <div class="control-group">
+                        <div>
+                            <label>
+                                <input name="form-field-radio" type="radio" class="ace">
+                                <span class="lbl"> I'm representing a food-related company</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input name="form-field-radio" type="radio" class="ace">
+                                <span class="lbl"> I'm a chef and/or food blogger</span>
+                            </label>
+                        </div>
+                    </div>
+                    <label class="block clearfix">
+                        <span class="block input-icon input-icon-right"></span>
+                    </label>
+                    <label class="block clearfix">
+                        <span class="block input-icon input-icon-right"></span>
+                    </label>
+                </fieldset>
+            </form>
+            <div class="space-6"></div>
+        </div>
+        <div class="col-md-6" id="userToc">
+            <h2>Terms and Conditions</h2>
+            <p class="lead">Here's some legal stuff, sorry.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sollicitudin nisi, commodo varius erat. Sed est urna, efficitur sed nisi vitae, euismod posuere quam. Proin in leo posuere, finibus metus malesuada, fringilla metus. Nullam a sagittis leo. Sed quis ipsum augue. Nulla facilisi. Nam tellus nisi, viverra ac orci id, porta sodales felis. Nam magna nulla, dignissim at porta quis, sodales nec tortor. Etiam in elit risus. Praesent molestie non dolor eget vehicula.</p>
+            <p>Vivamus accumsan neque ut magna tristique aliquam. Pellentesque scelerisque vulputate orci iaculis vulputate. Aliquam elementum pharetra lobortis. Cras non nunc arcu. Integer sed rhoncus eros, ac dictum lectus. Nam gravida metus quis enim egestas, quis fringilla diam varius. Sed in pretium tellus, sed placerat sapien. Nulla aliquam sem metus, ac consectetur odio pellentesque nec. Nulla venenatis justo lorem, quis mattis nibh suscipit eu. Sed ut euismod enim. Sed placerat gravida turpis, ut hendrerit arcu porta ac. In hac habitasse platea dictumst.</p>
+            <p>Amet, consectetur adipiscing elit. Phasellus pulvinar faucibus neque, nec rhoncus nunc ultrices sit amet. Curabitur ac sagittis neque, vel egestas est. Aenean elementum, erat at aliquet hendrerit, elit nisl posuere tortor, id suscipit diam dui sed nisi. Morbi sollicitudin massa vel tortor consequat, eget semper nisl fringilla. Maecenas at hendrerit odio. Sed in mi eu quam suscipit bibendum quis at orci. Pellentesque fermentum nisl purus, et iaculis lectus pharetra sit amet.</p>
+            <div class="checkbox">
+                <label>
+                    <input ng-model="agreeTerms" name="form-field-checkbox" type="checkbox" class="ace">
+                    <span class="lbl">&nbsp;I agree to the Terms of serivces above.</span>
+                </label>
+            </div>
+            <button type="button" class="pull-right btn btn-sm btn-primary" ng-click="requestAccount(user)">
+                <i class="ace-icon fa fa-user"></i>&nbsp;Send Account Request
+            </button>
+        </div>
+    </div>
+</div>

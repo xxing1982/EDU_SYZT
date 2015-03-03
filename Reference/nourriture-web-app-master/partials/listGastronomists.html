@@ -1,0 +1,28 @@
+<div class="main-container container" id="main-container">
+    <section class="panel">
+
+        <div class="page-header">
+            <h1>Gastronomists</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 col-xs-3"></div>
+            <div class="col-sm-9 col-xs-9">
+                <div ng-repeat="gastronomist in gastronomists" class="row list-recipe">
+                    <div class="col-sm-3 col-xs-3">
+                        <a href="/#/gastronomistProfile/{{gastronomist.username}}" class="profile-picture">
+                            <img class="img-responsive" ng-src="{{gastronomist.picture}}" />
+                        </a>
+                    </div>
+                    <div class="col-sm-9 col-xs-9">
+                        <a href="/#/gastronomistProfile/{{gastronomist.username}}" style="text-decoration: none">
+                            <h3>{{gastronomist.name}}</h3>
+                        </a>
+                        <p>{{gastronomist.occupation}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>

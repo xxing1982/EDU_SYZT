@@ -1,0 +1,132 @@
+<div class="main-container container" id="main-container">
+    <div class="row">
+        <div class="col-md-6 widget-body">
+            <div class="widget-main">
+                <h4 class="header blue lighter bigger">
+                    Log In
+                </h4>
+
+                <div class="space-6"></div>
+
+                <div id="alertInvalidCredentials" class="alert alert-danger" ng-if="error == 'Invalid'">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+                    </button><strong>
+                        <i class="ace-icon fa fa-times"></i>
+                        <span>Whoops!</span>
+                    </strong>
+                    <span>Those credentials are not valid, try again.</span>
+                </div>
+
+                <div id="alertUnexpectedError" class="alert alert-danger" ng-if="error == 'Unexpected'">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+                    </button><strong>
+                    <i class="ace-icon fa fa-times"></i>
+                    <span>Sorry!</span>
+                </strong>
+                    <span>An error occured. We are working to resolve the issue.</span>
+                </div>
+
+                <div id="alertConncetionIssues" class="alert alert-warning" ng-if="error == 'Connection'">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+                    </button><strong>
+                    <i class="ace-icon fa fa-times"></i>
+                    <span>Hello?</span>
+                </strong>
+                    <span>Could not contact Nourriture. Check your connection and try again.</span>
+                </div>
+
+                <div>
+
+                </div>
+
+                <form name="loginForm" novalidate >
+
+                    <fieldset>
+                        <label class="block clearfix form-group" ng-class="{ 'has-error':  loginForm.username.$invalid && submitted }">
+                            <span class="block input-icon input-icon-right">
+                                <input name="username" type="text" ng-model="credentials.username" required pattern="^[A-za-z0-9]+$|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}" required class="form-control" placeholder="Username / Email">
+                                <i class="ace-icon fa fa-user"></i>
+                            </span>
+                            <span id="alertMalformedUsername" ng-show="loginForm.username.$error.pattern && submitted" class="help-block">Only valid email addresses and basic usernames accepted</span>
+                            <span id="alertMissingUsername" ng-show="loginForm.username.$error.required && submitted" class="help-block">A username or email is required to login</span>
+                        </label>
+
+                        <label class="block clearfix form-group" ng-class="{ 'has-error':  loginForm.password.$invalid && submitted }">
+                        <span class="block input-icon input-icon-right">
+                            <input name="password" type="password" ng-model="credentials.password" required class="form-control" placeholder="Password">
+                            <i class="ace-icon fa fa-lock"></i>
+                            <span id="alertMissingPassword" ng-show="loginForm.password.$error.required && submitted" class="help-block">A password is required to login</span>
+                        </span>
+                        </label>
+
+                        <div class="space"></div>
+
+                        <div class="clearfix">
+
+                            <label class="inline">
+                                <input type="checkbox" class="ace">
+                                <span class="lbl"> Remember Me</span>
+                            </label>
+
+                            <button id="buttonLogin" type="button"  ng-click="attemptLogin(credentials)" class="width-35 pull-right btn btn-sm btn-info">
+                                <i class="ace-icon fa fa-key"></i>
+                                <span class="bigger-110">Login</span>
+                            </button>
+                        </div>
+
+                        <div class="space-4"></div>
+                    </fieldset>
+                </form>
+
+                <div class="social-or-login center">
+                    <span class="bigger-110">Or Login Using</span>
+                </div>
+
+                <div class="space-6"></div>
+
+                <div class="social-login center">
+                    <a class="btn btn-primary tooltip-primary login-using-tooltip" title="Facebook" data-placement="bottom">
+                        <i class="ace-icon fa fa-facebook"></i>
+                    </a>
+
+                    <a class="btn btn-info tooltip-info login-using-tooltip" title="Twitter" data-placement="bottom">
+                        <i class="ace-icon fa fa-twitter"></i>
+                    </a>
+
+                    <a class="btn btn-danger tooltip-error login-using-tooltip" title="Weibo" data-placement="bottom">
+                        <i class="ace-icon fa fa-weibo"></i>
+                    </a>
+
+                    <a class="btn btn-warning tooltip-warning login-using-tooltip" title="QQ" data-placement="bottom">
+                        <i class="ace-icon fa fa-qq"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="toolbar clearfix">
+                <div>
+                    <a href="#" data-target="#forgot-box" class="forgot-password-link pull-left">
+                        <i class="ace-icon fa fa-question-circle"></i>
+                        <span>I forgot my password</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>Nourriture community</h2>
+            <p class="lead">Something about what kind of people can join</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at sollicitudin nisi, commodo varius erat. Sed est urna, efficitur sed nisi vitae, euismod posuere quam. Proin in leo posuere, finibus metus malesuada, fringilla metus. Nullam a sagittis leo. Sed quis ipsum augue. Nulla facilisi. Nam tellus nisi, viverra ac orci id, porta sodales felis. Nam magna nulla, dignissim at porta quis, sodales nec tortor. Etiam in elit risus. Praesent molestie non dolor eget vehicula.</p>
+            <p>Vivamus accumsan neque ut magna tristique aliquam. Pellentesque scelerisque vulputate orci iaculis vulputate. Aliquam elementum pharetra lobortis. Cras non nunc arcu. Integer sed rhoncus eros, ac dictum lectus. Nam gravida metus quis enim egestas, quis fringilla diam varius. Sed in pretium tellus, sed placerat sapien. Nulla aliquam sem metus, ac consectetur odio pellentesque nec. Nulla venenatis justo lorem, quis mattis nibh suscipit eu. Sed ut euismod enim. Sed placerat gravida turpis, ut hendrerit arcu porta ac. In hac habitasse platea dictumst.</p>
+            <br />
+        </div>
+        <div class="clearfix bottom-button-group">
+            <a href="#/user/create" class="pull-right btn btn-sm btn-primary" role="button">
+                <i class="ace-icon fa fa-user"></i>
+                <span class="bigger-110">Request Account</span>
+            </a>
+        </div>
+    </div>
+</div>

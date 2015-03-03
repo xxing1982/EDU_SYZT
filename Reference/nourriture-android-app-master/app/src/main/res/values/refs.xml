@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    Layout alias to replace the single-pane version of the layout with a
+    two-pane version on Large screens.
+
+    For more on layout aliases, see:
+    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
+    -->
+    <item name="fragment_item" type="layout">@layout/fragment_moments_list</item>
+    <item name="fragment_recipe" type="layout">@layout/fragment_recipes_list</item>
+    <item name="fragment_friends" type="layout">@layout/fragment_friends_list</item>
+    <item name="fragment_consumer" type="layout">@layout/fragment_consumer_list</item>
+
+</resources>

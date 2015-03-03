@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>POD Export Utility for Nourriture</h1>
+<div>
+    <strong>Search</strong>
+    <div>
+        <div>
+            <p>
+                <input title="Search" name="search" data-bind="value: searchTerm"/>
+                <input type="submit" value="Search" data-bind="click: search" />
+                <input title="Quick" type="checkbox" data-bind="checked: quickModeEnabled" />
+                <span>Quick</span>
+            </p>
+        </div>
+        <div>
+            <p>
+                <input title="Name contains" type="radio" value="name" data-bind="checked: searchField" />
+                <span>Name contains</span>
+                <input title="Name exact" type="radio" value="ename" data-bind="checked: searchField" />
+                <span>Name exact</span>
+                <input title="Category" type="radio" value="category" data-bind="checked: searchField"  />
+                <span>Category</span>
+            </p>
+        </div>
+    </div>
+    <div>
+        <strong>Replace</strong>
+        <p>
+            <span>Calories</span>
+            <input title="Calories" name="calories" data-bind="value: replaceFields.calories"/>
+            <span>Carbs</span>
+            <input title="Carbs" name="carbs" data-bind="value: replaceFields.carbs"/>
+            <span>Protein</span>
+            <input title="Protein" name="protein" data-bind="value: replaceFields.protein"/>
+            <span>Fat</span>
+            <input title="Fat" name="fat" data-bind="value: replaceFields.fat"/>
+        </p>
+    </div>
+    <hr />
+    <div>
+        <div data-bind="visible: searching">
+            <p>Searching, please wait ...</p>
+        </div>
+        <div data-bind="if: !quickModeEnabled() && !searching()">
+            <div>
+                <h2>Products</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <td></td>
+                        <td>Name</td>
+                        <td>Category</td>
+                        <td>Company</td>
+                        <td>Calories</td>
+                        <td>Carbs</td>
+                        <td>Protein</td>
+                        <td>Fat</td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: searchResults">
+                    <tr>
+                        <td><img src="" data-bind="attr:{src: $data.picture }" /></td>
+                        <td data-bind="text: $data.name"></td>
+                        <td data-bind="text: $data.category"></td>
+                        <td data-bind="text: $data.bsin"></td>
+
+                        <!-- ko if: $parent.replaceFields.calories == null -->
+                        <td data-bind="text: $data.calories"></td>
+                        <!-- /ko -->
+                        <!-- ko if: $parent.replaceFields.calories -->
+                        <td data-bind="text: $parent.replaceFields.calories"></td>
+                        <!-- /ko -->
+
+                        <!-- ko if: $parent.replaceFields.carbs == null -->
+                        <td data-bind="text: $data.carbs"></td>
+                        <!-- /ko -->
+                        <!-- ko if: $parent.replaceFields.carbs -->
+                        <td data-bind="text: $parent.replaceFields.carbs"></td>
+                        <!-- /ko -->
+
+                        <!-- ko if: $parent.replaceFields.protein == null -->
+                        <td data-bind="text: $data.protein"></td>
+                        <!-- /ko -->
+                        <!-- ko if: $parent.replaceFields.protein -->
+                        <td data-bind="text: $parent.replaceFields.protein"></td>
+                        <!-- /ko -->
+
+                        <!-- ko if: $parent.replaceFields.fat == null -->
+                        <td data-bind="text: $data.fat"></td>
+                        <!-- /ko -->
+                        <!-- ko if: $parent.replaceFields.fat -->
+                        <td data-bind="text: $parent.replaceFields.fat"></td>
+                        <!-- /ko -->
+
+                        <td>
+                            <a data-bind="click: $parent.copyItemToClipboard" href="" class="json-link-button">Show JSON</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h2>Companies</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Name</td>
+                            <td>Website</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: searchResultsCompanies">
+                    <tr>
+                        <td><img src="" data-bind="attr:{src: $data.picture }" /></td>
+                        <td data-bind="text: $data.name"></td>
+                        <td data-bind="text: $data.website"></td>
+                        <td>
+                            <a data-bind="click: $parent.copyItemToClipboard" href="" class="json-link-button">Show JSON</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div data-bind="if: quickModeEnabled() && !searching()">
+            <p><span data-bind="text: searchResults().length">0</span> items found.</p>
+        </div>
+    </div>
+    <div style="display:none">
+        <p>No results found</p>
+    </div>
+</div>
+<script src="jquery.js"></script>
+<script src="knockout-latest.debug.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cn.edu.bjtu.nourriture.activities.recipe.DetailRecipeActivity">
+
+    <item android:id="@+id/action_cook_recipe"
+        android:icon="@drawable/ic_action_play"
+        android:title="@string/action_cook_recipe"
+        app:showAsAction="always|withText" />
+
+    <item android:id="@+id/action_recipe_moments"
+    android:icon="@drawable/ic_action_chat"
+    android:title="@string/action_recipe_moments"
+    app:showAsAction="always|withText" />
+
+
+</menu>

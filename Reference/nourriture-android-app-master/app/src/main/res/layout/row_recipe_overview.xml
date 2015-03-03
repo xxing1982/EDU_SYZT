@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:id="@+id/recipeThumbnailImageView"
+        android:src="@drawable/image_placeholder"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/recipeNameTextView"
+        android:layout_marginStart="16dp"
+        android:layout_alignTop="@+id/recipeThumbnailImageView"
+        android:layout_toEndOf="@+id/recipeThumbnailImageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/recipeDifficultyTextView"
+        android:layout_alignTop="@+id/difficultyTitleTextView"
+        android:layout_toEndOf="@+id/publishedTitleTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/recipeDifficulty"
+        android:id="@+id/difficultyTitleTextView"
+        android:layout_below="@+id/recipeNameTextView"
+        android:layout_marginTop="5dp"
+        android:layout_alignStart="@+id/recipeNameTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/recipeCreated"
+        android:id="@+id/publishedTitleTextView"
+        android:layout_below="@+id/difficultyTitleTextView"
+        android:layout_marginTop="5dp"
+        android:layout_alignStart="@+id/difficultyTitleTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/recipePublishedTextView"
+        android:layout_alignTop="@+id/publishedTitleTextView"
+        android:layout_toEndOf="@+id/publishedTitleTextView"
+        android:layout_marginLeft="8dp" />
+</RelativeLayout>

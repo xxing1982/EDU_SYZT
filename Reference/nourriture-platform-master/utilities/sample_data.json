@@ -1,0 +1,62 @@
+//new COMPANY JSON
+{
+  "name": "Coca Cola",
+  "username": "C&C"
+}
+
+//new GASTRONOMIST JSON
+{
+"username": "gordon",
+"name":"Gordon Ramsay",
+"email":"g@g.com",
+"occupation":"Chef",
+"picture":"http://ts4.mm.bing.net/th?id=HN.608030845369388150&pid=1.7",
+"bio":"Gordon James Ramsay, Jr. (born 8 November 1966) is a Scottish born British chef and restaurateur. His restaurants have been awarded 15 Michelin stars in total and currently hold 14. His signature restaurant, Restaurant Gordon Ramsay in Chelsea, London, has held 3 Michelin stars since 2001. Ramsay is known for presenting TV programmes about competitive cookery and food, such as the British series Hell's Kitchen, The F Word, and Ramsay's Kitchen Nightmares, along with the American versions of Hell's Kitchen, Kitchen Nightmares, MasterChef, MasterChef Junior and Hotel Hell."
+}
+
+//new INGREDIENT JSON
+{"name": "bread",
+"calories": 10,
+"carbs":10,
+"proteins": 10,
+"fat": 10,
+"picture": "http://www.iconshock.com/img_jpg/REALVISTA/food/jpg/256/bread_icon.jpg",
+"company": "547554543818200340db007b"}
+
+{"name": "onion",
+"calories": 20,
+"carbs": 20,
+"proteins": 20,
+"fat": 20,
+"picture": "http://img3.wikia.nocookie.net/__cb20121010115210/farmville2/images/5/51/Onion.png",
+"company": "547554543818200340db007b"}
+
+{"name":"ketchup",
+"calories": 30,
+"carbs": 30,
+"proteins": 30,
+"fat": 30,
+"picture":"http://38.media.tumblr.com/avatar_27c0c1dd0981_128.png",
+"company": "547554543818200340db007b"}
+
+//new RECIPE JSON (have to create a gastronomist before "db.gastronomists.insert({"username":"paja", "email":"p@p.cz", "name":"Paja"})")
+{"title": "Sushi",
+"description": "The famous Japanese food",
+"instruction": "boil rice and put a fresh fish on it",
+"picture": "http://icons.iconarchive.com/icons/madoyster/sushi/256/sushi-2-icon.png",
+"difficulty": 3,
+"author": "5475fd936bcf35fa8c287344",
+"ingredients":[
+{"name":"bread","quantity": 3, "quantityUnit": "slices", "original": "5477571adf67049a124cbd88"},
+{"name":"onion","quantity": 1, "quantityUnit": "pieces", "original": "54770ef2b7ec7568058b7f58"}]}
+
+{"title": "Goulash",
+"description": "The famous Hungarian food",
+"instruction": "boil beef meat with onion, garlic, peppers etc.",
+"picture": "http://homespunsprout.com/wp-content/uploads/2012/12/hungarian-goulash-2-3.jpg",
+"difficulty":5,
+"author": "5475fd936bcf35fa8c287344",
+"ingredients":[
+{"name":"ketchup", "quantity": 5, "quantityUnit": "spoons", "original": "54770ef8b7ec7568058b7f59"},
+{"name":"onion", "quantity": 15, "quantityUnit": "pieces", "original": "54770ef2b7ec7568058b7f58"},
+{"name":"bread", "quantity": 3, "quantityUnit": "slices", "original": "5477571adf67049a124cbd88"}]}

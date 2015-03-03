@@ -1,0 +1,83 @@
+<div class="main-container container" id="main-container">
+    <section class="panel">
+        <div class="page-header">
+            <h1>{{addrecipe.title}}</h1>
+        </div>
+        <div class="col-xs-12">
+        <form class="form-horizontal form-recipe-create" role="form">
+        <section class="section-form-profile">
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                <div class="profile-picture">
+                    <img ng-src="{{addrecipe.picture}}" class="img-responsive" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label class="control-label col-sm-3 no-padding-right">Description:</label>
+            <div class="col-sm-9">
+            <span class="input-width">{{addrecipe.description}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3 no-padding-right" for="addrecipe.difficulty">Difficulty :</label>
+            <div class="col-sm-9">
+            <span class="">{{addrecipe.difficulty}}</span>
+            </div>
+        </div>
+        
+            <hr>
+            <section class="section-form">        
+        <div class="form-group">
+                
+                <label class="control-label col-sm-3 no-padding-right">Ingredients :</label>
+                <div class="col-sm-9">
+                    <ul class="list-recipe" ng-repeat="ingd in addrecipe.ingredients">
+                        <li>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-8">
+                                <a href="/#/ingredient/{{ingd.original}}">
+                                    <label style="cursor:pointer">{{ingd.name}}</label>
+                                </a>
+                            </div>
+                            <div class="col-sm-2 col-xs-2">
+                                <span class="quantity">{{addrecipe.ingredients[$index].quantity}}</span>
+                            </div>
+                            <div class="col-sm-1 col-xs-2">
+                                <label class="unit">{{ingd.quantityUnit}}</label>
+                            </div>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+        </section>
+        <hr>
+        <section class="section-form">
+        <div class="form-group">
+            <label class="control-label col-sm-3 no-padding-right" >Instructions :</label>
+        </div>
+        <div ng-repeat="i in addrecipe.instructions track by $index">
+            <div class="form-group">
+            <label class="control-label col-sm-3 no-padding-right">Step {{$index+1}} :</label>
+            <div class="col-sm-9">
+            <span class="input-width">{{addrecipe.instructions[$index].step}}</span>
+            </div>
+        </div>
+        </div>
+        </section>
+
+        <br />
+        <div class="form-group pull-right" ng-show="user" ng-cloak>
+                <button type="button" class="btn btn-primary" ng-click="toggleUpdate()">Edit</button>
+                <button type="button" class="btn btn-danger" ng-click="toggleDelete()">Delete</button>
+        </div>
+        </section>
+    </form>
+</div>
+
+    </section>
+</div>

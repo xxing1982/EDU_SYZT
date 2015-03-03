@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Nourriture</string>
+
+    <!-- Menu items -->
+    <string name="title_section1">Moments</string>
+    <string name="title_section2">Recipes</string>
+    <string name="title_section3">My Friends</string>
+    <string name="title_section4">My Profile</string>
+
+    <!-- No data titles -->
+    <string name="no_moments">No moments yet</string>
+    <string name="no_recipes">Sorry, there are no recipes yet</string>
+    <string name="no_friends">No friends yet</string>
+    <string name="no_consumers">Sorry, there are no consumers yet</string>
+
+    <!-- Action bar titles -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add_moment">Add moment</string>
+    <string name="action_add_friend">Add friend</string>
+    <string name="action_like_moment">Like</string>
+    <string name="action_recipe_moments">Moments</string>
+    <string name="action_cook_recipe">Cook recipe</string>
+    <string name="action_search">Search</string>
+
+    <!-- Toast texts -->
+    <string name="api_error">An error occured</string>
+    <string name="moment_posted">Moment successfully posted</string>
+    <string name="moment_text_missing">Fill in moment text</string>
+    <string name="moment_liked">Moment liked</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Moments fragment -->
+    <string name="momentAuthor">Author</string>
+    <string name="momentContent">Text</string>
+    <string name="momentTime">xxx minutes ago</string>
+    <string name="momentLikes">likes</string>
+    <string name="momentLike">like</string>
+    <string name="momentComments">comments</string>
+    <string name="momentComment">comment</string>
+
+    <!-- Recipes fragment -->
+    <string name="recipeDifficulty">Difficulty:</string>
+    <string name="recipeCreated">Published:</string>
+
+    <!-- Consumer fragment -->
+    <string name="consumerUsername">Username</string>
+    <string name="consumerName">Name</string>
+    <string name="consumerOccupation">Occupation:</string>
+    <string name="consumerBirthdate">Birthdate:</string>
+    <string name="consumerWebsite">Website:</string>
+    <string name="consumerBio">Bio:</string>
+    <string name="consumerTitle">title</string>
+    <string name="consumerValue">value</string>
+
+    <!-- New moment activity -->
+    <string name="title_activity_new_moment">New moment</string>
+    <string name="action_save_moment">Save</string>
+    <string name="action_cancel_moment">Cancel</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Detail moment activity -->
+    <string name="title_activity_detail_moment">Moment</string>
+    <string name="momentDetailAuthor">Author:</string>
+    <string name="momentDetailCreated">Created:</string>
+    <string name="momentDetailLikes">Likes:</string>
+    <string name="momentDetailComments">Comments:</string>
+
+    <!-- Social list activity -->
+    <string name="title_activity_social_list_of_moment">SocialListOfMomentActivity</string>
+    <string name="listTypeLikes">Likes</string>
+    <string name="listTypeComments">Comments</string>
+
+    <!-- Detail recipe activity -->
+    <string name="title_activity_detail_recipe">Recipe</string>
+    <string name="recipeDetailName">Name:</string>
+    <string name="recipeDetailDescription">Description:</string>
+    <string name="recipeDetailDifficulty">Difficulty:</string>
+    <string name="recipeDetailCalories">Calories:</string>
+    <string name="recipeDetailCarbs">Carbs:</string>
+    <string name="recipeDetailProteins">Proteins:</string>
+    <string name="recipeDetailFats">Fats:</string>
+
+    <!-- Recipe's moment activity -->
+    <string name="title_activity_moments_of_recipe">Recipe\' moments</string>
+
+    <!-- New friend activity -->
+    <string name="title_activity_new_friend">New friend</string>
+    <string name="action_cancel_friend">Cancel</string>
+
+    <!-- Friend dialogs -->
+    <string name="title_add_friend">Add friend</string>
+    <string name="message_add_friend">Do you want to start following</string>
+    <string name="title_remove_friend">Remove friend</string>
+    <string name="message_remove_friend">Do you want to stop following</string>
+
+    <!-- Google Analytics screen names -->
+    <string name="ga_moments_all_screen">All moments screen</string>
+    <string name="ga_moment_detail_screen">Moment detail screen</string>
+    <string name="ga_moment_new_screen">New moment screen</string>
+
+    <string name="ga_recipes_all_screen">All recipes screen</string>
+    <string name="ga_recipe_detail_screen">Recipe detail screen</string>
+    <string name="ga_recipe_moments_screen">Recipe moments screen</string>
+
+    <string name="ga_friends_all_screen">All friends screen</string>
+    <string name="ga_friend_new_screen">New friend screen</string>
+
+    <string name="ga_my_profile_screen">My profile screen</string>
+
+</resources>

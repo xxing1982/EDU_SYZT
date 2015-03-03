@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cn.edu.bjtu.nourriture.activities.moment.NewMomentActivity">
+
+    <!--<item android:id="@+id/action_settings" android:title="@string/action_settings"-->
+        <!--android:orderInCategory="100" app:showAsAction="ifRoom" />-->
+
+    <item android:id="@+id/action_save_moment"
+        android:icon="@drawable/ic_action_accept"
+        android:title="@string/action_save_moment"
+        app:showAsAction="always|withText" />
+
+    <item android:id="@+id/action_cancel_moment"
+        android:icon="@drawable/ic_action_cancel"
+        android:title="@string/action_cancel_moment"
+        app:showAsAction="always|withText" />
+</menu>

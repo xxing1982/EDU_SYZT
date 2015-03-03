@@ -1,0 +1,172 @@
+<div class="main-container container" id="main-container">
+    <div>
+        <div class="page-header">
+            <h1>{{ingredient.name}}</h1>
+        </div>
+
+        <div id="user-profile-1" class="user-profile row">
+            <div class="col-xs-12 col-sm-3 center">
+                <div>
+				    <span class="profile-picture">
+                        <img id="picture" class="editable img-responsive editable-empty" alt="Ingredient's Picture" ng-src={{ingredient.picture}}></img>
+					</span>
+
+                    <div class="space-4"></div>
+                </div>
+
+                <div class="hr hr16 dotted"></div>
+            </div>
+
+            <div class="col-xs-12 col-sm-9">
+
+                <div class="profile-user-info profile-user-info-striped">
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Ingredient name </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{ingredient.name}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedIngredient.name" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Company name </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{ingredient.company}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedIngredient.company" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Origin </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{ingredient.origin}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedIngredient.origin" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Season </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{ingredient.season}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedIngredient.season" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Calories </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{ingredient.calories}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedIngredient.calories" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Carbs </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{ingredient.carbs}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedIngredient.carbs" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Proteins </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{ingredient.proteins}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedIngredient.proteins" />
+                        </div>
+                    </div>
+
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Fat </div>
+
+                        <div class="profile-info-value">
+                            <span ng-if="!isEditing">{{ingredient.fat}}</span>
+                            <input ng-if="isEditing" type="text" ng-model="editedIngredient.fat" />
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="btn-group pull-right">
+                    <button type="button" class="pull-right btn btn-sm btn-danger" ng-if="!isEditing" ng-click="delete()">
+                        <i class="ace-icon fa fa-trash"></i>
+                        <span class="bigger-110">Delete Ingredient</span>
+                    </button>
+
+                    <button type="button" class="pull-right btn btn-sm btn-primary" ng-if="!isEditing" ng-click="edit()">
+                        <i class="ace-icon fa fa-pencil"></i>
+                        <span class="bigger-110">Edit Ingredient</span>
+                    </button>
+
+                    <button type="button" class="pull-right btn btn-sm btn-light" ng-if="isEditing" ng-click="abortEdit()">
+                        <i class="ace-icon fa fa-close"></i>
+                        <span class="bigger-110">Abort</span>
+                    </button>
+
+                    <button type="button" class="pull-right btn btn-sm btn-success" ng-if="isEditing" ng-click="confirmEdit()">
+                        <i class="ace-icon fa fa-check"></i>
+                        <span class="bigger-110">Confirm</span>
+                    </button>
+                </div>
+
+                <div class="space-20"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="ingredient-delete-confirm" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h2 class="modal-title">Deletion</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Are you sure you wish to delete?</p>
+                    <p>If you confirm, your ingredient profile will be deleted permanently and you will be logged out of the system!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="ace-icon fa fa-mail-reply"></i>
+                        <span>Abort</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-click="confirmDelete()">
+                        <i class="ace-icon fa fa-exclamation-circle"></i>
+                        <span>Yes, delete!</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ingredient-edit-confirm" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h2 class="modal-title">Confirmation</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Your profile has been updated</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="ace-icon fa fa-mail-reply"></i>
+                        <span>OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

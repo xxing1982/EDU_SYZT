@@ -1,0 +1,27 @@
+<label class="ace-file-input">
+    <input type="file" nv-file-select ng-show="!uploader.isUploading" uploader="uploader" id="id-input-file-2">
+    <span class="ace-file-container" nv-file-drop data-title="Browse" uploader="uploader" style="height: 52px;">
+        <span  ng-show="!uploader.isUploading && !uploader.error" class="ace-file-name" data-title="Drop an image file in this area ..." style="margin-top: 12px">
+            <i class=" ace-icon fa fa-upload" style="padding-top: 12px"></i>
+        </span>
+        <span  ng-show="!uploader.isUploading  && (uploader.error == 'maxSize')" class="ace-file-name error" data-title="Sorry! We only accept images smaller than 1 MB" style="margin-top: 12px">
+            <i class=" ace-icon fa fa-upload" style="padding-top: 12px"></i>
+        </span>
+        <span  ng-show="!uploader.isUploading  && (uploader.error == 'imageTypes')" class="ace-file-name error" data-title="Sorry! We only support PNG, JPG and GIF files" style="margin-top: 12px">
+            <i class=" ace-icon fa fa-upload" style="padding-top: 12px"></i>
+        </span>
+        <span  ng-show="!uploader.isUploading  && (uploader.error == 'connection')" class="ace-file-name error" data-title="Hello? Couldn't find Nourriture. Check your internet connection." style="margin-top: 12px">
+            <i class=" ace-icon fa fa-upload" style="padding-top: 12px"></i>
+        </span>
+        <span  ng-show="!uploader.isUploading  && (uploader.error == 'unexpected')" class="ace-file-name error" data-title="Sorry! An unexpected error occured. Try again!" style="margin-top: 12px">
+            <i class=" ace-icon fa fa-upload" style="padding-top: 12px"></i>
+        </span>
+        <div  ng-show="uploader.isUploading && uploader.progress > 0" class="progress pos-rel" ng-class="{ progressHigh: (uploader.progress > 50), progressLow: (uploader.progress <= 50) }" data-percent="{{ uploader.progress }}" style="height: 100%; padding: 5px; ">
+            <div class="progress-bar" style="width:{{ uploader.progress }}%"></div>
+        </div>
+        <div  ng-show="uploader.isUploading && uploader.progress == 0" class="progress pos-rel progressLow" data-percent="Starting upload .." style="height: 100%; padding: 5px; " ></div>
+    </span>
+    <a class="remove" href="#">
+        <i class=" ace-icon fa fa-times"></i>
+    </a>
+</label>

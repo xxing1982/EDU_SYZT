@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.edu.bjtu.nourriture" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:name=".Analytics">
+
+        <!-- Google Play services -->
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.moment.NewMomentActivity"
+            android:label="@string/title_activity_new_moment"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+        </activity>
+        <activity
+            android:name=".activities.moment.DetailMomentActivity"
+            android:label="@string/title_activity_detail_moment"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cn.edu.bjtu.nourriture.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.moment.SocialListOfMomentActivity"
+            android:label="@string/title_activity_social_list_of_moment"
+            android:parentActivityName=".activities.moment.DetailMomentActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.moment.DetailMomentActivity" />
+        </activity>
+        <activity
+            android:name=".activities.recipe.DetailRecipeActivity"
+            android:label="@string/title_activity_detail_recipe"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cn.edu.bjtu.nourriture.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.recipe.RecipeMomentsActivity"
+            android:label="@string/title_activity_moments_of_recipe"
+            android:parentActivityName=".activities.recipe.DetailRecipeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cn.edu.bjtu.nourriture.activities.recipe.DetailRecipeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.friend.NewFriendActivity"
+            android:label="@string/title_activity_new_friend" >
+        </activity>
+    </application>
+
+</manifest>

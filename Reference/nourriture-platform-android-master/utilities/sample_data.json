@@ -1,0 +1,78 @@
+{
+    "consumers" : [
+        {
+            "__v": 0,
+            "modified": "2015-01-02T08:55:01.391Z",
+            "created": "2015-01-02T08:55:01.391Z",
+            "_id": "5467f7ae27ed51ae0c296bfc",
+            "username": "nielssj",
+            "name": "Niels Jensen",
+            "email": "nm@9la.dk",
+            "picture": "https://avatars2.githubusercontent.com/u/1209767?v=2&s=460",
+            "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec lobortis massa, sit amet dapibus odio. Phasellus malesuada mi at tortor semper posuere. Aenean risus lorem, malesuada vitae nulla et, vulputate pulvinar mi. Nulla ullamcorper libero vitae massa facilisis pulvinar. In at elementum risus. Etiam posuere ligula ac mollis vehicula. Proin ullamcorper porttitor felis sit amet maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam diam leo, luctus ac turpis eget, varius facilisis erat.",
+            "occupation": "Software Developer",
+            "gender": 1,
+            "birthday": "1991-04-19T00:00:00.000Z",
+            "website": "https://www.facebook.com/nielsjensen",
+            "following": [
+                {
+                    "created": "2014-10-29T00:00:00.000Z",
+                    "consumer": "5467f7ae27ed51ae0c296bfc",
+                    "_id": "54a65ce566d69264478cca86"
+                },
+                {
+                    "created": "2014-10-31T00:00:00.000Z",
+                    "consumer": "5467ee99332f42cf0fe805d6",
+                    "_id": "54a65ce566d69264478cca85"
+                }
+            ]
+        },
+        {
+            "__v": 0,
+            "modified": "2015-01-02T08:56:01.834Z",
+            "created": "2015-01-02T08:56:01.834Z",
+            "_id": "5467f7cc27ed51ae0c296bfd",
+            "username": "ctverecek",
+            "name": "Pavel Prochazka",
+            "email": "ppprochazka72@gmail.com",
+            "picture": "https://avatars0.githubusercontent.com/u/3673765?v=2&s=400",
+            "bio": "Suspendisse laoreet lorem justo, sed efficitur enim efficitur nec. Sed blandit maximus faucibus. Etiam vestibulum venenatis quam, nec dapibus urna volutpat eget. Proin nec purus massa. Fusce rutrum nisl id lectus aliquet pellentesque. Nam finibus massa sit amet euismod lacinia. Cras a orci a nunc gravida cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consequat turpis tortor, id euismod arcu vehicula non. Praesent in diam quis mauris tristique consectetur. Nulla ullamcorper viverra nunc in porttitor. Donec eu fringilla nibh.",
+            "occupation": "Software Developer",
+            "gender": 1,
+            "birthday": "1991-09-06T00:00:00.000Z",
+            "website": "https://www.facebook.com/pavel.prochy",
+            "following": []
+        },
+        {
+            "__v": 0,
+            "modified": "2015-01-02T08:56:31.944Z",
+            "created": "2015-01-02T08:56:31.944Z",
+            "_id": "5467ee99332f42cf0fe805d6",
+            "username": "arnaudkevin",
+            "name": "Arnaud Kevin",
+            "email": "arnaudkevein@github.com",
+            "picture": "https://avatars3.githubusercontent.com/u/5804525?v=2&s=460",
+            "gender": 1,
+            "following": []
+        }
+    ],
+    "moments": [
+        {
+            "author" : "5467f7ae27ed51ae0c296bfc",
+            "text" : "I cooked a delicious lasagna from this amazing recipe! You should do the same, dude.",
+            "subjectID" : "recipe/6251b1fb84c3f4061a5f4996",
+            "comments" : [
+                {
+                    "created": "2014-11-04",
+                    "author": "5467f7cc27ed51ae0c296bfd",
+                    "text": "It sure looks delicious!"
+                }
+            ]
+        },
+        {
+            "author" : "5467ee99332f42cf0fe805d6",
+            "text" : "Heinz is truly the only real Ketchup brand I would consider. Now they are on Nourriture, check it out!",
+            "subjectID" : "ingredient/6251b1fb84c3f4061a5f4997"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+<div class="main-container container" id="main-container">
+    <div>
+        <img ng-if="imageSrc" ng-src="{{imageSrc}}" />
+        <form class="form-horizontal ng-pristine ng-valid" role="form">
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="id-input-file-2"> Logo </label>
+                <div nour-upload nour-success="uploadComplete" nour-group="company" nour-entity="{{ user.username }}" class="col-sm-9 nourFileUploader"></div>
+            </div>
+        </form>
+
+    </div>
+</div>
