@@ -8,7 +8,7 @@ import static junit.framework.Assert.*;
 /**
  * @author Petri Kainulainen
  */
-@Ignore
+//@Ignore
 public class TodoTest {
 
     private String TITLE = "title";

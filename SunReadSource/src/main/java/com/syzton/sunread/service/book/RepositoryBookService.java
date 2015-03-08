@@ -23,7 +23,6 @@ import java.util.List;
 public class RepositoryBookService implements BookService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryBookService.class);
-
     private BookRepository repository;
 
     @Autowired
@@ -35,12 +34,12 @@ public class RepositoryBookService implements BookService {
     public Book add(BookDTO added) {
         LOGGER.debug("Adding a new Book entry with information: {}", added);
 
-        Book bookModel = Book.getBuilder(added.getIsbn(),added.getName())
+        Book bookModel = Book.getBuilder(added.getIsbn(), added.getName())
                 .description(added.getDescription())
                 .build();
-      // Book bookModel = new Book();
+        // Book bookModel = new Book()
         return repository.save(bookModel);
-      //  return  new Book();
+        //  return  new Book();
     }
 
 

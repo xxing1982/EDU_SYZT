@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 /**
  * @author Petri Kainulainen
  */
-@Ignore
+//@Ignore
 public class RepositoryTodoServiceTest {
 
     private static final Long ID = 1L;
