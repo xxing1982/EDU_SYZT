@@ -1,5 +1,6 @@
 package com.syzton.sunread.todo.dto;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import static junit.framework.Assert.assertEquals;
 /**
  * @author Petri Kainulainen
  */
+@Ignore
 public class ValidationErrorDTOTest {
 
     private static final String FIELD_PATH = "foo";
