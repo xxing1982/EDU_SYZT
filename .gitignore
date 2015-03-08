@@ -29,13 +29,9 @@ node_modules
 SunReadSource/sunread.iml
 SunReadSource/target
 
+
 SunReadSource/.idea/*
 SunReadSource/.settings/*
 SunReadSource/.classpath
 SunReadSource/.project
 SunReadSource/rest-unittest.iml
-
-
-
-
-
