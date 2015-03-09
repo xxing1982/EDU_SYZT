@@ -1,0 +1,254 @@
+<!--index head content-->
+<div id="index-head" class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-3"><img ng-src="{{userInfo.portrait}}" class="img-responsive img-circle"></div>
+                <div class="col-md-9">
+                    <div class="col-md-12 index-head-info-text">
+                        <h2><strong>{{userInfo.name}}</strong></h2>
+                    </div>
+                    <div class="col-md-12 index-head-info-text">
+                        {{userInfo.sex | formatSex}}
+                        &nbsp;&nbsp;&nbsp;
+                        |
+                        &nbsp;&nbsp;&nbsp;
+                        {{userInfo.school}}
+                        &nbsp;&nbsp;&nbsp;
+                        |
+                        &nbsp;&nbsp;&nbsp;
+                        {{userInfo.class}}
+                    </div>
+                    <div class="col-md-12 index-head-info-text">
+                        <a href="#" class="btn btn-success btn-sm disabled" role="button">阅读等级：{{userInfo.level}}</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#" class="btn btn-warning btn-sm disabled" role="button">财富值：{{userInfo.treasure}}</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#" class="btn btn-danger btn-sm disabled" role="button">阅读金币：{{userInfo.integral}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<!--index body content-->
+<div class="container-fluid bodyPart">
+    <div class="col-md-1"></div>
+    <div class="col-md-7 div-tag tag-margin-blue tag-middle">
+        <div class="row row-title">
+            <div class="col-md-2 row-title-name">我的书架</div>
+            <div class="col-md-4 row-title-finish">阅读目标完成率：{{bookshelf.finishStatus}}</div>
+            <div class="col-md-4"></div>
+            <div class="col-md-2 row-title-more"><a href="#">更多></a></div>
+        </div>
+        <div class="row row-content">
+            <div class="col-md-6">
+                <div class="book-read-readed">已读</div>
+                <br />
+                <div class="col-md-1"></div>
+                <div class="col-md-4">必读：{{bookshelf.readed.must}}本</div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">选读：{{bookshelf.readed.select}}本</div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="col-md-6" style="border-left:1px #EAEAEA solid">
+                <div class="book-read-unread">未读</div>
+                <br />
+                <div class="col-md-1"></div>
+                <div class="col-md-4">必读：{{bookshelf.unread.must}}本</div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">选读：{{bookshelf.unread.select}}本</div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+        <div class="row row-title">
+            <div class="col-md-2 row-title-name">我的测试</div>
+            <div class="col-md-4 row-title-finish">测试正确率：80%</div>
+            <div class="col-md-4"></div>
+            <div class="col-md-2 row-title-more"><a href="#">更多></a></div>
+        </div>
+        <div class="row row-content">
+            <div class="col-md-4 clear-padding">
+                <div class="col-md-6"><img src="../static/img/cat.jpg" class="img-responsive"></div>
+                <div class="col-md-6 book-right-text">
+                    <div><h4>小猫钓鱼</h4></div>
+                    <div>时间：2014.06.20</div>
+                    <div>正确率：90%</div>
+                    <div>成绩：90</div>
+                    <div><input class="btn btn-default btn-xs" type="button" value="做笔记"></div>
+                </div>
+            </div>
+            <div class="col-md-4 clear-padding">
+                <div class="col-md-6"><img src="../static/img/horse.jpg" class="img-responsive"></div>
+                <div class="col-md-6 book-right-text">
+                    <div><h4>小马过河</h4></div>
+                    <div>时间：2014.06.20</div>
+                    <div>正确率：90%</div>
+                    <div>成绩：90</div>
+                    <div><input class="btn btn-default btn-xs" type="button" value="做笔记"></div>
+                </div>
+            </div>
+            <div class="col-md-4 clear-padding">
+                <div class="col-md-6"><img src="../static/img/horse.jpg" class="img-responsive"></div>
+                <div class="col-md-6 book-right-text">
+                    <div><h4>小马过河</h4></div>
+                    <div>时间：2014.06.20</div>
+                    <div>正确率：90%</div>
+                    <div>成绩：90</div>
+                    <div><input class="btn btn-default btn-xs" type="button" value="做笔记"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-title">
+            <div class="col-md-2 row-title-name">我的笔记</div>
+            <div class="col-md-4 row-title-finish"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-2 row-title-more"><a href="#">更多></a></div>
+        </div>
+        <div class="row row-content">
+            <div class="col-md-3">
+                <div class="book-bottom-text">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8"><img src="../static/img/horse.jpg" class="img-responsive"></div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div><h4>小马过河</h4></div>
+                    <div>笔记名：一本很有意义的书</div>
+                    <div>作者：张逸轩  评论：200条</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="book-bottom-text">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8"><img src="../static/img/horse.jpg" class="img-responsive"></div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div><h4>小马过河</h4></div>
+                    <div>笔记名：一本很有意义的书</div>
+                    <div>作者：张逸轩  评论：200条</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="book-bottom-text">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8"><img src="../static/img/horse.jpg" class="img-responsive"></div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div><h4>小马过河</h4></div>
+                    <div>笔记名：一本很有意义的书</div>
+                    <div>作者：张逸轩  评论：200条</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="book-bottom-text">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8"><img src="../static/img/horse.jpg" class="img-responsive"></div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div><h4>小马过河</h4></div>
+                    <div>笔记名：一本很有意义的书</div>
+                    <div>作者：张逸轩  评论：200条</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="col-md-12 div-tag tag-margin-green tag-right">
+            <div class="row row-title">
+                <div class="col-md-8 row-title-name">阅读海洋</div>
+                <div class="col-md-4 row-title-more"><a href="#">更多></a></div>
+            </div>
+            <div class="row row-content-right">
+                <div class="col-md-12"><img src="../static/img/app.jpg" class="img-responsive" /></div>
+                <div class="col-md-12 enter-game"><input class="btn btn-default" type="button" value="进入游戏" /></div>
+            </div>
+        </div>
+        
+        <div class="col-md-12 div-tag tag-margin-blue tag-right">
+            <div class="row row-title">
+                <div class="col-md-8 row-title-name">学校的活动</div>
+            </div>
+            <div class="row row-content-right row-activity">
+                <ul>
+                    <li>明天将举行颁奖典礼。</li>
+                    <li>学校将在2015年3月10日举行朗读比赛。</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-md-12 div-tag tag-margin-blue tag-right">
+            <div class="row row-title">
+                <div class="col-md-8 row-title-name">同学阅读达人</div>
+                <div class="col-md-4 row-title-more"><a href="#">更多></a></div>
+            </div>
+            <div class="row row-content-right row-read-master">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6"><img src="../static/img/picture1.jpg" class="img-responsive img-circle"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-3" style="margin-top:-50px;"><img src="../static/img/1.jpg" class="img-responsive img-circle"></div>
+                </div>
+                <div><h3>夏亚姗 <span class="read-master-count">203本</span></h3></div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7 read-master-name">2.顾佳倩</div>
+                    <div class="col-md-3 read-master-count">115本</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7 read-master-name">3.王欣萌</div>
+                    <div class="col-md-3 read-master-count">104本</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7 read-master-name">4.王慧斌</div>
+                    <div class="col-md-3 read-master-count">99本</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-7 read-master-name">5.张一轩</div>
+                    <div class="col-md-3 read-master-count">86本</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 div-tag tag-margin-blue tag-right">
+            <div class="row row-title">
+                <div class="col-md-8 row-title-name">热门笔记</div>
+                <div class="col-md-4 row-title-more"><a href="#">更多></a></div>
+            </div>
+            <div class="row row-content-right row-hot-note">
+                <div class-"row">
+                    <div class="col-md-7">《原来世界这么...</div>
+                    <div class="col-md-5">评论：86</div>
+                </div>
+                <div class-"row">
+                    <div class="col-md-7">《原来世界这么...</div>
+                    <div class="col-md-5">评论：86</div>
+                </div>
+                <div class-"row">
+                    <div class="col-md-7">《原来世界这么...</div>
+                    <div class="col-md-5">评论：86</div>
+                </div>
+                <div class-"row">
+                    <div class="col-md-7">《原来世界这么...</div>
+                    <div class="col-md-5">评论：86</div>
+                </div>
+                <div class-"row">
+                    <div class="col-md-7">《原来世界这么...</div>
+                    <div class="col-md-5">评论：86</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
