@@ -2,13 +2,9 @@ package com.syzton.sunread.model.bookshelf;
 
 import java.util.Collection;
 
-
-import com.syzton.sunread.model.book.*;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-
 
 import javax.persistence.*;
 
@@ -57,7 +53,7 @@ public class Bookshelf {
      */
     @OneToMany(mappedBy = "bookshelf", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @OrderBy(value = "createTime")
-    private Collection<Book> books;
+    private Collection<BookInShelf> booksInShelf;
 
     public Bookshelf() {
 
@@ -88,8 +84,8 @@ public class Bookshelf {
         return operation_record;
     }
     
-    public Collection<Book> getBooks(){    	
-    	return books;
+    public Collection<BookInShelf> getBooks(){    	
+    	return booksInShelf;
     }
 
     @PrePersist
@@ -116,21 +112,21 @@ public class Bookshelf {
         	built = new Bookshelf();
         	built.owner = owner;
         	built.operation_record = "";
-        	//built.books = null;   	
+        	//built.booksInShelf = null;   	
         }
         
         public Builder(String owner_name){        	
         }
 
-        public Builder(long owner,Collection<Book> books, String operation_record) {
+        public Builder(long owner,Collection<BookInShelf> booksInShelf, String operation_record) {
             built = new Bookshelf();
             built.owner = owner;
-            built.books = books;
+            built.booksInShelf = booksInShelf;
             built.operation_record = operation_record;
         }
         
-        //Build bookshelf by owner name(:String)
-        public Builder(String owner_name,Collection<Book> books, String operation_record) {
+        //Build booksInShelfhelf by owner name(:String)
+        public Builder(String owner_name, Collection<BookInShelf> booksInShelf, String operation_record) {
         }
 
         
