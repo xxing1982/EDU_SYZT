@@ -1,5 +1,7 @@
 package com.syzton.sunread.exception.bookshelf;
 
-public class BookshelfNotFoundException {
-
+public class BookshelfNotFoundException extends Exception {
+    public  BookshelfNotFoundException(String message) {
+        super();
+    }
 }
