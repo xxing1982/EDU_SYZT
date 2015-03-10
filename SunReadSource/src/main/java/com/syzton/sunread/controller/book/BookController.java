@@ -3,6 +3,10 @@ package com.syzton.sunread.controller.book;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.service.book.BookService;
+import com.syzton.sunread.todo.dto.TodoDTO;
+import com.syzton.sunread.todo.exception.TodoNotFoundException;
+import com.syzton.sunread.todo.model.Todo;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 /**@date 2015-03-05
  * @author Jerry Zhang
@@ -35,13 +40,39 @@ public class BookController {
 
         LOGGER.debug("Added a book entry with information: {}", added);
 
-       return createDTO(added);
+       return added.createDTO(added);
     }
 
 
-    private BookDTO createDTO(Book model) {
-        BookDTO dto = new BookDTO();
+    @RequestMapping(value = "/api/book/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public BookDTO findById(@PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Finding to-do entry with id: {}", id);
 
-        return dto;
+        Book found = bookService.findById(id);
+        LOGGER.debug("Found to-do entry with information: {}", found);
+
+        return found.createDTO(found);
+    }
+
+    @RequestMapping(value = "/api/book/{id}/review", method = RequestMethod.GET)
+    @ResponseBody
+    public BookDTO findByIdwithReview(@PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Finding to-do entry with id: {}", id);
+
+        Book found = bookService.findById(id);
+        LOGGER.debug("Found to-do entry with information: {}", found);
+
+        return found.bookWithReview(found);
+    }
+    @RequestMapping(value = "/api/book/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public BookDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Deleting a to-do entry with id: {}", id);
+
+        Book deleted = bookService.deleteById(id);
+        LOGGER.debug("Deleted to-do entry with information: {}", deleted);
+
+        return deleted.createDTO(deleted);
     }
 }

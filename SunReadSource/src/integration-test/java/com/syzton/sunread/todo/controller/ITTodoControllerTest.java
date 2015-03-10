@@ -6,7 +6,7 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.syzton.sunread.todo.dto.TodoDTO;
 import com.syzton.sunread.config.ApplicationContext;
-import com.syzton.sunread.todo.TestUtil;
+import com.syzton.sunread.TestUtil;
 import com.syzton.sunread.todo.dto.TodoDTOBuilder;
 import com.syzton.sunread.todo.model.Todo;
 import org.junit.Before;

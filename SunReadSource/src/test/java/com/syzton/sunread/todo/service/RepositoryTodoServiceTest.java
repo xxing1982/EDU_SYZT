@@ -7,7 +7,6 @@ import com.syzton.sunread.todo.model.Todo;
 import com.syzton.sunread.todo.model.TodoBuilder;
 import com.syzton.sunread.todo.repository.TodoRepository;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 

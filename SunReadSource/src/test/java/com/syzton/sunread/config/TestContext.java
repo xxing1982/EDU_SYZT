@@ -1,6 +1,7 @@
 package com.syzton.sunread.config;
 
 import com.syzton.sunread.service.book.BookService;
+import com.syzton.sunread.service.book.ReviewService;
 import com.syzton.sunread.todo.service.TodoService;
 import org.mockito.Mockito;
 import org.springframework.context.MessageSource;
@@ -29,6 +30,11 @@ public class TestContext {
     @Bean
     public TodoService todoService() {
         return Mockito.mock(TodoService.class);
+    }
+
+    @Bean
+    public ReviewService reviewService(){
+        return Mockito.mock(ReviewService.class);
     }
     @Bean
     public BookService bookService() {

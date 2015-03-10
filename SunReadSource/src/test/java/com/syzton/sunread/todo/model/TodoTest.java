@@ -1,6 +1,5 @@
 package com.syzton.sunread.todo.model;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.Assert.*;

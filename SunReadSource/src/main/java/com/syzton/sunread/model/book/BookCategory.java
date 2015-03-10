@@ -13,9 +13,9 @@ import java.util.Set;
 /**
  * @author Jerry zhang
  */
-@Entity
-@Table(name="book")
-public class Book {
+//@Entity
+//@Table(name="book_category")
+public class BookCategory {
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
     public static final int MAX_LENGTH_NAME = 100;
@@ -39,22 +39,11 @@ public class Book {
     @Column(name="name",nullable = false,length = MAX_LENGTH_NAME)
     private String name;
 
-    @Column(name ="isbn",unique = true,nullable = false,length = MAX_LENGTH_ISBN)
-    private String isbn;
-
-    @Column(name = "avg_rate")
-    private int avgRate;
-
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
+    @ManyToMany(cascade = CascadeType.REFRESH,mappedBy = "book")
     @Basic(fetch = FetchType.LAZY)
     private Set<Review> reviews = new HashSet<>() ;
 
-
-
-
-
-
-    public Book() {
+    public BookCategory() {
 
     }
 
@@ -91,14 +80,6 @@ public class Book {
         this.name = name;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-
-    public int getAvgRate() {
-        return avgRate;
-    }
 
     public Set<Review> getReviews() {
         return reviews;
@@ -121,15 +102,14 @@ public class Book {
 
     public static class Builder {
 
-        private Book built;
+        private BookCategory built;
 
         public Builder(String isbn,String name) {
-            built = new Book();
+            built = new BookCategory();
             built.name = name;
-            built.isbn = isbn;
         }
 
-        public Book build() {
+        public BookCategory build() {
             return built;
         }
 
@@ -145,17 +125,16 @@ public class Book {
 
 
     }
-    public BookDTO createDTO(Book model) {
+    public BookDTO createDTO(BookCategory model) {
         BookDTO dto = new BookDTO();
         dto.setId(model.getId());
         dto.setName(model.getName());
-        dto.setIsbn(model.getIsbn());
         dto.setDescription(model.getDescription());
         //  dto.setPublicationDate(new Date());
         // dto.setReviewSet(model.getReviews());
         return dto;
     }
-    public BookDTO bookWithReview(Book model){
+    public BookDTO bookWithReview(BookCategory model){
        BookDTO dto = this.createDTO(model);
         Set<ReviewDTO> reviewDTOs = new HashSet<>();
         for(Review review : model.getReviews()){

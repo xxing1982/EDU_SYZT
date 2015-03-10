@@ -1,4 +1,4 @@
-package com.syzton.sunread.todo;
+package com.syzton.sunread;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
