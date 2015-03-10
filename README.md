@@ -1,7 +1,8 @@
 # EDU_SYZT
 
-# UI Prototyping
-* Access URL: pqird6.axshare.com
+# UI Prototyping 
+* Note: It is ONLY used to avoid the leakage of user logics
+* Access URL: http://8eyr00.axshare.com/
 * Password:   Beijing123
 
 # Data structure
