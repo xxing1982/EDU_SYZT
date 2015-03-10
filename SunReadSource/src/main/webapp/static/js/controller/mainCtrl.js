@@ -2,7 +2,7 @@
 
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices']);
 
-ctrls.controller("mainController", ['$scope', 'User', function ($scope, User) {
+ctrls.controller("mainController", ['$scope', 'User', 'GetUserList', function ($scope, User, getList) {
 	//userinfo
     $scope.userInfo = {
     	'name': '张晓晨',
@@ -14,9 +14,17 @@ ctrls.controller("mainController", ['$scope', 'User', function ($scope, User) {
     	'treasure': '300',
     	'integral': '102'
     };
-    //test function to get data
-    var testData = User.get({id: 3474}, function(){
+    //test function to get data by id
+ /*   var testData = User.get({id: 3474}, function(){
     	console.log(testData);
+    });
+    //test function to get data list
+    var testDataList = User.query(function(){
+        console.log(testDataList);
+    });*/
+
+    getList.getUsers(function(){
+        
     });
 
     //bookshelf

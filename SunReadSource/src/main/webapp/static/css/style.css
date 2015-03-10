@@ -3,7 +3,7 @@ body
 {
     margin-left:auto;
     margin-right:auto;
-    background:url(../img/background.jpg);
+    background-image:url(../img/background.jpg);
     background-repeat:no-repeat;
     background-size:100% 100%;
     /*for navbar*/
@@ -12,7 +12,7 @@ body
 /***********navigation top*************************/
 .navbar
 {
-    background-color: #71BEE8;
+    background-color: #71BEE8 !important;
 }
 
 .navbar a
@@ -28,6 +28,14 @@ body
 .navbar li a:focus
 {
     background-color:transparent;
+    border-bottom: 2px White solid;
+    margin-bottom: -2px;
+}
+
+.nav-underline li.active a
+{
+    border-bottom: 2px White solid;
+    margin-bottom: -2px;
 }
 
 .nav-underline li a:hover
@@ -42,7 +50,7 @@ body
 
 #index-head
 {
-    padding-top:20px;
+    margin-top:80px;
 }
 
 .index-head-info-text
@@ -60,18 +68,19 @@ body
 .index-head-info-text:last-child
 {
     margin-top: 20px;
+    font-size: 16px;
 }
 /************index-head bottom************************/
 
 /************index-body top************************/
 .bodyPart
 {
-    background-color: #EAEAEA;
+    /*background-color: #EAEAEA;*/
 }
 
 .div-tag
 {
-    margin-top: 20px;
+    margin-top: 40px;
     background-color: white;
 }
 
