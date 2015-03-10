@@ -1,29 +1,39 @@
 // app.js
 
-// define our application and pull in ngRoute and ngAnimate
-var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate']);
+//Main Angular script file for application
 
-// ROUTING
-animateApp.config(function ($routeProvider) {
+//create a module with injected modules in brackets
+var routeApp = angular.module('routeApp',['ngRoute', 'ngResource', 'nourControllers', 'nourConfig', 'userServices']);
 
+// router config
+routeApp.config(['$routeProvider',function ($routeProvider) {
     $routeProvider
-
-    // home page
-        .when('/index', {
-            templateUrl: 'partials/test.html',
-            controller: 'mainController'
+    	//main page
+        .when('/', {
+            templateUrl: "partials/main.html",
+            controller: "mainController"
         })
-
-    // about page
-        .when('/about', {
-            templateUrl: 'page-about.html',
-            controller: 'aboutController'
+        //reading center
+        .when('/readingCenter', {
+        	templateUrl: "partials/readingCenter.html",
+            controller: "readingCenterCtrlController"
         })
-
-    // contact page
-        .when('/contact', {
-            templateUrl: 'page-contact.html',
-            controller: 'contactController'
+        //reading sea
+        .when('/readingSea',{
+        	templateUrl: "partials/index.html",
+            controller: "indexController"
+        })
+        //reading training
+        .when('/readingTraining',{
+        	templateUrl: "partials/index.html",
+            controller: "indexController"
+        })
+        //prize center
+        .when('/prizeCenter',{
+        	templateUrl: "partials/index.html",
+            controller: "indexController"
+        })
+        .otherwise({
+                redirectTo: '/'
         });
-
-});
+}]);

@@ -1,18 +1,18 @@
 
 body
 {
-    width:1200px;
     margin-left:auto;
     margin-right:auto;
+    background:url(../img/background.jpg);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    /*for navbar*/
+    padding-top: 50px;
 }
 /***********navigation top*************************/
 .navbar
 {
-    position:absolute;
-    z-index:1;
-    top:0;
-    width:1200px;
-    
+    background-color: #71BEE8;
 }
 
 .navbar a
@@ -25,48 +25,43 @@ body
     background-color:transparent;
 }
 
+.navbar li a:focus
+{
+    background-color:transparent;
+}
+
 .nav-underline li a:hover
 {    
-    border-bottom:2px White solid;
+    border-bottom: 2px White solid;
+    margin-bottom: -2px;
 }
 /************navigation bottom************************/
 
 /************index-head top************************/
+
+
 #index-head
 {
-    background:url(../img/screen.jpg);
-    background-repeat:no-repeat;
-    background-size:100% 100%;
-    height:350px;
-    border-bottom:2px #C4C4C4 solid;
-}
-
-#index-head-info
-{
-    padding-top:120px;
+    padding-top:20px;
 }
 
 .index-head-info-text
 {
-    margin-left:-10px;
-    margin-top:10px;
-    color: White;
-    font-size: 16px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: ;
 }
 
 .index-head-info-text:first-child
 {
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 .index-head-info-text:last-child
 {
-    margin-left: -10px;
-    margin-top: 30px;
-    color: Black;
+    margin-top: 20px;
 }
 /************index-head bottom************************/
-
 
 /************index-body top************************/
 .bodyPart
@@ -156,34 +151,28 @@ body
     font-weight: 800;
 }
 
-.book-img
+.enter-game
 {
-    width: 120px;
-    height:150px;
-}
-
-.readmaster-img
-{
-    width: 120px;
-    height:120px;
-}
-
-.first-img
-{
-    width: 50px;
-    height:50px;
+    text-align: center;
+    margin-top: 15px;
 }
 
 .book-right-text div
 {
-    font-size: 10px;
-    margin-top: 8px;
+    font-size: 11px;
+    margin-top: 3px;
+    margin-left: -10px;
+}
+
+.clear-padding
+{
+    padding: 0;
 }
 
 .book-bottom-text div
 {
     text-align: center;
-    font-size: 10px;
+    font-size: 11px;
     margin-top: 8px;
 }
 
