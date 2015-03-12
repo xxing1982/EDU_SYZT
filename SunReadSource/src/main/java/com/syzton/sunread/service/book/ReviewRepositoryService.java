@@ -1,6 +1,7 @@
 package com.syzton.sunread.service.book;
 
 import com.syzton.sunread.dto.book.ReviewDTO;
+import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.Review;
 import com.syzton.sunread.repository.book.BookRepository;
@@ -9,6 +10,8 @@ import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,5 +63,13 @@ public class ReviewRepositoryService implements ReviewService {
         Review review = reviewRepository.findOne(id);
         reviewRepository.delete(review);
         return review;
+    }
+    @Transactional
+    @Override
+    public Page<Review> findByBookId(Pageable pageable, long bookId) {
+
+        Book book = bookRepository.findOne(bookId);
+        Page<Review> reviewPage = reviewRepository.findByBook(book,pageable);
+        return reviewPage;
     }
 }

@@ -10,7 +10,7 @@ import com.syzton.sunread.model.bookshelf.Bookshelf;
  * @author Morgan-Leon
  */
 public interface BookshelfService {
-	
+
     /**
      * Adds a new bookshelf entry.
      * @param added The information of the added bookshelf entry.

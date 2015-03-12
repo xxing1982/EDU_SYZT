@@ -20,13 +20,13 @@ public class BookshelfDTO {
 
     @NotEmpty
     private boolean isMandatory;
-    
+
     @NotEmpty
     private int readState;
-    
+
     @NotEmpty
     private Bookshelf bookshelf_id;
-    
+
     @NotEmpty
     private Book book_id;
 
@@ -57,22 +57,22 @@ public class BookshelfDTO {
     public void setBookAttribute(boolean isMandatory) {
         this.isMandatory = isMandatory;
     }
-    
+
     public int getReadState() {
 		return readState;
 	}
-    
+
     public void setReadState(int readState) {
 		this.readState = readState;
 	}
-    
+
     public Book getBook() {
 		return book_id;
 	}
     public void setBook(Book book) {
 		this.book_id = book;
 	}
-    
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

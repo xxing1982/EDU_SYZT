@@ -1,6 +1,8 @@
 package com.syzton.sunread.model.book;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.book.ReviewDTO;
+import com.syzton.sunread.util.DateSerializer;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -16,7 +18,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+    @JsonSerialize(using = DateSerializer.class)
     @Column(name = "creation_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime creationTime;

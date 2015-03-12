@@ -7,6 +7,7 @@ import com.syzton.sunread.todo.model.Todo;
 import com.syzton.sunread.todo.model.TodoBuilder;
 import com.syzton.sunread.todo.repository.TodoRepository;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.*;
 /**
  * @author Petri Kainulainen
  */
-//@Ignore
+@Ignore
 public class RepositoryTodoServiceTest {
 
     private static final Long ID = 1L;

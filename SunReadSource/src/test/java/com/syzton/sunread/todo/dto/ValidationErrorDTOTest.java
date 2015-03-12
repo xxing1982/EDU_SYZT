@@ -10,7 +10,7 @@ import static junit.framework.Assert.assertEquals;
 /**
  * @author Petri Kainulainen
  */
-//@Ignore
+@Ignore
 public class ValidationErrorDTOTest {
 
     private static final String FIELD_PATH = "foo";

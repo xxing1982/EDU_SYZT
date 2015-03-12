@@ -33,27 +33,27 @@ public class Bookshelf {
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
-    
+
     /*
      * ￼
 	"mapperBy" is used in embedded class. eg. person & person_detail.
-	"JoinColumn" is used in  reference. 
+	"JoinColumn" is used in  reference.
      */
-    @OneToOne(optional = false, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "owner", referencedColumnName = "user_id", unique = true)
-    private long owner;
-    
+//    @OneToOne(optional = false, cascade = CascadeType.REFRESH)
+//    @JoinColumn(name = "owner", referencedColumnName = "user_id", unique = true)
+//    private long owner;
+
     @Column(name = "operation_record", nullable = true, length = MAX_LENGTH_OPERATION_RECORD)
     private String operation_record;
-    
+
     /*
      *@OneToMany(mappedBy="order",cascade = CascadeType.ALL, fetch = FetchType.LAZY) 
-	 *@OrderBy(value = "id ASC")  
+	 *@OrderBy(value = "id ASC") 
      *
      */
-    @OneToMany(mappedBy = "bookshelf", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @OrderBy(value = "createTime")
-    private Collection<BookInShelf> booksInShelf;
+//    @OneToMany(mappedBy = "bookshelf", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @OrderBy(value = "createTime")
+//    private Collection<BookInShelf> booksInShelf;
 
     public Bookshelf() {
 
@@ -83,10 +83,10 @@ public class Bookshelf {
     public String getTitle() {
         return operation_record;
     }
-    
-    public Collection<BookInShelf> getBooks(){    	
-    	return booksInShelf;
-    }
+
+//    public Collection<BookInShelf> getBooks(){
+//    	return booksInShelf;
+//    }
 
     @PrePersist
     public void prePersist() {
@@ -107,29 +107,29 @@ public class Bookshelf {
     public static class Builder {
 
         private Bookshelf built;
-        
+
         public Builder(long owner){
         	built = new Bookshelf();
-        	built.owner = owner;
+//        	built.owner = owner;
         	built.operation_record = "";
-        	//built.booksInShelf = null;   	
+        	//built.booksInShelf = null;
         }
-        
-        public Builder(String owner_name){        	
+
+        public Builder(String owner_name){
         }
 
         public Builder(long owner,Collection<BookInShelf> booksInShelf, String operation_record) {
             built = new Bookshelf();
-            built.owner = owner;
-            built.booksInShelf = booksInShelf;
+//            built.owner = owner;
+//            built.booksInShelf = booksInShelf;
             built.operation_record = operation_record;
         }
-        
+
         //Build booksInShelfhelf by owner name(:String)
         public Builder(String owner_name, Collection<BookInShelf> booksInShelf, String operation_record) {
         }
 
-        
+
         public Bookshelf build() {
             return built;
         }
