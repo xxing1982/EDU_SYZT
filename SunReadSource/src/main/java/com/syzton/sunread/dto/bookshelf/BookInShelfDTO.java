@@ -15,16 +15,16 @@ public class BookInShelfDTO {
     private String description;
 
     @NotEmpty
+    private Book book;
+    
+    @NotEmpty
+    private Bookshelf bookshelf;
+    
+    @NotEmpty
     private boolean isMandatory;
 
     @NotEmpty
-    private int readState;
-
-    @NotEmpty
-    private Bookshelf bookshelf_id;
-
-    @NotEmpty
-    private Book book_id;
+    private boolean isVerified;
 
     public BookInShelfDTO() {
 
@@ -54,26 +54,26 @@ public class BookInShelfDTO {
         this.isMandatory = isMandatory;
     }
 
-    public int getReadState() {
-		return readState;
+    public boolean getReadState() {
+		return isVerified;
 	}
 
-    public void setReadState(int readState) {
-		this.readState = readState;
+    public void setReadState(boolean isVerified) {
+		this.isVerified = isVerified;
 	}
 
     public Book getBook() {
-		return book_id;
+		return book;
 	}
     public void setBook(Book book) {
-		this.book_id = book;
+		this.book = book;
 	}
 
 	  public Bookshelf getBookshelf() {
-	  return bookshelf_id;
+	  return bookshelf;
 	}
 	  public void setBookshelf(Bookshelf bookshelf) {
-	  this.bookshelf_id = bookshelf;
+	  this.bookshelf = bookshelf;
 	}
 
     @Override

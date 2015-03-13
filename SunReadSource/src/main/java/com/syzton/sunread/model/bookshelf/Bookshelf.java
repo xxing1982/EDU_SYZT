@@ -64,11 +64,16 @@ public class Bookshelf {
 
     }
 
+    public static Builder getBuilder(long owner) {
+    	return new Builder(owner);
+		
+	}
     //how to deal with  name  duplication ?
     public static Builder getBuilder(long owner,Collection<BookInShelf> booksInShelf, 
     		Collection<BookShelfOperation> bookShelfOperations) {
         return new Builder(owner,booksInShelf,bookShelfOperations);
     }
+    
 
     public Long getId() {
         return id;
@@ -120,13 +125,13 @@ public class Bookshelf {
 
         public Builder(long owner){
         	built = new Bookshelf();
-        	built.owner = owner;
-        	
+        	built.owner = owner;       	
         }
 
         public Builder(String owner_name){
         }
-
+        
+        
         public Builder(long owner,Collection<BookInShelf> booksInShelf, Collection<BookShelfOperation> bookShelfOperations) {
             built = new Bookshelf();
             built.owner = owner;
