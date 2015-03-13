@@ -42,7 +42,7 @@ public class BookController {
 
         LOGGER.debug("Added a book entry with information: {}", added);
 
-        return added.createDTO(added);
+        return added.createDTO();
     }
 
     @RequestMapping(value = "/api/books", method = RequestMethod.GET)
@@ -69,7 +69,7 @@ public class BookController {
         Book found = bookService.findById(id);
         LOGGER.debug("Found to-do entry with information: {}", found);
 
-        return found.createDTO(found);
+        return found.createDTO();
     }
 
 
@@ -82,6 +82,6 @@ public class BookController {
         Book deleted = bookService.deleteById(id);
         LOGGER.debug("Deleted to-do entry with information: {}", deleted);
 
-        return deleted.createDTO(deleted);
+        return deleted.createDTO();
     }
 }
