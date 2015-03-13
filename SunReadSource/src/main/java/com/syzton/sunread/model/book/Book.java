@@ -55,11 +55,6 @@ public class Book {
     @Basic(fetch = FetchType.LAZY)
     private Set<Review> reviews = new HashSet<>() ;
 
-
-
-
-
-
     public Book() {
 
     }

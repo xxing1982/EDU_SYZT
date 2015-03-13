@@ -1,17 +1,22 @@
-package com.syzton.sunread.service.comment;
+package com.syzton.sunread.service.note;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.syzton.sunread.dto.comment.CommentDTO;
-import com.syzton.sunread.exception.comment.CommentNotFoundException;
-import com.syzton.sunread.model.comment.Comment;
-import com.syzton.sunread.repository.comment.CommentRepository;
+import com.syzton.sunread.dto.note.CommentDTO;
+import com.syzton.sunread.exception.note.CommentNotFoundException;
+import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.note.Comment;
+import com.syzton.sunread.model.note.Note;
+import com.syzton.sunread.repository.note.CommentRepository;
+import com.syzton.sunread.repository.note.NoteRepository;
 
 
 /**
@@ -19,22 +24,31 @@ import com.syzton.sunread.repository.comment.CommentRepository;
  *
  */
 @Service
-public class RepositoryCommentService implements CommentService {
+public class CommentRepositoryService implements CommentService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryCommentService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommentRepositoryService.class);
     private CommentRepository repository;
 
     @Autowired
-    public RepositoryCommentService(CommentRepository repository) {
+    public CommentRepositoryService(CommentRepository repository) {
         this.repository = repository;
     }
 
+    private NoteRepository noteRepository;
+
+    @Autowired
+    public void NoteRepositoryService(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
+    
     @Override
-    public Comment add(CommentDTO added) {
+    public Comment add(CommentDTO added, Long noteId) {
         LOGGER.debug("Adding a new comment entry with information: {}", added);
 
-        Comment commentModel = Comment.getBuilder(added.getContent())
+        Note note = noteRepository.findOne(noteId);
+        Comment commentModel = Comment.getBuilder(added.getContent(), note)
                 .build();
+
         
         return repository.save(commentModel);
     }
@@ -85,4 +99,13 @@ public class RepositoryCommentService implements CommentService {
 
         return model;
     }
+
+	@Override
+	public Page<Comment> findByNoteId(Pageable pageable, long noteId) {
+
+        Note note = noteRepository.findOne(noteId);
+        Page<Comment> commentPage = repository.findByNote(note, pageable);
+        
+        return commentPage;
+	}
 }

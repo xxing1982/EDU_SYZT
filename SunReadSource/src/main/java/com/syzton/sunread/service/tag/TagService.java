@@ -23,7 +23,7 @@ public interface TagService {
      * Deletes a tag entry.
      * @param id    The id of the deleted tag entry.
      * @return  The deleted tag entry.
-     * @throws com.syzton.sunread.todo.exception.BookTagNotFoundException    if no tag entry is found with the given id.
+     * @throws com.syzton.sunread.exception.tag.BookTagNotFoundException    if no tag entry is found with the given id.
      */
     public Tag deleteById(Long id) throws TagNotFoundException;
 

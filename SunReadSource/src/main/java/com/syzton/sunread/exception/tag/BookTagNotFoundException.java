@@ -1,4 +1,4 @@
-package com.syzton.sunread.exception.booktag;
+package com.syzton.sunread.exception.tag;
 
 /**
  * @author Petri Kainulainen

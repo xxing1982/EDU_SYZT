@@ -1,8 +1,10 @@
-package com.syzton.sunread.model.comment;
+package com.syzton.sunread.model.note;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+
+import com.syzton.sunread.dto.note.CommentDTO;
 
 import javax.persistence.*;
 
@@ -14,7 +16,7 @@ import java.util.Collection;
  *
  */
 @Entity
-@Table(name="Comment")
+@Table(name="comment")
 public class Comment {
 
     public static final int MAX_LENGTH_CONTENT = 200000;
@@ -26,24 +28,29 @@ public class Comment {
     @Column(name="content",length = MAX_LENGTH_CONTENT)
     private String content;
 
-    @Column(name = "creation_time", nullable = false)
+    @Column(name = "create_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime creationTime;
+    private DateTime createTime;
+    
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+    @Basic(fetch = FetchType.LAZY)
+    @JoinColumn(name="note_id")
+    private Note note;
     
     public Comment() {
 
     }
 
-    public static Builder getBuilder(String content) {
-        return new Builder(content);
+    public static Builder getBuilder(String content, Note note) {
+        return new Builder(content, note);
     }
 
     public Long getId() {
         return id;   
     }
 
-	public DateTime getCreationTime() {
-		return creationTime;
+	public DateTime getCreateTime() {
+		return createTime;
 	}
 
 	public String getContent() {
@@ -57,7 +64,7 @@ public class Comment {
     @PrePersist
     public void prePersist() {
         DateTime now = DateTime.now();
-        creationTime = now;
+        createTime = now;
     }
 
     
@@ -65,9 +72,10 @@ public class Comment {
 
         private Comment built;
 
-        public Builder(String content) {
+        public Builder(String content, Note note) {
             built = new Comment();
             built.content = content;
+            built.note = note;
         }
 
         public Comment build() {
@@ -80,6 +88,14 @@ public class Comment {
 //        }
     }
 
+    public CommentDTO createDTO(Comment model) {
+        CommentDTO dto = new CommentDTO();
+
+        dto.setId(model.getId());
+        dto.setContent(model.getContent());
+        return dto;
+    }
+    
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

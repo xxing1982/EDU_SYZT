@@ -4,12 +4,18 @@ import java.util.List;
 
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.note.NoteNotFoundException;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.note.Note;
+import com.syzton.sunread.model.tag.BookTag;
+import com.syzton.sunread.model.tag.Tag;
+import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.note.NoteRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,21 +25,30 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Service
-public class RepositoryNoteService implements NoteService {
+public class NoteRepositoryService implements NoteService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryNoteService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NoteRepositoryService.class);
     private NoteRepository repository;
 
     @Autowired
-    public RepositoryNoteService(NoteRepository repository) {
+    public NoteRepositoryService(NoteRepository repository) {
         this.repository = repository;
     }
 
+    private BookRepository bookRepository;
+
+    @Autowired
+    public void BookRepositoryService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    
     @Override
-    public Note add(NoteDTO added) {
+    public Note add(NoteDTO added, Long bookId) {
         LOGGER.debug("Adding a new note entry with information: {}", added);
 
-        Note noteModel = Note.getBuilder(added.getTitle(), added.getContent())
+        Book book = bookRepository.findOne(bookId);
+        Note noteModel = Note.getBuilder(added.getTitle(), added.getContent(), book)
         		.image(added.getImage())
                 .build();
         
@@ -82,8 +97,18 @@ public class RepositoryNoteService implements NoteService {
         Note model = findById(updated.getId());
         LOGGER.debug("Found a note entry: {}", model);
 
-        model.update(updated.getTitle(), updated.getContent());
+        model.update(updated.getTitle(), updated.getContent(), updated.getImage());
 
         return model;
     }
+    
+    @Transactional
+    @Override
+    public Page<Note> findByBookId(Pageable pageable, long bookId) {
+
+        Book book = bookRepository.findOne(bookId);
+        Page<Note> notePage = repository.findByBook(book, pageable);
+        return notePage;
+    }
+
 }

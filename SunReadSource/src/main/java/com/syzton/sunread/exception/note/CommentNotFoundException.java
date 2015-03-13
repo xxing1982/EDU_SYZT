@@ -1,4 +1,4 @@
-package com.syzton.sunread.exception.comment;
+package com.syzton.sunread.exception.note;
 
 /**
  * @author Petri Kainulainen

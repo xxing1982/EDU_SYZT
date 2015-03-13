@@ -1,10 +1,13 @@
-package com.syzton.sunread.service.comment;
+package com.syzton.sunread.service.note;
 
 import java.util.List;
 
-import com.syzton.sunread.dto.comment.CommentDTO;
-import com.syzton.sunread.exception.comment.CommentNotFoundException;
-import com.syzton.sunread.model.comment.Comment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.syzton.sunread.dto.note.CommentDTO;
+import com.syzton.sunread.exception.note.CommentNotFoundException;
+import com.syzton.sunread.model.note.Comment;
 
 /**
  * @author chenty
@@ -17,7 +20,7 @@ public interface CommentService {
      * @param added The information of the added comment entry.
      * @return  The added comment entry.
      */
-    public Comment add(CommentDTO added);
+    public Comment add(CommentDTO added, Long noteId);
 
     /**
      * Deletes a comment entry.
@@ -48,6 +51,8 @@ public interface CommentService {
      * @throws CommentNotFoundException    If no comment entry is found with the given id.
      */
     public Comment update(CommentDTO updated) throws CommentNotFoundException;
+
+	public Page<Comment> findByNoteId(Pageable pageable, long noteId);
 
 
 }

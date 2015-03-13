@@ -4,12 +4,16 @@ import java.util.List;
 
 import com.syzton.sunread.dto.tag.TagDTO;
 import com.syzton.sunread.exception.tag.TagNotFoundException;
+import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.book.Review;
 import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.repository.tag.TagRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +23,13 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Service
-public class RepositoryTagService implements TagService {
+public class TagRepositoryService implements TagService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryTagService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TagRepositoryService.class);
     private TagRepository repository;
 
     @Autowired
-    public RepositoryTagService(TagRepository repository) {
+    public TagRepositoryService(TagRepository repository) {
         this.repository = repository;
     }
 

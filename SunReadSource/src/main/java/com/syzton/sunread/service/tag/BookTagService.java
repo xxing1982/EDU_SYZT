@@ -1,10 +1,13 @@
-package com.syzton.sunread.service.booktag;
+package com.syzton.sunread.service.tag;
 
 import java.util.List;
 
-import com.syzton.sunread.dto.booktag.BookTagDTO;
-import com.syzton.sunread.exception.booktag.BookTagNotFoundException;
-import com.syzton.sunread.model.booktag.BookTag;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.syzton.sunread.dto.tag.BookTagDTO;
+import com.syzton.sunread.exception.tag.BookTagNotFoundException;
+import com.syzton.sunread.model.tag.BookTag;
 
 /**
  * @author chenty
@@ -23,7 +26,7 @@ public interface BookTagService {
      * Deletes a booktag entry.
      * @param id    The id of the deleted booktag entry.
      * @return  The deleted booktag entry.
-     * @throws com.syzton.sunread.todo.exception.BookTagNotFoundException    if no booktag entry is found with the given id.
+     * @throws com.syzton.sunread.exception.tag.BookTagNotFoundException    if no booktag entry is found with the given id.
      */
     public BookTag deleteById(Long id) throws BookTagNotFoundException;
 
@@ -48,6 +51,8 @@ public interface BookTagService {
      * @throws BookTagNotFoundException    If no booktag entry is found with the given id.
      */
     public BookTag update(BookTagDTO updated) throws BookTagNotFoundException;
+
+	Page<BookTag> findByTagId(Pageable pageable, long tagId);
 
 
 }

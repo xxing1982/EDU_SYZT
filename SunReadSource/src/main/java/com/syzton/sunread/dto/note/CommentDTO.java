@@ -1,9 +1,9 @@
-package com.syzton.sunread.dto.comment;
+package com.syzton.sunread.dto.note;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.syzton.sunread.model.comment.Comment;
+import com.syzton.sunread.model.note.Comment;
 import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.todo.model.Todo;
 

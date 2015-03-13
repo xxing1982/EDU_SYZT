@@ -1,11 +1,13 @@
 package com.syzton.sunread.model.tag;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.IndexColumn;
-import com.syzton.sunread.model.booktag.BookTag;
+
+import com.syzton.sunread.dto.tag.TagDTO;
 
 import javax.persistence.*;
 
 import java.util.Collection;
+import java.util.Set;
 
 
 /**
@@ -13,7 +15,7 @@ import java.util.Collection;
  *
  */
 @Entity
-@Table(name="Tag")
+@Table(name="tag")
 public class Tag {
 
     public static final int MAX_LENGTH_NAME = 20;
@@ -29,11 +31,10 @@ public class Tag {
     @Column(name ="value",nullable = false,length = MAX_LENGTH_VALUE)
     private String value;
 
-	@OneToMany(cascade={CascadeType.ALL})
-	@JoinColumn(name="tag_id")
-	@IndexColumn(name="idx")
-	private Collection<BookTag> bookTags;
-
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tag")
+    @Basic(fetch = FetchType.LAZY)
+	private Set<BookTag> bookTags;
+    
     
     public Tag() {
 
@@ -55,7 +56,12 @@ public class Tag {
         return value;
     }
 
-    public void update(String name, String value) {
+    
+    public Set<BookTag> getBookTags() {
+		return bookTags;
+	}
+
+	public void update(String name, String value) {
         this.name = name;
         this.value = value;
     }
@@ -76,8 +82,13 @@ public class Tag {
         }
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    public TagDTO createDTO(Tag model) {
+        TagDTO dto = new TagDTO();
+
+        dto.setId(model.getId());
+        dto.setName(model.getName());
+        dto.setValue(model.getValue());
+
+        return dto;
     }
 }
