@@ -2,6 +2,7 @@ package com.syzton.sunread.common.controller;
 
 import com.syzton.sunread.config.ApplicationContext;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = {ApplicationContext.class})
 //@ContextConfiguration(locations = {"classpath:exampleApplicationContext.xml"})
 @WebAppConfiguration
+@Ignore
 public class ITHomeControllerTest {
 
     @Resource

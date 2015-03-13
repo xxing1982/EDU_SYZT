@@ -1,7 +1,10 @@
 package com.syzton.sunread.model.book;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.book.ReviewDTO;
+import com.syzton.sunread.util.DateSerializer;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -15,6 +18,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="book")
+@JsonIgnoreProperties(value = { "reviews" })
 public class Book {
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
@@ -24,6 +28,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @JsonSerialize(using = DateSerializer.class)
 
     @Column(name = "creation_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -32,6 +37,7 @@ public class Book {
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
 
+    @JsonSerialize(using = DateSerializer.class)
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;

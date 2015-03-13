@@ -1,5 +1,6 @@
 package com.syzton.sunread.todo.model;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.Assert.*;
@@ -7,7 +8,7 @@ import static junit.framework.Assert.*;
 /**
  * @author Petri Kainulainen
  */
-//@Ignore
+@Ignore
 public class TodoTest {
 
     private String TITLE = "title";

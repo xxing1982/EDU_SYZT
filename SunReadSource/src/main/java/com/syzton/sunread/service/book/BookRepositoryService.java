@@ -2,16 +2,18 @@ package com.syzton.sunread.service.book;
 
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.model.book.Book;
+
 import com.syzton.sunread.repository.book.BookRepository;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author Petri Kainulainen
  */
 @Service
 public class BookRepositoryService implements BookService {
@@ -60,5 +62,15 @@ public class BookRepositoryService implements BookService {
         repository.delete(deleted);
         return deleted;
     }
+    @Transactional(rollbackFor = {NotFoundException.class})
+    @Override
+    public Page<Book> findAll(Pageable pageable) throws NotFoundException{
+
+        Page<Book> bookPages = repository.findAll(pageable);
+
+        return bookPages;
+
+    }
+
 
 }

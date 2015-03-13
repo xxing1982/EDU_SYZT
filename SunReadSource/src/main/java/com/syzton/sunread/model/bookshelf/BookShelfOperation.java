@@ -1,26 +1,35 @@
 package com.syzton.sunread.model.bookshelf;
 
-import java.util.Collection;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.bookshelf.BookInShelf.Builder;
 
-import javax.persistence.*;
 
 /**
+ * @Date 2015/3/12
  * @author Morgan-Leon
- *
  */
 @Entity
-@Table(name="bookinshelf")
-public class BookInShelf {
+@Table(name="bookshelfoperation")
 
-    public static final int MAX_LENGTH_DESCRIPTION = 500;
-    public static final int MAX_LENGTH_NAME = 100;
-
+public class BookShelfOperation {
+    
+	public static final int MAX_LENGTH_DESCRIPTION = 500;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -35,32 +44,26 @@ public class BookInShelf {
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
-    //
-
-    //is required or optional
-    @Column(name = "isMandatory", nullable = false)
-    private boolean isMandatory;
-
-    @Column(name = "isVerified", nullable = false)
-    private boolean isVerified;
     
-    //a bookshelf can`t have the same books
-    @ManyToOne(cascade=CascadeType.REFRESH,optional=false)
+    //user operation_time operation_type
+    
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
     @JoinColumn(name = "bookshelf_id")
     private Bookshelf bookshelf;
-
-    @ManyToOne(cascade=CascadeType.REFRESH,optional=false)
-    @JoinColumn(name = "book_id")
-    private Book book;
-
-    public BookInShelf() {
+    
+    public BookShelfOperation() {
 
     }
+    
+    public Bookshelf getBookshelf() {
+		return bookshelf;
+	}
+    
 
     public static Builder getBuilder() {
         return new Builder();
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -80,18 +83,7 @@ public class BookInShelf {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-    public boolean getReadState() {
-        return isVerified;
-    }
-
-    public boolean getBookAttribute() {
-        return isMandatory;
-    }
-
-    //getBook & getBookShelf
-
+    
     @PrePersist
     public void prePersist() {
         DateTime now = DateTime.now();
@@ -103,36 +95,15 @@ public class BookInShelf {
     public void preUpdate() {
         modificationTime = DateTime.now();
     }
-
-
+    
     public static class Builder {
 
         private BookInShelf built;
-
-        public Builder() {
-			// TODO Auto-generated constructor stub
-        	built = new BookInShelf();
-        	//book
-        	//bookshelf
-        	built.isVerified = false;
-        	built.isMandatory = false;
-		}
         
-        public Builder(Book book, Bookshelf bookshelf, 
-        		boolean isVerified, boolean isMandatory) {           
-        	built = new BookInShelf();
-        	built.book = book;
-        	built.bookshelf = bookshelf;
-        	built.isVerified = isVerified;
-        	built.isMandatory = isMandatory;
+        
+        public Builder() {           
 
         }
-
-		public Builder description(String description) {
-            built.description = description;
-            return this;
-        }
-
 
     }
 
@@ -140,6 +111,6 @@ public class BookInShelf {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+
 }
-
-

@@ -2,6 +2,10 @@ package com.syzton.sunread.service.bookshelf;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import javassist.NotFoundException;
+
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.exception.bookshelf.BookInShelfNotFoundException;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
@@ -9,8 +13,9 @@ import com.syzton.sunread.model.bookshelf.BookInShelf;
 /**
  * @author Morgan-Leon
  */
+
 public interface BookInShelfService {
-	
+
     /**
      * Adds a new bookshelf entry.
      * @param added The information of the added bookshelf entry.
@@ -24,7 +29,7 @@ public interface BookInShelfService {
      * @return  The deleted bookshelf entry.
      * @throws com.syzton.sunread.BookInShelf.exception.BookInShelfNotFoundException if no bookshelf entry is found with the given id.
      */
-    public BookInShelf deleteById(Long id) throws BookInShelfNotFoundException;
+    public BookInShelf deleteById(Long id) throws NotFoundException;
 
     /**
      * Returns a list of bookshelf entries.
@@ -38,7 +43,7 @@ public interface BookInShelfService {
      * @return  The found to-entry.
      * @throws BookInShelfNotFoundException    if no bookshelf entry is found with the given id.
      */
-    public BookInShelf findById(Long id) throws BookInShelfNotFoundException;
+    public BookInShelf findById(Long id) throws NotFoundException;
 
     /**
      * Updates the information of a bookshelf entry.
@@ -46,6 +51,6 @@ public interface BookInShelfService {
      * @return  The updated bookshelf entry.
      * @throws BookInShelfNotFoundException    If no bookshelf entry is found with the given id.
      */
-    public BookInShelf update(BookInShelfDTO updated) throws BookInShelfNotFoundException;
+    public BookInShelf update(BookInShelfDTO updated) throws NotFoundException;
 
 }
