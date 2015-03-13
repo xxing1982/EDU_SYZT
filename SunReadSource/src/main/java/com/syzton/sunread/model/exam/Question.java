@@ -41,4 +41,9 @@ public abstract class Question {
 	private Set<Exam> exams;
 	
 	public abstract QuestionDTO createDTO();
+
+	public void update(QuestionDTO updated) {
+		// TODO Auto-generated method stub
+		
+	}
 }

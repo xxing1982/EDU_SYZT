@@ -1,4 +1,4 @@
-package com.syzton.sunread.exception.answer;
+package com.syzton.sunread.exception.exam;
 
 public class AnswerNotFoundException extends Throwable{
 	

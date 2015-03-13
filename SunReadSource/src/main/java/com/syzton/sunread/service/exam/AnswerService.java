@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.exam.AnswerDTO;
-import com.syzton.sunread.exception.answer.AnswerNotFoundException;
+import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.todo.model.Todo;
 
@@ -14,15 +14,15 @@ import com.syzton.sunread.todo.model.Todo;
  * @author XieYi
  *
  */
-public interface AnswerService<T extends Answer,DTO extends AnswerDTO> {
+public interface AnswerService {
 
-	 	public T add(DTO added);
+	 	public Answer add(AnswerDTO added);
 
-	    public T deleteById(Long id) throws AnswerNotFoundException;
+	    public Answer deleteById(Long id) throws AnswerNotFoundException;
 
-	    public List<T> findAll();
+	    public List<Answer> findAll();
 
-	    public T findById(Long id) throws AnswerNotFoundException;
+	    public Answer findById(Long id) throws AnswerNotFoundException;
 
-	    public T update(AnswerDTO updated) throws AnswerNotFoundException;
+	    public Answer update(AnswerDTO updated) throws AnswerNotFoundException;
 }

@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.exam.ExamDTO;
 import com.syzton.sunread.dto.exam.QuestionDTO;
-import com.syzton.sunread.exception.answer.AnswerNotFoundException;
+import com.syzton.sunread.exception.exam.AnswerNotFoundException;
+import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.service.exam.ExamService;
@@ -46,7 +47,7 @@ public class QuestionController {
     
     @RequestMapping(value = "/api/question/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public QuestionDTO deleteById(@PathVariable("id") Long id) throws AnswerNotFoundException {
+    public QuestionDTO deleteById(@PathVariable("id") Long id) throws QuestionNotFoundExcepiton {
         LOGGER.debug("Deleting a to-do entry with id: {}", id);
 
         Question deleted = service.deleteById(id);
@@ -78,7 +79,7 @@ public class QuestionController {
 
     @RequestMapping(value = "/api/question/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public QuestionDTO findById(@PathVariable("id") Long id) throws AnswerNotFoundException {
+    public QuestionDTO findById(@PathVariable("id") Long id) throws QuestionNotFoundExcepiton {
         LOGGER.debug("Finding to-do entry with id: {}", id);
 
         Question found = service.findById(id);
@@ -89,7 +90,7 @@ public class QuestionController {
 
     @RequestMapping(value = "/api/question/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public QuestionDTO update(@Valid @RequestBody QuestionDTO dto, @PathVariable("id") Long todoId) throws AnswerNotFoundException {
+    public QuestionDTO update(@Valid @RequestBody QuestionDTO dto, @PathVariable("id") Long todoId) throws QuestionNotFoundExcepiton {
         LOGGER.debug("Updating a to-do entry with information: {}", dto);
 
         Question updated = service.update(dto);

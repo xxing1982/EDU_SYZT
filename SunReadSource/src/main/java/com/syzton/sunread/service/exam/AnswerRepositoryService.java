@@ -5,17 +5,18 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.exam.AnswerDTO;
-import com.syzton.sunread.exception.answer.AnswerNotFoundException;
+import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.repository.exam.AnswerRepository;
 import com.syzton.sunread.repository.exam.ObjectiveAnswerRepository;
 import com.syzton.sunread.repository.exam.SubjectiveAnswerRepository;
 import com.syzton.sunread.todo.dto.TodoDTO;
 import com.syzton.sunread.todo.model.Todo;
-
+@Service
 public class AnswerRepositoryService implements AnswerService {
 
 	private static final Logger LOGGER = LoggerFactory
@@ -26,7 +27,7 @@ public class AnswerRepositoryService implements AnswerService {
 
 
 	@Autowired
-	public AnswerRepositoryService(AnswerRepository repository) {
+	public AnswerRepositoryService(AnswerRepository<Answer,Long> repository) {
 		this.repository = repository;
 	}
 

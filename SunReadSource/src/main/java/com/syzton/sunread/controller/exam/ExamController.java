@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.ExamDTO;
-import com.syzton.sunread.exception.answer.AnswerNotFoundException;
+import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.service.exam.AnswerService;
