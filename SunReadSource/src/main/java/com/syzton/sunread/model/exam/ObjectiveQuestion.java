@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.syzton.sunread.dto.exam.QuestionDTO;
+import com.syzton.sunread.model.exam.SubjectiveQuestion.Builder;
 
 @Entity
 @DiscriminatorValue("objective")
@@ -24,6 +25,27 @@ public class ObjectiveQuestion extends Question {
 	@OneToOne(cascade=CascadeType.ALL)  
     @JoinColumn(name="correct_id")  
     private Option correctAnswer;
+	
+	
+	
+	public static Builder getBuilder() {
+        return new Builder();
+    }
+	
+	public static class Builder {
+
+		private ObjectiveQuestion built;
+
+		public Builder() {
+			built = new ObjectiveQuestion();
+		}
+
+		public ObjectiveQuestion build() {
+			return built;
+		}
+
+	 
+	}
 
 	@Override
 	public QuestionDTO createDTO() {

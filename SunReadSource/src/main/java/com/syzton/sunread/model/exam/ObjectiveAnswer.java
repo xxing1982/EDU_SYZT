@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.ObjectiveAnswerDTO;
+import com.syzton.sunread.model.exam.SubjectiveAnswer.Builder;
 
 @Entity
 @DiscriminatorValue("objective")
@@ -19,6 +20,25 @@ public class ObjectiveAnswer extends Answer {
 	@Override
 	public void update(AnswerDTO updated) {
 		
+	}
+	
+	public static Builder getBuilder() {
+        return new Builder();
+    }
+	
+	public static class Builder {
+
+		private ObjectiveAnswer built;
+
+		public Builder() {
+			built = new ObjectiveAnswer();
+		}
+
+		public ObjectiveAnswer build() {
+			return built;
+		}
+
+	 
 	}
 
 	@Override

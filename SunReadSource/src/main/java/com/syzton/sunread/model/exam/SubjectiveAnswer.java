@@ -1,5 +1,7 @@
 package com.syzton.sunread.model.exam;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import org.joda.time.DateTime;
 
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.SubjectiveAnswerDTO;
+import com.syzton.sunread.model.exam.Exam.Builder;
+import com.syzton.sunread.model.exam.Exam.ExamType;
 
 @Entity
 @DiscriminatorValue("subjective")
@@ -40,6 +44,25 @@ public class SubjectiveAnswer extends Answer {
 	public void update(AnswerDTO updated) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public static Builder getBuilder() {
+        return new Builder();
+    }
+	
+	public static class Builder {
+
+		private SubjectiveAnswer built;
+
+		public Builder() {
+			built = new SubjectiveAnswer();
+		}
+
+		public SubjectiveAnswer build() {
+			return built;
+		}
+
+	 
 	}
 
 	@Override

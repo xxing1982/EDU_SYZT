@@ -4,6 +4,8 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.syzton.sunread.model.exam.Answer;
+import com.syzton.sunread.model.exam.ObjectiveAnswer;
+import com.syzton.sunread.model.exam.SubjectiveAnswer;
 
 @JsonTypeName("subjective")
 public class SubjectiveAnswerDTO extends AnswerDTO {
@@ -50,8 +52,8 @@ public class SubjectiveAnswerDTO extends AnswerDTO {
 
 	@Override
 	public Answer OTD() {
-		// TODO Auto-generated method stub
-		return null;
+		Answer answer = SubjectiveAnswer.getBuilder().build();
+		return answer;
 	}
 
 }

@@ -6,8 +6,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
 import com.syzton.sunread.model.exam.Question;
+import com.syzton.sunread.model.exam.SubjectiveQuestion;
 
 @JsonTypeName("objective")
 public class ObjectiveQuestionDTO extends QuestionDTO {
@@ -34,8 +36,8 @@ public class ObjectiveQuestionDTO extends QuestionDTO {
 
 	@Override
 	public Question OTD() {
-		// TODO Auto-generated method stub
-		return null;
+		Question question = ObjectiveQuestion.getBuilder().build();
+		return question;
 	}
 
 	

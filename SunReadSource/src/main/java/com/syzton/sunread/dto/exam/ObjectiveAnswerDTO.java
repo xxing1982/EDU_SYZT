@@ -19,7 +19,7 @@ public class ObjectiveAnswerDTO extends AnswerDTO {
 	
 	@Override
 	public Answer OTD() {
-		Answer answer = new ObjectiveAnswer();
+		Answer answer = ObjectiveAnswer.getBuilder().build();
 		
 		return answer;
 	}
