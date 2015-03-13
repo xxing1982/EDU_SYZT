@@ -1,12 +1,15 @@
 package com.syzton.sunread.model.bookshelf;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.util.DateSerializer;
 
 import javax.persistence.*;
 
@@ -31,7 +34,8 @@ public class BookInShelf {
 
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
-
+    
+    @JsonSerialize(using = DateSerializer.class)
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
@@ -60,6 +64,9 @@ public class BookInShelf {
     public static Builder getBuilder() {
         return new Builder();
     }
+    public static Builder getBuilder(Book book ,Bookshelf bookshelf, boolean isMandatory,boolean isVerified) {
+        return new Builder();
+    }
 
     public Long getId() {
         return id;
@@ -81,14 +88,22 @@ public class BookInShelf {
         this.description = description;
     }
 
+    public boolean getBookAttribute() {
+        return isMandatory;
+    }
 
     public boolean getReadState() {
         return isVerified;
     }
 
-    public boolean getBookAttribute() {
-        return isMandatory;
+    public Book getBook() {
+        return book;
     }
+    
+    public Bookshelf getBookShelf(){
+    	return bookshelf;
+    }
+
 
     //getBook & getBookShelf
 
@@ -118,6 +133,10 @@ public class BookInShelf {
         	built.isMandatory = false;
 		}
         
+        public BookInShelf build() {
+            return built;
+        }
+        
         public Builder(Book book, Bookshelf bookshelf, 
         		boolean isVerified, boolean isMandatory) {           
         	built = new BookInShelf();
@@ -135,7 +154,17 @@ public class BookInShelf {
 
 
     }
-
+    
+    public BookInShelfDTO createDTO(BookInShelf model){
+    	BookInShelfDTO dto = new BookInShelfDTO();
+    	dto.setId(model.getId());
+    	dto.setBookAttribute(model.getBookAttribute());
+    	dto.setReadState(model.getReadState());
+    	dto.setBook(model.getBook());
+    	dto.setBookshelf(model.getBookShelf());
+    	return dto;
+    }
+    
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

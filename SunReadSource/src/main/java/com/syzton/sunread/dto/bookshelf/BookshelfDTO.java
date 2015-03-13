@@ -31,18 +31,7 @@ public class BookshelfDTO {
     
     private DateTime creation_time;
     private DateTime modification_time;
-
-    @NotEmpty
-    private boolean isMandatory;
-
-    @NotEmpty
-    private int readState;
-
-    @NotEmpty
-    private Bookshelf bookshelf_id;
-
-    @NotEmpty
-    private Book book_id;
+    
     private Long owner;
     
     private Collection<BookInShelf> booksInShelf ;
@@ -69,11 +58,11 @@ public class BookshelfDTO {
         this.description = description;
     }
     
-    public DateTime getCreDate() {
+    public DateTime getCreationTime() {
         return creation_time;
     }
 
-    public void setCreDate(DateTime create_time) {
+    public void setCreationTime(DateTime create_time) {
         this.creation_time = create_time;
     }
     
@@ -85,26 +74,12 @@ public class BookshelfDTO {
         this.modification_time = modification_time;
     }
 
-    public int getReadState() {
-		return readState;
-	}
-
-    public void setReadState(int readState) {
-		this.readState = readState;
-	}
-
-    public Book getBook() {
-		return book_id;
-	}
-    public void setBook(Book book) {
-		this.book_id = book;
-	}
     
     public Long getOwner() {
 		return owner;
 	}
-    public void setOwner(Long user_id) {
-		this.owner = user_id;
+    public void setOwner(Long owner) {
+		this.owner = owner;
 	}
     
     public Collection<BookInShelf> getBooksInShelf() {

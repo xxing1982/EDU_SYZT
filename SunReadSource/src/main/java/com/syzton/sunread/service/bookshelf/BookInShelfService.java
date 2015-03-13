@@ -2,6 +2,8 @@ package com.syzton.sunread.service.bookshelf;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javassist.NotFoundException;
@@ -35,7 +37,7 @@ public interface BookInShelfService {
      * Returns a list of bookshelf entries.
      * @return
      */
-    public List<BookInShelf> findAll();
+    public Page<BookInShelf> findAll(Pageable pageable) throws NotFoundException;
 
     /**
      * Finds a bookshelf entry.

@@ -18,7 +18,7 @@ public interface BookshelfService {
      * @param added The information of the added bookshelf entry.
      * @return  The added bookshelf entry.
      */
-    //public Bookshelf add(BookshelfDTO added);
+    public Bookshelf add(BookshelfDTO added);
 
     /**
      * Deletes a bookshelf entry.

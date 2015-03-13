@@ -25,17 +25,28 @@ public class BookshelfRepositoryService implements BookshelfService {
         this.repository = repository;
     }
     
+	@Override
+	public Bookshelf add(BookshelfDTO added) {
+		// TODO Auto-generated method stub
+//		Bookshelf bookshelf = Bookshelf.getBuilder(added.getOwner(), added.getBooksInShelf()
+//				, added.getBookShelfOperations()).description(added.getDescription())
+//				.build();
+		Bookshelf bookshelf = Bookshelf.getBuilder(added.getOwner())
+				.description(added.getDescription()).build();			
+		return repository.save(bookshelf);
+	}
+	
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
     @Override
 	public Bookshelf findById(Long id) throws NotFoundException {
 		// TODO Auto-generated method stub
-        LOGGER.debug("Finding a book entry with id: {}", id);
+        LOGGER.debug("Finding a bookshelf entry with id: {}", id);
 
         Bookshelf found = repository.findOne(id);
         LOGGER.debug("Found book entry: {}", found);
 
         if (found == null) {
-            throw new NotFoundException("No book found with id: " + id);
+            throw new NotFoundException("No bookshelf found with id: " + id);
         }
 
         return found; 
@@ -55,6 +66,8 @@ public class BookshelfRepositoryService implements BookshelfService {
     	
 		return repository.save(bookshelfModel);
 	}
+
+
 
 
 }
