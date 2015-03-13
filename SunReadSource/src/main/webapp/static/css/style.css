@@ -1,18 +1,36 @@
 
 body
 {
-    margin-left:auto;
-    margin-right:auto;
+}
+/*change placeholder color*/
+input::-webkit-input-placeholder {
+color: #FFFFFF !important; /* WebKit browsers */
+}
+input:-moz-placeholder {
+color: #FFFFFF !important; /* Mozilla Firefox 4 to 18 */
+}
+input::-moz-placeholder {
+color: #FFFFFF !important; /* Mozilla Firefox 19+ */
+}
+input:-ms-input-placeholder {
+color: #FFFFFF !important; /* Internet Explorer 10+ */
+}
+a:focus, input:focus
+{
+    outline: none;
+}
+
+/***********navigation top*************************/
+#main-page
+{
     background-image:url(../img/background.jpg);
     background-repeat:no-repeat;
     background-size:100% 100%;
-    /*for navbar*/
     padding-top: 50px;
 }
-/***********navigation top*************************/
 .navbar
 {
-    background-color: #71BEE8 !important;
+    background-color: #FFAF25 !important;
 }
 
 .navbar a
@@ -20,37 +38,38 @@ body
     color:White;
 }
 
-.navbar li a:hover
+.nav li a:hover, .nav li a:visited
 {
     background-color:transparent;
 }
 
-.navbar li a:focus
+.nav-underline li a:focus
 {
-    background-color:transparent;
+    background-color:transparent !important;
     border-bottom: 2px White solid;
     margin-bottom: -2px;
 }
 
-.nav-underline li.active a
+.nav-underline li.myActive a
 {
     border-bottom: 2px White solid;
     margin-bottom: -2px;
 }
 
-.nav-underline li a:hover
-{    
-    border-bottom: 2px White solid;
-    margin-bottom: -2px;
+.nav-transparent
+{
+    background-color: #E9980B;
+    color:#FFFFFF;
+    border: 0;
 }
 /************navigation bottom************************/
 
-/************index-head top************************/
+/************main-head top************************/
 
 
 #index-head
 {
-    margin-top:80px;
+    margin-top:50px;
 }
 
 .index-head-info-text
@@ -70,9 +89,9 @@ body
     margin-top: 20px;
     font-size: 16px;
 }
-/************index-head bottom************************/
+/************main-head bottom************************/
 
-/************index-body top************************/
+/************main-body top************************/
 .bodyPart
 {
     /*background-color: #EAEAEA;*/
@@ -168,8 +187,8 @@ body
 
 .book-right-text div
 {
-    font-size: 11px;
-    margin-top: 3px;
+    font-size: 12px;
+    margin-top: 5px;
     margin-left: -10px;
 }
 
@@ -221,5 +240,168 @@ body
     color: #BEBEBE;
     font-size: 12px;
 }
-/************index-body bottom************************/
+/************main-body bottom************************/
 
+/************readingCenter page******************************/
+#readingCenter-page
+{
+    padding-top: 50px;
+    /*background-color: #FFFCFA;*/
+}
+
+.list-group a.myActive
+{
+    border-right: 3px #FFAF25 solid;
+    z-index: 100;
+}
+
+.list-right
+{
+    border-left: 1px #DDD solid;
+    margin-left: -16px;
+    background-color: #EAEAEA;
+    height: 100%;
+}
+
+.list-group-item, .list-group-item:first-child, .list-group-item:last-child
+{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-radius: 0px;
+    border-right: 0px;
+    background-color: #FFFCFA;
+}
+
+.bgLightYellow
+{
+    background-color: #FFFCFA;
+}
+
+#readingCenter-bookshelf
+{
+    background-color: #EAEAEA;
+}
+
+#myBookshelfTop
+{
+    margin-top: 25px;
+}
+
+#myBookshelfTop #myBookshelf-button
+{
+    margin-top: -100px;
+}
+
+.btn-addBook
+{
+    padding:9px 24px;
+    font-size: 20px;
+    border: 2px #FFFFFF solid;
+    background-color: #FFAF25;
+    color: #FFFFFF;
+    border-radius:7px;
+}
+
+.btn-addBook:hover
+{
+    background-color: #EB9B00;
+    color: #FFFFFF;
+}
+
+.btn-addBook:focus
+{
+    color: #FFFFFF;
+    background-color: #FFAF25;
+}
+
+#myBookshelfBody
+{
+    margin-top: 25px;
+    border-radius:5px;
+    border:1px #DDD solid;
+    background-color:#FFFFFF;
+}
+
+#myBookshelfBody-top
+{
+    border-bottom: 1px #DDD solid;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#myBookshelfBody-center
+{
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px #DDD solid;
+    padding-bottom: 20px;
+}
+
+.bookshelf-tab
+{
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 0px;
+}
+
+.bookshelf-tab.myActive
+{    
+    border-bottom: 2px #FFAF25 solid;
+    margin-bottom: -2px;
+    color: #FFAF25;
+}
+
+.bookshelf-book
+{
+    margin-top: 30px;
+}
+
+.mustRead
+{
+    margin-top: -160%;
+    margin-left:60%;
+}
+
+.btn-testTraining
+{
+    border: 1px #B6D023 solid;
+    background-color: #FFFFFF;
+    color: #B6D023;
+}
+
+.btn-testTraining:hover
+{
+    background-color: #F0F0F0;
+    color: #B6D023;
+}
+
+.btn-testTraining:focus
+{
+    color: #B6D023;
+    background-color: #F0F0F0;
+}
+
+.img-padding
+{
+    padding: 5px 28px 10px 0px; 
+}
+
+.fsize12
+{
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+#myBookshelfBody-bottom
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#myBookshelfBody-bottom:hover
+{
+    background-color: #EB9B00;
+    color: #FFFFFF;
+}

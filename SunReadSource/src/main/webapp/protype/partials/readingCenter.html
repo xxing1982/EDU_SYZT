@@ -1,9 +1,19 @@
-<div>
-	<hr>
-	<hr>
-	<hr>
-	<hr>
-	<hr>
-	<hr>
-	阅读中心
+<div id="readingCenter-page" class="bgLightYellow">
+	<div class="row ">
+		<div class="col-md-2">
+			<div class="list-group">
+  				<a class="list-group-item" ui-sref='.myBookshelf'>我的书架</a>
+  				<a class="list-group-item" ui-sref='.myNote'>我的笔记</a>
+  				<a class="list-group-item" ui-sref='.myEvaluating'>我的评测</a>
+  				<a class="list-group-item" ui-sref='.myEvaluate'>我的评价</a>
+			</div>
+		</div>
+		<div class="col-md-10 list-right">
+			<div ui-view></div>
+		</div>
+	</div>
 </div>
+<script>
+	ReadingCenterLeftNav();
+	SetReadingCenterBodyHeight();
+</script>
