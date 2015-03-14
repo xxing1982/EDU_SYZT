@@ -193,9 +193,9 @@ public class Exam {
 	
 	public ExamDTO createDTO() {
         ExamDTO dto = new ExamDTO();
-        if(this.book!=null){
-        	dto.setBook(this.book.createDTO(this.book));
-        }
+//        if(this.book!=null){
+//        	dto.setBook(this.book.createDTO(this.book));
+//        }
         dto.setId(this.id);
         dto.setExamScore(this.examScore);
         dto.setExamType(this.examType);
