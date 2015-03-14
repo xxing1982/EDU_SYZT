@@ -19,7 +19,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.syzton.sunread.todo.repository")
+@EnableJpaRepositories(basePackages = {"com.syzton.sunread.todo.repository","com.syzton.sunread.repository"})
 public class PersistenceContext {
 
     protected static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
@@ -33,7 +33,7 @@ public class PersistenceContext {
     private static final String PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 
-    private static final String PROPERTY_PACKAGES_TO_SCAN = "com.syzton.sunread.todo.model";
+    private static final String[] PROPERTY_PACKAGES_TO_SCAN = {"com.syzton.sunread.todo.model","com.syzton.sunread.model"};
 
     @Resource
     private Environment environment;

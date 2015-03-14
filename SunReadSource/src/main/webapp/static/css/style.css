@@ -1,0 +1,407 @@
+
+body
+{
+}
+/*change placeholder color*/
+input::-webkit-input-placeholder {
+color: #FFFFFF !important; /* WebKit browsers */
+}
+input:-moz-placeholder {
+color: #FFFFFF !important; /* Mozilla Firefox 4 to 18 */
+}
+input::-moz-placeholder {
+color: #FFFFFF !important; /* Mozilla Firefox 19+ */
+}
+input:-ms-input-placeholder {
+color: #FFFFFF !important; /* Internet Explorer 10+ */
+}
+a:focus, input:focus
+{
+    outline: none;
+}
+
+/***********navigation top*************************/
+#main-page
+{
+    background-image:url(../img/background.jpg);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    padding-top: 50px;
+}
+.navbar
+{
+    background-color: #FFAF25 !important;
+}
+
+.navbar a
+{
+    color:White;
+}
+
+.nav li a:hover, .nav li a:visited
+{
+    background-color:transparent;
+}
+
+.nav-underline li a:focus
+{
+    background-color:transparent !important;
+    border-bottom: 2px White solid;
+    margin-bottom: -2px;
+}
+
+.nav-underline li.myActive a
+{
+    border-bottom: 2px White solid;
+    margin-bottom: -2px;
+}
+
+.nav-transparent
+{
+    background-color: #E9980B;
+    color:#FFFFFF;
+    border: 0;
+}
+/************navigation bottom************************/
+
+/************main-head top************************/
+
+
+#index-head
+{
+    margin-top:50px;
+}
+
+.index-head-info-text
+{
+    margin-top: 10px;
+    font-size: 14px;
+    color: ;
+}
+
+.index-head-info-text:first-child
+{
+    margin-top: 20px;
+}
+
+.index-head-info-text:last-child
+{
+    margin-top: 20px;
+    font-size: 16px;
+}
+/************main-head bottom************************/
+
+/************main-body top************************/
+.bodyPart
+{
+    /*background-color: #EAEAEA;*/
+}
+
+.div-tag
+{
+    margin-top: 40px;
+    background-color: white;
+}
+
+.tag-margin-blue
+{
+    border-top: 2px #77B2D0 solid;
+}
+
+.tag-margin-green
+{
+    border-top: 2px #AEC634 solid;
+}
+
+.tag-left
+{
+}
+
+.tag-middle
+{
+    margin-left: 10px;
+}
+
+.tag-right
+{
+}
+
+.row-title
+{
+    margin-top:20px;
+}
+
+.row-content
+{
+    margin-top: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px #EAEAEA solid;
+}
+
+.row-content-right
+{
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px #EAEAEA solid;
+}
+
+.row-title-name
+{
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.row-title-finish
+{
+    font-size: 12px;
+    color: #BEBEBE;
+}
+
+.row-title-more
+{
+    font-size: 12px;
+    text-align: right;
+}
+
+.book-read-readed
+{
+    text-align: center;
+    font-size: 40px;
+    color: #AEC634;
+    font-weight: 800;
+}
+
+.book-read-unread
+{
+    text-align: center;
+    font-size: 40px;
+    color: #FF544D;
+    font-weight: 800;
+}
+
+.enter-game
+{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.book-right-text div
+{
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: -10px;
+}
+
+.clear-padding
+{
+    padding: 0;
+}
+
+.book-bottom-text div
+{
+    text-align: center;
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+.book-bottom-text:first-child
+{
+    margin-left: 10px;
+}
+
+.row-activity ul li
+{
+    margin-bottom: 8px;
+}
+
+.row-hot-note div div
+{
+    margin-bottom: 8px;
+}
+
+.row-read-master div div
+{
+    margin-bottom: 8px;
+}
+
+.row-read-master
+{
+    text-align: center;
+}
+
+.read-master-name
+{
+    font-size: 14px;
+    text-align: left;
+}
+
+.read-master-count
+{
+    color: #BEBEBE;
+    font-size: 12px;
+}
+/************main-body bottom************************/
+
+/************readingCenter page******************************/
+#readingCenter-page
+{
+    padding-top: 50px;
+    /*background-color: #FFFCFA;*/
+}
+
+.list-group a.myActive
+{
+    border-right: 3px #FFAF25 solid;
+    z-index: 100;
+}
+
+.list-right
+{
+    border-left: 1px #DDD solid;
+    margin-left: -16px;
+    background-color: #EAEAEA;
+    height: 100%;
+}
+
+.list-group-item, .list-group-item:first-child, .list-group-item:last-child
+{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-radius: 0px;
+    border-right: 0px;
+    background-color: #FFFCFA;
+}
+
+.bgLightYellow
+{
+    background-color: #FFFCFA;
+}
+
+#readingCenter-bookshelf
+{
+    background-color: #EAEAEA;
+}
+
+#myBookshelfTop
+{
+    margin-top: 25px;
+}
+
+#myBookshelfTop #myBookshelf-button
+{
+    margin-top: -100px;
+}
+
+.btn-addBook
+{
+    padding:9px 24px;
+    font-size: 20px;
+    border: 2px #FFFFFF solid;
+    background-color: #FFAF25;
+    color: #FFFFFF;
+    border-radius:7px;
+}
+
+.btn-addBook:hover
+{
+    background-color: #EB9B00;
+    color: #FFFFFF;
+}
+
+.btn-addBook:focus
+{
+    color: #FFFFFF;
+    background-color: #FFAF25;
+}
+
+#myBookshelfBody
+{
+    margin-top: 25px;
+    border-radius:5px;
+    border:1px #DDD solid;
+    background-color:#FFFFFF;
+}
+
+#myBookshelfBody-top
+{
+    border-bottom: 1px #DDD solid;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#myBookshelfBody-center
+{
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px #DDD solid;
+    padding-bottom: 20px;
+}
+
+.bookshelf-tab
+{
+    text-align: center;
+    cursor: pointer;
+    padding: 15px 0px;
+}
+
+.bookshelf-tab.myActive
+{    
+    border-bottom: 2px #FFAF25 solid;
+    margin-bottom: -2px;
+    color: #FFAF25;
+}
+
+.bookshelf-book
+{
+    margin-top: 30px;
+}
+
+.mustRead
+{
+    margin-top: -160%;
+    margin-left:60%;
+}
+
+.btn-testTraining
+{
+    border: 1px #B6D023 solid;
+    background-color: #FFFFFF;
+    color: #B6D023;
+}
+
+.btn-testTraining:hover
+{
+    background-color: #F0F0F0;
+    color: #B6D023;
+}
+
+.btn-testTraining:focus
+{
+    color: #B6D023;
+    background-color: #F0F0F0;
+}
+
+.img-padding
+{
+    padding: 5px 28px 10px 0px; 
+}
+
+.fsize12
+{
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+#myBookshelfBody-bottom
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#myBookshelfBody-bottom:hover
+{
+    background-color: #EB9B00;
+    color: #FFFFFF;
+}

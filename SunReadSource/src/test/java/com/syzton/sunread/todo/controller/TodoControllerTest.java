@@ -2,7 +2,7 @@ package com.syzton.sunread.todo.controller;
 
 import com.syzton.sunread.todo.dto.TodoDTO;
 import com.syzton.sunread.config.WebAppContext;
-import com.syzton.sunread.todo.TestUtil;
+import com.syzton.sunread.TestUtil;
 import com.syzton.sunread.config.TestContext;
 import com.syzton.sunread.todo.dto.TodoDTOBuilder;
 import com.syzton.sunread.todo.exception.TodoNotFoundException;
@@ -10,6 +10,7 @@ import com.syzton.sunread.todo.model.Todo;
 import com.syzton.sunread.todo.model.TodoBuilder;
 import com.syzton.sunread.todo.service.TodoService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -43,6 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
 //@ContextConfiguration(locations = {"classpath:testContext.xml", "classpath:exampleApplicationContext-web.xml"})
 @WebAppConfiguration
+@Ignore
 public class TodoControllerTest {
 
     private MockMvc mockMvc;

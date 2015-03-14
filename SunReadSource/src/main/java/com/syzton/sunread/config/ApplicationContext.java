@@ -8,7 +8,11 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  * @author Petri Kainulainen
  */
 @Configuration
-@ComponentScan(basePackages = {"com.syzton.sunread.todo.service"})
+@ComponentScan(basePackages = {
+        "com.syzton.sunread.todo.service",
+        "com.syzton.sunread.service"
+
+})
 @Import({WebAppContext.class, PersistenceContext.class})
 @PropertySource("classpath:application.properties")
 public class ApplicationContext {
