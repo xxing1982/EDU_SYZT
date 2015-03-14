@@ -55,9 +55,6 @@ public class Book {
     @Basic(fetch = FetchType.LAZY)
     private Set<Review> reviews = new HashSet<>() ;
 
-//    @ManyToMany(mappedBy = "books")
-//    private Set<Category> bookCategories = new HashSet<>();
-
 
 
 
@@ -113,9 +110,7 @@ public class Book {
         return reviews;
     }
 
-//    public Set<Category> getBookCategories() {
-//        return bookCategories;
-//    }
+
 
     @PrePersist
     public void prePersist() {
@@ -156,20 +151,20 @@ public class Book {
 
 
     }
-    public BookDTO createDTO() {
+    public BookDTO createDTO(Book model) {
         BookDTO dto = new BookDTO();
-        dto.setId(this.getId());
-        dto.setName(this.getName());
-        dto.setIsbn(this.getIsbn());
-        dto.setDescription(this.getDescription());
+        dto.setId(model.getId());
+        dto.setName(model.getName());
+        dto.setIsbn(model.getIsbn());
+        dto.setDescription(model.getDescription());
         //  dto.setPublicationDate(new Date());
         // dto.setReviewSet(model.getReviews());
         return dto;
     }
-    public BookDTO bookWithReview(){
-       BookDTO dto = this.createDTO();
+    public BookDTO bookWithReview(Book model){
+       BookDTO dto = this.createDTO(model);
         Set<ReviewDTO> reviewDTOs = new HashSet<>();
-        for(Review review : this.getReviews()){
+        for(Review review : model.getReviews()){
             reviewDTOs.add(review.createDTO(review));
         }
         dto.setReviewSet(reviewDTOs);

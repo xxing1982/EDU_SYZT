@@ -2,6 +2,9 @@ package com.syzton.sunread.service.note;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.note.NoteNotFoundException;
 import com.syzton.sunread.model.note.Note;
@@ -17,7 +20,7 @@ public interface NoteService {
      * @param added The information of the added note entry.
      * @return  The added note entry.
      */
-    public Note add(NoteDTO added);
+    public Note add(NoteDTO added, Long bookId);
 
     /**
      * Deletes a note entry.
@@ -48,6 +51,8 @@ public interface NoteService {
      * @throws NoteNotFoundException    If no note entry is found with the given id.
      */
     public Note update(NoteDTO updated) throws NoteNotFoundException;
+
+	Page<Note> findByBookId(Pageable pageable, long bookId);
 
 
 }

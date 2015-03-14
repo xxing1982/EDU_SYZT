@@ -2,7 +2,7 @@
 
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices']);
 
-ctrls.controller("mainController", ['$scope', 'User', 'GetUserList', function ($scope, User, getList) {
+ctrls.controller("mainController", ['$scope', 'User', function ($scope, User) {
 	//userinfo
     $scope.userInfo = {
     	'name': '张晓晨',
@@ -22,10 +22,6 @@ ctrls.controller("mainController", ['$scope', 'User', 'GetUserList', function ($
     var testDataList = User.query(function(){
         console.log(testDataList);
     });*/
-
-    getList.getUsers(function(){
-        
-    });
 
     //bookshelf
     $scope.bookshelf = {

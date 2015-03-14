@@ -4,9 +4,13 @@ import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.syzton.sunread.dto.note.NoteDTO;
+import com.syzton.sunread.model.book.Book;
+
 import javax.persistence.*;
 
 import java.util.Collection;
+import java.util.Set;
 
 
 /**
@@ -14,7 +18,7 @@ import java.util.Collection;
  *
  */
 @Entity
-@Table(name="Note")
+@Table(name="note")
 public class Note {
 
     public static final int MAX_LENGTH_TITLE = 200;
@@ -28,12 +32,21 @@ public class Note {
 	@Column(name="title",length = MAX_LENGTH_TITLE)
     private String title;
     
-    @Column(name = "creation_time", nullable = false)
+    @Column(name = "create_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime creationTime;
+    private DateTime createTime;
 
     @Column(name="content",length = MAX_LENGTH_CONTENT)
     private String content;
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "note")
+    @Basic(fetch = FetchType.LAZY)
+    private Set<Comment> comments;
+    
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+    @Basic(fetch = FetchType.LAZY)
+    @JoinColumn(name="book_id")
+	private Book book;
 
     @Column(name="image",length = MAX_LENGTH_IMAGE)
     private String image;
@@ -42,8 +55,8 @@ public class Note {
 
     }
 
-    public static Builder getBuilder(String title, String content) {
-        return new Builder(title, content);
+    public static Builder getBuilder(String title, String content, Book book) {
+        return new Builder(title, content, book);
     }
 
     public Long getId() {
@@ -54,8 +67,8 @@ public class Note {
 		return title;
 	}
 
-	public DateTime getCreationTime() {
-		return creationTime;
+	public DateTime getCreateTime() {
+		return createTime;
 	}
 
 	public String getContent() {
@@ -66,15 +79,16 @@ public class Note {
 		return image;
 	}
     
-    public void update(String title, String content) {
+    public void update(String title, String content, String image) {
         this.title = title;
         this.content = content;
+        this.image = image;
     }
 
     @PrePersist
     public void prePersist() {
         DateTime now = DateTime.now();
-        creationTime = now;
+        createTime = now;
     }
 
     
@@ -82,10 +96,11 @@ public class Note {
 
         private Note built;
 
-        public Builder(String title, String content) {
+        public Builder(String title, String content, Book book) {
             built = new Note();
             built.title = title;
             built.content = content;
+            built.book = book;
         }
 
         public Note build() {
@@ -98,6 +113,18 @@ public class Note {
         }
     }
 
+    public NoteDTO createDTO(Note model) {
+        NoteDTO dto = new NoteDTO();
+
+        dto.setId(model.getId());
+        dto.setTitle(model.getTitle());
+        dto.setContent(model.getContent());
+        dto.setImage(model.getImage());
+
+        return dto;
+    }
+
+    
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
