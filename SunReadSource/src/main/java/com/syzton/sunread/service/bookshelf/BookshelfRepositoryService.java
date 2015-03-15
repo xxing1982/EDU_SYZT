@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
 import com.syzton.sunread.repository.bookshelf.BookshelfRepository;
 
@@ -59,8 +58,7 @@ public class BookshelfRepositoryService implements BookshelfService {
 		// TODO Auto-generated method stub
         LOGGER.debug("Updates the information of a bookshelf entry.: {}", updated);
 
-        Bookshelf bookshelfModel = Bookshelf.getBuilder(updated.getOwner(),updated.getBooksInShelf(),
-        			updated.getBookShelfOperations())
+        Bookshelf bookshelfModel = Bookshelf.getBuilder(updated.getOwner())
                 .description(updated.getDescription())
                 .build();
     	

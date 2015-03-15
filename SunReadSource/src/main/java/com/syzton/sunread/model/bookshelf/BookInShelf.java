@@ -3,6 +3,7 @@ package com.syzton.sunread.model.bookshelf;
 import java.util.ArrayList;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.h2.command.dml.Update;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -28,6 +29,7 @@ public class BookInShelf {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonSerialize(using = DateSerializer.class)
     @Column(name = "creation_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime creationTime;
@@ -49,7 +51,7 @@ public class BookInShelf {
     private boolean isVerified;
     
     //a bookshelf can`t have the same books
-    @ManyToOne(cascade=CascadeType.REFRESH,optional=false)
+    @ManyToOne(cascade=CascadeType.ALL,optional=false)
     @JoinColumn(name = "bookshelf_id")
     private Bookshelf bookshelf;
 
@@ -103,7 +105,15 @@ public class BookInShelf {
     public Bookshelf getBookShelf(){
     	return bookshelf;
     }
-
+    
+    public void update(String description,boolean isManditory
+    		,boolean isVerified){
+    	this.description = description;
+    	this.isMandatory = isManditory;
+    	this.isVerified = isVerified;
+    	this.modificationTime = DateTime.now();
+    	
+    }
 
     //getBook & getBookShelf
 

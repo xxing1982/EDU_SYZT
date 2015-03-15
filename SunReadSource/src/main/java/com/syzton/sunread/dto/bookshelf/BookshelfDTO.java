@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -33,10 +36,10 @@ public class BookshelfDTO {
     private DateTime modification_time;
     
     private Long owner;
-    
-    private Collection<BookInShelf> booksInShelf ;
-    
-    private Collection<BookShelfOperation> bookShelfOperations;
+  
+//    private Collection<BookInShelf> booksInShelf ;
+//    
+//    private Collection<BookShelfOperation> bookShelfOperations;
     
     public BookshelfDTO() {
 
@@ -73,6 +76,18 @@ public class BookshelfDTO {
     public void setModificationTime(DateTime modification_time) {
         this.modification_time = modification_time;
     }
+    
+    @PrePersist
+    public void prePersist() {
+        DateTime now = DateTime.now();
+        creation_time = now;
+        modification_time = now;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        modification_time = DateTime.now();
+    }
 
     
     public Long getOwner() {
@@ -82,21 +97,21 @@ public class BookshelfDTO {
 		this.owner = owner;
 	}
     
-    public Collection<BookInShelf> getBooksInShelf() {
-        return booksInShelf;
-    }
-
-    public void setBooksInShelf(Collection<BookInShelf> booksInShelf) {
-        this.booksInShelf = booksInShelf;
-    }
-   
-    public Collection<BookShelfOperation> getBookShelfOperations() {
-        return bookShelfOperations;
-    }
-
-    public void setBookShelfOperations(Collection<BookShelfOperation> bookShelfOperations) {
-        this.bookShelfOperations= bookShelfOperations;
-    }
+//    public Collection<BookInShelf> getBooksInShelf() {
+//        return booksInShelf;
+//    }
+//
+//    public void setBooksInShelf(Collection<BookInShelf> booksInShelf) {
+//        this.booksInShelf = booksInShelf;
+//    }
+//   
+//    public Collection<BookShelfOperation> getBookShelfOperations() {
+//        return bookShelfOperations;
+//    }
+//
+//    public void setBookShelfOperations(Collection<BookShelfOperation> bookShelfOperations) {
+//        this.bookShelfOperations= bookShelfOperations;
+//    }
     
     
     @Override

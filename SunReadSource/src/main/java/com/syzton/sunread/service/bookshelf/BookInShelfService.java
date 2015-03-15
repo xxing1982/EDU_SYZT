@@ -23,7 +23,7 @@ public interface BookInShelfService {
      * @param added The information of the added bookshelf entry.
      * @return  The added bookshelf entry.
      */
-    public BookInShelf add(BookInShelfDTO added);
+    public BookInShelf add(BookInShelfDTO added,long id, long bookId );
 
     /**
      * Deletes a bookshelf entry.
@@ -31,13 +31,13 @@ public interface BookInShelfService {
      * @return  The deleted bookshelf entry.
      * @throws com.syzton.sunread.BookInShelf.exception.BookInShelfNotFoundException if no bookshelf entry is found with the given id.
      */
-    public BookInShelf deleteById(Long id) throws NotFoundException;
+    public BookInShelf deleteById(long id) throws NotFoundException;
 
     /**
      * Returns a list of bookshelf entries.
      * @return
      */
-    public Page<BookInShelf> findAll(Pageable pageable) throws NotFoundException;
+    public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id) throws NotFoundException;
 
     /**
      * Finds a bookshelf entry.
@@ -53,6 +53,6 @@ public interface BookInShelfService {
      * @return  The updated bookshelf entry.
      * @throws BookInShelfNotFoundException    If no bookshelf entry is found with the given id.
      */
-    public BookInShelf update(BookInShelfDTO updated) throws NotFoundException;
+    public BookInShelf update(BookInShelfDTO updated,long id) throws NotFoundException;
 
 }

@@ -7,19 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
-import com.syzton.sunread.exception.bookshelf.BookshelfNotFoundException;
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
 import com.syzton.sunread.service.bookshelf.BookshelfService;
 
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Date 2015/03/12

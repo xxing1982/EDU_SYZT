@@ -51,7 +51,7 @@ public class Bookshelf {
      *
      */
 
-    @OneToMany( cascade = CascadeType.ALL,mappedBy = "bookshelf")
+    @OneToMany( cascade = {CascadeType.MERGE,CascadeType.REFRESH},mappedBy = "bookshelf")
     @Basic(fetch = FetchType.EAGER)
     private Collection<BookInShelf> booksInShelf;
     
@@ -69,10 +69,10 @@ public class Bookshelf {
 		
 	}
     //how to deal with  name  duplication ?
-    public static Builder getBuilder(long owner,Collection<BookInShelf> booksInShelf, 
-    		Collection<BookShelfOperation> bookShelfOperations) {
-        return new Builder(owner,booksInShelf,bookShelfOperations);
-    }
+//    public static Builder getBuilder(long owner,Collection<BookInShelf> booksInShelf, 
+//    		Collection<BookShelfOperation> bookShelfOperations) {
+//        return new Builder(owner,booksInShelf,bookShelfOperations);
+//    }
     
 
     public Long getId() {
@@ -127,22 +127,16 @@ public class Bookshelf {
         	built = new Bookshelf();
         	built.owner = owner;       	
         }
-
-        public Builder(String owner_name){
-        }
         
         
-        public Builder(long owner,Collection<BookInShelf> booksInShelf, Collection<BookShelfOperation> bookShelfOperations) {
-            built = new Bookshelf();
-            built.owner = owner;
-            built.booksInShelf = booksInShelf;
-            built.bookShelfOprations = bookShelfOperations;
-        }
+//        public Builder(long owner,Collection<BookInShelf> booksInShelf, Collection<BookShelfOperation> bookShelfOperations) {
+//            built = new Bookshelf();
+//            built.owner = owner;
+//            built.booksInShelf = booksInShelf;
+//            built.bookShelfOprations = bookShelfOperations;
+//        }
 
         //Build booksInShelfhelf by owner name(:String)
-        public Builder(String owner_name, Collection<BookInShelf> booksInShelf, String operation_record) {
-        }
-
 
         public Bookshelf build() {
             return built;
@@ -167,8 +161,8 @@ public class Bookshelf {
     public BookshelfDTO createDTO(Bookshelf model){
     	BookshelfDTO dto = new BookshelfDTO();
     	dto.setOwner(model.getOwner());
-    	dto.setBooksInShelf(model.getBooksInShelf());
-    	dto.setBookShelfOperations(model.getBookShelfOperations());
+//    	dto.setBooksInShelf(model.getBooksInShelf());
+//    	dto.setBookShelfOperations(model.getBookShelfOperations());
     	dto.setDescription(model.getDescription());
 		return dto;
     }

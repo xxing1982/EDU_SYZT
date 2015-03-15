@@ -15,7 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
+import com.syzton.sunread.model.bookshelf.Bookshelf;
+import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.bookshelf.BookInShelfRepository;
+import com.syzton.sunread.repository.bookshelf.BookshelfRepository;
 import com.syzton.sunread.service.book.BookRepositoryService;
 
 /*
@@ -28,7 +31,9 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     private static final Logger LOGGER = LoggerFactory.getLogger(BookRepositoryService.class);
     @Autowired
     private BookInShelfRepository repository;
-
+    private BookshelfRepository bookshelfRepository;
+    private BookRepository bookRepository;
+    
     @Autowired
     public BookInShelfRepositoryService(BookInShelfRepository repository) {
         this.repository = repository;
@@ -36,12 +41,14 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     
     @Transactional
 	@Override
-	public BookInShelf add(BookInShelfDTO added) {
+	public BookInShelf add(BookInShelfDTO added, long id, long bookId) {
 		// TODO Auto-generated method stub
         LOGGER.debug("Adding a new Book entry with information: {}", added);
-
-        BookInShelf bookInShelfModel = BookInShelf.getBuilder(added.getBook(),added.getBookshelf(),
-        		added.getBookAttribute(),added.getReadState())
+        
+        Bookshelf bookshelf = bookshelfRepository.findOne(id);
+        Book book = bookRepository.findOne(bookId);
+        BookInShelf bookInShelfModel = BookInShelf.getBuilder(book,bookshelf
+        		,added.getBookAttribute(),added.getReadState())
         		.description(added.getDescription())
         		.build();
              
@@ -50,7 +57,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	
 	@Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
 	@Override
-	public BookInShelf deleteById(Long id) throws NotFoundException {
+	public BookInShelf deleteById(long id) throws NotFoundException {
 		// TODO Auto-generated method stub
 		BookInShelf bookInShelf = repository.findOne(id);
 		repository.delete(bookInShelf);
@@ -72,26 +79,26 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Page<BookInShelf> findAll(Pageable pageable) throws NotFoundException{
-
-        Page<BookInShelf> bookPages = repository.findAll(pageable);
+    public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id) throws NotFoundException{
+    	
+    	Bookshelf bookshelf = bookshelfRepository.findOne(id);
+        Page<BookInShelf> bookPages = repository.findByBookshelf(bookshelf,pageable);
 
         return bookPages;
     }
     
     @Transactional
 	@Override
-	public BookInShelf update(BookInShelfDTO updated) throws NotFoundException {
+	public BookInShelf update(BookInShelfDTO updated,long id) throws NotFoundException {
 		// TODO Auto-generated method stub
         LOGGER.debug("Adding a new Book entry with information: {}", updated);
-
-        BookInShelf bookInShelfModel = BookInShelf.getBuilder(updated.getBook()
-        		,updated.getBookshelf(),updated.getBookAttribute()
-        		,updated.getReadState())
-        		.description(updated.getDescription())
-        		.build();
-             
-        return repository.save(bookInShelfModel);
+        
+        BookInShelf bookInShelf = repository.findOne(id);
+        
+        bookInShelf.update(updated.getDescription(), updated.getBookAttribute()
+        		,updated.getReadState());
+        
+        return bookInShelf;
 	}
 
 }

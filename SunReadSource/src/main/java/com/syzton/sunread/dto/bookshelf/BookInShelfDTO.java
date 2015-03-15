@@ -1,7 +1,7 @@
 package com.syzton.sunread.dto.bookshelf;
 
-import org.hibernate.validator.constraints.Length;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.syzton.sunread.model.book.Book;
