@@ -32,12 +32,13 @@ public class BookInShelfController {
     }
     
 //Add a Book to bookshelf    
-    @RequestMapping(value = "/api/bookinshelf", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/bookshelf/{id}/books/{bookId}/bookinshelf", method = RequestMethod.POST)
     @ResponseBody
-    public BookInShelfDTO add(@Valid @RequestBody BookInShelfDTO dto) {
+    public BookInShelfDTO add(@Valid @RequestBody BookInShelfDTO dto
+    		,@PathVariable("id")Long id, @PathVariable("bookId")Long bookId	) {
         LOGGER.debug("Adding a new book to shelf entry with information: {}", dto);
         
-        BookInShelf added = service.add(dto);
+        BookInShelf added = service.add(dto,id, bookId);
         LOGGER.debug("Added a to-do entry with information: {}", added);
               
        return added.createDTO(added);
@@ -48,10 +49,10 @@ public class BookInShelfController {
     @RequestMapping(value = "/api/bookinshelf/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public BookInShelfDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
-        LOGGER.debug("Deleting a to-do entry with id: {}", id);
+        LOGGER.debug("Deleting a book in shelf entry with id: {}", id);
 
         BookInShelf deleted = service.deleteById(id);
-        LOGGER.debug("Deleted to-do entry with information: {}", deleted);
+        LOGGER.debug("Deleted book in shelf entry with information: {}", deleted);
 
         return deleted.createDTO(deleted);
     }
@@ -59,27 +60,26 @@ public class BookInShelfController {
 //Update a book in shelf    
     @RequestMapping(value = "/api/bookinshelf/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public BookInShelfDTO update(@Valid @RequestBody BookInShelfDTO dto) throws NotFoundException {
+    public BookInShelfDTO update(@Valid @RequestBody BookInShelfDTO dto,@PathVariable("id") long id) throws NotFoundException {
         LOGGER.debug("Adding a new book to shelf entry with information: {}", dto);
         
-        BookInShelf updated = service.update(dto);
+        BookInShelf updated = service.update(dto,id);
         LOGGER.debug("Added a to-do entry with information: {}", updated);
               
        return updated.createDTO(updated);
     }
    
 //Get all books in shelf
-    @RequestMapping(value = "/api/bookinshelf", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/bookshelf/{id}/bookinshelf", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<BookInShelf> findAllBooks(@RequestParam("page") int page,
+    public PageResource<BookInShelf> findAllBooks(@PathVariable("id") long id,
+    						@RequestParam("page") int page,
                             @RequestParam("size") int size,
                             @RequestParam("sortBy") String sortBy) throws NotFoundException {
         LOGGER.debug("Finding  books in shelf entry with id: {}" );
         sortBy = sortBy==null?"id": sortBy;
-        Pageable pageable = new PageRequest(
-                page,size,new Sort(sortBy)
-        );
-        Page<BookInShelf> pageResult = service.findAll(pageable);
+        Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
+        Page<BookInShelf> pageResult = service.findByBookshelfId(pageable,id);
 
         return new PageResource<>(pageResult,"page","size");
     }

@@ -103,7 +103,7 @@ public class NoteRepositoryService implements NoteService {
     }
     
     @Transactional
-    @Override
+    @Override 
     public Page<Note> findByBookId(Pageable pageable, long bookId) {
 
         Book book = bookRepository.findOne(bookId);
