@@ -2,9 +2,15 @@ package com.syzton.sunread.service.exam;
 
 import java.util.List;
 
+import javassist.NotFoundException;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.ExamDTO;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
@@ -18,7 +24,7 @@ public interface ExamService {
 
 	public Exam deleteById(Long id);
 
-	public List<Exam> findAll();
+	public Page<Exam> findAll(Pageable pageable) throws NotFoundException;
 
 	public Exam findById(Long id);
 

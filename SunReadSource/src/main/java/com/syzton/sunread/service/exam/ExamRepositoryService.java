@@ -2,14 +2,36 @@ package com.syzton.sunread.service.exam;
 
 import java.util.List;
 
+import javassist.NotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.exam.ExamDTO;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.Question;
+import com.syzton.sunread.repository.book.BookRepository;
+import com.syzton.sunread.repository.exam.ExamRepository;
+import com.syzton.sunread.service.book.BookRepositoryService;
 
 @Service
-public class ExamRepositoryService implements ExamService{
+public class ExamRepositoryService implements ExamService {
+
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ExamRepositoryService.class);
+	
+	private ExamRepository repository;
+
+	@Autowired
+	public ExamRepositoryService(ExamRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	public Exam add(ExamDTO added) {
@@ -23,10 +45,14 @@ public class ExamRepositoryService implements ExamService{
 		return null;
 	}
 
+	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
-	public List<Exam> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<Exam> findAll(Pageable pageable) throws NotFoundException {
+
+		Page<Exam> bookPages = repository.findAll(pageable);
+
+		return bookPages;
+
 	}
 
 	@Override
