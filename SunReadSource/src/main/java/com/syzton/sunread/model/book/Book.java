@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="book")
-@JsonIgnoreProperties(value = { "reviews" })
+@JsonIgnoreProperties(value = { "reviews","categories" })
 public class Book {
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
@@ -28,11 +28,13 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @JsonSerialize(using = DateSerializer.class)
 
+
+    @JsonSerialize(using = DateSerializer.class)
     @Column(name = "creation_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime creationTime;
+
 
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
@@ -56,8 +58,13 @@ public class Book {
     private Set<Review> reviews = new HashSet<>() ;
 
 
-
-
+    @ManyToMany(cascade = {CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.MERGE})
+    @Basic(fetch = FetchType.LAZY)
+    @JoinTable(name="book_category",
+            joinColumns = @JoinColumn(name="book_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="category_id", referencedColumnName="id")
+    )
+    private Set<Category> categories = new HashSet<>();
 
 
     public Book() {
@@ -110,7 +117,33 @@ public class Book {
         return reviews;
     }
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
 
+    public void setCreationTime(DateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public void setModificationTime(DateTime modificationTime) {
+        this.modificationTime = modificationTime;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setAvgRate(int avgRate) {
+        this.avgRate = avgRate;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 
     @PrePersist
     public void prePersist() {

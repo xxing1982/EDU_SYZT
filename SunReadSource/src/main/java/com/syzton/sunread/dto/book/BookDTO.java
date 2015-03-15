@@ -1,6 +1,7 @@
 package com.syzton.sunread.dto.book;
 
 import com.syzton.sunread.model.book.Review;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.Date;
 import java.util.HashSet;

@@ -1,5 +1,6 @@
 package com.syzton.sunread.service.book;
 
+import com.syzton.sunread.dto.book.CategoryDTO;
 import com.syzton.sunread.model.book.Category;
 import javassist.NotFoundException;
 

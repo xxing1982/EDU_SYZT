@@ -22,7 +22,7 @@ public class CategoryRepositoryService implements CategoryService {
 
     @Override
     public Category findById(Long id) throws NotFoundException {
-        return null;
+        return categoryRepository.findOne(id);
     }
 
     @Transactional

@@ -1,9 +1,10 @@
 package com.syzton.sunread.service.book;
 
-import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.model.book.Book;
 
+import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.repository.book.BookRepository;
+import com.syzton.sunread.repository.book.CategoryRepository;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,21 +20,27 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookRepositoryService implements BookService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookRepositoryService.class);
-    private BookRepository repository;
+
+    private BookRepository bookRepo;
+
+    private CategoryRepository categoryRepo;
+
+
 
     @Autowired
-    public BookRepositoryService(BookRepository repository) {
-        this.repository = repository;
+    public BookRepositoryService(BookRepository bookRepo,CategoryRepository categoryRepo)
+    {
+        this.bookRepo = bookRepo;
+        this.categoryRepo = categoryRepo;
     }
 
-    @Override
-    public Book add(BookDTO added) {
-        LOGGER.debug("Adding a new Book entry with information: {}", added);
 
-        Book bookModel = Book.getBuilder(added.getIsbn(), added.getName())
-                .description(added.getDescription())
-                .build();
-        return repository.save(bookModel);
+
+    @Override
+    public Book add(Book book) {
+        LOGGER.debug("Adding a new Book entry with information: {}", book);
+        
+        return bookRepo.save(book);
     }
 
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
@@ -41,7 +48,7 @@ public class BookRepositoryService implements BookService {
     public Book findById(Long id) throws NotFoundException {
         LOGGER.debug("Finding a book entry with id: {}", id);
 
-        Book found = repository.findOne(id);
+        Book found = bookRepo.findOne(id);
         LOGGER.debug("Found book entry: {}", found);
 
         if (found == null) {
@@ -59,14 +66,14 @@ public class BookRepositoryService implements BookService {
         Book deleted = findById(id);
         LOGGER.debug("Deleting to-do entry: {}", deleted);
 
-        repository.delete(deleted);
+        bookRepo.delete(deleted);
         return deleted;
     }
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
     public Page<Book> findAll(Pageable pageable) throws NotFoundException{
 
-        Page<Book> bookPages = repository.findAll(pageable);
+        Page<Book> bookPages = bookRepo.findAll(pageable);
 
         return bookPages;
 

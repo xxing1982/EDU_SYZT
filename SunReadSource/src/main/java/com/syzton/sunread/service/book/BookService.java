@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface BookService {
 
-    public Book add(BookDTO bookDTO);
+    public Book add(Book book);
 
     public Book findById(Long id) throws NotFoundException;
 

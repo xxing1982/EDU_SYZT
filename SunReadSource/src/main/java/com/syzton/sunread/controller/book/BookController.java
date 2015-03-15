@@ -5,6 +5,7 @@ import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.service.book.BookService;
 import javassist.NotFoundException;
+import org.dozer.Mapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Jerry Zhang
@@ -35,14 +37,14 @@ public class BookController {
 
     @RequestMapping(value = "/api/books", method = RequestMethod.POST)
     @ResponseBody
-    public BookDTO add(@Valid @RequestBody BookDTO dto) {
-        LOGGER.debug("Adding a new book entry with information: {}", dto);
+    public Book add(@Valid @RequestBody Book book) {
+        LOGGER.debug("Adding a new book entry with information: {}", book);
 
-        Book added = bookService.add(dto);
+        Book added = bookService.add(book);
 
         LOGGER.debug("Added a book entry with information: {}", added);
 
-        return added.createDTO();
+        return added;
     }
 
     @RequestMapping(value = "/api/books", method = RequestMethod.GET)
@@ -56,6 +58,8 @@ public class BookController {
                 page,size,new Sort(sortBy)
         );
         Page<Book> pageResult = bookService.findAll(pageable);
+
+        List<Book> books = pageResult.getContent();
 
         return new PageResource<>(pageResult,"page","size");
     }
@@ -71,8 +75,6 @@ public class BookController {
 
         return found.createDTO();
     }
-
-
 
     @RequestMapping(value = "/api/books/{id}", method = RequestMethod.DELETE)
     @ResponseBody

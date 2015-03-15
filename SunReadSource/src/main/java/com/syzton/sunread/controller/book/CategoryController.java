@@ -1,7 +1,9 @@
 package com.syzton.sunread.controller.book;
 
+import com.syzton.sunread.dto.book.CategoryDTO;
 import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.service.book.CategoryService;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +30,10 @@ public class CategoryController {
 
     @RequestMapping(value = "/categories", method = RequestMethod.POST)
     @ResponseBody
-    public Category add(@Valid @RequestBody Category category) {
+    public Category add(@Valid @RequestBody Category dto) {
 
-        category = categoryService.add(category);
-        return category;
+        dto = categoryService.add(dto);
+        return dto;
     }
 
     @RequestMapping(value = "/categories/{id}", method = RequestMethod.DELETE)
@@ -39,8 +41,18 @@ public class CategoryController {
     public Category deleteById(@PathVariable("id") Long id) {
 
         Category category = categoryService.deleteById(id);
+        for(Category child :category.getChildren()){
+            categoryService.deleteById(child.getId());
+        }
         return category;
     }
 
+
+    @RequestMapping(value = "/categories/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Category findById(@PathVariable("id") Long id) throws NotFoundException{
+        Category category = categoryService.findById(id);
+        return category;
+    }
 
 }
