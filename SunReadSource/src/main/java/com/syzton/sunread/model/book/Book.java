@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.book.ReviewDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
@@ -19,21 +20,11 @@ import java.util.Set;
 @Entity
 @Table(name="book")
 @JsonIgnoreProperties(value = { "reviews","categories" })
-public class Book {
+public class Book extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
     public static final int MAX_LENGTH_NAME = 100;
     public static final int MAX_LENGTH_ISBN = 20;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-
-    @JsonSerialize(using = DateSerializer.class)
-    @Column(name = "creation_time", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime creationTime;
 
 
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
@@ -58,8 +49,7 @@ public class Book {
     private Set<Review> reviews = new HashSet<>() ;
 
 
-    @ManyToMany(cascade = {CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.MERGE})
-    @Basic(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name="book_category",
             joinColumns = @JoinColumn(name="book_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="category_id", referencedColumnName="id")
@@ -75,13 +65,7 @@ public class Book {
         return new Builder(isbn,name);
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public DateTime getCreationTime() {
-        return creationTime;
-    }
 
     public String getDescription() {
         return description;

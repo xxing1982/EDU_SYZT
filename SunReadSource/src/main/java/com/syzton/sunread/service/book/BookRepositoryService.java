@@ -1,8 +1,9 @@
 package com.syzton.sunread.service.book;
 
+import com.syzton.sunread.assembler.book.BookAssembler;
+import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.model.book.Book;
 
-import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
 import javassist.NotFoundException;
@@ -37,10 +38,12 @@ public class BookRepositoryService implements BookService {
 
 
     @Override
-    public Book add(Book book) {
-        LOGGER.debug("Adding a new Book entry with information: {}", book);
-        
-        return bookRepo.save(book);
+    public BookDTO add(BookDTO bookDTO) {
+        BookAssembler assembler = new BookAssembler();
+        Book book =  assembler.fromDTO(bookDTO,categoryRepo);
+        book = bookRepo.save(book);
+        bookDTO.setId(book.getId());
+        return bookDTO;
     }
 
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})

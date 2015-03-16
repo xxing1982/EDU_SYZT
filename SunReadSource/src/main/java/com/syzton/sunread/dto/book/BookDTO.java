@@ -1,8 +1,10 @@
 package com.syzton.sunread.dto.book;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syzton.sunread.model.book.Review;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,13 +16,26 @@ public class BookDTO {
 
     private Long id;
 
+    @NotNull
     private String isbn;
 
+    @NotNull
     private String name;
 
     private String description;
 
     private Date publicationDate;
+
+    @JsonIgnore
+    private Set<Long> categories = new HashSet<>();
+
+    public Set<Long> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Long> categories) {
+        this.categories = categories;
+    }
 
     public Date getPublicationDate() {
         return publicationDate;
