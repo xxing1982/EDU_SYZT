@@ -17,6 +17,7 @@ public class ObjectiveAnswer extends Answer {
     @JoinColumn(name="option_id")  
 	private Option option;
 	
+	
 	@Override
 	public void update(AnswerDTO updated) {
 		

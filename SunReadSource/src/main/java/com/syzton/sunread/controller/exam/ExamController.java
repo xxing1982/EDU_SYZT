@@ -2,30 +2,44 @@ package com.syzton.sunread.controller.exam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import javassist.NotFoundException;
 
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.ExamDTO;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.Exam;
+import com.syzton.sunread.model.exam.ObjectiveQuestion;
+import com.syzton.sunread.model.exam.Question;
+import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.service.exam.AnswerService;
 import com.syzton.sunread.service.exam.ExamService;
 import com.syzton.sunread.service.exam.ObjectiveAnswerService;
 import com.syzton.sunread.service.exam.SubjectiveAnswerService;
 
 @Controller
+@RequestMapping(value = "/api")
 public class ExamController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExamController.class);
 
@@ -37,39 +51,77 @@ public class ExamController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/api/exam", method = RequestMethod.POST)
+    @RequestMapping(value = "/exam", method = RequestMethod.POST)
     @ResponseBody
-    public ExamDTO add(@Valid @RequestBody ExamDTO dto) {
+    public Exam add(@Valid @RequestBody Exam dto) {
         LOGGER.debug("Adding a new to-do entry with information: {}", dto);
 
         Exam added = service.add(dto);
         LOGGER.debug("Added a to-do entry with information: {}", added);
 
-       return added.createDTO();
+       return added;
     }
     
-    @RequestMapping(value = "/api/exam/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/exam/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ExamDTO deleteById(@PathVariable("id") Long id) throws AnswerNotFoundException {
+    public Exam deleteById(@PathVariable("id") Long id) throws  NotFoundException {
         LOGGER.debug("Deleting a to-do entry with id: {}", id);
 
         Exam deleted = service.deleteById(id);
         LOGGER.debug("Deleted to-do entry with information: {}", deleted);
 
-        return deleted.createDTO();
+        return deleted;
     }
 
-    @RequestMapping(value = "/api/exam", method = RequestMethod.GET)
+    @RequestMapping(value = "/exam", method = RequestMethod.GET)
     @ResponseBody
-    public List<ExamDTO> findAll() {
+    public PageResource<Exam> findAll(@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
         LOGGER.debug("Finding all todo entries.");
+        sortBy = sortBy==null?"id": sortBy;
+        Pageable pageable = new PageRequest(
+                page,size,new Sort(sortBy)
+        );
+        Page<Exam> pageResult = service.findAll(pageable);
+        LOGGER.debug("Found {} to-do entries.", pageResult.getTotalElements());
 
-        List<Exam> models = service.findAll();
-        LOGGER.debug("Found {} to-do entries.", models.size());
+        return new PageResource<>(pageResult,"page","size");
+    }
+    
+    @RequestMapping(value = "/exam/verifypaper/{bookid}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ObjectiveQuestion> createVerifyPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
+        LOGGER.debug("Finding all todo entries.");
+       
+        List<ObjectiveQuestion> questions = service.takeVerifyTest(bookId);
+        LOGGER.debug("Found {} to-do entries.", questions.size());
 
-        return createDTOs(models);
+        return questions;
     }
 
+    @RequestMapping(value = "/exam/capacitypaper/{bookid}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ObjectiveQuestion> createCapacityPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
+        LOGGER.debug("Finding all todo entries.");
+       
+        List<ObjectiveQuestion> questions = service.takeCapacityTest(bookId);
+        LOGGER.debug("Found {} to-do entries.", questions.size());
+
+        return questions;
+    }
+    
+    @RequestMapping(value = "/exam/thinkpaper/{bookid}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<SubjectiveQuestion> createThinkPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
+        LOGGER.debug("Finding all todo entries.");
+       
+        List<SubjectiveQuestion> questions = service.takeThinkTest(bookId);
+        LOGGER.debug("Found {} to-do entries.", questions.size());
+
+        return questions;
+    }
+    
     private List<ExamDTO> createDTOs(List<Exam> models) {
         List<ExamDTO> dtos = new ArrayList<ExamDTO>();
 
@@ -80,25 +132,25 @@ public class ExamController {
         return dtos;
     }
 
-    @RequestMapping(value = "/api/exam/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/exam/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ExamDTO findById(@PathVariable("id") Long id) throws AnswerNotFoundException {
+    public Exam findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding to-do entry with id: {}", id);
 
         Exam found = service.findById(id);
         LOGGER.debug("Found to-do entry with information: {}", found);
 
-        return found.createDTO();
+        return found;
     }
 
-    @RequestMapping(value = "/api/exam/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public ExamDTO update(@Valid @RequestBody ExamDTO dto, @PathVariable("id") Long todoId) throws AnswerNotFoundException {
-        LOGGER.debug("Updating a to-do entry with information: {}", dto);
-
-        Exam updated = service.update(dto);
-        LOGGER.debug("Updated the information of a to-entry to: {}", updated);
-
-        return updated.createDTO();
-    }
+//    @RequestMapping(value = "/exam/{id}", method = RequestMethod.PUT)
+//    @ResponseBody
+//    public Exam update(@Valid @RequestBody Exam exam, @PathVariable("id") Long todoId) throws AnswerNotFoundException {
+//        LOGGER.debug("Updating a to-do entry with information: {}", dto);
+//
+//        Exam updated = service.update(exam);
+//        LOGGER.debug("Updated the information of a to-entry to: {}", updated);
+//
+//        return updated;
+//    }
 }
