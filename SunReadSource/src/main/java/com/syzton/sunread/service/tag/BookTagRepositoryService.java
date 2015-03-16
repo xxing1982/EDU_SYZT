@@ -119,7 +119,6 @@ public class BookTagRepositoryService implements BookTagService {
         return model;
     }
     
-    @Transactional
     @Override
     public Page<BookTag> findByTagId(Pageable pageable, long tagId) {
 

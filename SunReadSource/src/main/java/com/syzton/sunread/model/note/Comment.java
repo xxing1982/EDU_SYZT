@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.syzton.sunread.dto.note.CommentDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 import javax.persistence.*;
 
@@ -17,21 +18,13 @@ import java.util.Collection;
  */
 @Entity
 @Table(name="comment")
-public class Comment {
+public class Comment extends AbstractEntity {
 
     public static final int MAX_LENGTH_CONTENT = 200000;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     
     @Column(name="content",length = MAX_LENGTH_CONTENT)
     private String content;
 
-    @Column(name = "create_time", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime createTime;
-    
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="note_id")
@@ -49,10 +42,6 @@ public class Comment {
         return id;   
     }
 
-	public DateTime getCreateTime() {
-		return createTime;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -60,13 +49,6 @@ public class Comment {
     public void update(String content) {
         this.content = content;
     }
-
-    @PrePersist
-    public void prePersist() {
-        DateTime now = DateTime.now();
-        createTime = now;
-    }
-
     
     public static class Builder {
 

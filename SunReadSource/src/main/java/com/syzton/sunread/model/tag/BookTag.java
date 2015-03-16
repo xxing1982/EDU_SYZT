@@ -1,12 +1,11 @@
 package com.syzton.sunread.model.tag;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
 import com.syzton.sunread.dto.tag.BookTagDTO;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 import javax.persistence.*;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author chenty
@@ -14,20 +13,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="booktag")
-public class BookTag {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class BookTag extends AbstractEntity{
 
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="book_id")
 	private Book book;
-    
-    @Column(name = "create_time", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime createTime;
 
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
     @Basic(fetch = FetchType.LAZY)
@@ -43,29 +34,18 @@ public class BookTag {
     	
         return new Builder(tag, book);
     }
-
-    public Long getId() {
-        return id;   
-    }
     
-    public Tag getTag() {
-		return tag;
+    public Long getTag_Id() {
+		return tag.getId();
 	}
     
-    public Book getBook() {
-    	return book;
+    public Long getBook_Id() {
+    	return book.getId();
     }
 
 	public void update() {
     }
 
-    @PrePersist
-    public void prePersist() {
-        DateTime now = DateTime.now();
-        createTime = now;
-    }
-
-    
     public static class Builder {
 
         private BookTag built;
@@ -84,8 +64,13 @@ public class BookTag {
     public BookTagDTO createDTO(BookTag model) {
         BookTagDTO dto = new BookTagDTO();
         dto.setId(model.getId());
-        dto.setTag_id(model.getTag().getId());
-        dto.setBook_id(model.getBook().getId());
+        dto.setTag_id(model.getTag_Id());
+        dto.setBook_id(model.getBook_Id());
         return dto;
+    }
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

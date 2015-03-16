@@ -1,12 +1,11 @@
 package com.syzton.sunread.model.tag;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.annotations.IndexColumn;
-
 import com.syzton.sunread.dto.tag.TagDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 import javax.persistence.*;
 
-import java.util.Collection;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.util.Set;
 
 
@@ -16,16 +15,12 @@ import java.util.Set;
  */
 @Entity
 @Table(name="tag")
-public class Tag {
+public class Tag extends AbstractEntity {
 
     public static final int MAX_LENGTH_NAME = 20;
     public static final int MAX_LENGTH_VALUE = 20;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    @Column(name="name",unique = true,nullable = false,length = MAX_LENGTH_NAME)
+    @Column(name="name",nullable = false,length = MAX_LENGTH_NAME)
     private String name;
 
     @Column(name ="value",nullable = false,length = MAX_LENGTH_VALUE)
@@ -43,11 +38,7 @@ public class Tag {
     public static Builder getBuilder(String name,String value) {
         return new Builder(name, value);
     }
-
-    public Long getId() {
-        return id;   
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -57,9 +48,9 @@ public class Tag {
     }
 
     
-    public Set<BookTag> getBookTags() {
-		return bookTags;
-	}
+//    public Set<BookTag> getBookTags() {
+//		return bookTags;
+//	}
 
 	public void update(String name, String value) {
         this.name = name;
@@ -90,5 +81,9 @@ public class Tag {
         dto.setValue(model.getValue());
 
         return dto;
+    }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 import javax.persistence.*;
 
@@ -19,23 +20,16 @@ import java.util.Set;
  */
 @Entity
 @Table(name="note")
-public class Note {
+public class Note extends AbstractEntity{
 
     public static final int MAX_LENGTH_TITLE = 200;
     public static final int MAX_LENGTH_CONTENT = 200000;
     public static final int MAX_LENGTH_IMAGE = 10485760; // 10MiB
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
 	@Column(name="title",length = MAX_LENGTH_TITLE)
     private String title;
     
-    @Column(name = "create_time", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime createTime;
-
     @Column(name="content",length = MAX_LENGTH_CONTENT)
     private String content;
     
@@ -59,16 +53,8 @@ public class Note {
         return new Builder(title, content, book);
     }
 
-    public Long getId() {
-        return id;   
-    }
-
     public String getTitle() {
 		return title;
-	}
-
-	public DateTime getCreateTime() {
-		return createTime;
 	}
 
 	public String getContent() {
@@ -83,12 +69,6 @@ public class Note {
         this.title = title;
         this.content = content;
         this.image = image;
-    }
-
-    @PrePersist
-    public void prePersist() {
-        DateTime now = DateTime.now();
-        createTime = now;
     }
 
     
