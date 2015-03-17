@@ -33,7 +33,7 @@ public interface ExamService {
 
 	public Exam handInVerifyPaper(Exam added);
 
-	public Exam handInAbilityTest(Exam added);
+	public Exam handInCapacityTest(Exam added);
 
 	public Exam handInThinkTest(Exam added);
 

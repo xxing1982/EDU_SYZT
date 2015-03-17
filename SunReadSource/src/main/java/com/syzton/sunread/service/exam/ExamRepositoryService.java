@@ -137,7 +137,7 @@ public class ExamRepositoryService implements ExamService {
 
 	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
-	public Exam handInAbilityTest(Exam added) {
+	public Exam handInCapacityTest(Exam added) {
 		Exam exam = add(added);
 		Set<Answer> answers = exam.getAnswers();
 		for (Answer answer : answers) {
