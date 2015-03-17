@@ -51,11 +51,11 @@ public class BookInShelf {
     private boolean isVerified;
     
     //a bookshelf can`t have the same books
-    @ManyToOne(cascade=CascadeType.ALL,optional=false)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "bookshelf_id")
     private Bookshelf bookshelf;
 
-    @ManyToOne(cascade=CascadeType.REFRESH,optional=false)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
     @JoinColumn(name = "book_id")
     private Book book;
 

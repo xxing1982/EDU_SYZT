@@ -30,6 +30,7 @@ import com.syzton.sunread.service.bookshelf.BookShelfOperationService;
  * @Author Morgan-Leon 
  */
 @Controller
+@RequestMapping(value = "/api")
 public class BookShelfOperationController {
 	
     private static final Logger LOGGER = LoggerFactory.getLogger(BookShelfOperationController.class);
@@ -42,7 +43,7 @@ public class BookShelfOperationController {
     }
 
 //Add an operation 
-    @RequestMapping(value = "/api/bookshelfoperation", method = RequestMethod.POST)
+    @RequestMapping(value = "/bookshelfoperation", method = RequestMethod.POST)
     @ResponseBody
     public BookShelfOperationDTO add(@Valid @RequestBody BookShelfOperationDTO dto) {
         LOGGER.debug("Adding a new operation entry with information: {}", dto);
@@ -55,7 +56,7 @@ public class BookShelfOperationController {
     }
 
 //Delete an operation
-    @RequestMapping(value = "/api/bookshelfoperation/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/bookshelfoperation/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public BookShelfOperationDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a to-do entry with id: {}", id);
@@ -67,7 +68,7 @@ public class BookShelfOperationController {
     }
     
 //Update an operation
-    @RequestMapping(value = "/api/bookshelfoperation/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/bookshelfoperation/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public BookShelfOperationDTO update(@Valid @RequestBody BookShelfOperationDTO dto) throws NotFoundException {
         LOGGER.debug("Adding a new operation entry with information: {}", dto);
@@ -78,7 +79,7 @@ public class BookShelfOperationController {
     }
  
  //Get all operations
-    @RequestMapping(value = "/api/bookshelfoperation", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookshelfoperation", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<BookShelfOperation> findAllBooks(@RequestParam("page") int page,
                             @RequestParam("size") int size,
@@ -94,7 +95,7 @@ public class BookShelfOperationController {
     }
     
 //Get an operation   
-    @RequestMapping(value = "/api/bookshelfoperation/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookshelfoperation/{id}", method = RequestMethod.GET)
     @ResponseBody
     public BookShelfOperationDTO findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding operation in shelf entry with id: {}", id);

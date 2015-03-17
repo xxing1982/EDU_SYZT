@@ -80,6 +80,7 @@ public class BookRepositoryService implements BookService {
         bookRepo.delete(deleted);
         return deleted;
     }
+    
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
     public Page<Book> findAll(Pageable pageable) throws NotFoundException{

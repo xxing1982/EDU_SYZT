@@ -35,50 +35,49 @@ public class Exam {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
+	// TODO
+	public static final int EXAM_QUESTION = 10;
+	public static final int EXAM_SUBJECTIVE_QUESTION_PER_TYPE = 2;
+
 	@Column(name = "creation_time", nullable = false)
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime creationTime;
 
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(
-	  name="exam_question",
-	  joinColumns={
-			  @JoinColumn(name="exam_id")
-	  }, inverseJoinColumns={
-			  @JoinColumn(name="question_id")
-	  }
-	)
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "exam_question", joinColumns = { @JoinColumn(name = "exam_id") }, inverseJoinColumns = { @JoinColumn(name = "question_id") })
 	private Set<Question> questions;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="book_id")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "book_id")
 	private Book book;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(length=10,nullable=false)
+	@Column(length = 10, nullable = false)
 	private ExamType examType;
-	
-	@Column(name="is_pass",nullable=false)
+
+	@Column(name = "is_pass", nullable = false)
 	private boolean isPass = false;
-	
-	@Column(name="score")
+
+	@Column(name = "score")
 	private int examScore;
-	
-	@Column(name="pass_count")
-	private int pass;
-	
-	@Column(name="fail_count")
-	private int fail;
-	
-	@Column(name="question_num")
+
+	@Column(name = "pass_count")
+	private int passCount;
+
+	@Column(name = "fail_count")
+	private int failCount;
+
+	@Column(name = "question_num")
 	private int questionNum = 5;
-	
-	public enum ExamType{FIRST,SECOND,THIRD}
-	
-	@OneToMany(cascade={CascadeType.ALL})
+
+	public enum ExamType {
+		VERIFY, THINK, CAPACITY
+	}
+
+	@OneToMany(cascade = { CascadeType.ALL },fetch = FetchType.LAZY)
 	private Set<Answer> answers;
-	
+
 	@Version
 	private long version;
 
@@ -86,9 +85,69 @@ public class Exam {
 
 	}
 
-//	public static Builder getBuilder(ExamType type) {
-//		return new Builder(type);
-//	}
+	public int getPassCount() {
+		return passCount;
+	}
+
+	public void setPassCount(int pass) {
+		this.passCount = pass;
+	}
+
+	public int getFailCount() {
+		return failCount;
+	}
+
+	public void setFailCount(int fail) {
+		this.failCount = fail;
+	}
+
+	public Set<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(Set<Answer> answers) {
+		this.answers = answers;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setCreationTime(DateTime creationTime) {
+		this.creationTime = creationTime;
+	}
+
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public void setExamType(ExamType examType) {
+		this.examType = examType;
+	}
+
+	public void setPass(boolean isPass) {
+		this.isPass = isPass;
+	}
+
+	public void setExamScore(int examScore) {
+		this.examScore = examScore;
+	}
+
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
+
+	// public static Builder getBuilder(ExamType type) {
+	// return new Builder(type);
+	// }
 
 	public Long getId() {
 		return id;
@@ -97,11 +156,10 @@ public class Exam {
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
-	
+
 	public long getVersion() {
 		return version;
 	}
-	
 
 	public Set<Question> getQuestions() {
 		return questions;
@@ -118,7 +176,6 @@ public class Exam {
 	public boolean isPass() {
 		return isPass;
 	}
-	
 
 	public int getExamScore() {
 		return examScore;
@@ -128,47 +185,41 @@ public class Exam {
 		return answers;
 	}
 
- 
-	
-	public int getQuestionNum(){
+	public int getQuestionNum() {
 		return this.questionNum;
 	}
 
-	
 	public void update(Set<Answer> answers) {
 		this.answers = answers;
 	}
 
-
-	
-	private void countScore(){
-		if(this.examType.equals(ExamType.FIRST)||this.examType.equals(ExamType.SECOND)){
+	private void countScore() {
+		if (this.examType.equals(ExamType.VERIFY)
+				|| this.examType.equals(ExamType.CAPACITY)) {
 			int total = answers.size();
-			for(Answer answer: answers){
-				ObjectiveAnswer  oAnswer = (ObjectiveAnswer)answer;
-				if(oAnswer.isCorrect()){
-					this.pass++;
-				}else{
-					this.fail++;
+			for (Answer answer : answers) {
+				ObjectiveAnswer oAnswer = (ObjectiveAnswer) answer;
+				if (oAnswer.isCorrect()) {
+					this.passCount++;
+				} else {
+					this.failCount++;
 				}
 			}
-			
-			this.examScore = 100*this.pass/total;
+
+			this.examScore = 100 * this.passCount / total;
 		}
-		
-		
-		
+
 	}
 
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
-	
+
 	public static Builder getBuilder(ExamType type) {
-        return new Builder(type);
-    }
-	
+		return new Builder(type);
+	}
+
 	public static class Builder {
 
 		private Exam built;
@@ -176,7 +227,7 @@ public class Exam {
 		public Builder(ExamType type) {
 			built = new Exam();
 			built.examType = type;
-			
+
 		}
 
 		public Exam build() {
@@ -187,25 +238,22 @@ public class Exam {
 			built.answers = answers;
 			return this;
 		}
-		
-	 
-	}
-	
-	public ExamDTO createDTO() {
-        ExamDTO dto = new ExamDTO();
-//        if(this.book!=null){
-//        	dto.setBook(this.book.createDTO(this.book));
-//        }
-        dto.setId(this.id);
-        dto.setExamScore(this.examScore);
-        dto.setExamType(this.examType);
-        dto.setPass(this.isPass);
-        dto.setPassNum(this.pass);
-        dto.setFailNum(this.fail);
 
-        return dto;
-    }
-	
-	 
+	}
+
+	public ExamDTO createDTO() {
+		ExamDTO dto = new ExamDTO();
+		// if(this.book!=null){
+		// dto.setBook(this.book.createDTO(this.book));
+		// }
+		dto.setId(this.id);
+		dto.setExamScore(this.examScore);
+		dto.setExamType(this.examType);
+		dto.setPass(this.isPass);
+		dto.setPassNum(this.passCount);
+		dto.setFailNum(this.failCount);
+
+		return dto;
+	}
 
 }

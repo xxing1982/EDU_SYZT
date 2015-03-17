@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
@@ -13,7 +14,7 @@ import com.syzton.sunread.model.exam.SubjectiveQuestion;
 
 @JsonTypeName("objective")
 public class ObjectiveQuestionDTO extends QuestionDTO {
-	
+	@JsonIgnore
 	private OptionDTO correctAnswer;
 	
 	private List<OptionDTO> options;

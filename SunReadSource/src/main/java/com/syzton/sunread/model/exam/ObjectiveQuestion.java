@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syzton.sunread.dto.exam.QuestionDTO;
 import com.syzton.sunread.model.exam.SubjectiveQuestion.Builder;
 
@@ -22,6 +23,7 @@ public class ObjectiveQuestion extends Question {
 	@JoinColumn(name = "question_id")
 	private Set<Option> options;
 	
+	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL)  
     @JoinColumn(name="correct_id")  
     private Option correctAnswer;
