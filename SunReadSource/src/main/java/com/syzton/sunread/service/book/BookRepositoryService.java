@@ -4,6 +4,7 @@ import com.syzton.sunread.assembler.book.BookAssembler;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.model.book.Book;
 
+import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
 import javassist.NotFoundException;
@@ -14,6 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  */
@@ -40,7 +44,11 @@ public class BookRepositoryService implements BookService {
     @Override
     public BookDTO add(BookDTO bookDTO) {
         BookAssembler assembler = new BookAssembler();
+
         Book book =  assembler.fromDTO(bookDTO,categoryRepo);
+
+        LOGGER.debug(book.toString());
+
         book = bookRepo.save(book);
         bookDTO.setId(book.getId());
         return bookDTO;
@@ -80,6 +88,25 @@ public class BookRepositoryService implements BookService {
 
         return bookPages;
 
+    }
+
+    @Transactional(rollbackFor = {NotFoundException.class})
+    @Override
+    public Page<Book> findByCategories(Set<Long> categoriyIds,Pageable pageable) throws NotFoundException{
+
+        Set<Category> categories = new HashSet<>();
+
+        for(Long id : categoriyIds)
+        {
+            Category category = categoryRepo.findOne(id);
+            if(category == null){
+                throw new NotFoundException("no category be found wiht id: "+id+"");
+            }
+            categories.add(categoryRepo.findOne(id));
+        }
+        Page<Book> bookPages = bookRepo.findByCategories(categories,pageable);
+
+        return bookPages;
     }
 
 
