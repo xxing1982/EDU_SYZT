@@ -22,6 +22,7 @@ import javax.validation.Valid;
  * @author Morgan-Leon
  */
 @Controller
+@RequestMapping(value = "/api")
 public class BookInShelfController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookshelfController.class);
     private BookInShelfService service;
@@ -32,7 +33,7 @@ public class BookInShelfController {
     }
     
 //Add a Book to bookshelf    
-    @RequestMapping(value = "/api/bookshelf/{id}/books/{bookId}/bookinshelf", method = RequestMethod.POST)
+    @RequestMapping(value = "/bookshelf/{id}/books/{bookId}/bookinshelf", method = RequestMethod.POST)
     @ResponseBody
     public BookInShelfDTO add(@Valid @RequestBody BookInShelfDTO dto
     		,@PathVariable("id")Long id, @PathVariable("bookId")Long bookId	) {
@@ -46,7 +47,7 @@ public class BookInShelfController {
    
     
 //Delete a book in shelf
-    @RequestMapping(value = "/api/bookinshelf/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/bookinshelf/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public BookInShelfDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a book in shelf entry with id: {}", id);
@@ -58,7 +59,7 @@ public class BookInShelfController {
     }
     
 //Update a book in shelf    
-    @RequestMapping(value = "/api/bookinshelf/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/bookinshelf/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public BookInShelfDTO update(@Valid @RequestBody BookInShelfDTO dto,@PathVariable("id") long id) throws NotFoundException {
         LOGGER.debug("Adding a new book to shelf entry with information: {}", dto);
@@ -70,7 +71,7 @@ public class BookInShelfController {
     }
    
 //Get all books in shelf
-    @RequestMapping(value = "/api/bookshelf/{id}/bookinshelf", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookshelf/{id}/bookinshelf", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<BookInShelf> findAllBooks(@PathVariable("id") long id,
     						@RequestParam("page") int page,
@@ -85,7 +86,7 @@ public class BookInShelfController {
     }
     
 //Get a Book in bookshelf    
-    @RequestMapping(value = "/api/bookinshelf/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookinshelf/{id}", method = RequestMethod.GET)
     @ResponseBody
     public BookInShelfDTO findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding a book in shelf entry with id: {}", id);

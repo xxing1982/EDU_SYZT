@@ -16,8 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="bookshelf")
 public class Bookshelf {
-   
-    public static final int MAX_LENGTH_OWNER = 100;
+
     public static final int MAX_LENGTH_DESCRIPTION = 500;
 
     @Id
@@ -127,16 +126,7 @@ public class Bookshelf {
         	built = new Bookshelf();
         	built.owner = owner;       	
         }
-        
-        
-//        public Builder(long owner,Collection<BookInShelf> booksInShelf, Collection<BookShelfOperation> bookShelfOperations) {
-//            built = new Bookshelf();
-//            built.owner = owner;
-//            built.booksInShelf = booksInShelf;
-//            built.bookShelfOprations = bookShelfOperations;
-//        }
 
-        //Build booksInShelfhelf by owner name(:String)
 
         public Bookshelf build() {
             return built;

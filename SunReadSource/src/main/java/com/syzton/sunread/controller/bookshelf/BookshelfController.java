@@ -20,6 +20,7 @@ import javax.validation.Valid;
  * @author Morgan-Leon
  */
 @Controller
+@RequestMapping(value = "/api")
 public class BookshelfController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookshelfController.class);
 
@@ -30,7 +31,7 @@ public class BookshelfController {
         this.service = service;
     }
     
-    @RequestMapping(value = "/api/bookshelf", method = RequestMethod.POST)
+    @RequestMapping(value = "/bookshelf", method = RequestMethod.POST)
     @ResponseBody
     public BookshelfDTO add(@Valid @RequestBody BookshelfDTO dto) {
         LOGGER.debug("Adding a new book entry with information: {}", dto);
@@ -45,7 +46,7 @@ public class BookshelfController {
 
 
   //Get information of a bookshelf by id  
-    @RequestMapping(value = "/api/bookshelf/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookshelf/{id}", method = RequestMethod.GET)
     @ResponseBody
     public BookshelfDTO findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding bookshelf entry with id: {}", id);
@@ -56,7 +57,7 @@ public class BookshelfController {
         return found.createDTO(found);
     }
 
-    @RequestMapping(value = "/api/bookshelf/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/bookshelf/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public BookshelfDTO update(@Valid @RequestBody BookshelfDTO dto, @PathVariable("id") Long bookshelfId) throws NotFoundException {
         LOGGER.debug("Updating bookshelf with information: {}", dto);
