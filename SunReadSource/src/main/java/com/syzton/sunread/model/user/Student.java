@@ -1,6 +1,7 @@
 package com.syzton.sunread.model.user;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,6 +10,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="student")
+@DiscriminatorValue("S")
 public class Student extends User{
 
     public static final int MAX_LENGTH_IDENTITYID = 16;

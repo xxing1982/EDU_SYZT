@@ -8,15 +8,16 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Range;
 import org.joda.time.DateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by jerry on 3/16/15.
  */
 @Entity
 @Table(name="users")
+@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.STRING,length=20)
+@DiscriminatorValue("U")
 public class User extends AbstractEntity{
 
     public static final int MAX_LENGTH_USERNAME = 15;

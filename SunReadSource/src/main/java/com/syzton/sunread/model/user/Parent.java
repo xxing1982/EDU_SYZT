@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Range;
 import org.joda.time.DateTime;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -17,6 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="parent")
+@DiscriminatorValue("P")
 public class Parent extends User{
 
 }

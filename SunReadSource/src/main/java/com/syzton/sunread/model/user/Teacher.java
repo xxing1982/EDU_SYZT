@@ -1,5 +1,6 @@
 package com.syzton.sunread.model.user;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -8,6 +9,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="teacher")
+@DiscriminatorValue("T")
 public class Teacher extends User{
 
 }
