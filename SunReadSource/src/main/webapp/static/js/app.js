@@ -10,6 +10,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
     
     $urlRouterProvider
         .when('/readingCenter', '/readingCenter/myBookshelf')
+        .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
         //.otherwise('/');
 
     $stateProvider
@@ -29,6 +30,35 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             url: '/myBookshelf',
             templateUrl: 'partials/readingCenterMyBookshelf.html',
             controller: 'readingCenterMyBookshelfController'
+        })
+        //reading center -> myBookshelf -> add books
+        .state('readingCenter.addBook',{
+            url: '/addBook',
+            templateUrl: 'partials/readingCenterAddBook.html'
+        })
+        //reading center -> myBookshelf -> add books -> quick search
+        .state('readingCenter.addBook.quick', {
+            url: '/quick',
+            templateUrl: 'partials/readingCenterAddBookQuickSearch.html',
+            controller: 'readingCenterAddBookQuickSearchController'
+        })
+        //reading center -> myBookshelf -> add books -> advenced search
+        .state('readingCenter.addBook.advanced', {
+            url: '/advanced',
+            templateUrl: 'partials/readingCenterAddBookAdvancedSearch.html',
+            controller: 'readingCenterAddBookAdvancedSearchController'
+        })
+        //reading center -> myBookshelf -> add books -> popular reading
+        .state('readingCenter.addBook.popular', {
+            url: '/popular',
+            templateUrl: 'partials/readingCenterAddBookPopularReading.html',
+            controller: 'readingCenterAddBookPopularReadingController'
+        })
+        //reading center -> myBookshelf -> add books -> popular recommend
+        .state('readingCenter.addBook.recommend', {
+            url: '/recommend',
+            templateUrl: 'partials/readingCenterAddBookPopularRecommend.html',
+            controller: 'readingCenterAddBookPopularRecommendController'
         })
         //reading center -> myNote
         .state('readingCenter.myNote',{
