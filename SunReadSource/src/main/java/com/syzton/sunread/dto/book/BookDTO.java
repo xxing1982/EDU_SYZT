@@ -26,7 +26,6 @@ public class BookDTO {
 
     private Date publicationDate;
 
-    @JsonIgnore
     private Set<Long> categories = new HashSet<>();
 
     public Set<Long> getCategories() {

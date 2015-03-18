@@ -2,15 +2,20 @@ package com.syzton.sunread.service.exam;
 
 import java.util.List;
 
+import javassist.NotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.exam.Answer;
+import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.repository.exam.AnswerRepository;
 import com.syzton.sunread.repository.exam.ObjectiveAnswerRepository;
 import com.syzton.sunread.repository.exam.SubjectiveAnswerRepository;
@@ -54,13 +59,13 @@ public class AnswerRepositoryService implements AnswerService {
 		return deleted;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
-	public List<Answer> findAll() {
-		LOGGER.debug("Finding all to-do entries");
-		return repository.findAll();
-	}
+	public Page<Answer> findAll(Pageable pageable) {
+		Page<Answer> answerPages = repository.findAll(pageable);
 
+		return answerPages;
+	}
 	@Transactional(readOnly = true, rollbackFor = { AnswerNotFoundException.class })
 	@Override
 	public Answer findById(Long id) throws AnswerNotFoundException {

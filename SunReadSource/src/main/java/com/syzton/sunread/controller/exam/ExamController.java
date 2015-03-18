@@ -54,10 +54,10 @@ public class ExamController {
     @RequestMapping(value = "/exam", method = RequestMethod.POST)
     @ResponseBody
     public Exam add(@Valid @RequestBody Exam dto) {
-        LOGGER.debug("Adding a new to-do entry with information: {}", dto);
+        LOGGER.debug("Adding a new exam entry with information: {}", dto);
 
         Exam added = service.add(dto);
-        LOGGER.debug("Added a to-do entry with information: {}", added);
+        LOGGER.debug("Added a exam entry with information: {}", added);
 
        return added;
     }
@@ -65,10 +65,10 @@ public class ExamController {
     @RequestMapping(value = "/exam/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public Exam deleteById(@PathVariable("id") Long id) throws  NotFoundException {
-        LOGGER.debug("Deleting a to-do entry with id: {}", id);
+        LOGGER.debug("Deleting a exam entry with id: {}", id);
 
         Exam deleted = service.deleteById(id);
-        LOGGER.debug("Deleted to-do entry with information: {}", deleted);
+        LOGGER.debug("Deleted exam entry with information: {}", deleted);
 
         return deleted;
     }
@@ -78,13 +78,13 @@ public class ExamController {
     public PageResource<Exam> findAll(@RequestParam("page") int page,
             @RequestParam("size") int size,
             @RequestParam("sortBy") String sortBy) throws NotFoundException {
-        LOGGER.debug("Finding all todo entries.");
+        LOGGER.debug("Finding all exam entries.");
         sortBy = sortBy==null?"id": sortBy;
         Pageable pageable = new PageRequest(
                 page,size,new Sort(sortBy)
         );
         Page<Exam> pageResult = service.findAll(pageable);
-        LOGGER.debug("Found {} to-do entries.", pageResult.getTotalElements());
+        LOGGER.debug("Found {} exam entries.", pageResult.getTotalElements());
 
         return new PageResource<>(pageResult,"page","size");
     }
@@ -92,13 +92,15 @@ public class ExamController {
     @RequestMapping(value = "/exam/verifypaper/{bookid}", method = RequestMethod.GET)
     @ResponseBody
     public List<ObjectiveQuestion> createVerifyPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
-        LOGGER.debug("Finding all todo entries.");
+        LOGGER.debug("Finding all exam entries.");
        
         List<ObjectiveQuestion> questions = service.takeVerifyTest(bookId);
-        LOGGER.debug("Found {} to-do entries.", questions.size());
+        LOGGER.debug("Found {} exam entries.", questions.size());
 
         return questions;
     }
+    
+    
 
     @RequestMapping(value = "/exam/capacitypaper/{bookid}", method = RequestMethod.GET)
     @ResponseBody
@@ -106,7 +108,7 @@ public class ExamController {
         LOGGER.debug("Finding all todo entries.");
        
         List<ObjectiveQuestion> questions = service.takeCapacityTest(bookId);
-        LOGGER.debug("Found {} to-do entries.", questions.size());
+        LOGGER.debug("Found {} exam entries.", questions.size());
 
         return questions;
     }
@@ -114,12 +116,45 @@ public class ExamController {
     @RequestMapping(value = "/exam/thinkpaper/{bookid}", method = RequestMethod.GET)
     @ResponseBody
     public List<SubjectiveQuestion> createThinkPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
-        LOGGER.debug("Finding all todo entries.");
+        LOGGER.debug("Finding all exam entries.");
        
         List<SubjectiveQuestion> questions = service.takeThinkTest(bookId);
-        LOGGER.debug("Found {} to-do entries.", questions.size());
+        LOGGER.debug("Found {} exam entries.", questions.size());
 
         return questions;
+    }
+    
+    @RequestMapping(value = "/exam/verifypaper", method = RequestMethod.POST)
+    @ResponseBody
+    public Exam handInVerifyPaper(@Valid @RequestBody Exam exam) throws NotFoundException {
+        LOGGER.debug("hand in exam entrie.");
+       
+        Exam examResult = service.handInVerifyPaper(exam);
+        LOGGER.debug("return a exam entry result with information: {}", exam);
+
+        return examResult;
+    }
+    
+    @RequestMapping(value = "/exam/capacitypaper", method = RequestMethod.POST)
+    @ResponseBody
+    public Exam handInThinkPaper(@Valid @RequestBody Exam exam) throws NotFoundException {
+        LOGGER.debug("hand in exam entrie.");
+       
+        Exam examResult = service.handInThinkTest(exam);
+        LOGGER.debug("return a exam entry result with information: {}", exam);
+
+        return examResult;
+    }
+    
+    @RequestMapping(value = "/exam/thinkpaper", method = RequestMethod.POST)
+    @ResponseBody
+    public Exam handInCapacityPaper(@Valid @RequestBody Exam exam) throws NotFoundException {
+        LOGGER.debug("hand in exam entrie.");
+       
+        Exam examResult = service.handInCapacityTest(exam);
+        LOGGER.debug("return a exam entry result with information: {}", exam);
+
+        return examResult;
     }
     
     private List<ExamDTO> createDTOs(List<Exam> models) {
@@ -142,6 +177,7 @@ public class ExamController {
 
         return found;
     }
+    
 
 //    @RequestMapping(value = "/exam/{id}", method = RequestMethod.PUT)
 //    @ResponseBody

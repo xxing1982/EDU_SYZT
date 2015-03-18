@@ -16,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Jerry Zhang
@@ -46,22 +48,48 @@ public class BookController {
         return added;
     }
 
+//    @RequestMapping(value = "/books", method = RequestMethod.GET)
+//    @ResponseBody
+//    public PageResource<Book> findAllBooks(@RequestParam("page") int page,
+//                            @RequestParam("size") int size,
+//                            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+//        LOGGER.debug("Finding to-do entry with id: {}" );
+//        sortBy = sortBy==null?"id": sortBy;
+//        Pageable pageable = new PageRequest(
+//                page,size,new Sort(sortBy)
+//        );
+//        Page<Book> pageResult = bookService.findAll(pageable);
+//
+//        return new PageResource<>(pageResult,"page","size");
+//    }
+
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Book> findAllBooks(@RequestParam("page") int page,
-                            @RequestParam("size") int size,
-                            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    public PageResource<Book> findByCategories(@RequestParam(value = "categories",required = false) String categories,
+                                           @RequestParam("page") int page,
+                                           @RequestParam("size") int size,
+                                           @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
         LOGGER.debug("Finding to-do entry with id: {}" );
+
         sortBy = sortBy==null?"id": sortBy;
         Pageable pageable = new PageRequest(
                 page,size,new Sort(sortBy)
         );
-        Page<Book> pageResult = bookService.findAll(pageable);
+        Page<Book> pageResult ;
+        if(categories != null) {
+            String[] cIds = categories.split(",");
+            Set<Long> categoryIds = new HashSet<>();
+            for (String id : cIds) {
+                categoryIds.add(Long.parseLong(id));
+            }
+            pageResult = bookService.findByCategories(categoryIds,pageable);
+        }else{
+            pageResult = bookService.findAll(pageable);
+
+        }
 
         return new PageResource<>(pageResult,"page","size");
     }
-
-
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Book findById(@PathVariable("id") Long id) throws NotFoundException {

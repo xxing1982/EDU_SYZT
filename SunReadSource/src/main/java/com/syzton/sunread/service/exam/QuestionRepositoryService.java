@@ -2,14 +2,20 @@ package com.syzton.sunread.service.exam;
 
 import java.util.List;
 
+import javassist.NotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.exam.QuestionDTO;
 import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
+import com.syzton.sunread.model.exam.ObjectiveAnswer;
+import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.repository.exam.QuestionRepository;
 
@@ -51,11 +57,12 @@ public class QuestionRepositoryService implements QuestionService {
 		return deleted;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
-	public List<Question> findAll() {
-		LOGGER.debug("Finding all to-do entries");
-		return repository.findAll();
+	public Page<Question> findAll(Pageable pageable) {
+		Page<Question> questionPages = repository.findAll(pageable);
+
+		return questionPages;
 	}
 
 	@Transactional(readOnly = true, rollbackFor = { QuestionNotFoundExcepiton.class })
