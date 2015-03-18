@@ -21,6 +21,7 @@ import javax.validation.Valid;
  * Created by jerry on 3/9/15.
  */
 @Controller
+@RequestMapping("/api")
 public class ReviewController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReviewController.class);
@@ -32,14 +33,14 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @RequestMapping(value = "/api/reviews", method = RequestMethod.POST)
+    @RequestMapping(value = "/reviews", method = RequestMethod.POST)
     @ResponseBody
     public ReviewDTO add(@Valid @RequestBody ReviewDTO reviewDTO) {
         Review review = reviewService.add(reviewDTO);
         return review.createDTO(review);
     }
 
-    @RequestMapping(value = "/api/reviews/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/reviews/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public ReviewDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a to-do entry with id: {}", id);
@@ -50,12 +51,12 @@ public class ReviewController {
         return deleted.createDTO(deleted);
     }
 
-    @RequestMapping(value = "/api/books/{bookId}/reviews", method = RequestMethod.GET)
+    @RequestMapping(value = "/books/{bookId}/reviews", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<Review> findReviewsByBookId(@PathVariable("bookId") long bookId,
                                                     @RequestParam("page") int page,
                                                     @RequestParam("size") int size,
-                                                    @RequestParam("sortBy") String sortBy) throws NotFoundException {
+                                                    @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
         sortBy = sortBy == null ? "id" : sortBy;
 
         Pageable pageable = new PageRequest(

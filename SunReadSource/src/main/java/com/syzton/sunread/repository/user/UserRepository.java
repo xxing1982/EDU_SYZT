@@ -2,9 +2,11 @@ package com.syzton.sunread.repository.user;
 
 import com.syzton.sunread.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * Created by Morgan-Leon on 2015/3/16.
+ * Created by jerry on 3/16/15.
  */
-public interface UserRepository extends JpaRepository<User,Long> {
+@Repository
+public interface UserRepository extends JpaRepository<User,Long>{
 }
