@@ -5,6 +5,8 @@ package com.syzton.sunread.dto.book;
  */
 public class ReviewDTO {
 
+    private Long id;
+
     private Long bookId;
 
     private String content;
@@ -23,5 +25,13 @@ public class ReviewDTO {
 
     public void setBookId(Long bookId) {
         this.bookId = bookId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

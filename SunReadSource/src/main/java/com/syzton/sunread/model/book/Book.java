@@ -45,9 +45,11 @@ public class Book extends AbstractEntity{
     private int avgRate;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
-    @Basic(fetch = FetchType.LAZY)
     private Set<Review> reviews = new HashSet<>() ;
 
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "book",optional = false)
+    private Quality quality;
 
     @ManyToMany
     @JoinTable(name="book_category",
@@ -129,11 +131,23 @@ public class Book extends AbstractEntity{
         this.categories = categories;
     }
 
+    public Quality getQuality() {
+        return quality;
+    }
+
+    public void setQuality(Quality quality) {
+        this.quality = quality;
+    }
+
     @PrePersist
     public void prePersist() {
+        super.prePersist();
         DateTime now = DateTime.now();
-        creationTime = now;
+//        creationTime = now;
         modificationTime = now;
+        quality = new Quality();
+        quality.setBook(this);
+
     }
 
     @PreUpdate

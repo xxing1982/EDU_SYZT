@@ -75,6 +75,7 @@ public class Review {
     }
     public ReviewDTO createDTO(Review model) {
         ReviewDTO dto = new ReviewDTO();
+        dto.setId(model.getId());
         dto.setBookId(model.getBook().getId());
         dto.setContent(model.getContent());
         return dto;

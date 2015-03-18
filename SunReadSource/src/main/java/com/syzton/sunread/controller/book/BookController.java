@@ -4,6 +4,7 @@ import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.service.book.BookService;
+import com.syzton.sunread.service.book.QualityService;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +32,14 @@ public class BookController {
 
     private BookService bookService;
 
+    private QualityService qualityService;
+
     @Autowired
-    public BookController(BookService service) {
-        this.bookService = service;
+    public BookController(BookService bookService, QualityService qualityService) {
+        this.bookService = bookService;
+        this.qualityService = qualityService;
     }
+
 
     @RequestMapping(value = "/books", method = RequestMethod.POST)
     @ResponseBody
@@ -111,4 +116,30 @@ public class BookController {
 
         return deleted;
     }
+
+    @RequestMapping(value = "/books/{id}/recommends", method = RequestMethod.PUT)
+    @ResponseBody
+    public void recommend(@PathVariable("id") Long id) throws NotFoundException {
+
+        qualityService.recommend(id);
+
+    }
+
+    @RequestMapping(value = "/books/{id}/passcounts", method = RequestMethod.PUT)
+    @ResponseBody
+    public void passIncreased(@PathVariable("id") Long id) throws NotFoundException {
+
+        qualityService.passCountIncrease(id);
+
+    }
+
+    @RequestMapping(value = "/books/{id}/testcounts", method = RequestMethod.PUT)
+    @ResponseBody
+    public void testIncreased(@PathVariable("id") Long id) throws NotFoundException {
+
+        qualityService.testCountIncrease(id);
+
+    }
+
+
 }
