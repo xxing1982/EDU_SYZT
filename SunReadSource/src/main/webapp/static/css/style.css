@@ -3,16 +3,16 @@ body
 {
 }
 /*change placeholder color*/
-input::-webkit-input-placeholder {
+.navbar .input-group input::-webkit-input-placeholder {
 color: #FFFFFF !important; /* WebKit browsers */
 }
-input:-moz-placeholder {
+.navbar .input-group input:-moz-placeholder {
 color: #FFFFFF !important; /* Mozilla Firefox 4 to 18 */
 }
-input::-moz-placeholder {
+.navbar .input-group input::-moz-placeholder {
 color: #FFFFFF !important; /* Mozilla Firefox 19+ */
 }
-input:-ms-input-placeholder {
+.navbar .input-group input:-ms-input-placeholder {
 color: #FFFFFF !important; /* Internet Explorer 10+ */
 }
 a:focus, input:focus
@@ -277,17 +277,17 @@ a:focus, input:focus
     background-color: #FFFCFA;
 }
 
-#readingCenter-bookshelf
+.readingCenter-right
 {
     background-color: #EAEAEA;
 }
 
-#myBookshelfTop
+.readingCenter-right-top
 {
     margin-top: 25px;
 }
 
-#myBookshelfTop #myBookshelf-button
+#myBookshelf-button
 {
     margin-top: -100px;
 }
@@ -314,7 +314,7 @@ a:focus, input:focus
     background-color: #FFAF25;
 }
 
-#myBookshelfBody
+.readingCenter-right-body
 {
     margin-top: 25px;
     border-radius:5px;
@@ -342,12 +342,12 @@ a:focus, input:focus
     text-align: center;
     cursor: pointer;
     padding: 15px 0px;
+    color:#000000;
 }
 
 .bookshelf-tab.myActive
 {    
     border-bottom: 2px #FFAF25 solid;
-    margin-bottom: -2px;
     color: #FFAF25;
 }
 
@@ -362,20 +362,20 @@ a:focus, input:focus
     margin-left:60%;
 }
 
-.btn-testTraining
+.btn-green
 {
     border: 1px #B6D023 solid;
     background-color: #FFFFFF;
     color: #B6D023;
 }
 
-.btn-testTraining:hover
+.btn-green:hover
 {
     background-color: #F0F0F0;
     color: #B6D023;
 }
 
-.btn-testTraining:focus
+.btn-green:focus
 {
     color: #B6D023;
     background-color: #F0F0F0;
@@ -392,7 +392,7 @@ a:focus, input:focus
     margin-bottom: 5px;
 }
 
-#myBookshelfBody-bottom
+.myBookshelfBody-bottom
 {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -400,8 +400,182 @@ a:focus, input:focus
     cursor: pointer;
 }
 
-#myBookshelfBody-bottom:hover
+.myBookshelfBody-bottom:hover
 {
     background-color: #EB9B00;
     color: #FFFFFF;
 }
+
+/*******************my note top*******************/
+
+.note-row
+{
+    border-bottom: 1px #DDD solid;
+}
+
+.book-row
+{
+    margin-top: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.book-row-left
+{
+    text-align: center;
+    font-size: 13px;
+    font-weight: 900;
+    margin-left: 10px;
+}
+
+.book-row-left div:last-child
+{
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.book-row-right .title
+{
+    font-size: 14px;
+    padding-top: 15px;
+    font-weight: 600;
+}
+
+.book-row-right .time
+{
+    font-size: 11px;
+    padding-top: 5px;
+}
+
+.book-row-right .content
+{
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+.book-row-right .book-thumbnail
+{
+    margin-top: 10px;
+}
+
+.book-row-right .book-thumbnail div
+{
+    margin-right: 15px;
+}
+
+.book-row-right .msg
+{
+    cursor: pointer;
+    float: right;
+    margin-top: -15px;
+    font-size: 13px;
+}
+
+.msg-row
+{
+    margin-left: 25px;
+    margin-bottom: 30px;
+}
+
+.msg-row .reply
+{
+    padding-right: 0;
+}
+
+.msg-row .reply .total
+{
+    margin-top: 10px;
+    background-color: #E6E6E6;
+    border-bottom: 1px #FFFFFF solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.msg-row .reply .block
+{
+    background-color: #E6E6E6;
+}
+
+.msg-row .reply .person
+{
+    padding-top: 10px;
+    color: #7C7C7C;
+}
+
+.msg-row .reply .content
+{
+    padding-top: 7px;
+    padding-bottom: 20px;
+}
+
+/*******************my note bottom*******************/
+
+/*******************find book top*******************/
+
+.readingCenter-right-body .find
+{
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px #DDD solid;
+}
+
+/*******************find book bottom*******************/
+
+/*******************quick search top*******************/
+
+.quickSearch .search, .advancedSearch .search
+{
+    margin-top: 10px;
+    padding-left: 20px;
+    width: 70%;
+    padding-bottom: 10px;
+    border-bottom: 1px #DDD solid;
+}
+
+.quickSearch .search input, .advancedSearch .search input
+{
+    border: 1px #FFAF25 solid;
+}
+
+.quickSearch .search span, .advancedSearch .search span
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #FFAF25;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.quickSearch .search span:hover, .advancedSearch .search span:hover
+{
+    background-color: #EB9B00;
+}
+
+.quickSearch .tip
+{
+    padding:15px;
+    border-bottom: 1px #DDD solid;
+}
+
+.quickSearch .multiple .title
+{
+    color: #087AB8;
+    font-size: 25px;
+    font-weight: 600;
+    padding-top: 70px;
+    padding-left: 50px;
+}
+
+.quickSearch .multiple .content
+{
+    padding-top: 15px;
+    padding-left: 50px;
+}
+
+.quickSearch .advert
+{
+    padding: 30px;
+}
+/*******************quick search bottom****************/
+
+/*******************quick search bottom****************/
