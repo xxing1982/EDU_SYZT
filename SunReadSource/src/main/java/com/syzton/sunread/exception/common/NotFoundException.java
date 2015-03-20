@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * show the hints.
  */
 
-public class SomethingNotFoundException extends RuntimeException {
+public class NotFoundException extends RuntimeException {
 
 	/**
 	 * Unique ID for Serialized object
 	 */
 	private static final long serialVersionUID = -8790211652911971729L;
 
-	public SomethingNotFoundException(String item) {
+	public NotFoundException(String item) {
 		super(item + " not found");
 	}
 }

@@ -3,7 +3,7 @@ package com.syzton.sunread.service.tag;
 import java.util.List;
 
 import com.syzton.sunread.dto.tag.TagDTO;
-import com.syzton.sunread.exception.common.SomethingNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.exception.tag.TagNotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.Review;
@@ -43,9 +43,9 @@ public class TagRepositoryService implements TagService {
         return repository.save(tagModel);
     }
     
-    @Transactional(rollbackFor = {SomethingNotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Tag deleteById(Long id) throws SomethingNotFoundException {
+    public Tag deleteById(Long id) throws NotFoundException {
         LOGGER.debug("Deleting a tag entry with id: {}", id);
 
         Tag deleted = findById(id);
@@ -62,16 +62,16 @@ public class TagRepositoryService implements TagService {
         return repository.findAll();
     }
 
-    @Transactional(readOnly = true, rollbackFor = {SomethingNotFoundException.class})
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
     @Override
-    public Tag findById(Long id) throws SomethingNotFoundException {
+    public Tag findById(Long id) throws NotFoundException {
         LOGGER.debug("Finding a tag entry with id: {}", id);
 
         Tag found = repository.findOne(id);
         LOGGER.debug("Found tag entry: {}", found);
 
         if (found == null) {
-            throw new SomethingNotFoundException("Tag entry with id: " + id);
+            throw new NotFoundException("Tag entry with id: " + id);
         }
 
         return found;
