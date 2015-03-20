@@ -4,17 +4,12 @@ import java.util.List;
 
 import com.syzton.sunread.dto.tag.TagDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.exception.tag.TagNotFoundException;
-import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.book.Review;
 import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.repository.tag.TagRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,9 +72,9 @@ public class TagRepositoryService implements TagService {
         return found;
     }
 
-    @Transactional(rollbackFor = {TagNotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Tag update(TagDTO updated) throws TagNotFoundException {
+    public Tag update(TagDTO updated) throws NotFoundException {
         LOGGER.debug("Updating contact with information: {}", updated);
 
         Tag model = findById(updated.getId());

@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.note.CommentDTO;
-import com.syzton.sunread.dto.note.NoteDTO;
-import com.syzton.sunread.exception.note.CommentNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Comment;
-import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.service.note.CommentService;
 
 import javax.validation.Valid;
@@ -54,7 +52,7 @@ public class CommentController {
 
     @RequestMapping(value = "/api/comments/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public CommentDTO deleteById(@PathVariable("id") Long id) throws CommentNotFoundException {
+    public CommentDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a comment entry with id: {}", id);
 
         Comment deleted = service.deleteById(id);
@@ -76,7 +74,7 @@ public class CommentController {
 
     @RequestMapping(value = "/api/comments/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public CommentDTO update(@Valid @RequestBody CommentDTO dto, @PathVariable("id") Long commentId) throws CommentNotFoundException {
+    public CommentDTO update(@Valid @RequestBody CommentDTO dto, @PathVariable("id") Long commentId) throws NotFoundException {
         LOGGER.debug("Updating a comment entry with information: {}", dto);
 
         Comment updated = service.update(dto);

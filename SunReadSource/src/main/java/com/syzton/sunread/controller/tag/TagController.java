@@ -16,15 +16,13 @@ import org.springframework.web.bind.annotation.*;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.tag.TagDTO;
-import com.syzton.sunread.exception.tag.BookTagNotFoundException;
-import com.syzton.sunread.exception.tag.TagNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.Review;
 import com.syzton.sunread.model.tag.BookTag;
 import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.service.tag.TagService;
 
-import javassist.NotFoundException;
 
 import javax.validation.Valid;
 
@@ -59,7 +57,7 @@ public class TagController {
 
     @RequestMapping(value = "/api/tags/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public TagDTO deleteById(@PathVariable("id") Long id) throws TagNotFoundException {
+    public TagDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a tag entry with id: {}", id);
 
         Tag deleted = service.deleteById(id);
@@ -81,7 +79,7 @@ public class TagController {
     
     @RequestMapping(value = "/api/tags/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public TagDTO update(@Valid @RequestBody TagDTO dto, @PathVariable("id") Long tagId) throws TagNotFoundException {
+    public TagDTO update(@Valid @RequestBody TagDTO dto, @PathVariable("id") Long tagId) throws NotFoundException {
         LOGGER.debug("Updating a tag entry with information: {}", dto);
 
         Tag updated = service.update(dto);

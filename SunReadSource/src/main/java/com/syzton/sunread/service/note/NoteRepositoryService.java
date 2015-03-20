@@ -3,13 +3,13 @@ package com.syzton.sunread.service.note;
 import java.util.List;
 
 import com.syzton.sunread.dto.note.NoteDTO;
-import com.syzton.sunread.exception.note.NoteNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.note.Note;
-import com.syzton.sunread.model.tag.BookTag;
-import com.syzton.sunread.model.tag.Tag;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.note.NoteRepository;
+import com.syzton.sunread.repository.user.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +42,13 @@ public class NoteRepositoryService implements NoteService {
         this.bookRepository = bookRepository;
     }
 
+    private UserRepository userRepository;
+
+    @Autowired
+    public void UserRepositoryService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     
     @Override
     public Note add(NoteDTO added, Long bookId) {
@@ -55,9 +62,9 @@ public class NoteRepositoryService implements NoteService {
         return repository.save(noteModel);
     }
     
-    @Transactional(rollbackFor = {NoteNotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Note deleteById(Long id) throws NoteNotFoundException {
+    public Note deleteById(Long id) throws NotFoundException {
         LOGGER.debug("Deleting a note entry with id: {}", id);
 
         Note deleted = findById(id);
@@ -74,24 +81,24 @@ public class NoteRepositoryService implements NoteService {
         return repository.findAll();
     }
 
-    @Transactional(readOnly = true, rollbackFor = {NoteNotFoundException.class})
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
     @Override
-    public Note findById(Long id) throws NoteNotFoundException {
+    public Note findById(Long id) throws NotFoundException {
         LOGGER.debug("Finding a note entry with id: {}", id);
 
         Note found = repository.findOne(id);
         LOGGER.debug("Found note entry: {}", found);
 
         if (found == null) {
-            throw new NoteNotFoundException("No note entry found with id: " + id);
+            throw new NotFoundException("No note entry found with id: " + id);
         }
 
         return found;
     }
 
-    @Transactional(rollbackFor = {NoteNotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Note update(NoteDTO updated) throws NoteNotFoundException {
+    public Note update(NoteDTO updated) throws NotFoundException {
         LOGGER.debug("Updating contact with information: {}", updated);
 
         Note model = findById(updated.getId());
@@ -108,6 +115,15 @@ public class NoteRepositoryService implements NoteService {
 
         Book book = bookRepository.findOne(bookId);
         Page<Note> notePage = repository.findByBook(book, pageable);
+        return notePage;
+    }
+
+    @Transactional
+    @Override 
+    public Page<Note> findByUserId(Pageable pageable, long userId) {
+
+        User user = userRepository.findOne(userId);
+        Page<Note> notePage = repository.findByUser(user, pageable);
         return notePage;
     }
 

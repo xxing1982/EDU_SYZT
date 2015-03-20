@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 
 import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.User;
 
 import javax.persistence.*;
 
@@ -29,6 +30,12 @@ public class Comment extends AbstractEntity {
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="note_id")
     private Note note;
+	
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+    @Basic(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+	private User user;
+    
     
     public Comment() {
 

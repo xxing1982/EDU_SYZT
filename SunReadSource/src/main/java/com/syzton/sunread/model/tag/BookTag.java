@@ -2,6 +2,7 @@ package com.syzton.sunread.model.tag;
 import com.syzton.sunread.dto.tag.BookTagDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.User;
 
 import javax.persistence.*;
 
@@ -25,6 +26,11 @@ public class BookTag extends AbstractEntity{
     @JoinColumn(name="tag_id")
 	private Tag tag;
 	
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+    @Basic(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+	private User user;
+    
 
     public BookTag() {
 

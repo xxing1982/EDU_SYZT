@@ -1,7 +1,10 @@
 package com.syzton.sunread.model.coinhistory;
 
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.User;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
+
 import javax.persistence.*;
 
 /**
@@ -24,10 +27,11 @@ public class CoinHistory extends AbstractEntity {
 	
 	public enum CoinFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER}
 	
-//  @OneToMany(cascade = CascadeType.ALL,mappedBy = "coinHistory")
-//  @Basic(fetch = FetchType.LAZY)
-//	private Set<BookCoinHistory> bookCoinHistorys;
-//
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+    @Basic(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+	private User user;
+    
 	
     public CoinHistory() {
 

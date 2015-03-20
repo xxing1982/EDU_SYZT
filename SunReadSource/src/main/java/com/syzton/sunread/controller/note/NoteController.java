@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.note.NoteDTO;
-import com.syzton.sunread.exception.note.NoteNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.model.tag.BookTag;
 import com.syzton.sunread.service.note.NoteService;
@@ -53,7 +53,7 @@ public class NoteController {
 
     @RequestMapping(value = "/api/notes/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public NoteDTO deleteById(@PathVariable("id") Long id) throws NoteNotFoundException {
+    public NoteDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a note entry with id: {}", id);
 
         Note deleted = service.deleteById(id);
@@ -75,7 +75,7 @@ public class NoteController {
 
     @RequestMapping(value = "/api/notes/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public NoteDTO update(@Valid @RequestBody NoteDTO dto, @PathVariable("id") Long noteId) throws NoteNotFoundException {
+    public NoteDTO update(@Valid @RequestBody NoteDTO dto, @PathVariable("id") Long noteId) throws NotFoundException {
         LOGGER.debug("Updating a note entry with information: {}", dto);
 
         Note updated = service.update(dto);
@@ -97,6 +97,23 @@ public class NoteController {
 		);
 		
         Page<Note> notePage = service.findByBookId(pageable, bookId);
+
+        return new PageResource<>(notePage, "page", "size");
+    }
+    
+    @RequestMapping(value = "/api/users/{userId}/notes", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Note> findNotesByUserId(@PathVariable("userId") long userId,
+										    	@RequestParam("page") int page,
+										        @RequestParam("size") int size,
+										        @RequestParam("sortBy") String sortBy) {
+		sortBy = sortBy == null ? "id" : sortBy;
+		
+		Pageable pageable = new PageRequest(
+				page, size, new Sort(sortBy)
+		);
+		
+        Page<Note> notePage = service.findByUserId(pageable, userId);
 
         return new PageResource<>(notePage, "page", "size");
     }

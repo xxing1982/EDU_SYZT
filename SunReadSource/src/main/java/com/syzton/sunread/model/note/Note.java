@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.User;
 
 import javax.persistence.*;
 
@@ -44,6 +45,12 @@ public class Note extends AbstractEntity{
 
     @Column(name="image",length = MAX_LENGTH_IMAGE)
     private String image;
+    
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+    @Basic(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+	private User user;
+    
     
     public Note() {
 

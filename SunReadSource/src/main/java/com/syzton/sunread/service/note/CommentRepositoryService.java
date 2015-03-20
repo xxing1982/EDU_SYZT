@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.note.CommentDTO;
-import com.syzton.sunread.exception.note.CommentNotFoundException;
-import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Comment;
 import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.repository.note.CommentRepository;
@@ -53,9 +52,9 @@ public class CommentRepositoryService implements CommentService {
         return repository.save(commentModel);
     }
     
-    @Transactional(rollbackFor = {CommentNotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Comment deleteById(Long id) throws CommentNotFoundException {
+    public Comment deleteById(Long id) throws NotFoundException {
         LOGGER.debug("Deleting a comment entry with id: {}", id);
 
         Comment deleted = findById(id);
@@ -72,24 +71,24 @@ public class CommentRepositoryService implements CommentService {
         return repository.findAll();
     }
 
-    @Transactional(readOnly = true, rollbackFor = {CommentNotFoundException.class})
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
     @Override
-    public Comment findById(Long id) throws CommentNotFoundException {
+    public Comment findById(Long id) throws NotFoundException {
         LOGGER.debug("Finding a comment entry with id: {}", id);
 
         Comment found = repository.findOne(id);
         LOGGER.debug("Found comment entry: {}", found);
 
         if (found == null) {
-            throw new CommentNotFoundException("No comment entry found with id: " + id);
+            throw new NotFoundException("No comment entry found with id: " + id);
         }
 
         return found;
     }
 
-    @Transactional(rollbackFor = {CommentNotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Comment update(CommentDTO updated) throws CommentNotFoundException {
+    public Comment update(CommentDTO updated) throws NotFoundException {
         LOGGER.debug("Updating contact with information: {}", updated);
 
         Comment model = findById(updated.getId());

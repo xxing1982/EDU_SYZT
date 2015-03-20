@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.syzton.sunread.dto.note.CommentDTO;
-import com.syzton.sunread.exception.note.CommentNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Comment;
 
 /**
@@ -26,9 +26,9 @@ public interface CommentService {
      * Deletes a comment entry.
      * @param id    The id of the deleted comment entry.
      * @return  The deleted comment entry.
-     * @throws com.syzton.sunread.todo.exception.BookCommentNotFoundException    if no comment entry is found with the given id.
+     * @throws com.syzton.sunread.todo.exception.BookNotFoundException    if no comment entry is found with the given id.
      */
-    public Comment deleteById(Long id) throws CommentNotFoundException;
+    public Comment deleteById(Long id) throws NotFoundException;
 
     /**
      * Returns a list of comment entries.
@@ -40,17 +40,17 @@ public interface CommentService {
      * Finds a comment entry.
      * @param id    The id of the wanted comment entry.
      * @return  The found comment entry.
-     * @throws CommentNotFoundException    if no comment entry is found with the given id.
+     * @throws NotFoundException    if no comment entry is found with the given id.
      */
-    public Comment findById(Long id) throws CommentNotFoundException;
+    public Comment findById(Long id) throws NotFoundException;
 
     /**
      * Updates the information of a comment entry.
      * @param updated   The information of the updated comment entry.
      * @return  The updated comment entry.
-     * @throws CommentNotFoundException    If no comment entry is found with the given id.
+     * @throws NotFoundException    If no comment entry is found with the given id.
      */
-    public Comment update(CommentDTO updated) throws CommentNotFoundException;
+    public Comment update(CommentDTO updated) throws NotFoundException;
 
 	public Page<Comment> findByNoteId(Pageable pageable, long noteId);
 

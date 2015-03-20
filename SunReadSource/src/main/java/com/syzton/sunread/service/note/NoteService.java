@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.syzton.sunread.dto.note.NoteDTO;
-import com.syzton.sunread.exception.note.NoteNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Note;
 
 /**
@@ -26,9 +26,9 @@ public interface NoteService {
      * Deletes a note entry.
      * @param id    The id of the deleted note entry.
      * @return  The deleted note entry.
-     * @throws com.syzton.sunread.todo.exception.BookNoteNotFoundException    if no note entry is found with the given id.
+     * @throws com.syzton.sunread.todo.exception.BookNotFoundException    if no note entry is found with the given id.
      */
-    public Note deleteById(Long id) throws NoteNotFoundException;
+    public Note deleteById(Long id) throws NotFoundException;
 
     /**
      * Returns a list of note entries.
@@ -40,19 +40,20 @@ public interface NoteService {
      * Finds a note entry.
      * @param id    The id of the wanted note entry.
      * @return  The found note entry.
-     * @throws NoteNotFoundException    if no note entry is found with the given id.
+     * @throws NotFoundException    if no note entry is found with the given id.
      */
-    public Note findById(Long id) throws NoteNotFoundException;
+    public Note findById(Long id) throws NotFoundException;
 
     /**
      * Updates the information of a note entry.
      * @param updated   The information of the updated note entry.
      * @return  The updated note entry.
-     * @throws NoteNotFoundException    If no note entry is found with the given id.
+     * @throws NotFoundException    If no note entry is found with the given id.
      */
-    public Note update(NoteDTO updated) throws NoteNotFoundException;
+    public Note update(NoteDTO updated) throws NotFoundException;
 
 	Page<Note> findByBookId(Pageable pageable, long bookId);
 
+	Page<Note> findByUserId(Pageable pageable, long userId);
 
 }
