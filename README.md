@@ -23,9 +23,12 @@
 * User Name:            Syzton2015
 * Password: 		    Syzton2015
 
-# 翻墙方法
+# ByPass CGW
 * 主程序：https://github.com/EiddleChen/shadowsocks-heroku
 * 绑定cdn加速：https://www.incapsula.com/
 * 转为http代理：http://www.wllog.net/2014/10/16/1042.html
 * windows版试用：http://chentycv.github.io/shadowsocks-heroku-win32.zip
 * 临时账户不保证一直能用：bvbwd.x.incapdns.net
+
+# Tech Reference
+* http://blog.jobbole.com/41233/
