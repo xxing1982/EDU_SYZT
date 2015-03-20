@@ -16,9 +16,9 @@ import javax.persistence.Table;
 /**
  * Created by jerry on 3/16/15.
  */
-@Entity
-@Table(name="parent")
-@DiscriminatorValue("P")
+//@Entity
+//@Table(name="parent")
+//@DiscriminatorValue("P")
 public class Parent extends User{
 
 }

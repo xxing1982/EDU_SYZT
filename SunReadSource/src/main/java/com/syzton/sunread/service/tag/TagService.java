@@ -3,6 +3,7 @@ package com.syzton.sunread.service.tag;
 import java.util.List;
 
 import com.syzton.sunread.dto.tag.TagDTO;
+import com.syzton.sunread.exception.common.SomethingNotFoundException;
 import com.syzton.sunread.exception.tag.TagNotFoundException;
 import com.syzton.sunread.model.tag.Tag;
 
@@ -25,7 +26,7 @@ public interface TagService {
      * @return  The deleted tag entry.
      * @throws com.syzton.sunread.exception.tag.BookTagNotFoundException    if no tag entry is found with the given id.
      */
-    public Tag deleteById(Long id) throws TagNotFoundException;
+    public Tag deleteById(Long id) throws SomethingNotFoundException;
 
     /**
      * Returns a list of tag entries.

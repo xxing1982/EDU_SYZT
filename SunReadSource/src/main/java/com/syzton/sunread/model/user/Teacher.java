@@ -7,9 +7,9 @@ import javax.persistence.Table;
 /**
  * Created by jerry on 3/16/15.
  */
-@Entity
-@Table(name="teacher")
-@DiscriminatorValue("T")
+//@Entity
+//@Table(name="teacher")
+//@DiscriminatorValue("T")
 public class Teacher extends User{
 
 }

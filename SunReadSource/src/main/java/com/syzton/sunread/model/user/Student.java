@@ -8,9 +8,9 @@ import javax.persistence.Table;
 /**
  * Created by jerry on 3/16/15.
  */
-@Entity
-@Table(name="student")
-@DiscriminatorValue("S")
+//@Entity
+//@Table(name="student")
+//@DiscriminatorValue("S")
 public class Student extends User{
 
     public static final int MAX_LENGTH_IDENTITYID = 16;
