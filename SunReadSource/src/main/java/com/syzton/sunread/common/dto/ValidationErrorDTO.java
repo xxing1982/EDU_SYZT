@@ -1,4 +1,4 @@
-package com.syzton.sunread.todo.dto;
+package com.syzton.sunread.common.dto;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,7 +16,11 @@ public class NotFoundException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = -8790211652911971729L;
 
-	public NotFoundException(String item) {
-		super(item + " not found");
+	public NotFoundException(String msg) {
+		super(msg);
+	}
+
+	public NotFoundException(String msg, Exception e) {
+		super(msg + " because of " + e.toString());
 	}
 }

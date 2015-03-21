@@ -23,17 +23,28 @@ import java.util.Set;
 public class Book extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
-    public static final int MAX_LENGTH_NAME = 100;
-    public static final int MAX_LENGTH_ISBN = 20;
+    public static final int MAX_LENGTH_NAME = 50;
+    public static final int MAX_LENGTH_ISBN = 16;
+    public static final int MAX_LENGTH_AUTHOR = 10;
+    public static final int MAX_LENGTH_PUBLISHER = 50;
+
+    public static final int DEFAULT_POINT = 5;
+    public static final int DEFAULT_COIN = 5;
+    private static final String DEFAULT_PICTURE_URL = "ftp://default_book_picture" ;
 
 
-    @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
+    @Column(nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
 
     @JsonSerialize(using = DateSerializer.class)
-    @Column(name = "modification_time", nullable = false)
+    @Column(nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
+
+    @JsonSerialize(using = DateSerializer.class)
+    @Column(nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime publicationDate;
 
     @Column(name="name",nullable = false,length = MAX_LENGTH_NAME)
     private String name;
@@ -41,33 +52,29 @@ public class Book extends AbstractEntity{
     @Column(name ="isbn",unique = true,nullable = false,length = MAX_LENGTH_ISBN)
     private String isbn;
 
-    @Column(name = "avg_rate")
-    private int avgRate;
+
+    @Column(nullable = false,length = MAX_LENGTH_AUTHOR)
+    private String author;
+
+    @Column(nullable = false,length = MAX_LENGTH_PUBLISHER)
+    private String publisher;
+
+    private int point = DEFAULT_POINT;
+
+    private int coin = DEFAULT_COIN;
+
+    private String pictureUrl = DEFAULT_PICTURE_URL;
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
+    private BookExtra extra;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private Set<Review> reviews = new HashSet<>() ;
 
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "book",optional = false)
-    private Quality quality;
-
-    @ManyToMany
-    @JoinTable(name="book_category",
-            joinColumns = @JoinColumn(name="book_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="category_id", referencedColumnName="id")
-    )
-    private Set<Category> categories = new HashSet<>();
-
-
     public Book() {
 
     }
-
-    public static Builder getBuilder(String isbn,String name) {
-        return new Builder(isbn,name);
-    }
-
-
 
     public String getDescription() {
         return description;
@@ -94,17 +101,8 @@ public class Book extends AbstractEntity{
         return isbn;
     }
 
-
-    public int getAvgRate() {
-        return avgRate;
-    }
-
     public Set<Review> getReviews() {
         return reviews;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
     }
 
     public void setCreationTime(DateTime creationTime) {
@@ -119,34 +117,71 @@ public class Book extends AbstractEntity{
         this.isbn = isbn;
     }
 
-    public void setAvgRate(int avgRate) {
-        this.avgRate = avgRate;
-    }
-
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public String getAuthor() {
+        return author;
     }
 
-    public Quality getQuality() {
-        return quality;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setQuality(Quality quality) {
-        this.quality = quality;
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public BookExtra getExtra() {
+        return extra;
+    }
+
+    public void setExtra(BookExtra extra) {
+        this.extra = extra;
+    }
+
+    public DateTime getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(DateTime publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
     @PrePersist
     public void prePersist() {
         super.prePersist();
         DateTime now = DateTime.now();
-//        creationTime = now;
         modificationTime = now;
-        quality = new Quality();
-        quality.setBook(this);
 
     }
 
@@ -156,53 +191,4 @@ public class Book extends AbstractEntity{
     }
 
 
-    public static class Builder {
-
-        private Book built;
-
-        public Builder(String isbn,String name) {
-            built = new Book();
-            built.name = name;
-            built.isbn = isbn;
-        }
-
-        public Book build() {
-            return built;
-        }
-
-        public Builder description(String description) {
-            built.description = description;
-            return this;
-        }
-
-        public Builder reviews(Set<Review> reviews){
-            built.reviews = reviews;
-            return this;
-        }
-
-
-    }
-    public BookDTO createDTO() {
-        BookDTO dto = new BookDTO();
-        dto.setId(this.getId());
-        dto.setName(this.getName());
-        dto.setIsbn(this.getIsbn());
-        dto.setDescription(this.getDescription());
-        //  dto.setPublicationDate(new Date());
-        // dto.setReviewSet(model.getReviews());
-        return dto;
-    }
-    public BookDTO bookWithReview(){
-       BookDTO dto = this.createDTO();
-        Set<ReviewDTO> reviewDTOs = new HashSet<>();
-        for(Review review : this.getReviews()){
-            reviewDTOs.add(review.createDTO(review));
-        }
-        dto.setReviewSet(reviewDTOs);
-        return dto;
-    }
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
 }

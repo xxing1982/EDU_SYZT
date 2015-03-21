@@ -4,8 +4,8 @@ import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.service.book.BookService;
-import com.syzton.sunread.service.book.QualityService;
-import javassist.NotFoundException;
+import com.syzton.sunread.service.book.RecommendationService;
+import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +32,12 @@ public class BookController {
 
     private BookService bookService;
 
-    private QualityService qualityService;
+    private RecommendationService recommendationService;
 
     @Autowired
-    public BookController(BookService bookService, QualityService qualityService) {
+    public BookController(BookService bookService, RecommendationService qualityService) {
         this.bookService = bookService;
-        this.qualityService = qualityService;
+        this.recommendationService = qualityService;
     }
 
 
@@ -53,51 +53,55 @@ public class BookController {
         return added;
     }
 
-//    @RequestMapping(value = "/books", method = RequestMethod.GET)
-//    @ResponseBody
-//    public PageResource<Book> findAllBooks(@RequestParam("page") int page,
-//                            @RequestParam("size") int size,
-//                            @RequestParam("sortBy") String sortBy) throws NotFoundException {
-//        LOGGER.debug("Finding to-do entry with id: {}" );
-//        sortBy = sortBy==null?"id": sortBy;
-//        Pageable pageable = new PageRequest(
-//                page,size,new Sort(sortBy)
-//        );
-//        Page<Book> pageResult = bookService.findAll(pageable);
-//
-//        return new PageResource<>(pageResult,"page","size");
-//    }
-
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Book> findByCategories(@RequestParam(value = "categories",required = false) String categories,
-                                           @RequestParam("page") int page,
-                                           @RequestParam("size") int size,
-                                           @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
-        LOGGER.debug("Finding to-do entry with id: {}" );
+    public PageResource<Book> findByCategories(@RequestParam(value = "categories", required = false) String categories,
+                                               @RequestParam("page") int page,
+                                               @RequestParam("size") int size,
+                                               @RequestParam(value = "sortBy", required = false) String sortBy) {
+        LOGGER.debug("Finding to-do entry with id: {}");
 
-        sortBy = sortBy==null?"id": sortBy;
-        Pageable pageable = new PageRequest(
-                page,size,new Sort(sortBy)
-        );
-        Page<Book> pageResult ;
-        if(categories != null) {
+        Pageable pageable = getPageable(page, size, sortBy);
+        Page<Book> pageResult;
+        if (categories != null) {
             String[] cIds = categories.split(",");
             Set<Long> categoryIds = new HashSet<>();
             for (String id : cIds) {
                 categoryIds.add(Long.parseLong(id));
             }
-            pageResult = bookService.findByCategories(categoryIds,pageable);
-        }else{
+            pageResult = bookService.findByCategories(categoryIds, pageable);
+        } else {
             pageResult = bookService.findAll(pageable);
 
         }
 
-        return new PageResource<>(pageResult,"page","size");
+        return new PageResource<>(pageResult, "page", "size");
     }
+
+    private Pageable getPageable(int page, int size, String sortBy) {
+        sortBy = sortBy == null ? "id" : sortBy;
+        return new PageRequest(
+                page, size, new Sort(sortBy)
+        );
+    }
+
+    @RequestMapping(value = "/books/search", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<Book> quickSearch(@RequestParam("searchTerm") String searchTerm,
+                                  @RequestParam("page") int page,
+                                  @RequestParam("size") int size,
+                                  @RequestParam(value = "sortBy", required = false) String sortBy) {
+
+        Pageable pageable = getPageable(page, size, sortBy);
+
+        Page<Book> bookPage = bookService.quickSearch(searchTerm, pageable);
+
+        return bookPage;
+    }
+
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Book findById(@PathVariable("id") Long id) throws NotFoundException {
+    public Book findById(@PathVariable("id") Long id) {
         LOGGER.debug("Finding to-do entry with id: {}", id);
 
         Book found = bookService.findById(id);
@@ -108,7 +112,7 @@ public class BookController {
 
     @RequestMapping(value = "/books/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Book deleteById(@PathVariable("id") Long id) throws NotFoundException {
+    public Book deleteById(@PathVariable("id") Long id) {
         LOGGER.debug("Deleting a to-do entry with id: {}", id);
 
         Book deleted = bookService.deleteById(id);
@@ -119,27 +123,10 @@ public class BookController {
 
     @RequestMapping(value = "/books/{id}/recommends", method = RequestMethod.PUT)
     @ResponseBody
-    public void recommend(@PathVariable("id") Long id) throws NotFoundException {
+    public void recommend(@PathVariable("id") Long id) {
 
-        qualityService.recommend(id);
-
-    }
-
-    @RequestMapping(value = "/books/{id}/passcounts", method = RequestMethod.PUT)
-    @ResponseBody
-    public void passIncreased(@PathVariable("id") Long id) throws NotFoundException {
-
-        qualityService.passCountIncrease(id);
+        recommendationService.recommend(id);
 
     }
-
-    @RequestMapping(value = "/books/{id}/testcounts", method = RequestMethod.PUT)
-    @ResponseBody
-    public void testIncreased(@PathVariable("id") Long id) throws NotFoundException {
-
-        qualityService.testCountIncrease(id);
-
-    }
-
 
 }

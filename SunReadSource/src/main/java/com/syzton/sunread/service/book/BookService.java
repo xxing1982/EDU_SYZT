@@ -6,6 +6,7 @@ import com.syzton.sunread.model.book.Category;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Set;
 
@@ -16,11 +17,13 @@ public interface BookService {
 
     public BookDTO add(BookDTO bookDTO);
 
-    public Book findById(Long id) throws NotFoundException;
+    public Book findById(Long id);
 
-    public Book deleteById(Long id) throws NotFoundException;
+    public Book deleteById(Long id);
 
-    Page<Book> findAll(Pageable pageable) throws NotFoundException;
+    Page<Book> findAll(Pageable pageable);
 
-    Page<Book> findByCategories(Set<Long> categoryIds,Pageable pageable) throws NotFoundException;
+    Page<Book> findByCategories(Set<Long> categoryIds,Pageable pageable);
+
+    Page<Book> quickSearch(String searchTerm,Pageable pageable);
 }

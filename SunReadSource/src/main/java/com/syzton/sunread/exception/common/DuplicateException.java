@@ -13,7 +13,12 @@ public class DuplicateException extends DataIntegrityViolationException {
 	 */
 	private static final long serialVersionUID = 8810853019521983157L;
 
-	public DuplicateException(String item) {
-		super(item + " is duplicated");
+	public DuplicateException(String msg) {
+		super(msg);
+	}
+
+	public DuplicateException(String msg, Exception e) {
+		super(msg + " because of " + e.toString());
 	}
 }
+

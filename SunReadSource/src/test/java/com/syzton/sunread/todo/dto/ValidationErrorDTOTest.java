@@ -1,5 +1,7 @@
 package com.syzton.sunread.todo.dto;
 
+import com.syzton.sunread.common.dto.FieldErrorDTO;
+import com.syzton.sunread.common.dto.ValidationErrorDTO;
 import org.junit.Ignore;
 import org.junit.Test;
 

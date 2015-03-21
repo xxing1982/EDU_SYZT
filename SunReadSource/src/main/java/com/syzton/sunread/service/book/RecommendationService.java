@@ -11,12 +11,9 @@ import java.util.Set;
 /**
  * Created by jerry on 3/8/15.
  */
-public interface QualityService {
+public interface RecommendationService {
 
-    public void recommend(Long bookId) throws NotFoundException;
+    public void recommend(Long bookId);
 
-    public void passCountIncrease(Long bookId) throws NotFoundException;
-
-    public void testCountIncrease(Long bookId) throws NotFoundException;
 
 }

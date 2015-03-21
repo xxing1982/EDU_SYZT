@@ -1,6 +1,6 @@
 package com.syzton.sunread.todo.controller;
 
-import com.syzton.sunread.todo.dto.ValidationErrorDTO;
+import com.syzton.sunread.common.dto.ValidationErrorDTO;
 import com.syzton.sunread.todo.exception.TodoNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

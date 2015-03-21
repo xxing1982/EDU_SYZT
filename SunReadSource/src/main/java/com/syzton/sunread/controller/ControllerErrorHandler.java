@@ -3,7 +3,8 @@ package com.syzton.sunread.controller;
 import com.syzton.sunread.exception.common.DatabaseException;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.todo.dto.ValidationErrorDTO;
+import com.syzton.sunread.common.dto.ValidationErrorDTO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

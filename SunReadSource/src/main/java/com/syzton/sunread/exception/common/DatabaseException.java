@@ -7,8 +7,12 @@ public class DatabaseException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 4657491283614455649L;
 
-	public DatabaseException(String item) {
-		super(item + " encountered a database exception");
+	public DatabaseException(String msg) {
+		super(msg);
+	}
+
+	public DatabaseException(String msg, Exception e) {
+		super(msg + " because of " + e.toString());
 	}
 
 }

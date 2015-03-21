@@ -14,27 +14,19 @@ import java.util.Set;
 @Table(name="category")
 public class Category extends AbstractEntity{
 
-    public static final int MAX_LENGTH_NAME = 100;
+    public static final int MAX_LENGTH_NAME = 20;
+
+    private int value;
+
+    private CategoryType type;
 
     @Column(name="name",nullable = false,length = MAX_LENGTH_NAME)
     private String name;
-
 
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE},fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_id")
     @OrderColumn
     private Set<Category> children = new HashSet<>() ;
-
-
-//    @ManyToMany(cascade = CascadeType.REFRESH)
-//    @Basic(fetch = FetchType.LAZY)
-//    @JoinTable(name="book_category",
-//            joinColumns=
-//            @JoinColumn(name="category_id", referencedColumnName="id"),
-//            inverseJoinColumns=
-//            @JoinColumn(name="book_id", referencedColumnName="id")
-//    )
-//    private Set<Book> books = new HashSet<>();
 
 
     public Category() {
@@ -49,10 +41,6 @@ public class Category extends AbstractEntity{
         this.name = name;
     }
 
-//    public Set<Book> getBooks() {
-//        return books;
-//    }
-
     public Set<Category> getChildren() {
         return children;
     }
@@ -61,7 +49,21 @@ public class Category extends AbstractEntity{
         this.children = children;
     }
 
+    public int getValue() {
+        return value;
+    }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public CategoryType getType() {
+        return type;
+    }
+
+    public void setType(CategoryType type) {
+        this.type = type;
+    }
 
     @Override
     public String toString() {

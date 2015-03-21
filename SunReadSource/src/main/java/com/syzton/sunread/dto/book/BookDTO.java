@@ -1,11 +1,6 @@
 package com.syzton.sunread.dto.book;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.syzton.sunread.model.book.Review;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,16 +11,32 @@ public class BookDTO {
 
     private Long id;
 
-    @NotNull
     private String isbn;
 
-    @NotNull
     private String name;
+
+    private String pictureUrl;
 
     private String description;
 
-    private Date publicationDate;
+    private Long publicationDate;
 
+    private String author;
+
+    private String publisher;
+
+    private int point;
+
+    private int coin;
+
+    private int level;
+
+    private int language;
+
+    private int literature;
+
+    private int testType;
+    //TODO resource must be discuss first
     private Set<Long> categories = new HashSet<>();
 
     public Set<Long> getCategories() {
@@ -36,15 +47,13 @@ public class BookDTO {
         this.categories = categories;
     }
 
-    public Date getPublicationDate() {
+    public Long getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(Long publicationDate) {
         this.publicationDate = publicationDate;
     }
-
-    private Set<ReviewDTO> reviewSet = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -78,12 +87,75 @@ public class BookDTO {
         this.description = description;
     }
 
-    public Set<ReviewDTO> getReviewSet() {
-        return reviewSet;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setReviewSet(Set<ReviewDTO> reviewSet) {
-        this.reviewSet = reviewSet;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(int language) {
+        this.language = language;
+    }
+
+    public int getLiterature() {
+        return literature;
+    }
+
+    public void setLiterature(int literature) {
+        this.literature = literature;
+    }
+
+    public int getTestType() {
+        return testType;
+    }
+
+    public void setTestType(int testType) {
+        this.testType = testType;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
 }
