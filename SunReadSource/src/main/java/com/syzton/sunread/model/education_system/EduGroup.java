@@ -1,11 +1,14 @@
 package com.syzton.sunread.model.education_system;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.syzton.sunread.dto.education_system.EduGroupDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.HashSet;
+
 import java.util.Set;
 
 /**
@@ -14,18 +17,26 @@ import java.util.Set;
 @Entity
 @Table(name="edu_group")
 @JsonIgnoreProperties
-public class EduGroup extends EducationSys{
+public class EduGroup extends AbstractEntity{
 
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
+    public static final int MAX_LENGTH_NAME = 100;
+    
+    @Column(name ="name", nullable = false, length = MAX_LENGTH_NAME)
+    private String name; 
 
-    @Column(name = "modification_time", nullable = false)
+    @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
+    private String description;
+
+	@Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
 
-    @OneToMany(cascade = CascadeType.ALL)
+	//cascade = CascadeType.ALL,mappedBy = "note"
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="eduGroup")
     @Basic(fetch = FetchType.LAZY)
-    private Set<School> schools = new HashSet<>();
+    private Set<School> schools;
 
 
     public EduGroup() {
@@ -34,6 +45,19 @@ public class EduGroup extends EducationSys{
     public DateTime getModificationTime() {
         return modificationTime;
     }
+    
+	public String getName() {
+		return name;
+	}
+	
+    public static Builder getBuilder(String name) {
+    	return new Builder(name);
+		
+	}
+    
+    public String getDescription() {
+		return description;
+	}
 
 
     @PrePersist
@@ -52,26 +76,25 @@ public class EduGroup extends EducationSys{
         return schools;
     }
 
-    public void setSchools(Set<School> schools) {
-        this.schools = schools;
-    }
-
+//    public void setSchools(Set<School> schools) {
+//        this.schools = schools;
+//    }
+    
+	public void update(String name) {
+		// TODO Auto-generated method stub
+		this.name = name;			
+	}
 
     public static class Builder {
 
         private EduGroup built;
-
-        public Builder() {
-            // TODO Auto-generated constructor stub
-            built = new EduGroup();
-        }
 
         public EduGroup build() {
             return built;
         }
 
         public Builder(String name) {
-            built = new EduGroup();
+        	built = new EduGroup();
             built.name = name;
         }
 
@@ -80,6 +103,26 @@ public class EduGroup extends EducationSys{
             built.schools = schools;
             return this;
         }
-
+        
+		public Builder description(String description) {
+            built.description = description;
+            return this;
+        }
     }
+        
+        public EduGroupDTO createDTO() {
+            EduGroupDTO dto = new EduGroupDTO();
+            dto.setId(this.id);
+            dto.setName(this.getName());
+            dto.setDescription(this.getDescription());
+            return dto;
+    }
+        public EduGroupDTO createDTO(EduGroup model) {
+            EduGroupDTO dto = new EduGroupDTO();
+            dto.setId(model.id);
+            dto.setName(model.getName());
+            dto.setDescription(model.getDescription());
+            return dto;
+    }
+
 }

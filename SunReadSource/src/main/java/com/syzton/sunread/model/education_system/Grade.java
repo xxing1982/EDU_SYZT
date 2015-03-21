@@ -1,10 +1,13 @@
 package com.syzton.sunread.model.education_system;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.syzton.sunread.dto.education_system.GradeDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,10 +17,18 @@ import java.util.Set;
 @Entity
 @Table(name="grade")
 @JsonIgnoreProperties
-public class Grade extends EducationSys{
+public class Grade extends AbstractEntity{
 
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
+
+	public static final int MAX_LENGTH_NAME = 100;
+	
+    @Column(name ="name", nullable = false, length = MAX_LENGTH_NAME)
+    private String name; 
+
+    @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
+    private String description;
 
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -38,6 +49,19 @@ public class Grade extends EducationSys{
     public DateTime getModificationTime() {
         return modificationTime;
     }
+
+	public String getName() {
+		return name;
+	}
+	
+    public static Builder getBuilder(String name) {
+    	return new Builder(name);
+		
+	}
+    
+    public String getDescription() {
+		return description;
+	}
 
 
     @PrePersist
@@ -68,6 +92,10 @@ public class Grade extends EducationSys{
         this.clazzs = clazzs;
     }
 
+	public void update(String name) {
+		// TODO Auto-generated method stub
+		this.name = name;			
+	}
 
     public static class Builder {
 
@@ -82,6 +110,11 @@ public class Grade extends EducationSys{
             return built;
         }
 
+        public Builder(String name) {
+            built = new Grade();
+            built.name = name;
+        }
+        
         public Builder(String name,School school) {
             built = new Grade();
             built.name = name;
@@ -92,6 +125,19 @@ public class Grade extends EducationSys{
             built.clazzs = clazzs;
             return this;
         }
+        
+		public Builder description(String description) {
+            built.description = description;
+            return this;
+        }
 
     }
+    
+    public GradeDTO createDTO(Grade model) {
+        GradeDTO dto = new GradeDTO();
+        dto.setId(model.id);
+        dto.setName(model.getName());
+        dto.setDescription(model.getDescription());
+        return dto;
+}
 }

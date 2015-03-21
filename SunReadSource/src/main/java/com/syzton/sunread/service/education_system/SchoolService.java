@@ -1,7 +1,10 @@
 package com.syzton.sunread.service.education_system;
 
+import com.syzton.sunread.dto.education_system.SchoolDTO;
 import com.syzton.sunread.model.education_system.School;
+
 import javassist.NotFoundException;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,11 +13,11 @@ import org.springframework.data.domain.Pageable;
  */
 public interface SchoolService {
 
-    public School add(School School);
+    public School add(SchoolDTO School);
 
     public School deleteById(Long id) throws NotFoundException;
 
-    public School update(School updated) throws NotFoundException;
+    public School update(SchoolDTO updated) throws NotFoundException;
 
     public School findById(Long id) throws NotFoundException;
 

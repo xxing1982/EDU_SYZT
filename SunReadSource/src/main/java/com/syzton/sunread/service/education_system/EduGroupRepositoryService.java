@@ -1,5 +1,6 @@
 package com.syzton.sunread.service.education_system;
 
+import com.syzton.sunread.dto.education_system.EduGroupDTO;
 import com.syzton.sunread.exception.coinhistory.CoinHistoryNotFoundException;
 import com.syzton.sunread.model.education_system.Clazz;
 import com.syzton.sunread.model.education_system.EduGroup;
@@ -12,11 +13,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Morgan-Leon on 2015/3/16.
  */
+@Service
 public class EduGroupRepositoryService implements EduGroupService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EduGroupRepositoryService.class);
@@ -28,10 +31,12 @@ public class EduGroupRepositoryService implements EduGroupService {
     }
 
     @Override
-    public EduGroup add(EduGroup add) {
+    public EduGroup add(EduGroupDTO add) {
 
         LOGGER.debug("Adding a new clazz entry with information: {}", add);
-        return repository.save(add);
+        EduGroup model = EduGroup.getBuilder(add.getName())
+        		.description(add.getDescription()).build();   
+        return repository.save(model);
 
     }
 
@@ -49,7 +54,7 @@ public class EduGroupRepositoryService implements EduGroupService {
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public EduGroup update(EduGroup updated)throws  NotFoundException{
+    public EduGroup update(EduGroupDTO updated)throws  NotFoundException{
         LOGGER.debug("Updating contact with information: {}", updated);
 
         EduGroup model = findById(updated.getId());
@@ -80,6 +85,6 @@ public class EduGroupRepositoryService implements EduGroupService {
     @Override
     public Page<EduGroup> findAll(Pageable pageable) throws NotFoundException {
         LOGGER.debug("Finding all clazz entries");
-        return (Page<EduGroup>) repository.findAll();
+        return repository.findAll(pageable);
     }
 }
