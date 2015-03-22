@@ -1,4 +1,4 @@
-package com.syzton.sunread.controller.education_system;
+package com.syzton.sunread.controller.organization;
 
 import javassist.NotFoundException;
 
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.dto.education_system.ClazzDTO;
-import com.syzton.sunread.model.education_system.Clazz;
-import com.syzton.sunread.service.education_system.ClazzService;
+import com.syzton.sunread.dto.organization.ClazzDTO;
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.service.organization.ClazzService;
 
 @Controller
 @RequestMapping(value="/api")

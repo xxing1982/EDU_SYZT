@@ -1,4 +1,4 @@
-package com.syzton.sunread.model.education_system;
+package com.syzton.sunread.model.organization;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.common.AbstractEntity;

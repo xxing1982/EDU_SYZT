@@ -1,20 +1,17 @@
-package com.syzton.sunread.dto.education_system;
-
-import javax.validation.constraints.NotNull;
+package com.syzton.sunread.dto.organization;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 
-import com.syzton.sunread.model.education_system.Clazz;
+import com.syzton.sunread.model.organization.Grade;
 
-public class ClazzDTO {
+public class GradeDTO {
 	private Long id;
     
-	@Length(max = Clazz.MAX_LENGTH_DESCRIPTION)
+	@Length(max = Grade.MAX_LENGTH_DESCRIPTION)
     private String description;
 	
-	@NotNull
-	@Length(max = Clazz.MAX_LENGTH_NAME)
+	@Length(max = Grade.MAX_LENGTH_NAME)
 	private String name;
 	
 	public Long getId() {

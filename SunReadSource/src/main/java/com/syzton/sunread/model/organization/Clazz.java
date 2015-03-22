@@ -1,7 +1,7 @@
-package com.syzton.sunread.model.education_system;
+package com.syzton.sunread.model.organization;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.syzton.sunread.dto.education_system.SchoolDTO;
+import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 
 import org.hibernate.annotations.Type;
@@ -9,16 +9,13 @@ import org.joda.time.DateTime;
 
 import javax.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by Morgan-Leon on 2015/3/16.
  */
 @Entity
-@Table(name="school")
-@JsonIgnoreProperties
-public class School extends AbstractEntity{
+@Table(name="clazz")
+@JsonIgnoreProperties(value = {"grade"})
+public class Clazz extends  AbstractEntity{
 
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
@@ -26,44 +23,46 @@ public class School extends AbstractEntity{
     
     @Column(name ="name", nullable = false, length = MAX_LENGTH_NAME)
     private String name; 
-    
+
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
-
+    
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
 
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH },optional = false)
-    @Basic(fetch = FetchType.LAZY)
-    @JoinColumn(name = "edu_group")
-    private EduGroup eduGroup;
-    
-    @OneToMany(cascade = CascadeType.ALL,mappedBy ="school")
-    @Basic(fetch = FetchType.LAZY)
-    private Set<Grade> grades = new HashSet<>();
+    @JoinColumn(name = "grade")
+    private Grade grade;
 
-
-    public School() {
+    public Clazz() {
     }
 
     public DateTime getModificationTime() {
         return modificationTime;
     }
 
-
 	public String getName() {
 		return name;
 	}
 	
-	private String getDescription() {
-		return this.description;
-	}
-	
-    public static Builder getBuilder(String name, EduGroup eduGroup) {
-    	return new Builder(name, eduGroup);	
+    public static Builder getBuilder(String name, Grade grade) {
+    	return new Builder(name, grade);	
 	}
     
+    public String getDescription() {
+		return description;
+	}
+
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
     @PrePersist
     public void prePersist() {
         DateTime now = DateTime.now();
@@ -76,65 +75,47 @@ public class School extends AbstractEntity{
         modificationTime = DateTime.now();
     }
 
-    public EduGroup getEduGroup() {
-        return eduGroup;
-    }
-
-    public void setEduGroup(EduGroup eduGroup) {
-        this.eduGroup = eduGroup;
-    }
-
-    public Set<Grade> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(Set<Grade> grades) {
-        this.grades = grades;
-    }
-
 	public void update(String name) {
-		// TODO Auto-generated method stub
-		this.name = name;	
+		this.name = name;
 	}
-	
+
     public static class Builder {
 
-        private School built;
+        private Clazz built;
 
         public Builder() {
-            // TODO Auto-generated constructor stub
-            built = new School();
+            built = new Clazz();
         }
 
-        public School build() {
+        public Clazz build() {
             return built;
         }
-
-        public Builder(String name,EduGroup eduGroup) {
-            built = new School();
+        
+        public Builder(String name) {
+            built = new Clazz();
             built.name = name;
-            built.eduGroup = eduGroup;
         }
 
-        public Builder Grade(Set<Grade> grades) {
-            built.grades = grades;
-            return this;
+        public Builder(String name,Grade grade) {
+            built = new Clazz();
+            built.name = name;
+            built.grade = grade;
         }
 
 		public Builder description(String description) {
-            built.description = description;
-            return this;
-        }
-				
-	}
+			// TODO Auto-generated method stub
+			built.description = description;
+			return this;
+		}        
+    }
     
-    public SchoolDTO createDTO(School model) {
-        SchoolDTO dto = new SchoolDTO();
+    public ClazzDTO createDTO(Clazz model) {
+        ClazzDTO dto = new ClazzDTO();
         dto.setId(model.id);
         dto.setName(model.getName());
         dto.setDescription(model.getDescription());
         return dto;
     }
-
+    
 
 }

@@ -1,4 +1,4 @@
-package com.syzton.sunread.controller.education_system;
+package com.syzton.sunread.controller.organization;
 
 import javassist.NotFoundException;
 
@@ -20,81 +20,80 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.dto.education_system.SchoolDTO;
-import com.syzton.sunread.model.education_system.School;
-import com.syzton.sunread.service.education_system.SchoolService;
+import com.syzton.sunread.dto.organization.GradeDTO;
+import com.syzton.sunread.model.organization.Grade;
+import com.syzton.sunread.service.organization.GradeService;
 
 @Controller
 @RequestMapping(value="/api")
-public class SchoolController {
+public class GradeController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SchoolController.class);
-    private SchoolService service;
+    private static final Logger LOGGER = LoggerFactory.getLogger(GradeController.class);
+    private GradeService service;
     @Autowired
-    public  SchoolController(SchoolService service){
+    public  GradeController(GradeService service){
     	this.service = service;
     }
     
-//Add a School 
-    @RequestMapping(value = "/eduGroup/{edu_id}/school", method = RequestMethod.POST)
+//Add a Grade 
+    @RequestMapping(value = "/school/{id}/grade", method = RequestMethod.POST)
     @ResponseBody
-    public SchoolDTO add(@Valid @RequestBody SchoolDTO dto
-    		,@PathVariable("edu_id")Long eduId) {
-        LOGGER.debug("Adding a new edu group entry with information: {}", dto);
-        
-        School added = service.add(dto,eduId);
+    public GradeDTO add(@Valid @RequestBody GradeDTO dto
+    		,@PathVariable("id")Long id) {
+        LOGGER.debug("Adding a new edu group entry with information: {}", dto);        
+        Grade added = service.add(dto,id);
         LOGGER.debug("Added a edu group entry with information: {}", added);
               
        return added.createDTO(added);
     }
     
     
-//Delete a School
-    @RequestMapping(value = "/school/{id}", method = RequestMethod.DELETE)
+//Delete a Grade
+    @RequestMapping(value = "/grade/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public SchoolDTO deleteById(@Valid @PathVariable("id") Long id) throws NotFoundException {
-        LOGGER.debug("Deleting a School entry with id: {}", id);
+    public GradeDTO deleteById(@Valid @PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Deleting a Grade entry with id: {}", id);
 
-        School deleted = service.deleteById(id);
-        LOGGER.debug("Deleted School entry with information: {}", deleted);
+        Grade deleted = service.deleteById(id);
+        LOGGER.debug("Deleted Grade entry with information: {}", deleted);
 
         return deleted.createDTO(deleted);
     }
     
-//Update a School    
-    @RequestMapping(value = "/school/{id}", method = RequestMethod.PUT)
+//Update a Grade    
+    @RequestMapping(value = "/grade/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public SchoolDTO update(@Valid @RequestBody SchoolDTO dto,@PathVariable("id") long id) throws NotFoundException {
+    public GradeDTO update(@Valid @RequestBody GradeDTO dto,@PathVariable("id") long id) throws NotFoundException {
         LOGGER.debug("Adding a new book to shelf entry with information: {}", dto);
         
-        School updated = service.update(dto);
+        Grade updated = service.update(dto);
         LOGGER.debug("Added a to-do entry with information: {}", updated);
               
        return updated.createDTO(updated);
     } 
 
-//Get all Schools
-    @RequestMapping(value = "/schools", method = RequestMethod.GET)
+//Get all Grades
+    @RequestMapping(value = "/grades", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<School> findAll(
+    public PageResource<Grade> findAll(
     						@RequestParam("page") int page,
                             @RequestParam("size") int size,
                             @RequestParam("sortBy") String sortBy) throws NotFoundException {
         LOGGER.debug("Finding  edugroups entry " );
         sortBy = sortBy==null?"id": sortBy;
         Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
-        Page<School> pageResult = service.findAll(pageable);
+        Page<Grade> pageResult = service.findAll(pageable);
 
         return new PageResource<>(pageResult,"page","size");
     }
     
-//Get a School    
-    @RequestMapping(value = "/school/{id}", method = RequestMethod.GET)
+//Get a Grade    
+    @RequestMapping(value = "/grade/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public SchoolDTO findById(@PathVariable("id") Long id) throws NotFoundException {
+    public GradeDTO findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding a edugroup entry with id: {}", id);
 
-        School found = service.findById(id);
+        Grade found = service.findById(id);
         LOGGER.debug("Found edugroup entry with information: {}", found);
 
         return found.createDTO(found);

@@ -1,6 +1,7 @@
-package com.syzton.sunread.repository.education_system;
+package com.syzton.sunread.repository.organization;
 
-import com.syzton.sunread.model.education_system.EduGroup;
+import com.syzton.sunread.model.organization.EduGroup;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

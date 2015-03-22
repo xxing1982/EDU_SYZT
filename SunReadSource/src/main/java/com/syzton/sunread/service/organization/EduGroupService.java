@@ -1,7 +1,7 @@
-package com.syzton.sunread.service.education_system;
+package com.syzton.sunread.service.organization;
 
-import com.syzton.sunread.dto.education_system.EduGroupDTO;
-import com.syzton.sunread.model.education_system.EduGroup;
+import com.syzton.sunread.dto.organization.EduGroupDTO;
+import com.syzton.sunread.model.organization.EduGroup;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

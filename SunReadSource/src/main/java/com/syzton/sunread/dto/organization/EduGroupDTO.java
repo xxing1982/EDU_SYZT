@@ -1,9 +1,9 @@
-package com.syzton.sunread.dto.education_system;
+package com.syzton.sunread.dto.organization;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 
-import com.syzton.sunread.model.education_system.EduGroup;
+import com.syzton.sunread.model.organization.EduGroup;
 
 public class EduGroupDTO {
 	private Long id;

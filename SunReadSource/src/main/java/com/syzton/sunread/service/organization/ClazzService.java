@@ -1,7 +1,7 @@
-package com.syzton.sunread.service.education_system;
+package com.syzton.sunread.service.organization;
 
-import com.syzton.sunread.dto.education_system.ClazzDTO;
-import com.syzton.sunread.model.education_system.Clazz;
+import com.syzton.sunread.dto.organization.ClazzDTO;
+import com.syzton.sunread.model.organization.Clazz;
 
 import javassist.NotFoundException;
 

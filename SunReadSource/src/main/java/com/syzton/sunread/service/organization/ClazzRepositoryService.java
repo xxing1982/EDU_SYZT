@@ -1,10 +1,10 @@
-package com.syzton.sunread.service.education_system;
+package com.syzton.sunread.service.organization;
 
-import com.syzton.sunread.dto.education_system.ClazzDTO;
-import com.syzton.sunread.model.education_system.Clazz;
-import com.syzton.sunread.model.education_system.Grade;
-import com.syzton.sunread.repository.education_system.ClazzRepository;
-import com.syzton.sunread.repository.education_system.GradeRepository;
+import com.syzton.sunread.dto.organization.ClazzDTO;
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.organization.Grade;
+import com.syzton.sunread.repository.organization.ClazzRepository;
+import com.syzton.sunread.repository.organization.GradeRepository;
 
 import javassist.NotFoundException;
 

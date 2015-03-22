@@ -1,8 +1,8 @@
-package com.syzton.sunread.service.education_system;
+package com.syzton.sunread.service.organization;
 
-import com.syzton.sunread.dto.education_system.EduGroupDTO;
-import com.syzton.sunread.model.education_system.EduGroup;
-import com.syzton.sunread.repository.education_system.EduGroupRepository;
+import com.syzton.sunread.dto.organization.EduGroupDTO;
+import com.syzton.sunread.model.organization.EduGroup;
+import com.syzton.sunread.repository.organization.EduGroupRepository;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 
