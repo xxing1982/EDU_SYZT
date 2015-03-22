@@ -36,12 +36,13 @@ public class ClazzController {
     }
     
 //Add a Clazz 
-    @RequestMapping(value = "/clazz", method = RequestMethod.POST)
+    @RequestMapping(value = "/grade/{id}/clazz", method = RequestMethod.POST)
     @ResponseBody
-    public ClazzDTO add(@Valid @RequestBody ClazzDTO dto) {
+    public ClazzDTO add(@Valid @RequestBody ClazzDTO dto
+    		,@PathVariable("id")Long id) {
         LOGGER.debug("Adding a new edu group entry with information: {}", dto);
         
-        Clazz added = service.add(dto);
+        Clazz added = service.add(dto, id);
         LOGGER.debug("Added a edu group entry with information: {}", added);
               
        return added.createDTO(added);

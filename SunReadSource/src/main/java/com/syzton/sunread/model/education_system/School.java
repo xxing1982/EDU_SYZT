@@ -60,9 +60,8 @@ public class School extends AbstractEntity{
 		return this.description;
 	}
 	
-    public static Builder getBuilder(String name) {
-    	return new Builder(name);
-		
+    public static Builder getBuilder(String name, EduGroup eduGroup) {
+    	return new Builder(name, eduGroup);	
 	}
     
     @PrePersist
@@ -111,9 +110,10 @@ public class School extends AbstractEntity{
             return built;
         }
 
-        public Builder(String name) {
+        public Builder(String name,EduGroup eduGroup) {
             built = new School();
             built.name = name;
+            built.eduGroup = eduGroup;
         }
 
         public Builder Grade(Set<Grade> grades) {

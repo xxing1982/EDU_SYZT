@@ -54,8 +54,8 @@ public class Grade extends AbstractEntity{
 		return name;
 	}
 	
-    public static Builder getBuilder(String name) {
-    	return new Builder(name);
+    public static Builder getBuilder(String name, School school) {
+    	return new Builder(name, school);
 		
 	}
     

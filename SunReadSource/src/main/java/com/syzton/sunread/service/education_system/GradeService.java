@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface GradeService {
 
-    public Grade add(GradeDTO Grade);
+    public Grade add(GradeDTO Grade, Long id);
 
     public Grade deleteById(Long id) throws NotFoundException;
 

@@ -36,12 +36,12 @@ public class GradeController {
     }
     
 //Add a Grade 
-    @RequestMapping(value = "/grade", method = RequestMethod.POST)
+    @RequestMapping(value = "/school/{id}/grade", method = RequestMethod.POST)
     @ResponseBody
-    public GradeDTO add(@Valid @RequestBody GradeDTO dto) {
-        LOGGER.debug("Adding a new edu group entry with information: {}", dto);
-        
-        Grade added = service.add(dto);
+    public GradeDTO add(@Valid @RequestBody GradeDTO dto
+    		,@PathVariable("id")Long id) {
+        LOGGER.debug("Adding a new edu group entry with information: {}", dto);        
+        Grade added = service.add(dto,id);
         LOGGER.debug("Added a edu group entry with information: {}", added);
               
        return added.createDTO(added);

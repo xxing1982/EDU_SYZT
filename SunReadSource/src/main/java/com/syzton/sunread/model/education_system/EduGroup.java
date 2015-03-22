@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,7 +37,7 @@ public class EduGroup extends AbstractEntity{
 	//cascade = CascadeType.ALL,mappedBy = "note"
     @OneToMany(cascade = CascadeType.ALL, mappedBy="eduGroup")
     @Basic(fetch = FetchType.LAZY)
-    private Set<School> schools;
+    private Set<School> schools = new HashSet<School>();
 
 
     public EduGroup() {
@@ -48,6 +49,10 @@ public class EduGroup extends AbstractEntity{
     
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
     public static Builder getBuilder(String name) {
@@ -76,9 +81,9 @@ public class EduGroup extends AbstractEntity{
         return schools;
     }
 
-//    public void setSchools(Set<School> schools) {
-//        this.schools = schools;
-//    }
+    public void setSchools(Set<School> schools) {
+        this.schools = schools;
+    }
     
 	public void update(String name) {
 		// TODO Auto-generated method stub

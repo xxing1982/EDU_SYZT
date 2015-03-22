@@ -2,7 +2,9 @@ package com.syzton.sunread.service.education_system;
 
 import com.syzton.sunread.dto.education_system.ClazzDTO;
 import com.syzton.sunread.model.education_system.Clazz;
+import com.syzton.sunread.model.education_system.Grade;
 import com.syzton.sunread.repository.education_system.ClazzRepository;
+import com.syzton.sunread.repository.education_system.GradeRepository;
 
 import javassist.NotFoundException;
 
@@ -22,6 +24,7 @@ public class ClazzRepositoryService implements ClazzService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClazzRepositoryService.class);
     private ClazzRepository repository;
+    private GradeRepository gradeRepository;
 
     @Autowired
     public ClazzRepositoryService(ClazzRepository repository) {
@@ -29,10 +32,11 @@ public class ClazzRepositoryService implements ClazzService {
     }
 
     @Override
-    public Clazz add(ClazzDTO add) {
+    public Clazz add(ClazzDTO add, Long id) {
 
         LOGGER.debug("Adding a new clazz entry with information: {}", add);
-        Clazz model = Clazz.getBuilder(add.getName())
+        Grade grade = gradeRepository.findOne(id);
+        Clazz model = Clazz.getBuilder(add.getName(),grade)
         		.description(add.getDescription()).build();  
         
         return repository.save(model);

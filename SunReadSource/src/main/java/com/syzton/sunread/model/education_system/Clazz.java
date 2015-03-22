@@ -45,8 +45,8 @@ public class Clazz extends  AbstractEntity{
 		return name;
 	}
 	
-    public static Builder getBuilder(String name) {
-    	return new Builder(name);	
+    public static Builder getBuilder(String name, Grade grade) {
+    	return new Builder(name, grade);	
 	}
     
     public String getDescription() {

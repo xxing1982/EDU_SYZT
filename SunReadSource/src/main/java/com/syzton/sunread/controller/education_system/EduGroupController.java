@@ -78,7 +78,7 @@ public class EduGroupController {
     public PageResource<EduGroup> findAll(
     						@RequestParam("page") int page,
                             @RequestParam("size") int size,
-                            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+                            @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
         LOGGER.debug("Finding  edugroups entry " );
         sortBy = sortBy==null?"id": sortBy;
         Pageable pageable = new PageRequest(page,size,new Sort(sortBy));

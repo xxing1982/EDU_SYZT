@@ -1,7 +1,9 @@
 package com.syzton.sunread.service.education_system;
 
 import com.syzton.sunread.dto.education_system.SchoolDTO;
+import com.syzton.sunread.model.education_system.EduGroup;
 import com.syzton.sunread.model.education_system.School;
+import com.syzton.sunread.repository.education_system.EduGroupRepository;
 import com.syzton.sunread.repository.education_system.SchoolRepository;
 
 import javassist.NotFoundException;
@@ -22,6 +24,7 @@ public class SchoolRepositoryService implements SchoolService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SchoolRepositoryService.class);
     private SchoolRepository repository;
+    private EduGroupRepository eduRepository;
 
     @Autowired
     public SchoolRepositoryService(SchoolRepository repository) {
@@ -29,10 +32,11 @@ public class SchoolRepositoryService implements SchoolService {
     }
 
     @Override
-    public School add(SchoolDTO add) {
+    public School add(SchoolDTO add, Long eduId) {
 
         LOGGER.debug("Adding a new school entry with information: {}", add);
-        School school = School.getBuilder(add.getName())
+        EduGroup eduGroup =  eduRepository.findOne(eduId);
+        School school = School.getBuilder(add.getName(),eduGroup)
         		.description(add.getDescription()).build();
         return repository.save(school);
 

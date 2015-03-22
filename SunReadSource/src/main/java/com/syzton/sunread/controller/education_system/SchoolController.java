@@ -36,12 +36,13 @@ public class SchoolController {
     }
     
 //Add a School 
-    @RequestMapping(value = "/school", method = RequestMethod.POST)
+    @RequestMapping(value = "/eduGroup/{edu_id}/school", method = RequestMethod.POST)
     @ResponseBody
-    public SchoolDTO add(@Valid @RequestBody SchoolDTO dto) {
+    public SchoolDTO add(@Valid @RequestBody SchoolDTO dto
+    		,@PathVariable("edu_id")Long eduId) {
         LOGGER.debug("Adding a new edu group entry with information: {}", dto);
         
-        School added = service.add(dto);
+        School added = service.add(dto,eduId);
         LOGGER.debug("Added a edu group entry with information: {}", added);
               
        return added.createDTO(added);

@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface SchoolService {
 
-    public School add(SchoolDTO School);
+    public School add(SchoolDTO School,Long id);
 
     public School deleteById(Long id) throws NotFoundException;
 

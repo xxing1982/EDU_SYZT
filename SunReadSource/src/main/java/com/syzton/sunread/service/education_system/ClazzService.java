@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ClazzService {
 
-    public Clazz add(ClazzDTO Clazz);
+    public Clazz add(ClazzDTO Clazz, Long id);
 
     public Clazz deleteById(Long id) throws NotFoundException;
 

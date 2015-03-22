@@ -2,7 +2,9 @@ package com.syzton.sunread.service.education_system;
 
 import com.syzton.sunread.dto.education_system.GradeDTO;
 import com.syzton.sunread.model.education_system.Grade;
+import com.syzton.sunread.model.education_system.School;
 import com.syzton.sunread.repository.education_system.GradeRepository;
+import com.syzton.sunread.repository.education_system.SchoolRepository;
 
 import javassist.NotFoundException;
 
@@ -22,6 +24,7 @@ public class GradeRepositoryService implements GradeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GradeRepositoryService.class);
     private GradeRepository repository;
+    private SchoolRepository schRepository;
 
     @Autowired
     public GradeRepositoryService(GradeRepository repository) {
@@ -29,10 +32,11 @@ public class GradeRepositoryService implements GradeService {
     }
 
     @Override
-    public Grade add(GradeDTO add) {
+    public Grade add(GradeDTO add,Long id) {
 
         LOGGER.debug("Adding a new grade entry with information: {}", add);
-        Grade model = Grade.getBuilder(add.getName())
+         School school = schRepository.findOne(id);
+        Grade model = Grade.getBuilder(add.getName(),school)
         		.description(add.getDescription()).build();   
         return repository.save(model);
     }
