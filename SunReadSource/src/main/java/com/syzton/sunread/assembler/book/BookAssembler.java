@@ -32,7 +32,7 @@ public class BookAssembler {
         book.setExtra(extra);
         return book;
     }
-    
+
 
     public Book fromDTOtoBookWithExtra(final BookDTO bookDTO){
 
@@ -50,6 +50,8 @@ public class BookAssembler {
         book.setPoint(bookDTO.getPoint());
         book.setPublicationDate(new DateTime(bookDTO.getPublicationDate()));
         book.setPictureUrl(bookDTO.getPictureUrl());
+        book.setWordCount(bookDTO.getWordCount());
+        book.setPageCount(bookDTO.getPageCount());
         book.setExtra(extra);
 
 

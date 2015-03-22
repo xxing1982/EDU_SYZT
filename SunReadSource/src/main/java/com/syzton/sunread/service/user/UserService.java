@@ -1,19 +1,30 @@
 package com.syzton.sunread.service.user;
 
-import com.syzton.sunread.model.book.Category;
+import com.syzton.sunread.model.user.Parent;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
-import javassist.NotFoundException;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by jerry on 3/9/15.
  */
 public interface UserService {
 
-    public User findById(Long id) throws NotFoundException;
+    public User findById(Long id);
 
-    public User add(User user);
+    public User addUser(User user);
 
-    void deleteById(Long id) throws NotFoundException;;
+    void deleteById(Long id);
+
+    public Student addStudent(Student student);
+
+    public Student findByStudentId(Long id);
+
+    void deleteByStudentId(Long id);
+
+    public Parent addParent(Parent parent,Long studentId);
+
+    public Parent addChildren(Long id, Long userId);
+
+    public Parent findByParentId(Long id);
 
 }

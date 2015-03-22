@@ -25,6 +25,10 @@ public class BookDTO {
 
     private String publisher;
 
+    private int pageCount;
+
+    private int wordCount;
+
     private int point;
 
     private int coin;
@@ -157,5 +161,21 @@ public class BookDTO {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public int getWordCount() {
+        return wordCount;
+    }
+
+    public void setWordCount(int wordCount) {
+        this.wordCount = wordCount;
     }
 }

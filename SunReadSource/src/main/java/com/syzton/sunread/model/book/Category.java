@@ -18,7 +18,6 @@ public class Category extends AbstractEntity{
 
     private int value;
 
-    private CategoryType type;
 
     @Column(name="name",nullable = false,length = MAX_LENGTH_NAME)
     private String name;
@@ -57,13 +56,7 @@ public class Category extends AbstractEntity{
         this.value = value;
     }
 
-    public CategoryType getType() {
-        return type;
-    }
 
-    public void setType(CategoryType type) {
-        this.type = type;
-    }
 
     @Override
     public String toString() {

@@ -1,6 +1,8 @@
 package com.syzton.sunread.controller.user;
 
 import com.syzton.sunread.model.book.Category;
+import com.syzton.sunread.model.user.Parent;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.book.CategoryService;
 import com.syzton.sunread.service.user.UserService;
@@ -34,22 +36,60 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     @ResponseBody
     public User add(@Valid @RequestBody User user) {
-        return userService.add(user);
+        return userService.addUser(user);
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteById(@PathVariable("id") Long id) throws NotFoundException{
+    public void deleteById(@PathVariable("id") Long id){
 
         userService.deleteById(id);
 
     }
 
-
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
     @ResponseBody
-    public User findById(@PathVariable("id") Long id) throws NotFoundException{
+    public User findById(@PathVariable("id") Long id){
         return userService.findById(id);
     }
+
+    @RequestMapping(value = "/students", method = RequestMethod.POST)
+    @ResponseBody
+    public Student add(@Valid @RequestBody Student student) {
+        return userService.addStudent(student);
+    }
+
+
+    @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteByStudentId(@PathVariable("id") Long id){
+
+        userService.deleteByStudentId(id);
+
+    }
+
+    @RequestMapping(value = "/students/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Student findByStudentId(@PathVariable("id") Long id){
+        return userService.findByStudentId(id);
+    }
+    /*student add parent*/
+    //TODO Student role
+    @RequestMapping(value = "/students/{id}/parents", method = RequestMethod.POST)
+    @ResponseBody
+    public Parent add(@Valid @RequestBody Parent parent,@PathVariable("id") Long id) {
+        return userService.addParent(parent,id);
+    }
+
+    /*parent add student*/
+    //TODO Parent role
+    @RequestMapping(value = "/parents/{id}/students/{userId}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Parent addChildren(@PathVariable("id") Long id,@PathVariable("userId") Long userId) {
+
+        return userService.addChildren(id, userId);
+    }
+
+
 
 }

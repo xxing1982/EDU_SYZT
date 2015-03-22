@@ -59,6 +59,10 @@ public class Book extends AbstractEntity{
     @Column(nullable = false,length = MAX_LENGTH_PUBLISHER)
     private String publisher;
 
+    private int pageCount;
+
+    private int wordCount;
+
     private int point = DEFAULT_POINT;
 
     private int coin = DEFAULT_COIN;
@@ -87,7 +91,6 @@ public class Book extends AbstractEntity{
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public String getName() {
         return name;
@@ -175,6 +178,22 @@ public class Book extends AbstractEntity{
 
     public void setPublicationDate(DateTime publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public int getWordCount() {
+        return wordCount;
+    }
+
+    public void setWordCount(int wordCount) {
+        this.wordCount = wordCount;
     }
 
     @PrePersist

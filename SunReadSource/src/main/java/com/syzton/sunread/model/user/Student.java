@@ -8,28 +8,21 @@ import javax.persistence.Table;
 /**
  * Created by jerry on 3/16/15.
  */
-//@Entity
-//@Table(name="student")
-//@DiscriminatorValue("S")
+@Entity
+@Table(name="student")
+@DiscriminatorValue("S")
 public class Student extends User{
 
-    public static final int MAX_LENGTH_IDENTITYID = 16;
-    @Column(nullable = false,length = MAX_LENGTH_IDENTITYID)
-    private String identityId;
+    public static final int MAX_LENGTH_IDENTITY = 16;
+
+    @Column(length = MAX_LENGTH_IDENTITY)
+    private String identity;
 
     private int level ;
 
     private int coin;
 
-    private int experience;
-
-    public String getIdentityId() {
-        return identityId;
-    }
-
-    public void setIdentityId(String identityId) {
-        this.identityId = identityId;
-    }
+    private int point;
 
     public int getLevel() {
         return level;
@@ -47,12 +40,20 @@ public class Student extends User{
         this.coin = coin;
     }
 
-    public int getExperience() {
-        return experience;
+    public int getPoint() {
+        return point;
     }
 
-    public void setExperience(int experience) {
-        this.experience = experience;
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 }
 
