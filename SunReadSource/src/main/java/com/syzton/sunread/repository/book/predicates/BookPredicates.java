@@ -1,6 +1,6 @@
 package com.syzton.sunread.repository.book.predicates;
 
-import querydsl.com.syzton.sunread.model.book.QBook;
+import com.syzton.sunread.model.book.QBook;
 
 import com.mysema.query.types.Predicate;
 import com.syzton.sunread.model.book.BookExtra;
