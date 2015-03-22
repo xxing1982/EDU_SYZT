@@ -7,6 +7,7 @@ import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.repository.book.CategoryRepository;
 import org.joda.time.DateTime;
 
+import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,8 +32,7 @@ public class BookAssembler {
         book.setExtra(extra);
         return book;
     }
-
-
+    
 
     public Book fromDTOtoBookWithExtra(final BookDTO bookDTO){
 
