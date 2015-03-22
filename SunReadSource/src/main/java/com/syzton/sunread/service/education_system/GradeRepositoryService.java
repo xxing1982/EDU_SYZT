@@ -1,19 +1,23 @@
 package com.syzton.sunread.service.education_system;
 
-import com.syzton.sunread.exception.coinhistory.CoinHistoryNotFoundException;
+import com.syzton.sunread.dto.education_system.GradeDTO;
 import com.syzton.sunread.model.education_system.Grade;
 import com.syzton.sunread.repository.education_system.GradeRepository;
+
 import javassist.NotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Morgan-Leon on 2015/3/16.
  */
+@Service
 public class GradeRepositoryService implements GradeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GradeRepositoryService.class);
@@ -25,20 +29,21 @@ public class GradeRepositoryService implements GradeService {
     }
 
     @Override
-    public Grade add(Grade add) {
+    public Grade add(GradeDTO add) {
 
-        LOGGER.debug("Adding a new clazz entry with information: {}", add);
-        return repository.save(add);
-
+        LOGGER.debug("Adding a new grade entry with information: {}", add);
+        Grade model = Grade.getBuilder(add.getName())
+        		.description(add.getDescription()).build();   
+        return repository.save(model);
     }
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
     public Grade deleteById(Long id) throws NotFoundException {
-        LOGGER.debug("Deleting a clazz entry with id: {}", id);
+        LOGGER.debug("Deleting a grade entry with id: {}", id);
 
         Grade deleted = findById(id);
-        LOGGER.debug("Deleting clazz entry: {}", deleted);
+        LOGGER.debug("Deleting grade entry: {}", deleted);
 
         repository.delete(deleted);
         return deleted;
@@ -46,7 +51,7 @@ public class GradeRepositoryService implements GradeService {
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Grade update(Grade updated)throws  NotFoundException{
+    public Grade update(GradeDTO updated)throws  NotFoundException{
         LOGGER.debug("Updating contact with information: {}", updated);
 
         Grade model = findById(updated.getId());
@@ -59,24 +64,21 @@ public class GradeRepositoryService implements GradeService {
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
     @Override
     public Grade findById(Long id) throws NotFoundException {
-        LOGGER.debug("Finding a clazz entry with id: {}", id);
+        LOGGER.debug("Finding a grade entry with id: {}", id);
 
         Grade found = repository.findOne(id);
-        LOGGER.debug("Found clazz entry: {}", found);
+        LOGGER.debug("Found grade entry: {}", found);
 
         if (found == null) {
-            throw new NotFoundException("No clazz entry found with id: " + id);
+            throw new NotFoundException("No grade entry found with id: " + id);
         }
-
         return found;
     }
-
-
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
     public Page<Grade> findAll(Pageable pageable) throws NotFoundException {
-        LOGGER.debug("Finding all clazz entries");
-        return (Page<Grade>) repository.findAll();
+        LOGGER.debug("Finding all grade entries");
+        return repository.findAll(pageable);
     }
 }

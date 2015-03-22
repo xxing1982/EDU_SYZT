@@ -1,12 +1,14 @@
 package com.syzton.sunread.model.education_system;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.syzton.sunread.model.bookshelf.BookInShelf;
+import com.syzton.sunread.dto.education_system.SchoolDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.Collection;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,22 +18,30 @@ import java.util.Set;
 @Entity
 @Table(name="school")
 @JsonIgnoreProperties
-public class School extends EducationSys{
+public class School extends AbstractEntity{
 
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
+    public static final int MAX_LENGTH_NAME = 100;
+    
+    @Column(name ="name", nullable = false, length = MAX_LENGTH_NAME)
+    private String name; 
+    
+    @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
+    private String description;
 
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "school")
-    @Basic(fetch = FetchType.LAZY)
-    private Set<Grade> grades = new HashSet<>();
-
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH },optional = false)
+    @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name = "edu_group")
     private EduGroup eduGroup;
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy ="school")
+    @Basic(fetch = FetchType.LAZY)
+    private Set<Grade> grades = new HashSet<>();
 
 
     public School() {
@@ -42,6 +52,19 @@ public class School extends EducationSys{
     }
 
 
+	public String getName() {
+		return name;
+	}
+	
+	private String getDescription() {
+		return this.description;
+	}
+	
+    public static Builder getBuilder(String name) {
+    	return new Builder(name);
+		
+	}
+    
     @PrePersist
     public void prePersist() {
         DateTime now = DateTime.now();
@@ -70,7 +93,11 @@ public class School extends EducationSys{
         this.grades = grades;
     }
 
-
+	public void update(String name) {
+		// TODO Auto-generated method stub
+		this.name = name;	
+	}
+	
     public static class Builder {
 
         private School built;
@@ -84,10 +111,9 @@ public class School extends EducationSys{
             return built;
         }
 
-        public Builder(String name,EduGroup eduGroup) {
+        public Builder(String name) {
             built = new School();
             built.name = name;
-            built.eduGroup = eduGroup;
         }
 
         public Builder Grade(Set<Grade> grades) {
@@ -95,6 +121,20 @@ public class School extends EducationSys{
             return this;
         }
 
-
+		public Builder description(String description) {
+            built.description = description;
+            return this;
+        }
+				
+	}
+    
+    public SchoolDTO createDTO(School model) {
+        SchoolDTO dto = new SchoolDTO();
+        dto.setId(model.id);
+        dto.setName(model.getName());
+        dto.setDescription(model.getDescription());
+        return dto;
     }
+
+
 }
