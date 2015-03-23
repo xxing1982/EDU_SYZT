@@ -25,20 +25,16 @@ import org.joda.time.DateTime;
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.QuestionDTO;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 
 @Entity 
 @Table(name = "question")  
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "question_type", discriminatorType = DiscriminatorType.STRING, length = 30)   
-public abstract class Question {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+public abstract class Question extends AbstractEntity {
+	
 
-	@Column(name = "creation_time", nullable = false)
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	private DateTime creationTime;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name="book_id",nullable=false)
@@ -47,21 +43,6 @@ public abstract class Question {
 	@ManyToMany(mappedBy="questions",cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	private Set<Exam> exams;
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public DateTime getCreationTime() {
-		return creationTime;
-	}
-
-	public void setCreationTime(DateTime creationTime) {
-		this.creationTime = creationTime;
-	}
 
 	public Book getBook() {
 		return book;

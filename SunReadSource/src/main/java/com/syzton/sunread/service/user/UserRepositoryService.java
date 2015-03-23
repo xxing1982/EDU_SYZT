@@ -7,17 +7,26 @@ import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.user.ParentRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.springframework.util.Assert.notNull;
 
 /**
  * Created by jerry on 3/16/15.
  */
 @Service
-public class UserRepositoryService implements UserService{
+public class UserRepositoryService implements UserService,UserDetailsService{
 
     private UserRepository userRepository;
+    
+    private PasswordEncoder passwordEncoder;
 
     private StudentRepository studentRepository;
 
@@ -31,10 +40,8 @@ public class UserRepositoryService implements UserService{
     }
 
 
-
     @Override
     public User findById(Long id){
-
         User user = userRepository.findOne(id);
         if(user == null){
             throw new NotFoundException("user id =" + id +" does not exits...");
@@ -112,4 +119,33 @@ public class UserRepositoryService implements UserService{
 
         return parent;
     }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return locateUser(username);
+    }
+    
+    /**
+     * Locate the user and throw an exception if not found.
+     *
+     * @param username
+     * @return a User object is guaranteed.
+     * @throws AuthenticationException if user not located.
+     */
+    private User locateUser(final String username) {
+        notNull(username, "Mandatory argument 'username' missing.");
+        User user = userRepository.findByEmailAddress(username.toLowerCase());
+        if (user == null) {
+            LOG.debug("Credentials [{}] failed to locate a user.", username.toLowerCase());
+            throw new UsernameNotFoundException("failed to locate a user");
+        }
+        return user;
+    }
+
+	@Override
+	public User getSingleUser(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

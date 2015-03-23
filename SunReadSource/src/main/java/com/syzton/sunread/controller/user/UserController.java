@@ -6,12 +6,18 @@ import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.book.CategoryService;
 import com.syzton.sunread.service.user.UserService;
+
 import javassist.NotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.security.*;
 
 import javax.validation.Valid;
 
@@ -46,6 +52,14 @@ public class UserController {
         userService.deleteById(id);
 
     }
+
+    
+    @RequestMapping(value = "/tokens/{token}",method = RequestMethod.POST)
+    public Response verifyToken(@PathVariable("token") String token) {
+//        verificationTokenService.verify(token);
+//        return Response.ok().build();
+    }
+
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
     @ResponseBody

@@ -1,17 +1,39 @@
 package com.syzton.sunread.model.user;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.security.Role;
 import com.syzton.sunread.util.DateSerializer;
+
 import com.syzton.sunread.util.NumberUtil;
+
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.joda.time.DateTime;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
 import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 
 /**
  * Created by jerry on 3/16/15.
@@ -21,7 +43,7 @@ import java.util.UUID;
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.STRING,length=10)
 @DiscriminatorValue("U")
-public class User extends AbstractEntity{
+public class User extends AbstractEntity implements UserDetails{
 
     public static final int MAX_LENGTH_USERNAME = 15;
     public static final int MAX_LENGTH_PASSWORD = 16;
@@ -56,6 +78,11 @@ public class User extends AbstractEntity{
 
     @Enumerated(EnumType.STRING)
     private GenderType gender = GenderType.MALE;
+
+    
+    @ManyToMany(mappedBy="users",cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    private List<Role> roles = new ArrayList<Role>();
+
 
     private String email;
 
@@ -151,6 +178,7 @@ public class User extends AbstractEntity{
         this.email = email;
     }
 
+
     public String getUserId() {
         return userId;
     }
@@ -159,6 +187,52 @@ public class User extends AbstractEntity{
         this.userId = userId;
     }
 
+    
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+    
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		   for( Role role : this.getRoles() ){
+		      GrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
+		      authorities.add(authority);
+		   }
+		   return authorities;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	public List<Role> getRoles() {
+        return Collections.unmodifiableList(this.roles);
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+
+    public boolean hasRole(Role role) {
+        return (this.roles.contains(role));
+    }
 
 }
 

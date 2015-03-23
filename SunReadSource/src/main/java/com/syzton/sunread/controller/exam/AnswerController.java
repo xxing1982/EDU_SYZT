@@ -86,6 +86,22 @@ public class AnswerController {
          return new PageResource<>(pageResult,"page","size");
     }
     
+    //TODO wait user schoo module
+    @RequestMapping(value = "/answers/{userid}", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Answer> findOtherPersonAnswer(@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) {
+    	 LOGGER.debug("Finding answer entry with id: {}" );
+         sortBy = sortBy==null?"id": sortBy;
+         Pageable pageable = new PageRequest(
+                 page,size,new Sort(sortBy)
+         );
+         Page<Answer> pageResult = service.findAll(pageable);
+
+         return new PageResource<>(pageResult,"page","size");
+    }
+    
     @RequestMapping(value = "/subjectiveanswers", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<SubjectiveAnswer> findSubjectiveQuestions(@RequestParam("page") int page,
