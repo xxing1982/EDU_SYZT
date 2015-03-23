@@ -12,12 +12,16 @@ import java.util.Set;
 @DiscriminatorValue("P")
 public class Parent extends User{
 
+    private String workUnit;
+
+
     @ManyToMany
     @JoinTable(name="parent_student",
             joinColumns = @JoinColumn(name="parent_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="student_id", referencedColumnName="id")
     )
     private Set<Student> studentSet = new HashSet<>();
+
 
     public Set<Student> getStudentSet() {
         return studentSet;

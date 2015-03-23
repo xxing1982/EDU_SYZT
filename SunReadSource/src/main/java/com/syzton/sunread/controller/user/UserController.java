@@ -85,7 +85,7 @@ public class UserController {
     //TODO Parent role
     @RequestMapping(value = "/parents/{id}/students/{userId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Parent addChildren(@PathVariable("id") Long id,@PathVariable("userId") Long userId) {
+    public Parent addChildren(@PathVariable("id") Long id,@PathVariable("userId") String userId) {
 
         return userService.addChildren(id, userId);
     }

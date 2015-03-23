@@ -27,12 +27,13 @@ public class User extends AbstractEntity{
     public static final int MAX_LENGTH_PASSWORD = 16;
     public static final int MAX_LENGTH_NICKNAME = 15;
     public static final int MAX_LENGTH_PHONENUMBER = 11;
+    public static final int MAX_LENGTH_ADDRESS = 100;
 
     @NotEmpty
     @Column(nullable = false,length = MAX_LENGTH_USERNAME )
     private String username;
 
-    private long userId;
+    private String userId;
 
     @NotEmpty
     @Column(nullable = false,length = MAX_LENGTH_PASSWORD )
@@ -58,12 +59,17 @@ public class User extends AbstractEntity{
 
     private String email;
 
+    @Column(length = MAX_LENGTH_ADDRESS)
+    private String address;
+
+
+
 
 
     @PrePersist
     public void prePersist(){
         super.prePersist();
-        this.userId = NumberUtil.generateRandom16();
+        this.userId = String.valueOf(NumberUtil.generateRandom16());
     }
 
 
@@ -71,6 +77,14 @@ public class User extends AbstractEntity{
 
         MALE,FAMALE
 
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getUsername() {
@@ -137,11 +151,11 @@ public class User extends AbstractEntity{
         this.email = email;
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

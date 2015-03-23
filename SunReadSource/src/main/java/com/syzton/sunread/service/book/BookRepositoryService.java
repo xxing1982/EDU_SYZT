@@ -51,7 +51,6 @@ public class BookRepositoryService implements BookService {
         }
 
         BookAssembler assembler = new BookAssembler();
-
         Book book =  assembler.fromDTOtoEntireBook(bookDTO, categoryRepo);
 
         LOGGER.debug(book.toString());

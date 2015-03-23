@@ -23,7 +23,7 @@ public interface UserService {
 
     public Parent addParent(Parent parent,Long studentId);
 
-    public Parent addChildren(Long id, Long userId);
+    public Parent addChildren(Long id, String userId);
 
     public Parent findByParentId(Long id);
 

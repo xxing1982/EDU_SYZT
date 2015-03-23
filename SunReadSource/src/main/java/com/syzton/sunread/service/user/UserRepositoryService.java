@@ -89,7 +89,7 @@ public class UserRepositoryService implements UserService{
 
     @Transactional(rollbackFor = NotFoundException.class)
     @Override
-    public Parent addChildren(Long id, Long userId) {
+    public Parent addChildren(Long id, String userId) {
 
         Parent parent = this.findByParentId(id);
 
