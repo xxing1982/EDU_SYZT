@@ -4,10 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.util.DateSerializer;
 
 /*
  * @Date 2015-3-22
@@ -22,10 +25,14 @@ public class Semester extends AbstractEntity{
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
     
-    @Column(name = "start_time",nullable = false)
+    @JsonSerialize(using = DateSerializer.class)
+    @Column(name ="start_time",nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime startTime;
     
-    @Column(name = "end_time",nullable = false)
+    @JsonSerialize(using = DateSerializer.class)
+    @Column(name ="end_time",nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime endTime;
     
     public Semester() {
@@ -54,10 +61,9 @@ public class Semester extends AbstractEntity{
 	}
 
 	public void setEndTime(DateTime endTime) {
+
 		this.endTime = endTime;
 	}
-	
-
     
 
 }

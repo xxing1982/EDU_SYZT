@@ -3,6 +3,7 @@ package com.syzton.sunread.model.organization;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.syzton.sunread.dto.organization.SchoolDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.region.Region;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -38,6 +39,11 @@ public class School extends AbstractEntity{
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name = "edu_group")
     private EduGroup eduGroup;
+    
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH },optional = false)
+    @Basic(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region")
+    private Region region;
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy ="school")
     @Basic(fetch = FetchType.LAZY)
@@ -82,6 +88,14 @@ public class School extends AbstractEntity{
 
     public void setEduGroup(EduGroup eduGroup) {
         this.eduGroup = eduGroup;
+    }
+    
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setEduGroup(Region region) {
+        this.region = region;
     }
 
     public Set<Grade> getGrades() {
