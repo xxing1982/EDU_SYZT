@@ -1,13 +1,12 @@
 package com.syzton.sunread.repository.book.predicates;
 
+import com.mysema.query.BooleanBuilder;
+import com.syzton.sunread.dto.book.ConditionDTO;
 import com.syzton.sunread.model.book.QBook;
 
 import com.mysema.query.types.Predicate;
-import com.syzton.sunread.model.book.BookExtra;
-
 
 /**
- * @author Petri Kainulainen
  */
 public class BookPredicates {
 
@@ -19,17 +18,27 @@ public class BookPredicates {
                 .or(book.publisher.containsIgnoreCase(searchTerm)));
     }
 
-//    public static Predicate findByExtra(BookExtra extra){
-//        QBook book = QBook.book;
-//        Predicate predicate = book.;
-//        if(extra.getLevel()!= 0) // not all type
-//            predicate = book.extra.level.eq(extra.getLevel());
-//        else{
-////            predicate = book.extra;
-//        }
-//        return book.extra.level.eq(extra.getLevel())
-//                .andAnyOf(book.extra.language.eq(extra.getLanguage()))
-//                .andAnyOf(book.extra.testType.eq(extra.getTestType()))
-//                .andAnyOf(book.extra.literature.eq(extra.getLiterature()));
-//    }
+    public static Predicate findByCondition(ConditionDTO condition){
+        QBook book = QBook.book;
+
+        BooleanBuilder builder = new BooleanBuilder();
+        if(condition.getLevel()!=0){
+            builder.and(book.extra.level.eq(condition.getLevel()));
+        }
+
+        if(condition.getLanguage()!=0){
+            builder.and(book.extra.language.eq(condition.getLanguage()));
+        }
+
+        if(condition.getTestType()!=0){
+            builder.and(book.extra.testType.eq(condition.getTestType()));
+        }
+
+        if(condition.getLiterature()!=0){
+            builder.and(book.extra.literature.eq(condition.getLiterature()));
+        }
+
+
+        return builder.getValue();
+    }
 }

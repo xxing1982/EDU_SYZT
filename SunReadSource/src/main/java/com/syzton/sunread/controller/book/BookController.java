@@ -1,6 +1,7 @@
 package com.syzton.sunread.controller.book;
 
 import com.syzton.sunread.dto.book.BookDTO;
+import com.syzton.sunread.dto.book.ConditionDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.service.book.BookService;
@@ -95,6 +96,20 @@ public class BookController {
         Pageable pageable = getPageable(page, size, sortBy);
 
         Page<Book> bookPage = bookService.quickSearch(searchTerm, pageable);
+
+        return bookPage;
+    }
+
+    @RequestMapping(value = "/books/conditions", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<Book> searchByConditions(@RequestBody ConditionDTO condition,
+                                  @RequestParam("page") int page,
+                                  @RequestParam("size") int size,
+                                  @RequestParam(value = "sortBy", required = false) String sortBy) {
+
+        Pageable pageable = getPageable(page, size, sortBy);
+
+        Page<Book> bookPage = bookService.searchByCondition(condition, pageable);
 
         return bookPage;
     }

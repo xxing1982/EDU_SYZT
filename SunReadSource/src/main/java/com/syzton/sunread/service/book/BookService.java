@@ -1,6 +1,7 @@
 package com.syzton.sunread.service.book;
 
 import com.syzton.sunread.dto.book.BookDTO;
+import com.syzton.sunread.dto.book.ConditionDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.Category;
 import javassist.NotFoundException;
@@ -26,4 +27,6 @@ public interface BookService {
     Page<Book> findByCategories(Set<Long> categoryIds,Pageable pageable);
 
     Page<Book> quickSearch(String searchTerm,Pageable pageable);
+
+    Page<Book> searchByCondition(ConditionDTO condition,Pageable pageable);
 }

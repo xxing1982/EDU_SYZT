@@ -2,13 +2,13 @@ package com.syzton.sunread.service.book;
 
 import com.syzton.sunread.assembler.book.BookAssembler;
 import com.syzton.sunread.dto.book.BookDTO;
+import com.syzton.sunread.dto.book.ConditionDTO;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
-import com.syzton.sunread.repository.book.predicates.BookPredicates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.syzton.sunread.repository.book.predicates.BookPredicates.findByCondition;
+import static com.syzton.sunread.repository.book.predicates.BookPredicates.quickSearchContains;
 
 /**
  */
@@ -120,11 +123,21 @@ public class BookRepositoryService implements BookService {
     @Override
     public Page<Book> quickSearch(String searchTerm, Pageable pageable) {
 
-        Page<Book> bookPage = bookRepo.findAll(BookPredicates.quickSearchContains(searchTerm), pageable);
-        if(bookPage==null)
+        Page<Book> bookPage = bookRepo.findAll(quickSearchContains(searchTerm), pageable);
+        if(bookPage.getContent().size()==0)
             throw new NotFoundException("no satisfy book result with this search term : "+searchTerm);
         return bookPage;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Page<Book> searchByCondition(ConditionDTO condition,Pageable pageable){
 
+        Page<Book> bookPage = bookRepo.findAll(findByCondition(condition),pageable);
+
+        if(bookPage.getContent().size()==0)
+            throw new NotFoundException("no satisfy book result with this condition ="+ condition.toString());
+        return bookPage;
+
+    }
 }
