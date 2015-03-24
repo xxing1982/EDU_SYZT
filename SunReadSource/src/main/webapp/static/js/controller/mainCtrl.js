@@ -14,14 +14,10 @@ ctrls.controller("mainController", ['$scope', 'User', function ($scope, User) {
     	'treasure': '300',
     	'integral': '102'
     };
-    //test function to get data by id
- /*   var testData = User.get({id: 3474}, function(){
-    	console.log(testData);
-    });
     //test function to get data list
     var testDataList = User.query(function(){
         console.log(testDataList);
-    });*/
+    });
 
     //bookshelf
     $scope.bookshelf = {

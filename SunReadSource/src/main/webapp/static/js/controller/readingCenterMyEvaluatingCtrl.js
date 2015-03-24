@@ -1,5 +1,22 @@
 //readingCenterMyEvaluatingCtrl.js
 
 ctrls.controller("readingCenterMyEvaluatingController", ['$scope', function ($scope) {
-	$scope.name='阅读中心->我的评测';
+	function hideAllTabs(){
+		$scope.isCertification = false;
+		$scope.isWord = false;
+		$scope.isThinking = false;
+	}
+	$scope.showCertification = function(){
+		hideAllTabs();
+		$scope.isCertification = true;
+	}
+	$scope.showWord = function(){
+		hideAllTabs();
+		$scope.isWord = true;
+	}
+	$scope.showThinking = function(){
+		hideAllTabs();
+		$scope.isThinking = true;
+	}
+	$scope.isCertification = true;
 }]);

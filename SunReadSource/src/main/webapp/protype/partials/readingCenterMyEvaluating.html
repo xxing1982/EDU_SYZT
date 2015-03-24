@@ -1,1 +1,46 @@
-{{name}}
+<div class="readingCenter-right">
+	<div class="col-md-1"></div>
+	<div class="col-md-9">
+		<div class="readingCenter-right-top">
+			<img src="../static/img/myEvaluating.jpg" class="img-responsive img-rounded">
+		</div>
+		<div id="myEvaluating" class="readingCenter-right-body">
+			<div class="type row">
+				<div class="col-md-2 bookshelf-tab myActive" ng-click="showCertification()">认证测试</div>
+				<div class="col-md-2 bookshelf-tab" ng-click="showWord()">词汇训练</div>
+				<div class="col-md-2 bookshelf-tab" ng-click="showThinking()">思维训练</div>
+			</div>
+			<div ng-show="isCertification">
+				<div class="content row">
+					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-2 name">查理日记</div>
+					<div class="col-md-2 value">财富值：90</div>
+					<div class="col-md-2 value">积分：90</div>
+					<div class="col-md-2 value">正确率：80</div>
+					<div class="col-md-3 value">测试时间：2014.12.5</div>
+				</div>
+			</div>
+			<div ng-show="isWord">
+				<div class="content row">
+					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-2 name">查理日记</div>
+				</div>
+			</div>
+			<div ng-show="isThinking">
+				<div class="content row">
+					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-2 name">查理日记</div>
+					<div class="col-md-3 value count">问答题目数：9/10</div>
+					<div class="col-md-3 value"><span class="myAnswer">查看我的回答</span></div>
+					<div class="col-md-3 value">测试时间：2014.12.5</div>
+				</div>
+			</div>
+			<div class="bottom">更多加载中...</div>
+		</div>
+	</div>
+	<div class="col-md-1"></div>
+</div>
+<script>
+	SetBookList();
+	SetReadingCenterRightHeight();
+</script>

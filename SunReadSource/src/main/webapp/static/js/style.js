@@ -68,7 +68,6 @@ function SetReadingCenterRightHeight(){
 
 //reading center -> my bookshelf -> book list
 function SetBookList(){
-	$("#myBookshelfBody-top .bookshelf-tab").eq(0).addClass("myActive");
 	$(".bookshelf-tab").on("click", function(){
 		$(".bookshelf-tab.myActive").removeClass("myActive");
 		$(this).addClass("myActive");

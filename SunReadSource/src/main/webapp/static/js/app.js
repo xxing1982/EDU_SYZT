@@ -72,12 +72,6 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: 'partials/readingCenterMyEvaluating.html',
             controller: 'readingCenterMyEvaluatingController'
         })
-        //reading center -> myEvaluate
-        .state('readingCenter.myEvaluate',{
-            url: '/myEvaluate',
-            templateUrl: 'partials/readingCenterMyEvaluate.html',
-            controller: 'readingCenterMyEvaluateController'
-        })
         //reading sea
         .state('readingSea', {
             url: '/readingSea',
