@@ -1,17 +1,22 @@
 package com.syzton.sunread.dto.semester;
+
+import javax.validation.constraints.NotNull;
+
 /*
  * @Author Morgan-Leon 
  * @Date 2015-3-22
  */
 public class SemesterDTO {
 	
-	private Long id;
+	private long id;
 	
 	private String description;
 	
-	private long startTime;
+	@NotNull
+	private Long startTime;
 	
-	private long endTime;
+	@NotNull
+	private Long endTime;
 	
 	public Long getId() {
 		return id;
@@ -29,7 +34,7 @@ public class SemesterDTO {
 		this.description = description;
 	}
 
-	public long getStartTime() {
+	public Long getStartTime() {
 		return startTime;
 	}
 
@@ -37,7 +42,7 @@ public class SemesterDTO {
 		this.startTime = startTime;
 	}
 
-	public long getEndTime() {
+	public Long getEndTime() {
 		return endTime;
 	}
 

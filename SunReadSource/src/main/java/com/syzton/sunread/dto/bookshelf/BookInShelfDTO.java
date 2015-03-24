@@ -1,5 +1,7 @@
 package com.syzton.sunread.dto.bookshelf;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,10 +22,10 @@ public class BookInShelfDTO {
     @NotEmpty
     private Bookshelf bookshelf;
     
-    @NotEmpty
+    @NotNull
     private boolean isMandatory;
 
-    @NotEmpty
+    @NotNull
     private boolean isVerified;
 
     public BookInShelfDTO() {
