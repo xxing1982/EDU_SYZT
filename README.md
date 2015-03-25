@@ -1,4 +1,9 @@
 # EDU_SYZT
+# Live server
+*123.56.149.218
+*JAVA_HOME: /usr/local/java/jdk1.7.0_75
+*Tomcat7: /usr/local/tomcat7
+*mysql database: 123.56.149.218:3306/sunreading   username/password: sunreading/sunreading2015
 
 # UI Prototyping 
 * Note: It is ONLY used to avoid the leakage of user logics
