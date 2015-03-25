@@ -2,8 +2,6 @@ package com.syzton.sunread.dto.bookshelf;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
-import org.joda.time.Long;
-
 import com.syzton.sunread.model.bookshelf.BookShelfOperation;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
 import com.syzton.sunread.model.bookshelf.OperationType;
