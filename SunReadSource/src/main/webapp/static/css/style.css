@@ -471,6 +471,13 @@ a:focus, input:focus
     font-size: 13px;
 }
 
+.msg-buttom{
+    cursor: pointer;
+    position: absolute; 
+    bottom: 0;
+    right: 0;
+}
+
 .msg-row
 {
     margin-left: 25px;
