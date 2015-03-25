@@ -1,7 +1,5 @@
 package com.syzton.sunread.service.bookshelf;
 
-import javassist.NotFoundException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.bookshelf.BookShelfOperationDTO;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.bookshelf.BookShelfOperation;
 import com.syzton.sunread.repository.bookshelf.BookShelfOperationRepository;
 

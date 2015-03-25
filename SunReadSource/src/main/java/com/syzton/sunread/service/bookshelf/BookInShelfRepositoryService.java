@@ -1,9 +1,5 @@
 package com.syzton.sunread.service.bookshelf;
 
-import java.util.List;
-
-import javassist.NotFoundException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
@@ -87,7 +84,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         return bookPages;
     }
     
-    @Transactional
+    @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
 	public BookInShelf update(BookInShelfDTO updated,long id) throws NotFoundException {
 		// TODO Auto-generated method stub

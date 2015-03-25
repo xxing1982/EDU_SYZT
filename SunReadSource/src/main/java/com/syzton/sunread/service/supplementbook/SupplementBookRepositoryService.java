@@ -1,10 +1,9 @@
 package com.syzton.sunread.service.supplementbook;
 
 import com.syzton.sunread.dto.supplementbook.SupplementBookDTO;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.supplementbook.SupplementBook;
 import com.syzton.sunread.repository.supplementbook.SupplementBookRepository;
-
-import javassist.NotFoundException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

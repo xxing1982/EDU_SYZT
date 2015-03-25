@@ -1,12 +1,16 @@
 package com.syzton.sunread.model.bookshelf;
 
-import java.util.Collection;
+import java.util.Set;
+import java.util.HashSet;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.util.DateSerializer;
 
 import javax.persistence.*;
 
@@ -15,48 +19,28 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bookshelf")
-public class Bookshelf {
+public class Bookshelf extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(name = "creation_time", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime creationTime;
 
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
 
+    @JsonSerialize(using = DateSerializer.class)
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
-
-    /*
-     * ￼
-	"mapperBy" is used in embedded class. eg. person & person_detail.
-	"JoinColumn" is used in  reference.
-     */
-    //@OneToOne(optional = false, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "owner", referencedColumnName = "user_id", unique = true)
-    private long owner;
     
-
-    /*
-     *@OneToMany(mappedBy="order",cascade = CascadeType.ALL, fetch = FetchType.LAZY) 
-	 *@OrderBy(value = "id ASC") 
-     *
-     */
+    private long owner;
 
     @OneToMany( cascade = {CascadeType.MERGE,CascadeType.REFRESH},mappedBy = "bookshelf")
     @Basic(fetch = FetchType.EAGER)
-    private Collection<BookInShelf> booksInShelf;
+    private Set<BookInShelf> booksInShelf = new HashSet<BookInShelf>();
     
     @OneToMany( cascade = CascadeType.ALL, mappedBy = "bookshelf")
     @Basic(fetch = FetchType.LAZY)
-    private Collection<BookShelfOperation> bookShelfOprations ;
+    private Set<BookShelfOperation> bookShelfOprations ;
         
     
     public Bookshelf() {
@@ -68,33 +52,20 @@ public class Bookshelf {
 		
 	}
     //how to deal with  name  duplication ?
-//    public static Builder getBuilder(long owner,Collection<BookInShelf> booksInShelf, 
-//    		Collection<BookShelfOperation> bookShelfOperations) {
+//    public static Builder getBuilder(long owner,Set<BookInShelf> booksInShelf, 
+//    		Set<BookShelfOperation> bookShelfOperations) {
 //        return new Builder(owner,booksInShelf,bookShelfOperations);
 //    }
-    
-
-    public Long getId() {
-        return id;
-    }
-
-    public DateTime getCreationTime() {
-        return creationTime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 
     public DateTime getModificationTime() {
         return modificationTime;
     }
 
-    public Collection<BookInShelf> getBooksInShelf(){    	
+    public Set<BookInShelf> getBooksInShelf(){    	
     	return booksInShelf;
     }
     
-    public Collection<BookShelfOperation> getBookShelfOperations() {
+    public Set<BookShelfOperation> getBookShelfOperations() {
 		// TODO Auto-generated method stub
 		return bookShelfOprations;
 	}
@@ -137,12 +108,12 @@ public class Bookshelf {
             return this;
         }
         
-        public Builder booksInShelf(Collection<BookInShelf> bookInShelfs) {	
+        public Builder booksInShelf(Set<BookInShelf> bookInShelfs) {	
         	built.booksInShelf = bookInShelfs;
 			return this;
 		}
         
-        public Builder bookShelfOperations(Collection<BookShelfOperation> bookShelfOperations) {	
+        public Builder bookShelfOperations(Set<BookShelfOperation> bookShelfOperations) {	
         	built.bookShelfOprations = bookShelfOperations;
 			return this;
 		}
@@ -150,10 +121,11 @@ public class Bookshelf {
     
     public BookshelfDTO createDTO(Bookshelf model){
     	BookshelfDTO dto = new BookshelfDTO();
+    	dto.setId(model.getId());
+    	dto.setCreationTime(model.getCreationTime().getMillis());
+    	dto.setModificationTime(model.getModificationTime().getMillis());
     	dto.setOwner(model.getOwner());
-//    	dto.setBooksInShelf(model.getBooksInShelf());
-//    	dto.setBookShelfOperations(model.getBookShelfOperations());
-    	dto.setDescription(model.getDescription());
+    	dto.setDescription(model.description);
 		return dto;
     }
 

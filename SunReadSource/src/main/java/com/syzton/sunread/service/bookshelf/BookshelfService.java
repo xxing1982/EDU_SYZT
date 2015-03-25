@@ -1,9 +1,5 @@
 package com.syzton.sunread.service.bookshelf;
 
-import java.util.List;
-
-import javassist.NotFoundException;
-
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
 import com.syzton.sunread.exception.bookshelf.BookshelfNotFoundException;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
@@ -40,7 +36,7 @@ public interface BookshelfService {
      * @return  The found to-entry.
      * @throws BookshelfNotFoundException    if no bookshelf entry is found with the given id.
      */
-    public Bookshelf findById(Long id) throws NotFoundException;
+    public Bookshelf findById(Long id);
 
     /**
      * Updates the information of a bookshelf entry.
@@ -48,6 +44,6 @@ public interface BookshelfService {
      * @return  The updated bookshelf entry.
      * @throws BookshelfNotFoundException    If no bookshelf entry is found with the given id.
      */
-    public Bookshelf update(BookshelfDTO updated) throws NotFoundException;
+    public Bookshelf update(BookshelfDTO updated);
 
 }

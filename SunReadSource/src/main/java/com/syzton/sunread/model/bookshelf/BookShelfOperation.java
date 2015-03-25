@@ -131,10 +131,10 @@ public class BookShelfOperation {
     public BookShelfOperationDTO createDTO(BookShelfOperation model) {
 		BookShelfOperationDTO dto =new BookShelfOperationDTO();
 		dto.setBookshelf(model.getBookshelf());
-		dto.setCreationTime(model.getCreationTime());
+		dto.setCreationTime(model.getCreationTime().getMillis());
 		dto.setDescription(model.getDescription());
 		dto.setId(model.getId());
-		dto.setModificationTime(model.getModificationTime());
+		dto.setModificationTime(model.getModificationTime().getMillis());
 		dto.setOperationType(model.getOperationType());
 		
 		return dto;

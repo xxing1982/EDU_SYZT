@@ -1,9 +1,7 @@
 package com.syzton.sunread.model.bookshelf;
 
-import java.util.ArrayList;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.h2.command.dml.Update;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -168,6 +166,8 @@ public class BookInShelf {
     public BookInShelfDTO createDTO(BookInShelf model){
     	BookInShelfDTO dto = new BookInShelfDTO();
     	dto.setId(model.getId());
+    	dto.setCreateTime(model.getCreationTime().getMillis());
+    	dto.setModificationTime(model.getModificationTime().getMillis());
     	dto.setBookAttribute(model.getBookAttribute());
     	dto.setReadState(model.getReadState());
     	dto.setBook(model.getBook());
