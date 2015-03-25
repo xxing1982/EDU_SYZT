@@ -5,6 +5,12 @@
 * Access URL: http://8eyr00.axshare.com/
 * Password:   Beijing123
 
+# Aliyun Instances (Ubuntu 64 bits)
+* 123.56.149.218
+* 123.56.149.60
+* User Name: 			root
+* Password:				syzt2015KEY
+
 # Data structure
 * mySQL Access URL: 	123.57.139.159
 * User Name: 		    sunreading
