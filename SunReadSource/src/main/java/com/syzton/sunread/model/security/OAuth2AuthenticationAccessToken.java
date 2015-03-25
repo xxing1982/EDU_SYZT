@@ -1,18 +1,37 @@
 package com.syzton.sunread.model.security;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import com.syzton.sunread.model.common.AbstractEntity;
-
+@Entity
+@Table(name = "oauth_authentication_access_token")
 public class OAuth2AuthenticationAccessToken extends AbstractEntity {
 
-    private String tokenId;
+    @Column(name="token_id")
+	private String tokenId;
+    
+    @Transient
     private OAuth2AccessToken oAuth2AccessToken;
+    
+    @Column(name="authentication_id")
     private String authenticationId;
+    
+    @Column(name="user_name")
     private String userName;
+    
+    @Column(name="client_id")
     private String clientId;
+    
+    @Transient
     private OAuth2Authentication authentication;
+    
+    @Column(name="refresh_token")
     private String refreshToken;
 
     public OAuth2AuthenticationAccessToken() {

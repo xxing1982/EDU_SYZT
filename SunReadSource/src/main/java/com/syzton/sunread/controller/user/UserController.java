@@ -17,8 +17,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.security.*;
-
 import javax.validation.Valid;
 
 /**
@@ -55,10 +53,11 @@ public class UserController {
 
     
     @RequestMapping(value = "/tokens/{token}",method = RequestMethod.POST)
-    public Response verifyToken(@PathVariable("token") String token) {
+    public void verifyToken(@PathVariable("token") String token) {
 //        verificationTokenService.verify(token);
 //        return Response.ok().build();
     }
+
 
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)

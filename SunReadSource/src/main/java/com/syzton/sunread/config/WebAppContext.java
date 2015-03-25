@@ -3,6 +3,7 @@ package com.syzton.sunread.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -24,6 +25,11 @@ import java.util.Properties;
         "com.syzton.sunread.todo.controller",
         "com.syzton.sunread.controller"
 })
+@ImportResource({"classpath:security-configuration.xml",
+"classpath:authentication-managers.xml",
+"classpath:endpoint-configuration.xml",
+"classpath:oauth2-configuration.xml",
+"classpath:token-store.xml"})
 public class WebAppContext extends WebMvcConfigurerAdapter {
 
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";

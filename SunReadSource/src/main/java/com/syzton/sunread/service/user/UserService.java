@@ -26,4 +26,6 @@ public interface UserService {
     public Parent addChildren(Long id, String userId);
 
     public Parent findByParentId(Long id);
+    
+    public User getSingleUser(String userName);
 }

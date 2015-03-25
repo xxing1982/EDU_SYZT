@@ -135,10 +135,10 @@ public class UserRepositoryService implements UserService,UserDetailsService{
      */
     private User locateUser(final String username) {
         notNull(username, "Mandatory argument 'username' missing.");
-        User user = userRepository.findByEmailAddress(username.toLowerCase());
+        User user = userRepository.findByUsername(username.toLowerCase());
         if (user == null) {
-            LOG.debug("Credentials [{}] failed to locate a user.", username.toLowerCase());
-            throw new UsernameNotFoundException("failed to locate a user");
+//            LOG.debug("Credentials [{}] failed to locate a user.", username.toLowerCase());
+//            throw new UsernameNotFoundException("failed to locate a user");
         }
         return user;
     }
