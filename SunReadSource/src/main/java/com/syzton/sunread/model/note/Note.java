@@ -1,17 +1,10 @@
 package com.syzton.sunread.model.note;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.annotations.IndexColumn;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.user.User;
-
 import javax.persistence.*;
-
-import java.util.Collection;
 import java.util.Set;
 
 

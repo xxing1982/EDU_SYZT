@@ -1,7 +1,7 @@
 package com.syzton.sunread.service.coinhistory;
 
 import java.util.List;
-import com.syzton.sunread.exception.coinhistory.CoinHistoryNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 
 /**
@@ -23,7 +23,7 @@ public interface CoinHistoryService {
      * @return  The deleted coinHistory entry.
      * @throws com.syzton.sunread.exception.coinHistory.BookCoinHistoryNotFoundException    if no coinHistory entry is found with the given id.
      */
-    public CoinHistory deleteById(Long id) throws CoinHistoryNotFoundException;
+    public CoinHistory deleteById(Long id) throws NotFoundException;
 
     /**
      * Returns a list of coinHistory entries.
@@ -37,7 +37,7 @@ public interface CoinHistoryService {
      * @return  The found coinHistory entry.
      * @throws CoinHistoryNotFoundException    if no coinHistory entry is found with the given id.
      */
-    public CoinHistory findById(Long id) throws CoinHistoryNotFoundException;
+    public CoinHistory findById(Long id) throws NotFoundException;
 
     /**
      * Updates the information of a coinHistory entry.
@@ -45,7 +45,7 @@ public interface CoinHistoryService {
      * @return  The updated coinHistory entry.
      * @throws CoinHistoryNotFoundException    If no coinHistory entry is found with the given id.
      */
-    public CoinHistory update(CoinHistory updated) throws CoinHistoryNotFoundException;
+    public CoinHistory update(CoinHistory updated) throws NotFoundException;
 
 
 }

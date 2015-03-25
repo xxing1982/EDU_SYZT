@@ -1,16 +1,14 @@
 package com.syzton.sunread.controller.coinhistory;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.syzton.sunread.exception.coinhistory.CoinHistoryNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
-
 import javax.validation.Valid;
 
 
@@ -44,7 +42,7 @@ public class CoinHistoryController {
 
     @RequestMapping(value = "/api/coinhistories/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public CoinHistory deleteById(@PathVariable("id") Long id) throws CoinHistoryNotFoundException {
+    public CoinHistory deleteById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a coinhistory entry with id: {}", id);
 
         CoinHistory deleted = service.deleteById(id);
@@ -66,7 +64,7 @@ public class CoinHistoryController {
     
     @RequestMapping(value = "/api/coinhistories/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public CoinHistory update(@Valid @RequestBody CoinHistory updateEntity, @PathVariable("id") Long coinhistoryId) throws CoinHistoryNotFoundException {
+    public CoinHistory update(@Valid @RequestBody CoinHistory updateEntity, @PathVariable("id") Long coinhistoryId) throws NotFoundException {
         LOGGER.debug("Updating a coinhistory entry with information: {}", updateEntity);
 
         CoinHistory updated = service.update(updateEntity);

@@ -2,9 +2,7 @@ package com.syzton.sunread.dto.tag;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import com.syzton.sunread.model.tag.Tag;
-import com.syzton.sunread.todo.model.Todo;
 
 
 /**

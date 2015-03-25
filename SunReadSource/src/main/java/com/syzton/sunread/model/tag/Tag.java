@@ -1,11 +1,8 @@
 package com.syzton.sunread.model.tag;
 import com.syzton.sunread.dto.tag.TagDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
-
 import javax.persistence.*;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.util.Set;
 
 

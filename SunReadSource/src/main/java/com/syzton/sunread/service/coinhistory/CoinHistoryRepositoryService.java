@@ -1,7 +1,7 @@
 package com.syzton.sunread.service.coinhistory;
 
 import java.util.List;
-import com.syzton.sunread.exception.coinhistory.CoinHistoryNotFoundException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.repository.coinhistory.CoinHistoryRepository;
 import org.slf4j.Logger;
@@ -32,9 +32,9 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         return repository.save(add);
     }
     
-    @Transactional(rollbackFor = {CoinHistoryNotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public CoinHistory deleteById(Long id) throws CoinHistoryNotFoundException {
+    public CoinHistory deleteById(Long id) throws NotFoundException {
         LOGGER.debug("Deleting a coinHistory entry with id: {}", id);
 
         CoinHistory deleted = findById(id);
@@ -51,24 +51,24 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         return repository.findAll();
     }
 
-    @Transactional(readOnly = true, rollbackFor = {CoinHistoryNotFoundException.class})
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
     @Override
-    public CoinHistory findById(Long id) throws CoinHistoryNotFoundException {
+    public CoinHistory findById(Long id) throws NotFoundException {
         LOGGER.debug("Finding a coinHistory entry with id: {}", id);
 
         CoinHistory found = repository.findOne(id);
         LOGGER.debug("Found coinHistory entry: {}", found);
 
         if (found == null) {
-            throw new CoinHistoryNotFoundException("No coinHistory entry found with id: " + id);
+            throw new NotFoundException("No coinHistory entry found with id: " + id);
         }
 
         return found;
     }
 
-    @Transactional(rollbackFor = {CoinHistoryNotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public CoinHistory update(CoinHistory update) throws CoinHistoryNotFoundException {
+    public CoinHistory update(CoinHistory update) throws NotFoundException {
         LOGGER.debug("Updating contact with information: {}", update);
 
         CoinHistory model = findById(update.getId());

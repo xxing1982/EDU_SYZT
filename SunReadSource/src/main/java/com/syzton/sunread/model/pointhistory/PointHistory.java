@@ -1,4 +1,4 @@
-package com.syzton.sunread.model.coinhistory;
+package com.syzton.sunread.model.pointhistory;
 
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.user.User;
@@ -12,20 +12,20 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="coin_history")
-public class CoinHistory extends AbstractEntity {
+@Table(name="point_history")
+public class PointHistory extends AbstractEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
-	private CoinType coinType;
+	private PointType pointType;
 	
-	public enum CoinType{IN, OUT}
+	public enum PointType{IN, OUT}
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
-	private CoinFrom coinFrom;
+	private PointFrom pointFrom;
 	
-	public enum CoinFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER}
+	public enum PointFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER}
 	
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
     @Basic(fetch = FetchType.LAZY)
@@ -33,25 +33,25 @@ public class CoinHistory extends AbstractEntity {
 	private User user;
     
 	
-    public CoinHistory() {
+    public PointHistory() {
 
     }
 
-	public CoinType getCoinType() {
-		return coinType;
+	public PointType getPointType() {
+		return pointType;
 	}
 
-	public void setCoinType(CoinType coinType) {
-		this.coinType = coinType;
+	public void setPointType(PointType pointType) {
+		this.pointType = pointType;
 	}
     
 	
-	public CoinFrom getCoinFrom() {
-		return coinFrom;
+	public PointFrom getPointFrom() {
+		return pointFrom;
 	}
 
-	public void setCoinFrom(CoinFrom coinFrom) {
-		this.coinFrom = coinFrom;
+	public void setPointFrom(PointFrom pointFrom) {
+		this.pointFrom = pointFrom;
 	}
     
     @Override

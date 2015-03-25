@@ -1,7 +1,6 @@
 package com.syzton.sunread.service.tag;
 
 import java.util.List;
-
 import com.syzton.sunread.dto.tag.TagDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.tag.Tag;

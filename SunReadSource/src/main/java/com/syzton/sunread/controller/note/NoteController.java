@@ -17,7 +17,6 @@ import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Note;
-import com.syzton.sunread.model.tag.BookTag;
 import com.syzton.sunread.service.note.NoteService;
 
 import javax.validation.Valid;

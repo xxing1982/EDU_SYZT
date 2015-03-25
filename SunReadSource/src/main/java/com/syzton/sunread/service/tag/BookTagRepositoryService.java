@@ -1,17 +1,14 @@
 package com.syzton.sunread.service.tag;
 
 import java.util.List;
-
 import com.syzton.sunread.dto.tag.BookTagDTO;
 import com.syzton.sunread.exception.tag.BookTagNotFoundException;
 import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.book.Review;
 import com.syzton.sunread.model.tag.BookTag;
 import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.tag.BookTagRepository;
 import com.syzton.sunread.repository.tag.TagRepository;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

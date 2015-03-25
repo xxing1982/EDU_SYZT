@@ -44,13 +44,6 @@ public class BookTagController {
     public BookTagController(BookTagService service) {
         this.service = service;
     }
-
-    private BookService bookService;
-
-    @Autowired
-    public void BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
     
     @RequestMapping(value = "/api/booktags", method = RequestMethod.POST)
     @ResponseBody
@@ -102,23 +95,6 @@ public class BookTagController {
 
         return new PageResource<>(bookTagPage, "page", "size");
     }
-
-//	  Sample code for BookController
-//    @RequestMapping(value = "/api/booktags/{bookTagId}/books", method = RequestMethod.GET)
-//    @ResponseBody
-//    public BookDTO findBookByBookTagId(@PathVariable("bookTagId") long bookTagId) throws BookTagNotFoundException{
-//        Book book = service.findById(bookTagId).getBook();
-//        return book.createDTO(book);
-//    }
-    
-//    @RequestMapping(value = "/api/books/{bookId}/booktags", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<BookTag> findBookTagByBookId(@PathVariable("bookId") long bookId) throws NotFoundException{
-//    	
-//        Book book = bookService.findById(bookId);
-//        
-//        return book.createDTO(book);
-//    }
     
     private List<BookTagDTO> createDTOs(List<BookTag> models) {
         List<BookTagDTO> dtos = new ArrayList<BookTagDTO>();
