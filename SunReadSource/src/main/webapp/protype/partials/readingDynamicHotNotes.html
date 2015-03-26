@@ -1,0 +1,56 @@
+<div id="readingDynamicHotNotes-page">
+    <div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="readingCenter-right-top">
+			<img src="../static/img/myNote.jpg" class="img-responsive img-rounded">
+		</div>
+		<div class="readingCenter-right-body clear-padding">
+			<div class="note-row">
+				<div class="row book-row">
+					<div class="col-md-2 book-row-left">
+						<div><img src="../static/img/book.jpg" class="img-responsive"></div>
+						<div class="col-md-9 col-md-offset-5 mustRead" ng-show='showMust'>
+							<img src="../static/img/mustRead.jpg" class="img-responsive img-circle">
+						</div>
+						<div>查理日记</div>
+					</div>
+                    <div class="col-md-1"></div> 
+					<div class="col-md-9 book-row-right">
+						<div class="title">受益匪浅，很不错</div>
+						<div class="time">2014.06.20</div>
+						<div class="content">这是经受住时间考验的书，因为它追求的是真理，而不是利益。不得不为罗素那全面，深刻的剖析而折服。我觉得这本书填补了我这块的空白，学到了很多东西。我对“书”的理解应该是这样的。</div>
+						<div class="book-thumbnail">
+							<div class="col-md-1 clear-padding">
+								<img src="../static/img/note.jpg" class="img-responsive">
+							</div>
+							<div class="col-md-1 clear-padding">
+								<img src="../static/img/note.jpg" class="img-responsive">
+							</div>
+						</div>
+						<div class="msg-buttom" ng-click="IsShow()"><span class="glyphicon glyphicon-comment"></span> 6</div>
+					</div>
+				</div>
+				<div class="row msg-row" ng-show="showRepley">
+					<div class="col-md-9"><input class="form-control" placeholder="输入回复"></div>
+					<input class="btn btn-green col-md-2" type="button" value="发表评论">
+					<div class="clearfix"></div>
+					<div class="col-md-11 reply">
+						<div class="col-md-12 total">共1条评论</div>
+						<div class="col-md-12 block">
+							<div class="person">张逸轩&nbsp;&nbsp;&nbsp;三天前</div>
+							<div class="content">写的很好，哈哈哈</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            
+			<div class="bottom">更多加载中...</div>
+		</div>
+	</div>
+	<div class="col-md-1"></div>
+    </div>
+</div>
+<script>
+	SetReadingCenterRightHeight();
+</script>

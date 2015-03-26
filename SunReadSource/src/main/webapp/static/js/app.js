@@ -72,6 +72,18 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: 'partials/readingCenterMyEvaluating.html',
             controller: 'readingCenterMyEvaluatingController'
         })
+        //reading dynamic
+        .state('readingDynamic',{
+            url: '/readingDynamic',
+            templateUrl: 'partials/readingDynamic.html',
+            controller: 'readingDynamicController'
+        })
+        //reading dynamic -> HotNotes
+        .state('readingDynamicHotNotes',{
+            url: '/readingDynamicHotNotes',
+            templateUrl: 'partials/readingDynamicHotNotes.html',
+            controller: 'readingDynamicHotNotesController'
+        })
         //reading sea
         .state('readingSea', {
             url: '/readingSea',

@@ -434,6 +434,11 @@ a:focus, input:focus
     padding-bottom: 10px;
 }
 
+.book-row-right {
+    padding-left: 15px;
+    padding-right: 0;
+}
+
 .book-row-right .title
 {
     font-size: 14px;
@@ -648,3 +653,25 @@ a:focus, input:focus
 }
 
 /*******************my evaluate bottom****************/
+
+
+/*******************reading dynamic top****************/
+#readingDynamic-page {
+    padding-top: 50px;
+    background-color: #EAEAEA;
+    height: 100%;
+}
+
+
+/*******************reading dynamic buttom****************/
+
+/*******************reading dynamic top****************/
+#readingDynamicHotNotes-page {
+    padding-top: 50px;
+    background-color: #EAEAEA;
+    height: 100%;
+}
+
+
+/*******************reading dynamic buttom****************/
+
