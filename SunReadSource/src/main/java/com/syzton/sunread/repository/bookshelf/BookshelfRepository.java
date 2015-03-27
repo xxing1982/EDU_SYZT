@@ -2,7 +2,6 @@ package com.syzton.sunread.repository.bookshelf;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
 
 /**

@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
 
@@ -63,6 +64,10 @@ public class Bookshelf extends AbstractEntity{
 
     public Set<BookInShelf> getBooksInShelf(){    	
     	return booksInShelf;
+    }
+    
+    public void setBookInShelf(Set<BookInShelf> bookInShelfs){
+    	this.booksInShelf = bookInShelfs;
     }
     
     public Set<BookShelfOperation> getBookShelfOperations() {
@@ -121,14 +126,48 @@ public class Bookshelf extends AbstractEntity{
     
     public BookshelfDTO createDTO(Bookshelf model){
     	BookshelfDTO dto = new BookshelfDTO();
+    	int unreadMust = 0, unreadSelect = 0;
+    	int readMust = 0, readSelect = 0;
     	dto.setId(model.getId());
     	dto.setCreationTime(model.getCreationTime().getMillis());
     	dto.setModificationTime(model.getModificationTime().getMillis());
     	dto.setOwner(model.getOwner());
     	dto.setDescription(model.description);
+    	
+    	if (model.booksInShelf != null) {
+			for (BookInShelf bookInShelf:model.booksInShelf) {
+				//isVerified == true read
+				if (bookInShelf.getReadState() == true) {
+					//isMandatory == true must
+					if (bookInShelf.getBookAttribute() == true) 
+						readMust++;
+					//isMandatory == false Select
+					else 
+						readSelect++;
+				}
+				//isVerified == false unread
+				else {
+					//isMandatory == ture must
+					if (bookInShelf.getBookAttribute() == true) 
+						unreadMust++;
+					else
+						unreadSelect++;
+				}
+			}
+		}
+    	else {
+			throw new NotFoundException("no books in this bookShelf with id"+ model.getId());
+		}
+    	
+    	dto.setReadMust(readMust);
+    	dto.setReadSelect(readSelect);
+    	dto.setUnreadMust(unreadMust);
+    	dto.setUnreadSelect(unreadSelect);
+    	
 		return dto;
     }
 
+    
 
 
 	@Override

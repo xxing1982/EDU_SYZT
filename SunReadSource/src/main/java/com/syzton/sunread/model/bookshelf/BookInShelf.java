@@ -1,13 +1,13 @@
 package com.syzton.sunread.model.bookshelf;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
 
 import javax.persistence.*;
@@ -18,19 +18,9 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bookinshelf")
-public class BookInShelf {
+public class BookInShelf extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
-    public static final int MAX_LENGTH_NAME = 100;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @JsonSerialize(using = DateSerializer.class)
-    @Column(name = "creation_time", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime creationTime;
 
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
@@ -50,11 +40,11 @@ public class BookInShelf {
     
     //a bookshelf can`t have the same books
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
-    @JoinColumn(name = "bookshelf_id")
+    @JoinColumn(name = "bookshelf")
     private Bookshelf bookshelf;
 
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book")
     private Book book;
 
     public BookInShelf() {
@@ -65,17 +55,8 @@ public class BookInShelf {
         return new Builder();
     }
     public static Builder getBuilder(Book book ,Bookshelf bookshelf, boolean isMandatory,boolean isVerified) {
-        return new Builder();
+        return new Builder(book,bookshelf,isMandatory,isVerified);
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public DateTime getCreationTime() {
-        return creationTime;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -146,7 +127,7 @@ public class BookInShelf {
         }
         
         public Builder(Book book, Bookshelf bookshelf, 
-        		boolean isVerified, boolean isMandatory) {           
+        		 boolean isMandatory,boolean isVerified) {           
         	built = new BookInShelf();
         	built.book = book;
         	built.bookshelf = bookshelf;
@@ -167,11 +148,12 @@ public class BookInShelf {
     	BookInShelfDTO dto = new BookInShelfDTO();
     	dto.setId(model.getId());
     	dto.setCreateTime(model.getCreationTime().getMillis());
+    	dto.setDescription(model.getDescription());
     	dto.setModificationTime(model.getModificationTime().getMillis());
     	dto.setBookAttribute(model.getBookAttribute());
     	dto.setReadState(model.getReadState());
-    	dto.setBook(model.getBook());
-    	dto.setBookshelf(model.getBookShelf());
+    	dto.setBookIsbn(model.getBook().getIsbn());
+    	dto.setBookshelf(model.getBookShelf().getId());
     	return dto;
     }
     

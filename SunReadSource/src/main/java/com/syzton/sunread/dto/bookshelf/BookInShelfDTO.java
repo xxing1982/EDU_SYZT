@@ -4,11 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
-import com.syzton.sunread.model.bookshelf.Bookshelf;
 
 public class BookInShelfDTO {
     private Long id;
@@ -16,11 +12,9 @@ public class BookInShelfDTO {
     @Length(max = BookInShelf.MAX_LENGTH_DESCRIPTION)
     private String description;
 
-    @NotEmpty
-    private Book book;
+    private String bookIsbn;
     
-    @NotEmpty
-    private Bookshelf bookshelf;
+    private Long bookshelf;
     
     @NotNull
     private boolean isMandatory;
@@ -84,17 +78,17 @@ public class BookInShelfDTO {
 		this.isVerified = isVerified;
 	}
 
-    public Book getBook() {
-		return book;
+    public String getBookIsbn() {
+		return bookIsbn;
 	}
-    public void setBook(Book book) {
-		this.book = book;
+    public void setBookIsbn(String bookIsbn) {
+		this.bookIsbn = bookIsbn;
 	}
 
-	  public Bookshelf getBookshelf() {
+	  public Long getBookshelf() {
 	  return bookshelf;
 	}
-	  public void setBookshelf(Bookshelf bookshelf) {
+	  public void setBookshelf(Long bookshelf) {
 	  this.bookshelf = bookshelf;
 	}
 

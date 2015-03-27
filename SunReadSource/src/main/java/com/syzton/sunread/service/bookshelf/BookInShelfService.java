@@ -1,10 +1,9 @@
 package com.syzton.sunread.service.bookshelf;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import javassist.NotFoundException;
 
@@ -23,7 +22,7 @@ public interface BookInShelfService {
      * @param added The information of the added bookshelf entry.
      * @return  The added bookshelf entry.
      */
-    public BookInShelf add(BookInShelfDTO added,long id, long bookId );
+    public BookInShelf add(BookInShelfDTO added,Long id, Long bookId );
 
     /**
      * Deletes a bookshelf entry.
@@ -37,7 +36,13 @@ public interface BookInShelfService {
      * Returns a list of bookshelf entries.
      * @return
      */
-    public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id) throws NotFoundException;
+    public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id);
+    
+    /**
+     * Returns a list of bookshelf entries.
+     * @return
+     */
+    public Set<BookInShelf> findByBookshelfId(long id);
 
     /**
      * Finds a bookshelf entry.
@@ -53,6 +58,6 @@ public interface BookInShelfService {
      * @return  The updated bookshelf entry.
      * @throws BookInShelfNotFoundException    If no bookshelf entry is found with the given id.
      */
-    public BookInShelf update(BookInShelfDTO updated,long id) throws NotFoundException;
+    public BookInShelf update(BookInShelfDTO updated,long id);
 
 }

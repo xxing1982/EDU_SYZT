@@ -1,5 +1,9 @@
 package com.syzton.sunread.service.bookshelf;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,31 +34,43 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     private BookInShelfRepository repository;
     private BookshelfRepository bookshelfRepository;
     private BookRepository bookRepository;
+
     
     @Autowired
-    public BookInShelfRepositoryService(BookInShelfRepository repository) {
+    public BookInShelfRepositoryService(BookInShelfRepository repository
+    		,BookshelfRepository bookshelfRepository,BookRepository bookRepository) {
         this.repository = repository;
+        this.bookRepository = bookRepository;
+        this.bookshelfRepository = bookshelfRepository;
     }
     
-    @Transactional
+    @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
-	public BookInShelf add(BookInShelfDTO added, long id, long bookId) {
+	public BookInShelf add(BookInShelfDTO added, Long id, Long bookId) {
 		// TODO Auto-generated method stub
         LOGGER.debug("Adding a new Book entry with information: {}", added);
         
-        Bookshelf bookshelf = bookshelfRepository.findOne(id);
-        Book book = bookRepository.findOne(bookId);
+        Book book = new Book();
+        Bookshelf bookshelf = new Bookshelf();
+        book = bookRepository.findOne(bookId);
+        bookshelf = bookshelfRepository.findOne(id);
+        if (book == null) {
+			throw new NotFoundException("no book found with isbn :"+ book.getIsbn());
+		}
+        if (bookshelf == null) {
+			throw new NotFoundException("no bookshelf found with id :"+bookshelf.getId());
+		}
         BookInShelf bookInShelfModel = BookInShelf.getBuilder(book,bookshelf
         		,added.getBookAttribute(),added.getReadState())
         		.description(added.getDescription())
         		.build();
-             
-        return repository.save(bookInShelfModel);
+        BookInShelf model = repository.save(bookInShelfModel);
+        return model;
 	}
 	
 	@Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
 	@Override
-	public BookInShelf deleteById(long id) throws NotFoundException {
+	public BookInShelf deleteById(long id){
 		// TODO Auto-generated method stub
 		BookInShelf bookInShelf = repository.findOne(id);
 		repository.delete(bookInShelf);
@@ -63,7 +79,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
 	@Override
-	public BookInShelf findById(Long id) throws NotFoundException {
+	public BookInShelf findById(Long id)  {
         LOGGER.debug("Finding a bookinshelf entry with id: {}", id);
 		BookInShelf found = repository.findOne(id);
         LOGGER.debug("Found book entry: {}", found);
@@ -76,7 +92,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id) throws NotFoundException{
+    public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id) {
     	
     	Bookshelf bookshelf = bookshelfRepository.findOne(id);
         Page<BookInShelf> bookPages = repository.findByBookshelf(bookshelf,pageable);
@@ -86,7 +102,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     
     @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
-	public BookInShelf update(BookInShelfDTO updated,long id) throws NotFoundException {
+	public BookInShelf update(BookInShelfDTO updated,long id){
 		// TODO Auto-generated method stub
         LOGGER.debug("Adding a new Book entry with information: {}", updated);
         
@@ -96,6 +112,27 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         		,updated.getReadState());
         
         return bookInShelf;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.syzton.sunread.service.bookshelf.BookInShelfService#findByBookshelfId(long)
+	 */
+	@Override
+	public Set<BookInShelf> findByBookshelfId(long id) {
+		// TODO Auto-generated method stub
+		Bookshelf bookshelf = bookshelfRepository.findOne(id);
+		if (bookshelf == null) {
+			throw new NotFoundException("no bookshelf found with id :" + id);
+		}
+		else {
+			ArrayList<BookInShelf> bookArray = repository.findByBookShelf(bookshelf);
+			Set<BookInShelf> bookSet = new HashSet<BookInShelf>();
+			for (BookInShelf bookInShelf : bookArray) {
+				bookSet.add(bookInShelf);
+			}
+			return bookSet;
+		}
+		
 	}
 
 }

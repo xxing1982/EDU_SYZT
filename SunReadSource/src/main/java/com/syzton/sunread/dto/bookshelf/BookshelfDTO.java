@@ -1,11 +1,7 @@
 package com.syzton.sunread.dto.bookshelf;
 
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
-import org.joda.time.DateTime;
 
 import com.syzton.sunread.model.bookshelf.Bookshelf;
 
@@ -25,12 +21,52 @@ public class BookshelfDTO {
     private Long modification_time;
     
     private Long owner;
-  
+    
+    private int unreadMust;
+    
+    private int unreadSelect;
+    
+    private int readMust;
+    
+    private int readSelect;
+   
 //    private Collection<BookInShelf> booksInShelf ;
 //    
 //    private Collection<BookShelfOperation> bookShelfOperations;
     
-    public BookshelfDTO() {
+    public int getUnreadMust() {
+		return unreadMust;
+	}
+
+	public void setUnreadMust(int unreadMust) {
+		this.unreadMust = unreadMust;
+	}
+
+	public int getUnreadSelect() {
+		return unreadSelect;
+	}
+
+	public void setUnreadSelect(int unreadSelect) {
+		this.unreadSelect = unreadSelect;
+	}
+
+	public int getReadMust() {
+		return readMust;
+	}
+
+	public void setReadMust(int readMust) {
+		this.readMust = readMust;
+	}
+
+	public int getReadSelect() {
+		return readSelect;
+	}
+
+	public void setReadSelect(int readSelect) {
+		this.readSelect = readSelect;
+	}
+
+	public BookshelfDTO() {
 
     }
 

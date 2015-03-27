@@ -1,5 +1,9 @@
 package com.syzton.sunread.service.bookshelf;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
+import com.syzton.sunread.repository.bookshelf.BookInShelfRepository;
 import com.syzton.sunread.repository.bookshelf.BookshelfRepository;
 
 /**
@@ -21,10 +27,12 @@ public class BookshelfRepositoryService implements BookshelfService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookshelfRepositoryService.class);
     private BookshelfRepository repository;
+    private BookInShelfRepository bookInShelfRepository;
 
     @Autowired
-    public BookshelfRepositoryService(BookshelfRepository repository) {
+    public BookshelfRepositoryService(BookshelfRepository repository,BookInShelfRepository bookInShelfRepository) {
         this.repository = repository;
+        this.bookInShelfRepository = bookInShelfRepository;
     }
     
 	@Override
@@ -40,11 +48,20 @@ public class BookshelfRepositoryService implements BookshelfService {
         LOGGER.debug("Finding a bookshelf entry with id: {}", id);
 
         Bookshelf found = repository.findOne(id);
+        
         LOGGER.debug("Found book entry: {}", found);
 
         if (found == null) {
             throw new NotFoundException("No bookshelf found with id: " + id);
         }
+        else {
+        	ArrayList<BookInShelf> bookArray = bookInShelfRepository.findByBookShelf(found);
+			Set<BookInShelf> bookSet = new HashSet<BookInShelf>();
+			for (BookInShelf bookInShelf : bookArray) {
+				bookSet.add(bookInShelf);
+			}
+			found.setBookInShelf(bookSet);
+		}
 
         return found; 
 	}

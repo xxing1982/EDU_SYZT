@@ -40,7 +40,7 @@ public class BookInShelfController {
         LOGGER.debug("Adding a new book to shelf entry with information: {}", dto);
         
         BookInShelf added = service.add(dto,id, bookId);
-        LOGGER.debug("Added a to-do entry with information: {}", added);
+      
               
        return added.createDTO(added);
     }
