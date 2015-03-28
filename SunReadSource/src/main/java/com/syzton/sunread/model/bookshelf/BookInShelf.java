@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.model.book.Book;
@@ -18,6 +19,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bookinshelf")
+@JsonIgnoreProperties(value = {"book","bookshelf"})
 public class BookInShelf extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;

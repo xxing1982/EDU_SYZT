@@ -3,7 +3,6 @@ package com.syzton.sunread.dto.bookshelf;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import com.syzton.sunread.model.bookshelf.BookShelfOperation;
-import com.syzton.sunread.model.bookshelf.Bookshelf;
 import com.syzton.sunread.model.bookshelf.OperationType;
 
 /*
@@ -22,7 +21,7 @@ public class BookShelfOperationDTO {
     
     private OperationType operationType;
     
-    private Bookshelf bookshelf;
+    private Long bookshelf;
     
     public BookShelfOperationDTO() {
 		
@@ -68,11 +67,11 @@ public class BookShelfOperationDTO {
 		this.operationType = operationType;
 	}
     
-    public Bookshelf getBookshelf(){
+    public Long getBookshelf(){
     	return bookshelf;
     }
     
-    public void setBookshelf(Bookshelf bookshelf) {
+    public void setBookshelf(Long bookshelf) {
 		this.bookshelf = bookshelf;
 	}
     @Override

@@ -9,3 +9,5 @@ ctrls.controller("readingCenterMyBookshelfController", ['$scope',
     })
     $scope.shelf = bookshelf;
 }]);
+
+var booksCtrl = angular.module('nourControllers',['nourConfig', 'ngResource','bookInShelfService');

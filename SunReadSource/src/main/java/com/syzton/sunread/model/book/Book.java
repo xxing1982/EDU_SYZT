@@ -2,15 +2,15 @@ package com.syzton.sunread.model.book;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.syzton.sunread.dto.book.BookDTO;
-import com.syzton.sunread.dto.book.ReviewDTO;
+import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
-import org.apache.commons.lang.builder.ToStringBuilder;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +19,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="book")
-@JsonIgnoreProperties(value = { "reviews","categories" })
+@JsonIgnoreProperties(value = { "reviews","categories","booksInShelf"})
 public class Book extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
@@ -75,9 +75,16 @@ public class Book extends AbstractEntity{
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private Set<Review> reviews = new HashSet<>() ;
 
+    @OneToMany( cascade = {CascadeType.MERGE,CascadeType.REFRESH},mappedBy = "book")
+    @Basic(fetch = FetchType.EAGER)
+    private Set<BookInShelf> booksInShelf = new HashSet<BookInShelf>();
 
     public Book() {
 
+    }
+    
+    public Set<BookInShelf> getBooksInShelf(){    	
+    	return booksInShelf;
     }
 
     public String getDescription() {

@@ -7,6 +7,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
@@ -20,6 +21,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bookshelf")
+@JsonIgnoreProperties(value = {"booksInShelf"})
 public class Bookshelf extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
@@ -39,9 +41,9 @@ public class Bookshelf extends AbstractEntity{
     @Basic(fetch = FetchType.EAGER)
     private Set<BookInShelf> booksInShelf = new HashSet<BookInShelf>();
     
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "bookshelf")
-    @Basic(fetch = FetchType.LAZY)
-    private Set<BookShelfOperation> bookShelfOprations ;
+//    @OneToMany( cascade = CascadeType.ALL, mappedBy = "bookshelf")
+//    @Basic(fetch = FetchType.EAGER)
+//    private Set<BookShelfOperation> bookShelfOprations ;
         
     
     public Bookshelf() {
@@ -66,14 +68,6 @@ public class Bookshelf extends AbstractEntity{
     	return booksInShelf;
     }
     
-    public void setBookInShelf(Set<BookInShelf> bookInShelfs){
-    	this.booksInShelf = bookInShelfs;
-    }
-    
-    public Set<BookShelfOperation> getBookShelfOperations() {
-		// TODO Auto-generated method stub
-		return bookShelfOprations;
-	}
     public Long getOwner() {
 		return owner;
 	}
@@ -112,16 +106,7 @@ public class Bookshelf extends AbstractEntity{
             built.description = description;
             return this;
         }
-        
-        public Builder booksInShelf(Set<BookInShelf> bookInShelfs) {	
-        	built.booksInShelf = bookInShelfs;
-			return this;
-		}
-        
-        public Builder bookShelfOperations(Set<BookShelfOperation> bookShelfOperations) {	
-        	built.bookShelfOprations = bookShelfOperations;
-			return this;
-		}
+       
     }
     
     public BookshelfDTO createDTO(Bookshelf model){

@@ -1,13 +1,10 @@
 package com.syzton.sunread.model.bookshelf;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -16,6 +13,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookShelfOperationDTO;
 import com.syzton.sunread.util.DateSerializer;
@@ -27,7 +25,7 @@ import com.syzton.sunread.util.DateSerializer;
  */
 @Entity
 @Table(name="bookshelfoperation")
-
+@JsonIgnoreProperties(value ={"bookshelf"})
 public class BookShelfOperation {
     
 	public static final int MAX_LENGTH_DESCRIPTION = 500;
@@ -47,9 +45,9 @@ public class BookShelfOperation {
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
 
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
-    @JoinColumn(name = "bookshelf_id")
-    private Bookshelf bookshelf;
+//    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
+//    @JoinColumn(name = "bookshelf")
+    private Long bookshelfId;
     
     @Column(name = "operation_type",nullable = false)
     private OperationType operationType;
@@ -62,8 +60,8 @@ public class BookShelfOperation {
     }
     
     
-    public static Builder getBuilder(Bookshelf bookshelf, OperationType operationType) {
-        return new Builder(bookshelf, operationType);
+    public static Builder getBuilder(Long bookshelfId, OperationType operationType) {
+        return new Builder(bookshelfId, operationType);
     }
     
     public Long getId() {
@@ -87,8 +85,8 @@ public class BookShelfOperation {
     }
 
     
-    public Bookshelf getBookshelf() {
-    	return bookshelf;
+    public long getBookshelf() {
+    	return bookshelfId;
 	}
     public OperationType getOperationType(){
     	return operationType;
@@ -120,10 +118,10 @@ public class BookShelfOperation {
             return this;
         }
         
-        public Builder(Bookshelf bookshelf,OperationType operationType) {           
+        public Builder(long bookshelfId,OperationType operationType) {           
         	built = new BookShelfOperation();
         	built.operationType= operationType;
-        	built.bookshelf = bookshelf;
+        	built.bookshelfId = bookshelfId;
         }
 
     }

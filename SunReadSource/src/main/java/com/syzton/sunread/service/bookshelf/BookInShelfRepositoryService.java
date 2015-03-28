@@ -95,9 +95,12 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id) {
     	
     	Bookshelf bookshelf = bookshelfRepository.findOne(id);
-        Page<BookInShelf> bookPages = repository.findByBookshelf(bookshelf,pageable);
-
-        return bookPages;
+		if (bookshelf == null) {
+			throw new NotFoundException("no bookshelf found with id :" + id);
+		}
+	    Page<BookInShelf> bookPages = repository.findByBookshelf(bookshelf,pageable);
+     
+	    return bookPages;
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})
