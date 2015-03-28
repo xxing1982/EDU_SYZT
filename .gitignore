@@ -35,3 +35,5 @@ SunReadSource/.settings/*
 SunReadSource/.classpath
 SunReadSource/.project
 SunReadSource/rest-unittest.iml
+
+SunReadSource/.buildpath
