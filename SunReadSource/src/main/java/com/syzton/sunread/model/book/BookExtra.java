@@ -5,9 +5,7 @@ import com.syzton.sunread.model.common.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by jerry on 3/20/15.
@@ -26,20 +24,78 @@ public class BookExtra extends AbstractEntity{
 
     private int resource;
 
+    private int grade;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "book")
-    private List<Recommendation> recomendations = new ArrayList<>();
+    private int category;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name="book_category",
-            joinColumns = @JoinColumn(name="book_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="category_id", referencedColumnName="id")
-    )
-    private Set<Category> categories = new HashSet<>();
+    private int ageRange;
+
+//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "book")
+//    private List<Recommendation> recommendations = new ArrayList<>();
+
+    private long weeklyHot;
+
+    private long monthlyHot;
+
+    private long yearlyHot;
+
+    public long getWeeklyHot() {
+        return weeklyHot;
+    }
+
+    public void setWeeklyHot(long weeklyHot) {
+        this.weeklyHot = weeklyHot;
+    }
+
+    public long getMonthlyHot() {
+        return monthlyHot;
+    }
+
+    public void setMonthlyHot(long monthlyHot) {
+        this.monthlyHot = monthlyHot;
+    }
+
+    public long getYearlyHot() {
+        return yearlyHot;
+    }
+
+    public void setYearlyHot(long yearlyHot) {
+        this.yearlyHot = yearlyHot;
+    }
+
+    //    @JsonIgnore
+//    @ManyToMany
+//    @JoinTable(name="book_category",
+//            joinColumns = @JoinColumn(name="book_id", referencedColumnName="id"),
+//            inverseJoinColumns = @JoinColumn(name="category_id", referencedColumnName="id")
+//    )
+//    private Set<Category> categories = new HashSet<>();
 
 
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public int getAgeRange() {
+        return ageRange;
+    }
+
+    public void setAgeRange(int ageRange) {
+        this.ageRange = ageRange;
+    }
 
     public int getLevel() {
         return level;
@@ -81,19 +137,19 @@ public class BookExtra extends AbstractEntity{
         this.resource = resource;
     }
 
-    public List<Recommendation> getRecomendations() {
-        return recomendations;
-    }
+//    public List<Recommendation> getRecommendations() {
+//        return recommendations;
+//    }
 
-    public void setRecomendations(List<Recommendation> recomendations) {
-        this.recomendations = recomendations;
-    }
+//    public void setRecommendations(List<Recommendation> recommendations) {
+//        this.recommendations = recommendations;
+//    }
 
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    }
+//    public Set<Category> getCategories() {
+//        return categories;
+//    }
+//
+//    public void setCategories(Set<Category> categories) {
+//        this.categories = categories;
+//    }
 }

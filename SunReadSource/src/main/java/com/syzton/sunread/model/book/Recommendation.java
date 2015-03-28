@@ -12,16 +12,26 @@ import javax.persistence.*;
 @Table(name = "recommendation")
 public class Recommendation extends AbstractEntity{
 
-    @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.MERGE})
-    @JoinColumn(name="book_id")
-    private Book book;
+    @Column(nullable = false)
+    private Long bookId;
+    @Column(nullable = false)
+    private Long userId;
 
-    public Book getBook() {
-        return book;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
 }
+

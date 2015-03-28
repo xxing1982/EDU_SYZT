@@ -1,5 +1,6 @@
 package com.syzton.sunread.controller;
 
+import com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException;
 import com.syzton.sunread.exception.common.DatabaseException;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 
@@ -92,6 +94,21 @@ public class ControllerErrorHandler {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public String handleDatabaseException(Exception ex) {
+        LOGGER.debug(ex.getMessage());
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(SQLException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public String handleSQLException(Exception ex) {
+        LOGGER.debug(ex.getMessage());
+        return ex.getMessage();
+    }
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public String handleNumberFormatException(Exception ex) {
         LOGGER.debug(ex.getMessage());
         return ex.getMessage();
     }

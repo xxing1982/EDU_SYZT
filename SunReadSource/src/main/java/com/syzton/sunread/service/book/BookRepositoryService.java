@@ -2,11 +2,10 @@ package com.syzton.sunread.service.book;
 
 import com.syzton.sunread.assembler.book.BookAssembler;
 import com.syzton.sunread.dto.book.BookDTO;
-import com.syzton.sunread.dto.book.ConditionDTO;
+import com.syzton.sunread.dto.book.BookExtraDTO;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
 import org.slf4j.Logger;
@@ -16,9 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import static com.syzton.sunread.repository.book.predicates.BookPredicates.findByCondition;
 import static com.syzton.sunread.repository.book.predicates.BookPredicates.quickSearchContains;
@@ -54,7 +50,7 @@ public class BookRepositoryService implements BookService {
         }
 
         BookAssembler assembler = new BookAssembler();
-        Book book =  assembler.fromDTOtoEntireBook(bookDTO, categoryRepo);
+        Book book =  assembler.fromDTOtoBookWithExtra(bookDTO);
 
         LOGGER.debug(book.toString());
 
@@ -100,24 +96,24 @@ public class BookRepositoryService implements BookService {
 
     }
 
-    @Transactional(rollbackFor = {NotFoundException.class})
-    @Override
-    public Page<Book> findByCategories(Set<Long> categoryIds,Pageable pageable){
-
-        Set<Category> categories = new HashSet<>();
-
-        for(Long id : categoryIds)
-        {
-            Category category = categoryRepo.findOne(id);
-            if(category == null){
-                throw new NotFoundException("no category be found wiht id: "+id+"");
-            }
-            categories.add(category);
-        }
-        Page<Book> bookPages = bookRepo.findByCategories(categories,pageable);
-
-        return bookPages;
-    }
+//    @Transactional(rollbackFor = {NotFoundException.class})
+//    @Override
+//    public Page<Book> findByCategories(Set<Long> categoryIds,Pageable pageable){
+//
+//        Set<Category> categories = new HashSet<>();
+//
+//        for(Long id : categoryIds)
+//        {
+//            Category category = categoryRepo.findOne(id);
+//            if(category == null){
+//                throw new NotFoundException("no category be found wiht id: "+id+"");
+//            }
+//            categories.add(category);
+//        }
+//        Page<Book> bookPages = bookRepo.findByCategories(categories,pageable);
+//
+//        return bookPages;
+//    }
 
     @Transactional(readOnly = true)
     @Override
@@ -131,7 +127,7 @@ public class BookRepositoryService implements BookService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Book> searchByCondition(ConditionDTO condition,Pageable pageable){
+    public Page<Book> searchByCondition(BookExtraDTO condition,Pageable pageable){
 
         Page<Book> bookPage = bookRepo.findAll(findByCondition(condition),pageable);
 

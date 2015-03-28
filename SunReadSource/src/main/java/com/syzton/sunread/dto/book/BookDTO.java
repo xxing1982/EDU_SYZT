@@ -1,15 +1,16 @@
 package com.syzton.sunread.dto.book;
 
+import com.syzton.sunread.dto.common.AbstractDTO;
+import com.syzton.sunread.model.book.Binding;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by jerry on 3/8/15.
  */
-public class BookDTO {
+public class BookDTO  extends AbstractDTO{
 
-    private Long id;
 
     private String isbn;
 
@@ -33,22 +34,25 @@ public class BookDTO {
 
     private int coin;
 
-    private int level;
+    private int price;
 
-    private int language;
+    private int highPrice;
 
-    private int literature;
+    private Binding binding;
 
-    private int testType;
-    //TODO resource must be discuss first
-    private Set<Long> categories = new HashSet<>();
+    private String authorIntroduction;
 
-    public Set<Long> getCategories() {
-        return categories;
+    private int evaluationNum;
+
+    @NotNull
+    private BookExtraDTO extra;
+
+    public BookExtraDTO getExtra() {
+        return extra;
     }
 
-    public void setCategories(Set<Long> categories) {
-        this.categories = categories;
+    public void setExtra(BookExtraDTO extra) {
+        this.extra = extra;
     }
 
     public Long getPublicationDate() {
@@ -123,38 +127,6 @@ public class BookDTO {
         this.coin = coin;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(int language) {
-        this.language = language;
-    }
-
-    public int getLiterature() {
-        return literature;
-    }
-
-    public void setLiterature(int literature) {
-        this.literature = literature;
-    }
-
-    public int getTestType() {
-        return testType;
-    }
-
-    public void setTestType(int testType) {
-        this.testType = testType;
-    }
-
     public String getPictureUrl() {
         return pictureUrl;
     }
@@ -177,5 +149,46 @@ public class BookDTO {
 
     public void setWordCount(int wordCount) {
         this.wordCount = wordCount;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getHighPrice() {
+        return highPrice;
+    }
+
+    public void setHighPrice(int highPrice) {
+        this.highPrice = highPrice;
+    }
+
+    public Binding getBinding() {
+        return binding;
+    }
+
+    public void setBinding(Binding binding) {
+        this.binding = binding;
+    }
+
+
+    public String getAuthorIntroduction() {
+        return authorIntroduction;
+    }
+
+    public void setAuthorIntroduction(String authorIntroduction) {
+        this.authorIntroduction = authorIntroduction;
+    }
+
+    public int getEvaluationNum() {
+        return evaluationNum;
+    }
+
+    public void setEvaluationNum(int evaluationNum) {
+        this.evaluationNum = evaluationNum;
     }
 }
