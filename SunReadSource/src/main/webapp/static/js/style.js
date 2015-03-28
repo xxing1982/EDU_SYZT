@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	TopNav();
-	//ReadingCenterLeftNav();
 });
 
 //top navigate event

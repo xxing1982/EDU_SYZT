@@ -1,0 +1,129 @@
+<h1>Book</h1>
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr class="active">
+			<th>id</th>
+			<th>name</th>
+			<th>creationTime</th>
+			<th>description</th>
+			<th>modificationTime</th>
+			<th>isbn</th>
+			<th>avgRate</th>
+			<th>
+				<button type="button" class="btn btn-default btn-xs" ng-click="Add()" data-toggle="modal" data-target="#myModal">Add</button>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in books">
+			<th scope="row">{{item.id}}</th>
+			<td>{{item.name}}</td>
+			<td>{{item.creationTime}}</td>
+			<td>{{item.description}}</td>
+			<td>{{item.modificationTime}}</td>
+			<td>{{item.isbn}}</td>
+			<td>{{item.avgRate}}</td>
+			<td>
+				<button type="button" class="btn btn-default btn-xs" ng-click="Update(item.id)" data-toggle="modal" data-target="#myModal">Edit</button>
+				<button type="button" class="btn btn-default btn-xs" ng-click="Delete(item.id)">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">{{selected.title}}</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">name:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="Name" ng-model="selected.book.name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">description:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="description" ng-model="selected.book.description">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">isbn:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="isbn" ng-model="selected.book.isbn">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">publicationDate:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="publicationDate" ng-model="selected.book.publicationDate">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">author:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="author" ng-model="selected.book.author">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">publisher:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="publisher" ng-model="selected.book.publisher">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">point:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="point" ng-model="selected.book.point">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">coin:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="coin" ng-model="selected.book.coin">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">level:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="level" ng-model="selected.book.level">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">language:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="language" ng-model="selected.book.language">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">literature:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="literature" ng-model="selected.book.literature">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">testType:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="testType" ng-model="selected.book.testType">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">categories:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="categories" ng-model="selected.book.categories">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
