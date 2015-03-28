@@ -16,4 +16,7 @@ public interface NoteRepository extends JpaRepository<Note,Long> {
 	Page<Note> findByBook(Book book, Pageable pageable);
 
 	Page<Note> findByUser(User user, Pageable pageable);
+	
+	Page<Note> findAll(Pageable pageable);
+	
 }

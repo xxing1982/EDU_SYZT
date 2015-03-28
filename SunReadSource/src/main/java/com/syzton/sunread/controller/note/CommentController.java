@@ -61,17 +61,6 @@ public class CommentController {
         return deleted.createDTO(deleted);
     }
     
-    @RequestMapping(value = "/api/comments", method = RequestMethod.GET)
-    @ResponseBody
-    public List<CommentDTO> findAll() {
-        LOGGER.debug("Finding all comment entries.");
-
-        List<Comment> models = service.findAll();
-        LOGGER.debug("Found {} comment entries.", models.size());
-
-        return createDTOs(models);
-    }
-
     @RequestMapping(value = "/api/comments/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public CommentDTO update(@Valid @RequestBody CommentDTO dto, @PathVariable("id") Long commentId) throws NotFoundException {
@@ -99,16 +88,4 @@ public class CommentController {
 
         return new PageResource<>(commentPage, "page", "size");
     }
-
-    private List<CommentDTO> createDTOs(List<Comment> models) {
-        List<CommentDTO> dtos = new ArrayList<CommentDTO>();
-
-        for (Comment model: models) {
-            dtos.add(model.createDTO(model));
-        }
-
-        return dtos;
-    }
-    
-
 }

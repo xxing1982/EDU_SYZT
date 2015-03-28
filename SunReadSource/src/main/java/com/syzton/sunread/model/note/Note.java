@@ -39,11 +39,10 @@ public class Note extends AbstractEntity{
     @Column(name="image",length = MAX_LENGTH_IMAGE)
     private String image;
     
-	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
 	private User user;
-    
     
     public Note() {
 

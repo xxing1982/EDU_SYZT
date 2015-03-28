@@ -63,13 +63,18 @@ public class NoteController {
     
     @RequestMapping(value = "/api/notes", method = RequestMethod.GET)
     @ResponseBody
-    public List<NoteDTO> findAll() {
-        LOGGER.debug("Finding all note entries.");
+    public PageResource<Note> findAll(@RequestParam("page") int page,
+	        					 @RequestParam("size") int size,
+	        					 @RequestParam("sortBy") String sortBy) {
+		sortBy = sortBy == null ? "id" : sortBy;
+		
+		Pageable pageable = new PageRequest(
+				page, size, new Sort(sortBy)
+		);
+		
+        Page<Note> notePage = service.findAll(pageable);
 
-        List<Note> models = service.findAll();
-        LOGGER.debug("Found {} note entries.", models.size());
-
-        return createDTOs(models);
+        return new PageResource<>(notePage, "page", "size");
     }
 
     @RequestMapping(value = "/api/notes/{id}", method = RequestMethod.PUT)
@@ -115,15 +120,5 @@ public class NoteController {
         Page<Note> notePage = service.findByUserId(pageable, userId);
 
         return new PageResource<>(notePage, "page", "size");
-    }
-    
-    private List<NoteDTO> createDTOs(List<Note> models) {
-        List<NoteDTO> dtos = new ArrayList<NoteDTO>();
-
-        for (Note model: models) {
-            dtos.add(model.createDTO(model));
-        }
-
-        return dtos;
     }
 }

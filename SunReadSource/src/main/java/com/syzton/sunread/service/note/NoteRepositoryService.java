@@ -74,9 +74,9 @@ public class NoteRepositoryService implements NoteService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Note> findAll() {
+    public Page<Note> findAll(Pageable pageable) {
         LOGGER.debug("Finding all note entries");
-        return repository.findAll();
+        return repository.findAll(pageable);
     }
 
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})

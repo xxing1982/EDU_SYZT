@@ -246,14 +246,13 @@
         								<artifactId>
         									build-helper-maven-plugin
         								</artifactId>
-        								<versionRange>
-        									[1.7,)
-        								</versionRange>
+        								<versionRange>[1.4,)</versionRange>
         								<goals>
         									<goal>add-test-source</goal>
         									<goal>
         										add-test-resource
         									</goal>
+        									<goal>add-source</goal>
         								</goals>
         							</pluginExecutionFilter>
         							<action>

@@ -1,5 +1,5 @@
 //readingDynamicHotNotes.js
 
 ctrls.controller("readingDynamicHotNotesController", ['$scope', function ($scope) {
-    $scope.readingDynamic = '热门笔记';
-}]);
+    $scope.readingDynamicHotNotes = '热门笔记';
+}]);    

@@ -32,7 +32,7 @@ public interface NoteService {
      * Returns a list of note entries.
      * @return
      */
-    public List<Note> findAll();
+    public Page<Note> findAll(Pageable pageable);
 
     /**
      * Finds a note entry.
@@ -50,8 +50,8 @@ public interface NoteService {
      */
     public Note update(NoteDTO updated) throws NotFoundException;
 
-	Page<Note> findByBookId(Pageable pageable, long bookId);
+	public Page<Note> findByBookId(Pageable pageable, long bookId);
 
-	Page<Note> findByUserId(Pageable pageable, long userId);
+	public Page<Note> findByUserId(Pageable pageable, long userId);
 
 }

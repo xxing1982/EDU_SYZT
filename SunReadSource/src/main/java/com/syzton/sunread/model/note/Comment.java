@@ -1,5 +1,4 @@
 package com.syzton.sunread.model.note;
-import org.apache.commons.lang.builder.ToStringBuilder;
 import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.user.User;
@@ -24,7 +23,7 @@ public class Comment extends AbstractEntity {
     @JoinColumn(name="note_id")
     private Note note;
 	
-	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
 	private User user;
@@ -63,11 +62,6 @@ public class Comment extends AbstractEntity {
         public Comment build() {
             return built;
         }
-
-//        public Builder image(String image){
-//        	built.image = image;
-//        	return this;
-//        }
     }
 
     public CommentDTO createDTO(Comment model) {
@@ -76,10 +70,5 @@ public class Comment extends AbstractEntity {
         dto.setId(model.getId());
         dto.setContent(model.getContent());
         return dto;
-    }
-    
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
     }
 }
