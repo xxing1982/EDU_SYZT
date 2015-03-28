@@ -1,8 +1,7 @@
 //mainCtrl.js
+var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices','bookshelfServices']);
 
-var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices']);
-
-ctrls.controller("mainController", ['$scope', 'User', function ($scope, User) {
+ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($scope, User,Bookshelf) {
 	//userinfo
     $scope.userInfo = {
     	'name': '张晓晨',
@@ -20,17 +19,23 @@ ctrls.controller("mainController", ['$scope', 'User', function ($scope, User) {
     });
 
     //bookshelf
-    $scope.bookshelf = {
-    	'finishStatus': '80%',
-    	'readed': {
-    		'must': '5',
-    		'select': '12'
-    	},
-    	'unread': {
-    		'must': '12',
-    		'select': '8'
-    	},
-    };
+        //bookshelf
+//    $scope.bookshelf = {
+//    	'finishStatus': '80%',
+//    	'readed': {
+//    		'must': '5',
+//    		'select': '12'
+//    	},
+//    	'unread': {
+//    		'must': '12',
+//    		'select': '8'
+//    	},
+//    };
+    var bookshelf = Bookshelf.get(function(){
+        console.log(bookshelf);
+    });
+    $scope.bookshelf = bookshelf;
+    $scope.bookshelf.finishStatus = 80;
 }]);
 
 ctrls.filter('formatSex', function(){

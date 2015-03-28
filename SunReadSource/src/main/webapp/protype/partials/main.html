@@ -1,5 +1,5 @@
 <!--index head content-->
-<div id="main-page">
+<div  id="main-page">
 <div id="index-head" class="container-fluid">
     <div class="row">
         <div class="col-md-2"></div>
@@ -21,7 +21,7 @@
                         &nbsp;&nbsp;&nbsp;
                         {{userInfo.class}}
                     </div>
-                    <div class="col-md-12 index-head-info-text">
+                    <div class="col-md-12 index-head-info-text" >
                         <span class="label label-success">阅读等级：{{userInfo.level}}</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span class="label label-warning">财富值：{{userInfo.treasure}}</span>
@@ -40,7 +40,7 @@
     <div class="col-md-7 div-tag tag-margin-blue tag-middle">
         <div class="row row-title">
             <div class="col-md-2 row-title-name">我的书架</div>
-            <div class="col-md-4 row-title-finish">阅读目标完成率：{{bookshelf.finishStatus}}</div>
+            <div class="col-md-4 row-title-finish">阅读目标完成率：{{bookshelf.finishStatus}}%</div>
             <div class="col-md-4"></div>
             <div class="col-md-2 row-title-more"><a href="#">更多></a></div>
         </div>
@@ -49,18 +49,18 @@
                 <div class="book-read-unread">未读</div>
                 <br />
                 <div class="col-md-1"></div>
-                <div class="col-md-4">必读：{{bookshelf.unread.must}}本</div>
+                <div class="col-md-4">必读：{{bookshelf.unreadMust}}本</div>
                 <div class="col-md-2"></div>
-                <div class="col-md-4">选读：{{bookshelf.unread.select}}本</div>
+                <div class="col-md-4">选读：{{bookshelf.unreadSelect}}本</div>
                 <div class="col-md-1"></div>
             </div>
             <div class="col-md-6" style="border-left:1px #EAEAEA solid">
                 <div class="book-read-readed">已读</div>
                 <br />
                 <div class="col-md-1"></div>
-                <div class="col-md-4">必读：{{bookshelf.readed.must}}本</div>
+                <div class="col-md-4">必读：{{bookshelf.readMust}}本</div>
                 <div class="col-md-2"></div>
-                <div class="col-md-4">选读：{{bookshelf.readed.select}}本</div>
+                <div class="col-md-4">选读：{{bookshelf.readSelect}}本</div>
                 <div class="col-md-1"></div>
             </div>
         </div>
