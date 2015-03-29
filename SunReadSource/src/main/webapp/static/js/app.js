@@ -84,6 +84,18 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: 'partials/readingDynamicHotNotes.html',
             controller: 'readingDynamicHotNotesController'
         })
+        //reading center -> thinking test
+        .state('readingCenter.thinkingTest',{
+            url: '/myEvaluating/thinkingTest',
+            templateUrl: 'partials/readingCenterThinkingTest.html',
+            controller: 'readingCenterThinkingTestController'
+        })
+        //reading center -> thinking test -> other answers
+        .state('readingCenter.otherAnswer',{
+            url: '/myEvaluating/otherAnswer',
+            templateUrl: 'partials/readingCenterOtherAnswer.html',
+            controller: 'readingCenterOtherAnswerController'
+        })
         //reading sea
         .state('readingSea', {
             url: '/readingSea',

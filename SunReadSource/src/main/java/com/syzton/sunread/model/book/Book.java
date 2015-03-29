@@ -2,15 +2,12 @@ package com.syzton.sunread.model.book;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +16,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="book")
-@JsonIgnoreProperties(value = { "reviews","categories","booksInShelf"})
+@JsonIgnoreProperties(value = {"reviews","categories"})
 public class Book extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
@@ -27,10 +24,15 @@ public class Book extends AbstractEntity{
     public static final int MAX_LENGTH_ISBN = 16;
     public static final int MAX_LENGTH_AUTHOR = 10;
     public static final int MAX_LENGTH_PUBLISHER = 50;
+    public static final int MAX_LENGTH_AUTHOR_INTRODUCTION =100;
 
     public static final int DEFAULT_POINT = 5;
     public static final int DEFAULT_COIN = 5;
     private static final String DEFAULT_PICTURE_URL = "ftp://default_book_picture" ;
+
+    public Book() {
+
+    }
 
 
     @Column(nullable = true, length = MAX_LENGTH_DESCRIPTION)
@@ -55,9 +57,17 @@ public class Book extends AbstractEntity{
 
     @Column(nullable = false,length = MAX_LENGTH_AUTHOR)
     private String author;
+    @Column(nullable = false,length = MAX_LENGTH_AUTHOR_INTRODUCTION)
+    private String authorIntroduction;
 
     @Column(nullable = false,length = MAX_LENGTH_PUBLISHER)
     private String publisher;
+
+    private float price;
+
+    private float highPrice;
+
+    private int evaluationNum;
 
     private int pageCount;
 
@@ -67,6 +77,12 @@ public class Book extends AbstractEntity{
 
     private int coin = DEFAULT_COIN;
 
+    @Enumerated(EnumType.STRING)
+    private Binding binding = Binding.softback;
+
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.valid;
+
     private String pictureUrl = DEFAULT_PICTURE_URL;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
@@ -75,16 +91,25 @@ public class Book extends AbstractEntity{
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private Set<Review> reviews = new HashSet<>() ;
 
-    @OneToMany( cascade = {CascadeType.MERGE,CascadeType.REFRESH},mappedBy = "book")
-    @Basic(fetch = FetchType.EAGER)
-    private Set<BookInShelf> booksInShelf = new HashSet<BookInShelf>();
 
-    public Book() {
+
+    public enum Status {
+        valid,invalid
+    }
+
+
+
+    @PrePersist
+    public void prePersist() {
+        super.prePersist();
+        DateTime now = DateTime.now();
+        modificationTime = now;
 
     }
-    
-    public Set<BookInShelf> getBooksInShelf(){    	
-    	return booksInShelf;
+
+    @PreUpdate
+    public void preUpdate() {
+        modificationTime = DateTime.now();
     }
 
     public String getDescription() {
@@ -203,17 +228,52 @@ public class Book extends AbstractEntity{
         this.wordCount = wordCount;
     }
 
-    @PrePersist
-    public void prePersist() {
-        super.prePersist();
-        DateTime now = DateTime.now();
-        modificationTime = now;
-
+    public String getAuthorIntroduction() {
+        return authorIntroduction;
     }
 
-    @PreUpdate
-    public void preUpdate() {
-        modificationTime = DateTime.now();
+    public void setAuthorIntroduction(String authorIntroduction) {
+        this.authorIntroduction = authorIntroduction;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getHighPrice() {
+        return highPrice;
+    }
+
+    public void setHighPrice(float highPrice) {
+        this.highPrice = highPrice;
+    }
+
+    public int getEvaluationNum() {
+        return evaluationNum;
+    }
+
+    public void setEvaluationNum(int evaluationNum) {
+        this.evaluationNum = evaluationNum;
+    }
+
+    public Binding getBinding() {
+        return binding;
+    }
+
+    public void setBinding(Binding binding) {
+        this.binding = binding;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
 

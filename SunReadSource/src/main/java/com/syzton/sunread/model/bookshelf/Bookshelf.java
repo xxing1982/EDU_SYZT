@@ -67,6 +67,10 @@ public class Bookshelf extends AbstractEntity{
     public Set<BookInShelf> getBooksInShelf(){    	
     	return booksInShelf;
     }
+	public void setBookInShelf(Set<BookInShelf> bookSet) {
+		// TODO Auto-generated method stub
+		this.booksInShelf = bookSet;
+	}
     
     public Long getOwner() {
 		return owner;
@@ -159,5 +163,10 @@ public class Bookshelf extends AbstractEntity{
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+	/**
+	 * @param bookSet
+	 */
+
 }
 

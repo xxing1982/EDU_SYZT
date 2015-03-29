@@ -1,44 +1,39 @@
 package com.syzton.sunread.assembler.book;
 
 import com.syzton.sunread.dto.book.BookDTO;
+import com.syzton.sunread.dto.book.BookExtraDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.BookExtra;
-import com.syzton.sunread.model.book.Category;
-import com.syzton.sunread.repository.book.CategoryRepository;
 import org.joda.time.DateTime;
-
-import javax.annotation.Resource;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by jerry on 3/16/15.
  */
 public class BookAssembler {
 
-    public Book fromDTOtoEntireBook(final BookDTO bookDTO,final CategoryRepository categoryRepository){
-
-        Set<Category> categorySet = new HashSet<>();
-
-        for(Long caId: bookDTO.getCategories()){
-            categorySet.add(categoryRepository.findOne(caId));
-        }
-
-        BookExtra extra = this.fromDTOToExtra(bookDTO);
-        extra.setCategories(categorySet);
-
-
-        Book book = this.fromDTOtoBookWithExtra(bookDTO);
-        book.setExtra(extra);
-        return book;
-    }
+//    public Book fromDTOtoEntireBook(final BookDTO bookDTO,final CategoryRepository categoryRepository){
+//
+//        Set<Category> categorySet = new HashSet<>();
+//
+//        for(Long caId: bookDTO.getCategories()){
+//            categorySet.add(categoryRepository.findOne(caId));
+//        }
+//
+//        BookExtra extra = this.fromDTOToExtra(bookDTO);
+//        extra.setCategories(categorySet);
+//
+//
+//        Book book = this.fromDTOtoBookWithExtra(bookDTO);
+//        book.setExtra(extra);
+//        return book;
+//    }
 
 
     public Book fromDTOtoBookWithExtra(final BookDTO bookDTO){
 
 
 
-        BookExtra extra = this.fromDTOToExtra(bookDTO);
+        BookExtra extra = this.fromDTOToExtra(bookDTO.getExtra());
 
         Book book = new Book();
         book.setName(bookDTO.getName());
@@ -52,18 +47,27 @@ public class BookAssembler {
         book.setPictureUrl(bookDTO.getPictureUrl());
         book.setWordCount(bookDTO.getWordCount());
         book.setPageCount(bookDTO.getPageCount());
+        book.setAuthorIntroduction(bookDTO.getAuthorIntroduction());
+        book.setPrice(bookDTO.getPrice());
+        book.setHighPrice(bookDTO.getHighPrice());
+        book.setEvaluationNum(bookDTO.getEvaluationNum());
+        book.setBinding(bookDTO.getBinding());
+
         book.setExtra(extra);
 
 
         return book;
     }
 
-    public BookExtra fromDTOToExtra(final BookDTO bookDTO){
+    public BookExtra fromDTOToExtra(final BookExtraDTO bookExtraDTO){
         BookExtra extra = new BookExtra();
-        extra.setLanguage(bookDTO.getLanguage());
-        extra.setLevel(bookDTO.getLevel());
-        extra.setLiterature(bookDTO.getLiterature());
-        extra.setTestType(bookDTO.getTestType());
+        extra.setLanguage(bookExtraDTO.getLanguage());
+        extra.setLevel(bookExtraDTO.getLevel());
+        extra.setLiterature(bookExtraDTO.getLiterature());
+        extra.setTestType(bookExtraDTO.getTestType());
+        extra.setGrade(bookExtraDTO.getGrade());
+        extra.setCategory(bookExtraDTO.getCategory());
+        extra.setAgeRange(bookExtraDTO.getAgeRange());
         return extra;
     }
 }

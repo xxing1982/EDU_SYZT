@@ -5,5 +5,5 @@ package com.syzton.sunread.model.book;
  */
 public enum DictionaryType {
 
-    TEST, LITERATURE, LANGUAGE, RESOURCE, LEVEL;
+    TEST, LITERATURE, LANGUAGE, RESOURCE, LEVEL,GRADE,CATEGORY,AGERANGE;
 }

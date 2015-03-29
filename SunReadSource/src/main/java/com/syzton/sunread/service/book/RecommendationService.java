@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public interface RecommendationService {
 
-    public void recommend(Long bookId);
+    public void recommend(Long bookId,Long userId);
 
 
 }

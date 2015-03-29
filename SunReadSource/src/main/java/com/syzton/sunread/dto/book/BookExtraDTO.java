@@ -1,12 +1,9 @@
 package com.syzton.sunread.dto.book;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by jerry on 3/24/15.
  */
-public class ConditionDTO {
+public class BookExtraDTO {
 
     private int level;
 
@@ -16,9 +13,21 @@ public class ConditionDTO {
 
     private int language;
 
+    private int grade;
+
+    private int category;
+
     private int resource;
 
-    private Set<Long> categories = new HashSet<>();
+    private int ageRange;
+
+    public int getAgeRange() {
+        return ageRange;
+    }
+
+    public void setAgeRange(int ageRange) {
+        this.ageRange = ageRange;
+    }
 
     public int getLevel() {
         return level;
@@ -60,11 +69,19 @@ public class ConditionDTO {
         this.resource = resource;
     }
 
-    public Set<Long> getCategories() {
-        return categories;
+    public int getGrade() {
+        return grade;
     }
 
-    public void setCategories(Set<Long> categories) {
-        this.categories = categories;
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 }

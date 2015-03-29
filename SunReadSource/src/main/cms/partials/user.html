@@ -1,0 +1,111 @@
+<h1>user</h1>
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr class="active">
+			<th>id</th>
+			<th>userName</th>
+			<th>password</th>
+			<th>phoneNumber</th>
+			<th>email</th>
+			<th>address</th>
+			<th>gender</th>
+			<th>age</th>
+			<th>role</th>
+			<th>birthday</th>
+			<th>
+				<button type="button" class="btn btn-default btn-xs" ng-click="Add()" data-toggle="modal" data-target="#myModal">Add</button>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in users">
+			<th scope="row">{{item.id}}</th>
+			<td>{{item.userName}}</td>
+			<td>{{item.password}}</td>
+			<td>{{item.phoneNumber}}</td>
+			<td>{{item.email}}</td>
+			<td>{{item.address}}</td>
+			<td>{{item.userName}}</td>
+			<td>{{item.gender}}</td>
+			<td>{{item.age}}</td>
+			<td>{{item.birthday}}</td>
+			<td>
+				<button type="button" class="btn btn-default btn-xs" ng-click="Update(item.id)" data-toggle="modal" data-target="#myModal">Edit</button>
+				<button type="button" class="btn btn-default btn-xs" ng-click="Delete(item.id)">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">{{selected.title}}</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">userName:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="userName" ng-model="selected.user.userName">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">password:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="password" ng-model="selected.user.password">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">phoneNumber:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="phoneNumber" ng-model="selected.user.phoneNumber">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">email:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="email" ng-model="selected.user.email">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">address:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="address" ng-model="selected.user.address">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">gender:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="gender" ng-model="selected.user.gender">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">age:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="age" ng-model="selected.user.age">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">role:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="role" ng-model="selected.user.role">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">birthday:</label>
+						<div class="col-sm-10">
+							<input class="form-control" placeholder="birthday" ng-model="selected.user.birthday">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

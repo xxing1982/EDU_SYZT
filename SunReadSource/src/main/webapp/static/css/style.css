@@ -31,6 +31,8 @@ a:focus, input:focus
 .navbar
 {
     background-color: #FFAF25 !important;
+    padding-top: 5px;
+    box-shadow: 0 0px 7px #888888;
 }
 
 .navbar a
@@ -41,6 +43,11 @@ a:focus, input:focus
 .nav li a:hover, .nav li a:visited
 {
     background-color:transparent;
+}
+
+.nav-underline
+{
+    margin-bottom: 5px;
 }
 
 .nav-underline li a:focus
@@ -69,7 +76,7 @@ a:focus, input:focus
 
 #index-head
 {
-    margin-top:50px;
+    margin-top:60px;
 }
 
 .index-head-info-text
@@ -245,7 +252,7 @@ a:focus, input:focus
 /************readingCenter page******************************/
 #readingCenter-page
 {
-    padding-top: 50px;
+    padding-top: 60px;
     /*background-color: #FFFCFA;*/
 }
 
@@ -654,6 +661,7 @@ a:focus, input:focus
 
 /*******************my evaluate bottom****************/
 
+<<<<<<< HEAD
 
 /*******************reading dynamic top****************/
 #readingDynamic-page {
@@ -675,3 +683,95 @@ a:focus, input:focus
 
 /*******************reading dynamic buttom****************/
 
+=======
+/*******************my thinking test top****************/
+
+.readingCenter-right-body .thinkingTest .tagHead,
+.readingCenter-right-body .otherAnswer .tagHead
+{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px solid #DDD;
+}
+
+.readingCenter-right-body .thinkingTest .title
+{
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.readingCenter-right-body .thinkingTest .analysis .category
+{
+    color: #BEBEBE;
+    font-size: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.readingCenter-right-body .thinkingTest .analysis .lists,
+.readingCenter-right-body .otherAnswer .lists
+{
+    padding-left: 15px;
+    padding-right: 30px;
+}
+
+.readingCenter-right-body .thinkingTest .analysis .lists .list,
+.readingCenter-right-body .otherAnswer .lists .list
+{
+    padding-bottom: 30px;
+}
+
+.readingCenter-right-body .thinkingTest .analysis .list .theme
+{
+    font-size: 16px;
+    font-weight: 900;
+    padding-top: 20px;
+}
+
+.readingCenter-right-body .thinkingTest .analysis .list .content
+{
+    padding-top: 10px;
+    line-height: 22px;
+}
+
+.readingCenter-right-body .thinkingTest .analysis .list .other
+{
+    color: #75C9FF;
+    text-align: right;
+}
+
+/*******************my thinking test bottom****************/
+
+/*******************other answer top****************/
+
+.readingCenter-right-body .otherAnswer .title
+{
+    padding-left: 15px;
+    font-size: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: 900;
+}
+
+.readingCenter-right-body .otherAnswer .lists
+{
+    padding-bottom: 30px;
+}
+
+.readingCenter-right-body .otherAnswer .list .theme
+{
+    color: #BEBEBE;
+}
+
+.readingCenter-right-body .otherAnswer .list .content
+{
+    line-height: 22px;
+}
+
+/*******************other answer bottom****************/
+>>>>>>> cms user and book

@@ -19,8 +19,6 @@ import java.util.List;
  */
 public interface BookRepository extends JpaRepository<Book,Long>,QueryDslPredicateExecutor<Book>{
 
-    @Query("SELECT Distinct(b) FROM Book b LEFT JOIN b.extra.categories c where c in (:categories)")
-    Page<Book> findByCategories(@Param("categories") Collection<Category> categories,Pageable pageable);
 
     Book findByIsbn(String isbn);
 

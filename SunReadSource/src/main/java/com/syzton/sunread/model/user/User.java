@@ -15,7 +15,6 @@ import com.syzton.sunread.util.DateSerializer;
 import com.syzton.sunread.util.NumberUtil;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.joda.time.DateTime;
@@ -25,7 +24,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import javax.persistence.*;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,11 +49,15 @@ public class User extends AbstractEntity implements UserDetails{
     public static final int MAX_LENGTH_PHONENUMBER = 11;
     public static final int MAX_LENGTH_ADDRESS = 100;
 
+    public static final String DEFAULT_USER_PICTURE_URL ="";
+
     @NotEmpty
     @Column(nullable = false,length = MAX_LENGTH_USERNAME )
     private String username;
 
     private String userId;
+
+    private String picture = DEFAULT_USER_PICTURE_URL;
 
     @NotEmpty
     @Column(nullable = false,length = MAX_LENGTH_PASSWORD )
@@ -76,8 +78,15 @@ public class User extends AbstractEntity implements UserDetails{
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime birthday;
 
+
+    @JsonSerialize(using = DateSerializer.class)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime expireTime;
     @Enumerated(EnumType.STRING)
-    private GenderType gender = GenderType.MALE;
+    private Status status;
+
+    @Enumerated(EnumType.STRING)
+    private GenderType gender = GenderType.male;
 
     
     @ManyToMany(mappedBy="users",cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
@@ -97,13 +106,43 @@ public class User extends AbstractEntity implements UserDetails{
     public void prePersist(){
         super.prePersist();
         this.userId = String.valueOf(NumberUtil.generateRandom16());
+
+        //TODO need to define user expireTime default value
     }
 
 
     public enum GenderType {
 
-        MALE,FAMALE
+        male,famale
 
+    }
+
+    public enum Status {
+        valid,invalid,locked
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public DateTime getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(DateTime expireTime) {
+        this.expireTime = expireTime;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getAddress() {
