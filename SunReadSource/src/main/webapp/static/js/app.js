@@ -34,7 +34,8 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
         //reading center -> myBookshelf -> add books
         .state('readingCenter.addBook',{
             url: '/addBook',
-            templateUrl: 'partials/readingCenterAddBook.html'
+            templateUrl: 'partials/readingCenterAddBook.html',
+            controller: 'readingCenterAddBookController'
         })
         //reading center -> myBookshelf -> add books -> quick search
         .state('readingCenter.addBook.quick', {
