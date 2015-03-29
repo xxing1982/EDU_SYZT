@@ -1,6 +1,8 @@
 package com.syzton.sunread.model.user;
 
 import com.syzton.sunread.model.coinhistory.CoinHistory;
+import com.syzton.sunread.model.organization.Clazz;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,13 +27,13 @@ public class Student extends User{
 
     private int point;
 
-    private long classId;
+    @Transient
+    private long enrollmentTime; // for receive json
 
-    private long gradeId;
+    private DateTime enrollmentDate; // for insert DB
 
-    private long schoolId;
-
-    private long enrollmentTime;
+    @OneToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    private Clazz clazz;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private Set<CoinHistory> coinHistorySet = new HashSet<>();
@@ -68,21 +70,6 @@ public class Student extends User{
         this.identity = identity;
     }
 
-    public long getClassId() {
-        return classId;
-    }
-
-    public void setClassId(long classId) {
-        this.classId = classId;
-    }
-
-    public long getGradeId() {
-        return gradeId;
-    }
-
-    public void setGradeId(long gradeId) {
-        this.gradeId = gradeId;
-    }
 
     public long getEnrollmentTime() {
         return enrollmentTime;
@@ -92,12 +79,16 @@ public class Student extends User{
         this.enrollmentTime = enrollmentTime;
     }
 
-    public long getSchoolId() {
-        return schoolId;
+    public Clazz getClazz() {
+        return clazz;
     }
 
-    public void setSchoolId(long schoolId) {
-        this.schoolId = schoolId;
+    public DateTime getEnrollmentDate() {
+        return new DateTime(this.enrollmentTime);
+    }
+
+    public void setClazz(Clazz clazz) {
+        this.clazz = clazz;
     }
 
     public Set<CoinHistory> getCoinHistorySet() {

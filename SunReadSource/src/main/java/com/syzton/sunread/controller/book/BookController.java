@@ -1,5 +1,6 @@
 package com.syzton.sunread.controller.book;
 
+import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.book.BookExtraDTO;
 import com.syzton.sunread.model.book.Book;
@@ -24,7 +25,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping(value = "/api")
-public class BookController {
+public class BookController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
 
@@ -75,17 +76,6 @@ public class BookController {
 //
 //        return new PageResource<>(pageResult, "page", "size");
 //    }
-
-    private Pageable getPageable(int page, int size, String sortBy,String direction) {
-        sortBy = sortBy == null ? "id" : sortBy;
-        Sort.Direction directionType = direction ==null && !direction.equalsIgnoreCase("desc")? Sort.Direction.ASC: Sort.Direction.DESC;
-        return new PageRequest(
-                page, size, new Sort(directionType,sortBy)
-        );
-    }
-    private Pageable getPageable(int page, int size, String sortBy) {
-        return this.getPageable(page,size,sortBy,null);
-    }
 
     @RequestMapping(value = "/books/search", method = RequestMethod.GET)
     @ResponseBody

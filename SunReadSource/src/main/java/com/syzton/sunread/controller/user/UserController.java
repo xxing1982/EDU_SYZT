@@ -1,5 +1,6 @@
 package com.syzton.sunread.controller.user;
 
+import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
@@ -24,7 +25,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping(value = "/api")
-public class UserController {
+public class UserController extends BaseController{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
