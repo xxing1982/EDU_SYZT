@@ -11,7 +11,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
     $urlRouterProvider
         .when('/readingCenter', '/readingCenter/myBookshelf')
         .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
-        //.otherwise('/');
+        .otherwise('/');
 
     $stateProvider
         //main page

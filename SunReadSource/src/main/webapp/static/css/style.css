@@ -4,16 +4,16 @@ body
 }
 /*change placeholder color*/
 .navbar .input-group input::-webkit-input-placeholder {
-color: #FFFFFF !important; /* WebKit browsers */
+    color: #FFFFFF !important; /* WebKit browsers */
 }
 .navbar .input-group input:-moz-placeholder {
-color: #FFFFFF !important; /* Mozilla Firefox 4 to 18 */
+    color: #FFFFFF !important; /* Mozilla Firefox 4 to 18 */
 }
 .navbar .input-group input::-moz-placeholder {
-color: #FFFFFF !important; /* Mozilla Firefox 19+ */
+    color: #FFFFFF !important; /* Mozilla Firefox 19+ */
 }
 .navbar .input-group input:-ms-input-placeholder {
-color: #FFFFFF !important; /* Internet Explorer 10+ */
+    color: #FFFFFF !important; /* Internet Explorer 10+ */
 }
 a:focus, input:focus
 {
@@ -256,7 +256,22 @@ a:focus, input:focus
     /*background-color: #FFFCFA;*/
 }
 
-.list-group a.myActive
+.sidebar
+{
+    position: fixed;
+    top: 51px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #F5F5F5;
+    border-right: 1px solid #EEE;
+}
+
+.nav-sidebar li.myActive
 {
     border-right: 3px #FFAF25 solid;
     z-index: 100;
@@ -282,6 +297,7 @@ a:focus, input:focus
 .bgLightYellow
 {
     background-color: #FFFCFA;
+
 }
 
 .readingCenter-right
