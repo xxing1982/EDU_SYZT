@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 @Entity
 public class Task extends AbstractEntity{
 
-    private long teachId;
+    private long teacherId;
 
     private long studentId;
 
@@ -18,12 +18,12 @@ public class Task extends AbstractEntity{
 
     private int point;
 
-    public long getTeachId() {
-        return teachId;
+    public long getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeachId(long teachId) {
-        this.teachId = teachId;
+    public void setTeacherId(long teacherId) {
+        this.teacherId = teacherId;
     }
 
     public long getStudentId() {
