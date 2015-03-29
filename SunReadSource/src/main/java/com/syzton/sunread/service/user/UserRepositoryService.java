@@ -1,12 +1,8 @@
 package com.syzton.sunread.service.user;
 
 import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.user.Parent;
-import com.syzton.sunread.model.user.Student;
-import com.syzton.sunread.model.user.User;
-import com.syzton.sunread.repository.user.ParentRepository;
-import com.syzton.sunread.repository.user.StudentRepository;
-import com.syzton.sunread.repository.user.UserRepository;
+import com.syzton.sunread.model.user.*;
+import com.syzton.sunread.repository.user.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,13 +28,22 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
     private ParentRepository parentRepository;
 
+    private TeacherRepository teacherRepository;
+
+    private TeacherClazzRepository teacherClazzRepository;
+
     @Autowired
-    public UserRepositoryService(UserRepository userRepository, StudentRepository studentRepository, ParentRepository parentRepository) {
+    public UserRepositoryService(UserRepository userRepository,
+                                 StudentRepository studentRepository,
+                                 ParentRepository parentRepository,
+                                 TeacherRepository teacherRepository,
+                                 TeacherClazzRepository teacherClazzRepository) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
         this.parentRepository = parentRepository;
+        this.teacherRepository = teacherRepository;
+        this.teacherClazzRepository = teacherClazzRepository;
     }
-
 
     @Override
     public User findById(Long id){
@@ -89,7 +94,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
         //student can add her/his parent,each add operation will be as add a new parent.
         Student student = this.findByStudentId(studentId);
-        parent.getStudentSet().add(student);
+        parent.getChildren().add(student);
 
         return parentRepository.save(parent);
     }
@@ -104,7 +109,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         if(student == null)
             throw new NotFoundException("student with id = "+userId+" not found..");
 
-        parent.getStudentSet().add(student);
+        parent.getChildren().add(student);
 
         return parentRepository.save(parent);
 
@@ -148,4 +153,27 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+    @Transactional
+    @Override
+    public Teacher addTeacher(Teacher teacher) {
+        teacher = teacherRepository.save(teacher);
+        for (Long clazzId: teacher.getClazzIds()){
+            TeacherClazz teacherClazz = new TeacherClazz();
+            teacherClazz.setClazzId(clazzId);
+            teacherClazz.setTeacherId(teacher.getId());
+            teacherClazzRepository.save(teacherClazz);
+
+        }
+        return teacher ;
+    }
+
+    @Override
+    public Teacher findByTeacherId(Long id) {
+        return teacherRepository.findOne(id);
+    }
+
+    @Override
+    public void deleteByTeacherId(Long id) {
+        teacherRepository.delete(id);
+    }
 }

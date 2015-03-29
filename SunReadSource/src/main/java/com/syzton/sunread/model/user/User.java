@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.security.Role;
@@ -73,15 +74,23 @@ public class User extends AbstractEntity implements UserDetails{
     @NotEmpty
     @Column(nullable = false,length = MAX_LENGTH_PHONENUMBER)
     private String phoneNumber;
-
+    @JsonIgnore
+    @Column(name = "birthday")
     @JsonSerialize(using = DateSerializer.class)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime birthday;
+    private DateTime birthdayDB;
 
-
+    @Transient
+    private long birthday;
+    @JsonIgnore
+    @Column(name="expireTime")
     @JsonSerialize(using = DateSerializer.class)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime expireTime;
+    private DateTime expireTimeDB;
+
+    @Transient
+    private long expireTime;
+
     @Enumerated(EnumType.STRING)
     private Status status;
 
@@ -106,6 +115,8 @@ public class User extends AbstractEntity implements UserDetails{
     public void prePersist(){
         super.prePersist();
         this.userId = String.valueOf(NumberUtil.generateRandom16());
+        this.expireTimeDB = new DateTime(this.expireTime);
+        this.birthdayDB = new DateTime(this.birthday);
 
         //TODO need to define user expireTime default value
     }
@@ -127,14 +138,6 @@ public class User extends AbstractEntity implements UserDetails{
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    public DateTime getExpireTime() {
-        return expireTime;
-    }
-
-    public void setExpireTime(DateTime expireTime) {
-        this.expireTime = expireTime;
     }
 
     public Status getStatus() {
@@ -193,14 +196,6 @@ public class User extends AbstractEntity implements UserDetails{
         this.phoneNumber = phoneNumber;
     }
 
-    public DateTime getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(DateTime birthday) {
-        this.birthday = birthday;
-    }
-
     public GenderType getGender() {
         return gender;
     }
@@ -217,7 +212,6 @@ public class User extends AbstractEntity implements UserDetails{
         this.email = email;
     }
 
-
     public String getUserId() {
         return userId;
     }
@@ -226,12 +220,29 @@ public class User extends AbstractEntity implements UserDetails{
         this.userId = userId;
     }
 
-    
-	public void setRoles(List<Role> roles) {
+	public void setRoles(List<Role> roles)   {
 		this.roles = roles;
 	}
-    
-	@Override
+
+    public long getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(long birthday) {
+        this.birthday = birthday;
+    }
+
+    public long getExpireTime() {
+
+        return expireTime;
+    }
+
+    public void setExpireTime(long expireTime) {
+        this.expireTime = expireTime;
+    }
+
+
+    @Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 		   for( Role role : this.getRoles() ){
@@ -240,22 +251,22 @@ public class User extends AbstractEntity implements UserDetails{
 		   }
 		   return authorities;
 	}
-
+    @Transient
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
-
+    @Transient
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
-
+    @Transient
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
-
+    @Transient
 	@Override
 	public boolean isEnabled() {
 		return true;

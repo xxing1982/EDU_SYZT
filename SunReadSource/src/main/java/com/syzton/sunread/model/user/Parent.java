@@ -20,15 +20,22 @@ public class Parent extends User{
             joinColumns = @JoinColumn(name="parent_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="student_id", referencedColumnName="id")
     )
-    private Set<Student> studentSet = new HashSet<>();
+    private Set<Student> children = new HashSet<>();
 
-
-    public Set<Student> getStudentSet() {
-        return studentSet;
+    public String getWorkUnit() {
+        return workUnit;
     }
 
-    public void setStudentSet(Set<Student> studentSet) {
-        this.studentSet = studentSet;
+    public void setWorkUnit(String workUnit) {
+        this.workUnit = workUnit;
+    }
+
+    public Set<Student> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Student> children) {
+        this.children = children;
     }
 }
 

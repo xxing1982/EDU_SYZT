@@ -4,6 +4,7 @@ import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.book.CategoryService;
 import com.syzton.sunread.service.user.UserService;
@@ -103,6 +104,24 @@ public class UserController extends BaseController{
 
         return userService.addChildren(id, userId);
     }
+
+    @RequestMapping(value = "/teachers",method = RequestMethod.POST)
+    @ResponseBody
+    public Teacher addTeacher(@Valid @RequestBody Teacher teacher){
+        return userService.addTeacher(teacher);
+    }
+
+    @RequestMapping(value = "/teachers/{teacherId}",method = RequestMethod.GET)
+    @ResponseBody
+    public Teacher findByTeacherId(@PathVariable("teacherId") Long teacherId){
+        return userService.findByTeacherId(teacherId);
+    }
+    @RequestMapping(value = "/teachers/{teacherId}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteTeacherId(@PathVariable("teacherId") Long teacherId){
+         userService.deleteByTeacherId(teacherId);
+    }
+
 
 
 

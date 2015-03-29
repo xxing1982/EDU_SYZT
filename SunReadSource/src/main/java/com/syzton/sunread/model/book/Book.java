@@ -16,7 +16,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="book")
-@JsonIgnoreProperties(value = {"reviews","categories"})
+@JsonIgnoreProperties(value = {"reviews"})
 public class Book extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;

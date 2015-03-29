@@ -1,7 +1,11 @@
 package com.syzton.sunread.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.util.DateSerializer;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -30,13 +34,23 @@ public class Student extends User{
     @Transient
     private long enrollmentTime; // for receive json
 
+    @JsonIgnore
+    @JsonSerialize(using = DateSerializer.class)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime enrollmentDate; // for insert DB
 
-    @OneToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
-    private Clazz clazz;
+    @Column(nullable = true)
+    private Long classId;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private Set<CoinHistory> coinHistorySet = new HashSet<>();
+
+
+    @PrePersist
+    public void prePersist(){
+        super.prePersist();
+        this.enrollmentDate = new DateTime(this.enrollmentTime);
+    }
 
     public int getLevel() {
         return level;
@@ -79,17 +93,6 @@ public class Student extends User{
         this.enrollmentTime = enrollmentTime;
     }
 
-    public Clazz getClazz() {
-        return clazz;
-    }
-
-    public DateTime getEnrollmentDate() {
-        return new DateTime(this.enrollmentTime);
-    }
-
-    public void setClazz(Clazz clazz) {
-        this.clazz = clazz;
-    }
 
     public Set<CoinHistory> getCoinHistorySet() {
         return coinHistorySet;
@@ -98,5 +101,14 @@ public class Student extends User{
     public void setCoinHistorySet(Set<CoinHistory> coinHistorySet) {
         this.coinHistorySet = coinHistorySet;
     }
+
+    public Long getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Long classId) {
+        this.classId = classId;
+    }
+
 }
 

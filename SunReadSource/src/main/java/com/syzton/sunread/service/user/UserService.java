@@ -2,6 +2,7 @@ package com.syzton.sunread.service.user;
 
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.model.user.User;
 
 /**
@@ -28,4 +29,10 @@ public interface UserService {
     public Parent findByParentId(Long id);
     
     public User getSingleUser(String userName);
+
+    public Teacher addTeacher(Teacher teacher);
+
+    public Teacher findByTeacherId(Long id);
+
+    void deleteByTeacherId(Long id);
 }

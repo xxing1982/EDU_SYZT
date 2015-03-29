@@ -2,9 +2,13 @@ package com.syzton.sunread.model.user;
 
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.Grade;
+import com.syzton.sunread.repository.organization.ClazzRepository;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -13,45 +17,58 @@ import java.util.Set;
 @Entity
 @Table(name="teacher")
 @DiscriminatorValue("T")
+//@Configurable
 public class Teacher extends User{
 
-    private long schoolId;
+//    @Transient
+//    private ClazzRepository clazzRepository;
+//
+//    @Autowired
+//    public Teacher(ClazzRepository clazzRepository) {
+//        this.clazzRepository = clazzRepository;
+//    }
 
     private int rank;
 
     private int experience;
 
     private String graduateSchool;
+    @Transient
+    private Set<Long> clazzIds;
+
+//    @ManyToMany
+//    @JoinTable(name="teacher_clazz",
+//            joinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"),
+//            inverseJoinColumns = @JoinColumn(name="clazz_id", referencedColumnName="id")
+//    )
+//    private Set<Clazz> clazzs = new HashSet<>();
 
 
-    @ManyToMany
-    @JoinTable(name="teacher_clazz",
-            joinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="clazz_id", referencedColumnName="id")
-    )
-    private Set<Clazz> clazzs;
+//    @PrePersist
+//    public void prePersist(){
+//        super.prePersist();
+//        for(Long clazzId: clazzIds){
+//            Clazz clazz = clazzRepository.findOne(clazzId);
+//            if(clazz!=null){
+//                clazzs.add(clazz);
+//            }
+//        }
+//
+//    }
 
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
 
-
-    public long getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(long schoolId) {
-        this.schoolId = schoolId;
-    }
-
-    public Set<Clazz> getClazzs() {
-        return clazzs;
-    }
-
-    public void setClazzs(Set<Clazz> clazzs) {
-        this.clazzs = clazzs;
-    }
+//
+//    public Set<Clazz> getClazzs() {
+//        return clazzs;
+//    }
+//
+//    public void setClazzs(Set<Clazz> clazzs) {
+//        this.clazzs = clazzs;
+//    }
 
     public int getRank() {
         return rank;
@@ -75,6 +92,14 @@ public class Teacher extends User{
 
     public void setGraduateSchool(String graduateSchool) {
         this.graduateSchool = graduateSchool;
+    }
+
+    public Set<Long> getClazzIds() {
+        return clazzIds;
+    }
+
+    public void setClazzIds(Set<Long> clazzIds) {
+        this.clazzIds = clazzIds;
     }
 }
 
