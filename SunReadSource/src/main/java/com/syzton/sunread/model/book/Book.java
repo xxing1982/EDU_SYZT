@@ -92,7 +92,6 @@ public class Book extends AbstractEntity{
     private Set<Review> reviews = new HashSet<>() ;
 
 
-
     public enum Status {
         valid,invalid
     }
@@ -111,6 +110,12 @@ public class Book extends AbstractEntity{
     public void preUpdate() {
         modificationTime = DateTime.now();
     }
+
+
+
+
+
+
 
     public String getDescription() {
         return description;
