@@ -114,5 +114,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             url: '/prizeCenter',
             templateUrl: "partials/prizeCenter.html",
             controller: "prizeCenterController"
+        })
+        //message center
+        .state('messageCenter', {
+            url: '/messageCenter',
+            templateUrl: "partials/messageCenter.html",
+            controller: "messageCenterController"
         });
 }]);

@@ -661,12 +661,9 @@ a:focus, input:focus
 
 /*******************my evaluate bottom****************/
 
-<<<<<<< HEAD
-
 /*******************reading dynamic top****************/
 #readingDynamic-page {
     padding-top: 50px;
-    background-color: #EAEAEA;
     height: 100%;
 }
 
@@ -774,4 +771,57 @@ a:focus, input:focus
 }
 
 /*******************other answer bottom****************/
->>>>>>> cms user and book
+
+/*******************message center top****************/
+
+.messageCenter-page {
+    padding-top: 85px;
+    padding-bottom: 50px;
+    height: 100%;
+}
+
+.messageCenter-body
+{
+    margin-top: 25px;
+    border-radius:5px;
+    border:1px #DDD solid;
+    background-color:#FFFFFF;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.messageCenter-body .title{
+    margin-bottom: 30px;
+}
+
+
+.messageCenter-body .message-row {
+    border-bottom: 1px #DDD solid;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.messageCenter-body .nav-tabs {
+    padding-left: 20px;
+}
+
+.messageCenter-body .page-number-input {
+    padding: 0;
+    width: 38px;
+    margin-left:5px;
+    margin-right:5px;
+    line-height: normal;
+}
+
+.messageCenter-body .page-number {
+    padding: 0px;
+    width: 18px;
+}
+
+.messageCenter-body .page-number-collection {
+    text-align: center;
+}
+
+.messageCenter-body .footer-elements {
+    margin-top: 20px;
+}
