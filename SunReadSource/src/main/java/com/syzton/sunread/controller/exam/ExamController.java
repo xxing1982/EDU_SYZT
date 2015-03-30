@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.ExamDTO;
+import com.syzton.sunread.exception.common.TodayVerifyTimesOverException;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
+import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Question;
@@ -89,11 +91,14 @@ public class ExamController {
         return new PageResource<>(pageResult,"page","size");
     }
     
-    @RequestMapping(value = "/exam/verifypaper/{bookid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/exam/verifypaper/{studentid}/{bookid}", method = RequestMethod.GET)
     @ResponseBody
-    public List<ObjectiveQuestion> createVerifyPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
+    public List<ObjectiveQuestion> createVerifyPaper(@PathVariable("studentid") Long studentId,@PathVariable("bookid") Long bookId) throws NotFoundException {
         LOGGER.debug("Finding all exam entries.");
-       
+        List<Exam> list = service.getTodayVerifyTestStatus(bookId, studentId);
+        if(list.size()>=2){
+        	throw new TodayVerifyTimesOverException("Student{"+studentId+"} verify test with book{"+bookId+"} greater than twice, system ignore this verify test request.");
+        }
         List<ObjectiveQuestion> questions = service.takeVerifyTest(bookId);
         LOGGER.debug("Found {} exam entries.", questions.size());
 
@@ -104,10 +109,10 @@ public class ExamController {
 
     @RequestMapping(value = "/exam/capacitypaper/{bookid}", method = RequestMethod.GET)
     @ResponseBody
-    public List<ObjectiveQuestion> createCapacityPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
+    public List<CapacityQuestion> createCapacityPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
         LOGGER.debug("Finding all todo entries.");
        
-        List<ObjectiveQuestion> questions = service.takeCapacityTest(bookId);
+        List<CapacityQuestion> questions = service.takeCapacityTest(bookId);
         LOGGER.debug("Found {} exam entries.", questions.size());
 
         return questions;
@@ -128,7 +133,12 @@ public class ExamController {
     @ResponseBody
     public Exam handInVerifyPaper(@Valid @RequestBody Exam exam) throws NotFoundException {
         LOGGER.debug("hand in exam entrie.");
-       
+        long studentId = exam.getStudent().getId();
+        long bookId = exam.getBook().getId();
+        List<Exam> list = service.getTodayVerifyTestStatus(studentId, bookId);
+        if(list.size()>=2){
+        	throw new TodayVerifyTimesOverException("Student{"+studentId+"} verify test with book{"+bookId+"} greater than twice, system ignore this verify test request.");
+        }
         Exam examResult = service.handInVerifyPaper(exam);
         LOGGER.debug("return a exam entry result with information: {}", exam);
 

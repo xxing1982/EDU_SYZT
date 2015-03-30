@@ -7,17 +7,23 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syzton.sunread.dto.exam.QuestionDTO;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.SubjectiveQuestion.Builder;
 
 @Entity
 @DiscriminatorValue("objective")
 public class ObjectiveQuestion extends Question {
-
+	
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name="book_id",nullable=false)
+	private Book book;
+	
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
 			CascadeType.REMOVE, CascadeType.MERGE,CascadeType.REFRESH })
 	@JoinColumn(name = "question_id")
@@ -29,6 +35,13 @@ public class ObjectiveQuestion extends Question {
     private Option correctAnswer;
 	
 	
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
 	
 	public static Builder getBuilder() {
         return new Builder();

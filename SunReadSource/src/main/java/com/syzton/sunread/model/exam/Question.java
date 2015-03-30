@@ -34,23 +34,16 @@ import com.syzton.sunread.model.common.AbstractEntity;
 @DiscriminatorColumn(name = "question_type", discriminatorType = DiscriminatorType.STRING, length = 30)   
 public abstract class Question extends AbstractEntity {
 	
-
+	public static final int MAX_LENGTH_DESCRIPTION = 500;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinColumn(name="book_id",nullable=false)
-	private Book book;
+	@Column(nullable=false,length= MAX_LENGTH_DESCRIPTION)
+	private String topic;
+	
+
 
 	@ManyToMany(mappedBy="questions",cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	private Set<Exam> exams;
 	
-
-	public Book getBook() {
-		return book;
-	}
-
-	public void setBook(Book book) {
-		this.book = book;
-	}
 
 	public Set<Exam> getExams() {
 		return exams;
@@ -58,6 +51,14 @@ public abstract class Question extends AbstractEntity {
 
 	public void setExams(Set<Exam> exams) {
 		this.exams = exams;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 
 	public abstract QuestionDTO createDTO();

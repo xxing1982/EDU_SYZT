@@ -24,10 +24,10 @@
 			refresh-token-validity="5184000" scope="read,write" />-->
 
 		<!-- Web Application clients -->
-		<!--<oauth:client client-id="7b5a38705d7b3562655925406a652e32"
+		<oauth:client client-id="7b5a38705d7b3562655925406a652e32"
 			secret="655f523128212d6e70634446224c2a48" authorized-grant-types="password,refresh_token"
 			authorities="ROLE_WEB" access-token-validity="5184000"
-			refresh-token-validity="5184000" scope="read,write" />-->
+			refresh-token-validity="5184000" scope="read,write" />
 
 		<!-- iOS clients -->
 		<!--<oauth:client client-id="5e572e694e4d61763b567059273a4d3d"

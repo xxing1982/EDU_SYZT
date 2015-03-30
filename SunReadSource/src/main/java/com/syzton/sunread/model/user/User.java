@@ -45,7 +45,7 @@ import javax.persistence.Table;
 public class User extends AbstractEntity implements UserDetails{
 
     public static final int MAX_LENGTH_USERNAME = 15;
-    public static final int MAX_LENGTH_PASSWORD = 16;
+    public static final int MAX_LENGTH_PASSWORD = 128;
     public static final int MAX_LENGTH_NICKNAME = 15;
     public static final int MAX_LENGTH_PHONENUMBER = 11;
     public static final int MAX_LENGTH_ADDRESS = 100;
@@ -98,7 +98,14 @@ public class User extends AbstractEntity implements UserDetails{
     private GenderType gender = GenderType.male;
 
     
-    @ManyToMany(mappedBy="users",cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name="e_user_role",    
+    joinColumns={    
+        @JoinColumn(name="u_id",referencedColumnName="id")    
+        },    
+        inverseJoinColumns={    
+         @JoinColumn(name="r_id",referencedColumnName="id")    
+    }) 
     private List<Role> roles = new ArrayList<Role>();
 
 
@@ -107,7 +114,13 @@ public class User extends AbstractEntity implements UserDetails{
     @Column(length = MAX_LENGTH_ADDRESS)
     private String address;
 
-
+    private boolean enabled;
+    
+    private boolean accountNonExpired;
+    
+    private boolean accountNonLocked;
+    
+    private boolean credentialsNonExpired;
 
 
 
@@ -254,22 +267,38 @@ public class User extends AbstractEntity implements UserDetails{
     @Transient
 	@Override
 	public boolean isAccountNonExpired() {
-		return true;
+		return this.accountNonExpired;
 	}
     @Transient
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return this.accountNonLocked;
 	}
     @Transient
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return true;
+		return this.credentialsNonExpired;
 	}
     @Transient
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return this.enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
 	}
 
 	public List<Role> getRoles() {

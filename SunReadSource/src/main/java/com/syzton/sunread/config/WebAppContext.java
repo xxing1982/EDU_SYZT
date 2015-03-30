@@ -77,4 +77,7 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
 
         return viewResolver;
     }
+    
+    
+
 }

@@ -3,7 +3,11 @@ package com.syzton.sunread.model.exam;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -12,17 +16,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.syzton.sunread.dto.exam.QuestionDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.exam.SubjectiveQuestion.SubjectiveQuestionType;
 
 @Entity
-@Table(name = "capacity_quesiton")
-public class CapacityQuestion extends AbstractEntity{
+@DiscriminatorValue("capacity")
+public class CapacityQuestion extends Question{
 	
 	public enum CapacityQuestionType{FIRST,SECOND,THIRD,FOURTH,FIFTH}
-	
-	@ManyToMany(mappedBy="questions",cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
-	private Set<Exam> exams;
-	
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
 			CascadeType.REMOVE, CascadeType.MERGE,CascadeType.REFRESH })
@@ -33,15 +35,13 @@ public class CapacityQuestion extends AbstractEntity{
 	@OneToOne(cascade=CascadeType.ALL)  
     @JoinColumn(name="correct_id")  
     private Option correctAnswer;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name="subjective_que_type",length=10,nullable=false)
+	private CapacityQuestionType questionType;
 	
-	public Set<Exam> getExams() {
-		return exams;
-	}
-
-	public void setExams(Set<Exam> exams) {
-		this.exams = exams;
-	}
-
+	@Column(name="level")
+	private int level;
 	
 	public Set<Option> getOptions() {
 		return options;
@@ -59,6 +59,10 @@ public class CapacityQuestion extends AbstractEntity{
 		this.correctAnswer = correctAnswer;
 	}
 
+	@Override
+	public QuestionDTO createDTO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
- 
 }

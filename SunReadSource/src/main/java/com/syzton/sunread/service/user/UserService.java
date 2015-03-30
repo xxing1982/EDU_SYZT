@@ -35,4 +35,6 @@ public interface UserService {
     public Teacher findByTeacherId(Long id);
 
     void deleteByTeacherId(Long id);
+    
+    public User authenticate(String username, String password);
 }

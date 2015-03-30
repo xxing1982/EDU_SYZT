@@ -24,14 +24,19 @@ public class ApplicationConfig implements WebApplicationInitializer {
 
         //XmlWebApplicationContext rootContext = new XmlWebApplicationContext();
         //rootContext.setConfigLocation("classpath:exampleApplicationContext.xml");
-        FilterRegistration.Dynamic filter = servletContext.addFilter(ENTITYMANAGER_FILTER_NAME,new OpenEntityManagerInViewFilter());
-        filter.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST),true, DISPATCHER_SERVLET_NAME);
-
-
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(rootContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping(DISPATCHER_SERVLET_MAPPING);
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
+        
+        FilterRegistration.Dynamic springSecurityFilter = servletContext.addFilter("springSecurityFilterChain", org.springframework.web.filter.DelegatingFilterProxy.class);
+        springSecurityFilter.addMappingForUrlPatterns(null, false, "/*");
+ 
+        FilterRegistration.Dynamic filter = servletContext.addFilter(ENTITYMANAGER_FILTER_NAME,new OpenEntityManagerInViewFilter());
+        filter.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST),true, DISPATCHER_SERVLET_NAME);
+
+        
     }
+
 }

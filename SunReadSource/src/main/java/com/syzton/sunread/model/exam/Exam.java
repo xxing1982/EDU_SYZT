@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -25,24 +26,21 @@ import javax.persistence.Version;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+
 import com.syzton.sunread.dto.exam.ExamDTO;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.Student;
 
 @Entity
 @Table(name = "exam")
-public class Exam {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+public class Exam extends AbstractEntity {
 
 	// TODO
 	public static final int EXAM_QUESTION = 10;
+	
 	public static final int EXAM_SUBJECTIVE_QUESTION_PER_TYPE = 2;
-
-	@Column(name = "creation_time", nullable = false)
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	private DateTime creationTime;
+	public static final int EXAM_CAPACITY_QUESTION_PER_TYPE = 2;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "exam_question", joinColumns = { @JoinColumn(name = "exam_id") }, inverseJoinColumns = { @JoinColumn(name = "question_id") })
@@ -51,6 +49,10 @@ public class Exam {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "book_id")
 	private Book book;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="student_id")
+	private Student student;
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 10, nullable = false)
@@ -163,6 +165,14 @@ public class Exam {
 
 	public Set<Question> getQuestions() {
 		return questions;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Book getBook() {

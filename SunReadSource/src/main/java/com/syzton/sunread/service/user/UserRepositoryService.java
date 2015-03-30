@@ -1,14 +1,28 @@
 package com.syzton.sunread.service.user;
 
+import java.util.Collections;
+
+import com.syzton.sunread.exception.common.AuthenticationException;
+import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
+ 
 import com.syzton.sunread.model.user.*;
 import com.syzton.sunread.repository.user.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.ClientDetails;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Request;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +33,9 @@ import static org.springframework.util.Assert.notNull;
  */
 @Service
 public class UserRepositoryService implements UserService,UserDetailsService{
+	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(UserRepositoryService.class);
 
     private UserRepository userRepository;
     
@@ -27,6 +44,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     private StudentRepository studentRepository;
 
     private ParentRepository parentRepository;
+    
+    private RoleRepository roleRepository;
 
     private TeacherRepository teacherRepository;
 
@@ -37,12 +56,15 @@ public class UserRepositoryService implements UserService,UserDetailsService{
                                  StudentRepository studentRepository,
                                  ParentRepository parentRepository,
                                  TeacherRepository teacherRepository,
-                                 TeacherClazzRepository teacherClazzRepository) {
+                                 TeacherClazzRepository teacherClazzRepository,
+                                 PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
         this.parentRepository = parentRepository;
         this.teacherRepository = teacherRepository;
         this.teacherClazzRepository = teacherClazzRepository;
+        this.passwordEncoder = passwordEncoder;
+
     }
 
     @Override
@@ -54,10 +76,24 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         return user;
 
     }
+    
+//    @Transactional
+//    @Override
+//    public User addUser(User user) {
+//        return userRepository.save(user);
+//    }
+    
+    @Transactional
     @Override
     public User addUser(User user) {
-        return userRepository.save(user);
+    	User repeat = userRepository.findByUsername(user.getUsername());
+    	if(repeat != null){
+    		throw new DuplicateException("User "+user.getUsername()+" duplicate.");
+    	}else{
+    			return insertNewUser(user);
+    	}
     }
+    
 
     @Transactional
     @Override
@@ -69,7 +105,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
     @Override
     public Student addStudent(Student student) {
-
+    	
         return studentRepository.save(student);
     }
 
@@ -131,6 +167,15 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         return locateUser(username);
     }
     
+    @Override
+    public User authenticate(String username, String password) {
+        User user = locateUser(username);
+        if(!passwordEncoder.encode(password).equals(user.getPassword())) {
+            throw new AuthenticationException("User "+ username +" password error");
+        }
+        return user;
+    }
+    
     /**
      * Locate the user and throw an exception if not found.
      *
@@ -140,12 +185,18 @@ public class UserRepositoryService implements UserService,UserDetailsService{
      */
     private User locateUser(final String username) {
         notNull(username, "Mandatory argument 'username' missing.");
-        User user = userRepository.findByUsername(username.toLowerCase());
+        User user = userRepository.findByUsername(username);
         if (user == null) {
-//            LOG.debug("Credentials [{}] failed to locate a user.", username.toLowerCase());
-//            throw new UsernameNotFoundException("failed to locate a user");
+            LOGGER.debug("Credentials [{}] failed to locate a user.", username.toLowerCase());
+            throw new AuthenticationException("User "+username+" didn't exist.");
         }
         return user;
+    }
+    
+    private User insertNewUser(User user) {
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
+        return userRepository.save(user);
     }
 
 	@Override
@@ -153,6 +204,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
     @Transactional
     @Override
     public Teacher addTeacher(Teacher teacher) {
@@ -176,4 +228,5 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     public void deleteByTeacherId(Long id) {
         teacherRepository.delete(id);
     }
+
 }

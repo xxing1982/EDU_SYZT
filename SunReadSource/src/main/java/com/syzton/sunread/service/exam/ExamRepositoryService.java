@@ -1,6 +1,8 @@
 package com.syzton.sunread.service.exam;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -26,12 +28,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
+import com.syzton.sunread.model.exam.CapacityQuestion;
+import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion.SubjectiveQuestionType;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.book.BookRepository;
+import com.syzton.sunread.repository.exam.CapacityQuestionRepository;
 import com.syzton.sunread.repository.exam.ExamRepository;
 import com.syzton.sunread.repository.exam.ObjectiveQuestionRepository;
 import com.syzton.sunread.repository.exam.SubjectiveQuestionRepository;
@@ -48,19 +54,20 @@ public class ExamRepositoryService implements ExamService {
 
 	private SubjectiveQuestionRepository subjectQsRepo;
 
-	
+	private CapacityQuestionRepository capacityQsRepo;
 
 	private BookRepository bookRepo;
 
 	@Autowired
 	public ExamRepositoryService(ExamRepository repository,
 			ObjectiveQuestionRepository objectQsRepo,SubjectiveQuestionRepository 
-			subjectQsRepo,
+			subjectQsRepo,CapacityQuestionRepository capacityQsRepo,
 			BookRepository bookRepo) {
 		this.repository = repository;
 		this.objectQsRepo = objectQsRepo;
 		this.subjectQsRepo = subjectQsRepo;
 		this.bookRepo = bookRepo;
+		this.capacityQsRepo = capacityQsRepo;
 	}
 
 	@Override
@@ -174,8 +181,15 @@ public class ExamRepositoryService implements ExamService {
 	}
 
 	@Override
-	public List<ObjectiveQuestion> takeCapacityTest(Long bookId) {
-		return getRandomObjectiveQuestions(bookId);
+	public List<CapacityQuestion> takeCapacityTest(Long bookId) {
+		List<CapacityQuestionType> list = new ArrayList<CapacityQuestionType>();
+		list.add(CapacityQuestionType.FIRST);
+		list.add(CapacityQuestionType.SECOND);
+		list.add(CapacityQuestionType.THIRD);
+		list.add(CapacityQuestionType.FOURTH);
+		list.add(CapacityQuestionType.FIFTH);
+		List<CapacityQuestion> questions = this.getRandomCapacityQuestion(list, Exam.EXAM_CAPACITY_QUESTION_PER_TYPE);
+		return questions;
 	}
 
 	@Override
@@ -195,6 +209,7 @@ public class ExamRepositoryService implements ExamService {
 
 	private List<ObjectiveQuestion> getRandomObjectiveQuestions(
 			final Long bookId) {
+		 
 		long total = objectQsRepo.count(new Specification<ObjectiveQuestion>() {
 
 			@Override
@@ -254,6 +269,46 @@ public class ExamRepositoryService implements ExamService {
 				}
 			}
 		}
+		return list;
+	}
+	
+	private List<CapacityQuestion> getRandomCapacityQuestion(
+			List<CapacityQuestionType> typeList, int num) {
+		List<CapacityQuestion> list = new ArrayList<CapacityQuestion>();
+		 
+		Random random = new Random();
+		if (typeList != null) {
+			for (int i = 0; i < typeList.size(); i++) {
+				List<CapacityQuestion> tempList = capacityQsRepo
+						.findByQuestionType(typeList.get(i));
+				if (tempList.size() > num) {
+					int z = random.nextInt(tempList.size());
+					for (int j = 0; j < num; j++) {
+						list.add(tempList.get(z));
+						z = (z + 1) % tempList.size();
+					}
+				} else {
+					list.addAll(tempList);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Exam> getTodayVerifyTestStatus(Long bookId, Long studentId) {	
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		Date date = cal.getTime();
+		Book book = new Book();
+		book.setId(bookId);
+		Student student = new Student();
+		student.setId(studentId);
+		List<Exam> list = repository.findByStudentAndBookAfter(student, book,date);
 		return list;
 	}
 }

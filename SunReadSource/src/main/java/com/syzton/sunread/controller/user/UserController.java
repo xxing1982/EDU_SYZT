@@ -1,7 +1,19 @@
 package com.syzton.sunread.controller.user;
 
+
 import com.syzton.sunread.controller.BaseController;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
+import com.syzton.sunread.dto.user.UserDTO;
+
 import com.syzton.sunread.model.book.Category;
+import com.syzton.sunread.model.security.Role;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.Teacher;
@@ -15,7 +27,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.ClientDetails;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Request;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,17 +57,29 @@ public class UserController extends BaseController{
 
 
     private UserService userService;
+    
+    private DefaultTokenServices tokenServices;
+    
+    private PasswordEncoder passwordEncoder;
+    
+    private ClientDetailsService clientDetailsService;
 
 
     @Autowired
-    public void setReviewService(UserService userService) {
+    public void setReviewService(UserService userService,DefaultTokenServices tokenServices,PasswordEncoder passwordEncoder,ClientDetailsService clientDetailsService) {
         this.userService = userService;
+        this.tokenServices = tokenServices;
+        this.passwordEncoder = passwordEncoder;
+        this.clientDetailsService = clientDetailsService;
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     @ResponseBody
-    public User add(@Valid @RequestBody User user) {
-        return userService.addUser(user);
+    public UserDTO add(@Valid @RequestBody User user) { 
+    	LOGGER.debug("PASSWORD:"+user.getPassword());
+    	User insertUser = userService.addUser(user);
+    	return new UserDTO(insertUser, createTokenForNewUser(
+    			insertUser.getUsername(), insertUser.getPassword(), "353b302c44574f565045687e534e7d6a","ROLE_USER"));
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
@@ -52,7 +89,14 @@ public class UserController extends BaseController{
         userService.deleteById(id);
 
     }
+    
+    @Secured({"ROLE_USER"})
+    @RequestMapping(value = "/users/test/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public void test(@PathVariable("id") Long id){
 
+    	
+    }
     
     @RequestMapping(value = "/tokens/{token}",method = RequestMethod.POST)
     public void verifyToken(@PathVariable("token") String token) {
@@ -105,6 +149,7 @@ public class UserController extends BaseController{
         return userService.addChildren(id, userId);
     }
 
+
     @RequestMapping(value = "/teachers",method = RequestMethod.POST)
     @ResponseBody
     public Teacher addTeacher(@Valid @RequestBody Teacher teacher){
@@ -123,6 +168,28 @@ public class UserController extends BaseController{
     }
 
 
+
+
+    private OAuth2AccessToken createTokenForNewUser(String username, String password, String clientId,String role) {
+        String hashedPassword = passwordEncoder.encode(password);
+        UsernamePasswordAuthenticationToken userAuthentication = new UsernamePasswordAuthenticationToken(
+        		username,
+                hashedPassword, Collections.singleton(new SimpleGrantedAuthority(role)));
+        ClientDetails authenticatedClient = clientDetailsService.loadClientByClientId(clientId);
+        OAuth2Request oAuth2Request = createOAuth2Request(null, clientId,
+                Collections.singleton(new SimpleGrantedAuthority(role)),
+                true, authenticatedClient.getScope(), null, null, null, null);
+        OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, userAuthentication);
+        return tokenServices.createAccessToken(oAuth2Authentication);
+    }
+    
+    private OAuth2Request createOAuth2Request(Map<String, String> requestParameters, String clientId,
+            Collection<? extends GrantedAuthority> authorities, boolean approved, Collection<String> scope,
+            Set<String> resourceIds, String redirectUri, Set<String> responseTypes,
+            Map<String, Serializable> extensionProperties) {
+return new OAuth2Request(requestParameters, clientId, authorities, approved, scope == null ? null
+: new LinkedHashSet<String>(scope), resourceIds, redirectUri, responseTypes, extensionProperties);
+}
 
 
 }

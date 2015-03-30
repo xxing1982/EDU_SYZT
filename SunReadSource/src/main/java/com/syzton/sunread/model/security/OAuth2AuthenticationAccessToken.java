@@ -2,6 +2,7 @@ package com.syzton.sunread.model.security;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -11,7 +12,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import com.syzton.sunread.model.common.AbstractEntity;
 @Entity
 @Table(name = "oauth_authentication_access_token")
-public class OAuth2AuthenticationAccessToken extends AbstractEntity {
+public class OAuth2AuthenticationAccessToken  {
 
     @Column(name="token_id")
 	private String tokenId;
@@ -22,6 +23,7 @@ public class OAuth2AuthenticationAccessToken extends AbstractEntity {
     @Column(name="authentication_id")
     private String authenticationId;
     
+    @Id
     @Column(name="user_name")
     private String userName;
     
