@@ -8,6 +8,9 @@ var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourContro
 // router config
 routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     
+    $urlRouterProvider
+        .otherwise('/');
+
      $stateProvider
         //main page
         .state('main', {

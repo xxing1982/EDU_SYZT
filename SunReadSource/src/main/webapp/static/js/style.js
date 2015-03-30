@@ -30,23 +30,23 @@ function TopNav(){
 
 //left navigate event in page reading center
 function ReadingCenterLeftNav(){
-	$(".list-group a").on("click", function(){
-		$(".list-group").find(".myActive").removeClass("myActive");
+	$(".nav-sidebar ul li").on("click", function(){
+		$(".nav-sidebar ul li").find(".myActive").removeClass("myActive");
 		$(this).addClass("myActive");
 	});
 
 	var urlStr = window.location.href;
 	if (urlStr.match("readingCenter/myNote")) {
-		$(".list-group a").eq(1).addClass("myActive");
+		$(".nav-sidebar ul li").eq(1).addClass("myActive");
 	}
 	else if (urlStr.match("readingCenter/myEvaluating")) {
-		$(".list-group a").eq(2).addClass("myActive");
+		$(".nav-sidebar ul li").eq(2).addClass("myActive");
 	}
 	else if (urlStr.match("readingCenter/myEvaluate")) {
-		$(".list-group a").eq(3).addClass("myActive");
+		$(".nav-sidebar ul li").eq(3).addClass("myActive");
 	}
 	else{
-		$(".list-group a").eq(0).addClass("myActive");
+		$(".nav-sidebar ul li").eq(0).addClass("myActive");
 	}
 }
 
