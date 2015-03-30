@@ -1,12 +1,24 @@
 //readingCenterMyNoteCtrl.js
 
 ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', function ($scope, Note, Comment) {
-	$scope.showMust = true;
+
+    /*
+        Some constants 
+    */
+    var pageSize = 10;
+    var stateTexts = { more : "加载更多", loading: "更多加载中...", nomore: "没有了"};
+    
+    
+    /*
+        Initlizate some variables in $scope
+    */
+    $scope.showMust = true;
+    $scope.loadingState = stateTexts.more;
 
     /*
         Hide all the comments of all notes
     */
-    $scope.Notes = Note.get(function(){
+    $scope.Notes = Note.get({page: 0, size: pageSize}, function(){
         var content = $scope.Notes.content;
         for(var i = 0; i < content.length; i++){
             content[i].showComments = false;
@@ -14,29 +26,79 @@ ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', 
     });
     
     /*
+        Invoke this method to load more notes
+    */
+    $scope.ShowMoreNotes = (function(){
+        
+        // Some states of the closure
+        var page = 1;
+        var size = pageSize;
+        var finished = false;
+        
+        return function (){
+            // Change the loading state to loading
+            $scope.loadingState = stateTexts.loading;
+    
+            // GET the Notes entity
+            var newPage = Note.get({page: page, size: size}, function(){               
+                if (newPage.lastPage){
+                    // Get the last page of the Notes, 
+                    // Change the state of the loading state and turn on finished
+                    $scope.loadingState = stateTexts.nomore;
+                    if (!finished) {
+                        $scope.Notes.content = $scope.Notes.content.concat(newPage.content);
+                    }
+                    finished = true;
+                } else {
+                    finished = false;
+                    $scope.loadingState = stateTexts.more;
+                    $scope.Notes.content = $scope.Notes.content.concat(newPage.content);
+                    page ++;
+                }
+            });
+        };
+    })();
+
+    
+    /*
         Show the comments of the note with the index and hide the last one
     */
 	$scope.ShowComments = (function(){
         var last = 0;
-        return function(index){
-            
-            // Initlizate some common values
-            var notes = $scope.Notes.content;
-            var currentNote = notes[index];
+        var page = 0;
+        return function(note){
             
             // Toggle the comment show or hide and then save the last index 
-            currentNote.showComments = !currentNote.showComments; 
-            if (last !== index){
-                notes[last].showComments = false;
-                last = index;
-            }
+            note.showComments = !note.showComments; 
             
             // Get the comments by Note id and display
-            if ( currentNote.showComments === true ){
-                $scope.Comments = Comment.getByNoteId({id: currentNote.id});
+            if ( note.showComments === true ){
+                var Comments = Comment.get(
+                    {by: "notes", id: note.id, page: 0, size: 3, sortBy: "id"},
+                    function(){
+                        note.Comments = Comments;
+                });
             }
         };
     })();
 
 
+    $scope.addComment = function(note){
+        // Check the content of comment is avaliable
+        var content = note.newCommentContent;
+        if ( content === "" || content === undefined ) return;
+        
+        // Get the comments reference and set the comment entity
+        var comments = note.Comments.content;
+        var comment = {content: content};
+        
+        // POST the comment entity by Comment factory
+        Comment.save({by: "notes", id: note.id}, comment);
+        
+        // Add the comment entity to the top of Comments list
+        comments.unshift(comment);
+        
+        // Reset the form 
+        note.newCommentContent = "";
+    }
 }]);

@@ -27,16 +27,16 @@
 								<img src="../static/img/note.jpg" class="img-responsive">
 							</div>
 						</div>
-						<div class="msg-buttom" ng-click="ShowComments($index)"><span class="glyphicon glyphicon-comment"></span> 6</div>
+						<div class="msg-buttom" ng-click="ShowComments(Note)"><span class="glyphicon glyphicon-comment"></span> 6</div>
 					</div>
 				</div>
 				<div class="row msg-row" ng-show="Note.showComments">
-					<div class="col-md-9"><input class="form-control" placeholder="输入回复"></div>
-					<input class="btn btn-green col-md-2" type="button" value="发表评论">
+					<div class="col-md-9"><input class="form-control" placeholder="输入回复" ng-model="Note.newCommentContent"></div>
+					<input class="btn btn-green col-md-2" ng-click="addComment(Note)" type="button" value="发表评论">
 					<div class="clearfix"></div>
 					<div class="col-md-11 reply">
 						<div class="col-md-12 total">共1条评论</div>
-						<div class="col-md-12 block" ng-repeat="Comment in Comments.content">
+						<div class="col-md-12 block" ng-repeat="Comment in Note.Comments.content">
 							<div class="person">张逸轩&nbsp;&nbsp;&nbsp;三天前</div>
 							<div class="content">{{Comment.content}}</div>
 						</div>
@@ -44,7 +44,7 @@
 				</div>
 			</div>
             
-			<div class="bottom">更多加载中...</div>
+			<div class="bottom" ng-click="ShowMoreNotes()">{{ loadingState }}</div>
 		</div>
 	</div>
 	<div class="col-md-1"></div>
