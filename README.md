@@ -1,15 +1,4 @@
-# EDU_SYZT
-# Live server
-* 123.56.149.218
-* JAVA_HOME: /usr/local/java/jdk1.7.0_75
-* Tomcat7: /usr/local/tomcat7
-* mysql database: 123.56.149.218:3306/sunreading   
-* database username/password: sunreading/sunreading2015
-
-# UI Prototyping 
-* Note: It is ONLY used to avoid the leakage of user logics
-* Access URL: http://8eyr00.axshare.com/
-* Password:   Beijing123
+# EDU_SYZT Project 
 
 # Aliyun Instances (Ubuntu 64 bits)
 * 123.56.149.218
@@ -17,23 +6,44 @@
 * User Name: 			root
 * Password:				syzt2015KEY
 
-# Data structure
+# Server: 
+* JAVA_HOME: 			/usr/local/java/jdk1.7.0_75
+* Tomcat7: 				/usr/local/tomcat7
+* Live Server:			123.56.149.218
+* mysql DB Server: 		123.56.149.218:3306/sunreading   
+* DB Username			sunreading
+* DB Password: 			sunreading2015
+
+# FTP server
+* Server Access URL:    123.57.139.159
+* User Name:            Syzton2015
+* Password: 		    Syzton2015
+
+# Images PSD server:
+* Server Path: 			http://pan.baidu.com/s/1jGBZiM6
+* PSW:					r6nu
+
+# EDU_SYZT reference
+
+# Data structure reference
 * mySQL Access URL: 	123.57.139.159
 * User Name: 		    sunreading
 * Password:			    sunreading2015
 * Table reference from customer (Only FYI) as below:
 * webbooks, webschool, webuser, webteacher, webstudent, webareaprovince, webareacity and webareadistrict 
 
-# Test server
+# Test server reference
 * Note: there is a server running, which is listening to port 80 (DON'T change anything)
 * Server Access URL:    123.57.139.159
 * User Name:            Administrator
 * Password: 		    Syzton123
 
-# FTP server
-* Server Access URL:    123.57.139.159
-* User Name:            Syzton2015
-* Password: 		    Syzton2015
+# UI Prototyping reference
+* Note: It is ONLY used to avoid the leakage of user logics
+* Access URL: http://8eyr00.axshare.com/
+* Password:   Beijing123
+
+# MISC INFO
 
 # ByPass CGW
 * 主程序：https://github.com/EiddleChen/shadowsocks-heroku
