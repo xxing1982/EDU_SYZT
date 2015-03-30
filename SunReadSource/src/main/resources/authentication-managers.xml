@@ -24,6 +24,4 @@
         <constructor-arg ref="client-details-service" />
     </bean>
     <bean id="client-details-service" class="com.syzton.sunread.security.ClientDetailsServiceImpl" />
-    
-
 </beans>

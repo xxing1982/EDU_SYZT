@@ -15,7 +15,9 @@
           xmlns="http://www.springframework.org/schema/beans">
         <property name="decisionVoters">
             <list>
-                <ref bean="roleVoter"/>
+                <bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter"/>
+                <bean class="org.springframework.security.access.vote.RoleVoter"/>
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
             </list>
         </property>
     </bean>
@@ -34,7 +36,7 @@
         <constructor-arg ref="roleHierarchy" />
     </bean>
 
-    <sec:global-method-security secured-annotations="enabled" access-decision-manager-ref="accessDecisionManager"/>
+    <sec:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" access-decision-manager-ref="accessDecisionManager"/>
     
     <oauth:expression-handler id="oauthExpressionHandler"/>
     

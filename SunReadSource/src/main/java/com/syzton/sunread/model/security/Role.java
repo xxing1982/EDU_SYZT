@@ -1,5 +1,6 @@
 package com.syzton.sunread.model.security;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,8 +16,9 @@ import com.syzton.sunread.model.user.User;
 
 @Entity
 @JsonIgnoreProperties(value = { "creationTime"})
-public class Role  extends AbstractEntity{
-	
+public class Role  extends AbstractEntity implements Serializable{
+ 
+	private static final long serialVersionUID = -7699561423592269380L;
 	public static final int MAX_LENGTH_DESCRIPTION = 500;
     public static final int MAX_LENGTH_NAME = 32;
 	

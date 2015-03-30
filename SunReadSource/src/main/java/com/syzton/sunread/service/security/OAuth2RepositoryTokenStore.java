@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
+import org.springframework.security.oauth2.common.util.SerializationUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.AuthenticationKeyGenerator;
 import org.springframework.security.oauth2.provider.token.DefaultAuthenticationKeyGenerator;
@@ -16,8 +19,12 @@ import com.syzton.sunread.model.security.OAuth2AuthenticationAccessToken;
 import com.syzton.sunread.model.security.OAuth2AuthenticationRefreshToken;
 import com.syzton.sunread.repository.security.OAuth2AccessTokenRepository;
 import com.syzton.sunread.repository.security.OAuth2RefreshTokenRepository;
+import com.syzton.sunread.service.user.UserRepositoryService;
 
 public class OAuth2RepositoryTokenStore implements TokenStore{
+	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(OAuth2RepositoryTokenStore.class);
 	
 	private final OAuth2AccessTokenRepository oAuth2AccessTokenRepository;
 
@@ -39,7 +46,8 @@ public class OAuth2RepositoryTokenStore implements TokenStore{
 
     @Override
     public OAuth2Authentication readAuthentication(String tokenId) {
-        return oAuth2AccessTokenRepository.findByTokenId(tokenId).getAuthentication();
+    	OAuth2AuthenticationAccessToken  token = oAuth2AccessTokenRepository.findByTokenId(tokenId);
+        return SerializationUtils.deserialize(token.getAuthentication());
     }
 
     @Override
@@ -55,7 +63,7 @@ public class OAuth2RepositoryTokenStore implements TokenStore{
         if(token == null) {
             return null; //let spring security handle the invalid token
         }
-        OAuth2AccessToken accessToken = token.getoAuth2AccessToken();
+        OAuth2AccessToken accessToken = SerializationUtils.deserialize(token.getToken());
 		return accessToken;
     }
 
@@ -94,8 +102,10 @@ public class OAuth2RepositoryTokenStore implements TokenStore{
 
     @Override
     public OAuth2AccessToken getAccessToken(OAuth2Authentication authentication) {
-        OAuth2AuthenticationAccessToken token =  oAuth2AccessTokenRepository.findByAuthenticationId(authenticationKeyGenerator.extractKey(authentication));
-        return token == null ? null : token.getoAuth2AccessToken();
+        List<OAuth2AuthenticationAccessToken> tokenList =  oAuth2AccessTokenRepository.findByAuthenticationIdOrderByCreationTimeDesc(authenticationKeyGenerator.extractKey(authentication));
+        OAuth2AccessToken token = null;
+        if(tokenList.size() != 0) {SerializationUtils.deserialize(tokenList.get(0).getToken());}
+        return token;
     }
 
     @Override
@@ -113,7 +123,7 @@ public class OAuth2RepositoryTokenStore implements TokenStore{
     private Collection<OAuth2AccessToken> extractAccessTokens(List<OAuth2AuthenticationAccessToken> tokens) {
         List<OAuth2AccessToken> accessTokens = new ArrayList<OAuth2AccessToken>();
         for(OAuth2AuthenticationAccessToken token : tokens) {
-            accessTokens.add(token.getoAuth2AccessToken());
+            accessTokens.add((OAuth2AccessToken)SerializationUtils.deserialize(token.getToken()));
         }
         return accessTokens;
     }
