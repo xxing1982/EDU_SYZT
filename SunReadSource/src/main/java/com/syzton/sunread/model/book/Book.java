@@ -88,6 +88,9 @@ public class Book extends AbstractEntity{
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
     private BookExtra extra;
 
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
+    private BookHot hot;
+
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private Set<Review> reviews = new HashSet<>() ;
 
@@ -277,9 +280,16 @@ public class Book extends AbstractEntity{
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Status status)
+    {
         this.status = status;
     }
 
+    public BookHot getHot() {
+        return hot;
+    }
 
+    public void setHot(BookHot hot) {
+        this.hot = hot;
+    }
 }

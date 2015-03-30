@@ -147,7 +147,7 @@ public class BookController extends BaseController {
             @RequestParam(value = "ageRange", required = false) String ageRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"extra.weeklyHot","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.weeklyHot","desc");
     }
     @RequestMapping(value = "/books/conditions/monthlyhot", method = RequestMethod.GET)
     @ResponseBody
@@ -162,7 +162,7 @@ public class BookController extends BaseController {
             @RequestParam(value = "ageRange", required = false) String ageRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"extra.monthlyHot","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.monthlyHot","desc");
     }
 
     @RequestMapping(value = "/books/conditions/yearlyhot", method = RequestMethod.GET)
@@ -178,7 +178,54 @@ public class BookController extends BaseController {
             @RequestParam(value = "ageRange", required = false) String ageRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"extra.yearlyHot","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.yearlyHot","desc");
+    }
+
+    @RequestMapping(value = "/books/conditions/weeklyRecommend", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<Book> orderByWeeklyRecommend(
+            @RequestParam(value = "level", required = false) String level,
+            @RequestParam(value = "testType", required = false) String testType,
+            @RequestParam(value = "literature", required = false) String literature,
+            @RequestParam(value = "language", required = false) String language,
+            @RequestParam(value = "grade", required = false) String grade,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "resource", required = false) String resource,
+            @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size) {
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.weeklyRecommend","desc");
+    }
+    @RequestMapping(value = "/books/conditions/monthlyRecommend", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<Book> orderByMonthlyRecommend(
+            @RequestParam(value = "level", required = false) String level,
+            @RequestParam(value = "testType", required = false) String testType,
+            @RequestParam(value = "literature", required = false) String literature,
+            @RequestParam(value = "language", required = false) String language,
+            @RequestParam(value = "grade", required = false) String grade,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "resource", required = false) String resource,
+            @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size) {
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.monthlyRecommend","desc");
+    }
+
+    @RequestMapping(value = "/books/conditions/yearlyRecommend", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<Book> orderByYearlyRecommend(
+            @RequestParam(value = "level", required = false) String level,
+            @RequestParam(value = "testType", required = false) String testType,
+            @RequestParam(value = "literature", required = false) String literature,
+            @RequestParam(value = "language", required = false) String language,
+            @RequestParam(value = "grade", required = false) String grade,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "resource", required = false) String resource,
+            @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size) {
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.yearlyRecommend","desc");
     }
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     @ResponseBody

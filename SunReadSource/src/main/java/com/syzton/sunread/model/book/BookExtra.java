@@ -34,35 +34,6 @@ public class BookExtra extends AbstractEntity{
 //    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "book")
 //    private List<Recommendation> recommendations = new ArrayList<>();
 
-    private long weeklyHot;
-
-    private long monthlyHot;
-
-    private long yearlyHot;
-
-    public long getWeeklyHot() {
-        return weeklyHot;
-    }
-
-    public void setWeeklyHot(long weeklyHot) {
-        this.weeklyHot = weeklyHot;
-    }
-
-    public long getMonthlyHot() {
-        return monthlyHot;
-    }
-
-    public void setMonthlyHot(long monthlyHot) {
-        this.monthlyHot = monthlyHot;
-    }
-
-    public long getYearlyHot() {
-        return yearlyHot;
-    }
-
-    public void setYearlyHot(long yearlyHot) {
-        this.yearlyHot = yearlyHot;
-    }
 
     //    @JsonIgnore
 //    @ManyToMany

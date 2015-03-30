@@ -60,14 +60,14 @@ public class RecommendationRepositoryService implements RecommendationService {
 
         long weekHot = recommendationRepository.count(countRMDuringWeekly(bookId));
 
-        book.getExtra().setWeeklyHot(weekHot);
+        book.getHot().setWeeklyHot(weekHot);
 
         long monthHot = recommendationRepository.count(countRMDuringMonthly(bookId));
 
-        book.getExtra().setMonthlyHot(monthHot);
+        book.getHot().setMonthlyHot(monthHot);
 
         long yearHot = recommendationRepository.count(countRMDuringYearly(bookId));
-        book.getExtra().setYearlyHot(yearHot);
+        book.getHot().setYearlyHot(yearHot);
         bookRepository.save(book);
 
 
