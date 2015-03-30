@@ -825,3 +825,49 @@ a:focus, input:focus
 .messageCenter-body .footer-elements {
     margin-top: 20px;
 }
+
+.messageCenter-body #myTab li{
+    width: 146px;
+    text-align: center;
+}
+
+.messageCenter-body #myTab #send-message{
+    text-align: center;
+    float: right;
+    margin-right: 15px;
+}
+
+.messageCenter-body .modal-dialog {
+    width: 58%;
+}
+
+.messageCenter-body .modal-content {
+    padding: 35px;
+}
+
+.messageCenter-body .modal-content .radio{
+    padding-bottom: 23px;
+}
+
+.messageCenter-body .modal-content .modal-title{
+    padding-bottom: 16px;
+}
+
+
+.messageCenter-body .modal-content .select-group{
+    padding-bottom: 16px;
+}
+
+.messageCenter-body .modal-content .select-label{
+    line-height: 34px;
+}
+
+
+.messageCenter-body .modal-content .place-holder{
+    height: 52px;
+}
+
+.messageCenter-body .modal-content .message-input{
+    height: 140px;
+    margin-bottom: 23px;
+}
