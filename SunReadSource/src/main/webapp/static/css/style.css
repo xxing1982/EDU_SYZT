@@ -869,7 +869,6 @@ a:focus, input:focus
     padding-bottom: 16px;
 }
 
-
 .messageCenter-body .modal-content .select-group{
     padding-bottom: 16px;
 }
@@ -878,12 +877,9 @@ a:focus, input:focus
     line-height: 34px;
 }
 
-
-.messageCenter-body .modal-content .place-holder{
-    height: 52px;
-}
-
 .messageCenter-body .modal-content .message-input{
     height: 140px;
     margin-bottom: 23px;
 }
+
+/*******************message center buttom****************/
