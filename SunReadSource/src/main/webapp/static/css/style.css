@@ -1,6 +1,9 @@
 
 body
 {
+    background-image:url(../img/background.jpg);
+    background-repeat:no-repeat;
+    padding-top: 50px;
 }
 /*change placeholder color*/
 .navbar .input-group input::-webkit-input-placeholder {
@@ -21,26 +24,21 @@ a:focus, input:focus
 }
 
 /***********navigation top*************************/
-#main-page
-{
-    background-image:url(../img/background.jpg);
-    background-repeat:no-repeat;
-    background-size:100% 100%;
-    padding-top: 50px;
-}
 .navbar
 {
-    background-color: #FFAF25 !important;
+    background-color: #FFFFFF !important;
     padding-top: 5px;
     box-shadow: 0 0px 7px #888888;
 }
 
 .navbar a
 {
-    color:White;
+    color:#778BA6;
+    font-size: 16px;
+    font-weight: 700;
 }
 
-.nav li a:hover, .nav li a:visited
+.navbar li a:hover, .navbar li a:visited
 {
     background-color:transparent;
 }
@@ -53,21 +51,14 @@ a:focus, input:focus
 .nav-underline li a:focus
 {
     background-color:transparent !important;
-    border-bottom: 2px White solid;
+    border-bottom: 2px #778BA6 solid;
     margin-bottom: -2px;
 }
 
-.nav-underline li.myActive a
+.nav-underline li.myActive
 {
-    border-bottom: 2px White solid;
+    border-bottom: 2px #778BA6 solid;
     margin-bottom: -2px;
-}
-
-.nav-transparent
-{
-    background-color: #E9980B;
-    color:#FFFFFF;
-    border: 0;
 }
 /************navigation bottom************************/
 
@@ -250,59 +241,52 @@ a:focus, input:focus
 /************main-body bottom************************/
 
 /************readingCenter page******************************/
-#readingCenter-page
-{
-    padding-top: 60px;
-    /*background-color: #FFFCFA;*/
-}
-
 .sidebar
 {
     position: fixed;
-    top: 51px;
-    bottom: 0px;
+    top: 41px;
+    bottom: 30px;
     left: 0px;
-    z-index: 1000;
+    z-index: 10;
     display: block;
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #F5F5F5;
+    background-color: #5E4F35;
     border-right: 1px solid #EEE;
+}
+
+.nav-sidebar li a:hover, .nav-sidebar li a:focus
+{
+    background-color:transparent !important;
 }
 
 .nav-sidebar li.myActive
 {
-    border-right: 3px #FFAF25 solid;
+    border-right: 5px #FFFFFF solid;
     z-index: 100;
+    background-color: #B8A179;
 }
 
-.list-right
+.nav-sidebar 
 {
-    border-left: 1px #DDD solid;
-    margin-left: -16px;
-    background-color: #EAEAEA;
-    height: 100%;
+    margin-right: -21px;
+    margin-bottom: 20px;
+    margin-left: -20px;
 }
 
-.list-group-item, .list-group-item:first-child, .list-group-item:last-child
+.nav-sidebar a
 {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-radius: 0px;
-    border-right: 0px;
-    background-color: #FFFCFA;
+    color: #FFFFFF;
+    border-bottom: 1px #FFFFFF solid;
+    font-weight: 700;
+    padding-top: 5px;
 }
 
 .bgLightYellow
 {
     background-color: #FFFCFA;
 
-}
-
-.readingCenter-right
-{
-    background-color: #EAEAEA;
 }
 
 .readingCenter-right-top
@@ -339,7 +323,6 @@ a:focus, input:focus
 
 .readingCenter-right-body
 {
-    margin-top: 25px;
     border-radius:5px;
     border:1px #DDD solid;
     background-color:#FFFFFF;
