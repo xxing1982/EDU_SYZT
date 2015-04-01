@@ -48,6 +48,15 @@
     background: none;
 }
 
+
+/* Avatar image */
+.img-circle {
+  border-width: 2.5px;
+  border-color: white;
+  border-style: solid;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
 /* Other */
 .buttom-separator {
     border-bottom: 1px #DDD solid;
