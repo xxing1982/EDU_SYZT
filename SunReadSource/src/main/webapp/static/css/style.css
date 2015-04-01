@@ -289,14 +289,11 @@ a:focus, input:focus
 
 }
 
-<<<<<<< HEAD
-=======
 .readingCenter-right
 {
-    background-color: #EAEAEA;
+/*    background-color: #EAEAEA;*/
 }
 
->>>>>>> AdvancedSearch & PopularSearch
 .readingCenter-right-top
 {
     margin-top: 25px;
