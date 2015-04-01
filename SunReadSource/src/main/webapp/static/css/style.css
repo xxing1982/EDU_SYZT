@@ -1,8 +1,7 @@
 
 body
 {
-    background-image:url(../img/background.jpg);
-    background-repeat:no-repeat;
+    background: url(../img/background.jpg) no-repeat fixed center top #b4d6d8;
     padding-top: 50px;
 }
 /*change placeholder color*/
@@ -299,33 +298,6 @@ a:focus, input:focus
     margin-top: 25px;
 }
 
-#myBookshelf-button
-{
-    margin-top: -100px;
-}
-
-.btn-addBook
-{
-    padding:9px 24px;
-    font-size: 20px;
-    border: 2px #FFFFFF solid;
-    background-color: #FFAF25;
-    color: #FFFFFF;
-    border-radius:7px;
-}
-
-.btn-addBook:hover
-{
-    background-color: #EB9B00;
-    color: #FFFFFF;
-}
-
-.btn-addBook:focus
-{
-    color: #FFFFFF;
-    background-color: #FFAF25;
-}
-
 .readingCenter-right-body
 {
     border-radius:5px;
@@ -348,7 +320,7 @@ a:focus, input:focus
     padding-bottom: 20px;
 }
 
-.bookshelf-tab
+.select-tab
 {
     text-align: center;
     cursor: pointer;
@@ -356,10 +328,10 @@ a:focus, input:focus
     color:#000000;
 }
 
-.bookshelf-tab.myActive
+.select-tab.myActive
 {    
-    border-bottom: 2px #FFAF25 solid;
-    color: #FFAF25;
+    border-bottom: 2px #B6D023 solid;
+    color: #B6D023;
 }
 
 .bookshelf-book
@@ -371,25 +343,6 @@ a:focus, input:focus
 {
     margin-top: -160%;
     margin-left:60%;
-}
-
-.btn-green
-{
-    border: 1px #B6D023 solid;
-    background-color: #FFFFFF;
-    color: #B6D023;
-}
-
-.btn-green:hover
-{
-    background-color: #F0F0F0;
-    color: #B6D023;
-}
-
-.btn-green:focus
-{
-    color: #B6D023;
-    background-color: #F0F0F0;
 }
 
 .img-padding
@@ -657,7 +610,7 @@ a:focus, input:focus
     color: #000000;
 }
 
-#myEvaluating .content .myAnswer
+#myEvaluating .content a
 {
     color: #75C9FF;
     cursor: pointer;
@@ -684,7 +637,6 @@ a:focus, input:focus
 
 /*******************reading dynamic buttom****************/
 
-
 /*******************AddBook*****************************/
 .readingCenter-right-body .col-md-8
 {
@@ -696,8 +648,14 @@ a:focus, input:focus
 }
 
 /*******************my thinking test top****************/
+.readingCenter-right-body .thinkingTest,
+.readingCenter-right-body .thinkingTesting
+{
+    color: #2F5682;
+}
 
 .readingCenter-right-body .thinkingTest .tagHead,
+.readingCenter-right-body .thinkingTesting .tagHead,
 .readingCenter-right-body .otherAnswer .tagHead
 {
     padding-top: 15px;
@@ -707,7 +665,8 @@ a:focus, input:focus
     border-bottom: 1px solid #DDD;
 }
 
-.readingCenter-right-body .thinkingTest .title
+.readingCenter-right-body .thinkingTest .title,
+.readingCenter-right-body .thinkingTesting .title
 {
     text-align: center;
     padding-top: 30px;
@@ -716,7 +675,8 @@ a:focus, input:focus
     font-weight: 900;
 }
 
-.readingCenter-right-body .thinkingTest .analysis .category
+.readingCenter-right-body .thinkingTest .analysis .category,
+.readingCenter-right-body .thinkingTesting .analysis .category
 {
     color: #BEBEBE;
     font-size: 14px;
@@ -725,6 +685,7 @@ a:focus, input:focus
 }
 
 .readingCenter-right-body .thinkingTest .analysis .lists,
+.readingCenter-right-body .thinkingTesting .analysis .lists,
 .readingCenter-right-body .otherAnswer .lists
 {
     padding-left: 15px;
@@ -732,21 +693,23 @@ a:focus, input:focus
 }
 
 .readingCenter-right-body .thinkingTest .analysis .lists .list,
+.readingCenter-right-body .thinkingTesting .analysis .lists .list,
 .readingCenter-right-body .otherAnswer .lists .list
 {
     padding-bottom: 30px;
 }
 
-.readingCenter-right-body .thinkingTest .analysis .list .theme
+.readingCenter-right-body .thinkingTest .analysis .list .theme,
+.readingCenter-right-body .thinkingTesting .analysis .list .theme
 {
     font-size: 16px;
     font-weight: 900;
     padding-top: 20px;
+    margin-bottom: 10px;
 }
 
 .readingCenter-right-body .thinkingTest .analysis .list .content
 {
-    padding-top: 10px;
     line-height: 22px;
 }
 
@@ -759,6 +722,10 @@ a:focus, input:focus
 /*******************my thinking test bottom****************/
 
 /*******************other answer top****************/
+.readingCenter-right-body .otherAnswer
+{
+    color: #2F5682;
+}
 
 .readingCenter-right-body .otherAnswer .title
 {

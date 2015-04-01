@@ -43,6 +43,18 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: 'partials/readingCenterAddBook.html',
             controller: 'readingCenterAddBookController'
         })
+        //reading center -> myBookshelf -> thinking testing
+        .state('readingCenter.thinkingTesting',{
+            url: '/thinkingTesting',
+            templateUrl: 'partials/readingCenterThinkingTesting.html',
+            controller: 'readingCenterThinkingTestingController'
+        })
+        //reading center -> myBookshelf -> authentication testing
+        .state('readingCenter.authenticationTesting',{
+            url: '/authenticationTesting',
+            templateUrl: 'partials/readingCenterAuthenticationTesting.html',
+            controller: 'readingCenterAuthenticationTestingController'
+        })
         //reading center -> myBookshelf -> add books -> quick search
         .state('readingCenter.addBook.quick', {
             url: '/quick',

@@ -1,0 +1,60 @@
+.txt-title
+{
+	padding: 10px;
+	font-size: 14px;
+	width: 100%;
+	border: 1px #92A5BB solid;
+	border-bottom: 0;
+}
+
+.txt-content
+{
+	padding: 10px;
+	font-size: 14px;
+	width: 100%;
+	border: 1px #92A5BB solid;
+    border-top: 1px #D5DDE6 solid;
+}
+
+.txt-content:focus
+{
+	outline: -webkit-focus-ring-color auto 0px;
+}
+
+.btn-addBook
+{
+	border: 2px #FFFFFF solid;
+    background-color: #FFAF25;
+    color: #FFFFFF;
+}
+
+.btn-addBook:hover
+{
+    background-color: #EB9B00;
+    color: #FFFFFF;
+}
+
+.btn-addBook:focus
+{
+    color: #FFFFFF;
+    background-color: #FFAF25;
+}
+
+.btn-green
+{
+    border: 1px #B6D023 solid;
+    background-color: #FFFFFF;
+    color: #B6D023;
+}
+
+.btn-green:hover
+{
+    background-color: #F0F0F0;
+    color: #B6D023;
+}
+
+.btn-green:focus
+{
+    color: #B6D023;
+    background-color: #F0F0F0;
+}

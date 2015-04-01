@@ -59,23 +59,23 @@ function SetReadingCenterRightHeight(){
 
 //reading center -> my bookshelf -> book list
 function SetBookList(){
-	$(".bookshelf-tab").on("click", function(){
-		$(".bookshelf-tab.myActive").removeClass("myActive");
+	$(".select-tab").on("click", function(){
+		$(".select-tab.myActive").removeClass("myActive");
 		$(this).addClass("myActive");
 	});
 
 	var urlStr = window.location.href;
 	if (urlStr.match("readingCenter/addBook/advanced")) {
-		$(".readingCenter-right-body .find .bookshelf-tab").eq(1).addClass("myActive");
+		$(".readingCenter-right-body .find .select-tab").eq(1).addClass("myActive");
 	}
 	else if (urlStr.match("readingCenter/addBook/popular")) {
-		$(".readingCenter-right-body .find .bookshelf-tab").eq(2).addClass("myActive");
+		$(".readingCenter-right-body .find .select-tab").eq(2).addClass("myActive");
 	}
 	else if (urlStr.match("readingCenter/addBook/recommend")) {
-		$(".readingCenter-right-body .find .bookshelf-tab").eq(3).addClass("myActive");
+		$(".readingCenter-right-body .find .select-tab").eq(3).addClass("myActive");
 	}
 	else{
-		$(".readingCenter-right-body .find .bookshelf-tab").eq(0).addClass("myActive");
+		$(".readingCenter-right-body .find .select-tab").eq(0).addClass("myActive");
 	}
 }
 
