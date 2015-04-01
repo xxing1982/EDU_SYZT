@@ -289,6 +289,11 @@ a:focus, input:focus
 
 }
 
+.readingCenter-right
+{
+/*    background-color: #EAEAEA;*/
+}
+
 .readingCenter-right-top
 {
     margin-top: 25px;
@@ -544,15 +549,15 @@ a:focus, input:focus
 {
     margin-left: 15px;
     margin-right: 15px;
+    min-height: 600px;
 }
 
 .quickSearch .search, .advancedSearch .search
 {
     margin-top: 10px;
     padding-left: 20px;
-    padding-right: 30%;
+    padding-right: 5%;
     padding-bottom: 10px;
-    border-bottom: 1px #DDD solid;
 }
 
 .quickSearch .search input, .advancedSearch .search input
@@ -679,6 +684,17 @@ a:focus, input:focus
 
 /*******************reading dynamic buttom****************/
 
+
+/*******************AddBook*****************************/
+.readingCenter-right-body .col-md-8
+{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px solid #DDD;
+}
+
 /*******************my thinking test top****************/
 
 .readingCenter-right-body .thinkingTest .tagHead,
@@ -796,8 +812,11 @@ a:focus, input:focus
 }
 
 /*******************message center buttom****************/
+<<<<<<< HEAD
 
 
 /*******************personal profile top****************/
 
 /*******************personal profile buttom****************/
+=======
+>>>>>>> a6fd530973b91f07f52e235fe0a52190829135a8

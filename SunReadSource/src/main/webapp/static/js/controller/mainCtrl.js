@@ -23,7 +23,7 @@ ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($sco
 //    $scope.bookshelf = {
 //    	'finishStatus': '80%',
 //    	'readed': {
-//    		'must': '5',
+//    		'must': '5',bookshelfServices
 //    		'select': '12'
 //    	},
 //    	'unread': {

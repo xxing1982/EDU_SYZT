@@ -2,23 +2,34 @@
 
 
 <div class="readingCenter-right">
+<div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-9">
 		<div class="readingCenter-right-body">
-            <p class="cramb">
-            <a href="index.html#/readingCenter/myBookshelf">我的书架</a> 
-            > {{addBook}}
-            </p>
+           <div class="row ">
+               <div class="col-md-12 addBookNavigation">
+                <p class="cramb">
+                <a href="index.html#/readingCenter/myBookshelf">我的书架</a> 
+                   > {{addBook}}
+                </p>
+            </div>
+            </div>
 			<div class="row find">
 				<a ui-sref='.quick'><div class="col-md-2 bookshelf-tab">快速查找</div></a>
 				<a ui-sref='.advanced'><div class="col-md-2 bookshelf-tab">高级查找</div></a>
 				<a ui-sref='.popular'><div class="col-md-2 bookshelf-tab">热门阅读</div></a>
 				<a ui-sref=".recommend"><div class="col-md-2 bookshelf-tab">热门推荐</div></a>
+				<div class="col-md-2"></div>
+                <div class="col-md-2 lackFeadback"> 缺书反馈
+                    <div class="row " style="border-left: 1px #DDD solid"></div></div>
 			</div>
 			<div ui-view></div>
-		</div>
+		  </div><!--readingCenter Body-->
+		  
 	</div>
 	<div class="col-md-1"></div>
+	
+</div>
 </div>
 <script>
 	SetReadingCenterRightHeight();

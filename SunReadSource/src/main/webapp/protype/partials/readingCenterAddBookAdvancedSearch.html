@@ -1,51 +1,276 @@
 <!--AdvancedSearch-->
 <div class="advancedSearch">
+<div class="row">
+    <div class="col-md-9 leftpart">
+
 	<div class="input-group search">
 		<input type="text" class="form-control" placeholder="请输入书名">
 		<span class="input-group-addon" ng-click="search()">搜索</span>
 	</div>
 	<div class="condition" ng-show="showCondition">
-		<div class="row">
-			<div class="col-md-2 type">级别：</div>
-			<div class="col-md-2">
-				
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 type">测试训练：</div>
-			<div class="col-md-2">
-				
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 type">类型：</div>
-			<div class="col-md-2">
-				
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 type">年龄：</div>
-			<div class="col-md-2">
-				
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 type">积分：</div>
-			<div class="col-md-2">
-				
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 type">语言：</div>
-			<div class="col-md-2">
-				
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2 type">配套资源：</div>
-			<div class="col-md-2">
-				
-			</div>
-		</div>
+        <ul >
+            <li></li>
+        </ul>
 	</div>
+	
+	</div>
+
+   <!--right part -->
+    <div class="rightpart">
+        <div class="row conditionBlock"> 
+           <div class="col-md-1"></div>
+           <div class="col-md-12">
+                <div class="row" style="padding-bottom: 10px">
+                    <h5>级别及类别</h5>
+                </div><!---->
+                <div class="row">
+                    <div class="catogaryText"> <p>级别： </p></div>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-catogary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">无限制<span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                </div>    
+                
+                 <div class="row">
+                    <div class="catogaryText"> <p>类别： </p></div>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-catogary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">无限制<span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                </div>  
+                
+            </div>
+        </div>
+
+        <div class="row conditionBlock"> 
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>测试类型</h5>
+                </div><!---->
+                
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" name="testOptions" id="testOptions1" value="option1" checked>
+                    所有类型
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="testOptions" id="testOptions2" value="option2">
+                    认证测试
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="testOptions" id="testOptions3" value="option3">
+                    词汇训练
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="testOptions" id="testOptions4" value="option4">
+                    思维训练
+                  </label>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="row conditionBlock"> 
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>类型</h5>
+                </div><!---->
+                
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" name="typeOptions2" id="typeOptions1" value="option1" checked>
+                    小说及非小说
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="typeOptions2" id="typeOptions2" value="option2">
+                    小说
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="typeOptions2" id="typeOptions2" value="option3">
+                    非小说
+                  </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row conditionBlock"> 
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>年级</h5>
+                </div><!---->
+                
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" name="gradeOptions" id="gradeOptions1" value="option1" checked>
+                    所有年级
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="gradeOptions" id="gradeOptions2" value="option2">
+                    1年级
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="gradeOptions" id="gradeOptions2" value="option3">
+                    2年级
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="gradeOptions" id="gradeOptions2" value="option4">
+                    3年级
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="gradeOptions" id="gradeOptions2" value="option5">
+                    4年级
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="gradeOptions" id="gradeOptions2" value="option6">
+                    5年级
+                  </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row conditionBlock"> 
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>积分</h5>
+                </div><!---->
+                
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" name="pointOptions" id="pointOptions1" value="option1" checked>
+                    全部积分
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="pointOptions" id="pointOptions2" value="option2">
+                    0-5积分
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="pointOptions" id="pointOptions2" value="option4">
+                    6-10积分
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="pointOptions" id="pointOptions2" value="option4">
+                    10-20积分
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="pointOptions" id="pointOptions2" value="option5">
+                    20以上积分
+                  </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row conditionBlock"> 
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>语言</h5>
+                </div><!---->
+                
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" name="languageOptions" id="languageOptions1" value="option1" checked>
+                    全部语言
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="languageOptions" id="languageOptions2" value="option2">
+                    中文书
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="languageOptions" id="languageOptions2" value="option3">
+                    英文书
+                  </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row conditionBlock"> 
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>配套资源</h5>
+                </div><!---->
+                
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" name="resoucesOptions" id="resoucesOptions1" value="option1" checked>
+                    不限制
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="resoucesOptions" id="resoucesOptions2" value="option2">
+                    电子书
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="resoucesOptions" id="resoucesOptions2" value="option3">
+                    音频
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" name="resoucesOptions" id="resoucesOptions2" value="option4">
+                    视频
+                  </label>
+                </div>
+                
+            </div>
+        </div>
+
+        </div>
+    </div>    
+    </div>
+    <!-- End right part -->
+    
+</div><!--row-->
+
 </div>
