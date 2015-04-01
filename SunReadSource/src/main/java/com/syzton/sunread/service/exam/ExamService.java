@@ -27,7 +27,7 @@ public interface ExamService {
 
 	public List<ObjectiveQuestion> takeVerifyTest(Long bookId);
 
-	public List<CapacityQuestion> takeCapacityTest(Long bookId);
+	public List<CapacityQuestion> takeCapacityTest();
 
 	public List<SubjectiveQuestion> takeThinkTest(Long bookId);
 
@@ -38,4 +38,8 @@ public interface ExamService {
 	public Exam handInThinkTest(Exam added);
 	
 	public List<Exam> getTodayVerifyTestStatus(Long bookId, Long studentId);
+	
+	public boolean isPassVerifyTest(Long bookId,Long studentId);
+	
+
 }

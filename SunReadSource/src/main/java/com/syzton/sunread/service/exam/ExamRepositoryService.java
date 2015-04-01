@@ -181,7 +181,7 @@ public class ExamRepositoryService implements ExamService {
 	}
 
 	@Override
-	public List<CapacityQuestion> takeCapacityTest(Long bookId) {
+	public List<CapacityQuestion> takeCapacityTest() {
 		List<CapacityQuestionType> list = new ArrayList<CapacityQuestionType>();
 		list.add(CapacityQuestionType.FIRST);
 		list.add(CapacityQuestionType.SECOND);
@@ -310,5 +310,20 @@ public class ExamRepositoryService implements ExamService {
 		student.setId(studentId);
 		List<Exam> list = repository.findByStudentAndBookAfter(student, book,date);
 		return list;
+	}
+	
+	public boolean isPassVerifyTest(Long bookId,Long studentId){
+		Book book = new Book();
+		book.setId(bookId);
+		Student student = new Student();
+		student.setId(studentId);
+		List<Exam> list = repository.findByStudentAndBook(student,book);
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).isPass()){
+				return true;
+			}
+		}
+		return false;
+		
 	}
 }

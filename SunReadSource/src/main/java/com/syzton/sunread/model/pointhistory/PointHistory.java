@@ -25,12 +25,15 @@ public class PointHistory extends AbstractEntity {
 	@Column(nullable=false)
 	private PointFrom pointFrom;
 	
-	public enum PointFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER}
+	public enum PointFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER,FROM_VERIFY_TEST}
 	
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
 	private User user;
+	
+	@Column
+	private int num;
     
 	
     public PointHistory() {
@@ -54,7 +57,23 @@ public class PointHistory extends AbstractEntity {
 		this.pointFrom = pointFrom;
 	}
     
-    @Override
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	@Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
