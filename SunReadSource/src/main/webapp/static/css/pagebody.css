@@ -1,0 +1,14 @@
+.page-body {
+    margin-top: 25px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.page-body .title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-dialog {
+    width: 58%;
+}

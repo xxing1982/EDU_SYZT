@@ -1,7 +1,7 @@
-<div id="messageCenter-page" class="container">
+<div id="personalProfile-page" class="container">
     <div class="row">
-	<div class="page-body messageCenter-body readingCenter-right-body col-md-8 col-md-offset-2">
-        <div class="title"><h4>消息中心</h4></div>
+	<div class="messageCenter-body readingCenter-right-body col-md-8 col-md-offset-2">
+        <div class="title"><h4>个人中心</h4></div>
 
         <!-- Nav tabs -->
         <ul id="myTab" class="nav nav-tabs row" role="tablist">
@@ -10,23 +10,13 @@
             <button id="send-message" class="btn btn-green" data-toggle="modal" data-target="#myModal" ng-click="" type="button">
                 发信息
             </button>
-        </ul>    
-        
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                <div class="modal-body">
+                <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">发送信息</h4>
                     <div class="row">
-                        
-                        <!-- Row 0 -->
-                        <div class="col-md-12">
-                            <h4 class="modal-title" id="myModalLabel">发送信息
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </h4>
-                        </div>
-                        <!-- Col 1 -->
                         <div class="col-md-2">
                             <form role="form">
                                 <div class="radio">
@@ -107,23 +97,14 @@
                             </div> 
                         </div>
                     </div>
-
                     <!-- Input form -->
-                    <div >
-                        <h4 class="modal-title" id="myModalLabel">消息内容</h4>
-                        <div><textarea class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>	
-                    </div>
-              </div>
-              </div>
-                    <div class="modal-footer">
-                        <div class="col-md-12">
-                            <button class="btn btn-green" ng-click="" type="button">发送信息</button>
-                        </div>
-                    </div>
+                    <h4 class="modal-title" id="myModalLabel">消息内容</h4>
+                    <div><textarea class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>	
+                    <button class="btn btn-green" ng-click="" type="button">发送信息</button>
+                </div>
               </div>
             </div>
-        </div>
-
+        </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
@@ -167,7 +148,7 @@
             </div>
         </div>
         
-        <!-- Footer and page numbers  -->
+       
         <div class="row footer-elements">
             <div class="col-md-3">
                 <div class="row">
@@ -194,8 +175,8 @@
                 </div>
             </div>
         </div>
-	</div>
     </div>
+	</div>
 </div>
 <script>
     $('#myTab a').click(function (e) {

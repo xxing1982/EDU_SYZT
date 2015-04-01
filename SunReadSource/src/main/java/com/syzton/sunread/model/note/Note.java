@@ -31,7 +31,7 @@ public class Note extends AbstractEntity{
     @Basic(fetch = FetchType.LAZY)
     private Set<Comment> comments;
     
-	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="book_id")
 	private Book book;

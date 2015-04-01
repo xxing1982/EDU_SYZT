@@ -1,0 +1,86 @@
+/******************************************************/
+
+.catogary {
+    border: 1px #DDD solid;
+}
+
+.advancedSearch .input-group-addon {
+    padding-right: 5%;
+}
+
+.conditionBlock {
+    padding-left: 15px;
+    padding-bottom: 5px;
+    margin-right: 0px;
+    border-bottom: 1px #DDD solid;
+    border-left: 1px #DDD solid;
+}
+ .btn-catogary{
+  color: darkslateblue;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  *background-color: #fff;
+/*
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+  background-repeat: repeat-x;
+*/
+  border-color: #0044cc #0044cc #002a80;
+/*  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*/
+  border-color: darkslateblue;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+
+.catogaryText {
+    float:left;
+    margin-top: 8px;
+}
+
+
+
+.addBookNavigation {
+    float: left;
+    margin-left: 38px;
+    margin-top: 20px;
+    margin-bottom: -5px;
+    padding-left: 15px;;
+    font-weight: bold;
+    text-rendering: optimizelegibility;
+}
+
+.lackFeadback {
+    color: darkslateblue;
+    text-align: right;
+    cursor: pointer;
+    padding: 15px 2px;
+
+}
+
+.condition {
+    width: 80%;
+}
+
+.leftpart {
+    float: left;
+    width: 80%;
+}
+
+.rightpart {
+    padding-left: 10px;
+    float: right;
+    width: 20%;
+}
+
+.popularChoice {
+    margin: 15px 40px;
+}
+
+.popularChoice .popularText {
+    margin-right: 30px;
+    color: darkslateblue;
+}

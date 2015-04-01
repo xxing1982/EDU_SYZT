@@ -18,7 +18,7 @@ public class Comment extends AbstractEntity {
     @Column(name="content",length = MAX_LENGTH_CONTENT)
     private String content;
 
-	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="note_id")
     private Note note;

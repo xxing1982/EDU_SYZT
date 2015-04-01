@@ -12,56 +12,48 @@ function TopNav(){
 	//show underline
 	var urlStr = window.location.href;
 	if (urlStr.match("readingCenter")) {
-		$(".nav li").eq(1).addClass("myActive");
+		$(".nav-underline li").eq(1).addClass("myActive");
 	}
 	else if (urlStr.match("readingSea")) {
-		$(".nav li").eq(2).addClass("myActive");
+		$(".nav-underline li").eq(2).addClass("myActive");
 	}
 	else if (urlStr.match("readingTraining")) {
-		$(".nav li").eq(3).addClass("myActive");
+		$(".nav-underline li").eq(3).addClass("myActive");
 	}
 	else if (urlStr.match("prizeCenter")) {
-		$(".nav li").eq(4).addClass("myActive");
+		$(".nav-underline li").eq(4).addClass("myActive");
 	}
 	else{
-		$(".nav li").eq(0).addClass("myActive");
+		$(".nav-underline li").eq(0).addClass("myActive");
 	}
 }
 
 //left navigate event in page reading center
 function ReadingCenterLeftNav(){
-	$(".nav-sidebar ul li").on("click", function(){
-		$(".nav-sidebar ul li").find(".myActive").removeClass("myActive");
+	$(".nav-sidebar li").on("click", function(){
+		$(".nav-sidebar li").removeClass("myActive");
 		$(this).addClass("myActive");
 	});
 
 	var urlStr = window.location.href;
 	if (urlStr.match("readingCenter/myNote")) {
-		$(".nav-sidebar ul li").eq(1).addClass("myActive");
+		$(".nav-sidebar li").eq(1).addClass("myActive");
 	}
 	else if (urlStr.match("readingCenter/myEvaluating")) {
-		$(".nav-sidebar ul li").eq(2).addClass("myActive");
+		$(".nav-sidebar li").eq(2).addClass("myActive");
 	}
 	else if (urlStr.match("readingCenter/myEvaluate")) {
-		$(".nav-sidebar ul li").eq(3).addClass("myActive");
+		$(".nav-sidebar li").eq(3).addClass("myActive");
 	}
 	else{
-		$(".nav-sidebar ul li").eq(0).addClass("myActive");
+		$(".nav-sidebar li").eq(0).addClass("myActive");
 	}
-}
-
-//Set reading center body height
-function SetReadingCenterBodyHeight(){
-	$("#readingCenter-page").css('min-height' ,document.documentElement.clientHeight);
-	$(window).resize(function(){
-		$("#readingCenter-page").css('min-height' ,document.documentElement.clientHeight);
-	});
 }
 
 function SetReadingCenterRightHeight(){
-	$(".readingCenter-right").css('min-height' ,document.documentElement.clientHeight - 100);
+	$(".readingCenter-right").css('min-height' ,document.documentElement.clientHeight - 80);
 	$(window).resize(function(){
-		$(".readingCenter-right").css('min-height' ,document.documentElement.clientHeight - 100);
+		$(".readingCenter-right").css('min-height' ,document.documentElement.clientHeight - 80);
 	});
 }
 
