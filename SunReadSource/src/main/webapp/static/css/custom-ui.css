@@ -1,0 +1,26 @@
+/** Page number control **/
+
+
+.custom-page-number-group {
+    text-align: center;
+    padding: 0px;
+}
+
+.custom-page-number {
+    max-width: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.custom-page-number-input {
+    padding: 0;
+    width: 38px;
+    margin-left:5px;
+    margin-right:5px;
+    line-height: normal;
+}
+
+.custom-page-number-container{
+    padding-left: 0;
+    padding-right: 0;
+}

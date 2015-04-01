@@ -120,5 +120,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             url: '/messageCenter',
             templateUrl: "partials/messageCenter.html",
             controller: "messageCenterController"
+        })
+        //personal profile
+        .state('personalProfile', {
+            url: '/personalProfile',
+            templateUrl: "partials/personalProfile.html",
+            controller: "personalProfileController"
         });
 }]);

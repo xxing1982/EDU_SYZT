@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
     <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/custom-ui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
         <!--navigate-->
@@ -29,7 +30,7 @@
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false">张晓晨<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="http://v3.bootcss.com/getting-started/">起步</a> </li>
+                            <li><a href="#personalProfile">个人中心</a> </li>
                         </ul>
                     </li>
                     <li><a href="#/messageCenter">
@@ -37,14 +38,6 @@
                         </div>
                     </a></li>
                 </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control nav-transparent" placeholder="搜索书籍 笔记">
-                        <span class="input-group-addon nav-transparent">
-                            <a href="#"><span class="glyphicon glyphicon-search"></span></a>
-                        </span>
-                    </div>
-                </form>
             </div>
         </div>
 
@@ -52,7 +45,7 @@
         <div data-ui-view></div>
 
         <!--footer-->
-        <div>
+        <div id="footer">
             <a href="#">手机版</a>
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <a href="#">关于我们</a>
@@ -94,6 +87,7 @@
     <script type="text/javascript" src="../static/js/controller/readingDynamicCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/readingDynamicHotNotesCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/messageCenterCtrl.js"></script>
+    <script type="text/javascript" src="../static/js/controller/personalProfileCtrl.js"></script>
     
     
     <script type="text/javascript" src="../static/js/services/userService.js"></script>
