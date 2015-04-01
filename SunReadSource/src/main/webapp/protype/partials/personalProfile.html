@@ -1,182 +1,21 @@
-<div id="personalProfile-page" class="container">
+<div id="personalCenter-page" class="container">
     <div class="row">
-	<div class="messageCenter-body readingCenter-right-body col-md-8 col-md-offset-2">
+	<div class="page-body personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
         <div class="title"><h4>个人中心</h4></div>
-
-        <!-- Nav tabs -->
-        <ul id="myTab" class="nav nav-tabs row" role="tablist">
-            <li role="presentation" class="active"><a href="#receive" aria-controls="receive" role="tab" data-toggle="tab">收到的消息</a></li>
-            <li role="presentation"><a href="#send" aria-controls="send" role="tab" data-toggle="tab">发出的消息</a></li>
-            <button id="send-message" class="btn btn-green" data-toggle="modal" data-target="#myModal" ng-click="" type="button">
-                发信息
-            </button>
-                <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">发送信息</h4>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <form role="form">
-                                <div class="radio">
-                                  <label><input type="radio" name="optradio">发给校长</label>
-                                </div>
-                                <div class="radio">
-                                  <label><input type="radio" name="optradio">发给老师</label>
-                                </div>
-                                <div class="radio">
-                                  <label><input type="radio" name="optradio">发给同学</label>
-                                </div>
-                             </form>
-                        </div>
-                        
-                        <!-- Row 1 -->
-                        <div class="col-md-10">
-                            <div class="row">
-                            <div class="col-md-4 select-group">
-                                <div class="col-md-5 row select-label">校长：</div>
-                                <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
-                                </div>
-                            </div>
-                            </div> 
-                        </div>
-                        
-                        <!-- Row 2 -->
-                        <div class="col-md-10">
-                            <div class="row">
-                            <div class="col-md-4 select-group">
-                                <div class="col-md-5 row select-label">校长：</div>
-                                <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 select-group">
-                                <div class="col-md-5 row select-label">校长：</div>
-                                <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
-                                </div>
-                            </div>
-                            </div> 
-                        </div>
-                        
-                        <!-- Row 3 -->
-                        <div class="col-md-10">
-                            <div class="row">
-                            <div class="col-md-4 select-group">
-                                <div class="col-md-5 row select-label">校长：</div>
-                                <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 select-group">
-                                <div class="col-md-5 row select-label">校长：</div>
-                                <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 select-group">
-                                <div class="col-md-5 row select-label">校长：</div>
-                                <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
-                                </div>
-                            </div>
-                            </div> 
-                        </div>
-                    </div>
-                    <!-- Input form -->
-                    <h4 class="modal-title" id="myModalLabel">消息内容</h4>
-                    <div><textarea class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>	
-                    <button class="btn btn-green" ng-click="" type="button">发送信息</button>
-                </div>
-              </div>
-            </div>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="receive">
-                 <div class="message-row row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,20]">
-                    <div class="col-md-6">
-                        <div class="row">
-                        <div class="col-md-1">
-                            <input type="checkbox"/>
-                        </div>
-                        <div class="col-md-10">收到的信息收到的信息收到的信息收到的信息</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-3">发件人:张山风</div>
-                            <div class="col-md-3">2014-6-9</div>
-                            <div class="col-md-1">删</div>
-                        </div>
-                    </div>
+        <div class="col-md-4 col-md-offset-4">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <img ng-src="../static/img/picture.jpg" class="img-responsive img-circle" src="../static/img/picture.jpg">
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="send">
-                 <div class="message-row row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,20]">
-                    <div class="col-md-6">
-                        <div class="row">
-                        <div class="col-md-1">
-                            <input type="checkbox"/>
-                        </div>
-                        <div class="col-md-10">发出的信息发出的信息发出的信息发出的信息</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-3">收件人:张山风</div>
-                            <div class="col-md-3">2014-6-9</div>
-                            <div class="col-md-1">删</div>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1>张晓晨</h1>
                 </div>
             </div>
         </div>
-        
-       
-        <div class="row footer-elements">
-            <div class="col-md-3">
-                <div class="row">
-                    <div class="col-md-2"><input type="checkbox"/></div>
-                    <div class="col-md-5">全选</div>
-                    <div class="col-md-5">删除</div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-xs-2">全部已读</div>
-                    <div class="col-xs-7">
-                        <div class="row custom-page-number-group">
-                            <div class="col-xs-2"><div class="row">上一页</div></div>
-                            <div class="col-xs-1 custom-page-number-container" ng-repeat="n in [1,2,3,4,5,6,7,15]">
-                                <div class="custom-page-number">{{n}}</div>
-                            </div>    
-                            <div class="col-xs-2"><div class="row">下一页</div></div>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="row">去第<input type="text" class="custom-page-number-input" />页</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 	</div>
+    </div>
 </div>
 <script>
     $('#myTab a').click(function (e) {

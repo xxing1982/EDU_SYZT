@@ -24,3 +24,31 @@
     padding-left: 0;
     padding-right: 0;
 }
+
+/* nav tabs (testing) */
+.messageCenter-body .nav-tabs {
+    border: none;
+}
+
+.messageCenter-body .nav-tabs>li.active>a {
+    border: none;
+}
+
+.messageCenter-body .nav-tabs>li.active>a:link {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-buttom-width: 2;
+    border-style: solid;
+    border-color: blue;
+}
+
+.messageCenter-body .nav-tabs>li>a:hover {
+    border: none;
+    background: none;
+}
+
+/* Other */
+.buttom-separator {
+    border-bottom: 1px #DDD solid;
+}

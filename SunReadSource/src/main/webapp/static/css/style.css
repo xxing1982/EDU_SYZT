@@ -775,31 +775,6 @@ a:focus, input:focus
 #messageCenter-page {
 }
 
-.messageCenter-body .message-row {
-    border-bottom: 1px #DDD solid;
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
-
-.messageCenter-body .nav-tabs {
-    padding-left: 20px;
-}
-
-.messageCenter-body .footer-elements {
-    margin-top: 20px;
-}
-
-.messageCenter-body #myTab li{
-    width: 146px;
-    text-align: center;
-}
-
-.messageCenter-body #myTab #send-message{
-    text-align: center;
-    float: right;
-    margin-right: 15px;
-}
-
 .messageCenter-body .modal-content .modal-title{
     margin-bottom: 15px;
 }
@@ -821,3 +796,6 @@ a:focus, input:focus
 }
 
 /*******************message center buttom****************/
+
+
+/*******************personal profile top****************/
