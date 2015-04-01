@@ -803,23 +803,6 @@ a:focus, input:focus
     padding-left: 20px;
 }
 
-.messageCenter-body .page-number-input {
-    padding: 0;
-    width: 38px;
-    margin-left:5px;
-    margin-right:5px;
-    line-height: normal;
-}
-
-.messageCenter-body .page-number {
-    padding: 0px;
-    width: 18px;
-}
-
-.messageCenter-body .page-number-collection {
-    text-align: center;
-}
-
 .messageCenter-body .footer-elements {
     margin-top: 20px;
 }
