@@ -3,7 +3,7 @@
     
     <!-- The top image -->
     <div class="page-body-top col-md-8 col-md-offset-2"> 
-        <img src="../static/img/readingDynamic.png" class="img-responsive img-rounded"> 
+        <img src="../static/img/readingDynamic.png" class="img-responsive"> 
     </div>
     
     <!-- The page body top -->
@@ -15,8 +15,8 @@
                 <div class="title"><h4>校长寄语</h4></div>
                 <div class="paragraph ">
                     <div class="col-md-12">
-                        <p>亲爱的同学们：<br/><br/>
-                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校是你们享受童年快乐和学习乐趣的学园，学校是你们放飞理想、快乐成长的乐园。我希望同学们勤奋地学习，自觉地遵规守纪，快乐地生活。以认真和负责去对待学习，以俭朴和节约去对待生活，以开朗和友善去对待同学，以勇敢和坚强去面对困难。学会做人、学会做事，让老师放心，让父母安心。只要我们从现在开始，从身边的小事做起，从每一个细节开始，与好习惯交朋友，每天进步一点点，每天收获一点点，你就会发现自己就是最快乐、最健康、最优秀的！
+                        <p style="line-height: 24px;">亲爱的同学们：<br/><br/>
+                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校是你们享受童年快乐和学习乐趣的学园，学校是你们放飞理想、快乐成长的乐园。我希望同学们勤奋地学习，自觉地遵规守纪，快乐地生活。以认真和负责去对待学习，以俭朴和节约去对待生活，以开朗和友善去对待同学，以勇敢和坚强去面对困难。学会做人、学会做事，让老师放心，让父母安心。只要我们从现在开始，从身边的小事做起，从每一个细节开始，与好习惯交朋友，每天进步一点点，每天收获一点点，你就会发现自己就是最快乐、最健康、最优秀的！
                         </p>
                         <p class="text-right">  ——校长王长贵</p>
                     </div>
@@ -33,7 +33,7 @@
                 <div class="title">
                     <div class="row">
                         <div class="col-md-10"><h4>最新活动</h4></div>
-                        <div class="col-md-2 text-right"><a style="line-height:40px;">更多></a></div>
+                        <div class="col-md-2 text-right"><a class="title-link">更多></a></div>
                     </div>
                 </div>
                 <div class="paragraph">
@@ -65,7 +65,104 @@
                     </div>
                 </div>
                 <div class="paragraph">
+                    <div class="col-md-12">
+                        <div class="row">
 
+                            <!-- Golden silver bronze clazzes -->
+                            <div class="col-md-4" ng-repeat="n in ['golden', 'silver', 'bronze']">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <img ng-src="../static/img/readingDynamic/{{n}}.png" class="img-responsive">
+                                    </div>
+                                    <div class="col-md-7" style="margin-top:-10px;">
+                                        <div class="row text-left">
+                                            <h4>三年(2)班</h4>
+                                            <h6>班级人数：36<br/><br/>班级平均积分(学期)：246<br/><br/>班级人均阅读量(学期)：52</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
+        </div>
+        
+        <!-- Excellent students -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>阅读达人</h4></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <!-- Rank of students -->
+                            <div class="col-md-4" ng-repeat="n in ['first', 'second', 'third']">
+                                <div class="row">
+                                    <div class="col-xs-6 col-xs-offset-3">
+                                        <div class="row">
+                                            <div >
+                                                <img ng-src="../static/img/picture.jpg" class="img-responsive img-circle" src="../static/img/picture.jpg">
+                                                <img class="student-rank" ng-src="../static/img/readingDynamic/{{n}}.png" class="img-responsive img-circle" src="../static/img/readingDynamic/{{n}}.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-8 col-xs-offset-2">
+                                        <div class="text-center"><h4>夏亚珊</h4></div>
+                                        <div class="text-center"><h4><small>203本</small></h4></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
+        </div>
+
+        <!-- Hot notes -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>热门笔记</h4></div>
+                        <div class="col-md-2 text-right"><a class="title-link">全部热门笔记></a></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <!-- Rank of notes -->
+                            <div class="col-md-4" ng-repeat="n in ['golden', 'silver', 'bronze']">
+                                <div class="row">
+                                    <div class="col-xs-8 col-xs-offset-2">
+                                        <div class="row">
+                                            <img ng-src="../static/img/picture.jpg" class="img-responsive custom-shadow" src="../static/img/picture.jpg">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-8 col-xs-offset-2">
+                                        <div class="row text-center">
+                                            <h4>查理日记</h4>
+                                            <p><small>笔记名：一本很有意义</br>作者：张一凡&nbsp;&nbsp;评论：200条</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 

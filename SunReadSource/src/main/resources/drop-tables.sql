@@ -1,15 +1,49 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
-/*! @jerrywalker0435 top */
+drop table if exists answer;
 drop table if exists book;
 drop table if exists book_category;
 drop table if exists book_extra;
-/*! @jerrywalker0435 buttom */
-
-/*! @EiddleChen top */
-drop table if exists tag;
+drop table if exists bookinshelf;
+drop table if exists bookshelf;
+drop table if exists bookshelfoperation;
 drop table if exists booktag;
+drop table if exists capacity_quesiton;
+drop table if exists category;
+drop table if exists clazz;
+drop table if exists coin_history;
+drop table if exists comment;
+drop table if exists dictionary;
+drop table if exists edu_group;
+drop table if exists exam;
+drop table if exists exam_answers;
+drop table if exists exam_question;
+drop table if exists grade;
 drop table if exists note;
-/*! @EiddleChen buttom */
+drop table if exists oauth_authentication_access_token;
+drop table if exists oauth_authentication_refresh_token;
+drop table if exists objective_answer;
+drop table if exists objective_question;
+drop table if exists parent;
+drop table if exists parent_student;
+drop table if exists point_history;
+drop table if exists question;
+drop table if exists recommendation;
+drop table if exists region;
+drop table if exists review;
+drop table if exists role;
+drop table if exists school;
+drop table if exists semester;
+drop table if exists student;
+drop table if exists subjective_answer;
+drop table if exists subjective_question;
+drop table if exists supplementbook;
+drop table if exists tag;
+drop table if exists task;
+drop table if exists teacher;
+drop table if exists teacher_clazz;
+drop table if exists todos;
+drop table if exists user_role;
+drop table if exists users;
 
 SET FOREIGN_KEY_CHECKS = 1;
