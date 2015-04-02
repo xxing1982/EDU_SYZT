@@ -13,5 +13,6 @@ import com.syzton.sunread.model.user.Student;
 public interface ExamRepository extends JpaRepository<Exam, Long> {
 	//@Query("select exam from Exam exam wehre Exam.book = ?1 and ")
 	List<Exam> findByStudentAndBookAfter(Student student,Book book,Date date);
+	List<Exam> findByStudentAndBook(Student student,Book book);
 
 }

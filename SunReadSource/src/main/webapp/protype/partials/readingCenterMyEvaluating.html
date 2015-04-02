@@ -6,17 +6,22 @@
 		</div>
 		<div id="myEvaluating" class="readingCenter-right-body">
 			<div class="type row">
-				<div class="col-md-2 bookshelf-tab myActive" ng-click="showCertification()">认证测试</div>
-				<div class="col-md-2 bookshelf-tab" ng-click="showWord()">词汇训练</div>
-				<div class="col-md-2 bookshelf-tab" ng-click="showThinking()">思维训练</div>
+				<div class="col-md-2 select-tab myActive" ng-click="showCertification()">认证测试</div>
+				<div class="col-md-2 select-tab" ng-click="showWord()">词汇训练</div>
+				<div class="col-md-2 select-tab" ng-click="showThinking()">思维训练</div>
 			</div>
 			<div ng-show="isCertification">
 				<div class="content row">
 					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
 					<div class="col-md-2 name">查理日记</div>
-					<div class="col-md-2 value">财富值：90</div>
-					<div class="col-md-2 value">积分：90</div>
-					<div class="col-md-2 value">正确率：80</div>
+					<div class="col-md-5 value">
+						财富值：90&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						积分：90&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						正确率：80&nbsp;&nbsp;
+					</div>
+					<div class="col-md-1 value">
+						<a>评价</a>
+					</div>
 					<div class="col-md-3 value">测试时间：2014.12.5</div>
 				</div>
 			</div>
@@ -24,6 +29,15 @@
 				<div class="content row">
 					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
 					<div class="col-md-2 name">查理日记</div>
+					<div class="col-md-5 value">
+						财富值：90&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						积分：90&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						正确率：80&nbsp;&nbsp;
+					</div>
+					<div class="col-md-1 value">
+						<a>评价</a>
+					</div>
+					<div class="col-md-3 value">测试时间：2014.12.5</div>
 				</div>
 			</div>
 			<div ng-show="isThinking">
@@ -31,7 +45,7 @@
 					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
 					<div class="col-md-2 name">查理日记</div>
 					<div class="col-md-3 value count">问答题目数：9/10</div>
-					<div class="col-md-3 value"><a class="myAnswer" href="#readingCenter/myEvaluating/thinkingTest">查看我的回答</a></div>
+					<div class="col-md-3 value"><a href="#readingCenter/myEvaluating/thinkingTest">查看我的回答</a></div>
 					<div class="col-md-3 value">测试时间：2014.12.5</div>
 				</div>
 			</div>

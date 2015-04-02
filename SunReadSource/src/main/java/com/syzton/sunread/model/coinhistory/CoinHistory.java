@@ -25,15 +25,34 @@ public class CoinHistory extends AbstractEntity {
 	@Column(nullable=false)
 	private CoinFrom coinFrom;
 	
-	public enum CoinFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER}
+	public enum CoinFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER,FROM_VERIFY_TEST}
 	
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
 	private User user;
+	
+	@Column
+	private int num;
     
 	
-    public CoinHistory() {
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public CoinHistory() {
 
     }
 

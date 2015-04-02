@@ -1,5 +1,5 @@
 //mainCtrl.js
-var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices','bookshelfServices', 'noteServices', 'commentServices']);
+var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices','bookshelfServices', 'noteServices', 'paraServices', 'commentServices']);
 
 ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($scope, User,Bookshelf) {
 	//userinfo

@@ -1,4 +1,5 @@
-ctrls.controller("readingCenterAddBookController", ['$scope', 
-function ($scope) {
+ctrls.controller("readingCenterAddBookController", ['$scope', 'para',
+function ($scope, para) {
 	$scope.addBook = '我要选书';
+	//para.get();
 }]);
