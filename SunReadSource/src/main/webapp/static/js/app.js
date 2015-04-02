@@ -11,6 +11,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
     $urlRouterProvider
         .when('/readingCenter', '/readingCenter/myBookshelf')
         .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
+//        .when('/readingCenter/bookDetails','/readingCenter/bookDetails/bookOverview')
         .otherwise('/');
 
     $stateProvider
@@ -34,9 +35,15 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
         //reading center -> myBookshelf -> book details
         .state('readingCenter.bookDetails',{
             url: '/bookDetails',
-            templateUrl: 'partials/readingCenterMyBookshelfBookDetails.html',
-            controller: 'readingCenterMyBookshelfBookDetailsController'
+            templateUrl: 'partials/readingCenterBookDetails.html',
+            controller: 'readingCenterBookDetailsController'
         })
+        //reading center -> myBookshelf -> book details -> book overview
+        .state('readingCenter.bookDetails.bookOverview',{
+        url: '/bookDetails',
+        templateUrl: 'partials/readingCenterBookDetailsBookOverview.html',
+        controller: 'readingCenterBookDetailsBookOverviewController'
+        })   
         //reading center -> myBookshelf -> add books
         .state('readingCenter.addBook',{
             url: '/addBook',

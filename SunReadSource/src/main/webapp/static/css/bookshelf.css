@@ -11,7 +11,7 @@
 .conditionBlock {
     padding-left: 15px;
     padding-bottom: 5px;
-    margin-right: 0px;
+    margin-right: 10px;
     border-bottom: 1px #DDD solid;
     border-left: 1px #DDD solid;
 }
@@ -45,10 +45,11 @@
 
 .addBookNavigation {
     float: left;
+/*
     margin-left: 38px;
     margin-top: 20px;
     margin-bottom: -5px;
-    padding-left: 15px;;
+*/
     font-weight: bold;
     text-rendering: optimizelegibility;
 }
@@ -83,4 +84,79 @@
 .popularChoice .popularText {
     margin-right: 30px;
     color: darkslateblue;
+}
+
+#myBookshelf-button {
+    font-size: 14px;
+    float: right;
+    margin: 8px 0;
+}
+
+
+
+.bookDetailImg {
+    float: left;
+}
+
+.bookDetailUp {
+    padding-top: 35px;
+    margin-bottom: 30px;
+}
+
+
+.bookDetailText {
+    padding-left: 20px;
+/*    font-size: 12px;*/
+}
+
+.cramb {
+    margin: 0px 0px 15px 0px;
+}
+
+.bookExercise {
+    padding-top: 5px;
+    border-left: 1px #DDD solid;
+}
+
+.bookOperation {
+    padding-top: 20px;
+    margin-left: -30px;
+}
+
+
+
+
+.bookBuy {
+    text-align: right;
+    font-size: 10px;
+    margin: 5px 0px 15px 0px;
+}
+
+.bookRemove {
+    text-align: left;
+    font-size: 10px;
+    margin: 5px 0px 15px 0px;
+}
+
+.bookDetailAlsoRead {
+    border-bottom: 1px #DDD solid;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.bookDetailMid {
+    margin-bottom: 5px;
+}
+
+.bookTital {
+    text-align: center;
+}
+
+.bookOverview {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+.input-group {
 }

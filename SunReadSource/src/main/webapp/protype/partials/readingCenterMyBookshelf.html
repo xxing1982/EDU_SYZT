@@ -5,14 +5,18 @@
 			<div class="col-md-4"><img src="../static/img/myBookshelf.png" class="img-responsive img-rounded"></div>
 				<div class="col-md-5"></div>
 				<div class="col-md-3">
-					<a class="btn btn-lg btn-addBook" href="#readingCenter/addBook">+ 我要选书</a>
 				</div>
 		</div>
+		
 		<div class="readingCenter-right-body">
 			<div id="myBookshelfBody-top" class="row">
-				<div class="col-md-2 select-tab myActive">未认证书单{{shelf.unreadMust+shelf.unreadSelect}}</div>
-				<div class="col-md-2 select-tab">已认证书单{{shelf.readSelect+shelf.readMust}}</div>
-				<div class="col-md-4"></div>
+				<div class="col-md-3 select-tab myActive">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</div>
+				<div class="col-md-3 select-tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-3">
+				    <a class="btn btn-lg btn-addBook" href="#readingCenter/addBook">+ 我要选书</a>
+				</div>
+
 				<div class="col-md-4"></div>
 			</div>
 			<div id="myBookshelfBody-center" class="row">

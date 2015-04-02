@@ -291,6 +291,7 @@ a:focus, input:focus
 .readingCenter-right
 {
 /*    background-color: #EAEAEA;*/
+    margin-top: 20px;
 }
 
 .readingCenter-right-top
@@ -298,11 +299,37 @@ a:focus, input:focus
     margin-top: 25px;
 }
 
+#myBookshelf-button
+
+
+.btn-addBook
+{
+    padding:9px 15px;
+    font-size: 18px;
+    border: 2px #FFFFFF solid;
+    background-color: #FFAF25;
+    color: #FFFFFF;
+    border-radius:7px;
+}
+
+.btn-addBook:hover
+{
+    background-color: #EB9B00;
+    color: #FFFFFF;
+}
+
+.btn-addBook:focus
+{
+    color: #FFFFFF;
+    background-color: #FFAF25;
+}
+
 .readingCenter-right-body
 {
     border-radius:5px;
     border:1px #DDD solid;
     background-color:#FFFFFF;
+    padding-top: 15px;
 }
 
 #myBookshelfBody-top
@@ -498,7 +525,7 @@ a:focus, input:focus
 /*******************find book bottom*******************/
 
 /*******************quick search top*******************/
-.quickSearch, .advancedSearch
+.quickSearch, .advancedSearch, .popularSearch
 {
     margin-left: 15px;
     margin-right: 15px;
@@ -535,7 +562,6 @@ a:focus, input:focus
 .quickSearch .tip
 {
     padding:15px;
-    border-bottom: 1px #DDD solid;
 }
 
 .quickSearch .multiple .title
