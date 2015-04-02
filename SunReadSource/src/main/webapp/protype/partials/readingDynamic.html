@@ -9,106 +9,70 @@
     <!-- The page body top -->
     <div class="page-body personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
         
-        <!-- Avatar -->
-        <div class="title col-md-12"><h4>个人中心</h4></div>
-        <div class="col-md-4 col-md-offset-4">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <img ng-src="../static/img/picture.jpg" class="img-responsive img-circle border-shadow" src="../static/img/picture.jpg">
+        <!-- President saying -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title"><h4>校长寄语</h4></div>
+                <div class="paragraph ">
+                    <div class="col-md-12">
+                        <p>亲爱的同学们：<br/><br/>
+                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校是你们享受童年快乐和学习乐趣的学园，学校是你们放飞理想、快乐成长的乐园。我希望同学们勤奋地学习，自觉地遵规守纪，快乐地生活。以认真和负责去对待学习，以俭朴和节约去对待生活，以开朗和友善去对待同学，以勇敢和坚强去面对困难。学会做人、学会做事，让老师放心，让父母安心。只要我们从现在开始，从身边的小事做起，从每一个细节开始，与好习惯交朋友，每天进步一点点，每天收获一点点，你就会发现自己就是最快乐、最健康、最优秀的！
+                        </p>
+                        <p class="text-right">  ——校长王长贵</p>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 text-center">
-                    <h2>张晓晨</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 text-center">
-                    <a><h5>修改头像</h5></a>
-                </div>
-            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
         </div>
         
-        <!-- Basic information -->
-        <div class="title col-md-12 buttom-separator">
-            <div class="row">
-                <div class="col-md-11"><h4>基本信息</h4></div>
-                <div class="col-md-1 text-right"><a style="line-height:40px;">编辑</a></div>
+        <!-- Latest activities -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>最新活动</h4></div>
+                        <div class="col-md-2 text-right"><a style="line-height:40px;">更多></a></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
+                        
+                        <!-- Activities row -->
+                        <div class="row" ng-repeat="n in [1,2,3,4,5]">
+                            <div class="col-md-10">
+                                <p>{{n}}. 感恩成长 资助育人：王式廓奖学金2014年报告会举行	</p>
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <p>2015.3.3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
+        </div>
+                
+        <!-- Excellent clazzes -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>优秀班级</h4></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
         </div>
 
-        <div class="col-md-2 text-right">
-            <div class="row"><h4>姓名：</h4></div>
-            <div class="row"><h4>性别：</h4></div>
-            <div class="row"><h4>出生日期：</h4></div>
-            <div class="row"><h4>学校：</h4></div>
-            <div class="row"><h4>班级：</h4></div>
-        </div>
-        
-        <div class="col-md-10 text-left">
-            <div class="col-md-12">
-                <div class="row"><h4>张晓晨</h4></div>
-                <div class="row"><h4>男</h4></div>
-                <div class="row"><h4>2003年10月20日</h4></div>
-                <div class="row"><h4>红英</h4></div>
-                <div class="row"><h4>三年级04班</h4></div>
-            </div>
-        </div>
-        
-        <!-- Place holder -->
-        <div class="row title"/>
-    
-        <!-- Details information -->
-        <div class="title col-md-12 buttom-separator">
-            <div class="row">
-                <div class="col-md-11"><h4>个人资料</h4></div>
-                <div class="col-md-1 text-right"><a style="line-height:40px;">编辑</a></div>
-            </div>
-        </div>
-
-        <div class="col-md-2 text-right">
-            <div class="row"><h4>昵称：</h4></div>
-            <div class="row"><h4>QQ：</h4></div>
-            <div class="row"><h4>微信：</h4></div>
-            <div class="row"><h4>邮箱：</h4></div>
-            <div class="row"><h4>手机：</h4></div>
-        </div>
-        
-        <div class="col-md-10 text-left">
-            <div class="col-md-12">
-                <div class="row"><h4>小晨</h4></div>
-                <div class="row"><h4>123456</h4></div>
-                <div class="row"><h4>xiaochen</h4></div>
-                <div class="row"><h4>xiaochen@163.com</h4></div>
-                <div class="row"><h4>1888888888888</h4></div>
-            </div>
-        </div>
-        
-        <!-- Place holder -->
-        <div class="row title"/>
-        
-        <!-- Security setting -->
-        <div class="title col-md-12 buttom-separator">
-            <div class="row">
-                <div class="col-md-11"><h4>安全设置</h4></div>
-            </div>
-        </div>
-
-        <div class="col-md-2 text-right">
-            <div class="row"><h4>账号：</h4></div>
-        </div>
-        
-        <div class="col-md-10 text-left">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-10"><h4>张晓晨</h4></div>
-                    <div class="col-md-2 text-right"><div class="row"><a style="line-height:40px;">编辑</a></div></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Place holder -->
-        <div class="row title"/>
         
     </div>
     </div>
