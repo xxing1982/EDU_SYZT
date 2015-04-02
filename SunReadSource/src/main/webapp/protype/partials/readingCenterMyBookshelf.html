@@ -4,21 +4,25 @@
 		<div class="row readingCenter-right-top">
 			<div class="col-md-4"><img src="../static/img/myBookshelf.png" class="img-responsive img-rounded"></div>
 				<div class="col-md-5"></div>
-				<div id="myBookshelf-button" class="col-md-3">
-					<a class="btn btn-addBook" href="#readingCenter/addBook">+ 我要选书</a>
+				<div class="col-md-3">
 				</div>
 		</div>
+		
 		<div class="readingCenter-right-body">
 			<div id="myBookshelfBody-top" class="row">
-				<div class="col-md-2 bookshelf-tab myActive">未认证书单{{shelf.unreadMust+shelf.unreadSelect}}</div>
-				<div class="col-md-2 bookshelf-tab">已认证书单{{shelf.readSelect+shelf.readMust}}</div>
-				<div class="col-md-4"></div>
+				<div class="col-md-3 select-tab myActive">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</div>
+				<div class="col-md-3 select-tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-3">
+				    <a class="btn btn-lg btn-addBook" href="#readingCenter/addBook">+ 我要选书</a>
+				</div>
+
 				<div class="col-md-4"></div>
 			</div>
 			<div id="myBookshelfBody-center" class="row">
 				<div class="col-md-4 bookshelf-book clear-padding">
 					<div class="col-md-6">
-						<div><img src="../static/img/book.jpg" class="img-responsive"></div>
+                        <a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive"></div></a>
 						<div class="col-md-9 col-md-offset-5 mustRead"><img src="../static/img/mustRead.jpg" class="img-responsive img-circle"></div>
 					</div>
 					<div class="col-md-6">
@@ -27,87 +31,7 @@
 						<div class="fsize12">积分：90</div>
 						<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
 						<div>
-							<div class="col-md-5 img-padding"><img src="../static/img/write.jpg" class="img-responsive"></div>
-							<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 bookshelf-book clear-padding">
-					<div class="col-md-6">
-						<div><img src="../static/img/book.jpg" class="img-responsive"></div>
-						<div class="col-md-9 col-md-offset-5 mustRead"><img src="../static/img/mustRead.jpg" class="img-responsive img-circle"></div>
-					</div>
-					<div class="col-md-6">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">作者：张敬轩</div>
-						<div class="fsize12">积分：90</div>
-						<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
-						<div>
-							<div class="col-md-5 img-padding"><img src="../static/img/write.jpg" class="img-responsive"></div>
-							<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 bookshelf-book clear-padding">
-					<div class="col-md-6">
-						<div><img src="../static/img/book.jpg" class="img-responsive"></div>
-						<div class="col-md-9 col-md-offset-5 mustRead"><img src="../static/img/mustRead.jpg" class="img-responsive img-circle"></div>
-					</div>
-					<div class="col-md-6">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">作者：张敬轩</div>
-						<div class="fsize12">积分：90</div>
-						<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
-						<div>
-							<div class="col-md-5 img-padding"><img src="../static/img/write.jpg" class="img-responsive"></div>
-							<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 bookshelf-book clear-padding">
-					<div class="col-md-6">
-						<div><img src="../static/img/book.jpg" class="img-responsive"></div>
-						<div class="col-md-9 col-md-offset-5 mustRead"><img src="../static/img/mustRead.jpg" class="img-responsive img-circle"></div>
-					</div>
-					<div class="col-md-6">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">作者：张敬轩</div>
-						<div class="fsize12">积分：90</div>
-						<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
-						<div>
-							<div class="col-md-5 img-padding"><img src="../static/img/write.jpg" class="img-responsive"></div>
-							<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 bookshelf-book clear-padding">
-					<div class="col-md-6">
-						<div><img src="../static/img/book.jpg" class="img-responsive"></div>
-						<div class="col-md-9 col-md-offset-5 mustRead"><img src="../static/img/mustRead.jpg" class="img-responsive img-circle"></div>
-					</div>
-					<div class="col-md-6">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">作者：张敬轩</div>
-						<div class="fsize12">积分：90</div>
-						<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
-						<div>
-							<div class="col-md-5 img-padding"><img src="../static/img/write.jpg" class="img-responsive"></div>
-							<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 bookshelf-book clear-padding">
-					<div class="col-md-6">
-						<div><img src="../static/img/book.jpg" class="img-responsive"></div>
-						<div class="col-md-9 col-md-offset-5 mustRead"><img src="../static/img/mustRead.jpg" class="img-responsive img-circle"></div>
-					</div>
-					<div class="col-md-6">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">作者：张敬轩</div>
-						<div class="fsize12">积分：90</div>
-						<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
-						<div>
-							<div class="col-md-5 img-padding"><img src="../static/img/write.jpg" class="img-responsive"></div>
+							<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
 							<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
 						</div>
 					</div>
@@ -118,6 +42,27 @@
 	</div>
 	<div class="col-md-1"></div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="book-evaluation-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="color: #2F5682">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: 0">
+        <h4 class="modal-title"><strong>图书评价</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div>你的评分:</div>
+        <br>
+        <div><input type="text" class="txt-title" placeholder="标题（必填）"></div>
+        <div><textarea class="txt-content" rows="6" placeholder="正文（不少于20字）"></textarea> </div>
+        <div>
+        	<button type="button" class="btn btn-sm btn-green">发表评论</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 	SetBookList();
 	SetReadingCenterRightHeight();

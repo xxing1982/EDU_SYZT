@@ -1,0 +1,11 @@
+h1, h2, h3, h4, h5, .title {
+    color: #2f5682;
+}
+
+.select-group, .radio, p, .paragraph {
+    color: #6c82a0;
+}
+
+a {
+    color: #2bb5ff;
+}

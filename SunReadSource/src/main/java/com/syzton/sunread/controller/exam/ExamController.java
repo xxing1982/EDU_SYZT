@@ -28,17 +28,29 @@ import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.ExamDTO;
 import com.syzton.sunread.exception.common.TodayVerifyTimesOverException;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
+import com.syzton.sunread.exception.exam.HaveVerifiedBookException;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.coinhistory.CoinHistory;
+import com.syzton.sunread.model.coinhistory.CoinHistory.CoinFrom;
+import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
+import com.syzton.sunread.model.pointhistory.PointHistory;
+import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
+import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.service.book.TestPassService;
+import com.syzton.sunread.service.coinhistory.CoinHistoryService;
 import com.syzton.sunread.service.exam.AnswerService;
 import com.syzton.sunread.service.exam.ExamService;
 import com.syzton.sunread.service.exam.ObjectiveAnswerService;
 import com.syzton.sunread.service.exam.SubjectiveAnswerService;
+import com.syzton.sunread.service.pointhistory.PointHistoryService;
 
 @Controller
 @RequestMapping(value = "/api")
@@ -47,10 +59,19 @@ public class ExamController {
 
     private ExamService service;
     
+    private TestPassService testPassService;
+    
+    private CoinHistoryService coinService;
+    
+    private PointHistoryService pointService;
+    
      
     @Autowired
-    public ExamController(ExamService service) {
+    public ExamController(ExamService service,TestPassService tService,CoinHistoryService coinService,PointHistoryService pointService) {
         this.service = service;
+        this.testPassService = tService;
+        this.coinService = coinService;
+        this.pointService = pointService;
     }
 
     @RequestMapping(value = "/exam", method = RequestMethod.POST)
@@ -95,6 +116,9 @@ public class ExamController {
     @ResponseBody
     public List<ObjectiveQuestion> createVerifyPaper(@PathVariable("studentid") Long studentId,@PathVariable("bookid") Long bookId) throws NotFoundException {
         LOGGER.debug("Finding all exam entries.");
+        if(service.isPassVerifyTest(bookId, studentId)){
+        	throw new HaveVerifiedBookException("Student "+studentId+" have verified the book " +bookId);
+        }
         List<Exam> list = service.getTodayVerifyTestStatus(bookId, studentId);
         if(list.size()>=2){
         	throw new TodayVerifyTimesOverException("Student{"+studentId+"} verify test with book{"+bookId+"} greater than twice, system ignore this verify test request.");
@@ -107,12 +131,12 @@ public class ExamController {
     
     
 
-    @RequestMapping(value = "/exam/capacitypaper/{bookid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/exam/capacitypaper/", method = RequestMethod.GET)
     @ResponseBody
     public List<CapacityQuestion> createCapacityPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
         LOGGER.debug("Finding all todo entries.");
        
-        List<CapacityQuestion> questions = service.takeCapacityTest(bookId);
+        List<CapacityQuestion> questions = service.takeCapacityTest();
         LOGGER.debug("Found {} exam entries.", questions.size());
 
         return questions;
@@ -135,11 +159,32 @@ public class ExamController {
         LOGGER.debug("hand in exam entrie.");
         long studentId = exam.getStudent().getId();
         long bookId = exam.getBook().getId();
+        if(service.isPassVerifyTest(bookId, studentId)){
+        	throw new HaveVerifiedBookException("Student "+studentId+" have verified the book " +bookId);
+        }
         List<Exam> list = service.getTodayVerifyTestStatus(studentId, bookId);
         if(list.size()>=2){
         	throw new TodayVerifyTimesOverException("Student{"+studentId+"} verify test with book{"+bookId+"} greater than twice, system ignore this verify test request.");
         }
         Exam examResult = service.handInVerifyPaper(exam);
+        if(examResult.isPass()){
+        	testPassService.hotBookUpdate(bookId, studentId);
+        	CoinHistory coinHistory = new CoinHistory();
+        	coinHistory.setCoinFrom(CoinFrom.FROM_VERIFY_TEST);
+        	coinHistory.setCoinType(CoinType.IN);
+        	User user = new Student();
+        	user.setId(studentId);
+        	coinHistory.setNum(2);
+        	coinHistory.setUser(user);
+        	coinService.add(coinHistory);
+        	
+        	PointHistory pointHistory = new PointHistory();
+        	pointHistory.setPointFrom(PointFrom.FROM_VERIFY_TEST);
+        	pointHistory.setPointType(PointType.IN);
+        	pointHistory.setNum(2);
+        	pointHistory.setUser(user);
+        	pointService.add(pointHistory);
+        }
         LOGGER.debug("return a exam entry result with information: {}", exam);
 
         return examResult;
@@ -167,15 +212,6 @@ public class ExamController {
         return examResult;
     }
     
-    private List<ExamDTO> createDTOs(List<Exam> models) {
-        List<ExamDTO> dtos = new ArrayList<ExamDTO>();
-
-        for (Exam model: models) {
-            dtos.add(model.createDTO());
-        }
-
-        return dtos;
-    }
 
     @RequestMapping(value = "/exam/{id}", method = RequestMethod.GET)
     @ResponseBody

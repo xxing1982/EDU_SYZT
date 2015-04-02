@@ -1,8 +1,7 @@
 
 body
 {
-    background-image:url(../img/background.jpg);
-    background-repeat:no-repeat;
+    background: url(../img/background.jpg) no-repeat fixed center top #b4d6d8;
     padding-top: 50px;
 }
 /*change placeholder color*/
@@ -289,20 +288,24 @@ a:focus, input:focus
 
 }
 
+.readingCenter-right
+{
+/*    background-color: #EAEAEA;*/
+    margin-top: 20px;
+}
+
 .readingCenter-right-top
 {
     margin-top: 25px;
 }
 
 #myBookshelf-button
-{
-    margin-top: -100px;
-}
+
 
 .btn-addBook
 {
-    padding:9px 24px;
-    font-size: 20px;
+    padding:9px 15px;
+    font-size: 18px;
     border: 2px #FFFFFF solid;
     background-color: #FFAF25;
     color: #FFFFFF;
@@ -326,6 +329,7 @@ a:focus, input:focus
     border-radius:5px;
     border:1px #DDD solid;
     background-color:#FFFFFF;
+    padding-top: 15px;
 }
 
 #myBookshelfBody-top
@@ -343,7 +347,7 @@ a:focus, input:focus
     padding-bottom: 20px;
 }
 
-.bookshelf-tab
+.select-tab
 {
     text-align: center;
     cursor: pointer;
@@ -351,10 +355,10 @@ a:focus, input:focus
     color:#000000;
 }
 
-.bookshelf-tab.myActive
+.select-tab.myActive
 {    
-    border-bottom: 2px #FFAF25 solid;
-    color: #FFAF25;
+    border-bottom: 2px #B6D023 solid;
+    color: #B6D023;
 }
 
 .bookshelf-book
@@ -366,25 +370,6 @@ a:focus, input:focus
 {
     margin-top: -160%;
     margin-left:60%;
-}
-
-.btn-green
-{
-    border: 1px #B6D023 solid;
-    background-color: #FFFFFF;
-    color: #B6D023;
-}
-
-.btn-green:hover
-{
-    background-color: #F0F0F0;
-    color: #B6D023;
-}
-
-.btn-green:focus
-{
-    color: #B6D023;
-    background-color: #F0F0F0;
 }
 
 .img-padding
@@ -540,19 +525,19 @@ a:focus, input:focus
 /*******************find book bottom*******************/
 
 /*******************quick search top*******************/
-.quickSearch, .advancedSearch
+.quickSearch, .advancedSearch, .popularSearch
 {
     margin-left: 15px;
     margin-right: 15px;
+    min-height: 600px;
 }
 
 .quickSearch .search, .advancedSearch .search
 {
     margin-top: 10px;
     padding-left: 20px;
-    padding-right: 30%;
+    padding-right: 5%;
     padding-bottom: 10px;
-    border-bottom: 1px #DDD solid;
 }
 
 .quickSearch .search input, .advancedSearch .search input
@@ -577,7 +562,6 @@ a:focus, input:focus
 .quickSearch .tip
 {
     padding:15px;
-    border-bottom: 1px #DDD solid;
 }
 
 .quickSearch .multiple .title
@@ -652,7 +636,7 @@ a:focus, input:focus
     color: #000000;
 }
 
-#myEvaluating .content .myAnswer
+#myEvaluating .content a
 {
     color: #75C9FF;
     cursor: pointer;
@@ -679,9 +663,25 @@ a:focus, input:focus
 
 /*******************reading dynamic buttom****************/
 
+/*******************AddBook*****************************/
+.readingCenter-right-body .col-md-8
+{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px solid #DDD;
+}
+
 /*******************my thinking test top****************/
+.readingCenter-right-body .thinkingTest,
+.readingCenter-right-body .thinkingTesting
+{
+    color: #2F5682;
+}
 
 .readingCenter-right-body .thinkingTest .tagHead,
+.readingCenter-right-body .thinkingTesting .tagHead,
 .readingCenter-right-body .otherAnswer .tagHead
 {
     padding-top: 15px;
@@ -691,7 +691,8 @@ a:focus, input:focus
     border-bottom: 1px solid #DDD;
 }
 
-.readingCenter-right-body .thinkingTest .title
+.readingCenter-right-body .thinkingTest .title,
+.readingCenter-right-body .thinkingTesting .title
 {
     text-align: center;
     padding-top: 30px;
@@ -700,7 +701,8 @@ a:focus, input:focus
     font-weight: 900;
 }
 
-.readingCenter-right-body .thinkingTest .analysis .category
+.readingCenter-right-body .thinkingTest .analysis .category,
+.readingCenter-right-body .thinkingTesting .analysis .category
 {
     color: #BEBEBE;
     font-size: 14px;
@@ -709,6 +711,7 @@ a:focus, input:focus
 }
 
 .readingCenter-right-body .thinkingTest .analysis .lists,
+.readingCenter-right-body .thinkingTesting .analysis .lists,
 .readingCenter-right-body .otherAnswer .lists
 {
     padding-left: 15px;
@@ -716,21 +719,23 @@ a:focus, input:focus
 }
 
 .readingCenter-right-body .thinkingTest .analysis .lists .list,
+.readingCenter-right-body .thinkingTesting .analysis .lists .list,
 .readingCenter-right-body .otherAnswer .lists .list
 {
     padding-bottom: 30px;
 }
 
-.readingCenter-right-body .thinkingTest .analysis .list .theme
+.readingCenter-right-body .thinkingTest .analysis .list .theme,
+.readingCenter-right-body .thinkingTesting .analysis .list .theme
 {
     font-size: 16px;
     font-weight: 900;
     padding-top: 20px;
+    margin-bottom: 10px;
 }
 
 .readingCenter-right-body .thinkingTest .analysis .list .content
 {
-    padding-top: 10px;
     line-height: 22px;
 }
 
@@ -743,6 +748,10 @@ a:focus, input:focus
 /*******************my thinking test bottom****************/
 
 /*******************other answer top****************/
+.readingCenter-right-body .otherAnswer
+{
+    color: #2F5682;
+}
 
 .readingCenter-right-body .otherAnswer .title
 {
@@ -772,66 +781,15 @@ a:focus, input:focus
 
 /*******************message center top****************/
 
-.messageCenter-page {
-    padding-top: 85px;
-    padding-bottom: 50px;
-    height: 100%;
+#messageCenter-page {
 }
 
-.messageCenter-body
-{
-    margin-top: 25px;
-    border-radius:5px;
-    border:1px #DDD solid;
-    background-color:#FFFFFF;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.messageCenter-body .title{
-    margin-bottom: 30px;
-}
-
-
-.messageCenter-body .message-row {
-    border-bottom: 1px #DDD solid;
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
-
-.messageCenter-body .nav-tabs {
-    padding-left: 20px;
-}
-
-.messageCenter-body .footer-elements {
-    margin-top: 20px;
-}
-
-.messageCenter-body #myTab li{
-    width: 146px;
-    text-align: center;
-}
-
-.messageCenter-body #myTab #send-message{
-    text-align: center;
-    float: right;
-    margin-right: 15px;
-}
-
-.messageCenter-body .modal-dialog {
-    width: 58%;
-}
-
-.messageCenter-body .modal-content {
-    padding: 35px;
+.messageCenter-body .modal-content .modal-title{
+    margin-bottom: 15px;
 }
 
 .messageCenter-body .modal-content .radio{
     padding-bottom: 23px;
-}
-
-.messageCenter-body .modal-content .modal-title{
-    padding-bottom: 16px;
 }
 
 .messageCenter-body .modal-content .select-group{
@@ -844,7 +802,7 @@ a:focus, input:focus
 
 .messageCenter-body .modal-content .message-input{
     height: 140px;
-    margin-bottom: 23px;
 }
 
 /*******************message center buttom****************/
+

@@ -11,6 +11,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
     $urlRouterProvider
         .when('/readingCenter', '/readingCenter/myBookshelf')
         .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
+//        .when('/readingCenter/bookDetails','/readingCenter/bookDetails/bookOverview')
         .otherwise('/');
 
     $stateProvider
@@ -31,11 +32,35 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: 'partials/readingCenterMyBookshelf.html',
             controller: 'readingCenterMyBookshelfController'
         })
+        //reading center -> myBookshelf -> book details
+        .state('readingCenter.bookDetails',{
+            url: '/bookDetails',
+            templateUrl: 'partials/readingCenterBookDetails.html',
+            controller: 'readingCenterBookDetailsController'
+        })
+        //reading center -> myBookshelf -> book details -> book overview
+        .state('readingCenter.bookDetails.bookOverview',{
+        url: '/bookDetails',
+        templateUrl: 'partials/readingCenterBookDetailsBookOverview.html',
+        controller: 'readingCenterBookDetailsBookOverviewController'
+        })   
         //reading center -> myBookshelf -> add books
         .state('readingCenter.addBook',{
             url: '/addBook',
             templateUrl: 'partials/readingCenterAddBook.html',
             controller: 'readingCenterAddBookController'
+        })
+        //reading center -> myBookshelf -> thinking testing
+        .state('readingCenter.thinkingTesting',{
+            url: '/thinkingTesting',
+            templateUrl: 'partials/readingCenterThinkingTesting.html',
+            controller: 'readingCenterThinkingTestingController'
+        })
+        //reading center -> myBookshelf -> authentication testing
+        .state('readingCenter.authenticationTesting',{
+            url: '/authenticationTesting',
+            templateUrl: 'partials/readingCenterAuthenticationTesting.html',
+            controller: 'readingCenterAuthenticationTestingController'
         })
         //reading center -> myBookshelf -> add books -> quick search
         .state('readingCenter.addBook.quick', {

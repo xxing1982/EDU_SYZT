@@ -4,8 +4,23 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
+    <link href="../static/css/common.css" rel="stylesheet" type="text/css" />
     <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+    
+    <!-- style for controls like page numbers-->
     <link href="../static/css/custom-ui.css" rel="stylesheet" type="text/css" />
+    
+    <!-- style for all the bodies inside the xxx-page -->
+    <link href="../static/css/pagebody.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Color manage -->
+    <link href="../static/css/color.css" rel="stylesheet" type="text/css" /> 
+    
+    <!-- Font manage -->
+    <link href="../static/css/fonts.css" rel="stylesheet" type="text/css" /> 
+    
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" /> 
+    <link href="../static/css/bookshelf.css" rel="stylesheet" type="text/css" /> 
 </head>
 <body>
         <!--navigate-->
@@ -21,6 +36,7 @@
                 <ul class="nav navbar-nav nav-underline">
                     <li><a href="#/">首页</a></li>
                     <li><a href="#/readingCenter">阅读中心</a></li>
+                    <li><a href="#/readingDynamic">阅读动态</a></li>
                     <li><a href="#readingSea">阅读海洋</a></li>
                     <li><a href="#readingTraining">阅读训练</a></li>
                     <li><a href="#prizeCenter">奖品中心</a></li>
@@ -77,9 +93,10 @@
     <script type="text/javascript" src="../static/js/controller/readingTrainingCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/prizeCenterCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/readingCenterMyBookshelfCtrl.js"></script>
+    <script type="text/javascript" src="../static/js/controller/readingCenterBookDetailsCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/readingCenterMyNoteCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/readingCenterMyEvaluatingCtrl.js"></script>
-    <script type="text/javascript" src="../static/js/controller/readingCenterAddBookCtrl.js"></script>
+    <script type="text/javascript" src="../static/js/controller/readingCenterAddBookCtrl.js"></script>   
     <script type="text/javascript" src="../static/js/controller/readingCenterAddBookQuickSearchCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/readingCenterAddBookAdvancedSearchCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/readingCenterAddBookPopularReadingCtrl.js"></script>
@@ -88,12 +105,15 @@
     <script type="text/javascript" src="../static/js/controller/readingDynamicHotNotesCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/messageCenterCtrl.js"></script>
     <script type="text/javascript" src="../static/js/controller/personalProfileCtrl.js"></script>
+    <script type="text/javascript" src="../static/js/controller/readingCenterThinkingTestingCtrl.js"></script>
+    <script type="text/javascript" src="../static/js/controller/readingCenterAuthenticationTestingCtrl.js"></script>
     
     
     <script type="text/javascript" src="../static/js/services/userService.js"></script>
     <script type="text/javascript" src="../static/js/services/bookshelfService.js"></script>
     <script type="text/javascript" src="../static/js/services/noteService.js"></script>
     <script type="text/javascript" src="../static/js/services/commentService.js"></script>
+    <script type="text/javascript" src="../static/js/services/para.js"></script>
     
     <!--bootstrap-->
     <script type="text/javascript" src="../static/js/style.js"></script>

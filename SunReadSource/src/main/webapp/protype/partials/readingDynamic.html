@@ -1,56 +1,81 @@
-<div id="readingDynamic-page">
+<div id="personalCenter-page" class="container">
     <div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8">
-		<div class="readingCenter-right-top">
-			<img src="../static/img/myNote.jpg" class="img-responsive img-rounded">
-		</div>
-		<div class="readingCenter-right-body clear-padding">
-			<div class="note-row">
-				<div class="row book-row">
-					<div class="col-md-2 book-row-left">
-						<div><img src="../static/img/book.jpg" class="img-responsive"></div>
-						<div class="col-md-9 col-md-offset-5 mustRead" ng-show='showMust'>
-							<img src="../static/img/mustRead.jpg" class="img-responsive img-circle">
-						</div>
-						<div>查理日记</div>
-					</div>
-                    <div class="col-md-1"></div> 
-					<div class="col-md-9 book-row-right">
-						<div class="title">受益匪浅，很不错</div>
-						<div class="time">2014.06.20</div>
-						<div class="content">这是经受住时间考验的书，因为它追求的是真理，而不是利益。不得不为罗素那全面，深刻的剖析而折服。我觉得这本书填补了我这块的空白，学到了很多东西。我对“书”的理解应该是这样的。</div>
-						<div class="book-thumbnail">
-							<div class="col-md-1 clear-padding">
-								<img src="../static/img/note.jpg" class="img-responsive">
-							</div>
-							<div class="col-md-1 clear-padding">
-								<img src="../static/img/note.jpg" class="img-responsive">
-							</div>
-						</div>
-						<div class="msg-buttom" ng-click="IsShow()"><span class="glyphicon glyphicon-comment"></span> 6</div>
-					</div>
-				</div>
-				<div class="row msg-row" ng-show="showRepley">
-					<div class="col-md-9"><input class="form-control" placeholder="输入回复"></div>
-					<input class="btn btn-green col-md-2" type="button" value="发表评论">
-					<div class="clearfix"></div>
-					<div class="col-md-11 reply">
-						<div class="col-md-12 total">共1条评论</div>
-						<div class="col-md-12 block">
-							<div class="person">张逸轩&nbsp;&nbsp;&nbsp;三天前</div>
-							<div class="content">写的很好，哈哈哈</div>
-						</div>
-					</div>
-				</div>
-			</div>
-            
-			<div class="bottom">更多加载中...</div>
-		</div>
-	</div>
-	<div class="col-md-1"></div>
+    
+    <!-- The top image -->
+    <div class="page-body-top col-md-8 col-md-offset-2"> 
+        <img src="../static/img/readingDynamic.png" class="img-responsive img-rounded"> 
+    </div>
+    
+    <!-- The page body top -->
+    <div class="page-body personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
+        
+        <!-- President saying -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title"><h4>校长寄语</h4></div>
+                <div class="paragraph ">
+                    <div class="col-md-12">
+                        <p>亲爱的同学们：<br/><br/>
+                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校是你们享受童年快乐和学习乐趣的学园，学校是你们放飞理想、快乐成长的乐园。我希望同学们勤奋地学习，自觉地遵规守纪，快乐地生活。以认真和负责去对待学习，以俭朴和节约去对待生活，以开朗和友善去对待同学，以勇敢和坚强去面对困难。学会做人、学会做事，让老师放心，让父母安心。只要我们从现在开始，从身边的小事做起，从每一个细节开始，与好习惯交朋友，每天进步一点点，每天收获一点点，你就会发现自己就是最快乐、最健康、最优秀的！
+                        </p>
+                        <p class="text-right">  ——校长王长贵</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
+        </div>
+        
+        <!-- Latest activities -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>最新活动</h4></div>
+                        <div class="col-md-2 text-right"><a style="line-height:40px;">更多></a></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
+                        
+                        <!-- Activities row -->
+                        <div class="row" ng-repeat="n in [1,2,3,4,5]">
+                            <div class="col-md-10">
+                                <p>{{n}}. 感恩成长 资助育人：王式廓奖学金2014年报告会举行	</p>
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <p>2015.3.3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
+        </div>
+                
+        <!-- Excellent clazzes -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>优秀班级</h4></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
+        </div>
+
+        
+    </div>
     </div>
 </div>
 <script>
-	SetReadingCenterRightHeight();
 </script>

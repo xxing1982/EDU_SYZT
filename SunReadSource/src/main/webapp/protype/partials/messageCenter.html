@@ -1,29 +1,46 @@
-<div class="messageCenter-page container">
+<div id="messageCenter-page" class="container">
     <div class="row">
-	<div class="messageCenter-body col-md-8 col-md-offset-2">
+	<div class="page-body page-body-top messageCenter-body readingCenter-right-body col-md-8 col-md-offset-2">
         <div class="title"><h4>消息中心</h4></div>
 
         <!-- Nav tabs -->
-        <ul id="myTab" class="nav nav-tabs row" role="tablist">
+        <div class="row buttom-separator">
+        <div class="col-md-10">
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#receive" aria-controls="receive" role="tab" data-toggle="tab">收到的消息</a></li>
             <li role="presentation"><a href="#send" aria-controls="send" role="tab" data-toggle="tab">发出的消息</a></li>
+        </ul>
+        </div>
+        <div class="col-md-2 text-right">
             <button id="send-message" class="btn btn-green" data-toggle="modal" data-target="#myModal" ng-click="" type="button">
                 发信息
-            </button>
-                <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">发送信息</h4>
+            </button>    
+        </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                <div class="modal-body">
                     <div class="row">
+                        
+                        <!-- Row 0 -->
+                        <div class="col-md-12">
+                            <h4 class="modal-title" id="myModalLabel">发送信息
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </h4>
+                        </div>
+                        
+                        <!-- Col 1 -->
                         <div class="col-md-2">
                             <form role="form">
                                 <div class="radio">
-                                  <label><input type="radio" name="optradio">发给校长</label>
+                                    <label><input type="radio" name="optradio">发给校长</label>
                                 </div>
                                 <div class="radio">
-                                  <label><input type="radio" name="optradio">发给老师</label>
+                                    <label><input type="radio" name="optradio">发给老师</label>
                                 </div>
                                 <div class="radio">
                                   <label><input type="radio" name="optradio">发给同学</label>
@@ -97,25 +114,34 @@
                             </div> 
                         </div>
                     </div>
+
                     <!-- Input form -->
-                    <h4 class="modal-title" id="myModalLabel">消息内容</h4>
-                    <div><textarea class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>	
-                    <button class="btn btn-green" ng-click="" type="button">发送信息</button>
-                </div>
+                    <div >
+                        <h4 class="modal-title" id="myModalLabel">消息内容</h4>
+                        <div><textarea class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>	
+                    </div>
+              </div>
+              </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <button class="btn btn-green" ng-click="" type="button">发送信息</button>
+                        </div>
+                    </div>
               </div>
             </div>
-        </ul>
+        </div>
+
 
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="receive">
-                 <div class="message-row row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,20]">
+                 <div class="paragraph buttom-separator row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,20]">
                     <div class="col-md-6">
                         <div class="row">
                         <div class="col-md-1">
                             <input type="checkbox"/>
                         </div>
-                        <div class="col-md-10">收到的信息收到的信息收到的信息收到的信息</div>
+                            <div class="col-md-10">收到的信息收到的信息收到的信息收到的信息</div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -128,7 +154,7 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="send">
-                 <div class="message-row row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,20]">
+                 <div class="paragraph buttom-separator row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,20]">
                     <div class="col-md-6">
                         <div class="row">
                         <div class="col-md-1">
@@ -148,8 +174,8 @@
             </div>
         </div>
         
-       
-        <div class="row footer-elements">
+        <!-- Footer and page numbers  -->
+        <div class="row paragraph">
             <div class="col-md-3">
                 <div class="row">
                     <div class="col-md-2"><input type="checkbox"/></div>
@@ -170,13 +196,13 @@
                         </div>
                     </div>
                     <div class="col-xs-3">
-                        <div class="row">去第<input type="text" class="custom-page-number-input" />页</div>
+                        <div class="">去第<input type="text" class="custom-page-number-input" />页</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 	</div>
+    </div>
 </div>
 <script>
     $('#myTab a').click(function (e) {

@@ -1,5 +1,5 @@
 //mainCtrl.js
-var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices','bookshelfServices', 'noteServices', 'commentServices']);
+var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices','bookshelfServices', 'noteServices', 'paraServices', 'commentServices']);
 
 ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($scope, User,Bookshelf) {
 	//userinfo
@@ -23,7 +23,7 @@ ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($sco
 //    $scope.bookshelf = {
 //    	'finishStatus': '80%',
 //    	'readed': {
-//    		'must': '5',
+//    		'must': '5',bookshelfServices
 //    		'select': '12'
 //    	},
 //    	'unread': {
