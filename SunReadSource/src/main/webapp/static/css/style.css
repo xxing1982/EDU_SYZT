@@ -762,9 +762,11 @@ a:focus, input:focus
     margin-bottom: 15px;
 }
 
+/*
 .messageCenter-body .modal-content .radio{
     padding-bottom: 23px;
 }
+*/
 
 .messageCenter-body .modal-content .select-group{
     padding-bottom: 16px;
@@ -779,16 +781,4 @@ a:focus, input:focus
 }
 
 /*******************message center buttom****************/
-
-
-/*******************personal profile buttom****************/
-
-.img-circle {
-  border-width: 2.5px;
-  border-color: white;
-  border-style: solid;
-  box-shadow: 0px 0px 8px rgba(0, 0, 34, 0.48);
-}
-
-/*******************personal profile buttom****************/
 
