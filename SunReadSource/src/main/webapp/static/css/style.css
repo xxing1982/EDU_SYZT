@@ -806,3 +806,13 @@ a:focus, input:focus
 
 /*******************message center buttom****************/
 
+/*******************reading dynamic top****************/
+
+.student-rank {
+    bottom: -10%;
+    right: -10%;
+    position: absolute;
+}
+
+/*******************reading dynamic buttom****************/
+
