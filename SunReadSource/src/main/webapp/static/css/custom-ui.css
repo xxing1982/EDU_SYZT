@@ -24,27 +24,37 @@
     padding-right: 0;
 }
 
-/* nav tabs (testing) */
-.messageCenter-body .nav-tabs {
-    border: none;
+
+/* nav tabs override the bootstrap styles */
+
+.nav-tabs {
+    border-bottom: none;
 }
 
-.messageCenter-body .nav-tabs>li.active>a {
-    border: none;
+.nav-tabs>li>a{
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
-.messageCenter-body .nav-tabs>li.active>a:link {
-    border-top-width: 0;
-    border-right-width: 0;
-    border-left-width: 0;
-    border-buttom-width: 2;
-    border-style: solid;
-    border-color: blue;
+.nav-tabs>li.active>a:link {
+    
+    border: none;
+    color: #B6D023;
+    border-bottom: 3px solid #B6D023;
 }
 
-.messageCenter-body .nav-tabs>li>a:hover {
-    border: none;
+.nav-tabs>li.active>a:hover {
+    color: #B6D023;
+}
+
+.nav-tabs>li>a:link {
+    color: #6c82a0
+}
+
+.nav-tabs>li>a:hover {
+    border-color: transparent;
     background: none;
+    color: #2bb5ff;
 }
 
 
