@@ -1,11 +1,24 @@
+
+/* Dark blue */
 h1, h2, h3, h4, h5, .title {
     color: #2f5682;
 }
 
-.select-group, .radio, p, .paragraph {
+
+/* Dark blue for text and so on*/
+.select-group, .radio,
+p, .paragraph {
     color: #6c82a0;
 }
 
+
+/* Light blue for link and so on */
 a {
     color: #2bb5ff;
 }
+
+/* Green for nav-tabs and bottons */
+
+
+/*    color: #B6D023;*/
+

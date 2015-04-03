@@ -146,6 +146,12 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: "partials/messageCenter.html",
             controller: "messageCenterController"
         })
+        //statistic ranking
+        .state('statisticsRanking', {
+            url: '/statisticsRanking',
+            templateUrl: "partials/statisticsRanking.html",
+            controller: "statisticsRankingController"
+        })
         //personal profile
         .state('personalProfile', {
             url: '/personalProfile',
