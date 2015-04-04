@@ -11,6 +11,6 @@ import com.syzton.sunread.model.exam.SubjectiveQuestion.SubjectiveQuestionType;
 
 public interface SubjectiveQuestionRepository extends JpaRepository<SubjectiveQuestion, Long>{
 	
-	public List<SubjectiveQuestion> findByQuestionTypeAndBook(SubjectiveQuestionType questionType,Book book );
+	public List<SubjectiveQuestion> findByQuestionTypeAndBookId(SubjectiveQuestionType questionType,Long bookId );
 	
 }

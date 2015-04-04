@@ -1,6 +1,5 @@
 package com.syzton.sunread.model.exam;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,22 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.syzton.sunread.dto.exam.ExamDTO;
@@ -46,13 +38,11 @@ public class Exam extends AbstractEntity {
 	@JoinTable(name = "exam_question", joinColumns = { @JoinColumn(name = "exam_id") }, inverseJoinColumns = { @JoinColumn(name = "question_id") })
 	private Set<Question> questions;
 
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "book_id")
-	private Book book;
+	private Long bookId;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="student_id")
-	private Student student;
+	private Long studentId;
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 10, nullable = false)
@@ -74,7 +64,7 @@ public class Exam extends AbstractEntity {
 	private int questionNum = 5;
 
 	public enum ExamType {
-		VERIFY, THINK, CAPACITY
+		VERIFY, THINK, CAPACITY,SPEED,WORD
 	}
 
 	@OneToMany(cascade = { CascadeType.ALL },fetch = FetchType.LAZY)
@@ -123,8 +113,8 @@ public class Exam extends AbstractEntity {
 		this.questions = questions;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
 
 	public void setExamType(ExamType examType) {
@@ -167,16 +157,16 @@ public class Exam extends AbstractEntity {
 		return questions;
 	}
 
-	public Student getStudent() {
-		return student;
+	public Long getStudentId() {
+		return this.studentId;
 	}
 
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
 	}
 
-	public Book getBook() {
-		return book;
+	public Long getBookId() {
+		return bookId;
 	}
 
 	public ExamType getExamType() {
@@ -204,8 +194,8 @@ public class Exam extends AbstractEntity {
 	}
 
 	private void countScore() {
-		if (this.examType.equals(ExamType.VERIFY)
-				|| this.examType.equals(ExamType.CAPACITY)) {
+		if (!this.examType.equals(ExamType.THINK)
+				&&! this.examType.equals(ExamType.SPEED)) {
 			int total = answers.size();
 			for (Answer answer : answers) {
 				ObjectiveAnswer oAnswer = (ObjectiveAnswer) answer;

@@ -26,16 +26,24 @@ public interface ExamService {
 	public Exam findById(Long id) throws NotFoundException;
 
 	public List<ObjectiveQuestion> takeVerifyTest(Long bookId);
+	
+	public List<ObjectiveQuestion> takeWordTest(Long bookId);
+	
+	public List<ObjectiveQuestion> takeSpeedTest();
 
-	public List<CapacityQuestion> takeCapacityTest();
+	public List<CapacityQuestion> takeCapacityTest(int level);
 
 	public List<SubjectiveQuestion> takeThinkTest(Long bookId);
 
 	public Exam handInVerifyPaper(Exam added);
+	
+	public Exam handInWordPaper(Exam added);
 
 	public Exam handInCapacityTest(Exam added);
 
 	public Exam handInThinkTest(Exam added);
+	
+	public Exam handInSpeedTest(Exam added);
 	
 	public List<Exam> getTodayVerifyTestStatus(Long bookId, Long studentId);
 	

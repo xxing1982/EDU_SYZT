@@ -3,29 +3,54 @@ package com.syzton.sunread.model.exam;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syzton.sunread.dto.exam.OptionDTO;
-import com.syzton.sunread.todo.model.Todo;
-import com.syzton.sunread.todo.model.Todo.Builder;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 @Entity 
-@Table(name = "option")  
-public class Option {
-	
-	@Id   
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@Column(nullable=false)
+@Table(name = "question_option")  
+public class Option extends AbstractEntity {
+	 
+	@Column(name="tag",nullable=false)
 	private String tag;
-	@Column(nullable=false)
+	
+	@Column(name="content",nullable=false)
 	private String content;
 	
+	
+//	@JsonIgnore
+//	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)   
+//    @JoinColumn(name="question_id")
+//	private ObjectiveQuestion question;
+//	
+//	public ObjectiveQuestion getQuestion() {
+//		return question;
+//	}
+//
+//	public void setQuestion(ObjectiveQuestion question) {
+//		this.question = question;
+//	}
+	
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(obj == null){

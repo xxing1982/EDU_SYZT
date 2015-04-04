@@ -3,6 +3,7 @@ package com.syzton.sunread.model.exam;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,28 +21,48 @@ import com.syzton.sunread.model.exam.SubjectiveQuestion.Builder;
 @DiscriminatorValue("objective")
 public class ObjectiveQuestion extends Question {
 	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinColumn(name="book_id",nullable=false)
-	private Book book;
+//	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,optional=true)
+//	@JoinColumn(name="book_id",nullable=false)
+//	private Book book;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
-			CascadeType.REMOVE, CascadeType.MERGE,CascadeType.REFRESH })
-	@JoinColumn(name = "question_id")
+	@Column(name="book_id")
+	private Long bookId;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH,CascadeType.REMOVE})
+	@JoinColumn(name="question_id")  
 	private Set<Option> options;
+	
+	
+	@Column(name="objective_type",nullable=false)
+	private QuestionType objectiveType;
 	
 	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL)  
     @JoinColumn(name="correct_id")  
     private Option correctAnswer;
 	
-	
-	public Book getBook() {
-		return book;
+	public Long getBookId() {
+		return bookId;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
+
+	public QuestionType getObjectiveType() {
+		return objectiveType;
+	}
+
+	public void setObjectiveType(QuestionType objectiveType) {
+		this.objectiveType = objectiveType;
+	}
+
+	
+	
+	public enum QuestionType {
+		VERIFY,WORD,CAPACITY
+	}
+
 	
 	public static Builder getBuilder() {
         return new Builder();
@@ -62,19 +83,25 @@ public class ObjectiveQuestion extends Question {
 	 
 	}
 
-	@Override
-	public QuestionDTO createDTO() {
-		// TODO Auto-generated method stub
-		return null;
-	}  
+	  
 	
 	public Set<Option> getOptions() {
 		return options;
 	}
 
 	public Option getCorrectAnswer() {
-		return correctAnswer;
+		return this.correctAnswer;
 	}
+	
+	public void setCorrectAnswer(Option option){
+		this.correctAnswer = option;
+	}
+	
+	public void setOptions(Set<Option> options) {
+		this.options = options;
+	}
+
+	 
 
  
 }

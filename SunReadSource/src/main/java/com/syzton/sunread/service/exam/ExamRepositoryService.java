@@ -33,6 +33,7 @@ import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
+import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion.SubjectiveQuestionType;
 import com.syzton.sunread.model.user.Student;
@@ -176,19 +177,19 @@ public class ExamRepositoryService implements ExamService {
 
 	@Override
 	public List<ObjectiveQuestion> takeVerifyTest(final Long bookId) {
-		return getRandomObjectiveQuestions(bookId);
+		return getRandomObjectiveQuestions(bookId,QuestionType.VERIFY);
 
 	}
 
 	@Override
-	public List<CapacityQuestion> takeCapacityTest() {
+	public List<CapacityQuestion> takeCapacityTest(int level) {
 		List<CapacityQuestionType> list = new ArrayList<CapacityQuestionType>();
 		list.add(CapacityQuestionType.FIRST);
 		list.add(CapacityQuestionType.SECOND);
 		list.add(CapacityQuestionType.THIRD);
 		list.add(CapacityQuestionType.FOURTH);
 		list.add(CapacityQuestionType.FIFTH);
-		List<CapacityQuestion> questions = this.getRandomCapacityQuestion(list, Exam.EXAM_CAPACITY_QUESTION_PER_TYPE);
+		List<CapacityQuestion> questions = this.getRandomCapacityQuestion(list, Exam.EXAM_CAPACITY_QUESTION_PER_TYPE,level);
 		return questions;
 	}
 
@@ -208,7 +209,7 @@ public class ExamRepositoryService implements ExamService {
 	}
 
 	private List<ObjectiveQuestion> getRandomObjectiveQuestions(
-			final Long bookId) {
+			final Long bookId,final QuestionType questionType) {
 		 
 		long total = objectQsRepo.count(new Specification<ObjectiveQuestion>() {
 
@@ -217,7 +218,7 @@ public class ExamRepositoryService implements ExamService {
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
 				root = query.from(ObjectiveQuestion.class);
 				Path<Book> book = root.get("book");
-
+				
 				return cb.equal(book.get("id"), bookId);
 			}
 		});
@@ -232,8 +233,8 @@ public class ExamRepositoryService implements ExamService {
 							CriteriaQuery<?> query, CriteriaBuilder cb) {
 						root = query.from(ObjectiveQuestion.class);
 						Path<Book> book = root.get("book");
-
-						return cb.equal(book.get("id"), bookId);
+						Path<QuestionType> type = root.get("type");
+						return cb.and(cb.equal(book.get("id"), bookId),cb.equal(type,questionType));
 					}
 				}, pageable);
 		List<ObjectiveQuestion> list = pageResult.getContent();
@@ -252,12 +253,12 @@ public class ExamRepositoryService implements ExamService {
 	private List<SubjectiveQuestion> getRandomSubjectiveQuestion(Long bookId,
 			List<SubjectiveQuestionType> typeList, int num) {
 		List<SubjectiveQuestion> list = new ArrayList<SubjectiveQuestion>();
-		Book book = bookRepo.findOne(bookId);
+		 
 		Random random = new Random();
 		if (typeList != null) {
 			for (int i = 0; i < typeList.size(); i++) {
 				List<SubjectiveQuestion> tempList = subjectQsRepo
-						.findByQuestionTypeAndBook(typeList.get(i), book);
+						.findByQuestionTypeAndBookId(typeList.get(i), bookId);
 				if (tempList.size() > num) {
 					int z = random.nextInt(tempList.size());
 					for (int j = 0; j < num; j++) {
@@ -273,14 +274,14 @@ public class ExamRepositoryService implements ExamService {
 	}
 	
 	private List<CapacityQuestion> getRandomCapacityQuestion(
-			List<CapacityQuestionType> typeList, int num) {
+			List<CapacityQuestionType> typeList, int num,int level) {
 		List<CapacityQuestion> list = new ArrayList<CapacityQuestion>();
 		 
 		Random random = new Random();
 		if (typeList != null) {
 			for (int i = 0; i < typeList.size(); i++) {
 				List<CapacityQuestion> tempList = capacityQsRepo
-						.findByQuestionType(typeList.get(i));
+						.findByQuestionTypeAndLevel(typeList.get(i),level);
 				if (tempList.size() > num) {
 					int z = random.nextInt(tempList.size());
 					for (int j = 0; j < num; j++) {
@@ -304,20 +305,14 @@ public class ExamRepositoryService implements ExamService {
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		Date date = cal.getTime();
-		Book book = new Book();
-		book.setId(bookId);
-		Student student = new Student();
-		student.setId(studentId);
-		List<Exam> list = repository.findByStudentAndBookAfter(student, book,date);
+		 
+		List<Exam> list = repository.findByStudentIdAndBookIdAfter(studentId, bookId,date);
 		return list;
 	}
 	
 	public boolean isPassVerifyTest(Long bookId,Long studentId){
-		Book book = new Book();
-		book.setId(bookId);
-		Student student = new Student();
-		student.setId(studentId);
-		List<Exam> list = repository.findByStudentAndBook(student,book);
+		 
+		List<Exam> list = repository.findByStudentIdAndBookId(bookId,studentId);
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).isPass()){
 				return true;
@@ -325,5 +320,47 @@ public class ExamRepositoryService implements ExamService {
 		}
 		return false;
 		
+	}
+
+	@Override
+	public List<ObjectiveQuestion> takeWordTest(Long bookId) {
+		return getRandomObjectiveQuestions(bookId,QuestionType.WORD);
+	}
+
+	@Override
+	public List<ObjectiveQuestion> takeSpeedTest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Exam handInWordPaper(Exam added) {
+		Exam exam = added;
+		Set<Answer> answers = exam.getAnswers();
+		for (Answer answer : answers) {
+			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
+			if (objectAnswer.isCorrect()) {
+				exam.setPassCount(exam.getPassCount() + 1);
+			} else {
+				exam.setFailCount(exam.getFailCount() + 1);
+			}
+
+		}
+		int score = exam.getPassCount() * 100
+				/ (exam.getPassCount() + exam.getFailCount());
+		exam.setExamScore(score);
+		if (score >= 60) {
+			exam.setPass(true);
+		} else {
+			exam.setPass(false);
+		}
+		exam = add(exam);
+		return exam;
+	}
+
+	@Override
+	public Exam handInSpeedTest(Exam added) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

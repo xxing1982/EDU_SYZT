@@ -10,6 +10,7 @@
 
 
  
+ 
     <!--<http pattern="/api/users" create-session="stateless" authentication-manager-ref="clientAuthenticationManager"-->
           <!--xmlns="http://www.springframework.org/schema/security">-->
         <!--<intercept-url pattern="/api/users" method="POST" access="IS_AUTHENTICATED_FULLY"/>-->
@@ -25,6 +26,5 @@
         <!--<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER"/>-->
         <!--<access-denied-handler ref="oauthAccessDeniedHandler"/>-->
     <!--</http>-->
- 
 
 </beans>

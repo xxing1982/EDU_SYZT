@@ -9,6 +9,6 @@ import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 
 public interface CapacityQuestionRepository extends JpaRepository<CapacityQuestion, Long> {
 	
-	public List<CapacityQuestion> findByQuestionType(CapacityQuestionType questionType);
+	public List<CapacityQuestion> findByQuestionTypeAndLevel(CapacityQuestionType questionType,int level);
 }
 

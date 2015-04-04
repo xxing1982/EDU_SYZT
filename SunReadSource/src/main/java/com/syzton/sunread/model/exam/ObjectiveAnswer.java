@@ -47,7 +47,7 @@ public class ObjectiveAnswer extends Answer {
 		ObjectiveAnswerDTO dto = new ObjectiveAnswerDTO();
 		dto.setId(this.getId());
 		if(option!=null){
-			dto.setOptionDTO(option.createDTO());
+//			dto.setOptionDTO(option.createDTO());
 		}
 		return dto;
 	}

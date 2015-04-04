@@ -1,8 +1,5 @@
 package com.syzton.sunread.controller.exam;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
@@ -132,36 +129,27 @@ public class AnswerController {
          return new PageResource<>(pageResult,"page","size");
     }
 
-    private List<AnswerDTO> createDTOs(List<Answer> models) {
-        List<AnswerDTO> dtos = new ArrayList<AnswerDTO>();
-
-        for (Answer model: models) {
-            dtos.add(model.createDTO());
-        }
-
-        return dtos;
-    }
-
+   
     @RequestMapping(value = "/answer/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public AnswerDTO findById(@PathVariable("id") Long id) throws AnswerNotFoundException {
+    public Answer  findById(@PathVariable("id") Long id) throws AnswerNotFoundException {
         LOGGER.debug("Finding to-do entry with id: {}", id);
 
         Answer found = service.findById(id);
         LOGGER.debug("Found to-do entry with information: {}", found);
 
-        return found.createDTO();
+        return found;
     }
 
     @RequestMapping(value = "/answer/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public AnswerDTO update(@Valid @RequestBody AnswerDTO dto, @PathVariable("id") Long todoId) throws AnswerNotFoundException {
+    public Answer update(@Valid @RequestBody AnswerDTO dto, @PathVariable("id") Long todoId) throws AnswerNotFoundException {
         LOGGER.debug("Updating a to-do entry with information: {}", dto);
 
         Answer updated = service.update(dto);
         LOGGER.debug("Updated the information of a to-entry to: {}", updated);
 
-        return updated.createDTO();
+        return updated;
     }
 
 }

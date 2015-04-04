@@ -10,17 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.syzton.sunread.dto.exam.QuestionDTO;
 import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.exam.Exam.ExamType;
-import com.syzton.sunread.model.exam.ObjectiveAnswer.Builder;
 @Entity
 @DiscriminatorValue("subjective")
 public class SubjectiveQuestion extends Question {
 	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinColumn(name="book_id",nullable=false)
-	private Book book;
+	@Column(name="book_id")
+	private Long bookId;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="subjective_que_type",length=10,nullable=false)
@@ -48,17 +44,21 @@ public class SubjectiveQuestion extends Question {
 	 
 	}
 	
-	public Book getBook() {
-		return book;
+	public Long getBook() {
+		return bookId;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBook(Long bookId) {
+		this.bookId = bookId;
 	}
-	@Override
-	public QuestionDTO createDTO() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public SubjectiveQuestionType getQuestionType() {
+		return questionType;
 	}
+
+	public void setQuestionType(SubjectiveQuestionType questionType) {
+		this.questionType = questionType;
+	}
+	 
 
 }

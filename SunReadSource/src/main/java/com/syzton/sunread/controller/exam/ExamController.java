@@ -129,14 +129,23 @@ public class ExamController {
         return questions;
     }
     
+    @RequestMapping(value = "/exam/wordpaper/{studentid}/{bookid}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ObjectiveQuestion> createWordPaper(@PathVariable("studentid") Long studentId,@PathVariable("bookid") Long bookId) throws NotFoundException {
+        LOGGER.debug("Finding all exam entries.");
+        List<ObjectiveQuestion> questions = service.takeWordTest(bookId);
+        LOGGER.debug("Found {} exam entries.", questions.size());
+        return questions;
+    }
+    
     
 
-    @RequestMapping(value = "/exam/capacitypaper/", method = RequestMethod.GET)
+    @RequestMapping(value = "/exam/capacitypaper/{level}", method = RequestMethod.GET)
     @ResponseBody
-    public List<CapacityQuestion> createCapacityPaper(@PathVariable("bookid") Long bookId) throws NotFoundException {
+    public List<CapacityQuestion> createCapacityPaper(@PathVariable("level") int level) throws NotFoundException {
         LOGGER.debug("Finding all todo entries.");
        
-        List<CapacityQuestion> questions = service.takeCapacityTest();
+        List<CapacityQuestion> questions = service.takeCapacityTest(level);
         LOGGER.debug("Found {} exam entries.", questions.size());
 
         return questions;
@@ -157,8 +166,8 @@ public class ExamController {
     @ResponseBody
     public Exam handInVerifyPaper(@Valid @RequestBody Exam exam) throws NotFoundException {
         LOGGER.debug("hand in exam entrie.");
-        long studentId = exam.getStudent().getId();
-        long bookId = exam.getBook().getId();
+        long studentId = exam.getStudentId();
+        long bookId = exam.getBookId();
         if(service.isPassVerifyTest(bookId, studentId)){
         	throw new HaveVerifiedBookException("Student "+studentId+" have verified the book " +bookId);
         }
@@ -185,6 +194,18 @@ public class ExamController {
         	pointHistory.setUser(user);
         	pointService.add(pointHistory);
         }
+        LOGGER.debug("return a exam entry result with information: {}", exam);
+
+        return examResult;
+    }
+    
+    @RequestMapping(value = "/exam/wordpaper", method = RequestMethod.POST)
+    @ResponseBody
+    public Exam handInWordPaper(@Valid @RequestBody Exam exam) throws NotFoundException {
+        LOGGER.debug("hand in exam entrie.");
+        
+        Exam examResult = service.handInWordPaper(exam);
+        
         LOGGER.debug("return a exam entry result with information: {}", exam);
 
         return examResult;

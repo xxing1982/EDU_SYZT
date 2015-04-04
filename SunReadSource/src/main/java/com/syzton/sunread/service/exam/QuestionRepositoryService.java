@@ -36,13 +36,9 @@ public class QuestionRepositoryService implements QuestionService {
 
 	@Transactional
 	@Override
-	public Question add(QuestionDTO added) {
-		LOGGER.debug("Adding a new Answer entry with information: {}", added);
-
-		//
-		Question model = added.OTD();
-
-		return repository.save(model);
+	public Question add(Question added) {
+		LOGGER.debug("Adding a new Question entry with information: {}", added);
+		return repository.save(added);
 	}
 
 	@Transactional(rollbackFor = { QuestionNotFoundExcepiton.class })
@@ -82,13 +78,13 @@ public class QuestionRepositoryService implements QuestionService {
 
 	@Transactional(rollbackFor = { QuestionNotFoundExcepiton.class })
 	@Override
-	public Question update(QuestionDTO updated) throws QuestionNotFoundExcepiton {
+	public Question update(Question updated) throws QuestionNotFoundExcepiton {
 		LOGGER.debug("Updating contact with information: {}", updated);
 
 		Question model = findById(updated.getId());
 		LOGGER.debug("Found a to-do entry: {}", model);
 
-		model.update(updated);
+		model.setTopic(updated.getTopic());
 
 		return model;
 	}

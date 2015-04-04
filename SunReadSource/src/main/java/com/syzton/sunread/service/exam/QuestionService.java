@@ -13,7 +13,7 @@ import com.syzton.sunread.model.exam.Question;
 
 public interface QuestionService {
 	
-	public Question add(QuestionDTO added);
+	public Question add(Question added);
 
 	public Question deleteById(Long id)throws QuestionNotFoundExcepiton;
 
@@ -21,5 +21,5 @@ public interface QuestionService {
 
 	public Question findById(Long id) throws QuestionNotFoundExcepiton ;
 
-	public Question update(QuestionDTO updated) throws QuestionNotFoundExcepiton;
+	public Question update(Question updated) throws QuestionNotFoundExcepiton;
 }

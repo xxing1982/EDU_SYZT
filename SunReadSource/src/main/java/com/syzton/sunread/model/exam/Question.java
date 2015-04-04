@@ -41,17 +41,17 @@ public abstract class Question extends AbstractEntity {
 	
 
 
-	@ManyToMany(mappedBy="questions",cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
-	private Set<Exam> exams;
-	
-
-	public Set<Exam> getExams() {
-		return exams;
-	}
-
-	public void setExams(Set<Exam> exams) {
-		this.exams = exams;
-	}
+//	@ManyToMany(mappedBy="questions",cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+//	private Set<Exam> exams;
+//	
+//
+//	public Set<Exam> getExams() {
+//		return exams;
+//	}
+//
+//	public void setExams(Set<Exam> exams) {
+//		this.exams = exams;
+//	}
 
 	public String getTopic() {
 		return topic;
@@ -61,10 +61,4 @@ public abstract class Question extends AbstractEntity {
 		this.topic = topic;
 	}
 
-	public abstract QuestionDTO createDTO();
-
-	public void update(QuestionDTO updated) {
-		// TODO Auto-generated method stub
-		
-	}
 }
