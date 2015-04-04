@@ -1,19 +1,22 @@
 
 /* Dark blue */
-h1, h2, h3, h4, h5, .title {
+h1, h2, h3, h4, h5, .title,
+.dark-blue-1{
     color: #2f5682;
 }
 
 
 /* Dark blue for text and so on*/
 .select-group, .radio,
-p, .paragraph {
+p, .paragraph,
+.dark-blue-2{
     color: #6c82a0;
 }
 
 
 /* Light blue for link and so on */
-a {
+a,
+.light-blue {
     color: #2bb5ff;
 }
 

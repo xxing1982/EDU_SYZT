@@ -1,0 +1,409 @@
+<div id="statistics-page" class="container">
+    <div class="row">
+	<div class="page-body page-body-top statistics-body readingCenter-right-body col-md-8 col-md-offset-2">
+         <!-- Nav tabs -->
+        <div class="row buttom-separator">
+            <div class="col-xs-4">
+                <div class="row">
+                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#statisticsSummary" aria-controls="statisticsSummary" role="tab" data-toggle="tab">统计分析</a></li>
+                        <li role="presentation"><a href="#statisticsRanking" aria-controls="statisticsRanking" role="tab" data-toggle="tab">班级阅读达人</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div class="row">
+                    <div class="col-xs-8">
+                            <div class="row">
+                                <button id="send-message" class="btn btn-green" data-toggle="modal" data-target="#myModal" ng-click="" type="button">
+                                    生成阅读报告PDF
+                                </button>
+                            </div>
+                     </div>
+                    <div class="col-xs-4">
+                        <select class="form-control">
+                            <option>二年级上学期</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab panes -->
+        <div class="tab-content">
+            
+        
+            <!-- Summary header -->    
+            <div class="col-md-12 paragraph">
+                <div class="row title">
+                    <div class="col-md-6 col-md-offset-3">
+                        <img ng-src="../static/img/statisticsSummary/title.png" class="img-responsive" src="../static/img/statisticsSummary/title.png">
+                    </div>
+                </div>
+                <div clas="row">
+                    <div class="text-center title"><h5>报告时间：2014-2——2014.7&nbsp;&nbsp;&nbsp;&nbsp;学校：红英小学&nbsp;&nbsp;&nbsp;&nbsp;班级：三年（2）班&nbsp;&nbsp;&nbsp;&nbsp;姓名：张晓成</h5></div>
+                </div>
+                <div clas="row">
+                    <div class="col-md-1"><div class="row">
+                        <div class="text-right"><p><small>说明：</small></p></div>
+                    </div></div>
+                    <div class="col-md-11"><div class="row">
+                        <div class="text-left"><p><small>1、本报告从学生的阅读参与情况、阅读认证情况以及阅读兴趣等方面对学生进行阅读情况的扫描。<br/>2、本报告只基于学生在阳光阅读互动系统平台中的参与数据进行相关分析，不在系统内记录的数据不体现在报告内。</small></p></div>
+                    </div></div>
+                </div>
+
+            </div>
+            
+            
+            <!-- Basic informations -->
+
+            <div class="col-md-12">
+                <div class="row summary-items gray">基本阅读情况</div>
+            </div>
+            
+            <div class="col-md-12 title">
+                <div clas="row">
+                    <div class="col-md-4 col-md-offset-1"><div class="row">
+                        <div class="row"><h5>阅读等级：2级<h5></div>
+                        <div class="row"><h5>学期内阅读任务：45本<h5></div>
+                        <div class="row"><h5>阅读积分：90分<h5></div>
+                        <div class="row"><h5>总阅读量：45本<h5></div>
+                    </div></div>
+                    <div class="col-md-4"><div class="row">
+                        <div class="row"><h5>财富值：20金币、活的老师奖励20金币<h5></div>
+                        <div class="row"><h5>学期内通过认证数量：45本<h5></div>
+                        <div class="row">
+                            <h5>平均认证正确率：80% 
+                                <div class="orange-light fr average-width">&nbsp;
+                                    <div class="orange fl" style="width:79%;">&nbsp;
+                                    </div>
+                                </div>
+                            </h5>
+                        </div> 
+   
+                    </div></div>
+                </div>
+            </div>
+            
+            <!-- semester informations -->
+
+            <div class="col-md-12">
+                <div class="row summary-items orange">学期阅读分量</div>
+            </div>
+            
+            <div class="col-md-12 title">
+                <div><h5>您本学期一共阅读了<span class="orange-text">45</span>本书，六月读了<span class="orange-text">9</span>本书，为本学期最多。</h5></div>
+                <div><small>（年份/月）</small></div>
+                <div class="col-md-12">
+                    <div class="row" ng-repeat="n in [1,2,3,4,5,6,7,8,9]">
+                        <div class="col-md-1"><h5 class="row text-right">2014.&nbsp;12</h5></div>
+                        <div class="col-md-10"><h5>
+                            <div class="fr reading-count-width">&nbsp;
+                                <div class="orange fl" ng-style="{width: {{10*n}} + '%'}">&nbsp;
+                                </div>
+                                <div class="fl">&nbsp;&nbsp;{{n}}
+                                </div>
+                            </div>
+                        </h5></div>
+                    </div>
+                </div>
+            </div>
+                        
+            <!-- semester points -->
+
+            <div class="col-md-12">
+                <div class="row summary-items pink">学期获得积分</div>
+            </div>
+            
+            <div class="col-md-12 title">
+                <div><h5>本学期一共获得了<span class="pink-text">666</span>积分，七月获得了<span class="pink-text">145</span>积分，为本学期最多。</h5></div>                
+            </div>
+            
+            <!-- axis column -->
+            <div class="col-md-1">
+                <div class="row">
+                    <div class="histogram">
+                    </div>
+                </div>
+                <div class="row">
+                    <h5 class="axis text-right" style="width:100%"><small>(年份/月)</small></h5>
+                </div>
+            </div>
+                        
+            <!-- histogram columns -->
+            <div class="col-md-11">
+                <div class="row">
+                    <div class="histogram buttom-separator" style="width:16%;" ng-repeat="n in [20,80,90,10,30,40]">
+                        <div class="data"  ng-style="{height: {{n}} + '%'}">
+                            <div class="number"><h4>5</h4></div>
+                        </div>
+                        <div class="pink-2 data" ng-style="{height: {{100-n}} + '%'}" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="axis" style="width:16%;" ng-repeat="n in [1,2,3,4,5,6]">
+                        <h4 class="text-center">2014.12</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="title row"></div>
+                        
+            <!-- points pie -->
+                        
+            <div class="col-md-12">
+                <div class="row summary-items blue">学期获得积分</div>
+            </div>
+                        
+            <div class="col-md-12 title">
+                <div><h5>本学期一共阅读了<span class="blue-text">5</span>个种类的书，其中童话类阅读了<span class="blue-text">12</span>本，占40%。</h5></div>                
+            </div>
+            
+            <div class="col-md-12 title">
+                <canvas id="myPieChart"></canvas>
+            </div>
+                        
+            <!-- abality radar -->
+                        
+            <div class="col-md-12">
+                <div class="row summary-items green">阅读思维能力分析</div>
+            </div>
+                        
+            <div class="col-md-12 title">
+                <div><h5>本学期一共阅读了<span class="blue-text">5</span>个种类的书，其中童话类阅读了<span class="blue-text">12</span>本，占40%。</h5></div>                
+            </div>
+            
+            <div class="col-md-12 title">
+                <canvas id="myRadarChart"></canvas>
+            </div>
+                        
+            <!-- books list -->
+
+            <div class="col-md-12">
+                <div class="row summary-items bisque">阅读书单</div>
+            </div>
+            
+            <div class="col-md-12 title">
+            <div >
+              <table class="table text-center">
+                <thead>
+                  <tr>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>字数</th>
+                    <th>分数</th>
+                    <th>验证日期</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="n in [1,2,3,4,5,6,7,8,9]">
+                    <td>灰姑娘</td>
+                    <td>（美）布朗会</td>
+                    <td>2333</td>
+                    <td>90</td>
+                    <td>2012.11.11</td>
+                  </tr>
+                  <tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+                        
+            <!-- notes list -->
+
+            <div class="col-md-12">
+                <div class="row summary-items purple">阅读笔记列表</div>
+            </div>
+                
+            
+            <div class="col-md-12 title">
+            <div><h5>共发表阅读笔记<span class="purple-text">45</span>篇，共收到<span class="purple-text">451</span>条评论。</h5></div>
+    
+            <div >
+              <table class="table text-center">
+                <thead>
+                  <tr>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>字数</th>
+                    <th>分数</th>
+                    <th>验证日期</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="n in [1,2,3,4,5,6,7,8,9]">
+                    <td>灰姑娘</td>
+                    <td>（美）布朗会</td>
+                    <td>2333</td>
+                    <td>90</td>
+                    <td>2012.11.11</td>
+                  </tr>
+                  <tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+                        
+        </div>
+        
+	</div>
+    </div>
+</div>
+<script>
+    
+    /* 
+    * Pie chart for point pie
+    */
+    
+    var pie_data = [
+    {
+        value: 300,
+        color:" #CCDF9F",
+        highlight: "#CCDF9F",
+        label: "漫画"
+    },
+    {
+        value: 50,
+        color: "#B3DCDF",
+        highlight: "#B3DCDF",
+        label: "童话"
+    },
+    {
+        value: 100,
+        color: "#EDD685",
+        highlight: "#EDD685",
+        label: "科普"
+    },
+    {
+        value: 100,
+        color: "#E99999",
+        highlight: "#E99999",
+        label: "小说"
+    },
+    {
+        value: 100,
+        color: "#EABE94",
+        highlight: "#EABE94",
+        label: "教育"
+    }];
+    
+    var pie_options = options = {
+        //Boolean - Whether we should show a stroke on each segment
+        segmentShowStroke : false,
+
+        //String - The colour of each segment stroke
+        segmentStrokeColor : "#fff",
+
+        //Number - The width of each segment stroke
+        segmentStrokeWidth : 2,
+
+        //Number - The percentage of the chart that we cut out of the middle
+        percentageInnerCutout : 0, // This is 0 for Pie charts
+
+        //Number - Amount of animation steps
+        animationSteps : 100,
+
+        //String - Animation easing effect
+        animationEasing : "easeOutBounce",
+
+        //Boolean - Whether we animate the rotation of the Doughnut
+        animateRotate : true,
+
+        //Boolean - Whether we animate scaling the Doughnut from the centre
+        animateScale : false,
+
+        //String - A legend template
+        legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+
+    };
+    
+    // Get the context of the canvas element we want to select
+    var pie_ctx = document.getElementById("myPieChart").getContext("2d");
+    
+    // For a pie chart
+    var myPieChart = new Chart(pie_ctx).Pie(pie_data,pie_options);
+    
+    
+    /* 
+    * Pie chart for point pie
+    */
+    var radar_data = {
+    labels: ["自我反思", "信息提取", "文本理解", "文本理解", "综合分析", "推理判断", "作出评价"],
+    datasets: [
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(99, 177, 98, 0.5)",
+            strokeColor: "rgb(99, 177, 98)",
+            pointColor: "rgb(99, 177, 98)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [28, 48, 40, 19, 96, 27, 100]
+        }
+    ]
+    };
+    var radar_options = {
+        //Boolean - Whether to show lines for each scale point
+        scaleShowLine : true,
+
+        //Boolean - Whether we show the angle lines out of the radar
+        angleShowLineOut : true,
+
+        //Boolean - Whether to show labels on the scale
+        scaleShowLabels : false,
+
+        // Boolean - Whether the scale should begin at zero
+        scaleBeginAtZero : true,
+
+        //String - Colour of the angle line
+        angleLineColor : "rgba(0,0,0,.1)",
+
+        //Number - Pixel width of the angle line
+        angleLineWidth : 1,
+
+        //String - Point label font declaration
+        pointLabelFontFamily : "'Arial'",
+
+        //String - Point label font weight
+        pointLabelFontStyle : "normal",
+
+        //Number - Point label font size in pixels
+        pointLabelFontSize : 10,
+
+        //String - Point label font colour
+        pointLabelFontColor : "#666",
+
+        //Boolean - Whether to show a dot for each point
+        pointDot : true,
+
+        //Number - Radius of each point dot in pixels
+        pointDotRadius : 3,
+
+        //Number - Pixel width of point dot stroke
+        pointDotStrokeWidth : 1,
+
+        //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+        pointHitDetectionRadius : 20,
+
+        //Boolean - Whether to show a stroke for datasets
+        datasetStroke : true,
+
+        //Number - Pixel width of dataset stroke
+        datasetStrokeWidth : 2,
+
+        //Boolean - Whether to fill the dataset with a colour
+        datasetFill : true,
+
+        //String - A legend template
+        legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+    };
+    // Get the context of the canvas element we want to select
+    var radar_ctx = document.getElementById("myRadarChart").getContext("2d");
+    
+    // For a radar chart
+    var myRadarChart = new Chart(radar_ctx).Radar(radar_data, radar_options);
+
+</script>
