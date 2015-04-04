@@ -1,6 +1,8 @@
 package com.syzton.sunread.model.task;
 
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.Teacher;
 
 import javax.persistence.Entity;
 
@@ -10,43 +12,34 @@ import javax.persistence.Entity;
 @Entity
 public class Task extends AbstractEntity{
 
-    private long teacherId;
+    private Teacher teacher;
 
-    private long studentId;
+    private int targetBookNum;
 
-    private int bookNum;
+    private int targetPoint;
 
-    private int point;
-
-    public long getTeacherId() {
-        return teacherId;
+    public int getTargetBookNum() {
+        return targetBookNum;
     }
 
-    public void setTeacherId(long teacherId) {
-        this.teacherId = teacherId;
+    public void setTargetBookNum(int targetBookNum) {
+        this.targetBookNum = targetBookNum;
     }
 
-    public long getStudentId() {
-        return studentId;
+    public int getTargetPoint() {
+        return targetPoint;
     }
 
-    public void setStudentId(long studentId) {
-        this.studentId = studentId;
+    public void setTargetPoint(int targetPoint) {
+        this.targetPoint = targetPoint;
     }
 
-    public int getBookNum() {
-        return bookNum;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setBookNum(int bookNum) {
-        this.bookNum = bookNum;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
-    }
 }

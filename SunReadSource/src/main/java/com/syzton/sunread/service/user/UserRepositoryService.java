@@ -5,8 +5,10 @@ import java.util.Collections;
 import com.syzton.sunread.exception.common.AuthenticationException;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
- 
+
+import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
+import com.syzton.sunread.repository.task.TaskRepository;
 import com.syzton.sunread.repository.user.*;
 
 import org.slf4j.Logger;
@@ -51,6 +53,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
     private TeacherClazzRepository teacherClazzRepository;
 
+
     @Autowired
     public UserRepositoryService(UserRepository userRepository,
                                  StudentRepository studentRepository,
@@ -86,12 +89,14 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     @Transactional
     @Override
     public User addUser(User user) {
-    	User repeat = userRepository.findByUsername(user.getUsername());
-    	if(repeat != null){
-    		throw new DuplicateException("User "+user.getUsername()+" duplicate.");
-    	}else{
-    			return insertNewUser(user);
-    	}
+        // should support duplicate username
+//    	User repeat = userRepository.findByUsername(user.getUsername());
+//    	if(repeat != null){
+//    		throw new DuplicateException("User "+user.getUsername()+" duplicate.");
+//    	}else{
+            user.setPassword(encodePassword(user.getPassword()));
+            return userRepository.save(user);
+//    	}
     }
     
 
@@ -105,7 +110,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
     @Override
     public Student addStudent(Student student) {
-    	
+    	student.setPassword(encodePassword(student.getPassword()));
         return studentRepository.save(student);
     }
 
@@ -131,6 +136,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         //student can add her/his parent,each add operation will be as add a new parent.
         Student student = this.findByStudentId(studentId);
         parent.getChildren().add(student);
+        parent.setPassword(encodePassword(parent.getPassword()));
 
         return parentRepository.save(parent);
     }
@@ -175,7 +181,31 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         }
         return user;
     }
-    
+
+    @Override
+    public Student addTask(long studentId, long teacherId, int targetBookNum, int targetPoint) {
+        Teacher teacher = teacherRepository.findOne(teacherId);
+        if(teacher==null){
+            throw new NotFoundException("teacher with id = "+teacherId+" not found..");
+        }
+
+        Student student = studentRepository.findOne(studentId);
+        if(student == null){
+            throw new NotFoundException("student with id ="+studentId+" not found..");
+        }
+        Task task = student.getTask();
+        task.setTargetBookNum(targetBookNum);
+        task.setTargetPoint(targetPoint);
+        task.setTeacher(teacher);
+//        task.setStudent(student);
+
+        student.setTask(task);
+
+        return studentRepository.save(student);
+
+    }
+
+
     /**
      * Locate the user and throw an exception if not found.
      *
@@ -192,11 +222,10 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         }
         return user;
     }
-    
-    private User insertNewUser(User user) {
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-        return userRepository.save(user);
+
+    private String encodePassword(String password) {
+        String hashedPassword = passwordEncoder.encode(password);
+        return hashedPassword;
     }
 
 	@Override
@@ -208,6 +237,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     @Transactional
     @Override
     public Teacher addTeacher(Teacher teacher) {
+        teacher.setPassword(encodePassword(teacher.getPassword()));
         teacher = teacherRepository.save(teacher);
         for (Long clazzId: teacher.getClazzIds()){
             TeacherClazz teacherClazz = new TeacherClazz();

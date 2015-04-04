@@ -37,4 +37,6 @@ public interface UserService {
     void deleteByTeacherId(Long id);
     
     public User authenticate(String username, String password);
+
+    public Student  addTask(long studentId,long teacherId,int targetBookNum,int targetPoint);
 }

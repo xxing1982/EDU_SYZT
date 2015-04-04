@@ -18,11 +18,11 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @RequestMapping(value = "/tasks",method = RequestMethod.POST)
-    @ResponseBody
-    public Task add(@RequestBody Task task){
-        return taskService.add(task);
-    }
+//    @RequestMapping(value = "/tasks",method = RequestMethod.POST)
+//    @ResponseBody
+//    public Task add(@RequestBody Task task){
+//        return taskService.add(task);
+//    }
 
     @RequestMapping(value = "/tasks/{id}",method = RequestMethod.DELETE)
     @ResponseBody

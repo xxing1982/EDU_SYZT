@@ -18,7 +18,7 @@ public interface TaskService {
      * @param added The information of the added tag entry.
      * @return  The added tag entry.
      */
-    public Task add(Task added);
+//    public Task add(Task added);
 
     /**
      * Deletes a tag entry.

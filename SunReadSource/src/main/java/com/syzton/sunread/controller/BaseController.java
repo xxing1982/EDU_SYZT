@@ -11,7 +11,7 @@ public class BaseController {
 
     protected Pageable getPageable(int page, int size, String sortBy, String direction) {
         sortBy = sortBy == null ? "id" : sortBy;
-        Sort.Direction directionType = direction ==null && !direction.equalsIgnoreCase("desc")? Sort.Direction.ASC: Sort.Direction.DESC;
+        Sort.Direction directionType = direction ==null || !direction.equalsIgnoreCase("desc")? Sort.Direction.ASC: Sort.Direction.DESC;
         return new PageRequest(
                 page, size, new Sort(directionType,sortBy)
         );

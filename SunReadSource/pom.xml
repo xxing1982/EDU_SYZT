@@ -532,6 +532,19 @@
             <artifactId>querydsl-collections</artifactId>
             <version>2.3.2</version>
         </dependency>
+        <!-- Commons File Upload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+        <!-- Required by file uploader -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.1</version>
+        </dependency>
 
 
         <!-- TESTING DEPENDENCIES -->

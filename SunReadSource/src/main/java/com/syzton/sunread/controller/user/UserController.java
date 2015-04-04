@@ -117,7 +117,14 @@ public class UserController extends BaseController{
     public Student add(@Valid @RequestBody Student student) {
         return userService.addStudent(student);
     }
-
+    @RequestMapping(value = "teachers/{teacherId}/students/{studentId}/tasks", method = RequestMethod.POST)
+    @ResponseBody
+    public Student add(@PathVariable("teacherId") long teacherId,
+                       @PathVariable("studentId") long studentId,
+                       @RequestParam("targetBookNum") int targetBookNum,
+                       @RequestParam("targetPoint") int targetPoint) {
+        return userService.addTask(teacherId,studentId,targetBookNum,targetPoint);
+    }
 
     @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
     @ResponseBody

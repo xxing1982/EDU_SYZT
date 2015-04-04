@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.util.DateSerializer;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -30,6 +31,12 @@ public class Student extends User{
     private int coin;
 
     private int point;
+
+    private int bookNum;
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
+    private Task task = new Task();
+
 
     @Transient
     private long enrollmentTime; // for receive json
@@ -110,5 +117,20 @@ public class Student extends User{
         this.classId = classId;
     }
 
+    public int getBookNum() {
+        return bookNum;
+    }
+
+    public void setBookNum(int bookNum) {
+        this.bookNum = bookNum;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
 }
 
