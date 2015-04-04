@@ -832,7 +832,6 @@ a:focus, input:focus
     font-size: 16px;
     background-color: #EAEEF2;
     padding: 7px 7px 7px 15px;
-    font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
 .statistics-body .gray {
@@ -937,4 +936,75 @@ a:focus, input:focus
     height: 400px;
 }
 
+/*******************statistics summary and ranking buttom****************/
+
+/*******************personal show top****************/
+
+#personal-show-page .green-text {
+    color: #62B87D;
+}
+
+#personal-show-page .yellow-text {
+    color: #E6C44F;
+}
+
+#personal-show-page .purple-text {
+    color: #AD7EC0;
+}
+
+#personal-show-page .red-text {
+    color: #D18054;
+}
+
+#personal-show-page .processbar {
+    width: 100%;
+    height: 25px;
+    border-radius: 9px;
+}
+
+#personal-show-page .green-processbar {
+    background-color: #67D289;
+}
+
+#personal-show-page .green-processbar-light {
+    background-color: #E1F6E7;
+}
+
+#personal-show-page .blue-processbar {
+    background-color: #87CCD0;
+}
+
+#personal-show-page .blue-processbar-light {
+    background-color: #EBF7F8;
+}
+
+#personal-show-page .fr {
+    float: right;
+}
+
+#personal-show-page .fl {
+    float: left;
+}
+
+#personal-show-page .fish {
+    height: 260px;
+}
+
+#personal-show-page anking-container {
+    position: relative;
+}
+
+#personal-show-page .ranking {
+    -ms-transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+    position: absolute;
+    top: 20%;
+    left: 23%;
+    color: white;
+    font-size: 40px;
+    font-family: "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", Heiti, "黑体", sans-serif;
+}
+
+/*******************personal show buttom****************/
 

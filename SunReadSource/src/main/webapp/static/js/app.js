@@ -163,5 +163,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             url: '/personalProfile',
             templateUrl: "partials/personalProfile.html",
             controller: "personalProfileController"
+        })
+            //personal show
+        .state('personalShow', {
+            url: '/personalShow',
+            templateUrl: "partials/personalShow.html",
+            controller: "personalShowController"
         });
 }]);
