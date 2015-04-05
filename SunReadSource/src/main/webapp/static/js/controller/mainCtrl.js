@@ -1,6 +1,9 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'paraServices', 'commentServices'
-                                              ,'bookDetailServices','bookshelfServices','bookInShelfServices']);
+                                              ,'bookDetailServices','bookshelfServices','bookInShelfServices'
+                                              ,'conditionSearchServices','quickSearchServices'
+                                              ,'weeklyHotServices','monthlyHotServices'
+                                              ,'weeklyRecommendServices','monthlyRecommendServices']);
 
 ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($scope, User,Bookshelf) {
 	//userinfo

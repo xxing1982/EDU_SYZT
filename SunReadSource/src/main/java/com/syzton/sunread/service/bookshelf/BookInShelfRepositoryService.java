@@ -62,8 +62,9 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         if (bookshelf == null) {
 			throw new NotFoundException("no bookshelf found with id :"+bookshelf.getId());
 		}
-        BookInShelf bookInShelfModel = BookInShelf.getBuilder(book,bookshelf
-        		,added.getBookAttribute(),added.getReadState())
+        BookInShelf bookInShelfModel = BookInShelf.getBuilder(book.getId(),book.getName()
+        		,book.getIsbn(),book.getPictureUrl(),book.getAuthor(),book.getPoint()
+        		,bookshelf,added.getBookAttribute(),added.getReadState())
         		.description(added.getDescription())
         		.build();
         BookInShelf model = repository.save(bookInShelfModel);
@@ -100,7 +101,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		if (bookshelf == null) {
 			throw new NotFoundException("no bookshelf found with id :" + id);
 		}
-	    Page<BookInShelf> bookPages = repository.BooksInBookShelf(bookshelf,pageable);    
+	    Page<BookInShelf> bookPages = repository.findByBookshelf(bookshelf, pageable);    
 	    return bookPages;
     }
     

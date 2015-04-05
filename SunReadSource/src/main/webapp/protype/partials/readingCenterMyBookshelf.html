@@ -10,8 +10,17 @@
 		
 		<div class="readingCenter-right-body">
 			<div id="myBookshelfBody-top" class="row">
+<!--
 				<div class="col-md-3 select-tab myActive">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</div>
 				<div class="col-md-3 select-tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</div>
+-->
+                <div class="col-md-6">
+                <ul id="bookReadStateTabs" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#unreadBooksTab" aria-controls="unreadBooksTab" role="tab" data-toggle="tab">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</a></li>
+                    <li role="presentation"><a href="#readBooksTab" aria-controls="readBooksTab" role="tab" data-toggle="tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</a></li>
+                </ul>
+                </div>
+                
 				<div class="col-md-2"></div>
 				<div class="col-md-3">
 				    <a class="btn btn-lg btn-addBook" href="#readingCenter/addBook">+ 我要选书</a>
@@ -19,24 +28,51 @@
 
 				<div class="col-md-4"></div>
 			</div>
-			<div id="myBookshelfBody-center" class="row">
-				<div class="col-md-4 bookshelf-book clear-padding">
+			
+			<div id="myBookshelfBody-center" class="row" >
+			 <div class="tab-content">
+				<div id="unreadBooksTab" class="tab-pane in active" role="tabpanel">
+				<div ng-repeat="unreadBook in unreadBooks" class="col-md-4 bookshelf-book clear-padding">
 					<div class="col-md-6">
                         <a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive"></div></a>
-						<div class="col-md-9 col-md-offset-5 mustRead"><img src="../static/img/mustRead.jpg" class="img-responsive img-circle"></div>
+						<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
 					</div>
 					<div class="col-md-6">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">作者：张敬轩</div>
-						<div class="fsize12">积分：90</div>
+						<div class="fsize12"><h4>{{unreadBook.bookName}}</h4></div>
+						<div class="fsize12">作者：{{unreadBook.author}}</div>
+						<div class="fsize12">积分：{{unreadBook.point}}</div>
 						<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
 						<div>
 							<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
 							<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
 						</div>
-					</div>
+					</div>				
 				</div>
+                </div>
+				
+				<div id="readBooksTab" class="tab-pane" role="tabpanel">
+					<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
+                        <div class="col-md-6">
+                            <a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive"></div></a>
+                            <div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="fsize12"><h4>{{readBook.bookName}}</h4></div>
+                            <div class="fsize12">作者：{{readBook.author}}</div>
+                            <div class="fsize12">积分：{{readBook.point}}</div>
+                            <div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
+                            <div>
+                                <div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
+                                <div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
+                            </div>
+                        </div>
+					</div>				
+				</div>
+				
+            </div>
 			</div>
+			
+			
 			<div class="bottom">更多加载中...</div>
 		</div>
 	</div>
@@ -64,6 +100,10 @@
 </div>
 
 <script>
-	SetBookList();
 	SetReadingCenterRightHeight();
+    SetBookList();
+    $('#bookReadStateTabs').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    });
 </script>

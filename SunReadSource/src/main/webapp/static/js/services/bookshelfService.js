@@ -11,10 +11,7 @@ var bookInShelfService = angular.module('bookInShelfServices', ['ngResource', "n
 bookInShelfService.factory('BookInShelf',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-            "http://localhost:9999/api/bookshelf/1/bookinshelf?page=0&size=4&sortBy=id"
-        ,{},{query:{
-                method:"get",
-                isArray:true
-            }         
-        }); 
+            "http://localhost:9999/api/bookshelf/1/bookinshelf?page=:page&size=:size&sortBy=id",
+            {page:'@_page', size:'@_size'},{}
+        ); 
     }]);
