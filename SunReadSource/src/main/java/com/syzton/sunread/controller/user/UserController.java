@@ -117,7 +117,7 @@ public class UserController extends BaseController{
     public Student add(@Valid @RequestBody Student student) {
         return userService.addStudent(student);
     }
-    @RequestMapping(value = "teachers/{teacherId}/students/{studentId}/tasks", method = RequestMethod.POST)
+    @RequestMapping(value = "teachers/{teacherId}/students/{studentId}/tasks", method = RequestMethod.PUT)
     @ResponseBody
     public Student add(@PathVariable("teacherId") long teacherId,
                        @PathVariable("studentId") long studentId,

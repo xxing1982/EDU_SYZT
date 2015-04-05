@@ -38,13 +38,9 @@ public class AnswerRepositoryService implements AnswerService {
 
 	@Transactional
 	@Override
-	public Answer add(AnswerDTO added) {
+	public Answer add(Answer added) {
 		LOGGER.debug("Adding a new Answer entry with information: {}", added);
-
-		//
-		Answer model = added.OTD();
-
-		return repository.save(model);
+		return repository.save(added);
 	}
 
 	@Transactional(rollbackFor = { AnswerNotFoundException.class })
@@ -79,19 +75,6 @@ public class AnswerRepositoryService implements AnswerService {
 		}
 
 		return found;
-	}
-
-	@Transactional(rollbackFor = { AnswerNotFoundException.class })
-	@Override
-	public Answer update(AnswerDTO updated) throws AnswerNotFoundException {
-		LOGGER.debug("Updating contact with information: {}", updated);
-
-		Answer model = findById(updated.getId());
-		LOGGER.debug("Found a to-do entry: {}", model);
-
-		model.update(updated);
-
-		return model;
 	}
 
 }

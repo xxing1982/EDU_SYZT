@@ -4,6 +4,8 @@ import java.util.List;
 
 import javassist.NotFoundException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +23,11 @@ import com.syzton.sunread.repository.exam.SubjectiveAnswerRepository;
 @Service
 public class SubjectiveAnswerRepositoryService implements SubjectiveAnswerService {
 	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(SubjectiveAnswerRepositoryService.class);
+	
 	private SubjectiveAnswerRepository repository;
+	
 	@Autowired
 	public SubjectiveAnswerRepositoryService(SubjectiveAnswerRepository repository) {
 		
@@ -40,9 +46,52 @@ public class SubjectiveAnswerRepositoryService implements SubjectiveAnswerServic
 	}
 
 	@Override
-	public Page<SubjectiveAnswer> findOtherPersonAnswer(Long questionId,
+	public Page<SubjectiveAnswer> findOtherPersonAnswer(Long questionId,Long userId,
 			Pageable pageable) throws NotFoundException {
+		
 		Page<SubjectiveAnswer> subjectiveAnswerPages = repository.findAll(pageable);
+		return null;
+	}
+	
+	@Transactional
+	@Override
+	public SubjectiveAnswer add(SubjectiveAnswer added) {
+		LOGGER.debug("Adding a new Answer entry with information: {}", added);
+		return repository.save(added);
+	}
+
+	@Transactional(rollbackFor = { AnswerNotFoundException.class })
+	@Override
+	public SubjectiveAnswer deleteById(Long id) throws NotFoundException {
+		LOGGER.debug("Deleting a to-do entry with id: {}", id);
+
+		SubjectiveAnswer deleted = findById(id);
+		LOGGER.debug("Deleting to-do entry: {}", deleted);
+
+		repository.delete(deleted);
+		return deleted;
+	}
+
+	 
+	@Transactional(readOnly = true, rollbackFor = { AnswerNotFoundException.class })
+	@Override
+	public SubjectiveAnswer findById(Long id) throws NotFoundException {
+		LOGGER.debug("Finding a to-do entry with id: {}", id);
+
+		SubjectiveAnswer found = repository.findOne(id);
+		LOGGER.debug("Found to-do entry: {}", found);
+
+		if (found == null) {
+			throw new NotFoundException("No to-entry found with id: " + id);
+		}
+
+		return found;
+	}
+
+	@Override
+	public Page<SubjectiveAnswer> findAllByQuestionId(Pageable pageable,
+			Long questionId) throws NotFoundException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
