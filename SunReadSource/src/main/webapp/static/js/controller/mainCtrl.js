@@ -3,7 +3,7 @@ var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userS
 
 ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($scope, User,Bookshelf) {
 	//userinfo
-    $scope.userInfo = {
+    /*$scope.userInfo = {
     	'name': '张晓晨',
     	'portrait': '../static/img/picture.jpg',
     	'sex': 'm',
@@ -12,10 +12,10 @@ ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($sco
     	'level': '4',
     	'treasure': '300',
     	'integral': '102'
-    };
+    };*/
     //test function to get data list
-    var testDataList = User.query(function(){
-        console.log(testDataList);
+    $scope.userInfo = User.query(function(){
+        
     });
 
     //bookshelf
@@ -31,18 +31,27 @@ ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($sco
 //    		'select': '8'
 //    	},
 //    };
-    var bookshelf = Bookshelf.get(function(){
+    /*var bookshelf = Bookshelf.get(function(){
         console.log(bookshelf);
     });
     $scope.bookshelf = bookshelf;
-    $scope.bookshelf.finishStatus = 80;
+    $scope.bookshelf.finishStatus = 80;*/
 }]);
 
-ctrls.filter('formatSex', function(){
+ctrls.filter('formatImg', function(){
+    return function(input){
+        if (input == undefined || input == "") {
+            return "../static/img/picture.jpg";
+        };
+        return input;
+    }
+});
+
+ctrls.filter('formatGender', function(){
 	return function(input){
-		if (input == 'f') {
-    		return "女生";
+		if (input == 'male') {
+    		return "男生";
     	};
-    	return "男生";
+    	return "女生";
 	}
 });
