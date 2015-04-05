@@ -1,25 +1,16 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'paraServices', 'commentServices'
+                                              ,'examServices'
                                               ,'bookDetailServices','bookshelfServices','bookInShelfServices'
                                               ,'conditionSearchServices','quickSearchServices'
                                               ,'weeklyHotServices','monthlyHotServices'
                                               ,'weeklyRecommendServices','monthlyRecommendServices']);
 
-ctrls.controller("mainController", ['$scope', 'User',"Bookshelf", function ($scope, User,Bookshelf) {
-	//userinfo
-    /*$scope.userInfo = {
-    	'name': '张晓晨',
-    	'portrait': '../static/img/picture.jpg',
-    	'sex': 'm',
-    	'school': '北京市101中学',
-    	'class': '三年（2）班 ',
-    	'level': '4',
-    	'treasure': '300',
-    	'integral': '102'
-    };*/
+ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", function ($rootScope, $scope, Student,Bookshelf) {
+	$rootScope.id = 2;
     //test function to get data list
-    $scope.userInfo = User.query(function(){
-        
+    $scope.userInfo = Student.get({id : $rootScope.id} ,function(data){
+        $rootScope.student = data;
     });
 
     //bookshelf

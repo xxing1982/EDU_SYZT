@@ -79,3 +79,11 @@ function SetBookList(){
 	}
 }
 
+function SetOption(){
+	$(".option").removeClass("active");
+	$(".option").on("click", function(){
+		$(".option.active").removeClass("active");
+		$(this).addClass("active");
+	});
+}
+
