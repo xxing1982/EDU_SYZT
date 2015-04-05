@@ -38,5 +38,5 @@ public interface UserService {
     
     public User authenticate(String username, String password);
 
-    public Student  addTask(long studentId,long teacherId,int targetBookNum,int targetPoint);
+    public Student  addTask(long teacherId,long studentId,int targetBookNum,int targetPoint);
 }

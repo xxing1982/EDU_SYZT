@@ -183,7 +183,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     }
 
     @Override
-    public Student addTask(long studentId, long teacherId, int targetBookNum, int targetPoint) {
+    public Student addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
         Teacher teacher = teacherRepository.findOne(teacherId);
         if(teacher==null){
             throw new NotFoundException("teacher with id = "+teacherId+" not found..");
