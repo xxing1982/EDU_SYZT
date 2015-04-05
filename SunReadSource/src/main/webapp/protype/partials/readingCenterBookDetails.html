@@ -7,7 +7,7 @@
         <div class="col-md-12 addBookNavigation">
             <p class="cramb">
             <a href="index.html#/readingCenter/myBookshelf">我的书架</a> 
-               > {{bookDetails}}
+               > {{name}}
             </p>
         </div>
             
@@ -21,19 +21,21 @@
             
               <div class="col-md-9 bookDetailText">
                   <div class="row">
-                      <h5>科普袖珍馆：十万个为什么</h5>
+                      <h5>{{bookDetails.name}}</h5>
                   </div>
                   <div class="row">
-                      <p>评分：</p>
+                      <p>评分：{{bookDetails.evaluationNum}}</p>
                   </div>
                   <div class="row">
-                      <p>作者：</p>
+                      <p>作者：{{bookDetails.author}}</p>
                   </div>
                   <div class="row">
-                      <p>版权：</p>
+                      <p>版权：{{bookDetails.publisher}}</p>
                   </div>
                   <div class="row">
-                      <p>分值：90字数：14万页数：327</p>
+                      <p>分值：{{bookDetails.point}}&nbsp; &nbsp;
+                         字数：{{bookDetails.wordCount}}&nbsp;&nbsp;
+                         页数：{{bookDetails.pageCount}}&nbsp;&nbsp;</p>
                   </div>
                   <div class="row">
                       <p>已有2087人阅读，80人测试，54人笔记，5人推荐。</p>
@@ -43,7 +45,7 @@
                             <a class="btn btn-default" href="#" role="button">做笔记</a>
                          </div>
                          <div class="col-md-2">
-                            <a class="btn btn-default" href="#" role="button">认证中</a>
+                            <a href="#" >认证中</a>
                          </div>
                         <div class="col-md-2 bookExercise">
                             <a href="">词汇训练题</a>
@@ -54,7 +56,7 @@
                         <div class="col-md-4"> 
                            <p class="bookBuy">       
                             <a href="">购买比价</a>
-                                &nbsp;|   &nbsp;         
+                                &nbsp;|   &nbsp;        
                             <a href="">从书架移除</a>   
                             </p>    
                         </div>                                
@@ -102,11 +104,14 @@
                	<a ui-sref='.bookOverview'>
                	    <div class="col-md-2 select-tab myActive">图书简介</div>
                 </a>    
+                <a ui-sref='.bookOutline'>
+               	    <div class="col-md-2 select-tab">目录</div>
+                </a>
 				<div class="col-md-2 select-tab">图书评论</div>
                 <div class="col-md-2 select-tab">相关笔记</div>
-                <div class="col-md-2 select-tab">试读</div>
-                <div class="col-md-2 select-tab">推荐</div>
-                <div class="col-md-2 select-tab">音视频</div>
+                <div class="col-md-1 select-tab">试读</div>
+                <div class="col-md-1 select-tab">推荐</div>
+                <div class="col-md-1 select-tab">音视频</div>
             </div>
             <div ui-view></div>
         </div>

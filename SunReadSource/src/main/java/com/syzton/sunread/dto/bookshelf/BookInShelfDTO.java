@@ -59,7 +59,7 @@ public class BookInShelfDTO {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+//        this.description = description;
     }
 
     public boolean getBookAttribute() {

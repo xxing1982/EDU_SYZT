@@ -2,6 +2,7 @@ package com.syzton.sunread.service.bookshelf;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Iterators;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
@@ -98,8 +100,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		if (bookshelf == null) {
 			throw new NotFoundException("no bookshelf found with id :" + id);
 		}
-	    Page<BookInShelf> bookPages = repository.findByBookshelf(bookshelf,pageable);
-     
+	    Page<BookInShelf> bookPages = repository.BooksInBookShelf(bookshelf,pageable);    
 	    return bookPages;
     }
     

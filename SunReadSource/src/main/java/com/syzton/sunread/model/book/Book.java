@@ -86,10 +86,10 @@ public class Book extends AbstractEntity{
     private String pictureUrl = DEFAULT_PICTURE_URL;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
-    private BookExtra extra = new BookExtra();
+    private BookExtra extra;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
-    private BookHot hot = new BookHot();
+    private BookHot hot;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private Set<Review> reviews = new HashSet<>() ;

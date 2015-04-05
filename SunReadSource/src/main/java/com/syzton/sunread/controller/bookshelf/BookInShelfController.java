@@ -81,7 +81,6 @@ public class BookInShelfController {
         sortBy = sortBy==null?"id": sortBy;
         Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
         Page<BookInShelf> pageResult = service.findByBookshelfId(pageable,id);
-
         return new PageResource<>(pageResult,"page","size");
     }
     

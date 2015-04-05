@@ -38,6 +38,7 @@ public interface BookInShelfService {
      */
     public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id);
     
+    
     /**
      * Returns a list of bookshelf entries.
      * @return
