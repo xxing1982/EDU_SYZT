@@ -20,6 +20,12 @@ a,
     color: #2bb5ff;
 }
 
+a:focus, a:hover {
+    color: #22a1e5;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 /* Green for nav-tabs and bottons */
 
 
