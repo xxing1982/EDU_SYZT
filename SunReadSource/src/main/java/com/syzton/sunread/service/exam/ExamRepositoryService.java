@@ -306,7 +306,7 @@ public class ExamRepositoryService implements ExamService {
 		cal.set(Calendar.MILLISECOND, 0);
 		Date date = cal.getTime();
 		 
-		List<Exam> list = repository.findByStudentIdAndBookIdAfter(studentId, bookId,date);
+		List<Exam> list = repository.findByStudentIdAndBookIdAndCreationTimeAfter(studentId, bookId,date);
 		return list;
 	}
 	

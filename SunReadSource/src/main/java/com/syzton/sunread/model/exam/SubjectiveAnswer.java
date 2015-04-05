@@ -40,11 +40,6 @@ public class SubjectiveAnswer extends Answer {
 		return commentTime;
 	}
 
-	@Override
-	public void update(AnswerDTO updated) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public static Builder getBuilder() {
         return new Builder();
@@ -65,15 +60,4 @@ public class SubjectiveAnswer extends Answer {
 	 
 	}
 
-	@Override
-	public AnswerDTO createDTO() {
-//		SubjectiveAnswerDTO dto = new SubjectiveAnswerDTO();
-//		dto.setId(this.getId());
-//		dto.setComment(this.getComment());
-//		dto.setCommentTime(this.getCommentTime());
-//		if(this.question!=null){
-//			dto.setQuestionDTO(this.getQuestion().createDTO());
-//		}
- 	return null;
-	}
 }

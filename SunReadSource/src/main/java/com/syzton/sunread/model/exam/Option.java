@@ -60,7 +60,7 @@ public class Option extends AbstractEntity {
 			return false;
 		}
 		Option option = (Option)obj;
-		return (option.tag+option.content).equals(this.tag+this.content);
+		return (option.id).equals(this.id);
 	}
 	
 	  public static Builder getBuilder(String tag) {

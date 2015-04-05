@@ -39,7 +39,7 @@ public class SubjectiveQuestionRepositoryService implements SubjectiveQuestionSe
 
 	}
 	
-	@Transactional(readOnly = true, rollbackFor = { QuestionNotFoundExcepiton.class })
+	@Transactional(readOnly = true, rollbackFor = { NotFoundException.class })
 	@Override
 	public SubjectiveQuestion findById(Long id) throws NotFoundException {
 		LOGGER.debug("Finding a to-do entry with id: {}", id);

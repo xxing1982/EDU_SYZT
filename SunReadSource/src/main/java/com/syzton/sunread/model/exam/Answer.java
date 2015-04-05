@@ -1,6 +1,7 @@
 package com.syzton.sunread.model.exam;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -30,16 +31,33 @@ public abstract class Answer {
 	@JoinColumn(name="question_id")
 	protected Question question;
 	
+	@Column(name="student_id")
+	protected Long studentId;
+
+	public Long getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
+
 	public long getId() {
 		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Question getQuestion() {
 		return question;
 	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
 	
-	public abstract void  update(AnswerDTO updated);
 	
-	public abstract AnswerDTO createDTO();
 	
 }

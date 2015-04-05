@@ -12,7 +12,7 @@ import com.syzton.sunread.model.user.Student;
 
 public interface ExamRepository extends JpaRepository<Exam, Long> {
 	//@Query("select exam from Exam exam wehre Exam.book = ?1 and ")
-	List<Exam> findByStudentIdAndBookIdAfter(Long studentId,Long bookId,Date date);
+	List<Exam> findByStudentIdAndBookIdAndCreationTimeAfter(Long studentId,Long bookId,Date date);
 	List<Exam> findByStudentIdAndBookId(Long studentId,Long bookId);
 
 }

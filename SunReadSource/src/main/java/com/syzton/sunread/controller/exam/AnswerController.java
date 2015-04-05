@@ -20,12 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
 import com.syzton.sunread.model.exam.SubjectiveAnswer;
-import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.service.exam.AnswerService;
 import com.syzton.sunread.service.exam.ObjectiveAnswerService;
 import com.syzton.sunread.service.exam.SubjectiveAnswerService;
@@ -48,25 +46,71 @@ public class AnswerController {
 
     @RequestMapping(value = "/answer", method = RequestMethod.POST)
     @ResponseBody
-    public AnswerDTO add(@Valid @RequestBody AnswerDTO dto) {
-        LOGGER.debug("Adding a new to-do entry with information: {}", dto);
+    public Answer add(@Valid @RequestBody Answer answer) {
+        LOGGER.debug("Adding a new answer entry with information: {}", answer);
 
-        Answer added = service.add(dto);
-        LOGGER.debug("Added a to-do entry with information: {}", added);
+        Answer added = service.add(answer);
+        LOGGER.debug("Added a answer entry with information: {}", added);
 
-       return added.createDTO();
+       return added;
+    }
+    
+    @RequestMapping(value = "/subjectiveanswer", method = RequestMethod.POST)
+    @ResponseBody
+    public SubjectiveAnswer addSubjectiveAnswer(@Valid @RequestBody SubjectiveAnswer answer) {
+        LOGGER.debug("Adding a new answer entry with information: {}", answer);
+
+        SubjectiveAnswer added = subjectiveService.add(answer);
+        LOGGER.debug("Added a answer entry with information: {}", added);
+
+       return added;
+    }
+    
+    @RequestMapping(value = "/objectiveanswer", method = RequestMethod.POST)
+    @ResponseBody
+    public ObjectiveAnswer addObjectiveAnswer(@Valid @RequestBody ObjectiveAnswer answer) {
+        LOGGER.debug("Adding a new answer entry with information: {}", answer);
+
+        ObjectiveAnswer added = objectiveService.add(answer);
+        LOGGER.debug("Added a answer entry with information: {}", added);
+
+       return added;
     }
     
     @RequestMapping(value = "/answer/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public AnswerDTO deleteById(@PathVariable("id") Long id) throws AnswerNotFoundException {
-        LOGGER.debug("Deleting a to-do entry with id: {}", id);
+    public Answer deleteById(@PathVariable("id") Long id) throws AnswerNotFoundException {
+        LOGGER.debug("Deleting a answer entry with id: {}", id);
 
         Answer deleted = service.deleteById(id);
-        LOGGER.debug("Deleted to-do entry with information: {}", deleted);
+        LOGGER.debug("Deleted answer entry with information: {}", deleted);
 
-        return deleted.createDTO();
+        return deleted;
     }
+    
+    @RequestMapping(value = "/subjectiveanswer/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public SubjectiveAnswer deleteSubjectiveAnswerById(@PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Deleting a answer entry with id: {}", id);
+
+        SubjectiveAnswer deleted = subjectiveService.deleteById(id);
+        LOGGER.debug("Deleted answer entry with information: {}", deleted);
+
+        return deleted;
+    }
+    
+    @RequestMapping(value = "/objectiveanswer/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ObjectiveAnswer deleteObjectiveAnswerById(@PathVariable("id") Long id) throws  NotFoundException {
+        LOGGER.debug("Deleting a answer entry with id: {}", id);
+
+        ObjectiveAnswer deleted = objectiveService.deleteById(id);
+        LOGGER.debug("Deleted answer entry with information: {}", deleted);
+
+        return deleted;
+    }
+    
+    
 
     @RequestMapping(value = "/answers", method = RequestMethod.GET)
     @ResponseBody
@@ -83,7 +127,36 @@ public class AnswerController {
          return new PageResource<>(pageResult,"page","size");
     }
     
-    //TODO wait user schoo module
+    @RequestMapping(value = "/subjectiveanswers", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<SubjectiveAnswer> findAllSubjectiveAnswer(@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	 LOGGER.debug("Finding answer entry with id: {}" );
+         sortBy = sortBy==null?"id": sortBy;
+         Pageable pageable = new PageRequest(
+                 page,size,new Sort(sortBy)
+         );
+         Page<SubjectiveAnswer> pageResult = subjectiveService.findAll(pageable);
+
+         return new PageResource<>(pageResult,"page","size");
+    }
+    
+    @RequestMapping(value = "/objectiveanswers", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<ObjectiveAnswer> findAllObjectiveAnswer(@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	 LOGGER.debug("Finding answer entry with id: {}" );
+         sortBy = sortBy==null?"id": sortBy;
+         Pageable pageable = new PageRequest(
+                 page,size,new Sort(sortBy)
+         );
+         Page<ObjectiveAnswer> pageResult = objectiveService.findAll(pageable);
+
+         return new PageResource<>(pageResult,"page","size");
+    }
+     
     @RequestMapping(value = "/answers/{userid}", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<Answer> findOtherPersonAnswer(@RequestParam("page") int page,
@@ -99,9 +172,9 @@ public class AnswerController {
          return new PageResource<>(pageResult,"page","size");
     }
     
-    @RequestMapping(value = "/subjectiveanswers", method = RequestMethod.GET)
+    @RequestMapping(value = "/subjectiveanswers/{userid}/{questionid}", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<SubjectiveAnswer> findSubjectiveQuestions(@RequestParam("page") int page,
+    public PageResource<SubjectiveAnswer> findOtherPersonSubjectiveQuestions(@PathVariable("userid") Long userId,@PathVariable("questionid") Long questionId,@RequestParam("page") int page,
             @RequestParam("size") int size,
             @RequestParam("sortBy") String sortBy) throws NotFoundException {
     	 LOGGER.debug("Finding subjective answer entry with id: {}" );
@@ -109,25 +182,12 @@ public class AnswerController {
          Pageable pageable = new PageRequest(
                  page,size,new Sort(sortBy)
          );
-         Page<SubjectiveAnswer> pageResult = subjectiveService.findAll(pageable);
+         Page<SubjectiveAnswer> pageResult = subjectiveService.findOtherPersonAnswer(questionId,userId, pageable); 
 
          return new PageResource<>(pageResult,"page","size");
     }
     
-    @RequestMapping(value = "/objectiveanswers", method = RequestMethod.GET)
-    @ResponseBody
-    public PageResource<ObjectiveAnswer> findObjectiveQuestions(@RequestParam("page") int page,
-            @RequestParam("size") int size,
-            @RequestParam("sortBy") String sortBy) throws NotFoundException {
-    	 LOGGER.debug("Finding objective answer entry with id: {}" );
-         sortBy = sortBy==null?"id": sortBy;
-         Pageable pageable = new PageRequest(
-                 page,size,new Sort(sortBy)
-         );
-         Page<ObjectiveAnswer> pageResult = objectiveService.findAll(pageable);
-
-         return new PageResource<>(pageResult,"page","size");
-    }
+ 
 
    
     @RequestMapping(value = "/answer/{id}", method = RequestMethod.GET)
@@ -140,16 +200,29 @@ public class AnswerController {
 
         return found;
     }
-
-    @RequestMapping(value = "/answer/{id}", method = RequestMethod.PUT)
+    
+    @RequestMapping(value = "/subjectiveanswer/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Answer update(@Valid @RequestBody AnswerDTO dto, @PathVariable("id") Long todoId) throws AnswerNotFoundException {
-        LOGGER.debug("Updating a to-do entry with information: {}", dto);
+    public SubjectiveAnswer  findSubjectiveAnswerById(@PathVariable("id") Long id) throws  NotFoundException {
+        LOGGER.debug("Finding to-do entry with id: {}", id);
 
-        Answer updated = service.update(dto);
-        LOGGER.debug("Updated the information of a to-entry to: {}", updated);
+        SubjectiveAnswer found = subjectiveService.findById(id);
+        LOGGER.debug("Found to-do entry with information: {}", found);
 
-        return updated;
+        return found;
     }
+    
+    @RequestMapping(value = "/objectiveanswer/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ObjectiveAnswer  findObjectiveAnswerById(@PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Finding to-do entry with id: {}", id);
+
+        ObjectiveAnswer found = objectiveService.findById(id);
+        LOGGER.debug("Found to-do entry with information: {}", found);
+
+        return found;
+    }
+
+   
 
 }
