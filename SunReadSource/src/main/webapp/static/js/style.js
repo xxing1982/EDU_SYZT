@@ -79,6 +79,7 @@ function SetBookList(){
 	}
 }
 
+
 function SetBookDetailList(){
 	$(".select-tab").on("click", function(){
 		$(".select-tab.myActive").removeClass("myActive");
@@ -93,3 +94,12 @@ function SetBookDetailList(){
 		$(".readingCenter-right-body .bookDetailBottom .select-tab").eq(0).addClass("myActive");
 	}
 }
+
+function SetOption(){
+	$(".option").removeClass("active");
+	$(".option").on("click", function(){
+		$(".option.active").removeClass("active");
+		$(this).addClass("active");
+	});
+}
+

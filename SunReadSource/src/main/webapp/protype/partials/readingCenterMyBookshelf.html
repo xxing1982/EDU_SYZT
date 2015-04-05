@@ -3,9 +3,9 @@
 	<div class="col-md-9">
 		<div class="row readingCenter-right-top">
 			<div class="col-md-4"><img src="../static/img/myBookshelf.png" class="img-responsive img-rounded"></div>
-				<div class="col-md-5"></div>
-				<div class="col-md-3">
-				</div>
+			<div class="col-md-5"></div>
+			<div class="col-md-3">
+			</div>
 		</div>
 		
 		<div class="readingCenter-right-body">
@@ -13,97 +13,105 @@
 <!--
 				<div class="col-md-3 select-tab myActive">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</div>
 				<div class="col-md-3 select-tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</div>
--->
-                <div class="col-md-6">
-                <ul id="bookReadStateTabs" class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#unreadBooksTab" aria-controls="unreadBooksTab" role="tab" data-toggle="tab">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</a></li>
-                    <li role="presentation"><a href="#readBooksTab" aria-controls="readBooksTab" role="tab" data-toggle="tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</a></li>
-                </ul>
-                </div>
-                
-				<div class="col-md-2"></div>
-				<div class="col-md-3">
-				    <a class="btn btn-lg btn-addBook" href="#readingCenter/addBook">+ 我要选书</a>
-				</div>
-
-				<div class="col-md-4"></div>
+			-->
+			<div class="col-md-6">
+				<ul id="bookReadStateTabs" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#unreadBooksTab" aria-controls="unreadBooksTab" role="tab" data-toggle="tab">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</a></li>
+					<li role="presentation"><a href="#readBooksTab" aria-controls="readBooksTab" role="tab" data-toggle="tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</a></li>
+				</ul>
 			</div>
-			
-			<div id="myBookshelfBody-center" class="row" >
-			 <div class="tab-content">
+
+			<div class="col-md-2"></div>
+			<div class="col-md-3">
+				<a class="btn btn-lg btn-addBook" href="#readingCenter/addBook">+ 我要选书</a>
+			</div>
+
+			<div class="col-md-4"></div>
+		</div>
+
+		<div id="myBookshelfBody-center" class="row" >
+			<div class="tab-content">
 				<div id="unreadBooksTab" class="tab-pane in active" role="tabpanel">
-				<div ng-repeat="unreadBook in unreadBooks" class="col-md-4 bookshelf-book clear-padding">
-					<div class="col-md-6">
-                        <a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive"></div></a>
-						<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
-					</div>
-					<div class="col-md-6">
-						<div class="fsize12"><h4>{{unreadBook.bookName}}</h4></div>
-						<div class="fsize12">作者：{{unreadBook.author}}</div>
-						<div class="fsize12">积分：{{unreadBook.point}}</div>
-						<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
-						<div>
-							<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
-							<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
+					<div ng-repeat="unreadBook in unreadBooks" class="col-md-4 bookshelf-book clear-padding">
+						<div class="col-md-6">
+							<a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive"></div></a>
+							<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
 						</div>
-					</div>				
+						<div class="col-md-6">
+							<div class="fsize12"><h4>{{unreadBook.bookName}}</h4></div>
+							<div class="fsize12">作者：{{unreadBook.author}}</div>
+							<div class="fsize12">积分：{{unreadBook.point}}</div>
+							<div class="dropdown">
+								<button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" aria-expanded="true">测试训练
+									<span class="caret"></span></button>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+										<li role="presentation"><a role="menuitem" tabindex="-1" ng-click="CertificationTest(unreadBook)" href="#readingCenter/multipleTesting">认证测试</a></li>
+										<li role="presentation"><a role="menuitem" tabindex="-1" ng-click="SubjectiveTest(unreadBook)" href="#readingCenter/multipleTesting">思维测试</a></li>
+										<li role="presentation"><a role="menuitem" tabindex="-1" ng-click="WordTest(unreadBook)" href="#readingCenter/multipleTesting">词汇测试</a></li>
+									</ul>
+								</div>
+								<div>
+									<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
+									<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
+
+								</div>
+							</div>				
+						</div>
+					</div>
+
+					<div id="readBooksTab" class="tab-pane" role="tabpanel">
+						<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
+							<div class="col-md-6">
+								<a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive"></div></a>
+								<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div>
+							</div>
+							<div class="col-md-6">
+								<div class="fsize12"><h4>{{readBook.bookName}}</h4></div>
+								<div class="fsize12">作者：{{readBook.author}}</div>
+								<div class="fsize12">积分：{{readBook.point}}</div>
+								<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
+								<div>
+									<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
+									<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
+								</div>
+							</div>
+						</div>				
+					</div>
+
 				</div>
-                </div>
-				
-				<div id="readBooksTab" class="tab-pane" role="tabpanel">
-					<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
-                        <div class="col-md-6">
-                            <a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive"></div></a>
-                            <div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="fsize12"><h4>{{readBook.bookName}}</h4></div>
-                            <div class="fsize12">作者：{{readBook.author}}</div>
-                            <div class="fsize12">积分：{{readBook.point}}</div>
-                            <div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
-                            <div>
-                                <div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
-                                <div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
-                            </div>
-                        </div>
-					</div>				
-				</div>
-				
-            </div>
 			</div>
 			
 			
 			<div class="bottom">更多加载中...</div>
 		</div>
+		<div class="col-md-1"></div>
 	</div>
-	<div class="col-md-1"></div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="book-evaluation-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="color: #2F5682">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="border-bottom: 0">
-        <h4 class="modal-title"><strong>图书评价</strong></h4>
-      </div>
-      <div class="modal-body">
-        <div>你的评分:</div>
-        <br>
-        <div><input type="text" class="txt-title" placeholder="标题（必填）"></div>
-        <div><textarea class="txt-content" rows="6" placeholder="正文（不少于20字）"></textarea> </div>
-        <div>
-        	<button type="button" class="btn btn-sm btn-green">发表评论</button>
-        </div>
-      </div>
-    </div>
-  </div>
+	<!-- Modal -->
+	<div class="modal fade" id="book-evaluation-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="color: #2F5682">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="border-bottom: 0">
+					<h4 class="modal-title"><strong>图书评价</strong></h4>
+				</div>
+				<div class="modal-body">
+					<div>你的评分:</div>
+					<br>
+					<div><input type="text" class="txt-title" placeholder="标题（必填）"></div>
+					<div><textarea class="txt-content" rows="6" placeholder="正文（不少于20字）"></textarea> </div>
+					<div>
+						<button type="button" class="btn btn-sm btn-green">发表评论</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
 <script>
 	SetReadingCenterRightHeight();
-    SetBookList();
-    $('#bookReadStateTabs').click(function (e) {
-      e.preventDefault()
-      $(this).tab('show')
-    });
+	SetBookList();
+	$('#bookReadStateTabs').click(function (e) {
+		e.preventDefault()
+		$(this).tab('show')
+	});
 </script>

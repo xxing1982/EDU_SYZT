@@ -1,0 +1,40 @@
+#page
+{
+	background-image: url(../img/login.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	top: 0;
+}
+
+#login
+{
+	margin-top: 150px;
+	background-color: #E9F3F3;
+}
+
+#welcome
+{
+	padding-top: 40px;
+	font-size: 20px;
+	font-weight: 900;
+	padding-bottom: 20px;
+}
+
+input
+{
+	margin-bottom: 20px;
+	padding: 8px 5px;
+	width: 100%;
+}
+
+.btn-login
+{
+	margin-bottom: 20px;
+	width: 100%;
+	line-height: 20px;
+	font-size: 18px;
+}
