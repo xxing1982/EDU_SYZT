@@ -1,8 +1,5 @@
 package com.syzton.sunread.controller.note;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
@@ -27,7 +25,7 @@ import javax.validation.Valid;
  *
  */
 @Controller
-public class NoteController {
+public class NoteController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NoteController.class);
 
@@ -65,12 +63,9 @@ public class NoteController {
     @ResponseBody
     public PageResource<Note> findAll(@RequestParam("page") int page,
 	        					 @RequestParam("size") int size,
-	        					 @RequestParam("sortBy") String sortBy) {
-		sortBy = sortBy == null ? "id" : sortBy;
-		
-		Pageable pageable = new PageRequest(
-				page, size, new Sort(sortBy)
-		);
+	        					 @RequestParam("sortBy") String sortBy,
+						         @RequestParam("direction") String direction) {
+    	Pageable pageable = getPageable(page, size, sortBy, direction);
 		
         Page<Note> notePage = service.findAll(pageable);
 
@@ -93,12 +88,10 @@ public class NoteController {
     public PageResource<Note> findNotesByBookId(@PathVariable("bookId") long bookId,
 										    	@RequestParam("page") int page,
 										        @RequestParam("size") int size,
-										        @RequestParam("sortBy") String sortBy) {
-		sortBy = sortBy == null ? "id" : sortBy;
-		
-		Pageable pageable = new PageRequest(
-				page, size, new Sort(sortBy)
-		);
+										        @RequestParam("sortBy") String sortBy,
+										        @RequestParam("direction") String direction) {
+    	
+    	Pageable pageable = getPageable(page, size, sortBy, direction);
 		
         Page<Note> notePage = service.findByBookId(pageable, bookId);
 
@@ -110,12 +103,10 @@ public class NoteController {
     public PageResource<Note> findNotesByUserId(@PathVariable("userId") long userId,
 										    	@RequestParam("page") int page,
 										        @RequestParam("size") int size,
-										        @RequestParam("sortBy") String sortBy) {
-		sortBy = sortBy == null ? "id" : sortBy;
-		
-		Pageable pageable = new PageRequest(
-				page, size, new Sort(sortBy)
-		);
+										        @RequestParam("sortBy") String sortBy,
+										        @RequestParam("direction") String direction) {
+    	
+    	Pageable pageable = getPageable(page, size, sortBy, direction);
 		
         Page<Note> notePage = service.findByUserId(pageable, userId);
 

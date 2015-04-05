@@ -27,7 +27,17 @@ public class NoteDTO {
     @Length(max = Note.MAX_LENGTH_IMAGE)
     private String image;
     
-    public String getTitle() {
+    private Long commentCount;
+    
+    public Long getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(Long commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public String getTitle() {
 		return title;
 	}
 

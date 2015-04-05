@@ -389,12 +389,13 @@ a:focus, input:focus
     padding-bottom: 10px;
     text-align: center;
     cursor: pointer;
+    color: #6C82A0;
 }
 
 .readingCenter-right-body .bottom:hover
 {
-    background-color: #EB9B00;
-    color: #FFFFFF;
+    background-color: #D5DDE6;
+    color: #6C82A0;
 }
 
 /*******************my note top*******************/
@@ -428,25 +429,9 @@ a:focus, input:focus
 .book-row-right {
     padding-left: 15px;
     padding-right: 0;
-}
-
-.book-row-right .title
-{
-    font-size: 14px;
-    padding-top: 15px;
-    font-weight: 600;
-}
-
-.book-row-right .time
-{
-    font-size: 11px;
-    padding-top: 5px;
-}
-
-.book-row-right .content
-{
-    font-size: 12px;
-    padding-top: 5px;
+    width: 79%;
+    float: left;
+    position: relative;
 }
 
 .book-row-right .book-thumbnail
@@ -470,14 +455,24 @@ a:focus, input:focus
 .msg-buttom{
     cursor: pointer;
     position: absolute; 
-    bottom: 0;
+    float: right;
+    bottom: 0;  
     right: 0;
+    height: 23px;
+}
+
+.msg-buttom img{
+    bottom: 0;
+    position: absolute;
+    height: 14px;
+    left: -19px;
 }
 
 .msg-row
 {
-    margin-left: 25px;
+    margin-left: 10px;
     margin-bottom: 30px;
+    margin-right: 17px;
 }
 
 .msg-row .reply
@@ -488,27 +483,27 @@ a:focus, input:focus
 .msg-row .reply .total
 {
     margin-top: 10px;
-    background-color: #E6E6E6;
+    background-color: #EAEEF2;
     border-bottom: 1px #FFFFFF solid;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 .msg-row .reply .block
 {
-    background-color: #E6E6E6;
+    background-color: #EAEEF2;
 }
 
 .msg-row .reply .person
 {
-    padding-top: 10px;
-    color: #7C7C7C;
+/*    padding-top: 10px;*/
+/*    color: #7C7C7C;*/
 }
 
 .msg-row .reply .content
 {
+/*
     padding-top: 7px;
     padding-bottom: 20px;
+*/
 }
 
 /*******************my note bottom*******************/

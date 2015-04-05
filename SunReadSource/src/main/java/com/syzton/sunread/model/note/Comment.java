@@ -44,7 +44,12 @@ public class Comment extends AbstractEntity {
 	public String getContent() {
 		return content;
 	}
-
+	
+	public Note getNote() {
+		return note;
+	}
+	
+	
     public void update(String content) {
         this.content = content;
     }

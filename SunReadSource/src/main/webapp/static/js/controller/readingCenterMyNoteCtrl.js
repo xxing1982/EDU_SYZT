@@ -5,7 +5,8 @@ ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', 
     /*
         Some constants 
     */
-    var pageSize = 10;
+    var notePageSize = 10;
+    var commentPageSize = 5;
     var stateTexts = { more : "加载更多", loading: "更多加载中...", nomore: "没有了"};
     
     
@@ -18,12 +19,13 @@ ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', 
     /*
         Hide all the comments of all notes
     */
-    $scope.Notes = Note.get({page: 0, size: pageSize}, function(){
+    $scope.Notes = Note.get({page: 0, size: notePageSize, direction: "DESC"}, function(){
         var content = $scope.Notes.content;
-        for(var i = 0; i < content.length; i++){
+        for(var i = 0; i < content.length; i++){   
             content[i].showComments = false;
         }
     });
+    
     
     /*
         Invoke this method to load more notes
@@ -32,7 +34,7 @@ ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', 
         
         // Some states of the closure
         var page = 1;
-        var size = pageSize;
+        var size = notePageSize;
         var finished = false;
         
         return function (){
@@ -40,7 +42,7 @@ ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', 
             $scope.loadingState = stateTexts.loading;
     
             // GET the Notes entity
-            var newPage = Note.get({page: page, size: size}, function(){               
+            var newPage = Note.get({page: page, size: size, direction: "DESC"}, function(){ 
                 if (newPage.lastPage){
                     // Get the last page of the Notes, 
                     // Change the state of the loading state and turn on finished
@@ -59,7 +61,41 @@ ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', 
         };
     })();
 
+
+    /*
+        Invoke this method to load more comments
+    */
+    $scope.ShowMoreComments = (function(){
+        
+        // Some states of the closure
+        var page = 1;
+        var size = commentPageSize;
+        var finished = false;
+        
+        return function (note){
+            // Change the loading state to loading
+            note.loadingState = stateTexts.loading;
     
+            // GET the Comments entity
+            var newPage = Comment.get({by: "notes", id: note.id, page: page, size: size, sortBy: "id", direction: "DESC"}, function(){               
+                if (newPage.lastPage){
+                    // Get the last page of the Comments, 
+                    // Change the state of the loading state and turn on finished
+                    note.loadingState = stateTexts.nomore;
+                    if (!finished) {
+                        note.Comments.content = note.Comments.content.concat(newPage.content);
+                    }
+                    finished = true;
+                } else {
+                    finished = false;
+                    note.loadingState = stateTexts.more;
+                    note.Comments.content = note.Comments.content.concat(newPage.content);
+                    page ++;
+                }
+            });
+        };
+    })();
+
     /*
         Show the comments of the note with the index and hide the last one
     */
@@ -71,12 +107,16 @@ ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', 
             // Toggle the comment show or hide and then save the last index 
             note.showComments = !note.showComments; 
             
+            // Initlizate the loadingstate of the comments
+            note.loadingState = stateTexts.more;
+            
             // Get the comments by Note id and display
             if ( note.showComments === true ){
                 var Comments = Comment.get(
-                    {by: "notes", id: note.id, page: 0, size: 3, sortBy: "id"},
+                    {by: "notes", id: note.id, page: 0, size: commentPageSize, sortBy: "id", direction: "DESC"},
                     function(){
                         note.Comments = Comments;
+                        note.showShowMoreComment = (Comments.totalElements <= commentPageSize) ? false : true ;
                 });
             }
         };
@@ -100,5 +140,8 @@ ctrls.controller("readingCenterMyNoteController", ['$scope', 'Note', 'Comment', 
         
         // Reset the form 
         note.newCommentContent = "";
+        
+        // Add the count of comments
+        note.commentCount ++;
     }
 }]);

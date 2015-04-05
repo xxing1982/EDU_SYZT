@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.tag.BookTagDTO;
@@ -34,7 +35,7 @@ import javax.validation.Valid;
  *
  */
 @Controller
-public class BookTagController {
+public class BookTagController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookTagController.class);
 
@@ -84,13 +85,11 @@ public class BookTagController {
     public PageResource<BookTag> findBookTagsByBookId(@PathVariable("tagId") long tagId,
 										    		  @RequestParam("page") int page,
 										              @RequestParam("size") int size,
-										              @RequestParam("sortBy") String sortBy) {
-		sortBy = sortBy == null ? "id" : sortBy;
-		
-		Pageable pageable = new PageRequest(
-				page, size, new Sort(sortBy)
-		);
-		
+										              @RequestParam("sortBy") String sortBy,
+										              @RequestParam("direction") String direction) {
+
+    	Pageable pageable = getPageable(page, size, sortBy, direction);
+    	
         Page<BookTag> bookTagPage = service.findByTagId(pageable, tagId);
 
         return new PageResource<>(bookTagPage, "page", "size");

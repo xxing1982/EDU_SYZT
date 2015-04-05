@@ -31,6 +31,9 @@ public class Note extends AbstractEntity{
     @Basic(fetch = FetchType.LAZY)
     private Set<Comment> comments;
     
+    @Column(name="comment_count")
+    private Long commentCount = 0L;
+    
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="book_id")
@@ -51,6 +54,14 @@ public class Note extends AbstractEntity{
     public static Builder getBuilder(String title, String content, Book book) {
         return new Builder(title, content, book);
     }
+
+    public Long getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(Long commentCount) {
+		this.commentCount = commentCount;
+	}
 
     public String getTitle() {
 		return title;
@@ -99,6 +110,7 @@ public class Note extends AbstractEntity{
         dto.setTitle(model.getTitle());
         dto.setContent(model.getContent());
         dto.setImage(model.getImage());
+        dto.setCommentCount(model.getCommentCount());
 
         return dto;
     }

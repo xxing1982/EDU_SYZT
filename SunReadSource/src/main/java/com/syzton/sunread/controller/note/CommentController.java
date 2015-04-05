@@ -1,18 +1,14 @@
 package com.syzton.sunread.controller.note;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
@@ -27,7 +23,7 @@ import javax.validation.Valid;
  *
  */
 @Controller
-public class CommentController {
+public class CommentController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
 
@@ -77,12 +73,10 @@ public class CommentController {
     public PageResource<Comment> findNotesByBookId(@PathVariable("noteId") long noteId,
 										    	   @RequestParam("page") int page,
 										           @RequestParam("size") int size,
-										           @RequestParam("sortBy") String sortBy) {
-		sortBy = sortBy == null ? "id" : sortBy;
-		
-		Pageable pageable = new PageRequest(
-				page, size, new Sort(sortBy)
-		);
+										           @RequestParam("sortBy") String sortBy,
+										           @RequestParam("direction") String direction) {
+    	
+		Pageable pageable = getPageable(page, size, sortBy, direction);
 		
         Page<Comment> commentPage = service.findByNoteId(pageable, noteId);
 

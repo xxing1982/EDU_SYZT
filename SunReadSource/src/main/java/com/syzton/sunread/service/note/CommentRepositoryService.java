@@ -43,6 +43,7 @@ public class CommentRepositoryService implements CommentService {
         LOGGER.debug("Adding a new comment entry with information: {}", added);
 
         Note note = noteRepository.findOne(noteId);
+        note.setCommentCount( note.getCommentCount() + 1 );
         Comment commentModel = Comment.getBuilder(added.getContent(), note)
                 .build();
 
@@ -56,6 +57,7 @@ public class CommentRepositoryService implements CommentService {
         LOGGER.debug("Deleting a comment entry with id: {}", id);
 
         Comment deleted = findById(id);
+        deleted.getNote().setCommentCount( deleted.getNote().getCommentCount() - 1 );
         LOGGER.debug("Deleting comment entry: {}", deleted);
 
         repository.delete(deleted);
