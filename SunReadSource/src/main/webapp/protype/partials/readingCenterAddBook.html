@@ -21,10 +21,76 @@
 				<a ui-sref=".recommend"><div class="col-md-2 select-tab">热门推荐</div></a>
 				<div class="col-md-2"></div>
                 <div class="col-md-2 lackFeadback"> 
-                    <a id="lackFeadBack" class="" data-toggle="model" data-target="#supplementBook" ng-click="" > 
-                    缺书反馈</a>
+                    <a id="lackFeadBack" data-toggle="modal" data-target="#supplementBook" ng-click="" type="button"> 
+                        缺书反馈</a>
                 </div>
 			</div>
+			
+			        <!-- Modal -->
+        <div class="modal fade" id="supplementBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content lackBookModel container-fluid">
+                <div class="modal-body">
+
+                    <!-- Input form -->
+                    <div >
+                        <h4 class="modal-title" id="myModalLabel">缺书反馈</h4>
+                        <p><br />没有找到您想要的书？请反馈此书的相关信息，方便我们及时添加！</p>
+<!--                        <div><textarea class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>	-->
+                    </div>
+                    <div>
+                        <label class="radio-inline">
+                          <input type="radio" ng-click="search()" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> 
+                            <p class="popularText">中文</p>
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="radio-inline">
+                          <input type="radio" ng-click="searchWeekly()" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 
+                            <p class="popularText">英文</p>
+                        </label>
+                    </div>
+                       
+                    <div class="row">
+                        <div class="lackBookText"><p>作者姓名：</p></div>
+                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="lackBookText"><p>系列名称：</p></div>
+                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="lackBookText"><p>出版社：</p></div>
+                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="lackBookText"><p>出版日期：</p></div>
+                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                    </div>
+
+                    <div class="row">
+                        <div class="lackBookText"><p>ISBN号：</p></div>
+                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                    </div>
+                    
+            </div>
+            <div class="row modal-footer">       
+                    <div class="col-md-offset-2 col-md-3">
+                        <button class="btn btn-green" ng-click="" type="button">提交</button>
+                    </div>
+                   
+                    <div class="col-md-3">
+                        <button class="btn btn-green" ng-click="" type="button">取消</button>
+                    </div> 
+            </div>
+                    
+                
+            </div>
+            </div>
+        </div>
+			
+			
 			<div ui-view></div>
 		  </div><!--readingCenter Body-->
 		  

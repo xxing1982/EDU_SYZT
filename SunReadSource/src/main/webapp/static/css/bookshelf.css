@@ -168,3 +168,45 @@
     margin-top: 15px;
     margin-left: 10px;
 }
+
+.readingCenter-right-body .bookDetailBottom {
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px #DDD solid;   
+}
+
+.lackBookModal {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    width: auto;
+    margin: 0;
+}
+
+
+
+.lackBookModel {
+    margin-top: 260px;
+    margin-left: 250px;
+    width: 60%;
+    min-width: 350px;
+}
+
+.lackbook-input {
+    height: 30px;
+}
+
+.lackBookText {
+  width: 80px;
+  float: left;
+  padding-top: 5px;
+  margin-left: 15px;
+  text-align: right;
+}
+
+.lackBookInput {
+  width: 60%;
+  float: left;
+  margin-bottom: 10px;
+}

@@ -1,6 +1,6 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'paraServices', 'commentServices'
-                                              ,'bookDetailServices','bookshelfServices','bookInShelfServices'
+                                              ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices'
                                               ,'conditionSearchServices','quickSearchServices'
                                               ,'weeklyHotServices','monthlyHotServices'
                                               ,'weeklyRecommendServices','monthlyRecommendServices']);

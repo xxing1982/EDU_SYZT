@@ -79,3 +79,17 @@ function SetBookList(){
 	}
 }
 
+function SetBookDetailList(){
+	$(".select-tab").on("click", function(){
+		$(".select-tab.myActive").removeClass("myActive");
+		$(this).addClass("myActive");
+	});
+
+	var urlStr = window.location.href;
+	if (urlStr.match("readingCenter/bookDetails/bookOutline")) {
+		$(".readingCenter-right-body .bookDetailBottom .select-tab").eq(1).addClass("myActive");
+	}
+	else{
+		$(".readingCenter-right-body .bookDetailBottom .select-tab").eq(0).addClass("myActive");
+	}
+}
