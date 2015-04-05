@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 
 import javassist.NotFoundException;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,9 +218,9 @@ public class ExamRepositoryService implements ExamService {
 			public Predicate toPredicate(Root<ObjectiveQuestion> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
 				root = query.from(ObjectiveQuestion.class);
-				Path<Book> book = root.get("book");
+				Path<Long> book = root.get("bookId");
 				
-				return cb.equal(book.get("id"), bookId);
+				return cb.equal(book, bookId);
 			}
 		});
 		int i = this.getRandomPage((int) total, Exam.EXAM_QUESTION);
@@ -232,9 +233,9 @@ public class ExamRepositoryService implements ExamService {
 					public Predicate toPredicate(Root<ObjectiveQuestion> root,
 							CriteriaQuery<?> query, CriteriaBuilder cb) {
 						root = query.from(ObjectiveQuestion.class);
-						Path<Book> book = root.get("book");
-						Path<QuestionType> type = root.get("type");
-						return cb.and(cb.equal(book.get("id"), bookId),cb.equal(type,questionType));
+						Path<Book> book = root.get("bookId");
+						Path<QuestionType> type = root.get("objectiveType");
+						return cb.and(cb.equal(book, bookId),cb.equal(type,questionType));
 					}
 				}, pageable);
 		List<ObjectiveQuestion> list = pageResult.getContent();
@@ -305,14 +306,14 @@ public class ExamRepositoryService implements ExamService {
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		Date date = cal.getTime();
-		 
-		List<Exam> list = repository.findByStudentIdAndBookIdAndCreationTimeAfter(studentId, bookId,date);
+		DateTime dt = new DateTime(date);    
+		List<Exam> list = repository.findByStudentIdAndBookIdAndCreationTimeAfter(studentId, bookId,dt);
 		return list;
 	}
 	
 	public boolean isPassVerifyTest(Long bookId,Long studentId){
 		 
-		List<Exam> list = repository.findByStudentIdAndBookId(bookId,studentId);
+		List<Exam> list = repository.findByStudentIdAndBookId(studentId,bookId);
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).isPass()){
 				return true;
