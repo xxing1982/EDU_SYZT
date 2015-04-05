@@ -18,10 +18,6 @@ public class ObjectiveAnswer extends Answer {
 	private Option option;
 	
 	
-	@Override
-	public void update(AnswerDTO updated) {
-		
-	}
 	
 	public static Builder getBuilder() {
         return new Builder();
@@ -41,19 +37,9 @@ public class ObjectiveAnswer extends Answer {
 
 	 
 	}
-
-	@Override
-	public AnswerDTO createDTO() {
-		ObjectiveAnswerDTO dto = new ObjectiveAnswerDTO();
-		dto.setId(this.getId());
-		if(option!=null){
-//			dto.setOptionDTO(option.createDTO());
-		}
-		return dto;
-	}
 	
 	public boolean isCorrect(){
-		if(this.option==null){
+		if(this.option==null||this.question==null||!(this.question instanceof ObjectiveQuestion)){
 			return false;
 		}
 		

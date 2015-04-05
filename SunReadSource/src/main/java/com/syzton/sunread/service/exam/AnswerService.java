@@ -21,7 +21,7 @@ import com.syzton.sunread.todo.model.Todo;
  */
 public interface AnswerService {
 
-	 	public Answer add(AnswerDTO added);
+	 	public Answer add(Answer added);
 
 	    public Answer deleteById(Long id) throws AnswerNotFoundException;
 
@@ -29,5 +29,4 @@ public interface AnswerService {
 
 	    public Answer findById(Long id) throws AnswerNotFoundException;
 
-	    public Answer update(AnswerDTO updated) throws AnswerNotFoundException;
 }
