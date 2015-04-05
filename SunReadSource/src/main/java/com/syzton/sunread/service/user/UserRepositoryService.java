@@ -196,8 +196,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         Task task = student.getTask();
         task.setTargetBookNum(targetBookNum);
         task.setTargetPoint(targetPoint);
-        task.setTeacher(teacher);
-//        task.setStudent(student);
+        task.setTeacherId(teacherId);
 
         student.setTask(task);
 
