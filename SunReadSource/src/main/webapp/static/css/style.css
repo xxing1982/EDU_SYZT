@@ -537,21 +537,21 @@ a:focus, input:focus
 
 .quickSearch .search input, .advancedSearch .search input
 {
-    border: 1px #FFAF25 solid;
+    border: 1px #2F5682 solid;
 }
 
 .quickSearch .search span, .advancedSearch .search span
 {
     padding-left: 20px;
     padding-right: 20px;
-    background-color: #FFAF25;
+    background-color: #2F5682;
     color: #FFFFFF;
     cursor: pointer;
 }
 
 .quickSearch .search span:hover, .advancedSearch .search span:hover
 {
-    background-color: #EB9B00;
+    background-color: #48709d;
 }
 
 .quickSearch .tip
