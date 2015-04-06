@@ -3,7 +3,7 @@ var bookshelfServices = angular.module('bookshelfServices', ['ngResource', "nour
 // User object(s)
 bookshelfServices.factory('Bookshelf',['$resource', 'config',
 	function($resource, config){
-		return $resource("http://localhost:9999/api/bookshelf/1");
+		return $resource("/api/bookshelf/1");
 	}]);
 
 var bookInShelfService = angular.module('bookInShelfServices', ['ngResource', "nourConfig"]);
@@ -11,10 +11,17 @@ var bookInShelfService = angular.module('bookInShelfServices', ['ngResource', "n
 bookInShelfService.factory('BookInShelf',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-            "http://localhost:9999/api/bookshelf/1/bookinshelf?page=0&size=4&sortBy=id"
-        ,{},{query:{
-                method:"get",
-                isArray:true
-            }         
-        }); 
+            "/api/bookshelf/1/bookinshelf?page=:page&size=:size&sortBy=id",
+            {page:'@_page', size:'@_size'},{}
+        ); 
+    }]);
+
+var addbookToShelfService = angular.module('addbookToShelfServices', ['ngResource', "nourConfig"]);
+
+addbookToShelfService.factory('AddbookToShelf',['$resource', 'config',
+	function($resource, config){
+		return $resource(
+            "/api/bookshelf/:bookshelfId/books/:bookId/bookinshelf",
+            {bookshelfId:'@_bookshelfId', bookId:'@_bookId'},{}
+        ); 
     }]);

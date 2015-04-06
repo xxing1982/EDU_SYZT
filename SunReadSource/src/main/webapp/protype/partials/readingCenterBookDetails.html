@@ -99,7 +99,7 @@
         
         </div>
                
-        <div class="container-fluid bookDetailBottom">
+        <div class="container-fluid bookDetailBottom ">
             <div class="row">
                	<a ui-sref='.bookOverview'>
                	    <div class="col-md-2 select-tab myActive">图书简介</div>
@@ -114,23 +114,16 @@
                 <div class="col-md-1 select-tab">音视频</div>
             </div>
             <div ui-view></div>
-        </div>
-            
-            
-            
-            
-            
-            
-            
+        </div> 
                
     </div> <!--readingCenter Body-->
-        
-        
-        
-        
 		  
 	</div>
 	<div class="col-md-1"></div>
 	
 </div>
 </div>
+
+<script>
+    SetBookDetailList();
+</script>

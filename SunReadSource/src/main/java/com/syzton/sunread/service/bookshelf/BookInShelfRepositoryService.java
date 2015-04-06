@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Iterators;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
+import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
@@ -51,7 +52,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	public BookInShelf add(BookInShelfDTO added, Long id, Long bookId) {
 		// TODO Auto-generated method stub
         LOGGER.debug("Adding a new Book entry with information: {}", added);
-        
+       
         Book book = new Book();
         Bookshelf bookshelf = new Bookshelf();
         book = bookRepository.findOne(bookId);
@@ -62,8 +63,16 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         if (bookshelf == null) {
 			throw new NotFoundException("no bookshelf found with id :"+bookshelf.getId());
 		}
-        BookInShelf bookInShelfModel = BookInShelf.getBuilder(book,bookshelf
-        		,added.getBookAttribute(),added.getReadState())
+        
+		ArrayList<BookInShelf> bookArray = repository.findByBookShelf(bookshelf);
+		for (BookInShelf bookInShelf : bookArray) {
+			if(bookInShelf.getBookId() == bookId)
+				throw new DuplicateException("Book with name: "+book.getName()+" is already in your bookshelf..");
+		}
+        
+        BookInShelf bookInShelfModel = BookInShelf.getBuilder(book.getId(),book.getName()
+        		,book.getIsbn(),book.getPictureUrl(),book.getAuthor(),book.getPoint()
+        		,bookshelf,added.getBookAttribute(),added.getReadState())
         		.description(added.getDescription())
         		.build();
         BookInShelf model = repository.save(bookInShelfModel);
@@ -100,7 +109,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		if (bookshelf == null) {
 			throw new NotFoundException("no bookshelf found with id :" + id);
 		}
-	    Page<BookInShelf> bookPages = repository.BooksInBookShelf(bookshelf,pageable);    
+	    Page<BookInShelf> bookPages = repository.findByBookshelf(bookshelf, pageable);    
 	    return bookPages;
     }
     

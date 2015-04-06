@@ -364,6 +364,7 @@ a:focus, input:focus
 .bookshelf-book
 {
     margin-top: 30px;
+    float: left;
 }
 
 .mustRead
@@ -521,7 +522,7 @@ a:focus, input:focus
 /*******************find book bottom*******************/
 
 /*******************quick search top*******************/
-.quickSearch, .advancedSearch, .popularSearch
+.quickSearch, .advancedSearch, .popularSearch, .recommendSearch
 {
     margin-left: 15px;
     margin-right: 15px;
@@ -1004,3 +1005,50 @@ a:focus, input:focus
 
 /*******************personal show buttom****************/
 
+.readingCenter-right-body .thinkingTesting .total
+{
+    color: #BEBEBE;
+    font-size: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.readingCenter-right-body .thinkingTesting .question
+{
+    margin-top: 10px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 700;
+}
+
+.readingCenter-right-body .thinkingTesting .option
+{
+    padding: 5px;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.readingCenter-right-body .thinkingTesting .option.active
+{
+      border: 1px #778BA6 solid;
+      background-color: #BEBEBE;
+      margin-top: 9px;
+      margin-bottom: 9px;
+      margin-left: 14px;
+      margin-right: 14px;
+}
+
+.readingCenter-right-body .thinkingTesting .opContent
+{
+    padding-top: 10px;
+}
+
+.readingCenter-right-body .thinkingTesting .btn-next
+{
+    text-align: center;
+    margin-bottom: 10px;
+}
