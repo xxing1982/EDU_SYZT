@@ -6,11 +6,16 @@ var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userS
                                               ,'weeklyHotServices','monthlyHotServices'
                                               ,'weeklyRecommendServices','monthlyRecommendServices']);
 
-ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", function ($rootScope, $scope, Student,Bookshelf) {
-	$rootScope.id = 2;
+ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", 
+    function ($rootScope, $scope, Student,Bookshelf) {
+	 $rootScope.id = 2;
     //test function to get data list
     $scope.userInfo = Student.get({id : $rootScope.id} ,function(data){
         $rootScope.student = data;
+
+
+
+
     });
 
     //bookshelf
@@ -26,13 +31,21 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 //    		'select': '8'
 //    	},
 //    };
-    /*var bookshelf = Bookshelf.get(function(){
-        console.log(bookshelf);
-    });
-    $scope.bookshelf = bookshelf;
-    $scope.bookshelf.finishStatus = 80;*/
-}]);
+    
+    //bookshelf
+    Bookshelf.get({id : $rootScope.id}, function(data){
+        console.log(data);
+    })
 
+    //note
+    Note.get({page:0, size: 3, sortBy: 'commentCount', direction: 'DESC'}, function(data){
+        console.log(data.content);
+        $scope.hotNotes = data.content;   
+    })
+
+
+
+    }]);
 ctrls.filter('formatImg', function(){
     return function(input){
         if (input == undefined || input == "") {
@@ -42,11 +55,17 @@ ctrls.filter('formatImg', function(){
     }
 });
 
+ctrls.filter('formatSize6', function(){
+    return function(input){
+        return input.substring(0, 6) + '...';
+    }
+});
+
 ctrls.filter('formatGender', function(){
-	return function(input){
-		if (input == 'male') {
-    		return "男生";
-    	};
-    	return "女生";
-	}
+ return function(input){
+  if (input == 'male') {
+      return "男生";
+  };
+  return "女生";
+}
 });
