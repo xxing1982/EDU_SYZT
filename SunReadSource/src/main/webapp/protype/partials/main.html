@@ -218,17 +218,9 @@
                 <div class="col-md-4 row-title-more"><a href="#">更多></a></div>
             </div>
             <div class="row row-content-right row-hot-note">
-                <div class-"row">
-                    <div class="col-md-7">《原来世界这么...</div>
-                    <div class="col-md-5">评论：86</div>
-                </div>
-                <div class-"row">
-                    <div class="col-md-7">《原来世界这么...</div>
-                    <div class="col-md-5">评论：86</div>
-                </div>
-                <div class-"row">
-                    <div class="col-md-7">《原来世界这么...</div>
-                    <div class="col-md-5">评论：86</div>
+                <div class-"row" ng-repeat="item in hotNotes">
+                    <div class="col-md-7" title="{{item.content}}">{{item.content | formatSize6}}</div>
+                    <div class="col-md-5">评论：{{item.commentCount}}</div>
                 </div>
             </div>
         </div>

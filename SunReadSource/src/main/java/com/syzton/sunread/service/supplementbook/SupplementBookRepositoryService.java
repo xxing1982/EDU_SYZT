@@ -5,6 +5,7 @@ import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.supplementbook.SupplementBook;
 import com.syzton.sunread.repository.supplementbook.SupplementBookRepository;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,11 @@ public class SupplementBookRepositoryService implements SupplementBookService {
     @Override
     public SupplementBook add(SupplementBookDTO added) {
         LOGGER.debug("Adding a new SupplementBook entry with information: {}", added);
-
-        SupplementBook bookModel = SupplementBook.getBuilder(added.getIsbn(), added.getName())
+        DateTime date = new DateTime(added.getPublicationDate());
+        
+        SupplementBook bookModel = SupplementBook.getBuilder(added.getLanguage()
+        		,added.getAuthor(),added.getPublisher(),date
+        		,added.getIsbn(), added.getName())
                 .description(added.getDescription())
                 .build();
         return repository.save(bookModel);

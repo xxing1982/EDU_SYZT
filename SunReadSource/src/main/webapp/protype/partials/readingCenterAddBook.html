@@ -40,44 +40,44 @@
                     </div>
                     <div>
                         <label class="radio-inline">
-                          <input type="radio" ng-click="search()" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> 
+                          <input type="radio" ng-model="language" name="inlineRadioOptions" id="inlineRadio1" value="1" checked> 
                             <p class="popularText">中文</p>
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;
                         <label class="radio-inline">
-                          <input type="radio" ng-click="searchWeekly()" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 
+                          <input type="radio" ng-model="language" name="inlineRadioOptions" id="inlineRadio2" value="2"> 
                             <p class="popularText">英文</p>
                         </label>
                     </div>
                        
                     <div class="row">
                         <div class="lackBookText"><p>作者姓名：</p></div>
-                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                        <input type="text" ng-model="author" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
                     </div>
                     
                     <div class="row">
                         <div class="lackBookText"><p>系列名称：</p></div>
-                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                        <input type="text" ng-model="name" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
                     </div>
                     
                     <div class="row">
                         <div class="lackBookText"><p>出版社：</p></div>
-                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                        <input type="text" ng-model="publisher" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
                     </div>
                     
                     <div class="row">
                         <div class="lackBookText"><p>出版日期：</p></div>
-                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                        <input type="text" ng-model="publishDate" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
                     </div>
 
                     <div class="row">
                         <div class="lackBookText"><p>ISBN号：</p></div>
-                        <input type="text" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
+                        <input type="text" ng-model="isbn" class="form-control lackBookInput" placeholder="" aria-describedby="sizing-addon2">
                     </div>
                     
             </div>
             <div class="row modal-footer">       
                     <div class="col-md-offset-2 col-md-3">
-                        <button class="btn btn-green" ng-click="" type="button">提交</button>
+                        <button class="btn btn-green" ng-click="lackBookFeedback()" type="button">提交</button>
                     </div>
                    
                     <div class="col-md-3">

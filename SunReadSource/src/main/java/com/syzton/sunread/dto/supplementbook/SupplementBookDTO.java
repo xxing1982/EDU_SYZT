@@ -1,28 +1,48 @@
 package com.syzton.sunread.dto.supplementbook;
 
-import java.sql.Date;
-
 /*
  * @Data 2015/03/13
  * @Author Morgan-Leon
  */
 public class SupplementBookDTO {
 
-	 private Long id;
-
+		private Long id;
+		
+		private String author;
+		
+		private String publisher;
+		
 	    private String isbn;
 
 	    private String name;
+	    
+	    private int language;
 
 	    private String description;
 
-	    private Date publicationDate;
+	    private Long publicationDate;
 
-	    public Date getPublicationDate() {
+	    public Long getPublicationDate() {
 	        return publicationDate;
 	    }
 
-	    public void setPublicationDate(Date publicationDate) {
+	    public String getAuthor() {
+			return author;
+		}
+
+		public void setAuthor(String author) {
+			this.author = author;
+		}
+
+		public String getPublisher() {
+			return publisher;
+		}
+
+		public void setPublisher(String publisher) {
+			this.publisher = publisher;
+		}
+
+		public void setPublicationDate(Long publicationDate) {
 	        this.publicationDate = publicationDate;
 	    }
 
@@ -57,4 +77,18 @@ public class SupplementBookDTO {
 	    public void setDescription(String description) {
 	        this.description = description;
 	    }
+
+		/**
+		 * @return the language
+		 */
+		public int getLanguage() {
+			return language;
+		}
+
+		/**
+		 * @param language the language to set
+		 */
+		public void setLanguage(int language) {
+			this.language = language;
+		}
 }
