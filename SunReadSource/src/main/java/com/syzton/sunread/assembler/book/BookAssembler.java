@@ -68,6 +68,7 @@ public class BookAssembler {
         extra.setGrade(bookExtraDTO.getGrade());
         extra.setCategory(bookExtraDTO.getCategory());
         extra.setAgeRange(bookExtraDTO.getAgeRange());
+        extra.setPointRange(bookExtraDTO.getPointRange());
         return extra;
     }
 }

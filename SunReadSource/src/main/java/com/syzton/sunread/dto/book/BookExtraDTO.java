@@ -21,6 +21,8 @@ public class BookExtraDTO {
 
     private int ageRange;
 
+    private int pointRange;
+
     public int getAgeRange() {
         return ageRange;
     }
@@ -83,5 +85,13 @@ public class BookExtraDTO {
 
     public void setCategory(int category) {
         this.category = category;
+    }
+
+    public int getPointRange() {
+        return pointRange;
+    }
+
+    public void setPointRange(int pointRange) {
+        this.pointRange = pointRange;
     }
 }

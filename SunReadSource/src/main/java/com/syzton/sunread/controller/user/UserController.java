@@ -174,7 +174,9 @@ public class UserController extends BaseController{
          userService.deleteByTeacherId(teacherId);
     }
 
+    private void isDuplicateUsername(User user){
 
+    }
 
 
     private OAuth2AccessToken createTokenForNewUser(String username, String password, String clientId,String role) {

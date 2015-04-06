@@ -25,6 +25,7 @@ public class Book extends AbstractEntity{
     public static final int MAX_LENGTH_AUTHOR = 10;
     public static final int MAX_LENGTH_PUBLISHER = 50;
     public static final int MAX_LENGTH_AUTHOR_INTRODUCTION =100;
+    public static final int MAX_LENGTH_CATALOGUE =1000;
 
     public static final int DEFAULT_POINT = 5;
     public static final int DEFAULT_COIN = 5;
@@ -77,6 +78,9 @@ public class Book extends AbstractEntity{
 
     private int coin = DEFAULT_COIN;
 
+    @Column(length = MAX_LENGTH_CATALOGUE)
+    private String catalogue;
+
     @Enumerated(EnumType.STRING)
     private Binding binding = Binding.softback;
 
@@ -86,13 +90,17 @@ public class Book extends AbstractEntity{
     private String pictureUrl = DEFAULT_PICTURE_URL;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
+    @JoinColumn(name ="extra_id")
     private BookExtra extra;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)
-    private BookHot hot;
+    @JoinColumn(name ="book_statistic_id")
+    private BookStatistic statistic = new BookStatistic();
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private Set<Review> reviews = new HashSet<>() ;
+
+
 
 
     public enum Status {
@@ -285,11 +293,20 @@ public class Book extends AbstractEntity{
         this.status = status;
     }
 
-    public BookHot getHot() {
-        return hot;
+    public BookStatistic getStatistic() {
+        return statistic;
     }
 
-    public void setHot(BookHot hot) {
-        this.hot = hot;
+    public void setStatistic(BookStatistic statistic)
+    {
+        this.statistic = statistic;
+    }
+
+    public String getCatalogue() {
+        return catalogue;
+    }
+
+    public void setCatalogue(String catalogue) {
+        this.catalogue = catalogue;
     }
 }

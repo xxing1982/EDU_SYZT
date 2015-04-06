@@ -102,6 +102,7 @@ public class BookController extends BaseController {
                                          @RequestParam(value = "category", required = false) String category,
                                          @RequestParam(value = "resource", required = false) String resource,
                                          @RequestParam(value = "ageRange", required = false) String ageRange,
+                                         @RequestParam(value = "pointRange", required = false) String pointRange,
                                          @RequestParam("page") int page,
                                          @RequestParam("size") int size,
                                          @RequestParam(value = "sortBy", required = false) String sortBy,
@@ -114,6 +115,7 @@ public class BookController extends BaseController {
         int categoryNum = category == null? 0: Integer.parseInt(category);
         int resourceNum = resource == null? 0: Integer.parseInt(resource);
         int ageRangeNum = ageRange == null? 0: Integer.parseInt(ageRange);
+        int pointRangeNum = pointRange == null? 0: Integer.parseInt(pointRange);
 
 
         Pageable pageable = getPageable(page, size, sortBy,direction);
@@ -126,6 +128,7 @@ public class BookController extends BaseController {
         condition.setGrade(gradeNum);
         condition.setTestType(testTypeNum);
         condition.setResource(resourceNum);
+        condition.setPointRange(pointRangeNum);
 
 
         Page<Book> bookPage = bookService.searchByCondition(condition, pageable);
@@ -145,9 +148,10 @@ public class BookController extends BaseController {
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "resource", required = false) String resource,
             @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.weeklyHot","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.weeklyHot","desc");
     }
     @RequestMapping(value = "/books/conditions/monthlyhot", method = RequestMethod.GET)
     @ResponseBody
@@ -160,9 +164,10 @@ public class BookController extends BaseController {
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "resource", required = false) String resource,
             @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.monthlyHot","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.monthlyHot","desc");
     }
 
     @RequestMapping(value = "/books/conditions/yearlyhot", method = RequestMethod.GET)
@@ -176,9 +181,10 @@ public class BookController extends BaseController {
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "resource", required = false) String resource,
             @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.yearlyHot","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.yearlyHot","desc");
     }
 
     @RequestMapping(value = "/books/conditions/weeklyRecommend", method = RequestMethod.GET)
@@ -192,9 +198,10 @@ public class BookController extends BaseController {
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "resource", required = false) String resource,
             @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.weeklyRecommend","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.weeklyRecommend","desc");
     }
     @RequestMapping(value = "/books/conditions/monthlyRecommend", method = RequestMethod.GET)
     @ResponseBody
@@ -207,9 +214,10 @@ public class BookController extends BaseController {
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "resource", required = false) String resource,
             @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.monthlyRecommend","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.monthlyRecommend","desc");
     }
 
     @RequestMapping(value = "/books/conditions/yearlyRecommend", method = RequestMethod.GET)
@@ -223,9 +231,10 @@ public class BookController extends BaseController {
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "resource", required = false) String resource,
             @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,page,size,"hot.yearlyRecommend","desc");
+        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.yearlyRecommend","desc");
     }
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     @ResponseBody
