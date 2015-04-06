@@ -104,11 +104,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: 'partials/readingDynamic.html',
             controller: 'readingDynamicController'
         })
-        //reading dynamic -> HotNotes
-        .state('readingDynamic.HotNotes',{
-            url: '/HotNotes',
-            templateUrl: 'partials/readingDynamicHotNotes.html',
-            controller: 'readingDynamicHotNotesController'
+        //reading dynamic -> note notes
+        .state('hotNotes',{
+            url: '/hotNotes',
+            templateUrl: 'partials/hotNotes.html',
+            controller: 'hotNotesController'
         })
         //reading center -> thinking test
         .state('readingCenter.myAnswers',{
