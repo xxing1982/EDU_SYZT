@@ -432,6 +432,7 @@ a:focus, input:focus
     width: 79%;
     float: left;
     position: relative;
+    margin-bottom: 15px;
 }
 
 .book-row-right .book-thumbnail
@@ -531,7 +532,7 @@ a:focus, input:focus
 {
     margin-top: 10px;
     padding-left: 20px;
-    padding-right: 5%;
+    padding-right: 3%;
     padding-bottom: 10px;
 }
 

@@ -8,6 +8,13 @@
     
     <!-- The page body top -->
     <div class="page-body personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
+        <div class="row">
+        <div class="quickSearch row">
+        <div class="input-group search col-md-9">
+            <input type="text" class="form-control" placeholder="请输入书名">
+            <span class="input-group-addon">搜索</span>
+        </div>
+
         <div class="note-row row"  ng-repeat="Note in Notes.content">
             <div class="row book-row">
                 <div class="col-md-2 book-row-left">
@@ -50,6 +57,8 @@
         </div>
 
         <div class="row bottom" ng-click="ShowMoreNotes()">{{ loadingState }}</div>
+        </div>
+        </div>
     </div>
 </div>
 </div>
