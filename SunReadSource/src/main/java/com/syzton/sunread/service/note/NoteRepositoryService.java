@@ -1,14 +1,22 @@
 package com.syzton.sunread.service.note;
 
+import static com.syzton.sunread.repository.book.predicates.BookPredicates.quickSearchContains;
+
 import java.util.List;
+
+import com.mysema.query.types.Predicate;
+import com.mysema.query.types.expr.BooleanExpression;
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.book.QBook;
 import com.syzton.sunread.model.note.Note;
+import com.syzton.sunread.model.note.QNote;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.note.NoteRepository;
 import com.syzton.sunread.repository.user.UserRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +34,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class NoteRepositoryService implements NoteService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NoteRepositoryService.class);
+
+    /* Auto wire of note */
     private NoteRepository repository;
 
     @Autowired
     public NoteRepositoryService(NoteRepository repository) {
         this.repository = repository;
     }
-
+    
+    /* Auto wire of book */
     private BookRepository bookRepository;
 
     @Autowired
@@ -40,6 +51,7 @@ public class NoteRepositoryService implements NoteService {
         this.bookRepository = bookRepository;
     }
 
+    /* Auto wire of user */
     private UserRepository userRepository;
 
     @Autowired
@@ -122,6 +134,24 @@ public class NoteRepositoryService implements NoteService {
 
         User user = userRepository.findOne(userId);
         Page<Note> notePage = repository.findByUser(user, pageable);
+        return notePage;
+    }
+    
+    @Transactional
+    @Override 
+    public Page<Note> findBySearchTerm(Pageable pageable, String searchTerm) {
+    	
+    	// Get a list of book
+    	List<Book> bookList = (List<Book>) bookRepository.findAll(quickSearchContains(searchTerm));
+    	
+    	QNote qnote = QNote.note;
+    	
+    	BooleanExpression exp = qnote.book.id.eq(bookList.get(0).getId());
+    	for (int i = 1; i < bookList.size(); i++){
+    		exp = exp.or(qnote.book.id.eq(bookList.get(i).getId()));
+    	}
+    	
+        Page<Note> notePage = repository.findAll(exp, pageable);
         return notePage;
     }
 

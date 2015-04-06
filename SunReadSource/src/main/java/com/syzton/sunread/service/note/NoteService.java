@@ -54,4 +54,5 @@ public interface NoteService {
 
 	public Page<Note> findByUserId(Pageable pageable, long userId);
 
+	public Page<Note> findBySearchTerm(Pageable pageable, String searchTerm);
 }

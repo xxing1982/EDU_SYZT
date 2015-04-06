@@ -1,6 +1,6 @@
 // Lib for Note contrllers
 
-var notesLib = function ($scope, Note, Comment ) {
+var notesLib = function ($scope, Note, Comment) {
 
     /*
         Some constants 
