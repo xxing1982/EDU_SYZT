@@ -2,7 +2,7 @@
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'paraServices', 'commentServices'
                                               ,'examServices'
                                               ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices'
-                                              ,'conditionSearchServices','quickSearchServices'
+                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices'
                                               ,'weeklyHotServices','monthlyHotServices'
                                               ,'weeklyRecommendServices','monthlyRecommendServices']);
 

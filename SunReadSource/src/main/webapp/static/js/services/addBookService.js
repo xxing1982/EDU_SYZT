@@ -1,3 +1,14 @@
+var lackFeedbackServices = angular.module('lackFeedbackServices', ['ngResource', "nourConfig"]);
+
+// Note object(s)
+lackFeedbackServices.factory('LackFeedback',['$resource', 'config',
+	function($resource, config){
+		return $resource("/api/supplementbooks",
+                        {},
+                        {}
+        );
+	}]);
+
 var conditionSearchServices = angular.module('conditionSearchServices', ['ngResource', "nourConfig"]);
 
 // Note object(s)
