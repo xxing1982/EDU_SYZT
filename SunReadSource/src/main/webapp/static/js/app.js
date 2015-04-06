@@ -3,7 +3,7 @@
 //Main Angular script file for application
 
 //create a module with injected modules in brackets
-var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourControllers', 'nourConfig', 'userServices']);
+var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourControllers', 'nourConfig']);
 
 // router config
 routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
@@ -57,10 +57,10 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             controller: 'readingCenterTestSubjectiveController'
         })
         //reading center -> myBookshelf -> authentication testing
-        .state('readingCenter.authenticationTesting',{
-            url: '/authenticationTesting',
-            templateUrl: 'partials/readingCenterAuthenticationTesting.html',
-            controller: 'readingCenterAuthenticationTestingController'
+        .state('readingCenter.multipleTesting',{
+            url: '/multipleTesting',
+            templateUrl: 'partials/readingCenterMultipleTesting.html',
+            controller: 'readingCenterMultipleTestingController'
         })
         //reading center -> myBookshelf -> add books -> quick search
         .state('readingCenter.addBook.quick', {
@@ -104,17 +104,17 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: 'partials/readingDynamic.html',
             controller: 'readingDynamicController'
         })
-        //reading dynamic -> HotNotes
-        .state('readingDynamic.HotNotes',{
-            url: '/HotNotes',
-            templateUrl: 'partials/readingDynamicHotNotes.html',
-            controller: 'readingDynamicHotNotesController'
+        //reading dynamic -> note notes
+        .state('hotNotes',{
+            url: '/hotNotes',
+            templateUrl: 'partials/hotNotes.html',
+            controller: 'hotNotesController'
         })
         //reading center -> thinking test
-        .state('readingCenter.thinkingTest',{
-            url: '/myEvaluating/thinkingTest',
-            templateUrl: 'partials/readingCenterThinkingTest.html',
-            controller: 'readingCenterThinkingTestController'
+        .state('readingCenter.myAnswers',{
+            url: '/myEvaluating/myAnswers',
+            templateUrl: 'partials/readingCenterMyAnswers.html',
+            controller: 'readingCenterMyAnswersController'
         })
         //reading center -> thinking test -> other answers
         .state('readingCenter.otherAnswer',{

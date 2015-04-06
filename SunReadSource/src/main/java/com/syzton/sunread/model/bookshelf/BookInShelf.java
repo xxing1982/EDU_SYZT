@@ -19,7 +19,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bookinshelf")
-@JsonIgnoreProperties(value = {"book","bookshelf"})
+@JsonIgnoreProperties(value = {"bookshelf"})
 public class BookInShelf extends AbstractEntity{
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
@@ -31,8 +31,24 @@ public class BookInShelf extends AbstractEntity{
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
-    //
+   
+    //six book Attributes
+    private Long bookId;
+    
+    @Column(name="book_name",nullable = false,length = Book.MAX_LENGTH_NAME)
+    private String bookName;
 
+    @Column(name ="isbn",unique = true,nullable = false,length = Book.MAX_LENGTH_ISBN)
+    private String isbn;
+    
+    @Column(nullable = false,length = Book.MAX_LENGTH_AUTHOR)
+    private String author;
+    
+    private String pictureUrl = "ftp://default_book_picture";
+    
+    private int point = Book.DEFAULT_POINT;
+    //end Book Attributes
+    
     //is required or optional
     @Column(name = "isMandatory", nullable = false)
     private boolean isMandatory;
@@ -45,9 +61,9 @@ public class BookInShelf extends AbstractEntity{
     @JoinColumn(name = "bookshelf")
     private Bookshelf bookshelf;
 
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
-    @JoinColumn(name = "book")
-    private Book book;
+//    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
+//    @JoinColumn(name = "book")
+//    private Book book;
 
     public BookInShelf() {
 
@@ -56,8 +72,12 @@ public class BookInShelf extends AbstractEntity{
     public static Builder getBuilder() {
         return new Builder();
     }
-    public static Builder getBuilder(Book book ,Bookshelf bookshelf, boolean isMandatory,boolean isVerified) {
-        return new Builder(book,bookshelf,isMandatory,isVerified);
+    
+    public static Builder getBuilder(Long bookId,String bookName,String isbn,String pictureUrl
+    		,String author,int point,Bookshelf bookshelf
+    		,boolean isMandatory,boolean isVerified) {
+    	
+        return new Builder(bookId,bookName,isbn,pictureUrl,author,point,bookshelf,isMandatory,isVerified);
     }
     public String getDescription() {
         return description;
@@ -70,8 +90,33 @@ public class BookInShelf extends AbstractEntity{
     public void setDescription(String description) {
         this.description = description;
     }
+    
 
-    public boolean getBookAttribute() {
+    public Long getBookId() {
+		return bookId;
+	}
+
+	public String getBookName() {
+		return bookName;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public boolean getBookAttribute() {
         return isMandatory;
     }
 
@@ -79,10 +124,6 @@ public class BookInShelf extends AbstractEntity{
         return isVerified;
     }
 
-    public Book getBook() {
-        return book;
-    }
-    
     public Bookshelf getBookShelf(){
     	return bookshelf;
     }
@@ -128,14 +169,19 @@ public class BookInShelf extends AbstractEntity{
             return built;
         }
         
-        public Builder(Book book, Bookshelf bookshelf, 
-        		 boolean isMandatory,boolean isVerified) {           
+        public Builder(Long bookId,String bookName,String isbn,String pictureUrl
+        		,String author,int point,Bookshelf bookshelf
+        		,boolean isMandatory,boolean isVerified) {           
         	built = new BookInShelf();
-        	built.book = book;
+        	built.bookId = bookId;
+        	built.bookName = bookName;
+        	built.isbn = isbn;
+        	built.pictureUrl = pictureUrl;
+        	built.author = author;
+        	built.point = point;
         	built.bookshelf = bookshelf;
         	built.isVerified = isVerified;
         	built.isMandatory = isMandatory;
-
         }
 
 		public Builder description(String description) {
@@ -154,7 +200,7 @@ public class BookInShelf extends AbstractEntity{
     	dto.setModificationTime(model.getModificationTime().getMillis());
     	dto.setBookAttribute(model.getBookAttribute());
     	dto.setReadState(model.getReadState());
-    	dto.setBookIsbn(model.getBook().getIsbn());
+    	dto.setBookIsbn(model.getIsbn());
     	dto.setBookshelf(model.getBookShelf().getId());
     	return dto;
     }
