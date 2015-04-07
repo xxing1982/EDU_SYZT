@@ -27,8 +27,9 @@ public class SchoolRepositoryService implements SchoolService {
     private EduGroupRepository eduRepository;
 
     @Autowired
-    public SchoolRepositoryService(SchoolRepository repository) {
+    public SchoolRepositoryService(SchoolRepository repository,EduGroupRepository eduRepository) {
         this.repository = repository;
+        this.eduRepository = eduRepository;
     }
 
     @Override

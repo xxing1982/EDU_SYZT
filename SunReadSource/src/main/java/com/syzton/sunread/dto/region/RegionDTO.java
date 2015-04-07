@@ -1,10 +1,4 @@
-/**
- * 
- */
 package com.syzton.sunread.dto.region;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
@@ -32,7 +26,9 @@ public class RegionDTO {
     @Length(max = Region.MAX_LENGTH_AREA)
     private String city;
 	
-	private Set<String> schools = new HashSet<String>();
+	@NotNull
+    @Length(max = Region.MAX_LENGTH_AREA)
+    private String district;
     
 	public long getId() {
 		return id;
@@ -73,24 +69,6 @@ public class RegionDTO {
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-
-	/**
-	 * @return the schools
-	 */
-	public Set<String> getSchools() {
-		return schools;
-	}
-
-	/**
-	 * @param schools the schools to set
-	 */
-	public void setSchools(Set<String> schools) {
-		this.schools = schools;
-	}
-
-	@NotNull
-    @Length(max = Region.MAX_LENGTH_AREA)
-    private String district;
 	
 	
 }

@@ -2,10 +2,9 @@ package com.syzton.sunread.service.organization;
 
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.organization.Grade;
+import com.syzton.sunread.model.organization.Compus;
 import com.syzton.sunread.repository.organization.ClazzRepository;
-import com.syzton.sunread.repository.organization.GradeRepository;
-
+import com.syzton.sunread.repository.organization.CompusRepository;
 import javassist.NotFoundException;
 
 import org.slf4j.Logger;
@@ -24,21 +23,21 @@ public class ClazzRepositoryService implements ClazzService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClazzRepositoryService.class);
     private ClazzRepository repository;
-    private GradeRepository gradeRepository;
+    private CompusRepository compusRepository;
 
     @Autowired
-    public ClazzRepositoryService(ClazzRepository repository) {
+    public ClazzRepositoryService(ClazzRepository repository,CompusRepository compusRepository) {
         this.repository = repository;
+        this.compusRepository = compusRepository;
     }
 
     @Override
-    public Clazz add(ClazzDTO add, Long id) {
+    public Clazz add(ClazzDTO add, Long compusId) {
 
         LOGGER.debug("Adding a new clazz entry with information: {}", add);
-        Grade grade = gradeRepository.findOne(id);
-        Clazz model = Clazz.getBuilder(add.getName(),grade)
-        		.description(add.getDescription()).build();  
-        
+        Compus compus = compusRepository.findOne(compusId);
+        Clazz model = Clazz.getBuilder(add.getName(),add.getGrade(),compus)
+        		.description(add.getDescription()).build();        
         return repository.save(model);
 
     }
