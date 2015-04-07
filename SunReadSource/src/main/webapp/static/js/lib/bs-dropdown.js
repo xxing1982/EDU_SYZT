@@ -11,7 +11,7 @@ ctrls.directive('bsDropdown', function ($compile) {
             var html = '';
             switch (attrs.menuType) {
                 case "button":
-                    html += '<div class="btn-group"><button class="btn button-label btn-info">Action</button><button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
+                    html += '<div class="btn-group"><button class="btn button-label">Action</button><button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
                     break;
                 default:
                     html += '<div class="dropdown"><a class="dropdown-toggle" role="button" data-toggle="dropdown"  href="javascript:;">Dropdown<b class="caret"></b></a>';

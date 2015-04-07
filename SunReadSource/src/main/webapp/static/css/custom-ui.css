@@ -96,6 +96,26 @@ bs-dropdown .button-label {
     width: -webkit-calc(100% - 34px);
     width: -moz-calc(100% - 34px);
     width: calc(100% - 34px);
+    color: #2F5682;
+    background: none;
+    border-color: #2F5682;
+}
+bs-dropdown .dropdown-toggle {
+    color: #FFF;
+    background-color: #2F5682;
+    border-color: #2F5682;
+}
+
+bs-dropdown .dropdown-toggle:hover,
+bs-dropdown .dropdown-toggle:focus,
+bs-dropdown .dropdown-toggle:active {
+    color: #FFF;
+    background-color: #3b6ea8;
+    border-color: #2F5682;
+}
+
+bs-dropdown .dropdown-menu {
+    min-width: 0px;
 }
 
 /* Other */
