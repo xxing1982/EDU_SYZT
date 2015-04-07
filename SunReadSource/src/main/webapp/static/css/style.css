@@ -549,6 +549,7 @@ a:focus, input:focus
     background-color: #2F5682;
     color: #FFFFFF;
     cursor: pointer;
+    border: none;
 }
 
 .quickSearch .search span:hover, .advancedSearch .search span:hover
@@ -934,6 +935,21 @@ a:focus, input:focus
 }
 
 /*******************statistics summary and ranking buttom****************/
+
+
+/*******************personal profile top****************/
+#personalCenter-page input{
+    font-size: 18px;
+    height: 39px;
+    box-shadow: none;
+    border-style: none;
+    border-bottom: 1px dashed #DDD;
+    padding-left: 0px;
+    border-radius: 0px;
+}
+
+/*******************personal profile buttom****************/
+
 
 /*******************personal show top****************/
 

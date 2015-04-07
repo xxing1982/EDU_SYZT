@@ -1,5 +1,9 @@
 //personalProfile.js
 
 ctrls.controller("personalProfileController", ['$scope', function ($scope) {
-    $scope.personalProfile = '个人中心';
+    $scope.editable = false;
+    $scope.toggleEdit = function(){
+        $scope.editable = !$scope.editable ;
+    }
+    
 }]);

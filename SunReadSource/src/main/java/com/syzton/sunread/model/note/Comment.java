@@ -50,6 +50,7 @@ public class Comment extends AbstractEntity {
 	}
 	
 	
+	
     public void update(String content) {
         this.content = content;
     }

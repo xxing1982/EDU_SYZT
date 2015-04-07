@@ -3,13 +3,29 @@
 .custom-page-number-group {
     text-align: center;
     padding: 0px;
+
+}
+
+.custom-page-number-group a{
+    color: #5883C2;
 }
 
 .custom-page-number {
-    max-width: 25px;
     margin-left: auto;
     margin-right: auto;
+    display: block;
 }
+
+.custom-page-number:hover {
+    background-color: #5883C2 ;
+    color: #FFF;
+    position: absolute;
+    top: -4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 100%;
+}
+
 
 .custom-page-number-input {
     padding: 0;
@@ -68,6 +84,41 @@
 
 .custom-shadow {
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom bootstrap dropdown */
+bs-dropdown, bs-dropdown .btn-group {
+    width: 100%;
+}
+
+bs-dropdown .button-label {
+    width: 70%;
+    width: -webkit-calc(100% - 26px);
+    width: -moz-calc(100% - 26px);
+    width: calc(100% - 26px);
+    color: #2F5682;
+    background: none;
+    border-color: #2F5682;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+bs-dropdown .dropdown-toggle {
+    color: #FFF;
+    background-color: #2F5682;
+    border-color: #2F5682;
+}
+
+bs-dropdown .dropdown-toggle:hover,
+bs-dropdown .dropdown-toggle:focus,
+bs-dropdown .dropdown-toggle:active {
+    color: #FFF;
+    background-color: #3b6ea8;
+    border-color: #2F5682;
+}
+
+bs-dropdown .dropdown-menu {
+    min-width: 0px;
 }
 
 /* Other */

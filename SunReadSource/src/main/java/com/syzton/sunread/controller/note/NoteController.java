@@ -112,4 +112,19 @@ public class NoteController extends BaseController {
 
         return new PageResource<>(notePage, "page", "size");
     }
+    
+    @RequestMapping(value = "/api/notes/search", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Note> quickSearch(@RequestParam("page") int page,
+										  @RequestParam("size") int size,
+										  @RequestParam("sortBy") String sortBy,
+										  @RequestParam("direction") String direction,
+										  @RequestParam("searchTerm") String searchTerm) {
+    	
+    	Pageable pageable = getPageable(page, size, sortBy, direction);
+		
+        Page<Note> notePage = service.findBySearchTerm( pageable, searchTerm );
+
+        return new PageResource<>(notePage, "page", "size");
+    }
 }

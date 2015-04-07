@@ -1,3 +1,9 @@
+.page-body {
+    border-radius: 5px;
+    border: 1px #DDD solid;
+    background-color: #FFFFFF;
+}
+
 .page-body-top {
     margin-top: 25px;
 }
@@ -19,4 +25,12 @@
 /*modal related*/
 .modal-dialog {
     width: 58%;
+}
+
+.modal-content {
+     background-color: #F5F5F5;
+}
+
+.modal-content .btn-green {
+     background: none;
 }
