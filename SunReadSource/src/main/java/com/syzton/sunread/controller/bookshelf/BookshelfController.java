@@ -31,12 +31,12 @@ public class BookshelfController {
         this.service = service;
     }
     
-    @RequestMapping(value = "/bookshelf", method = RequestMethod.POST)
+    @RequestMapping(value = "/student/{studentId}/bookshelf", method = RequestMethod.POST)
     @ResponseBody
-    public BookshelfDTO add(@Valid @RequestBody BookshelfDTO dto) {
+    public BookshelfDTO add(@Valid @RequestBody BookshelfDTO dto,@PathVariable("studentId") Long studentId) {
         LOGGER.debug("Adding a new book entry with information: {}", dto);
 
-        Bookshelf added = service.add(dto);
+        Bookshelf added = service.add(dto,studentId);
 
         LOGGER.debug("Added a book entry with information: {}", added);
 

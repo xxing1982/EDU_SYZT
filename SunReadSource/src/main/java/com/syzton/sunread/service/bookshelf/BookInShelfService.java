@@ -60,5 +60,7 @@ public interface BookInShelfService {
      * @throws BookInShelfNotFoundException    If no bookshelf entry is found with the given id.
      */
     public BookInShelf update(BookInShelfDTO updated,long id);
+    
+    
 
 }

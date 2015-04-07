@@ -10,6 +10,8 @@ public class SemesterDTO {
 	
 	private long id;
 	
+	private String semester;
+	
 	private String description;
 	
 	@NotNull
@@ -24,6 +26,15 @@ public class SemesterDTO {
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public String getSemester() {
+		return semester;
+	}
+
+	public void setSemester(String semester) {
+		this.semester = semester;
 	}
 
 	public String getDescription() {

@@ -1,8 +1,12 @@
 package com.syzton.sunread.dto.bookshelf;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 
+import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
 
 
@@ -20,7 +24,9 @@ public class BookshelfDTO {
     
     private Long modification_time;
     
-    private Long owner;
+    private Long studentId;
+    
+    private String username;
     
     private int unreadMust;
     
@@ -30,7 +36,7 @@ public class BookshelfDTO {
     
     private int readSelect;
    
-//    private Collection<BookInShelf> booksInShelf ;
+    private Set<BookInShelf> booksInShelf = new HashSet<BookInShelf> () ;
 //    
 //    private Collection<BookShelfOperation> bookShelfOperations;
     
@@ -104,20 +110,20 @@ public class BookshelfDTO {
     
 
     
-    public Long getOwner() {
-		return owner;
+    public Long getStudentId() {
+		return studentId;
 	}
-    public void setOwner(Long owner) {
-		this.owner = owner;
+    public void setStudentId(Long owner) {
+		this.studentId = owner;
 	}
     
-//    public Collection<BookInShelf> getBooksInShelf() {
-//        return booksInShelf;
-//    }
-//
-//    public void setBooksInShelf(Collection<BookInShelf> booksInShelf) {
-//        this.booksInShelf = booksInShelf;
-//    }
+    public Set<BookInShelf> getBooksInShelf() {
+        return booksInShelf;
+    }
+
+    public void setBooksInShelf(Set<BookInShelf> booksInShelf) {
+        this.booksInShelf = booksInShelf;
+    }
 //   
 //    public Collection<BookShelfOperation> getBookShelfOperations() {
 //        return bookShelfOperations;
@@ -132,4 +138,12 @@ public class BookshelfDTO {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

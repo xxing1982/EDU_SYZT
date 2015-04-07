@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
+import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.bookshelf.BookInShelfRepository;
 import com.syzton.sunread.repository.bookshelf.BookshelfRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
 
 /**
  * @author Morgan-Leon
@@ -28,18 +31,49 @@ public class BookshelfRepositoryService implements BookshelfService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookshelfRepositoryService.class);
     private BookshelfRepository repository;
     private BookInShelfRepository bookInShelfRepository;
-
+    private StudentRepository studentRepository;
+	private Student student;
+	private Bookshelf bookshelf;
     @Autowired
-    public BookshelfRepositoryService(BookshelfRepository repository,BookInShelfRepository bookInShelfRepository) {
+    public BookshelfRepositoryService(BookshelfRepository repository,BookInShelfRepository bookInShelfRepository
+    		,StudentRepository studentRepository) {
         this.repository = repository;
         this.bookInShelfRepository = bookInShelfRepository;
+        this.studentRepository = studentRepository;
     }
     
 	@Override
-	public Bookshelf add(BookshelfDTO added) {
-		Bookshelf bookshelf = Bookshelf.getBuilder(added.getOwner())
+	public Bookshelf add(BookshelfDTO added,Long userId) {
+		student = studentRepository.findOne(userId);
+		bookshelf = repository.findOne(userId);
+		if (student == null) {
+			throw new NotFoundException("Not Found Student with id: "+student.getId());
+		}
+		if(bookshelf != null){
+			throw new DuplicateException("Bookshelf with id: "+bookshelf.getId()+" is already exits..");
+		}
+		bookshelf = Bookshelf.getBuilder(student.getUsername(),student.getId())
 				.description(added.getDescription()).build();			
 		return repository.save(bookshelf);
+	}
+	
+	@Override
+	public Boolean addBookshelfByStudent(Student student) {
+		
+		Bookshelf bookshelf = Bookshelf.getBuilder(student.getUsername(),student.getId())
+				.build();			
+		repository.save(bookshelf);
+		return true;
+	}
+	
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+	@Override
+	public Boolean deleteBookshelfByStudent(Student student) {
+    	
+    	bookshelf = repository.findOne(student.getId());
+    	
+		repository.delete(bookshelf);
+		return true;
 	}
 	
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
@@ -71,13 +105,24 @@ public class BookshelfRepositoryService implements BookshelfService {
 	public Bookshelf update(BookshelfDTO updated){
         LOGGER.debug("Updates the information of a bookshelf entry.: {}", updated);
 
-        Bookshelf bookshelfModel = Bookshelf.getBuilder(updated.getOwner())
+        Bookshelf bookshelfModel = Bookshelf.getBuilder(updated.getUsername(),updated.getId())
                 .description(updated.getDescription())
                 .build();
     	
 		return repository.save(bookshelfModel);
 	}
-
+    
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+	@Override
+	public Boolean updateBookshelfByStudent(Student student) {
+    	
+    	bookshelf = repository.findOne(student.getId());
+		repository.delete(bookshelf);
+		Bookshelf bookshelf = Bookshelf.getBuilder(student.getUsername(),student.getId())
+				.build();	
+		repository.saveAndFlush(bookshelf);
+		return true;
+	}
 
 
 

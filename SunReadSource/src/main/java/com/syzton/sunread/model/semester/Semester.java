@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
 
@@ -21,6 +20,8 @@ import com.syzton.sunread.util.DateSerializer;
 public class Semester extends AbstractEntity{
 	
     public static final int MAX_LENGTH_DESCRIPTION = 500;
+    
+    private String semester;
     
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
@@ -38,8 +39,19 @@ public class Semester extends AbstractEntity{
     public Semester() {
 
     }
+    
+    
+    public String getSemester() {
+		return semester;
+	}
 
-    public String getDescription() {
+
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+
+
+	public String getDescription() {
         return description;
     }
     
