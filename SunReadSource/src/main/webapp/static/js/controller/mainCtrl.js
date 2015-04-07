@@ -24,10 +24,16 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
         //todo
         //目标完成率
       })
-
     //note
+    Note.get({by: "users", id: $rootScope.id,  page: 0, size: 4, direction: "DESC", sortBy: "creationTime"}, 
+      function(data){
+        $scope.notes = data;
+      })
+
+    //hot note
     Note.get({page:0, size: 3, sortBy: 'commentCount', direction: 'DESC'}, function(data){
-      $scope.hotNotes = data.content;   
+      $scope.hotNotes = data.content;
+        console.log(data);
     })
 
 
