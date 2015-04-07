@@ -26,3 +26,11 @@
 .modal-dialog {
     width: 58%;
 }
+
+.modal-content {
+     background-color: #F5F5F5;
+}
+
+.modal-content .btn-green {
+     background: none;
+}

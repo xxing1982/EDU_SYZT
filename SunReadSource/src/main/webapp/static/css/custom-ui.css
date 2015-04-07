@@ -93,13 +93,16 @@ bs-dropdown, bs-dropdown .btn-group {
 
 bs-dropdown .button-label {
     width: 70%;
-    width: -webkit-calc(100% - 34px);
-    width: -moz-calc(100% - 34px);
-    width: calc(100% - 34px);
+    width: -webkit-calc(100% - 26px);
+    width: -moz-calc(100% - 26px);
+    width: calc(100% - 26px);
     color: #2F5682;
     background: none;
     border-color: #2F5682;
+    padding-left: 0;
+    padding-right: 0;
 }
+
 bs-dropdown .dropdown-toggle {
     color: #FFF;
     background-color: #2F5682;
