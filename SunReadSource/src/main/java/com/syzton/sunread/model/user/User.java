@@ -92,7 +92,7 @@ public class User extends AbstractEntity implements UserDetails{
     private long expireTime;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.valid;
 
     @Enumerated(EnumType.STRING)
     private GenderType gender = GenderType.male;

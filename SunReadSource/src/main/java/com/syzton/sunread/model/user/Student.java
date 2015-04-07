@@ -26,7 +26,7 @@ public class Student extends User{
     @Column(length = MAX_LENGTH_IDENTITY)
     private String identity;
 
-    private int level ;
+
 
     @NotNull
     private long schoolId;
@@ -36,8 +36,10 @@ public class Student extends User{
     private long gradeId;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
+    @JoinColumn(name = "task_id")
     private Task task = new Task();
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
+    @JoinColumn(name = "user_statistic_id")
     private UserStatistic statistic = new UserStatistic();
 
 
@@ -49,9 +51,6 @@ public class Student extends User{
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime enrollmentDate; // for insert DB
 
-    @Column(nullable = true)
-    private Long classId;
-
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private Set<CoinHistory> coinHistorySet = new HashSet<>();
 
@@ -62,13 +61,6 @@ public class Student extends User{
         this.enrollmentDate = new DateTime(this.enrollmentTime);
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
     public String getIdentity() {
         return identity;
@@ -94,14 +86,6 @@ public class Student extends User{
 
     public void setCoinHistorySet(Set<CoinHistory> coinHistorySet) {
         this.coinHistorySet = coinHistorySet;
-    }
-
-    public Long getClassId() {
-        return classId;
-    }
-
-    public void setClassId(Long classId) {
-        this.classId = classId;
     }
 
     public Task getTask() {

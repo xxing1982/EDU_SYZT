@@ -86,7 +86,7 @@ public class BookStatistic extends AbstractEntity{
 
     public void increaseHots()
     {
-        this.hots = this.hots++;
+        this.hots = ++this.hots;
     }
 
     public int getRecommends() {
@@ -95,7 +95,7 @@ public class BookStatistic extends AbstractEntity{
 
     public void increaseRecommends()
     {
-        this.recommends = this.recommends++;
+        this.recommends = ++this.recommends;
     }
 
     public int getNotes() {
@@ -104,7 +104,7 @@ public class BookStatistic extends AbstractEntity{
 
     public void increaseNotes()
     {
-        this.notes = this.notes++;
+        this.notes = ++this.notes;
     }
 
     public int getReadNums() {
@@ -112,12 +112,9 @@ public class BookStatistic extends AbstractEntity{
     }
 
     public void increaseReadNums() {
-        this.readNums = this.readNums++;
+        this.readNums = ++this.readNums;
     }
 
-    public void setHots(int hots) {
-        this.hots = hots;
-    }
 
     public void setRecommends(int recommends) {
         this.recommends = recommends;
@@ -127,7 +124,4 @@ public class BookStatistic extends AbstractEntity{
         this.notes = notes;
     }
 
-    public void setReadNums (int reads) {
-        this.readNums = reads;
-    }
 }

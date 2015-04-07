@@ -16,44 +16,51 @@ public class UserStatistic extends AbstractEntity{
     //total write note number
     private int notes;
     // total add bookShelf number
-    private int reads;
+    private int readNum;
     //total testPassed
     private int testPasses;
 
-    public int getPoint() {
-        return point;
+    private int level ;
+
+    public int getLevel() {
+        return level;
     }
 
-    public void increaseHots()
-    {
-        this.point = this.point++;
+    public void increaseLevel() {
+        this.level = ++this.level;
+    }
+
+    public int getPoint() {
+        return point;
     }
 
     public int getCoin() {
         return coin;
     }
 
-    public void increaseRecommends()
-    {
-        this.coin = this.coin++;
-    }
-
     public int getNotes() {
         return notes;
     }
 
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
     public void increaseNotes()
     {
-        this.notes = this.notes++;
+        this.notes = ++this.notes;
     }
 
-    public int getReads() {
-        return reads;
+    public int getReadNum() {
+        return readNum;
     }
 
-    public void increaseReads()
-    {
-        this.reads = this.reads++;
+    public void increaseReadNum() {
+        this.readNum = ++this.readNum;
     }
 
     public int getTestPasses() {
@@ -61,6 +68,6 @@ public class UserStatistic extends AbstractEntity{
     }
 
     public void increaseTestPasses() {
-        this.testPasses = this.testPasses++;
+        this.testPasses = ++this.testPasses;
     }
 }
