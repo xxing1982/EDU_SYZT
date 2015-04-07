@@ -3,13 +3,13 @@ package com.syzton.sunread.model.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
-import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.util.DateSerializer;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,16 +26,21 @@ public class Student extends User{
     @Column(length = MAX_LENGTH_IDENTITY)
     private String identity;
 
-    private int level ;
 
-    private int coin;
 
-    private int point;
-
-    private int bookNum;
+    @NotNull
+    private long schoolId;
+    @NotNull
+    private long clazzId;
+    @NotNull
+    private long gradeId;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
+    @JoinColumn(name = "task_id")
     private Task task = new Task();
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
+    @JoinColumn(name = "user_statistic_id")
+    private UserStatistic statistic = new UserStatistic();
 
 
     @Transient
@@ -45,9 +50,6 @@ public class Student extends User{
     @JsonSerialize(using = DateSerializer.class)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime enrollmentDate; // for insert DB
-
-    @Column(nullable = true)
-    private Long classId;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private Set<CoinHistory> coinHistorySet = new HashSet<>();
@@ -59,29 +61,6 @@ public class Student extends User{
         this.enrollmentDate = new DateTime(this.enrollmentTime);
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getCoin() {
-        return coin;
-    }
-
-    public void setCoin(int coin) {
-        this.coin = coin;
-    }
-
-    public int getPoint() {
-        return point;
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
-    }
 
     public String getIdentity() {
         return identity;
@@ -109,28 +88,45 @@ public class Student extends User{
         this.coinHistorySet = coinHistorySet;
     }
 
-    public Long getClassId() {
-        return classId;
-    }
-
-    public void setClassId(Long classId) {
-        this.classId = classId;
-    }
-
-    public int getBookNum() {
-        return bookNum;
-    }
-
-    public void setBookNum(int bookNum) {
-        this.bookNum = bookNum;
-    }
-
     public Task getTask() {
         return task;
     }
 
-    public void setTask(Task task) {
+    public void setTask(Task task)   {
         this.task = task;
+    }
+
+    public long getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(long schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public long getClazzId() {
+        return clazzId;
+    }
+
+    public void setClazzId(long clazzId) {
+        this.clazzId = clazzId;
+    }
+
+    public long getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(long gradeId)
+    {
+        this.gradeId = gradeId;
+    }
+
+    public UserStatistic getStatistic() {
+        return statistic;
+    }
+
+    public void setStatistic(UserStatistic statistic) {
+        this.statistic = statistic;
     }
 }
 

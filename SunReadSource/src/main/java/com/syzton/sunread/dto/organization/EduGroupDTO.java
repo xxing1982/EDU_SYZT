@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import com.syzton.sunread.model.organization.EduGroup;
 
 public class EduGroupDTO {
+	
 	private Long id;
     
 	@Length(max = EduGroup.MAX_LENGTH_DESCRIPTION)

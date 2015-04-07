@@ -120,6 +120,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         Student student = studentRepository.findOne(id);
         if(student == null)
             throw new NotFoundException("Student id ="+id+" not found..");
+
         return student;
     }
 

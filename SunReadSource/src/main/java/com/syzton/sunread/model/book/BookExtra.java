@@ -30,6 +30,9 @@ public class BookExtra extends AbstractEntity{
 
     private int ageRange;
 
+    @Transient
+    private int pointRange;
+
 //    @JsonIgnore
 //    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "book")
 //    private List<Recommendation> recommendations = new ArrayList<>();
@@ -108,19 +111,11 @@ public class BookExtra extends AbstractEntity{
         this.resource = resource;
     }
 
-//    public List<Recommendation> getRecommendations() {
-//        return recommendations;
-//    }
+    public int getPointRange() {
+        return pointRange;
+    }
 
-//    public void setRecommendations(List<Recommendation> recommendations) {
-//        this.recommendations = recommendations;
-//    }
-
-//    public Set<Category> getCategories() {
-//        return categories;
-//    }
-//
-//    public void setCategories(Set<Category> categories) {
-//        this.categories = categories;
-//    }
+    public void setPointRange(int pointRange) {
+        this.pointRange = pointRange;
+    }
 }

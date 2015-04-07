@@ -54,9 +54,11 @@
                             <div class="col-md-4 select-group">
                                 <div class="col-md-5 row select-label">校长：</div>
                                 <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
+                                    <bs-dropdown data-menu-type="button" 
+                                        select-val="selected_status = selectedVal"
+                                        preselected-item="selected_status" 
+                                        data-dropdown-data="statuses">
+                                    </bs-dropdown>
                                 </div>
                             </div>
                             </div> 

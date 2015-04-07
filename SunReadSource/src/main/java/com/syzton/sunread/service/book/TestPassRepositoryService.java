@@ -51,16 +51,18 @@ public class TestPassRepositoryService implements TestPassService {
 
         testPassRepository.save(testPass);
 
+        book.getStatistic().increaseHots();
+
         long weekHot = testPassRepository.count(countTPDuringWeekly(bookId));
 
-        book.getHot().setWeeklyHot(weekHot);
+        book.getStatistic().setWeeklyHot(weekHot);
 
         long monthHot = testPassRepository.count(countTPDuringMonthly(bookId));
 
-        book.getHot().setMonthlyHot(monthHot);
+        book.getStatistic().setMonthlyHot(monthHot);
 
         long yearHot = testPassRepository.count(countTPDuringYearly(bookId));
-        book.getHot().setYearlyHot(yearHot);
+        book.getStatistic().setYearlyHot(yearHot);
         bookRepository.save(book);
 
 

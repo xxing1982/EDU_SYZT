@@ -176,7 +176,6 @@ public class UserController extends BaseController{
 
 
 
-
     private OAuth2AccessToken createTokenForNewUser(String username, String password, String clientId,String role) {
         String hashedPassword = passwordEncoder.encode(password);
         UsernamePasswordAuthenticationToken userAuthentication = new UsernamePasswordAuthenticationToken(

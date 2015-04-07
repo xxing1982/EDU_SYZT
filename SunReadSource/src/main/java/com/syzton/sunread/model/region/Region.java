@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.model.organization.School;
+import com.syzton.sunread.model.organization.Compus;
 import com.syzton.sunread.util.DateSerializer;
 
 /**
@@ -52,11 +52,15 @@ public class Region extends AbstractEntity{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="region")
     @Basic(fetch = FetchType.LAZY)
-    private Set<School> schools = new HashSet<School>();
+    private Set<Compus> compus= new HashSet<Compus>();
     
     public Region () {
 		
 	}
+    
+    public String generateAddress(){
+    	return this.province + this.city + this.district;
+    }
 
 	public String getDescription() {
 		return description;
@@ -94,12 +98,12 @@ public class Region extends AbstractEntity{
 		this.district = district;
 	}
 	
-    public Set<School> getSchools() {
-        return schools;
+    public Set<Compus> getCompus() {
+        return compus;
     }
 
-    public void setSchools(Set<School> schools) {
-        this.schools = schools;
+    public void setSchools(Set<Compus> compus) {
+        this.compus = compus;
     }
     
     

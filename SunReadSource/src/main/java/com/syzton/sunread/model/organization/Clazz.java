@@ -23,6 +23,9 @@ public class Clazz extends  AbstractEntity{
     
     @Column(name ="name", nullable = false, length = MAX_LENGTH_NAME)
     private String name; 
+    
+    @Column(name = "grade", nullable = false)
+    private int grade = 0;
 
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
@@ -30,10 +33,10 @@ public class Clazz extends  AbstractEntity{
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
-
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH },optional = false)
-    @JoinColumn(name = "grade")
-    private Grade grade;
+  
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
+    @JoinColumn(name = "compus")
+    private Compus compus;
 
     public Clazz() {
     }
@@ -46,8 +49,8 @@ public class Clazz extends  AbstractEntity{
 		return name;
 	}
 	
-    public static Builder getBuilder(String name, Grade grade) {
-    	return new Builder(name, grade);	
+    public static Builder getBuilder(String name, int grade, Compus compus) {
+    	return new Builder(name, grade, compus);	
 	}
     
     public String getDescription() {
@@ -55,12 +58,8 @@ public class Clazz extends  AbstractEntity{
 	}
 
 
-    public Grade getGrade() {
+    public int getGrade() {
         return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
     }
 
     @PrePersist
@@ -90,16 +89,12 @@ public class Clazz extends  AbstractEntity{
         public Clazz build() {
             return built;
         }
-        
-        public Builder(String name) {
-            built = new Clazz();
-            built.name = name;
-        }
 
-        public Builder(String name,Grade grade) {
+        public Builder(String name,int grade, Compus compus) {
             built = new Clazz();
             built.name = name;
             built.grade = grade;
+            built.compus = compus;
         }
 
 		public Builder description(String description) {
@@ -113,6 +108,9 @@ public class Clazz extends  AbstractEntity{
         ClazzDTO dto = new ClazzDTO();
         dto.setId(model.id);
         dto.setName(model.getName());
+        dto.setGrade(model.grade);
+        //dto.setCompusId(model.compus.getId());
+        dto.setCompusName(model.compus.getName());
         dto.setDescription(model.getDescription());
         return dto;
     }

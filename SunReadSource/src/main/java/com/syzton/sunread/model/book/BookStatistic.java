@@ -8,7 +8,15 @@ import javax.persistence.Entity;
  * Created by jerry on 3/30/15.
  */
 @Entity
-public class BookHot extends AbstractEntity{
+public class BookStatistic extends AbstractEntity{
+    //total test pass number
+    private int hots;
+    //total recommend number
+    private int recommends;
+    //total write note number
+    private int notes;
+    // total add bookShelf number
+    private int readNums;
 
     private long weeklyRecommend;
 
@@ -67,7 +75,53 @@ public class BookHot extends AbstractEntity{
         return yearlyRecommend;
     }
 
-    public void setYearlyRecommend(long yearlyRecommend) {
+    public void setYearlyRecommend(long yearlyRecommend)
+    {
         this.yearlyRecommend = yearlyRecommend;
     }
+
+    public int getHots() {
+        return hots;
+    }
+
+    public void increaseHots()
+    {
+        this.hots = ++this.hots;
+    }
+
+    public int getRecommends() {
+        return recommends;
+    }
+
+    public void increaseRecommends()
+    {
+        this.recommends = ++this.recommends;
+    }
+
+    public int getNotes() {
+        return notes;
+    }
+
+    public void increaseNotes()
+    {
+        this.notes = ++this.notes;
+    }
+
+    public int getReadNums() {
+        return readNums;
+    }
+
+    public void increaseReadNums() {
+        this.readNums = ++this.readNums;
+    }
+
+
+    public void setRecommends(int recommends) {
+        this.recommends = recommends;
+    }
+
+    public void setNotes(int notes) {
+        this.notes = notes;
+    }
+
 }

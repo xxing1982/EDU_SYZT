@@ -11,6 +11,11 @@ import com.mysema.query.types.Predicate;
  */
 public class BookPredicates {
 
+    private static final int POINT_LEVET_0 = 0;
+    private static final int POINT_LEVET_5 = 5;
+    private static final int POINT_LEVET_10 = 10;
+    private static final int POINT_LEVET_20 = 20;
+
     public static Predicate quickSearchContains(String searchTerm) {
         QBook book = QBook.book;
         return book.status.eq(Book.Status.valid).and(book.name.containsIgnoreCase(searchTerm)
@@ -52,6 +57,23 @@ public class BookPredicates {
 
         if(condition.getAgeRange()!=0){
             builder.and(book.extra.ageRange.eq(condition.getAgeRange()));
+        }
+        if(condition.getPointRange()!=0){
+            switch (condition.getPointRange()){
+                case 1:
+                    builder.and(book.point.goe(POINT_LEVET_0).and(book.point.loe(POINT_LEVET_5)));
+                    break;
+                case 2:
+                    builder.and(book.point.gt(POINT_LEVET_5).and(book.point.loe(POINT_LEVET_10)));
+                    break;
+                case 3:
+                    builder.and(book.point.gt(POINT_LEVET_10).and(book.point.loe(POINT_LEVET_20)));
+                    break;
+                case 4:
+                    builder.and(book.point.gt(POINT_LEVET_20));
+                    break;
+            }
+
         }
 
 

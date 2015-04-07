@@ -2,7 +2,6 @@ package com.syzton.sunread.service.organization;
 
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
-
 import javassist.NotFoundException;
 
 import org.springframework.data.domain.Page;
@@ -20,6 +19,6 @@ public interface ClazzService {
     public Clazz update(ClazzDTO updated) throws NotFoundException;
 
     public Clazz findById(Long id) throws NotFoundException;
-
+  
     Page<Clazz> findAll(Pageable pageable) throws NotFoundException;
 }
