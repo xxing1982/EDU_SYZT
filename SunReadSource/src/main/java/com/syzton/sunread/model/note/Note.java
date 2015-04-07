@@ -79,9 +79,9 @@ public class Note extends AbstractEntity{
 		return user;
 	}
 	
-	public String getBook() {
-		return book.getName();
-	}
+//	public String getBook() {
+//		return book.getName();
+//	}
     
     public void update(String title, String content, String image) {
         this.title = title;

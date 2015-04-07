@@ -1,6 +1,7 @@
 <div id="personalCenter-page" class="container">
     <div class="row">
-    <div class="page-body page-body-top personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
+    <div class="page-body page-body-top personalProfile-body col-md-8 col-md-offset-2">
+    <div class="col-md-12">
         
         <!-- Avatar -->
         <div class="title col-md-12"><h4>个人中心</h4></div>
@@ -23,86 +24,94 @@
         </div>
         
         <!-- Basic information -->
-        <div class="title col-md-12 buttom-separator">
-            <div class="row">
-                <div class="col-md-11"><h4>基本信息</h4></div>
-                <div class="col-md-1 text-right"><a class="title-link">编辑</a></div>
+        <div class="title row buttom-separator">
+            <div class="col-md-11"><h4>基本信息</h4></div>
+        </div>
+    
+        <div class="col-md-12">
+        <div class="row" ng-repeat="n in [2,3,4,5,6]">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>账号：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                        <h4>张晓晨</h4>
+<!--                <input type="text" class="form-control dark-blue-2" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">-->
             </div>
         </div>
-
-        <div class="col-md-2 text-right">
-            <div class="row"><h4>姓名：</h4></div>
-            <div class="row"><h4>性别：</h4></div>
-            <div class="row"><h4>出生日期：</h4></div>
-            <div class="row"><h4>学校：</h4></div>
-            <div class="row"><h4>班级：</h4></div>
         </div>
-        
-        <div class="col-md-10 text-left">
-            <div class="col-md-12">
-                <div class="row"><h4>张晓晨</h4></div>
-                <div class="row"><h4>男</h4></div>
-                <div class="row"><h4>2003年10月20日</h4></div>
-                <div class="row"><h4>红英</h4></div>
-                <div class="row"><h4>三年级04班</h4></div>
-            </div>
-        </div>
-        
         <!-- Place holder -->
         <div class="row title"/>
+        
+        <!-- Personal information -->
+        <div class="title row buttom-separator">
+            <div class="col-md-10"><h4>个人资料</h4></div>
+            <div class="col-md-2 text-right">
+                <div class="row">
+                    <a class="title-link" ng-show="!editable" ng-click="toggleEdit()">编辑</a>
+                    <a class="title-link" ng-show="editable" ng-click="toggleEdit()">取消</a>
+                    <a class="title-link" ng-show="editable" ng-click="toggleEdit()">保存</a>
+                </div>
+            </div>
+        </div>
     
-        <!-- Details information -->
-        <div class="title col-md-12 buttom-separator">
-            <div class="row">
-                <div class="col-md-11"><h4>个人资料</h4></div>
-                <div class="col-md-1 text-right"><a class="title-link">编辑</a></div>
+        <div class="col-md-12">
+        <div class="row" ng-repeat="n in [2,3,4,5,6]">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>账号：</h4></div>
             </div>
-        </div>
-
-        <div class="col-md-2 text-right">
-            <div class="row"><h4>昵称：</h4></div>
-            <div class="row"><h4>QQ：</h4></div>
-            <div class="row"><h4>微信：</h4></div>
-            <div class="row"><h4>邮箱：</h4></div>
-            <div class="row"><h4>手机：</h4></div>
-        </div>
-        
-        <div class="col-md-10 text-left">
-            <div class="col-md-12">
-                <div class="row"><h4>小晨</h4></div>
-                <div class="row"><h4>123456</h4></div>
-                <div class="row"><h4>xiaochen</h4></div>
-                <div class="row"><h4>xiaochen@163.com</h4></div>
-                <div class="row"><h4>1888888888888</h4></div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!editable" >张晓晨</h4>
+                <input ng-show="editable" type="text" class="form-control dark-blue-2 theme-font" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">
             </div>
         </div>
         
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>账号：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                        <h4>张晓晨</h4>
+<!--                <input type="text" class="form-control dark-blue-2" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">-->
+            </div>
+        </div>
+        </div>
         <!-- Place holder -->
         <div class="row title"/>
         
         <!-- Security setting -->
-        <div class="title col-md-12 buttom-separator">
-            <div class="row">
-                <div class="col-md-11"><h4>安全设置</h4></div>
-            </div>
+        <div class="title row buttom-separator">
+            <div class="col-md-11"><h4>安全设置</h4></div>
         </div>
+    
+        <div class="col-md-12">
+        <div class="row" ng-repeat="n in [2,3,4,5,6]">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>账号：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+<!--                        <h4>张晓晨</h4>-->
+                <input type="text" class="form-control dark-blue-2 theme-font" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">
+            </div>
+            <div class="col-md-1 text-right"><div class="row"><a class="title-link">编辑</a></div></div>
 
-        <div class="col-md-2 text-right">
-            <div class="row"><h4>账号：</h4></div>
         </div>
         
-        <div class="col-md-10 text-left">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-10"><h4>张晓晨</h4></div>
-                    <div class="col-md-2 text-right"><div class="row"><a class="title-link">编辑</a></div></div>
-                </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>账号：</h4></div>
             </div>
+            <div class="col-md-9 text-left">
+                        <h4>张晓晨</h4>
+<!--                <input type="text" class="form-control dark-blue-2" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">-->
+            </div>
+            <div class="col-md-1 text-right"><div class="row"><a class="title-link">编辑</a></div></div>
+
         </div>
-        
+        </div>
         <!-- Place holder -->
         <div class="row title"/>
-        
+    
+    </div>    
     </div>
     </div>
 </div>
