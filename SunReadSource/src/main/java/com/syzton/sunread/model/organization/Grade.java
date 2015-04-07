@@ -1,6 +1,5 @@
 package com.syzton.sunread.model.organization;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.syzton.sunread.dto.organization.GradeDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 
@@ -15,9 +14,6 @@ import java.util.Set;
 /**
  * Created by Morgan-Leon on 2015/3/16.
  */
-@Entity
-@Table(name="grade")
-@JsonIgnoreProperties
 public class Grade extends AbstractEntity{
 
 
