@@ -549,6 +549,7 @@ a:focus, input:focus
     background-color: #2F5682;
     color: #FFFFFF;
     cursor: pointer;
+    border: none;
 }
 
 .quickSearch .search span:hover, .advancedSearch .search span:hover

@@ -19,7 +19,7 @@ var notesLib = function ($scope, Note, Comment) {
     /*
         Hide all the comments of all notes
     */
-    $scope.Notes = Note.get({page: 0, size: notePageSize, direction: "DESC", sortBy: "id"}, function(){
+    $scope.Notes = Note.get({ page: 0, size: notePageSize, direction: "DESC", sortBy: "id"}, function(){
         var content = $scope.Notes.content;
         for(var i = 0; i < content.length; i++){   
             content[i].showComments = false;
@@ -42,7 +42,7 @@ var notesLib = function ($scope, Note, Comment) {
             $scope.loadingState = stateTexts.loading;
     
             // GET the Notes entity
-            var newPage = Note.get({page: page, size: size, direction: "DESC", sortBy: "id"}, function(){ 
+            var newPage = Note.get({ page: page, size: size, direction: "DESC", sortBy: "id"}, function(){ 
                 if (newPage.lastPage){
                     // Get the last page of the Notes, 
                     // Change the state of the loading state and turn on finished
