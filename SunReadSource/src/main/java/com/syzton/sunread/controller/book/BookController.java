@@ -3,6 +3,7 @@ package com.syzton.sunread.controller.book;
 import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.book.BookExtraDTO;
+import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.BookExtra;
 import com.syzton.sunread.service.book.BookService;
@@ -79,46 +80,45 @@ public class BookController extends BaseController {
 
     @RequestMapping(value = "/books/search", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Book> quickSearch(@RequestParam("searchTerm") String searchTerm,
-                                  @RequestParam("page") int page,
-                                  @RequestParam("size") int size,
-                                  @RequestParam(value = "sortBy", required = false) String sortBy) {
-
+    public PageResource<Book> quickSearch(@RequestParam("searchTerm") String searchTerm,
+                                          @RequestParam("page") int page,
+                                          @RequestParam("size") int size,
+                                          @RequestParam(value = "sortBy", required = false) String sortBy) {
         Pageable pageable = getPageable(page, size, sortBy);
 
         Page<Book> bookPage = bookService.quickSearch(searchTerm, pageable);
 
-        return bookPage;
+        return new PageResource<>(bookPage, "page", "size");
     }
 
     @RequestMapping(value = "/books/conditions", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Book> searchByConditions(
-                                         @RequestParam(value = "level", required = false) String level,
-                                         @RequestParam(value = "testType", required = false) String testType,
-                                         @RequestParam(value = "literature", required = false) String literature,
-                                         @RequestParam(value = "language", required = false) String language,
-                                         @RequestParam(value = "grade", required = false) String grade,
-                                         @RequestParam(value = "category", required = false) String category,
-                                         @RequestParam(value = "resource", required = false) String resource,
-                                         @RequestParam(value = "ageRange", required = false) String ageRange,
-                                         @RequestParam(value = "pointRange", required = false) String pointRange,
-                                         @RequestParam("page") int page,
-                                         @RequestParam("size") int size,
-                                         @RequestParam(value = "sortBy", required = false) String sortBy,
-                                         @RequestParam(value = "direction", required = false) String direction) {
-        int levelNum = level == null? 0: Integer.parseInt(level);
-        int testTypeNum = testType == null? 0: Integer.parseInt(testType);
-        int literatureNum = literature == null? 0: Integer.parseInt(literature);
-        int languageNum = language == null? 0: Integer.parseInt(language);
-        int gradeNum = grade == null? 0: Integer.parseInt(grade);
-        int categoryNum = category == null? 0: Integer.parseInt(category);
-        int resourceNum = resource == null? 0: Integer.parseInt(resource);
-        int ageRangeNum = ageRange == null? 0: Integer.parseInt(ageRange);
-        int pointRangeNum = pointRange == null? 0: Integer.parseInt(pointRange);
+    public PageResource<Book> searchByConditions(
+            @RequestParam(value = "level", required = false) String level,
+            @RequestParam(value = "testType", required = false) String testType,
+            @RequestParam(value = "literature", required = false) String literature,
+            @RequestParam(value = "language", required = false) String language,
+            @RequestParam(value = "grade", required = false) String grade,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "resource", required = false) String resource,
+            @RequestParam(value = "ageRange", required = false) String ageRange,
+            @RequestParam(value = "pointRange", required = false) String pointRange,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam(value = "sortBy", required = false) String sortBy,
+            @RequestParam(value = "direction", required = false) String direction) {
+        int levelNum = level == null ? 0 : Integer.parseInt(level);
+        int testTypeNum = testType == null ? 0 : Integer.parseInt(testType);
+        int literatureNum = literature == null ? 0 : Integer.parseInt(literature);
+        int languageNum = language == null ? 0 : Integer.parseInt(language);
+        int gradeNum = grade == null ? 0 : Integer.parseInt(grade);
+        int categoryNum = category == null ? 0 : Integer.parseInt(category);
+        int resourceNum = resource == null ? 0 : Integer.parseInt(resource);
+        int ageRangeNum = ageRange == null ? 0 : Integer.parseInt(ageRange);
+        int pointRangeNum = pointRange == null ? 0 : Integer.parseInt(pointRange);
 
 
-        Pageable pageable = getPageable(page, size, sortBy,direction);
+        Pageable pageable = getPageable(page, size, sortBy, direction);
         BookExtraDTO condition = new BookExtraDTO();
         condition.setAgeRange(ageRangeNum);
         condition.setLevel(levelNum);
@@ -133,13 +133,13 @@ public class BookController extends BaseController {
 
         Page<Book> bookPage = bookService.searchByCondition(condition, pageable);
 
-        return bookPage;
+        return new PageResource<>(bookPage, "page", "size");
     }
 
 
     @RequestMapping(value = "/books/conditions/weeklyhot", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Book> orderByWeeklyHot(
+    public PageResource<Book> orderByWeeklyHot(
             @RequestParam(value = "level", required = false) String level,
             @RequestParam(value = "testType", required = false) String testType,
             @RequestParam(value = "literature", required = false) String literature,
@@ -151,11 +151,12 @@ public class BookController extends BaseController {
             @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.weeklyHot","desc");
+        return this.searchByConditions(level, testType, literature, language, grade, category, resource, ageRange, pointRange, page, size, "statistic.weeklyHot", "desc");
     }
+
     @RequestMapping(value = "/books/conditions/monthlyhot", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Book> orderByMonthlyHot(
+    public PageResource<Book> orderByMonthlyHot(
             @RequestParam(value = "level", required = false) String level,
             @RequestParam(value = "testType", required = false) String testType,
             @RequestParam(value = "literature", required = false) String literature,
@@ -167,12 +168,12 @@ public class BookController extends BaseController {
             @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.monthlyHot","desc");
+        return this.searchByConditions(level, testType, literature, language, grade, category, resource, ageRange, pointRange, page, size, "statistic.monthlyHot", "desc");
     }
 
     @RequestMapping(value = "/books/conditions/yearlyhot", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Book> orderByYearlyHot(
+    public PageResource<Book> orderByYearlyHot(
             @RequestParam(value = "level", required = false) String level,
             @RequestParam(value = "testType", required = false) String testType,
             @RequestParam(value = "literature", required = false) String literature,
@@ -184,12 +185,12 @@ public class BookController extends BaseController {
             @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.yearlyHot","desc");
+        return this.searchByConditions(level, testType, literature, language, grade, category, resource, ageRange, pointRange, page, size, "statistic.yearlyHot", "desc");
     }
 
     @RequestMapping(value = "/books/conditions/weeklyRecommend", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Book> orderByWeeklyRecommend(
+    public PageResource<Book> orderByWeeklyRecommend(
             @RequestParam(value = "level", required = false) String level,
             @RequestParam(value = "testType", required = false) String testType,
             @RequestParam(value = "literature", required = false) String literature,
@@ -201,11 +202,12 @@ public class BookController extends BaseController {
             @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.weeklyRecommend","desc");
+        return this.searchByConditions(level, testType, literature, language, grade, category, resource, ageRange, pointRange, page, size, "statistic.weeklyRecommend", "desc");
     }
+
     @RequestMapping(value = "/books/conditions/monthlyRecommend", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Book> orderByMonthlyRecommend(
+    public PageResource<Book> orderByMonthlyRecommend(
             @RequestParam(value = "level", required = false) String level,
             @RequestParam(value = "testType", required = false) String testType,
             @RequestParam(value = "literature", required = false) String literature,
@@ -217,12 +219,12 @@ public class BookController extends BaseController {
             @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.monthlyRecommend","desc");
+        return this.searchByConditions(level, testType, literature, language, grade, category, resource, ageRange, pointRange, page, size, "statistic.monthlyRecommend", "desc");
     }
 
     @RequestMapping(value = "/books/conditions/yearlyRecommend", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Book> orderByYearlyRecommend(
+    public PageResource<Book> orderByYearlyRecommend(
             @RequestParam(value = "level", required = false) String level,
             @RequestParam(value = "testType", required = false) String testType,
             @RequestParam(value = "literature", required = false) String literature,
@@ -234,8 +236,9 @@ public class BookController extends BaseController {
             @RequestParam(value = "pointRange", required = false) String pointRange,
             @RequestParam("page") int page,
             @RequestParam("size") int size) {
-        return this.searchByConditions(level,testType,literature,language,grade,category,resource,ageRange,pointRange,page,size,"statistic.yearlyRecommend","desc");
+        return this.searchByConditions(level, testType, literature, language, grade, category, resource, ageRange, pointRange, page, size, "statistic.yearlyRecommend", "desc");
     }
+
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Book findById(@PathVariable("id") Long id) {
@@ -260,9 +263,9 @@ public class BookController extends BaseController {
 
     @RequestMapping(value = "/books/{id}/users/{userId}/recommends", method = RequestMethod.PUT)
     @ResponseBody
-    public void recommend(@PathVariable("id") Long id,@PathVariable("userId") Long userId) {
+    public void recommend(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
 
-        recommendationService.recommend(id,userId);
+        recommendationService.recommend(id, userId);
 
     }
 

@@ -1,7 +1,7 @@
-package com.syzton.sunread.service.messagecenter;
+package com.syzton.sunread.service.message;
 
-import javassist.NotFoundException;
 
+import com.syzton.sunread.exception.common.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.syzton.sunread.model.messagecenter.Message;
+import com.syzton.sunread.model.message.Message;
 import com.syzton.sunread.model.user.User;
-import com.syzton.sunread.repository.messagecenter.MessageCenterRepository;
+import com.syzton.sunread.repository.message.MessageCenterRepository;
 import com.syzton.sunread.repository.user.UserRepository;
 
 @Service
@@ -31,29 +31,45 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 	}
 
 	@Override
-	public Message sendMessage(Message message) {
+	public void sendMessage(long sendUserId,long receiveUseId,String message) {
+
+		this.findUserById(sendUserId);
+
+		this.findUserById(receiveUseId);
+
+		Message send = new Message();
+		send.setMessage(message);
+		send.setSendUserId(sendUserId);
+		send.setReceiveUserId(receiveUseId);
+
+		messageRepository.save(send);
 		
-		Message sended = messageRepository.save(message);
-		
-		return sended;
+	}
+
+	private void findUserById(long userId) {
+		User receiveUser = userRepository.findOne(userId);
+		if(receiveUser == null){
+			throw new NotFoundException("user id = "+userId+ " not found...");
+		}
 	}
 
 	@Transactional(rollbackFor = {NotFoundException.class})
 	@Override
-	public Page<Message> findMessagesBySendUser(Pageable pageable,Long userId) {
+	public Page<Message> findMessagesBySendUser(Pageable pageable,Long sendUserId) {
+
+		this.findUserById(sendUserId);
 		
-		LOGGER.debug("Finding messages entry with sendUser:{}",userId);
-		User sendUser = userRepository.findOne(userId);
-		Page<Message> messagePage = messageRepository.findMessagesBySendUser(pageable,sendUser);
+		Page<Message> messagePage = messageRepository.findBySendUserId(pageable, sendUserId);
 		return messagePage;
 	}
 
 	@Transactional(rollbackFor = {NotFoundException.class})
 	@Override
-	public Page<Message> findMessagesByReceiveUser(Pageable pageable, Long userId) {
+	public Page<Message> findMessagesByReceiveUser(Pageable pageable, Long receiveUserId) {
+
+		this.findUserById(receiveUserId);
 		
-		User receiveUser = userRepository.findOne(userId);
-		Page<Message> messagePage = messageRepository.findMessagesByReceiveUser(pageable,receiveUser);
+		Page<Message> messagePage = messageRepository.findByReceiveUserId(pageable, receiveUserId);
 		
 		return messagePage;
 	}

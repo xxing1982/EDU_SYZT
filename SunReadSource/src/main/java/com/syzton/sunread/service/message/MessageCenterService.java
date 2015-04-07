@@ -1,15 +1,15 @@
-package com.syzton.sunread.service.messagecenter;
+package com.syzton.sunread.service.message;
 
 import javassist.NotFoundException;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.syzton.sunread.model.messagecenter.Message;
+import com.syzton.sunread.model.message.Message;
 
 public interface MessageCenterService {
 
-	public Message sendMessage(Message message);
+	public void sendMessage(long sendUserId,long receiveUserId, String message);
 
 	public Page<Message> findMessagesBySendUser(Pageable pageable, Long userId);
 
