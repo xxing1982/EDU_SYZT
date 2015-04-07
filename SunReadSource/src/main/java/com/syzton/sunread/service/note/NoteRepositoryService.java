@@ -65,8 +65,8 @@ public class NoteRepositoryService implements NoteService {
         LOGGER.debug("Adding a new note entry with information: {}", added);
 
         Book book = bookRepository.findOne(bookId);
-//        book.getStaticstic().increaseNotes();
-//        bookRepository.save(book);
+        book.getStatistic().increaseNotes();
+        bookRepository.save(book);
         Note noteModel = Note.getBuilder(added.getTitle(), added.getContent(), book)
         		.image(added.getImage())
                 .build();

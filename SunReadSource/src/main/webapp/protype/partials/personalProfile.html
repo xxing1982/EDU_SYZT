@@ -4,7 +4,7 @@
     <div class="col-md-12">
         
         <!-- Avatar -->
-        <div class="title col-md-12"><h4>个人中心</h4></div>
+        <div class="title col-md-12"><h4 class="row">个人中心</h4></div>
         <div class="col-md-4 col-md-offset-4">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 text-center">
-                    <h2>张晓晨</h2>
+                    <h2>{{basicInformation.content.name}}</h2>
                 </div>
             </div>
             <div class="row">
@@ -29,15 +29,46 @@
         </div>
     
         <div class="col-md-12">
-        <div class="row" ng-repeat="n in [2,3,4,5,6]">
+        <div class="row">
             <div class="col-md-2 text-right">
-                <div class="row"><h4>账号：</h4></div>
+                <div class="row"><h4>姓名：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                        <h4>张晓晨</h4>
-<!--                <input type="text" class="form-control dark-blue-2" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">-->
+                <h4>{{basicInformation.content.name}}</h4>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>性别：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4>{{basicInformation.content.gender}}</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>出生日期：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                 <h4>{{basicInformation.content.birthday}}</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>学校：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                 <h4>{{basicInformation.content.school}}</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>班级：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                  <h4>{{basicInformation.content.clazz}}</h4>
+            </div>
+        </div>        
         </div>
         <!-- Place holder -->
         <div class="row title"/>
@@ -47,33 +78,62 @@
             <div class="col-md-10"><h4>个人资料</h4></div>
             <div class="col-md-2 text-right">
                 <div class="row">
-                    <a class="title-link" ng-show="!editable" ng-click="toggleEdit()">编辑</a>
-                    <a class="title-link" ng-show="editable" ng-click="toggleEdit()">取消</a>
-                    <a class="title-link" ng-show="editable" ng-click="toggleEdit()">保存</a>
+                    <a class="title-link" ng-show="!personalInformation.editable" ng-click="toggleEdit(personalInformation, false)">编辑</a>
+                    <a class="title-link" ng-show="personalInformation.editable" ng-click="toggleEdit(personalInformation, false)">取消</a>
+                    <a class="title-link" ng-show="personalInformation.editable" ng-click="toggleEdit(personalInformation, true)">保存</a>
                 </div>
             </div>
         </div>
     
         <div class="col-md-12">
-        <div class="row" ng-repeat="n in [2,3,4,5,6]">
-            <div class="col-md-2 text-right">
-                <div class="row"><h4>账号：</h4></div>
-            </div>
-            <div class="col-md-9 text-left">
-                <h4 ng-show="!editable" >张晓晨</h4>
-                <input ng-show="editable" type="text" class="form-control dark-blue-2 theme-font" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">
-            </div>
-        </div>
-        
         <div class="row">
             <div class="col-md-2 text-right">
-                <div class="row"><h4>账号：</h4></div>
+                <div class="row"><h4>昵称：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                        <h4>张晓晨</h4>
-<!--                <input type="text" class="form-control dark-blue-2" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">-->
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.nickname}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.nickname">
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>QQ：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.qq}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.qq">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>微信：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.wechat}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.wechat">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>邮箱：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.email}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>手机：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable" >{{personalInformation.content.phone}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.phone">
+            </div>
+        </div>
+            
+        
+        
         </div>
         <!-- Place holder -->
         <div class="row title"/>
@@ -84,7 +144,7 @@
         </div>
     
         <div class="col-md-12">
-        <div class="row" ng-repeat="n in [2,3,4,5,6]">
+        <div class="row">
             <div class="col-md-2 text-right">
                 <div class="row"><h4>账号：</h4></div>
             </div>

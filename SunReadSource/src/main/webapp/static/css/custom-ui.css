@@ -125,3 +125,14 @@ bs-dropdown .dropdown-menu {
 .buttom-separator {
     border-bottom: 1px #DDD solid;
 }
+
+/* textarea and input */
+textarea, input, .form-control {
+    border-radius: 0;
+    border: 1px solid #ACBBCD;
+}
+
+.input-group .form-control:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}

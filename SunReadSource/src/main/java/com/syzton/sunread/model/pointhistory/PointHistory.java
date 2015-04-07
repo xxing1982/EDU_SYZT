@@ -2,7 +2,6 @@ package com.syzton.sunread.model.pointhistory;
 
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.user.User;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
@@ -27,7 +26,7 @@ public class PointHistory extends AbstractEntity {
 	
 	public enum PointFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER,FROM_VERIFY_TEST}
 	
-	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = false)
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
 	private User user;
