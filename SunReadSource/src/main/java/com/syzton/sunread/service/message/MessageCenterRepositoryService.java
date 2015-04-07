@@ -2,6 +2,8 @@ package com.syzton.sunread.service.message;
 
 
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.repository.user.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.message.MessageCenterRepository;
 import com.syzton.sunread.repository.user.UserRepository;
 
+import java.util.List;
+
 @Service
 public class MessageCenterRepositoryService implements MessageCenterService {
 
@@ -23,19 +27,22 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 	private MessageCenterRepository messageRepository;
 	
 	private UserRepository userRepository;
+
+	private StudentRepository studentRepository;
 	
 	@Autowired
-	public MessageCenterRepositoryService(MessageCenterRepository repository,UserRepository userRepository) {
+	public MessageCenterRepositoryService(MessageCenterRepository repository,UserRepository userRepository,StudentRepository studentRepository) {
 		this.messageRepository = repository;
 		this.userRepository = userRepository;
+		this.studentRepository = studentRepository;
 	}
 
 	@Override
 	public void sendMessage(long sendUserId,long receiveUseId,String message) {
 
-		this.findUserById(sendUserId);
+		this.checkUser(sendUserId);
 
-		this.findUserById(receiveUseId);
+		this.checkUser(receiveUseId);
 
 		Message send = new Message();
 		send.setMessage(message);
@@ -46,7 +53,24 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 		
 	}
 
-	private void findUserById(long userId) {
+	@Override
+	@Transactional(rollbackFor = NotFoundException.class)
+	public void sendMessageToClass(long sendUserId, long classId, String message) {
+
+		this.checkUser(sendUserId);
+
+		List<Student> students = studentRepository.findByClazzId(classId);
+		if(students == null || students.size()==0){
+			throw new NotFoundException("no student found in class id ="+ classId);
+		}
+
+		for(Student student : students){
+			this.sendMessage(sendUserId,student.getId(),message);
+		}
+
+	}
+
+	private void checkUser(long userId) {
 		User receiveUser = userRepository.findOne(userId);
 		if(receiveUser == null){
 			throw new NotFoundException("user id = "+userId+ " not found...");
@@ -57,7 +81,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 	@Override
 	public Page<Message> findMessagesBySendUser(Pageable pageable,Long sendUserId) {
 
-		this.findUserById(sendUserId);
+		this.checkUser(sendUserId);
 		
 		Page<Message> messagePage = messageRepository.findBySendUserId(pageable, sendUserId);
 		return messagePage;
@@ -67,7 +91,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 	@Override
 	public Page<Message> findMessagesByReceiveUser(Pageable pageable, Long receiveUserId) {
 
-		this.findUserById(receiveUserId);
+		this.checkUser(receiveUserId);
 		
 		Page<Message> messagePage = messageRepository.findByReceiveUserId(pageable, receiveUserId);
 		

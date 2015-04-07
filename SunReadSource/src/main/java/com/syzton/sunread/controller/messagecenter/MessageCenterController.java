@@ -47,6 +47,18 @@ public class MessageCenterController {
 		
 
 	}
+
+	@RequestMapping(value = "/from/{sendUserId}/to/class/{classId}/messages",method = RequestMethod.POST)
+	@ResponseBody
+	public void sendMessageToClass(@PathVariable("sendUserId") long sendUserId,
+							@PathVariable("classId") long classId,
+							@Valid @RequestBody MessageDTO messageDTO) {
+		LOGGER.debug("Sending a new message entry with information:{}",messageDTO);
+
+		messageService.sendMessageToClass(sendUserId,classId,messageDTO.getMessage());
+
+
+	}
 	
 	@RequestMapping(value = "/from/{userId}/messages",method = RequestMethod.GET)
 	@ResponseBody

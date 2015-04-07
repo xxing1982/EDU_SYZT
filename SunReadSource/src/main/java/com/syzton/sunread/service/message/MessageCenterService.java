@@ -11,6 +11,8 @@ public interface MessageCenterService {
 
 	public void sendMessage(long sendUserId,long receiveUserId, String message);
 
+	public void sendMessageToClass(long sendUserId,long classId, String message);
+
 	public Page<Message> findMessagesBySendUser(Pageable pageable, Long userId);
 
 	public Page<Message> findMessagesByReceiveUser(Pageable pageable, Long userId);
