@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
 
 import javax.persistence.*;
@@ -22,8 +21,18 @@ import javax.persistence.*;
 @Entity
 @Table(name="bookshelf")
 @JsonIgnoreProperties(value = {"booksInShelf"})
-public class Bookshelf extends AbstractEntity{
+public class Bookshelf {
 
+    @Id
+    @Column(unique = true, nullable = false)
+    private Long id;
+    
+    @JsonSerialize(using = DateSerializer.class)
+    @Column(name = "creation_time", nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime creationTime;
+
+	
     public static final int MAX_LENGTH_DESCRIPTION = 500;
 
 
@@ -35,7 +44,7 @@ public class Bookshelf extends AbstractEntity{
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
     
-    private long owner;
+    private String username;
 
     @OneToMany( cascade = {CascadeType.MERGE,CascadeType.REFRESH},mappedBy = "bookshelf")
     @Basic(fetch = FetchType.EAGER)
@@ -49,9 +58,30 @@ public class Bookshelf extends AbstractEntity{
     public Bookshelf() {
 
     }
+    
 
-    public static Builder getBuilder(long owner) {
-    	return new Builder(owner);
+    public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public DateTime getCreationTime() {
+		return creationTime;
+	}
+
+
+	public void setCreationTime(DateTime creationTime) {
+		this.creationTime = creationTime;
+	}
+
+
+	public static Builder getBuilder(String username,Long id) {
+    	return new Builder(username, id);
 		
 	}
     //how to deal with  name  duplication ?
@@ -71,10 +101,12 @@ public class Bookshelf extends AbstractEntity{
 		// TODO Auto-generated method stub
 		this.booksInShelf = bookSet;
 	}
-    
-    public Long getOwner() {
-		return owner;
+	
+	public String getUsername() {
+		return username;
 	}
+    
+	
 
     @PrePersist
     public void prePersist() {
@@ -96,9 +128,10 @@ public class Bookshelf extends AbstractEntity{
 
         private Bookshelf built;
 
-        public Builder(long owner){
+        public Builder(String username,Long userId){
         	built = new Bookshelf();
-        	built.owner = owner;       	
+        	built.username = username; 
+        	built.id = userId;
         }
 
 
@@ -120,7 +153,8 @@ public class Bookshelf extends AbstractEntity{
     	dto.setId(model.getId());
     	dto.setCreationTime(model.getCreationTime().getMillis());
     	dto.setModificationTime(model.getModificationTime().getMillis());
-    	dto.setOwner(model.getOwner());
+    	dto.setStudentId(model.getId());
+    	dto.setUsername(model.getUsername());
     	dto.setDescription(model.description);
     	
     	if (model.booksInShelf != null) {
@@ -152,6 +186,8 @@ public class Bookshelf extends AbstractEntity{
     	dto.setReadSelect(readSelect);
     	dto.setUnreadMust(unreadMust);
     	dto.setUnreadSelect(unreadSelect);
+    	dto.setBooksInShelf(model.getBooksInShelf());
+    	
     	
 		return dto;
     }
@@ -164,9 +200,7 @@ public class Bookshelf extends AbstractEntity{
         return ToStringBuilder.reflectionToString(this);
     }
 
-	/**
-	 * @param bookSet
-	 */
+
 
 }
 
