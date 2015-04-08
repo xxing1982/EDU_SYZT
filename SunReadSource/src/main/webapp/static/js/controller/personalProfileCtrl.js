@@ -1,22 +1,24 @@
 //personalProfile.js
 
-ctrls.controller("personalProfileController", ['$rootScope', '$scope', function ($rootScope, $scope) {
+ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', function ($rootScope, $scope, User) {
     
     // Basic information
     $scope.basicInformation = new Object();
-    $scope.basicInformation.content = { name:  $rootScope.student.username,
+    $scope.basicInformation.content = { username: $rootScope.student.username,
                                         gender: $rootScope.student.gender,
                                         birthday: $rootScope.student.birthday,
-                                        school: '学校',
-                                        clazz: '班级' };
+                                        schoolId: $rootScope.student.schoolId,
+                                        clazzId: $rootScope.student.clazzId };
     
     // Personal information
     $scope.personalInformation = new Object();
-    $scope.personalInformation.content = { nickname:  $rootScope.student.nickname,
-                                           qq: "12345",
-                                           wechat: "wechat",
+    $scope.personalInformation.content = { nickname: $rootScope.student.nickname,
+                                           qqId: $rootScope.student.qqId,
+                                           wechatId: $rootScope.student.wechatId,
                                            email: $rootScope.student.email,
-                                           phone: $rootScope.student.phoneNumber };
+                                           phoneNumber: $rootScope.student.phoneNumber };
+    
+    // Turn off the edit of personal infomation
     $scope.personalInformation.editable = false;
     
     
@@ -24,11 +26,20 @@ ctrls.controller("personalProfileController", ['$rootScope', '$scope', function 
     $scope.toggleEdit = function(editObj, save){
         
         if (save) {
+            
+            // Clone entity
             for (var key in editObj.cached){
                 editObj.content[key] = editObj.cached[key];
             }
+            
+            // Update the user entity
+            User.update({id: $rootScope.id}, editObj.cached);
         } else {
-            editObj.cached = new Object();            
+            
+            // Create cached entity
+            editObj.cached = new Object();
+            
+            // Clone entity
             for (var key in editObj.content){
                 editObj.cached[key] = editObj.content[key];
             }

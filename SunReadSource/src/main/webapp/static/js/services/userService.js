@@ -4,10 +4,13 @@ var userServices = angular.module('userServices', ['ngResource', "nourConfig"]);
 userServices.factory('User',['$resource', 'config',
 	function($resource, config){
 		return $resource(config.HOST + "users/:id",{},{
-			query:{
+			query: {
 				method: "get",
 				isArray: true
-			}
+			},
+            update: { 
+                method:'PUT'
+            }
 		});
 	}]);
 
