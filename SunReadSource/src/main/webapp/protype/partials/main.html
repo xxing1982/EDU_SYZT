@@ -22,11 +22,11 @@
                         {{userInfo.class}}
                     </div>
                     <div class="col-md-12 index-head-info-text" >
-                        <span class="label label-success">阅读等级：{{userInfo.level}}</span>
+                        <span class="label label-success">阅读等级：{{userInfo.statistic.level}}</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="label label-warning">财富值：{{userInfo.coin}}</span>
+                        <span class="label label-warning">财富值：{{userInfo.statistic.coin}}</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="label label-danger">阅读金币：{{userInfo.point}}</span>
+                        <span class="label label-danger">阅读金币：{{userInfo.statistic.point}}</span>
                     </div>
                 </div>
             </div>
@@ -106,52 +106,16 @@
             <div class="col-md-2 row-title-more"><a href="#">更多></a></div>
         </div>
         <div class="row row-content">
-            <div class="col-md-3">
+            <div class="col-md-3" ng-repeat="item in notes">
                 <div class="book-bottom-text">
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-8"><img src="../static/img/book.jpg" class="img-responsive"></div>
                         <div class="col-md-1"></div>
                     </div>
-                    <div><h4>小马过河</h4></div>
-                    <div>笔记名：一本很有意义的书</div>
-                    <div>作者：张逸轩  评论：200条</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="book-bottom-text">
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-8"><img src="../static/img/book.jpg" class="img-responsive"></div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <div><h4>小马过河</h4></div>
-                    <div>笔记名：一本很有意义的书</div>
-                    <div>作者：张逸轩  评论：200条</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="book-bottom-text">
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-8"><img src="../static/img/book.jpg" class="img-responsive"></div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <div><h4>小马过河</h4></div>
-                    <div>笔记名：一本很有意义的书</div>
-                    <div>作者：张逸轩  评论：200条</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="book-bottom-text">
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-8"><img src="../static/img/book.jpg" class="img-responsive"></div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <div><h4>小马过河</h4></div>
-                    <div>笔记名：一本很有意义的书</div>
-                    <div>作者：张逸轩  评论：200条</div>
+                    <div><h4>{{item.book}}</h4></div>
+                    <div>笔记名：{{item.afs}}</div>
+                    <div>作者：{{userInfo.username}}  评论：{{item.commentCount}}条</div>
                 </div>
             </div>
         </div>
