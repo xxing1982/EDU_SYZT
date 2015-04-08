@@ -1,30 +1,20 @@
 package com.syzton.sunread.service.user;
 
-import java.util.Collections;
-
+import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.exception.common.AuthenticationException;
-import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
-import com.syzton.sunread.repository.task.TaskRepository;
 import com.syzton.sunread.repository.user.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.provider.ClientDetails;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Request;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -115,6 +105,22 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     }
 
     @Override
+    @Transactional(rollbackFor = NotFoundException.class)
+    public User updateUser(long userId, UserExtraDTO userExtraDTO) {
+        User user = userRepository.findOne(userId);
+        if(user == null){
+            throw new NotFoundException("user id ="+ userId+" not found.." );
+        }
+        user.setEmail(userExtraDTO.getEmail());
+        user.setPhoneNumber(userExtraDTO.getPhoneNumber());
+        user.setQqId(userExtraDTO.getQqId());
+        user.setWechatId(userExtraDTO.getWechatId());
+        user.setNickname(userExtraDTO.getNickname());
+        return userRepository.save(user);
+
+    }
+
+    @Override
     public Student findByStudentId(Long id) {
 
         Student student = studentRepository.findOne(id);
@@ -125,9 +131,10 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     }
 
     @Override
-    public void deleteByStudentId(Long id) {
+    public Student deleteByStudentId(Long id) {
         Student student =  this.findByStudentId(id);
         studentRepository.delete(student);
+        return student;
     }
 
     @Transactional(rollbackFor = NotFoundException.class)
