@@ -116,6 +116,10 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         user.setQqId(userExtraDTO.getQqId());
         user.setWechatId(userExtraDTO.getWechatId());
         user.setNickname(userExtraDTO.getNickname());
+        if(userExtraDTO.getPassword()!=null && !"".equals(userExtraDTO.getPassword())){
+            user.setPassword(encodePassword(userExtraDTO.getPassword().trim()));
+        }
+
         return userRepository.save(user);
 
     }
