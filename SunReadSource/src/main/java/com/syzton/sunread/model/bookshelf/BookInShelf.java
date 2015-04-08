@@ -3,7 +3,6 @@ package com.syzton.sunread.model.bookshelf;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
@@ -38,7 +37,7 @@ public class BookInShelf extends AbstractEntity{
     @Column(name="book_name",nullable = false,length = Book.MAX_LENGTH_NAME)
     private String bookName;
 
-    @Column(name ="isbn",unique = true,nullable = false,length = Book.MAX_LENGTH_ISBN)
+    @Column(name ="isbn",nullable = false,length = Book.MAX_LENGTH_ISBN)
     private String isbn;
     
     @Column(nullable = false,length = Book.MAX_LENGTH_AUTHOR)
@@ -57,9 +56,14 @@ public class BookInShelf extends AbstractEntity{
     private boolean isVerified;
     
     //a bookshelf can`t have the same books
-    @ManyToOne(cascade={CascadeType.ALL},optional=false)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "bookshelf")
     private Bookshelf bookshelf;
+    
+    @JsonSerialize(using = DateSerializer.class)
+    @Column(name = "verified_time", nullable = true)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime verifiedTime;
 
 //    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
 //    @JoinColumn(name = "book")
@@ -128,14 +132,44 @@ public class BookInShelf extends AbstractEntity{
     	return bookshelf;
     }
     
-    public void update(String description,boolean isManditory
+    
+    
+    public DateTime getVerifiedTime() {
+		return verifiedTime;
+	}
+
+	public void update(String description,boolean isManditory
     		,boolean isVerified){
     	this.description = description;
     	this.isMandatory = isManditory;
     	this.isVerified = isVerified;
-    	this.modificationTime = DateTime.now();
-    	
+    	this.modificationTime = DateTime.now(); 	
     }
+	
+	public boolean updateReadState(){
+    	if (!isVerified) {
+    		this.isVerified = true;
+    		this.verifiedTime = DateTime.now();
+    		return true;
+		}
+    	else {
+    		return false;
+		}
+    }
+	
+	public boolean updateByBook(Book book) {
+		if (this.bookId == book.getId()) {
+			this.author = book.getAuthor();
+			this.bookName = book.getName();
+			this.isbn = book.getIsbn();
+			this.pictureUrl = book.getPictureUrl();
+			this.point = book.getPoint();	
+			return true;
+		}
+		else {
+			return false;
+		}	
+	}
 
     //getBook & getBookShelf
 

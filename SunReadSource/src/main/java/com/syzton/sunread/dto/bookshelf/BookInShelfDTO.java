@@ -25,6 +25,8 @@ public class BookInShelfDTO {
     private Long createTime;
     
     private Long modificationTime;
+    
+    private Long verifiedTime;
 
     public Long getCreateTime() {
 		return createTime;
@@ -40,6 +42,14 @@ public class BookInShelfDTO {
 
 	public void setModificationTime(Long modificationTime) {
 		this.modificationTime = modificationTime;
+	}	
+
+	public Long getVerifiedTime() {
+		return verifiedTime;
+	}
+
+	public void setVerifiedTime(Long verifiedTime) {
+		this.verifiedTime = verifiedTime;
 	}
 
 	public BookInShelfDTO() {
