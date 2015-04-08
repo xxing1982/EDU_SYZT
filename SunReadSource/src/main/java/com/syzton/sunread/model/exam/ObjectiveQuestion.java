@@ -28,7 +28,7 @@ public class ObjectiveQuestion extends Question {
 	@Column(name="book_id")
 	private Long bookId;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH,CascadeType.REMOVE})
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL})
 	@JoinColumn(name="question_id")  
 	private Set<Option> options;
 	

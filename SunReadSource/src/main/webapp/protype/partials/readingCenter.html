@@ -1,19 +1,21 @@
-<div id="readingCenter-page">
-	<div class="row" style="margin-right:0">
+<div id="readingCenter-page" class="container-fluid">
+	<div class="row">
 		<div class="col-md-2 sidebar">
-  				<!--<a class="list-group-item" ui-sref='.myBookshelf'>我的书架</a>
-  				<a class="list-group-item" ui-sref='.myNote'>我的笔记</a>
-  				<a class="list-group-item" ui-sref='.myEvaluating'>我的测试</a>-->
-  				<ul class="nav nav-sidebar">
-  					<li><a ui-sref='.myBookshelf'>我的书架</a></li>
-  					<li><a ui-sref='.myNote'>我的笔记</a></li>
-  					<li><a ui-sref='.myEvaluating'>我的测评</a></li>
-  				</ul>
-			</div>
-		</div>
-		<div class="col-md-10 col-md-offset-2">
-			<div ui-view></div>
-		</div>
+            <!--<a class="list-group-item" ui-sref='.myBookshelf'>我的书架</a>
+            <a class="list-group-item" ui-sref='.myNote'>我的笔记</a>
+            <a class="list-group-item" ui-sref='.myEvaluating'>我的测试</a>-->
+            <ul class="nav nav-sidebar">
+                <li><a ui-sref='.myBookshelf'>我的书架</a></li>
+                <li><a ui-sref='.myNote'>我的笔记</a></li>
+                <li><a ui-sref='.myEvaluating'>我的测评</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10 col-md-offset-2">
+            <div class="container">
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
 	ReadingCenterLeftNav();

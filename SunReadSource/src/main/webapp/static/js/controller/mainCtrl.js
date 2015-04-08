@@ -1,13 +1,13 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'paraServices', 'commentServices'
-                                             ,'examServices'
+                                             ,'examServices', 'classServices'
                                              ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices'
                                              ,'weeklyHotServices','monthlyHotServices'
                                              ,'weeklyRecommendServices','monthlyRecommendServices']);
 
-ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", 
-  function ($rootScope, $scope, Student,Bookshelf, Note) {
+ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam",
+  function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam) {
     $rootScope.id = 2;
 
 
@@ -15,6 +15,10 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     Student.get({id : $rootScope.id} ,function(data){
       $scope.userInfo = data;
       $rootScope.student = data;
+      Class.get({id: $scope.userInfo.clazzId}, function(classData){
+        $scope.userInfo.class=classData.name;
+        $scope.userInfo.school=classData.compusName;
+      });
     });    
     
     //bookshelf
@@ -23,17 +27,24 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
         //todo
         //目标完成率
-      })
+    })
+
+    //testing
+    PassExam.get($rootScope.id, function(data){
+      $scope.passExams = data;
+      console.log('testing');
+      console.log(data);
+    })
+
     //note
     Note.get({by: "users", id: $rootScope.id,  page: 0, size: 4, direction: "DESC", sortBy: "creationTime"}, 
       function(data){
-        $scope.notes = data;
+        $scope.notes = data.content;
       })
 
     //hot note
     Note.get({page:0, size: 3, sortBy: 'commentCount', direction: 'DESC'}, function(data){
       $scope.hotNotes = data.content;
-        console.log(data);
     })
 
 

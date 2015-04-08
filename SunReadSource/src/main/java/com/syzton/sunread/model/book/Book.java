@@ -51,7 +51,7 @@ public class Book extends AbstractEntity{
 
     @Column(name="name",nullable = false,length = MAX_LENGTH_NAME)
     private String name;
-
+    
     @Column(name ="isbn",unique = true,nullable = false,length = MAX_LENGTH_ISBN)
     private String isbn;
 
@@ -86,7 +86,7 @@ public class Book extends AbstractEntity{
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.valid;
-
+    
     private String pictureUrl = DEFAULT_PICTURE_URL;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = false)

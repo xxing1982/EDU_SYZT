@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.ExamDTO;
+import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.exception.common.TodayVerifyTimesOverException;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.exception.exam.HaveVerifiedBookException;
@@ -36,6 +37,7 @@ import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.Exam;
+import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
@@ -44,6 +46,7 @@ import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.service.book.BookService;
 import com.syzton.sunread.service.book.TestPassService;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
 import com.syzton.sunread.service.exam.AnswerService;
@@ -51,6 +54,7 @@ import com.syzton.sunread.service.exam.ExamService;
 import com.syzton.sunread.service.exam.ObjectiveAnswerService;
 import com.syzton.sunread.service.exam.SubjectiveAnswerService;
 import com.syzton.sunread.service.pointhistory.PointHistoryService;
+import com.syzton.sunread.service.user.UserService;
 
 @Controller
 @RequestMapping(value = "/api")
@@ -65,13 +69,19 @@ public class ExamController {
     
     private PointHistoryService pointService;
     
+    private UserService userService;
+    
+    private BookService bookService;
+    
      
     @Autowired
-    public ExamController(ExamService service,TestPassService tService,CoinHistoryService coinService,PointHistoryService pointService) {
+    public ExamController(ExamService service,TestPassService tService,CoinHistoryService coinService,PointHistoryService pointService,UserService userService,BookService bookService) {
         this.service = service;
         this.testPassService = tService;
         this.coinService = coinService;
         this.pointService = pointService;
+        this.userService = userService;
+        this.bookService = bookService;
     }
 
     @RequestMapping(value = "/exam", method = RequestMethod.POST)
@@ -193,6 +203,14 @@ public class ExamController {
         	pointHistory.setNum(2);
         	pointHistory.setUser(user);
         	pointService.add(pointHistory);
+        	
+        	Student student = userService.findByStudentId(studentId);
+        	Book book = bookService.findById(bookId);
+        	student.getStatistic().setPoint(2);
+        	student.getStatistic().setCoin(student.getStatistic().getCoin()+book.getCoin());
+        	student.getStatistic().setPoint(student.getStatistic().getPoint()+book.getPoint());
+        	student.getStatistic().increaseTestPasses();
+        	userService.saveStudent(student);
         }
         LOGGER.debug("return a exam entry result with information: {}", exam);
 
@@ -245,6 +263,14 @@ public class ExamController {
         return found;
     }
     
+    @RequestMapping(value = "/verifyexams/pass/{userid}", method = RequestMethod.GET)
+    @ResponseBody
+    public VerifyExamPassDTO findPassVerifyExam(@PathVariable("userid") Long userId) throws NotFoundException {
+    	LOGGER.debug("Finding objective question entry with id: {}" );
+        VerifyExamPassDTO examPassDTO = service.findAllByExamTypeAndPassStatus(userId, ExamType.VERIFY);
+
+        return examPassDTO;
+    }
 
 //    @RequestMapping(value = "/exam/{id}", method = RequestMethod.PUT)
 //    @ResponseBody

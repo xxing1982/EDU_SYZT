@@ -70,12 +70,24 @@ public class QuestionController {
        return added;
     }
     
+    
     @RequestMapping(value = "/capacityquestion", method = RequestMethod.POST)
     @ResponseBody
     public CapacityQuestion add(@Valid @RequestBody CapacityQuestion question) {
         LOGGER.debug("Adding a new to-do entry with information: {}", question);
 
         CapacityQuestion added = objectService.addCapacityQuestion(question);
+        LOGGER.debug("Added a to-do entry with information: {}", added);
+
+       return added;
+    }
+    
+    @RequestMapping(value = "/subjectivequestion", method = RequestMethod.POST)
+    @ResponseBody
+    public SubjectiveQuestion add(@Valid @RequestBody SubjectiveQuestion question) {
+        LOGGER.debug("Adding a new to-do entry with information: {}", question);
+
+        SubjectiveQuestion added = subjectService.add(question);
         LOGGER.debug("Added a to-do entry with information: {}", added);
 
        return added;
@@ -98,6 +110,8 @@ public class QuestionController {
         LOGGER.debug("Added a to-do entry with information: {}", added);
        return added;
     }
+    
+   
     
     
     @RequestMapping(value = "/question/{id}", method = RequestMethod.DELETE)

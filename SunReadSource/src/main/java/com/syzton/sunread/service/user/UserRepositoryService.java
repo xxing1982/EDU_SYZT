@@ -3,7 +3,6 @@ package com.syzton.sunread.service.user;
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.exception.common.AuthenticationException;
 import com.syzton.sunread.exception.common.NotFoundException;
-
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
 import com.syzton.sunread.repository.user.*;
@@ -181,8 +180,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return locateUser(username);
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        return locateUser(userId);
     }
     
     @Override
@@ -224,12 +223,12 @@ public class UserRepositoryService implements UserService,UserDetailsService{
      * @return a User object is guaranteed.
      * @throws AuthenticationException if user not located.
      */
-    private User locateUser(final String username) {
-        notNull(username, "Mandatory argument 'username' missing.");
-        User user = userRepository.findByUsername(username);
+    private User locateUser(final String userId) {
+        notNull(userId, "Mandatory argument 'userId' missing.");
+        User user = userRepository.findByUserId(userId);
         if (user == null) {
-            LOGGER.debug("Credentials [{}] failed to locate a user.", username.toLowerCase());
-            throw new AuthenticationException("User "+username+" didn't exist.");
+            LOGGER.debug("Credentials [{}] failed to locate a user.", userId.toLowerCase());
+            throw new AuthenticationException("User "+userId+" didn't exist.");
         }
         return user;
     }
@@ -269,5 +268,17 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     public void deleteByTeacherId(Long id) {
         teacherRepository.delete(id);
     }
+
+	@Override
+	public Student saveStudent(Student student) {
+		Student stu = studentRepository.save(student);
+		return stu;
+	}
+
+	@Override
+	public User findByUserId(String userId) {
+		User user = userRepository.findByUserId(userId);
+		return user;
+	}
 
 }

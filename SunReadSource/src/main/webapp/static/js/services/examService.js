@@ -1,6 +1,6 @@
 var examServices = angular.module('examServices', ['ngResource', "nourConfig"]);
 
-// User object(s)
+
 examServices.factory('VerifyExam',['$resource', 'config', '$http',
 	function($resource, config, $http){
 		var api = {};
@@ -45,6 +45,18 @@ examServices.factory('CapacityExam',['$resource', 'config', '$http',
 		var api = {};
 		api.get = function(levelId, callback){
 			$http.get(config.HOST + 'exam/wordpaper/'+levelId)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		};
+		return api;
+	}]);
+
+examServices.factory('PassExam',['$resource', 'config', '$http',
+	function($resource, config, $http){
+		var api = {};
+		api.get = function(userid, callback){
+			$http.get(config.HOST + 'verifyexams/pass/'+userid)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});

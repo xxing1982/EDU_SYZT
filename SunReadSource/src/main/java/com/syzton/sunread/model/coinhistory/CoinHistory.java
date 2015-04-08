@@ -18,7 +18,7 @@ public class CoinHistory extends AbstractEntity {
 	@Column(nullable=false)
 	private CoinType coinType;
 	
-	public enum CoinType{IN, OUT}
+	public enum CoinType{IN, OUT};
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)

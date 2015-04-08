@@ -28,20 +28,20 @@ import com.syzton.sunread.model.user.Student;
 @Table(name = "exam")
 public class Exam extends AbstractEntity {
 
-	// TODO
 	public static final int EXAM_QUESTION = 10;
 	
 	public static final int EXAM_SUBJECTIVE_QUESTION_PER_TYPE = 2;
+	
 	public static final int EXAM_CAPACITY_QUESTION_PER_TYPE = 2;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "exam_question", joinColumns = { @JoinColumn(name = "exam_id") }, inverseJoinColumns = { @JoinColumn(name = "question_id") })
 	private Set<Question> questions;
 
-	@JoinColumn(name = "book_id")
+	@Column(name = "book_id")
 	private Long bookId;
 	
-	@JoinColumn(name="student_id")
+	@Column(name="student_id")
 	private Long studentId;
 
 	@Enumerated(EnumType.STRING)
@@ -241,19 +241,5 @@ public class Exam extends AbstractEntity {
 
 	}
 
-	public ExamDTO createDTO() {
-		ExamDTO dto = new ExamDTO();
-		// if(this.book!=null){
-		// dto.setBook(this.book.createDTO(this.book));
-		// }
-		dto.setId(this.id);
-		dto.setExamScore(this.examScore);
-		dto.setExamType(this.examType);
-		dto.setPass(this.isPass);
-		dto.setPassNum(this.passCount);
-		dto.setFailNum(this.failCount);
-
-		return dto;
-	}
 
 }
