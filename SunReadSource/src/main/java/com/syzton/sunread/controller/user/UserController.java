@@ -12,6 +12,7 @@ import java.util.Set;
 
 import com.syzton.sunread.dto.user.UserDTO;
 
+import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.model.book.Category;
 import com.syzton.sunread.model.security.Role;
 import com.syzton.sunread.model.user.Parent;
@@ -19,6 +20,7 @@ import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.book.CategoryService;
+import com.syzton.sunread.service.bookshelf.BookshelfService;
 import com.syzton.sunread.service.user.UserService;
 
 import javassist.NotFoundException;
@@ -64,13 +66,19 @@ public class UserController extends BaseController{
     
     private ClientDetailsService clientDetailsService;
 
+    private BookshelfService bookshelfService;
+
 
     @Autowired
-    public void setReviewService(UserService userService,DefaultTokenServices tokenServices,PasswordEncoder passwordEncoder,ClientDetailsService clientDetailsService) {
+    public void setReviewService(UserService userService,DefaultTokenServices tokenServices,
+                                 PasswordEncoder passwordEncoder,
+                                 ClientDetailsService clientDetailsService,
+                                 BookshelfService bookshelfService) {
         this.userService = userService;
         this.tokenServices = tokenServices;
         this.passwordEncoder = passwordEncoder;
         this.clientDetailsService = clientDetailsService;
+        this.bookshelfService = bookshelfService;
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
@@ -117,20 +125,30 @@ public class UserController extends BaseController{
     public Student add(@Valid @RequestBody Student student) {
         return userService.addStudent(student);
     }
+
+    @RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)
+    @ResponseBody
+    public User updateUserExtra(@PathVariable("userId") long userId,
+                                   @Valid @RequestBody UserExtraDTO userExtraDTO) {
+        return userService.updateUser(userId,userExtraDTO);
+    }
     @RequestMapping(value = "teachers/{teacherId}/students/{studentId}/tasks", method = RequestMethod.PUT)
     @ResponseBody
     public Student add(@PathVariable("teacherId") long teacherId,
                        @PathVariable("studentId") long studentId,
                        @RequestParam("targetBookNum") int targetBookNum,
                        @RequestParam("targetPoint") int targetPoint) {
-        return userService.addTask(teacherId,studentId,targetBookNum,targetPoint);
+        Student student = userService.addTask(teacherId, studentId, targetBookNum, targetPoint);
+        bookshelfService.addBookshelfByStudent(student);
+        return student;
     }
 
     @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public void deleteByStudentId(@PathVariable("id") Long id){
 
-        userService.deleteByStudentId(id);
+        Student student = userService.deleteByStudentId(id);
+        bookshelfService.deleteBookshelfByStudent(student);
 
     }
 

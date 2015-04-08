@@ -1,5 +1,6 @@
 package com.syzton.sunread.service.user;
 
+import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.Teacher;
@@ -20,9 +21,11 @@ public interface UserService {
 
     public Student addStudent(Student student);
 
+    public User updateUser(long userId,UserExtraDTO userExtraDTO);
+
     public Student findByStudentId(Long id);
 
-    void deleteByStudentId(Long id);
+    public Student deleteByStudentId(Long id);
 
     public Parent addParent(Parent parent,Long studentId);
 

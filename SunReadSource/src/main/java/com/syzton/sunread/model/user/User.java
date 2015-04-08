@@ -114,6 +114,10 @@ public class User extends AbstractEntity implements UserDetails{
     @Column(length = MAX_LENGTH_ADDRESS)
     private String address;
 
+    private String qqId;
+
+    private String wechatId;
+
     private boolean enabled;
     
     private boolean accountNonExpired;
@@ -301,7 +305,23 @@ public class User extends AbstractEntity implements UserDetails{
 		this.credentialsNonExpired = credentialsNonExpired;
 	}
 
-	public List<Role> getRoles() {
+    public String getQqId() {
+        return qqId;
+    }
+
+    public void setQqId(String qqId) {
+        this.qqId = qqId;
+    }
+
+    public String getWechatId() {
+        return wechatId;
+    }
+
+    public void setWechatId(String wechatId) {
+        this.wechatId = wechatId;
+    }
+
+    public List<Role> getRoles() {
         return Collections.unmodifiableList(this.roles);
     }
 
