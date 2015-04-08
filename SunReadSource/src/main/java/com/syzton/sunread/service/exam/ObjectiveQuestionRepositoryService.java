@@ -157,7 +157,7 @@ public class ObjectiveQuestionRepositoryService implements
 		return model;
 	}
 	
-	@Transactional(readOnly = true, rollbackFor = { NotFoundException.class })
+	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
 	public ObjectiveQuestion setCorrectOption(Long questionId,
 			Long optionId) throws NotFoundException{

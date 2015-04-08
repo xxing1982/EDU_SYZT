@@ -13,6 +13,8 @@ public interface UserService {
     public User findById(Long id);
 
     public User addUser(User user);
+    
+    public User findByUserName(String userName);
 
     void deleteById(Long id);
 
@@ -39,4 +41,6 @@ public interface UserService {
     public User authenticate(String username, String password);
 
     public Student  addTask(long teacherId,long studentId,int targetBookNum,int targetPoint);
+    
+    public Student saveStudent(Student student);
 }

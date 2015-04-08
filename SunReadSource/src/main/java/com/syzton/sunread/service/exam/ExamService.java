@@ -8,12 +8,15 @@ import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.syzton.sunread.dto.exam.ExamDTO;
+import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
+import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.user.Student;
 
 public interface ExamService {
@@ -49,5 +52,5 @@ public interface ExamService {
 	
 	public boolean isPassVerifyTest(Long bookId,Long studentId);
 	
-
+	public VerifyExamPassDTO findAllByExamTypeAndPassStatus(Long studentId,ExamType type) throws NotFoundException;
 }

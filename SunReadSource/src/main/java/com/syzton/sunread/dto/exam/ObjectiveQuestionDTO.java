@@ -12,20 +12,12 @@ import com.syzton.sunread.model.exam.Option;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 
-@JsonTypeName("objective")
 public class ObjectiveQuestionDTO extends QuestionDTO {
-	@JsonIgnore
-	private OptionDTO correctAnswer;
+	
 	
 	private List<OptionDTO> options;
 	
-	public OptionDTO getCorrectAnswer() {
-		return correctAnswer;
-	}
-
-	public void setCorrectAnswer(OptionDTO correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
+	
 
 	public List<OptionDTO> getOptions() {
 		return options;

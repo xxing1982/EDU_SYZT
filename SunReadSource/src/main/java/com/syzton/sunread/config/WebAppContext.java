@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -34,6 +35,7 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
 
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";
     private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
+    private static final long MAX_UPLOAD_FILE_SIZE = 200000;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -76,6 +78,13 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
         viewResolver.setSuffix(VIEW_RESOLVER_SUFFIX);
 
         return viewResolver;
+    }
+    
+    @Bean 
+    public CommonsMultipartResolver multipartResolver(){
+    	CommonsMultipartResolver muliMultipartResolver = new CommonsMultipartResolver();
+    	muliMultipartResolver.setMaxUploadSize(MAX_UPLOAD_FILE_SIZE);
+    	return muliMultipartResolver;
     }
     
     

@@ -31,6 +31,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     //testing
     PassExam.get($rootScope.id, function(data){
+      $scope.passExams = data;
       console.log('testing');
       console.log(data);
     })

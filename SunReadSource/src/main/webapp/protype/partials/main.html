@@ -71,31 +71,13 @@
             <div class="col-md-2 row-title-more"><a href="#">更多></a></div>
         </div>
         <div class="row row-content">
-            <div class="col-md-4 clear-padding">
+            <div class="col-md-4 clear-padding" ng-repeat="item in passExams">
                 <div class="col-md-6"><img src="../static/img/book.jpg" class="img-responsive"></div>
                 <div class="col-md-6 book-right-text">
-                    <div><h4>小猫钓鱼</h4></div>
-                    <div>时间：2014.06.20</div>
-                    <div>正确率：90%</div>
-                    <div>成绩：90</div>
-                </div>
-            </div>
-            <div class="col-md-4 clear-padding">
-                <div class="col-md-6"><img src="../static/img/book.jpg" class="img-responsive"></div>
-                <div class="col-md-6 book-right-text">
-                    <div><h4>小马过河</h4></div>
-                    <div>时间：2014.06.20</div>
-                    <div>正确率：90%</div>
-                    <div>成绩：90</div>
-                </div>
-            </div>
-            <div class="col-md-4 clear-padding">
-                <div class="col-md-6"><img src="../static/img/book.jpg" class="img-responsive"></div>
-                <div class="col-md-6 book-right-text">
-                    <div><h4>小马过河</h4></div>
-                    <div>时间：2014.06.20</div>
-                    <div>正确率：90%</div>
-                    <div>成绩：90</div>
+                    <div><h4>item.name</h4></div>
+                    <div>时间：item.createionTime</div>
+                    <div>正确率：{{item.passCount/item.questionNum*100}}%</div>
+                    <div>成绩：examScore</div>
                 </div>
             </div>
         </div>
