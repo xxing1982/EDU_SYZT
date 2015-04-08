@@ -2,5 +2,5 @@ var bookDetailServices = angular.module('bookDetailServices', ['ngResource', "no
 
 bookDetailServices.factory('BookDetail',['$resource', 'config',
 	function($resource, config){
-		return $resource("http://localhost:9999/api/books/1");
+		return $resource(config.HOST + "books/1");
 	}]);

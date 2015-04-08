@@ -143,19 +143,17 @@
                         <img src="../static/img/book.jpg" class="img-responsive custom-shadow">
                     </div>
                     <div class="col-md-10">
-                        <h4>十万个为什么</h4>
-                        <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：张强<br/>版权：北京少儿出版社<br/>分值：90&nbsp;&nbsp;&nbsp;&nbsp;字数：140&nbsp;&nbsp;&nbsp;&nbsp;页数：1403</h5>
+                        <h4>{{bookDetails.name}}</h4>
+                        <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：{{bookDetails.author}}<br/>版权：{{bookDetails.publisher}}<br/>分值：{{bookDetails.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字数：{{bookDetails.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：{{bookDetails.pageCount}}</h5>
                         
                     </div>
                 </div>
 
-                <div class="row title"> </div>
-                
                 <!-- Input form -->
                 <div class="row">
                     <div class="col-md-12 input-textarea-group">
-                        <input class="form-control" placeholder="标题（必填）" />
-                        <textarea class="form-control message-input" placeholder="正文（不少于20字不大于300字）" />
+                        <input class="form-control" placeholder="标题（必填）" ng-model="note.title"/>
+                        <textarea class="form-control message-input" placeholder="正文（不少于20字不大于300字）" ng-model="note.content"/>
                     </div>	
                 </div>
           </div>
@@ -167,8 +165,8 @@
           </div>
                 <div class="modal-footer">
                     <div class="col-md-12">
-                        <a  class="btn-a" data-dismiss="modal" >取消</a>
-                        <button class="btn btn-green" ng-click="" type="button">提交笔记</button>
+                        <a  class="btn-a" data-dismiss="modal">取消</a>
+                        <button class="btn btn-green" type="button" ng-click="note.send()">提交笔记</button>
                     </div>
                 </div>
           </div>
