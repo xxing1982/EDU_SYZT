@@ -66,18 +66,18 @@
         </div>
         <div class="row row-title">
             <div class="col-md-2 row-title-name">我的测试</div>
-            <div class="col-md-4 row-title-finish">测试正确率：80%</div>
+            <div class="col-md-4 row-title-finish">测试正确率：{{exam.passRate}}%</div>
             <div class="col-md-4"></div>
             <div class="col-md-2 row-title-more"><a href="#">更多></a></div>
         </div>
         <div class="row row-content">
-            <div class="col-md-4 clear-padding" ng-repeat="item in passExams">
+            <div class="col-md-4 clear-padding" ng-repeat="item in exam.examDTOs">
                 <div class="col-md-6"><img src="../static/img/book.jpg" class="img-responsive"></div>
                 <div class="col-md-6 book-right-text">
-                    <div><h4>item.name</h4></div>
-                    <div>时间：item.createionTime</div>
+                    <div><h4>{{item.name}}</h4></div>
+                    <div>时间：{{item.createionTime}}</div>
                     <div>正确率：{{item.passCount/item.questionNum*100}}%</div>
-                    <div>成绩：examScore</div>
+                    <div>成绩：{{item.examScore}}</div>
                 </div>
             </div>
         </div>

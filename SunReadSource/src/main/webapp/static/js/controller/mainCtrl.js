@@ -31,9 +31,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     //testing
     PassExam.get($rootScope.id, function(data){
-      $scope.passExams = data;
-      console.log('testing');
-      console.log(data);
+      $scope.exam = data;
     })
 
     //note
@@ -56,6 +54,12 @@ ctrls.filter('formatImg', function(){
       return "../static/img/picture.jpg";
     };
     return input;
+  }
+});
+
+ctrls.filter('formatSize4', function(){
+  return function(input){
+    return input.substring(0, 4) + '...';
   }
 });
 
