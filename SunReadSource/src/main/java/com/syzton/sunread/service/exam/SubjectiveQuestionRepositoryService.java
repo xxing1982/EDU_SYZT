@@ -82,7 +82,7 @@ public class SubjectiveQuestionRepositoryService implements SubjectiveQuestionSe
 		LOGGER.debug("Found a to-do entry: {}", model);
 
 		model.setTopic(updated.getTopic());
-		model.setBook(updated.getBook());
+		model.setBookId(updated.getBookId());
 		model.setQuestionType(updated.getQuestionType());
 
 		return model;

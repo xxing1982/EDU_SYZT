@@ -40,6 +40,10 @@ public class AbstractEntity {
     public DateTime getCreationTime() {
         return creationTime;
     }
+    
+    public void setCreationTime(String str) {
+        
+    }
 
     @Override
     public boolean equals(Object obj) {

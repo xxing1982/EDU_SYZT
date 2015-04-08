@@ -5,7 +5,6 @@ import java.util.Collections;
 import com.syzton.sunread.exception.common.AuthenticationException;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
-
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
 import com.syzton.sunread.repository.task.TaskRepository;
@@ -258,5 +257,17 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     public void deleteByTeacherId(Long id) {
         teacherRepository.delete(id);
     }
+
+	@Override
+	public Student saveStudent(Student student) {
+		Student stu = studentRepository.save(student);
+		return stu;
+	}
+
+	@Override
+	public User findByUserName(String userName) {
+		User user = userRepository.findByUsername(userName);
+		return user;
+	}
 
 }
