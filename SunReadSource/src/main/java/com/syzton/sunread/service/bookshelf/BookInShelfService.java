@@ -9,7 +9,6 @@ import javassist.NotFoundException;
 
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
 
@@ -75,13 +74,13 @@ public interface BookInShelfService {
 	 * @param book
 	 * @return
 	 */
-	boolean updateByBook(Book book);
+	boolean updateByBookId(Long bookId);
 
 	/**
 	 * @param book
 	 * @return
 	 */
-	boolean deleteByBook(Book book);
+	boolean deleteByBookId(Long bookId);
 
 	/**
 	 * @param bookshelf

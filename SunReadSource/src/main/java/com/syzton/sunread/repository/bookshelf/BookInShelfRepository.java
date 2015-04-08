@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
 
@@ -21,6 +20,7 @@ public interface BookInShelfRepository extends JpaRepository<BookInShelf,Long>,Q
 	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) ")
 	ArrayList<BookInShelf> findByBookShelf(@Param("bookshelf")Bookshelf bookshelf);
 	Page<BookInShelf> findByBookshelf(Bookshelf bookshelf,Pageable pageable);
-	BookInShelf findByStudentIdAndBookId(Long studentId,Long bookId);
-	ArrayList<BookInShelf> findByBook(Book book);
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:studentId) AND bookId=(:bookId)")
+	BookInShelf findByStudentIdAndBookId(@Param("studentId")Long studentId,@Param("bookId")Long bookId);
+	ArrayList<BookInShelf> findByBookId(Long booId);
 }

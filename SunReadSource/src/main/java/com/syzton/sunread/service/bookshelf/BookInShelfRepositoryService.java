@@ -2,7 +2,6 @@ package com.syzton.sunread.service.bookshelf;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Iterators;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
 import com.syzton.sunread.exception.common.DuplicateException;
@@ -38,6 +36,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     private BookInShelfRepository repository;
     private BookshelfRepository bookshelfRepository;
     private BookRepository bookRepository;
+	private Book book;
+	private Bookshelf bookshelf;
 
     
     @Autowired
@@ -54,8 +54,6 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		// TODO Auto-generated method stub
         LOGGER.debug("Adding a new Book entry with information: {}", added);
        
-        Book book = new Book();
-        Bookshelf bookshelf = new Bookshelf();
         book = bookRepository.findOne(bookId);
         bookshelf = bookshelfRepository.findOne(id);
         if (book == null) {
@@ -91,9 +89,12 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	
     @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
-	public boolean deleteByBook(Book book){
-
-        ArrayList<BookInShelf> booksInShelf = repository.findByBook(book);
+	public boolean deleteByBookId(Long bookId){
+        book = bookRepository.findOne(bookId);
+        if (book == null) {
+			throw new NotFoundException("no book found with isbn :"+ book.getIsbn());
+		}
+        ArrayList<BookInShelf> booksInShelf = repository.findByBookId(bookId);
         for (BookInShelf bookInShelf : booksInShelf) {
 			if(bookInShelf != null){
 		        LOGGER.warn("delete a Book  with information: {}", bookInShelf);
@@ -101,7 +102,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 				continue;
 			}
 			else {
-				throw new NotFoundException("book with id :"+book.getId()+"is not in the shelf");
+				throw new NotFoundException("book with id :"+bookId+"is not in the shelf");
 			}			
 		}
         return true;
@@ -181,16 +182,19 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     
     @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
-	public boolean updateByBook(Book book){
-
-        ArrayList<BookInShelf> booksInShelf = repository.findByBook(book);
+	public boolean updateByBookId(Long bookId){
+    	book = bookRepository.findOne(bookId);
+        if (book == null) {
+			throw new NotFoundException("no book found with isbn :"+ book.getIsbn());
+		}    	
+        ArrayList<BookInShelf> booksInShelf = repository.findByBookId(bookId);
         for (BookInShelf bookInShelf : booksInShelf) {
 			if(bookInShelf.updateByBook(book)){
 				repository.saveAndFlush(bookInShelf);
 				continue;
 			}
 			else {
-				throw new NotFoundException("Book with Id"+book.getId()+"not in the bookshelf with Id:"
+				throw new NotFoundException("The book with Id"+bookId+"not in the bookshelf with Id:"
 			+bookInShelf.getBookShelf().getId());
 			}			
 		}

@@ -3,13 +3,9 @@ package com.syzton.sunread.model.bookshelf;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-import org.springframework.ui.context.Theme;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
-import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
-import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
@@ -41,7 +37,7 @@ public class BookInShelf extends AbstractEntity{
     @Column(name="book_name",nullable = false,length = Book.MAX_LENGTH_NAME)
     private String bookName;
 
-    @Column(name ="isbn",unique = true,nullable = false,length = Book.MAX_LENGTH_ISBN)
+    @Column(name ="isbn",nullable = false,length = Book.MAX_LENGTH_ISBN)
     private String isbn;
     
     @Column(nullable = false,length = Book.MAX_LENGTH_AUTHOR)
@@ -60,14 +56,14 @@ public class BookInShelf extends AbstractEntity{
     private boolean isVerified;
     
     //a bookshelf can`t have the same books
-    @ManyToOne(cascade={CascadeType.ALL},optional=false)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "bookshelf")
     private Bookshelf bookshelf;
     
     @JsonSerialize(using = DateSerializer.class)
-    @Column(name = "verity_time", nullable = false)
+    @Column(name = "verified_time", nullable = true)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime verifyTime;
+    private DateTime verifiedTime;
 
 //    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
 //    @JoinColumn(name = "book")
@@ -138,8 +134,8 @@ public class BookInShelf extends AbstractEntity{
     
     
     
-    public DateTime getVerifyTime() {
-		return verifyTime;
+    public DateTime getVerifiedTime() {
+		return verifiedTime;
 	}
 
 	public void update(String description,boolean isManditory
@@ -153,7 +149,7 @@ public class BookInShelf extends AbstractEntity{
 	public boolean updateReadState(){
     	if (!isVerified) {
     		this.isVerified = true;
-    		this.verifyTime = DateTime.now();
+    		this.verifiedTime = DateTime.now();
     		return true;
 		}
     	else {
