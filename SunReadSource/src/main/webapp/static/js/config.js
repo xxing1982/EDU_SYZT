@@ -1,5 +1,5 @@
 angular.module('nourConfig', [])
     .constant('config', {
-        HOST: "http://localhost:8080/api/"
+        HOST: "/api/"
     }
 );
