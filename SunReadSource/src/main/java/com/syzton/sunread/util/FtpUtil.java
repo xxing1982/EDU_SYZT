@@ -1,4 +1,4 @@
-package com.syzton.sunread.common.util;
+package com.syzton.sunread.util;
 
 
 import java.io.File;  

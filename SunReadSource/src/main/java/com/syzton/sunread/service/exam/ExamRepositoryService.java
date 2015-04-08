@@ -119,7 +119,6 @@ public class ExamRepositoryService implements ExamService {
 			passCount = passCount+exam.getPassCount();
 			questionCount = questionCount+exam.getQuestionNum();
 			Book book = bookRepo.findOne(exam.getBookId());
-			LOGGER.debug("bookId:"+book.getId());
 			examDTOs.add(new ExamDTO(exam, book));
 		}
 		int passRate = passCount*100/questionCount;

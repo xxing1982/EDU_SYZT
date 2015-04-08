@@ -46,6 +46,7 @@ import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.service.book.BookService;
 import com.syzton.sunread.service.book.TestPassService;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
 import com.syzton.sunread.service.exam.AnswerService;
@@ -53,6 +54,7 @@ import com.syzton.sunread.service.exam.ExamService;
 import com.syzton.sunread.service.exam.ObjectiveAnswerService;
 import com.syzton.sunread.service.exam.SubjectiveAnswerService;
 import com.syzton.sunread.service.pointhistory.PointHistoryService;
+import com.syzton.sunread.service.user.UserService;
 
 @Controller
 @RequestMapping(value = "/api")
@@ -67,13 +69,19 @@ public class ExamController {
     
     private PointHistoryService pointService;
     
+    private UserService userService;
+    
+    private BookService bookService;
+    
      
     @Autowired
-    public ExamController(ExamService service,TestPassService tService,CoinHistoryService coinService,PointHistoryService pointService) {
+    public ExamController(ExamService service,TestPassService tService,CoinHistoryService coinService,PointHistoryService pointService,UserService userService,BookService bookService) {
         this.service = service;
         this.testPassService = tService;
         this.coinService = coinService;
         this.pointService = pointService;
+        this.userService = userService;
+        this.bookService = bookService;
     }
 
     @RequestMapping(value = "/exam", method = RequestMethod.POST)
@@ -195,6 +203,14 @@ public class ExamController {
         	pointHistory.setNum(2);
         	pointHistory.setUser(user);
         	pointService.add(pointHistory);
+        	
+        	Student student = userService.findByStudentId(studentId);
+        	Book book = bookService.findById(bookId);
+        	student.getStatistic().setPoint(2);
+        	student.getStatistic().setCoin(student.getStatistic().getCoin()+book.getCoin());
+        	student.getStatistic().setPoint(student.getStatistic().getPoint()+book.getPoint());
+        	student.getStatistic().increaseTestPasses();
+        	userService.saveStudent(student);
         }
         LOGGER.debug("return a exam entry result with information: {}", exam);
 
