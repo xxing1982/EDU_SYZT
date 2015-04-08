@@ -8,12 +8,12 @@
     margin-top: 25px;
 }
 
-.page-body .title {
+.page-body .title, .modal-content .title {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.page-body .paragraph {
+.page-body .paragraph, .modal-content .paragraph {
     margin-top: 20px;
     padding-bottom: 20px;
 }

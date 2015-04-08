@@ -8,7 +8,7 @@
 			</div>
 		</div>
 		
-		<div class="readingCenter-right-body">
+		<div class="readingCenter-right-body page-body">
 			<div id="myBookshelfBody-top" class="row">
 <!--
 				<div class="col-md-3 select-tab myActive">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</div>
@@ -52,7 +52,7 @@
 								</div>
 								<div>
 									<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
-									<div class="col-md-5 img-padding"><img src="../static/img/read.jpg" class="img-responsive"></div>
+									<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-takenote-model"><img src="../static/img/read.jpg" class="img-responsive"></div>
 
 								</div>
 							</div>				
@@ -84,28 +84,103 @@
 			
 			<div class="bottom">更多加载中...</div>
 		</div>
-		<div class="col-md-1"></div>
+        <div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-takenote-model"><img src="../static/img/read.jpg" class="img-responsive"></div>
+		<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
+									
+        <div class="col-md-1"></div>
 	</div>
 
-	<!-- Modal -->
+	<!-- Create review modal -->
 	<div class="modal fade" id="book-evaluation-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="color: #2F5682">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" style="border-bottom: 0">
-					<h4 class="modal-title"><strong>图书评价</strong></h4>
-				</div>
-				<div class="modal-body">
-					<div>你的评分:</div>
-					<br>
-					<div><input type="text" class="txt-title" placeholder="标题（必填）"></div>
-					<div><textarea class="txt-content" rows="6" placeholder="正文（不少于20字）"></textarea> </div>
-					<div>
-						<button type="button" class="btn btn-sm btn-green">发表评论</button>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            <div class="modal-body">
+                
+                <!-- Row 0 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="modal-title" id="myModalLabel">图书评价
+                        </h4>
+                    </div>
+                </div>
+                
+                <!-- Place holder -->
+                <p class="row"></p>
+                
+                <!-- Row 1 -->
+                <div class="row">
+                    <div class="col-md-12">     
+
+                        <p><small style="line-height:20px;">您的评分：×　×　×　×　× </small></p>
+                    </div>
+                </div>
+
+                <!-- Input form -->
+                <div class="">
+                    <div class="input-textarea-group">
+                        <input class="form-control" placeholder="标题（必填）" />
+                        <textarea class="form-control message-input" placeholder="正文（不少于20字）" />
+                    </div>	
+                </div>
+          </div>
+          </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <button class="btn btn-green" ng-click="" type="button">发表评论</button>
+                    </div>
+                </div>
+          </div>
+        </div>
 	</div>
+    
+    <!-- Take note modal -->
+    <div class="modal fade" id="book-takenote-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            <div class="modal-body">
+                
+                <!-- Row 0 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="modal-title" id="myModalLabel">做笔记
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </h4>
+                    </div>
+                </div>
+                
+                <!-- Row 1 -->
+                <div class="row title">
+                    <div class="col-md-2">
+                        <img src="../static/img/book.jpg" class="img-responsive custom-shadow">
+                    </div>
+                    <div class="col-md-10">
+                        <h4>十万个为什么</h4>
+                        <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：张强<br/>版权：北京少儿出版社<br/>分值：90&nbsp;&nbsp;&nbsp;&nbsp;字数：140&nbsp;&nbsp;&nbsp;&nbsp;页数：1403</h5>
+                        
+                    </div>
+                </div>
+
+                <div class="row title"> </div>
+                <!-- Input form -->
+                <div class="">
+                    <div class="input-textarea-group">
+                        <input class="form-control" placeholder="标题（必填）" />
+                        <textarea class="form-control message-input" placeholder="正文（不少于20字不大于300字）" />
+                    </div>	
+                </div>
+          </div>
+          </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <a  class="btn-a" data-dismiss="modal" >取消</a>
+                        <button class="btn btn-green" ng-click="" type="button">提交笔记</button>
+                    </div>
+                </div>
+          </div>
+        </div>
+    </div>
 </div>
 <script>
 	SetReadingCenterRightHeight();
