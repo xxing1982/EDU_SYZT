@@ -74,8 +74,8 @@
             <div class="col-md-4 clear-padding" ng-repeat="item in exam.examDTOs">
                 <div class="col-md-6"><img src="../static/img/book.jpg" class="img-responsive"></div>
                 <div class="col-md-6 book-right-text">
-                    <div><h4>{{item.name}}</h4></div>
-                    <div>时间：{{item.createionTime}}</div>
+                    <div title="{{item.name}}"><h4>{{item.name | formatSize4}}</h4></div>
+                    <div>时间：{{item.creationTime}}</div>
                     <div>正确率：{{item.passCount/item.questionNum*100}}%</div>
                     <div>成绩：{{item.examScore}}</div>
                 </div>
@@ -136,12 +136,12 @@
             <div class="row row-content-right row-read-master">
                 <div class="row">
                     <div class="col-md-3"></div>
-                    <div class="col-md-6"><img src="../static/img/picture1.jpg" class="img-responsive img-circle"></div>
+                    <div class="col-md-6"><img src="../static/img/picture.jpg" class="img-responsive img-circle"></div>
                     <div class="col-md-3"></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-7"></div>
-                    <div class="col-md-3" style="margin-top:-17%;"><img src="../static/img/1.jpg" class="img-responsive img-circle"></div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3" style="margin-top:-17%;"><img src="../static/img/readingDynamic/first.png" class="img-responsive img-circle"></div>
                 </div>
                 <div><h3>夏亚姗 <span class="read-master-count">203本</span></h3></div>
                 <hr>

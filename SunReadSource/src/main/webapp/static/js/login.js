@@ -9,11 +9,16 @@ $(document).ready(function(){
                         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                         request.setRequestHeader("Authorization", "Basic MzUzYjMwMmM0NDU3NGY1NjUwNDU2ODdlNTM0ZTdkNmE6Mjg2OTI0Njk3ZTYxNWE2NzJhNjQ2YTQ5MzU0NTY0NmM=");
             },
-			success: function(date){
-				alert(data);
+			success: function(data){
+				sessionStorage.setItem("access_token", data.access_token);
+				sessionStorage.setItem("token_type", data.token_type);
+				sessionStorage.setItem("refresh_token", data.refresh_token);
+				sessionStorage.setItem("expires_in", data.expires_in);
+				sessionStorage.setItem("scope", data.scope);
+				window.location.href="index.html";
 			},
 			error : function(error){
-				alert(error);
+				alert('用户名或密码错误');
 			},
 		});
 	});
