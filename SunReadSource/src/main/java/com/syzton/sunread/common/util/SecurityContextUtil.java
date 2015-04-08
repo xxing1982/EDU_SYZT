@@ -58,7 +58,7 @@ public class SecurityContextUtil {
          
          if(principal!=null){
         	String userName = principal.getUsername();
-        	user = userService.findByUserName(userName);
+        	user = userService.findByUserId(userName);
          }
 
          return user;

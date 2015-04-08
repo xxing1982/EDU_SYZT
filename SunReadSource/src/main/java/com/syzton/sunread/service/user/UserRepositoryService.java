@@ -169,8 +169,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return locateUser(username);
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        return locateUser(userId);
     }
     
     @Override
@@ -212,12 +212,12 @@ public class UserRepositoryService implements UserService,UserDetailsService{
      * @return a User object is guaranteed.
      * @throws AuthenticationException if user not located.
      */
-    private User locateUser(final String username) {
-        notNull(username, "Mandatory argument 'username' missing.");
-        User user = userRepository.findByUsername(username);
+    private User locateUser(final String userId) {
+        notNull(userId, "Mandatory argument 'userId' missing.");
+        User user = userRepository.findByUserId(userId);
         if (user == null) {
-            LOGGER.debug("Credentials [{}] failed to locate a user.", username.toLowerCase());
-            throw new AuthenticationException("User "+username+" didn't exist.");
+            LOGGER.debug("Credentials [{}] failed to locate a user.", userId.toLowerCase());
+            throw new AuthenticationException("User "+userId+" didn't exist.");
         }
         return user;
     }
@@ -265,8 +265,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 	}
 
 	@Override
-	public User findByUserName(String userName) {
-		User user = userRepository.findByUsername(userName);
+	public User findByUserId(String userId) {
+		User user = userRepository.findByUserId(userId);
 		return user;
 	}
 
