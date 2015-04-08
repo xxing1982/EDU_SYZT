@@ -25,9 +25,7 @@ public class ExamDTO {
 	
 	private String name;
 	
-	
-
-	private Date creationTime;
+	private String creationTime;
 
 	private String pictureUrl;
 	
@@ -66,7 +64,7 @@ public class ExamDTO {
 		this.questions = questions;
 		this.bookId = bookId;
 		this.name = name;
-		this.creationTime = creationTime.toDate();
+		this.creationTime = creationTime.toString("yyyy.MM.dd");
 		this.pictureUrl = pictureUrl;
 		this.studentId = studentId;
 		this.examType = examType;
@@ -85,7 +83,7 @@ public class ExamDTO {
 		this.questions = exam.getQuestions();
 		this.bookId = exam.getBookId();
 		this.name = book.getName();
-		this.creationTime = exam.getCreationTime().toDate();
+		this.creationTime = exam.getCreationTime().toString("yyyy.MM.dd"); ;
 		this.pictureUrl = book.getPictureUrl();
 		this.studentId = exam.getStudentId();
 		this.examType = exam.getExamType();
@@ -126,13 +124,6 @@ public class ExamDTO {
 		this.id = id;
 	}
 
-	public void setCreationTime(DateTime creationTime) {
-		this.creationTime = creationTime.toDate();
-	}
-	
-	public Date getCreateionTime(){
-		return this.creationTime;
-	}
 
 	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
@@ -167,7 +158,7 @@ public class ExamDTO {
 		return id;
 	}
 
-	public Date getCreationTime() {
+	public String getCreationTime() {
 		return creationTime;
 	}
 
@@ -215,8 +206,6 @@ public class ExamDTO {
 		this.answers = answers;
 	}
 
-	 
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
@@ -240,7 +229,11 @@ public class ExamDTO {
 		this.pictureUrl = pictureUrl;
 	}
 
-	public void setCreationTime(Date creationTime) {
+	public void setCreationTime(String creationTime) {
 		this.creationTime = creationTime;
+	}
+	
+	public void setCreationTime(DateTime creationTime) {
+		this.creationTime = creationTime.toString("yyyy.MM.dd");
 	}
 }
