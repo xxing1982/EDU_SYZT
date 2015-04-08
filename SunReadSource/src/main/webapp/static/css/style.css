@@ -369,8 +369,13 @@ a:focus, input:focus
 
 .mustRead
 {
+/*  The old one
     margin-top: -160%;
     margin-left:60%;
+*/
+    margin-top: -160%;
+    margin-left: 66%;
+    width: 66%;
 }
 
 .img-padding
