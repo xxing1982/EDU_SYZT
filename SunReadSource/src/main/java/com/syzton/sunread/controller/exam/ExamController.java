@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.ExamDTO;
+import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.exception.common.TodayVerifyTimesOverException;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.exception.exam.HaveVerifiedBookException;
@@ -36,6 +37,7 @@ import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.Exam;
+import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
@@ -245,6 +247,14 @@ public class ExamController {
         return found;
     }
     
+    @RequestMapping(value = "/verifyexams/pass/{userid}", method = RequestMethod.GET)
+    @ResponseBody
+    public VerifyExamPassDTO findPassVerifyExam(@PathVariable("userid") Long userId) throws NotFoundException {
+    	LOGGER.debug("Finding objective question entry with id: {}" );
+        VerifyExamPassDTO examPassDTO = service.findAllByExamTypeAndPassStatus(userId, ExamType.VERIFY);
+
+        return examPassDTO;
+    }
 
 //    @RequestMapping(value = "/exam/{id}", method = RequestMethod.PUT)
 //    @ResponseBody

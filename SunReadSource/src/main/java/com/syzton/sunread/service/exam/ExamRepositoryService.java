@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -27,11 +30,14 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.syzton.sunread.dto.exam.ExamDTO;
+import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
+import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
@@ -57,7 +63,7 @@ public class ExamRepositoryService implements ExamService {
 	private SubjectiveQuestionRepository subjectQsRepo;
 
 	private CapacityQuestionRepository capacityQsRepo;
-
+	
 	private BookRepository bookRepo;
 
 	@Autowired
@@ -99,6 +105,26 @@ public class ExamRepositoryService implements ExamService {
 
 		return examPages;
 
+	}
+	
+	@Transactional(rollbackFor = { NotFoundException.class })
+	@Override
+	public VerifyExamPassDTO findAllByExamTypeAndPassStatus(Long studentId,ExamType type) throws NotFoundException {
+		int passCount = 0;
+		int questionCount = 0;
+		List<Exam> exams = repository.findByStudentIdAndExamTypeAndIsPass(studentId,type,true);
+		List<ExamDTO> examDTOs = new ArrayList<ExamDTO>();
+		for(int i=0;i<exams.size();i++){
+			Exam exam = exams.get(i);
+			passCount = passCount+exam.getPassCount();
+			questionCount = questionCount+exam.getQuestionNum();
+			Book book = bookRepo.findOne(exam.getBookId());
+			LOGGER.debug("bookId:"+book.getId());
+			examDTOs.add(new ExamDTO(exam, book));
+		}
+		int passRate = passCount*100/questionCount;
+		VerifyExamPassDTO passDTO = new VerifyExamPassDTO(examDTOs,passRate);
+		return passDTO;
 	}
 
 	@Transactional(readOnly = true, rollbackFor = { NotFoundException.class })
