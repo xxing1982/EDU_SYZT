@@ -1,6 +1,7 @@
 
 /* Dark blue */
 h1, h2, h3, h4, h5, .title,
+h1 small, h2 small, h3 small, h4 small, h5 small,
 .dark-blue-1{
     color: #2f5682;
 }

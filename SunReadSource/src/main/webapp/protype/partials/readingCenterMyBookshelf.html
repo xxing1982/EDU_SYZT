@@ -9,28 +9,30 @@
 		</div>
 		
 		<div class="readingCenter-right-body page-body">
-			<div id="myBookshelfBody-top" class="row">
-<!--
-				<div class="col-md-3 select-tab myActive">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</div>
-				<div class="col-md-3 select-tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</div>
-			-->
-			<div class="col-md-6">
-				<ul id="bookReadStateTabs" class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#unreadBooksTab" aria-controls="unreadBooksTab" role="tab" data-toggle="tab">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</a></li>
-					<li role="presentation"><a href="#readBooksTab" aria-controls="readBooksTab" role="tab" data-toggle="tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</a></li>
-				</ul>
-			</div>
+            <div class="row buttom-separator">
+                <div class="col-md-12">
+                    <div class="col-xs-6">
+                        <ul id="bookReadStateTabs" class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#unreadBooksTab" aria-controls="unreadBooksTab" role="tab" data-toggle="tab">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</a></li>
+                            <li role="presentation"><a href="#readBooksTab" aria-controls="readBooksTab" role="tab" data-toggle="tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <a class="btn btn-fill-green" href="#readingCenter/addBook">+ 我要选书</a>
+                    </div>
+                    <div class="col-xs-2">
+                        <bs-dropdown data-menu-type="button" 
+                            select-val="selected_status = selectedVal"
+                            preselected-item="selected_status" 
+                            data-dropdown-data="statuses">
+                        </bs-dropdown>
+                    </div>
+                </div>
+            </div>
 
-			<div class="col-md-2"></div>
-			<div class="col-md-3">
-				<a class="btn btn-lg btn-addBook" href="#readingCenter/addBook">+ 我要选书</a>
-			</div>
-
-			<div class="col-md-4"></div>
-		</div>
-
-		<div id="myBookshelfBody-center" class="row" >
-			<div class="tab-content">
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+			<div class="tab-content col-md-12">
 				<div id="unreadBooksTab" class="tab-pane in active" role="tabpanel">
 					<div ng-repeat="unreadBook in unreadBooks" class="col-md-4 bookshelf-book clear-padding">
 						<div class="col-md-6">
@@ -38,7 +40,7 @@
 							<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
 						</div>
 						<div class="col-md-6">
-							<div class="fsize12"><h4>{{unreadBook.bookName}}</h4></div>
+                            <div><h4><small>{{unreadBook.bookName}}</small></h4></div>
 							<div class="fsize12">作者：{{unreadBook.author}}</div>
 							<div class="fsize12">积分：{{unreadBook.point}}</div>
 							<div class="dropdown">
@@ -74,9 +76,9 @@
 							</div>
 						</div>				
 					</div>
-
+                </div>
 				</div>
-			</div>
+            </div>
 			
 			
 			<div class="bottom">更多加载中...</div>
