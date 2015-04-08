@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Iterators;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
+import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
@@ -88,6 +89,42 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		return bookInShelf;
 	}
 	
+    @Transactional(rollbackFor = {NotFoundException.class})
+	@Override
+	public boolean deleteByBook(Book book){
+
+        ArrayList<BookInShelf> booksInShelf = repository.findByBook(book);
+        for (BookInShelf bookInShelf : booksInShelf) {
+			if(bookInShelf != null){
+		        LOGGER.warn("delete a Book  with information: {}", bookInShelf);
+				repository.delete(bookInShelf);
+				continue;
+			}
+			else {
+				throw new NotFoundException("book with id :"+book.getId()+"is not in the shelf");
+			}			
+		}
+        return true;
+    }
+    
+    @Transactional(rollbackFor = {NotFoundException.class})
+	@Override
+	public boolean deleteByBookshelf(Bookshelf bookshelf){
+
+        ArrayList<BookInShelf> booksInShelf = repository.findByBookShelf(bookshelf);
+        for (BookInShelf bookInShelf : booksInShelf) {
+			if(bookInShelf != null){
+		        LOGGER.warn("delete a Book  with information: {}", bookInShelf);
+				repository.delete(bookInShelf);
+				continue;
+			}
+			else {
+				throw new NotFoundException("bookshelf with id :"+bookshelf.getId()+"is not contain any books");
+			}			
+		}
+        return true;
+    }
+	
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
 	@Override
 	public BookInShelf findById(Long id)  {
@@ -126,6 +163,40 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         
         return bookInShelf;
 	}
+    
+    @Transactional(rollbackFor = {NotFoundException.class})
+	@Override
+	public boolean updateReadState(Long studentId,Long bookId) throws BookInShelfDuplicateVerifiedException{
+
+        BookInShelf bookInShelf = repository.findByStudentIdAndBookId(studentId, bookId);
+        if (bookInShelf != null&&bookInShelf.updateReadState()) {
+			repository.saveAndFlush(bookInShelf);
+			return true;
+		}
+        else {
+    		throw new BookInShelfDuplicateVerifiedException("The book with id :"
+    	+bookId+"has been verified");
+		}
+    }
+    
+    @Transactional(rollbackFor = {NotFoundException.class})
+	@Override
+	public boolean updateByBook(Book book){
+
+        ArrayList<BookInShelf> booksInShelf = repository.findByBook(book);
+        for (BookInShelf bookInShelf : booksInShelf) {
+			if(bookInShelf.updateByBook(book)){
+				repository.saveAndFlush(bookInShelf);
+				continue;
+			}
+			else {
+				throw new NotFoundException("Book with Id"+book.getId()+"not in the bookshelf with Id:"
+			+bookInShelf.getBookShelf().getId());
+			}			
+		}
+        return true;
+    }
+    
 
 	/* (non-Javadoc)
 	 * @see com.syzton.sunread.service.bookshelf.BookInShelfService#findByBookshelfId(long)

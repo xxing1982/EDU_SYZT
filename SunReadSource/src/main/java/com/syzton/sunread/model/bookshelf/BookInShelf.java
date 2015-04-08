@@ -3,10 +3,13 @@ package com.syzton.sunread.model.bookshelf;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.springframework.ui.context.Theme;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
+import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
@@ -60,6 +63,11 @@ public class BookInShelf extends AbstractEntity{
     @ManyToOne(cascade={CascadeType.ALL},optional=false)
     @JoinColumn(name = "bookshelf")
     private Bookshelf bookshelf;
+    
+    @JsonSerialize(using = DateSerializer.class)
+    @Column(name = "verity_time", nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime verifyTime;
 
 //    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH },optional=false)
 //    @JoinColumn(name = "book")
@@ -128,14 +136,44 @@ public class BookInShelf extends AbstractEntity{
     	return bookshelf;
     }
     
-    public void update(String description,boolean isManditory
+    
+    
+    public DateTime getVerifyTime() {
+		return verifyTime;
+	}
+
+	public void update(String description,boolean isManditory
     		,boolean isVerified){
     	this.description = description;
     	this.isMandatory = isManditory;
     	this.isVerified = isVerified;
-    	this.modificationTime = DateTime.now();
-    	
+    	this.modificationTime = DateTime.now(); 	
     }
+	
+	public boolean updateReadState(){
+    	if (!isVerified) {
+    		this.isVerified = true;
+    		this.verifyTime = DateTime.now();
+    		return true;
+		}
+    	else {
+    		return false;
+		}
+    }
+	
+	public boolean updateByBook(Book book) {
+		if (this.bookId == book.getId()) {
+			this.author = book.getAuthor();
+			this.bookName = book.getName();
+			this.isbn = book.getIsbn();
+			this.pictureUrl = book.getPictureUrl();
+			this.point = book.getPoint();	
+			return true;
+		}
+		else {
+			return false;
+		}	
+	}
 
     //getBook & getBookShelf
 

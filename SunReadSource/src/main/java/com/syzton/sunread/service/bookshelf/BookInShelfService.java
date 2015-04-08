@@ -8,8 +8,10 @@ import org.springframework.data.domain.Pageable;
 import javassist.NotFoundException;
 
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
-import com.syzton.sunread.exception.bookshelf.BookInShelfNotFoundException;
+import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
+import com.syzton.sunread.model.bookshelf.Bookshelf;
 
 /**
  * @author Morgan-Leon
@@ -60,6 +62,32 @@ public interface BookInShelfService {
      * @throws BookInShelfNotFoundException    If no bookshelf entry is found with the given id.
      */
     public BookInShelf update(BookInShelfDTO updated,long id);
+
+	/**
+	 * @param studentId
+	 * @param bookId
+	 * @return
+	 * @throws BookInShelfDuplicateVerifiedException 
+	 */
+	boolean updateReadState(Long studentId, Long bookId) throws BookInShelfDuplicateVerifiedException;
+
+	/**
+	 * @param book
+	 * @return
+	 */
+	boolean updateByBook(Book book);
+
+	/**
+	 * @param book
+	 * @return
+	 */
+	boolean deleteByBook(Book book);
+
+	/**
+	 * @param bookshelf
+	 * @return
+	 */
+	boolean deleteByBookshelf(Bookshelf bookshelf);
     
     
 
