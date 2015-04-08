@@ -23,8 +23,18 @@
 }
 
 /*modal related*/
-.modal-dialog {
-    width: 68%;
+
+
+@media (min-width: 768px){
+    .modal-dialog {
+      width: 750px;
+    }
+}
+
+@media (min-width: 992px){
+    .modal-dialog {
+      width: 780px;
+    }
 }
 
 .modal-content {
