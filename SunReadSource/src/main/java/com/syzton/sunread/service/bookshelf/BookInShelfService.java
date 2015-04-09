@@ -1,7 +1,9 @@
 package com.syzton.sunread.service.bookshelf;
 
+import java.util.ArrayList;
 import java.util.Set;
 
+import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -53,6 +55,15 @@ public interface BookInShelfService {
      * @throws BookInShelfNotFoundException    if no bookshelf entry is found with the given id.
      */
     public BookInShelf findById(Long id) throws NotFoundException;
+    
+	/**
+	 * @param studentId
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	ArrayList<BookInShelf> findByStudentIdAndSemester(Long studentId,
+			DateTime startTime, DateTime endTime);
 
     /**
      * Updates the information of a bookshelf entry.
@@ -64,7 +75,7 @@ public interface BookInShelfService {
 
 	/**
 	 * @param studentId
-	 * @param bookId
+	 * @param bookId 
 	 * @return
 	 * @throws BookInShelfDuplicateVerifiedException 
 	 */
@@ -87,7 +98,8 @@ public interface BookInShelfService {
 	 * @return
 	 */
 	boolean deleteByBookshelf(Bookshelf bookshelf);
-    
+
+   
     
 
 }

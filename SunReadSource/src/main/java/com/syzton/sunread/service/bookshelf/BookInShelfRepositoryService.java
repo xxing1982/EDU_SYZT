@@ -1,9 +1,11 @@
 package com.syzton.sunread.service.bookshelf;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
+import com.syzton.sunread.model.semester.Semester;
+import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.bookshelf.BookInShelfRepository;
 import com.syzton.sunread.repository.bookshelf.BookshelfRepository;
@@ -36,16 +40,18 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     private BookInShelfRepository repository;
     private BookshelfRepository bookshelfRepository;
     private BookRepository bookRepository;
+    private SemesterRepository semesterRepository;
 	private Book book;
 	private Bookshelf bookshelf;
 
     
     @Autowired
-    public BookInShelfRepositoryService(BookInShelfRepository repository
+    public BookInShelfRepositoryService(BookInShelfRepository repository,SemesterRepository semesterRepository
     		,BookshelfRepository bookshelfRepository,BookRepository bookRepository) {
         this.repository = repository;
         this.bookRepository = bookRepository;
         this.bookshelfRepository = bookshelfRepository;
+        this.semesterRepository = semesterRepository;
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})
@@ -149,6 +155,14 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		}
 	    Page<BookInShelf> bookPages = repository.findByBookshelf(bookshelf, pageable);    
 	    return bookPages;
+    }
+    
+    @Transactional(rollbackFor = {NotFoundException.class})
+    @Override
+    public ArrayList<BookInShelf> findByStudentIdAndSemester(Long studentId, DateTime startTime,DateTime endTime) {
+    	
+	    ArrayList<BookInShelf> booksInSemester = repository.findByStudentIdAndSemester(studentId, startTime, endTime);  
+	    return booksInSemester;
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})

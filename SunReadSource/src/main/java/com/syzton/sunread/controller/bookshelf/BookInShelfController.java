@@ -1,9 +1,15 @@
 package com.syzton.sunread.controller.bookshelf;
+import java.util.ArrayList;
+
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
+import com.syzton.sunread.dto.bookshelf.BookshelfStatisticsDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.service.bookshelf.BookInShelfService;
+import com.syzton.sunread.service.semester.SemesterService;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +32,10 @@ import javax.validation.Valid;
 public class BookInShelfController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookshelfController.class);
     private BookInShelfService service;
+    private SemesterService semesterService;
+	private ArrayList<DateTime> month;
+	private ArrayList<String> monthly;
+	private ArrayList<Integer> monthlyVerified;
     
     @Autowired
     public BookInShelfController(BookInShelfService service){
@@ -95,7 +105,67 @@ public class BookInShelfController {
         return found.createDTO(found);
     }
     
+ //Get a Book in bookshelf    
+    @RequestMapping(value = "/student/{studentId}/semester/{semesterId}/bookshelfStatistics", method = RequestMethod.GET)
+    @ResponseBody
+    public BookshelfStatisticsDTO findBySemester(@PathVariable("studentId") Long studentId,@PathVariable("semesterId") Long semesterId) throws NotFoundException {
+        LOGGER.debug("Finding a book in shelf entry with id: {}", semesterId);
+        Semester semester = semesterService.findOne(semesterId);
+    	DateTime startTime = semester.getStartTime();
+    	DateTime endTime = semester.getEndTime(); 
+    	
+        ArrayList<BookInShelf> founds = service.findByStudentIdAndSemester(studentId, startTime,endTime);
+        LOGGER.debug("Found to-do entry with information: {}", founds);
+        return createBookshelfStatisticsDTO(founds,startTime,endTime);
+    }
+    
+    public BookshelfStatisticsDTO createBookshelfStatisticsDTO(ArrayList<BookInShelf> booksInShelf,DateTime startTime,DateTime endTime) {
+		BookshelfStatisticsDTO dto = new BookshelfStatisticsDTO();
+		String username = booksInShelf.get(0).getBookShelf().getUsername();
+		int semesterVerified = booksInShelf.size();
+		startTime = startTime.dayOfMonth().withMinimumValue().toDateTime();
+		endTime = endTime.dayOfMonth().withMaximumValue().toDateTime();
+		
+		for (int i = 0; i < booksInShelf.size(); i++) {
+			month.add(startTime.plusMonths(i));
+			monthly.add(month.get(i).toString());
+			monthlyVerified.add(bookNumDuration(booksInShelf, month.get(i), month.get(i).dayOfMonth().withMaximumValue().toDateTime()));
+		}
+		
+		dto.setMonthly(monthly);
+		dto.setMonthlyVerified(monthlyVerified);
+		dto.setSemesterVerified(semesterVerified);
+		dto.setUsername(username);
+				
+		return dto;
+	}
+    
+    public int bookNumDuration(ArrayList<BookInShelf> booksInShelfs, DateTime fromDate, DateTime toDate){
+		int count = 0;
+    	for (BookInShelf bookInShelf : booksInShelfs) {
+    		if(isInDuration(bookInShelf.getVerifiedTime(), fromDate, toDate))
+    			count++;
+		}
+    	return count;
+     }
+    
+    public boolean isInDuration(DateTime currentTime,DateTime fromDate, DateTime toDate){
+    	if (currentTime.isAfter(fromDate.getMillis())&&currentTime.isBefore(toDate.getMillis())) {
+			return true;
+		}
+    	else {
+			return false;
+		}
+    }
+    
 }
+
+
+
+
+
+
+
 
 
 
