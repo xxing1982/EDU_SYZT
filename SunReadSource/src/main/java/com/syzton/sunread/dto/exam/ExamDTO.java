@@ -1,15 +1,10 @@
 package com.syzton.sunread.dto.exam;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 
-import com.syzton.sunread.dto.book.BookDTO;
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.Question;
@@ -48,8 +43,8 @@ public class ExamDTO {
 
 	private long version;
 	
+	private String comment;
 	
-
 	public ExamDTO() {
 
 	}
@@ -58,7 +53,7 @@ public class ExamDTO {
 			String name, DateTime creationTime, String pictureUrl,
 			Long studentId, ExamType examType, boolean isPass,
 			int examScore, int passCount, int failCount, int questionNum,
-			Set<Answer> answers, long version) {
+			Set<Answer> answers, long version,String comment) {
 		super();
 		this.id = id;
 		this.questions = questions;
@@ -75,16 +70,17 @@ public class ExamDTO {
 		this.questionNum = questionNum;
 		this.answers = answers;
 		this.version = version;
+		this.comment = comment;
 	}
 	
-	public ExamDTO(Exam exam,Book book) {
+	public ExamDTO(Exam exam) {
 		super();
 		this.id = exam.getId();
 		this.questions = exam.getQuestions();
-		this.bookId = exam.getBookId();
-		this.name = book.getName();
+		this.bookId = exam.getBook().getId();
+		this.name = exam.getBook().getName();
 		this.creationTime = exam.getCreationTime().toString("yyyy.MM.dd"); ;
-		this.pictureUrl = book.getPictureUrl();
+		this.pictureUrl = exam.getBook().getPictureUrl();
 		this.studentId = exam.getStudentId();
 		this.examType = exam.getExamType();
 		this.isPass = exam.isPass();
@@ -94,6 +90,7 @@ public class ExamDTO {
 		this.questionNum = exam.getQuestionNum();
 		this.answers = exam.getAnswers();
 		this.version = exam.getVersion();
+		
 	}
 	
 	public int getPassCount() {
@@ -236,4 +233,6 @@ public class ExamDTO {
 	public void setCreationTime(DateTime creationTime) {
 		this.creationTime = creationTime.toString("yyyy.MM.dd");
 	}
+	
+	
 }

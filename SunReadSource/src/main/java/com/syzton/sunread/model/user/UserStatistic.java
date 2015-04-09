@@ -1,5 +1,7 @@
 package com.syzton.sunread.model.user;
 
+import java.io.Serializable;
+
 import com.syzton.sunread.model.common.AbstractEntity;
 
 import javax.persistence.Entity;
@@ -8,7 +10,7 @@ import javax.persistence.Entity;
  * Created by jerry on 3/30/15.
  */
 @Entity
-public class UserStatistic extends AbstractEntity{
+public class UserStatistic extends AbstractEntity implements Serializable{
     //current point
     private int point;
     //current coin

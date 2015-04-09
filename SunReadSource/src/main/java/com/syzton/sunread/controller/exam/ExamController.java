@@ -177,7 +177,7 @@ public class ExamController {
     public Exam handInVerifyPaper(@Valid @RequestBody Exam exam) throws NotFoundException {
         LOGGER.debug("hand in exam entrie.");
         long studentId = exam.getStudentId();
-        long bookId = exam.getBookId();
+        long bookId = exam.getBook().getId();
         if(service.isPassVerifyTest(bookId, studentId)){
         	throw new HaveVerifiedBookException("Student "+studentId+" have verified the book " +bookId);
         }
@@ -271,15 +271,37 @@ public class ExamController {
 
         return examPassDTO;
     }
+    
+    @RequestMapping(value = "/verifyexams/{userid}", method = RequestMethod.GET)
+    @ResponseBody
+    public VerifyExamPassDTO findVerifyExams(@PathVariable("userid") Long userId) throws NotFoundException {
+    	LOGGER.debug("Finding objective question entry with id: {}" );
+        VerifyExamPassDTO examPassDTO = service.findAllByExamType(userId, ExamType.VERIFY);
+        return examPassDTO;
+    }
+    
+    @RequestMapping(value = "/wordexams/{userid}", method = RequestMethod.GET)
+    @ResponseBody
+    public VerifyExamPassDTO findWordExams(@PathVariable("userid") Long userId) throws NotFoundException {
+    	LOGGER.debug("Finding objective question entry with id: {}" );
+        VerifyExamPassDTO examPassDTO = service.findAllByExamType(userId, ExamType.WORD);
 
-//    @RequestMapping(value = "/exam/{id}", method = RequestMethod.PUT)
-//    @ResponseBody
-//    public Exam update(@Valid @RequestBody Exam exam, @PathVariable("id") Long todoId) throws AnswerNotFoundException {
-//        LOGGER.debug("Updating a to-do entry with information: {}", dto);
-//
-//        Exam updated = service.update(exam);
-//        LOGGER.debug("Updated the information of a to-entry to: {}", updated);
-//
-//        return updated;
-//    }
+        return examPassDTO;
+    }
+    
+    @RequestMapping(value = "/capacityexams/{userid}", method = RequestMethod.GET)
+    @ResponseBody
+    public VerifyExamPassDTO findCapacityExams(@PathVariable("userid") Long userId) throws NotFoundException {
+    	LOGGER.debug("Finding objective question entry with id: {}" );
+        VerifyExamPassDTO examPassDTO = service.findAllByExamType(userId, ExamType.CAPACITY);
+        return examPassDTO;
+    }
+    
+    @RequestMapping(value = "/thinkexams/{userid}", method = RequestMethod.GET)
+    @ResponseBody
+    public VerifyExamPassDTO findThinkExams(@PathVariable("userid") Long userId) throws NotFoundException {
+    	LOGGER.debug("Finding objective question entry with id: {}" );
+        VerifyExamPassDTO examPassDTO = service.findAllByExamType(userId, ExamType.THINK);
+        return examPassDTO;
+    }
 }

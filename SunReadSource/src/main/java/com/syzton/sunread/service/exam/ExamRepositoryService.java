@@ -31,6 +31,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.exam.ExamDTO;
+import com.syzton.sunread.dto.exam.VerifiedExamDTO;
 import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
@@ -112,16 +113,43 @@ public class ExamRepositoryService implements ExamService {
 	public VerifyExamPassDTO findAllByExamTypeAndPassStatus(Long studentId,ExamType type) throws NotFoundException {
 		int passCount = 0;
 		int questionCount = 0;
+		int passRate = 0;
 		List<Exam> exams = repository.findByStudentIdAndExamTypeAndIsPass(studentId,type,true);
 		List<ExamDTO> examDTOs = new ArrayList<ExamDTO>();
 		for(int i=0;i<exams.size();i++){
 			Exam exam = exams.get(i);
 			passCount = passCount+exam.getPassCount();
 			questionCount = questionCount+exam.getQuestionNum();
-			Book book = bookRepo.findOne(exam.getBookId());
-			examDTOs.add(new ExamDTO(exam, book));
+			examDTOs.add(new VerifiedExamDTO(exam));
 		}
-		int passRate = passCount*100/questionCount;
+		if(questionCount != 0){
+			passRate = passCount*100/questionCount;
+		}
+		 
+		VerifyExamPassDTO passDTO = new VerifyExamPassDTO(examDTOs,passRate);
+		return passDTO;
+	}
+	
+	@Transactional(rollbackFor = { NotFoundException.class })
+	@Override
+	public VerifyExamPassDTO findAllByExamType(Long studentId,ExamType type) throws NotFoundException {
+		int passCount = 0;
+		int questionCount = 0;
+		int passRate = 0;
+		List<Exam> exams = repository.findByStudentIdAndExamType(studentId,type);
+		List<ExamDTO> examDTOs = new ArrayList<ExamDTO>();
+		for(int i=0;i<exams.size();i++){
+			Exam exam = exams.get(i);
+			passCount = passCount+exam.getPassCount();
+			questionCount = questionCount+exam.getQuestionNum();
+			if(type.equals(ExamType.VERIFY)){
+				examDTOs.add(new VerifiedExamDTO(exam));
+			}
+			examDTOs.add(new ExamDTO(exam));
+		}
+		if(questionCount != 0){
+			passRate = passCount*100/questionCount;
+		}
 		VerifyExamPassDTO passDTO = new VerifyExamPassDTO(examDTOs,passRate);
 		return passDTO;
 	}
@@ -215,6 +243,9 @@ public class ExamRepositoryService implements ExamService {
 		list.add(CapacityQuestionType.THIRD);
 		list.add(CapacityQuestionType.FOURTH);
 		list.add(CapacityQuestionType.FIFTH);
+		list.add(CapacityQuestionType.SIXTH);
+		list.add(CapacityQuestionType.SEVENTH);
+		list.add(CapacityQuestionType.EIGHTTH);
 		List<CapacityQuestion> questions = this.getRandomCapacityQuestion(list, Exam.EXAM_CAPACITY_QUESTION_PER_TYPE,level);
 		return questions;
 	}
@@ -227,7 +258,6 @@ public class ExamRepositoryService implements ExamService {
 		list.add(SubjectiveQuestionType.THIRD);
 		list.add(SubjectiveQuestionType.FOURTH);
 		list.add(SubjectiveQuestionType.FIFTH);
-		// TODO read num from database
 		List<SubjectiveQuestion> questions = this.getRandomSubjectiveQuestion(
 				bookId, list, Exam.EXAM_SUBJECTIVE_QUESTION_PER_TYPE);
 

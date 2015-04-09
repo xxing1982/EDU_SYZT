@@ -1,4 +1,4 @@
-package com.syzton.sunread.common.util;
+package com.syzton.sunread.controller.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.syzton.sunread.model.user.User;
-import com.syzton.sunread.service.book.BookService;
-import com.syzton.sunread.service.book.RecommendationService;
-import com.syzton.sunread.service.user.UserRepositoryService;
 import com.syzton.sunread.service.user.UserService;
  
 @Component
@@ -42,28 +39,24 @@ public class SecurityContextUtil {
         return principal;
     }
     
-    public  User getUser(){
+    public User getUser(){
     	 LOGGER.debug("Getting principal from the security context");
-    	 User user = null;
-         UserDetails principal = null;
 
+         User principal = null;
+         User user = null;
          Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
+    
          if (authentication != null) {
              Object currentPrincipal = authentication.getPrincipal();
-             if (currentPrincipal instanceof UserDetails) {
-                 principal = (UserDetails) currentPrincipal;
+             if (currentPrincipal instanceof User) {
+                 principal = (User) currentPrincipal;
              }
          }
-         
+    
          if(principal!=null){
-        	String userName = principal.getUsername();
-        	user = userService.findByUserId(userName);
+        	 user = userService.findByUserId(principal.getUserId());
          }
 
          return user;
-    	
     }
-    
-   
 }
