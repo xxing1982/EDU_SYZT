@@ -3,6 +3,7 @@ package com.syzton.sunread.model.bookshelf;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
@@ -238,6 +239,7 @@ public class BookInShelf extends AbstractEntity{
     	dto.setBookshelf(model.getBookShelf().getId());
     	return dto;
     }
+    
     
     @Override
     public String toString() {

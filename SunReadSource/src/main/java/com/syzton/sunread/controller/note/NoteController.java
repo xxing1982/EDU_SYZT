@@ -64,10 +64,17 @@ public class NoteController extends BaseController {
     public PageResource<Note> findAll(@RequestParam("page") int page,
 	        					 @RequestParam("size") int size,
 	        					 @RequestParam("sortBy") String sortBy,
-						         @RequestParam("direction") String direction) {
+						         @RequestParam("direction") String direction,
+						         @RequestParam( value = "searchTerm", required = false) String searchTerm) {
     	Pageable pageable = getPageable(page, size, sortBy, direction);
-		
-        Page<Note> notePage = service.findAll(pageable);
+    	
+    	Page<Note> notePage;
+    	
+    	if (searchTerm != null || searchTerm == ""){
+    		notePage = service.findBySearchTerm( pageable, searchTerm );
+    	} else {
+    		notePage = service.findAll(pageable);
+    	}
 
         return new PageResource<>(notePage, "page", "size");
     }
@@ -113,18 +120,18 @@ public class NoteController extends BaseController {
         return new PageResource<>(notePage, "page", "size");
     }
     
-    @RequestMapping(value = "/api/notes/search", method = RequestMethod.GET)
-    @ResponseBody
-    public PageResource<Note> quickSearch(@RequestParam("page") int page,
-										  @RequestParam("size") int size,
-										  @RequestParam("sortBy") String sortBy,
-										  @RequestParam("direction") String direction,
-										  @RequestParam("searchTerm") String searchTerm) {
-    	
-    	Pageable pageable = getPageable(page, size, sortBy, direction);
-		
-        Page<Note> notePage = service.findBySearchTerm( pageable, searchTerm );
-
-        return new PageResource<>(notePage, "page", "size");
-    }
+//    @RequestMapping(value = "/api/notes/search", method = RequestMethod.GET)
+//    @ResponseBody
+//    public PageResource<Note> quickSearch(@RequestParam("page") int page,
+//										  @RequestParam("size") int size,
+//										  @RequestParam("sortBy") String sortBy,
+//										  @RequestParam("direction") String direction,
+//										  @RequestParam("searchTerm") String searchTerm) {
+//    	
+//    	Pageable pageable = getPageable(page, size, sortBy, direction);
+//		
+//        Page<Note> notePage = service.findBySearchTerm( pageable, searchTerm );
+//
+//        return new PageResource<>(notePage, "page", "size");
+//    }
 }

@@ -98,6 +98,20 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             templateUrl: 'partials/readingCenterMyEvaluating.html',
             controller: 'readingCenterMyEvaluatingController'
         })
+
+        //reading center -> test result -> failed
+        .state('readingCenter.failed',{
+            url: '/failed',
+            templateUrl: 'partials/readingCenterTestResultFailed.html',
+            controller: 'readingCenterTestFailedController'
+        })
+
+        //reading center -> test result -> success
+        .state('readingCenter.success',{
+            url: '/success',
+            templateUrl: 'partials/readingCenterTestResultSuccess.html',
+            controller: 'readingCenterTestSuccessController'
+        })
         //reading dynamic
         .state('readingDynamic',{
             url: '/readingDynamic',

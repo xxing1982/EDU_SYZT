@@ -1,6 +1,6 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'paraServices', 'commentServices'
-                                             ,'examServices', 'classServices'
+                                             ,'examServices', 'classServices', 'questionServices'
                                              ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices'
                                              ,'weeklyHotServices','monthlyHotServices'
@@ -9,6 +9,8 @@ var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userS
 ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam",
   function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam) {
     $rootScope.id = 2;
+    //get token
+    //sessionStorage.getItem("access_token")
 
 
     //student info
@@ -31,9 +33,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     //testing
     PassExam.get($rootScope.id, function(data){
-      $scope.passExams = data;
-      console.log('testing');
-      console.log(data);
+      $scope.exam = data;
     })
 
     //note
@@ -56,6 +56,12 @@ ctrls.filter('formatImg', function(){
       return "../static/img/picture.jpg";
     };
     return input;
+  }
+});
+
+ctrls.filter('formatSize4', function(){
+  return function(input){
+    return input.substring(0, 4) + '...';
   }
 });
 

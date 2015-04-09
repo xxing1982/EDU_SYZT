@@ -34,7 +34,7 @@
                 <div class="row"><h4>姓名：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                <h4>{{basicInformation.content.name}}</h4>
+                <h4>{{basicInformation.content.username}}</h4>
             </div>
         </div>
         <div class="row">
@@ -58,7 +58,7 @@
                 <div class="row"><h4>学校：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                 <h4>{{basicInformation.content.school}}</h4>
+                 <h4>{{basicInformation.content.schoolId}}</h4>
             </div>
         </div>        
         <div class="row">
@@ -66,7 +66,7 @@
                 <div class="row"><h4>班级：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                  <h4>{{basicInformation.content.clazz}}</h4>
+                  <h4>{{basicInformation.content.clazzId}}</h4>
             </div>
         </div>        
         </div>
@@ -100,8 +100,8 @@
                 <div class="row"><h4>QQ：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.qq}}</h4>
-                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.qq">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.qqId}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.qqId">
             </div>
         </div>
         <div class="row">
@@ -109,8 +109,8 @@
                 <div class="row"><h4>微信：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.wechat}}</h4>
-                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.wechat">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.wechatId}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.wechatId">
             </div>
         </div>
         <div class="row">
@@ -127,8 +127,8 @@
                 <div class="row"><h4>手机：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                <h4 ng-show="!personalInformation.editable" >{{personalInformation.content.phone}}</h4>
-                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.phone">
+                <h4 ng-show="!personalInformation.editable" >{{personalInformation.content.phoneNumber}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.phoneNumber">
             </div>
         </div>
             
