@@ -1,9 +1,10 @@
 <div class="readingCenter-right">
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-1"></div>
+	<div class="col-md-9">
 		<div class="row readingCenter-right-top">
 			<div class="col-md-4"><img src="../static/img/myEvaluating.png" class="img-responsive img-rounded"></div>
 		</div>
-		<div id="myEvaluating" class="row readingCenter-right-body">
+		<div id="myEvaluating" class="readingCenter-right-body">
 			<div class="type row">
 				<div class="col-md-2 select-tab myActive" ng-click="showCertification()">认证测试</div>
 				<div class="col-md-2 select-tab" ng-click="showWord()">词汇训练</div>
@@ -16,12 +17,25 @@
 					<div class="col-md-5 value">
 						财富值：90&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						积分：90&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						正确率：80&nbsp;&nbsp;
+						正确率：80%&nbsp;&nbsp;
 					</div>
 					<div class="col-md-1 value">
-						<a>评价</a>
+						<a data-toggle="modal" data-target="#exam-evaluation-model">评价</a>
 					</div>
 					<div class="col-md-3 value">测试时间：2014.12.5</div>
+				</div>
+				<div class="content row" ng-repeat="item in verifyExams">
+					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-2 name">{{item.name}}</div>
+					<div class="col-md-5 value">
+						财富值：{{item.coin}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						积分：{{item.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						正确率：{{100*item.passCount/item.questionNum}}%&nbsp;&nbsp;
+					</div>
+					<div class="col-md-1 value">
+						<a data-toggle="modal" data-target="#exam-evaluation-model">评价</a>
+					</div>
+					<div class="col-md-3 value">测试时间：{{creationTime}}</div>
 				</div>
 			</div>
 			<div ng-show="isWord">
@@ -31,12 +45,25 @@
 					<div class="col-md-5 value">
 						财富值：90&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						积分：90&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						正确率：80&nbsp;&nbsp;
+						正确率：80%&nbsp;&nbsp;
 					</div>
 					<div class="col-md-1 value">
 						<a>评价</a>
 					</div>
 					<div class="col-md-3 value">测试时间：2014.12.5</div>
+				</div>
+				<div class="content row" ng-repeat="item in wordExams">
+					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-2 name">{{item.name}}</div>
+					<div class="col-md-5 value">
+						财富值：{{item.coin}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						积分：{{item.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						正确率：{{100*item.passCount/item.questionNum}}%&nbsp;&nbsp;
+					</div>
+					<div class="col-md-1 value">
+						<a>评价</a>
+					</div>
+					<div class="col-md-3 value">测试时间：{{creationTime}}</div>
 				</div>
 			</div>
 			<div ng-show="isThinking">
@@ -47,11 +74,60 @@
 					<div class="col-md-3 value"><a href="#readingCenter/myEvaluating/myAnswers">查看我的回答</a></div>
 					<div class="col-md-3 value">测试时间：2014.12.5</div>
 				</div>
+				<div class="content row" ng-repeat="item in thinkExams">
+					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-2 name">{{item.name}}</div>
+					<div class="col-md-3 value count">问答题目数：{{item.passCount}}/{{item.questionNum}}</div>
+					<div class="col-md-3 value"><a ng-click="MyAnswer(item)" href="#readingCenter/myEvaluating/myAnswers">查看我的回答</a></div>
+					<div class="col-md-3 value">测试时间：{{creationTime}}</div>
+				</div>
 			</div>
 			<div class="bottom">更多加载中...</div>
 		</div>
 	</div>
 	<div class="col-md-1"></div>
+	<div class="modal fade" id="exam-evaluation-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="color: #2F5682">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            <div class="modal-body">
+                
+                <!-- Row 0 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="modal-title" id="myModalLabel">测试评价
+                        </h4>
+                    </div>
+                </div>
+                
+                <!-- Place holder -->
+                <p class="row"></p>
+                
+                <!-- Row 1 -->
+                <div class="row">
+                    <div class="col-md-12">     
+
+                        <p><small style="line-height:20px;">您的评分：×　×　×　×　× </small></p>
+                    </div>
+                </div>
+
+                <!-- Input form -->
+                <div class="row">
+                    <div class="col-md-12 input-textarea-group">
+                        <input class="form-control" placeholder="标题（必填）" />
+                        <textarea class="form-control message-input" placeholder="正文（不少于20字）" />
+                    </div>	
+                </div>
+          </div>
+          </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <button class="btn btn-green" ng-click="" type="button">发表评论</button>
+                    </div>
+                </div>
+          </div>
+        </div>
+	</div>
 </div>
 <script>
 	SetBookList();
