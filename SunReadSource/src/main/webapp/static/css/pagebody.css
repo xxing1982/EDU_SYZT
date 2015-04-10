@@ -26,20 +26,20 @@
 
 @media (min-width: 768px){
     .modal-dialog {
-      width: 625px;
+      width: 500px;
     }
 }
 
 @media (min-width: 992px){
     .modal-dialog {
-      width: 808px;
+      width: 646px;
     }
 }
 
 
 @media (min-width: 1200px){
     .modal-dialog {
-      width: 975px;
+      width: 780px;
     }
 }
 

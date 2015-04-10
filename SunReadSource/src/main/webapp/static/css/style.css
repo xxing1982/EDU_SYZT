@@ -387,9 +387,9 @@ a:focus, input:focus
     margin-top: -160%;
     margin-left:60%;
 */
-    margin-top: -160%;
-    margin-left: 66%;
-    width: 66%;
+    margin-top: -159%;
+    margin-left: 71%;
+    width: 56%;
 }
 
 .img-padding
@@ -819,6 +819,7 @@ a:focus, input:focus
     bottom: -10%;
     right: -10%;
     position: absolute;
+    width: 46%;
 }
 
 /*******************reading dynamic buttom****************/
