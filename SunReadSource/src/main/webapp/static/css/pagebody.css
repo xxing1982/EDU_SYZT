@@ -24,18 +24,27 @@
 
 /*modal related*/
 
-
 @media (min-width: 768px){
     .modal-dialog {
-      width: 750px;
+      width: 625px;
     }
 }
 
 @media (min-width: 992px){
     .modal-dialog {
-      width: 780px;
+      width: 808px;
     }
 }
+
+
+@media (min-width: 1200px){
+    .modal-dialog {
+      width: 975px;
+    }
+}
+
+
+
 
 .modal-content {
      background-color: #F5F5F5;

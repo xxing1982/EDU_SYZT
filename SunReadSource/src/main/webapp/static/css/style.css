@@ -242,6 +242,8 @@ a:focus, input:focus
 /************readingCenter page******************************/
 .sidebar
 {
+    width: 11%;
+    max-width: 143px;
     position: fixed;
     top: 41px;
     bottom: 30px;
@@ -262,9 +264,13 @@ a:focus, input:focus
 
 .nav-sidebar li.myActive
 {
-    border-right: 5px #FFFFFF solid;
+    border-right: 4px #FFFFFF solid;
     z-index: 100;
     background-color: #B8A179;
+}
+
+.nav-sidebar>li.myActive>a {
+    border-bottom: 1px #B8A179 solid;
 }
 
 .nav-sidebar 
@@ -274,12 +280,22 @@ a:focus, input:focus
     margin-left: -20px;
 }
 
-.nav-sidebar a
+.nav-sidebar>li>a 
 {
     color: #FFFFFF;
-    border-bottom: 1px #FFFFFF solid;
+    border-bottom: 1px #857965 solid;
     font-weight: 700;
-    padding-top: 5px;
+    padding: 17px 0 17px 9%
+}
+
+.nav-sidebar>li>a>img {
+    margin-right: 5px;
+    height: 20px;    
+}
+
+.nav-sidebar>li>a>span {
+    font-size: 15px;
+    vertical-align: middle;
 }
 
 .bgLightYellow
@@ -298,8 +314,6 @@ a:focus, input:focus
 {
     margin-top: 25px;
 }
-
-#myBookshelf-button
 
 
 .btn-addBook
