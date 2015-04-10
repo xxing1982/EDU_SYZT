@@ -1,26 +1,18 @@
 <div id="personalCenter-page" class="container">
     <div class="row">
-    <div class="page-body page-body-top personalProfile-body col-md-8 col-md-offset-2">
+    <div class="page-body page-body-top personalProfile-body col-md-10 col-md-offset-1">
     <div class="col-md-12">
         
         <!-- Avatar -->
         <div class="title col-md-12"><h4 class="row">个人中心</h4></div>
         <div class="col-md-4 col-md-offset-4">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <img ng-src="../static/img/picture.jpg" class="img-responsive img-circle border-shadow" src="../static/img/picture.jpg">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 text-center">
-                    <h2>{{basicInformation.content.name}}</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 text-center">
-                    <a>修改头像</a>
-                </div>
-            </div>
+            <img ng-src="../static/img/picture.jpg" class="img-responsive img-circle border-shadow avatar" src="../static/img/picture.jpg">
+        </div>
+        <div class="col-md-12  text-center">
+            <h2>{{basicInformation.content.username}}</h2>
+        </div>
+        <div class="col-md-12 text-center">
+            <a>修改头像</a>
         </div>
         
         <!-- Basic information -->
@@ -58,7 +50,7 @@
                 <div class="row"><h4>学校：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                 <h4>{{basicInformation.content.schoolId}}</h4>
+                 <h4>{{basicInformation.content.school}}</h4>
             </div>
         </div>        
         <div class="row">
@@ -66,7 +58,7 @@
                 <div class="row"><h4>班级：</h4></div>
             </div>
             <div class="col-md-9 text-left">
-                  <h4>{{basicInformation.content.clazzId}}</h4>
+                  <h4>{{basicInformation.content.class}}</h4>
             </div>
         </div>        
         </div>

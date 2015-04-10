@@ -3,13 +3,14 @@ package com.syzton.sunread.service.pointhistory;
 import java.util.List;
 
 import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
 import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.model.user.UserStatistic;
 import com.syzton.sunread.repository.pointhistory.PointHistoryRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
+import com.syzton.sunread.repository.user.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,11 +41,18 @@ public class PointHistoryRepositoryService implements PointHistoryService {
         this.studentRepository = studentRepository;
     }
 
+    private UserRepository userRepository;
+
+    @Autowired
+    public void UserRepositoryService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
 
     @Override
     public PointHistory add(PointHistory add) {
         LOGGER.debug("Adding a new pointHistory entry with information: {}", add);
-        Student student = studentRepository.findOne(add.getUser().getId());
+        Student student = studentRepository.findOne(add.getUserId());
         UserStatistic statistic = student.getStatistic();
         if (add.getPointType() == PointType.IN) {
         	statistic.setPoint( statistic.getPoint() + add.getNum() );
@@ -100,4 +108,12 @@ public class PointHistoryRepositoryService implements PointHistoryService {
         model.setPointFrom(update.getPointFrom());        
         return model;
     }
+
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+	@Override
+	public List<PointHistory> findByUserId(Long userId) {
+        LOGGER.debug("Finding all pointHistory entries by user id");
+        User user = userRepository.findOne(userId);
+        return repository.findByUser(user);
+	}
 }

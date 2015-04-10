@@ -7,8 +7,8 @@ ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', f
     $scope.basicInformation.content = { username: $rootScope.student.username,
                                         gender: $rootScope.student.gender,
                                         birthday: $rootScope.student.birthday,
-                                        schoolId: $rootScope.student.schoolId,
-                                        clazzId: $rootScope.student.clazzId };
+                                        school: $rootScope.student.school,
+                                        class: $rootScope.student.class };
     
     // Personal information
     $scope.personalInformation = new Object();

@@ -28,30 +28,30 @@ public class CoinHistoryController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/api/coinhistories", method = RequestMethod.POST)
-    @ResponseBody
-    public CoinHistory add(@Valid @RequestBody CoinHistory add) {
-        LOGGER.debug("Adding a new coinhistory entry with information: {}", add);
-
-        CoinHistory added = service.add(add);
-
-        LOGGER.debug("Added a coinhistory entry with information: {}", added);
-
-       return added;
-    }
-
-    @RequestMapping(value = "/api/coinhistories/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public CoinHistory deleteById(@PathVariable("id") Long id) throws NotFoundException {
-        LOGGER.debug("Deleting a coinhistory entry with id: {}", id);
-
-        CoinHistory deleted = service.deleteById(id);
-        LOGGER.debug("Deleted coinhistory entry with information: {}", deleted);
-
-        return deleted;
-    }
-    
-    @RequestMapping(value = "/api/coinhistories", method = RequestMethod.GET)
+//    @RequestMapping(value = "/api/coinhistories", method = RequestMethod.POST)
+//    @ResponseBody
+//    public CoinHistory add(@Valid @RequestBody CoinHistory add) {
+//        LOGGER.debug("Adding a new coinhistory entry with information: {}", add);
+//
+//        CoinHistory added = service.add(add);
+//
+//        LOGGER.debug("Added a coinhistory entry with information: {}", added);
+//
+//       return added;
+//    }
+//
+//    @RequestMapping(value = "/api/coinhistories/{id}", method = RequestMethod.DELETE)
+//    @ResponseBody
+//    public CoinHistory deleteById(@PathVariable("id") Long id) throws NotFoundException {
+//        LOGGER.debug("Deleting a coinhistory entry with id: {}", id);
+//
+//        CoinHistory deleted = service.deleteById(id);
+//        LOGGER.debug("Deleted coinhistory entry with information: {}", deleted);
+//
+//        return deleted;
+//    }
+//    
+    @RequestMapping(value = "/api/users/{userId}/coinhistories", method = RequestMethod.GET)
     @ResponseBody
     public List<CoinHistory> findAll() {
         LOGGER.debug("Finding all coinhistory entries.");
@@ -62,14 +62,14 @@ public class CoinHistoryController {
         return models;
     }
     
-    @RequestMapping(value = "/api/coinhistories/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public CoinHistory update(@Valid @RequestBody CoinHistory updateEntity, @PathVariable("id") Long coinhistoryId) throws NotFoundException {
-        LOGGER.debug("Updating a coinhistory entry with information: {}", updateEntity);
-
-        CoinHistory updated = service.update(updateEntity);
-        LOGGER.debug("Updated the information of a coinhistory entry to: {}", updated);
-
-        return updated;
-    }
+//    @RequestMapping(value = "/api/coinhistories/{id}", method = RequestMethod.PUT)
+//    @ResponseBody
+//    public CoinHistory update(@Valid @RequestBody CoinHistory updateEntity, @PathVariable("id") Long coinhistoryId) throws NotFoundException {
+//        LOGGER.debug("Updating a coinhistory entry with information: {}", updateEntity);
+//
+//        CoinHistory updated = service.update(updateEntity);
+//        LOGGER.debug("Updated the information of a coinhistory entry to: {}", updated);
+//
+//        return updated;
+//    }
 }

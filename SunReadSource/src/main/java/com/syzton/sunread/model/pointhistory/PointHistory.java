@@ -56,8 +56,8 @@ public class PointHistory extends AbstractEntity {
 		this.pointFrom = pointFrom;
 	}
     
-    public User getUser() {
-		return user;
+    public Long getUserId() {
+		return user.getId();
 	}
 
 	public void setUser(User user) {

@@ -43,7 +43,7 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
     @Override
     public CoinHistory add(CoinHistory add) {
         LOGGER.debug("Adding a new coinHistory entry with information: {}", add);
-        Student student = studentRepository.findOne(add.getUser().getId());
+        Student student = studentRepository.findOne(add.getUserId());
         UserStatistic statistic = student.getStatistic();
         if (add.getCoinType() == CoinType.IN) {
         	statistic.setCoin( statistic.getCoin() + add.getNum() );

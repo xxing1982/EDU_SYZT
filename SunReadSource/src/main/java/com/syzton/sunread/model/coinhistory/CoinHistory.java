@@ -35,8 +35,8 @@ public class CoinHistory extends AbstractEntity {
 	private int num;
     
 	
-    public User getUser() {
-		return user;
+    public Long getUserId() {
+		return user.getId();
 	}
 
 	public void setUser(User user) {

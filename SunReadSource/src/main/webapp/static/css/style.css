@@ -946,6 +946,12 @@ a:focus, input:focus
     border-radius: 0px;
 }
 
+#personalCenter-page .avatar{
+    margin-left: auto;
+    margin-right: auto;
+    width: 67%;
+}
+
 /*******************personal profile buttom****************/
 
 
@@ -998,7 +1004,7 @@ a:focus, input:focus
 }
 
 #personal-show-page .fish {
-    height: 260px;
+    height: 325px;
 }
 
 #personal-show-page anking-container {
@@ -1010,14 +1016,20 @@ a:focus, input:focus
     -webkit-transform: rotate(-10deg);
     transform: rotate(-10deg);
     position: absolute;
-    top: 20%;
-    left: 23%;
+    top: 23%;
+    left: 22%;
     color: white;
-    font-size: 40px;
+    font-size: 48px;
     font-family: "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", Heiti, "黑体", sans-serif;
+}
+#personal-show-page .icon {
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*******************personal show buttom****************/
+
 
 .readingCenter-right-body .thinkingTesting .total
 {
