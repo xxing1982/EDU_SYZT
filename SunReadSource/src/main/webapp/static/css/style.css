@@ -307,7 +307,7 @@ a:focus, input:focus
 .readingCenter-right
 {
 /*    background-color: #EAEAEA;*/
-    margin-top: 20px;
+/*    margin-top: 20px;*/
 }
 
 .readingCenter-right-top
@@ -387,9 +387,9 @@ a:focus, input:focus
     margin-top: -160%;
     margin-left:60%;
 */
-    margin-top: -159%;
-    margin-left: 71%;
-    width: 56%;
+    margin-top: -161%;
+    margin-left: 63%;
+    width: 70%;
 }
 
 .img-padding
@@ -1019,7 +1019,7 @@ a:focus, input:focus
 }
 
 #personal-show-page .fish {
-    height: 325px;
+    height: 255px;
 }
 
 #personal-show-page anking-container {
@@ -1031,10 +1031,10 @@ a:focus, input:focus
     -webkit-transform: rotate(-10deg);
     transform: rotate(-10deg);
     position: absolute;
-    top: 23%;
-    left: 22%;
+    top: 20%;
+    left: 21%;
     color: white;
-    font-size: 48px;
+    font-size: 42px;
     font-family: "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", Heiti, "黑体", sans-serif;
 }
 #personal-show-page .icon {
