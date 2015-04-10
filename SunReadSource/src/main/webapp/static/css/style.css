@@ -1093,3 +1093,41 @@ a:focus, input:focus
     text-align: center;
     margin-bottom: 10px;
 }
+
+.readingCenter-right-body .thinkingTesting .showResult
+{
+    padding-left: 15px;
+    padding-top: 30px;
+}
+
+.readingCenter-right-body .thinkingTesting .isPass
+{
+    height: 200px;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 700;
+    padding-top: 50px;
+}
+
+.readingCenter-right-body .thinkingTesting .bookName
+{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.readingCenter-right-body .thinkingTesting .addCoin
+{
+    height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.readingCenter-right-body .thinkingTesting .btn-exam
+{
+    text-align: center;
+    margin-bottom: 20px;
+}

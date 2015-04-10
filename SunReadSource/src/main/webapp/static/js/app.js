@@ -185,3 +185,9 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             controller: "personalShowController"
         });
 }]);
+
+routeApp.run(['$rootScope',function($rootScope){
+    $rootScope.id = 2;
+    //get token
+    //sessionStorage.getItem("access_token")
+}]);
