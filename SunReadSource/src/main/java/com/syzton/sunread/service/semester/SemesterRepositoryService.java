@@ -1,5 +1,8 @@
 package com.syzton.sunread.service.semester;
 
+import java.util.ArrayList;
+
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,12 @@ import com.syzton.sunread.assembler.semester.SemesterAssembler;
 import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.semester.Semester;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.SemesterRepository;
+import com.syzton.sunread.repository.organization.ClazzRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
 
 /*
  * @Date 2015-3-22
@@ -25,6 +32,8 @@ public class SemesterRepositoryService implements SemesterService{
     private static final Logger LOGGER = LoggerFactory.getLogger(SemesterRepositoryService.class);
 
     private SemesterRepository semesterRepo;
+    private StudentRepository studentRepository;
+    private ClazzRepository clazzRepository;
     
     @Autowired
     public SemesterRepositoryService(SemesterRepository repository) {
@@ -92,16 +101,48 @@ public class SemesterRepositoryService implements SemesterService{
         }
         return found;
 	}
+	
+	@Override
+	public Semester findByTime(DateTime time) {
+        LOGGER.debug("Finding a Semester with id: {}", time);
+
+        Semester found = semesterRepo.findByTime(time);
+        LOGGER.debug("Found semester entry: {}", found);
+
+        if (found == null) {
+            throw new NotFoundException("No Semester found with id: " + time);
+        }
+        return found;
+	}
 
 	@Override
 	public Page<Semester> findAll(Pageable pageable) {
         LOGGER.debug("Finding all semester entries");
-        Page<Semester> eduPages = semesterRepo.findAll(pageable);
-        if (eduPages == null) {
+        Page<Semester> semesters = semesterRepo.findAll(pageable);
+        if (semesters == null) {
             throw new NotFoundException("No Semester found");
         }
-        return eduPages;
+        return semesters;
     }
 	
+	@Override
+	public ArrayList<Semester> findByStudentId(Long studentId){
+        LOGGER.debug("Finding all semester entries");
+        Student student = studentRepository.findOne(studentId);
+        if(student == null){
+        	throw new NotFoundException("Student with ID :"+studentId);
+        }
+        Clazz clazz = clazzRepository.findOne(student.getClazzId());
+        int grade = clazz.getGrade();
+        DateTime currentTime = DateTime.now();
+        DateTime fromTime = currentTime.minusYears(grade-1);
+        ArrayList<Semester> semesters = (ArrayList<Semester>) semesterRepo.findByDuration(fromTime,currentTime);
+         
+        if (semesters == null) {
+            throw new NotFoundException("No Semester found");
+        }
+        return semesters;
+    }
+
 
 }
