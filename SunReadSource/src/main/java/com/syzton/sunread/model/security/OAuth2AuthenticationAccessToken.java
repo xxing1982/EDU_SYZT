@@ -21,6 +21,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.util.DateSerializer;
 @Entity
 @Table(name = "oauth_authentication_access_token")
@@ -78,7 +79,8 @@ public class OAuth2AuthenticationAccessToken extends AbstractEntity implements S
         this.tokenId = oAuth2AccessToken.getValue();
         this.token = SerializationUtils.serialize(oAuth2AccessToken);
         this.authenticationId = authenticationId;
-        this.userName = authentication.getName();
+         
+        this.userName = ((User)authentication.getPrincipal()).getUserId();
         this.clientId = authentication.getOAuth2Request().getClientId();
         this.authentication = SerializationUtils.serialize(authentication);
         this.refreshToken = oAuth2AccessToken.getRefreshToken().getValue();

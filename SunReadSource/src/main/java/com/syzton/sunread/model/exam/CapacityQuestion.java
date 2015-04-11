@@ -12,7 +12,7 @@ import javax.persistence.Enumerated;
 @DiscriminatorValue("capacity")
 public class CapacityQuestion extends ObjectiveQuestion{
 	
-	public enum CapacityQuestionType{FIRST,SECOND,THIRD,FOURTH,FIFTH}
+	public enum CapacityQuestionType{FIRST,SECOND,THIRD,FOURTH,FIFTH,SIXTH,SEVENTH,EIGHTTH}
 
 	@Enumerated(EnumType.STRING)
 	@Column(name="capacity_que_type",length=10,nullable=false)

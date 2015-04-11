@@ -1,5 +1,8 @@
 package com.syzton.sunread.service.semester;
 
+import java.util.ArrayList;
+
+import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,4 +20,17 @@ public interface SemesterService {
     public Semester findOne(Long id) ;
 
     Page<Semester> findAll(Pageable pageable);
+
+	/**
+	 * @param time
+	 * @return
+	 */
+	public Semester findByTime(DateTime time);
+
+
+	/**
+	 * @param studentId
+	 * @return
+	 */
+	ArrayList<Semester> findByStudentId(Long studentId);
 }

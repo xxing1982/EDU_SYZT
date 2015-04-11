@@ -37,9 +37,11 @@ public class Exam extends AbstractEntity {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "exam_question", joinColumns = { @JoinColumn(name = "exam_id") }, inverseJoinColumns = { @JoinColumn(name = "question_id") })
 	private Set<Question> questions;
-
-	@Column(name = "book_id")
-	private Long bookId;
+	
+	@ManyToOne(fetch = FetchType.LAZY,cascade = { CascadeType.REFRESH })
+	@JoinColumn(name = "book_id")
+	private Book book;
+	
 	
 	@Column(name="student_id")
 	private Long studentId;
@@ -62,6 +64,8 @@ public class Exam extends AbstractEntity {
 
 	@Column(name = "question_num")
 	private int questionNum = 5;
+	
+
 
 	public enum ExamType {
 		VERIFY, THINK, CAPACITY,SPEED,WORD
@@ -113,8 +117,8 @@ public class Exam extends AbstractEntity {
 		this.questions = questions;
 	}
 
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	public void setExamType(ExamType examType) {
@@ -165,8 +169,8 @@ public class Exam extends AbstractEntity {
 		this.studentId = studentId;
 	}
 
-	public Long getBookId() {
-		return bookId;
+	public Book getBook() {
+		return book;
 	}
 
 	public ExamType getExamType() {

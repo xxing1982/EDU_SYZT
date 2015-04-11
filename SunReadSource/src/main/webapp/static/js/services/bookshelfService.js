@@ -3,7 +3,7 @@ var bookshelfServices = angular.module('bookshelfServices', ['ngResource', "nour
 // User object(s)
 bookshelfServices.factory('Bookshelf',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/bookshelf/1");
+		return $resource("/api/bookshelf/4");
 	}]);
 
 var bookInShelfService = angular.module('bookInShelfServices', ['ngResource', "nourConfig"]);

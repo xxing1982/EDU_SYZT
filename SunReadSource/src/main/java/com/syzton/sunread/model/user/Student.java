@@ -26,8 +26,6 @@ public class Student extends User{
     @Column(length = MAX_LENGTH_IDENTITY)
     private String identity;
 
-
-
     @NotNull
     private long schoolId;
     @NotNull

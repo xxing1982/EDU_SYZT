@@ -11,7 +11,7 @@ examServices.factory('VerifyExam',['$resource', 'config', '$http',
 			});
 		};
 		api.getAllInfo = function(userId ,callback){
-			$http.get(config.Host + 'verifyexams/' + userId)
+			$http.get(config.HOST + 'verifyexams/' + userId)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});
@@ -30,7 +30,7 @@ examServices.factory('WordExam',['$resource', 'config', '$http',
 			});
 		};
 		api.getAllInfo = function(userId ,callback){
-			$http.get(config.Host + 'wordexams/' + userId)
+			$http.get(config.HOST + 'wordexams/' + userId)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});
@@ -49,7 +49,7 @@ examServices.factory('ThinkExam',['$resource', 'config', '$http',
 			});
 		};
 		api.getAllInfo = function(userId ,callback){
-			$http.get(config.Host + 'thinkexam/' + userId)
+			$http.get(config.HOST + 'thinkexams/' + userId)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});
@@ -68,7 +68,7 @@ examServices.factory('CapacityExam',['$resource', 'config', '$http',
 			});
 		};
 		api.getAllInfo = function(userId ,callback){
-			$http.get(config.Host + 'capacityexams/' + userId)
+			$http.get(config.HOST + 'capacityexams/' + userId)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});

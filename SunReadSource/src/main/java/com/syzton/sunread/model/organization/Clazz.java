@@ -1,8 +1,11 @@
 package com.syzton.sunread.model.organization;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.Student;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -37,6 +40,8 @@ public class Clazz extends  AbstractEntity{
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "compus")
     private Compus compus;
+    
+    
 
     public Clazz() {
     }
@@ -62,7 +67,8 @@ public class Clazz extends  AbstractEntity{
         return grade;
     }
 
-    @PrePersist
+
+	@PrePersist
     public void prePersist() {
         DateTime now = DateTime.now();
         creationTime = now;

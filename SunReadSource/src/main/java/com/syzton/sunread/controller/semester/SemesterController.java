@@ -1,9 +1,12 @@
 package com.syzton.sunread.controller.semester;
 
+import java.util.ArrayList;
+
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +94,17 @@ public class SemesterController {
         return new PageResource<>(pageResult,"page","size");
     }
     
+//Get all Semesters By userId
+    @RequestMapping(value = "/student/{studentId}/semesters", method = RequestMethod.GET)
+    @ResponseBody
+    public ArrayList<Semester> findAll(@PathVariable("studentId")Long studentId) throws NotFoundException {
+        LOGGER.debug("Finding  semesters entry " );
+
+        ArrayList<Semester> semesters = service.findByStudentId(studentId);
+
+        return semesters;
+    }    
+    
 //Get a Semester    
     @RequestMapping(value = "/semester/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -98,6 +112,19 @@ public class SemesterController {
         LOGGER.debug("Finding a semester entry with id: {}", id);
 
         Semester found = service.findOne(id);
+        LOGGER.debug("Found semester entry with information: {}", found);
+
+        return found;
+    }
+    
+ //Get a Semester  by  time
+    @RequestMapping(value = "/time/{time}/semester", method = RequestMethod.GET)
+    @ResponseBody
+    public Semester findByTime(@PathVariable("time") Long time) throws NotFoundException {
+        LOGGER.debug("Finding a semester entry with id: {}", time);
+        DateTime timeDate = new DateTime(time);
+
+        Semester found = service.findByTime(timeDate);
         LOGGER.debug("Found semester entry with information: {}", found);
 
         return found;

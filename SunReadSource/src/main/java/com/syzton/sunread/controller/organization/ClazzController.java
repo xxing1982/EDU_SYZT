@@ -36,7 +36,7 @@ public class ClazzController {
     }
     
 //Add a Clazz 
-    @RequestMapping(value = "/grade/{id}/clazz", method = RequestMethod.POST)
+    @RequestMapping(value = "/compus/{id}/clazz", method = RequestMethod.POST)
     @ResponseBody
     public ClazzDTO add(@Valid @RequestBody ClazzDTO dto
     		,@PathVariable("id")Long id) {

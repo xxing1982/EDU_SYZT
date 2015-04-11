@@ -8,9 +8,9 @@ var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userS
 
 ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam",
   function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam) {
-    $rootScope.id = 2;
-    //get token
-    //sessionStorage.getItem("access_token")
+    //$rootScope.id = 2;
+    //get userid
+    $rootScope.id = sessionStorage.getItem("userId");
 
 
     //student info

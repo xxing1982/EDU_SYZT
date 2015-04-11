@@ -53,4 +53,6 @@ public interface ExamService {
 	public boolean isPassVerifyTest(Long bookId,Long studentId);
 	
 	public VerifyExamPassDTO findAllByExamTypeAndPassStatus(Long studentId,ExamType type) throws NotFoundException;
+	
+	public VerifyExamPassDTO findAllByExamType(Long studentId,ExamType type) throws NotFoundException;
 }
