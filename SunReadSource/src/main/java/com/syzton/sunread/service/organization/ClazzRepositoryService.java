@@ -1,10 +1,15 @@
 package com.syzton.sunread.service.organization;
 
+import java.util.List;
+
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.Compus;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.organization.CompusRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
+
 import javassist.NotFoundException;
 
 import org.slf4j.Logger;
@@ -22,13 +27,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class ClazzRepositoryService implements ClazzService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClazzRepositoryService.class);
+    
     private ClazzRepository repository;
+    
+    private StudentRepository studentRepository;
+    
     private CompusRepository compusRepository;
 
     @Autowired
-    public ClazzRepositoryService(ClazzRepository repository,CompusRepository compusRepository) {
+    public ClazzRepositoryService(ClazzRepository repository,CompusRepository compusRepository,StudentRepository studentRepository) {
         this.repository = repository;
         this.compusRepository = compusRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -89,4 +99,39 @@ public class ClazzRepositoryService implements ClazzService {
         LOGGER.debug("Finding all clazz entries");
         return repository.findAll(pageable);
     }
+
+	@Override
+	public List<Student> findAllStudentFromClazz(int clazzId) {
+		return studentRepository.findByClazzId(clazzId);
+	
+	}
+ 
+	@Override
+	public int getAveragePointsfromClass(int clazzId) throws NotFoundException {
+		List<Student> students = findAllStudentFromClazz(clazzId);
+		int total = 0;
+		if(students.size() == 0){
+			throw new NotFoundException("Can't find class id:"+clazzId);
+		}
+		for(int i=0;i<students.size();i++){
+			Student student = students.get(i);
+			total = total + student.getStatistic().getPoint();
+		}
+		return total/students.size();
+	}
+
+	@Override
+	public int getAverageReadingBookFromClass(int clazzId)
+			throws NotFoundException {
+		List<Student> students = findAllStudentFromClazz(clazzId);
+		int total = 0;
+		if(students.size() == 0){
+			throw new NotFoundException("Can't find class id:"+clazzId);
+		}
+		for(int i=0;i<students.size();i++){
+			Student student = students.get(i);
+			total = total + student.getStatistic().getReadNum();
+		}
+		return total/students.size();
+	}
 }
