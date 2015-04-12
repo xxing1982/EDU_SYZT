@@ -48,8 +48,10 @@ public class Comment extends AbstractEntity {
 	public Note getNote() {
 		return note;
 	}
-	
-	
+
+	public String getUsername(){
+		return user.getUsername();
+	}
 	
     public void update(String content) {
         this.content = content;

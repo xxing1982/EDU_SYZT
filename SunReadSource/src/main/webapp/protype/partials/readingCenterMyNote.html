@@ -4,7 +4,7 @@
 			<div class="col-md-4"><img src="../static/img/myNote.png" class="img-responsive img-rounded"></div>
 		</div>
 		<div class="row readingCenter-right-body clear-padding">
-			<div class="note-row"  ng-repeat="Note in Notes.content">
+			<div class="note-row"  ng-repeat="Note in noteView.Notes.content">
 				<div class="row book-row">
 					<div class="col-md-2 book-row-left">
 						<div><img src="../static/img/book.jpg" class="img-responsive custom-shadow"/></div>
@@ -24,7 +24,7 @@
 								<img src="../static/img/note.jpg" class="img-responsive">
 							</div>
 						</div>
-						<div class="msg-buttom" ng-click="ShowComments(Note)">
+						<div class="msg-buttom" ng-click="noteView.ShowComments(Note)">
                             <div><h5>{{ Note.commentCount }}</h5></div>
                             <img src="../static/img/myNote/comment.png"/>
                         </div>
@@ -32,20 +32,20 @@
 				</div>
 				<div class="row msg-row" ng-show="Note.showComments">
 					<div class="col-md-10"><input class="form-control" placeholder="输入回复" ng-model="Note.newCommentContent"></div>
-					<input class="btn btn-green col-md-2" ng-click="addComment(Note)" type="button" value="发表评论">
+					<input class="btn btn-green col-md-2" ng-click="noteView.addComment(Note)" type="button" value="发表评论">
 					<div class="clearfix"></div>
 					<div class="col-md-12 reply">
                         <div class="col-md-12 total"><h5>共{{ Note.commentCount }}条评论</h5></div>
 						<div class="col-md-12 block" ng-repeat="Comment in Note.Comments.content">
-                            <div class="person"><h5>张逸轩&nbsp;&nbsp;&nbsp;三天前</h5></div>
+                            <div class="person"><h5>{{Comment.username}}&nbsp;&nbsp;&nbsp;{{Comment.creationTime}}</h5></div>
                             <div class="content"><p>{{Comment.content}}</p></div>
 						</div>
-                        <div class="bottom col-md-12 block" style="margin-top:1px;" ng-show="Note.showShowMoreComment" ng-click="ShowMoreComments(Note)">{{ Note.loadingState }}</div>
+                        <div class="bottom col-md-12 block" style="margin-top:1px;" ng-show="Note.showShowMoreComment" ng-click="noteView.ShowMoreComments(Note)">{{ Note.loadingState }}</div>
 					</div>
 				</div>
 			</div>
             
-			<div class="bottom" ng-click="ShowMoreNotes()">{{ loadingState }}</div>
+			<div class="bottom" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}</div>
 		</div>
 	</div>
 	<div class="col-md-1"></div>

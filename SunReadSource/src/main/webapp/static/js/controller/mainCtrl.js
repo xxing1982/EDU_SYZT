@@ -1,5 +1,5 @@
 //mainCtrl.js
-var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'paraServices', 'commentServices'
+var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
                                              ,'examServices', 'classServices', 'questionServices'
                                              ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices'
