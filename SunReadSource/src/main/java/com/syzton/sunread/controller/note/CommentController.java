@@ -5,14 +5,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.syzton.sunread.controller.BaseController;
+import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Comment;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.note.CommentService;
 
 import javax.validation.Valid;
@@ -28,19 +31,18 @@ public class CommentController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
 
     private CommentService service;
-
+    
     @Autowired
     public CommentController(CommentService service) {
         this.service = service;
     }
-
+    
     @RequestMapping(value = "/api/notes/{noteId}/comments", method = RequestMethod.POST)
     @ResponseBody
     public CommentDTO add(@Valid @RequestBody CommentDTO dto, @PathVariable("noteId") Long noteId) {
         LOGGER.debug("Adding a new comment entry with information: {}", dto);
 
         Comment added = service.add(dto, noteId);
-
         LOGGER.debug("Added a comment entry with information: {}", added);
 
        return added.createDTO(added);

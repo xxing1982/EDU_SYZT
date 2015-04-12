@@ -33,8 +33,8 @@ public class Comment extends AbstractEntity {
 
     }
 
-    public static Builder getBuilder(String content, Note note) {
-        return new Builder(content, note);
+    public static Builder getBuilder(String content, Note note, User user) {
+        return new Builder(content, note, user);
     }
 
     public Long getId() {
@@ -59,10 +59,11 @@ public class Comment extends AbstractEntity {
 
         private Comment built;
 
-        public Builder(String content, Note note) {
+        public Builder(String content, Note note, User user) {
             built = new Comment();
             built.content = content;
             built.note = note;
+            built.user = user;
         }
 
         public Comment build() {

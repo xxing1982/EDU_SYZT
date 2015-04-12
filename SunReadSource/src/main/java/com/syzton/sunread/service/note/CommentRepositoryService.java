@@ -1,6 +1,7 @@
 package com.syzton.sunread.service.note;
 
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Comment;
 import com.syzton.sunread.model.note.Note;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.note.CommentRepository;
 import com.syzton.sunread.repository.note.NoteRepository;
 
@@ -38,13 +42,21 @@ public class CommentRepositoryService implements CommentService {
         this.noteRepository = noteRepository;
     }
     
+    private SecurityContextUtil securityContextUtil;
+    
+    @Autowired
+    public void setSecurityContextUtil(SecurityContextUtil securityContextUtil) {
+        this.securityContextUtil = securityContextUtil;
+    }
+    
     @Override
     public Comment add(CommentDTO added, Long noteId) {
         LOGGER.debug("Adding a new comment entry with information: {}", added);
 
         Note note = noteRepository.findOne(noteId);
         note.setCommentCount( note.getCommentCount() + 1 );
-        Comment commentModel = Comment.getBuilder(added.getContent(), note)
+        User user = securityContextUtil.getUser();
+        Comment commentModel = Comment.getBuilder(added.getContent(), note, user)
                 .build();
 
         

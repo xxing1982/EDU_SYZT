@@ -51,8 +51,8 @@ public class Note extends AbstractEntity{
 
     }
 
-    public static Builder getBuilder(String title, String content, Book book) {
-        return new Builder(title, content, book);
+    public static Builder getBuilder(String title, String content, Book book, User user) {
+        return new Builder(title, content, book, user);
     }
 
     public Long getCommentCount() {
@@ -94,11 +94,12 @@ public class Note extends AbstractEntity{
 
         private Note built;
 
-        public Builder(String title, String content, Book book) {
+        public Builder(String title, String content, Book book, User user) {
             built = new Note();
             built.title = title;
             built.content = content;
             built.book = book;
+            built.user = user;
         }
 
         public Note build() {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.mysema.query.types.Predicate;
 import com.mysema.query.types.expr.BooleanExpression;
+import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
@@ -59,6 +60,12 @@ public class NoteRepositoryService implements NoteService {
         this.userRepository = userRepository;
     }
 
+    private SecurityContextUtil securityContextUtil;
+    
+    @Autowired
+    public void setSecurityContextUtil(SecurityContextUtil securityContextUtil) {
+        this.securityContextUtil = securityContextUtil;
+    }
     
     @Override
     public Note add(NoteDTO added, Long bookId) {
@@ -67,7 +74,8 @@ public class NoteRepositoryService implements NoteService {
         Book book = bookRepository.findOne(bookId);
         book.getStatistic().increaseNotes();
         bookRepository.save(book);
-        Note noteModel = Note.getBuilder(added.getTitle(), added.getContent(), book)
+        User user = securityContextUtil.getUser();
+        Note noteModel = Note.getBuilder(added.getTitle(), added.getContent(), book, user)
         		.image(added.getImage())
                 .build();
         
