@@ -10,6 +10,8 @@ public class ReviewDTO {
     private Long bookId;
 
     private String content;
+    
+    private Long studentId;
 
     public String getContent() {
         return content;
@@ -34,4 +36,14 @@ public class ReviewDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+	public Long getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
+    
+   
 }

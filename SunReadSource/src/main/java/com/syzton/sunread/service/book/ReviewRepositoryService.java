@@ -53,7 +53,7 @@ public class ReviewRepositoryService implements ReviewService {
 
         Book book = bookRepository.findOne(reviewDTO.getBookId());
 
-        Review review = Review.getBuilder(reviewDTO.getContent()).book(book).build();
+        Review review = Review.getBuilder(reviewDTO.getStudentId(),reviewDTO.getContent()).book(book).build();
 
         return reviewRepository.save(review);
     }

@@ -19,9 +19,12 @@ public class VerifyExamPassDTO {
 
 	private int passRate;
 	
-	public VerifyExamPassDTO(List<ExamDTO> exams,int passRate){
+	private String firstExamTime;
+	
+	public VerifyExamPassDTO(List<ExamDTO> exams,int passRate,String firstExamTime){
 		this.examDTOs = exams;
 		this.passRate = passRate;
+		this.firstExamTime = firstExamTime;
 	}
 
 	public List<ExamDTO> getExamDTOs() {
@@ -38,6 +41,14 @@ public class VerifyExamPassDTO {
 
 	public void setPassRate(int passRate) {
 		this.passRate = passRate;
+	}
+
+	public String getFirstExamTime() {
+		return firstExamTime;
+	}
+
+	public void setFirstExamTime(String firstExamTime) {
+		this.firstExamTime = firstExamTime;
 	}
 
 }

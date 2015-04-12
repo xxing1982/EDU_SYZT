@@ -1,23 +1,21 @@
 package com.syzton.sunread.service.exam;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import javassist.NotFoundException;
 
+import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.syzton.sunread.dto.exam.ExamDTO;
 import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.CapacityQuestion;
+import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.exam.Exam.ExamType;
-import com.syzton.sunread.model.user.Student;
 
 public interface ExamService {
 	public Exam add(Exam added);
@@ -55,4 +53,8 @@ public interface ExamService {
 	public VerifyExamPassDTO findAllByExamTypeAndPassStatus(Long studentId,ExamType type) throws NotFoundException;
 	
 	public VerifyExamPassDTO findAllByExamType(Long studentId,ExamType type) throws NotFoundException;
+	
+	public int findPassVerifyExamPassRate(Long studentId, DateTime from,DateTime to);
+	
+	public Map<CapacityQuestionType, Integer> getStudentCapacityStatus(Long student,DateTime from,DateTime to);
 }

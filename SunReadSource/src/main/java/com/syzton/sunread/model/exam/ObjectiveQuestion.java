@@ -1,5 +1,6 @@
 package com.syzton.sunread.model.exam;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,7 +31,7 @@ public class ObjectiveQuestion extends Question {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL})
 	@JoinColumn(name="question_id")  
-	private Set<Option> options;
+	private List<Option> options;
 	
 	
 	@Column(name="objective_type",nullable=false)
@@ -85,7 +86,7 @@ public class ObjectiveQuestion extends Question {
 
 	  
 	
-	public Set<Option> getOptions() {
+	public List<Option> getOptions() {
 		return options;
 	}
 
@@ -97,7 +98,7 @@ public class ObjectiveQuestion extends Question {
 		this.correctAnswer = option;
 	}
 	
-	public void setOptions(Set<Option> options) {
+	public void setOptions(List<Option> options) {
 		this.options = options;
 	}
 
