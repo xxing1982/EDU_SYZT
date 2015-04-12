@@ -145,3 +145,25 @@ var notesLib = function ($scope, Note, Comment) {
         note.commentCount ++;
     }
 };
+
+
+var takeNote = function(Note, bookDetails){
+    // Initlizate the properties of details
+    this.id = bookDetails.id;
+    this.name = bookDetails.bookDetails;
+    this.author = bookDetails.author;
+    this.publisher = bookDetails.publisher;
+    this.point = bookDetails.point;
+    this.wordCount = bookDetails.wordCount;
+    this.pageCount = bookDetails.pageCount;
+
+    // Take note entity and methods
+    this.send = function(){
+        
+        // Create a note entity from input 
+        var note = {title: this.title, content: this.content};
+        
+        // POST the note by the note service with book id
+        Note.save({by: "books", id: this.id}, note);
+    }
+}

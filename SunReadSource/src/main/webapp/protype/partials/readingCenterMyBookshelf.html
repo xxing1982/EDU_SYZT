@@ -66,6 +66,44 @@
 							</div>				
 						</div>
 					</div>
+                
+                <div id="readBooksTab" class="tab-pane" role="tabpanel">
+					<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
+						<div class="col-md-6">
+							<a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive custom-shadow"></div></a>
+							<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
+						</div>
+						<div class="col-md-6">
+                            <!-- bookName row -->
+                            <div class="row"><h5>{{readBook.bookName | limitTo:8}}</h5></div>
+                            
+                            <!-- Details row -->
+                            <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;"><small>作者：{{readBook.author | limitTo:8 }} <br> 积分：{{readBook.point | limitTo:8 }}</small></p></div>
+							
+                            <!-- Tests row -->
+                            <div class="row dropdown">
+								<button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" aria-expanded="true">测试训练
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="CertificationTest(unreadBook)" href="#readingCenter/multipleTesting">认证测试</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="SubjectiveTest(unreadBook)" href="#readingCenter/multipleTesting">思维测试</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="WordTest(unreadBook)" href="#readingCenter/multipleTesting">词汇测试</a></li>
+                                </ul>
+                                <!-- Place Holder -->
+                                <p class="row"></p>
+                            </div>
+
+                            <!-- Review row -->
+                            <div>
+                                <div class="row" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/myBookshelf/review.png" class="img-responsive"></div>
+                                <!-- Place Holder -->
+                                <p class="row"></p>
+                            </div>
+
+                            
+							</div>				
+						</div>
+					</div>
 
 					<div id="readBooksTab" class="tab-pane" role="tabpanel">
 						<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">

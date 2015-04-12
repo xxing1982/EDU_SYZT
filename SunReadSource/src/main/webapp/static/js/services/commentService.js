@@ -4,6 +4,6 @@ var commentServices = angular.module('commentServices', ['ngResource', "nourConf
 commentServices.factory('Comment',['$resource', 'config',
 	function($resource, config){
 		return $resource(config.HOST + ":by/:id/comments",
-            {by:'@by', id:'@id'},{}
+            {by:'@by', id:'@id'}, {}
         );
 	}]); 
