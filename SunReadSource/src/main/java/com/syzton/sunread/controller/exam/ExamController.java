@@ -2,6 +2,7 @@ package com.syzton.sunread.controller.exam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javassist.NotFoundException;
@@ -37,6 +38,7 @@ import com.syzton.sunread.model.coinhistory.CoinHistory.CoinFrom;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
+import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
@@ -45,6 +47,7 @@ import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.book.BookService;
@@ -58,6 +61,7 @@ import com.syzton.sunread.service.exam.ExamService;
 import com.syzton.sunread.service.exam.ObjectiveAnswerService;
 import com.syzton.sunread.service.exam.SubjectiveAnswerService;
 import com.syzton.sunread.service.pointhistory.PointHistoryService;
+import com.syzton.sunread.service.semester.SemesterService;
 import com.syzton.sunread.service.user.UserService;
 
 @Controller
@@ -79,11 +83,13 @@ public class ExamController {
 	private BookService bookService;
 
 	private BookInShelfService shelfService;
+	
+	private SemesterService semesterService;
 
 	@Autowired
 	public ExamController(ExamService service, TestPassService tService,
 			CoinHistoryService coinService, PointHistoryService pointService,
-			UserService userService, BookService bookService,BookInShelfService shelfService) {
+			UserService userService, BookService bookService,BookInShelfService shelfService,SemesterService semesterService) {
 		this.service = service;
 		this.testPassService = tService;
 		this.coinService = coinService;
@@ -91,6 +97,7 @@ public class ExamController {
 		this.userService = userService;
 		this.bookService = bookService;
 		this.shelfService = shelfService;
+		this.semesterService = semesterService;
 	}
 
 	@RequestMapping(value = "/exam", method = RequestMethod.POST)
@@ -275,7 +282,6 @@ public class ExamController {
 	public Exam handInCapacityPaper(@Valid @RequestBody Exam exam)
 			throws NotFoundException {
 		LOGGER.debug("hand in exam entrie.");
-
 		Exam examResult = service.handInCapacityTest(exam);
 		LOGGER.debug("return a exam entry result with information: {}", exam);
 
@@ -344,4 +350,23 @@ public class ExamController {
 				ExamType.THINK);
 		return examPassDTO;
 	}
+	
+	@RequestMapping(value = "/verifyexams/average/{studentid}/{semester}", method = RequestMethod.GET)
+	@ResponseBody
+	public int getAverageVerifyExamsPassRate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId)
+			throws NotFoundException {
+		Semester semester = semesterService.findOne(semesterId);
+		int passRate = service.findPassVerifyExamPassRate(studentId, semester.getStartTime(), semester.getEndTime());
+		return passRate;
+	}
+	
+	@RequestMapping(value = "/capacityexam/everytypepassrate/{studentid}/{semester}", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<CapacityQuestionType,Integer> getCapacityQuestionPassrate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId){
+		Semester semester = semesterService.findOne(semesterId);
+		Map<CapacityQuestionType,Integer> passRate = service.getStudentCapacityStatus(studentId, semester.getStartTime(), semester.getEndTime());
+		return passRate;
+	}
+	
+	 
 }

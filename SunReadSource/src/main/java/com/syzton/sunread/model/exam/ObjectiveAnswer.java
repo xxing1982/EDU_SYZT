@@ -13,11 +13,10 @@ import com.syzton.sunread.model.exam.SubjectiveAnswer.Builder;
 @Entity
 @DiscriminatorValue("objective")
 public class ObjectiveAnswer extends Answer {
+	
 	@OneToOne(cascade=CascadeType.REFRESH)  
     @JoinColumn(name="option_id")  
 	private Option option;
-	
-	
 	
 	public static Builder getBuilder() {
         return new Builder();

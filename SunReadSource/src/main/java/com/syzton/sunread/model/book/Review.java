@@ -25,9 +25,11 @@ public class Review {
 
     @Column(name ="content",nullable = false)
     private String content;
+    
+    private Long studentId;
 
-
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
+  
+	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @JoinColumn(name="book_id")
     private Book book;
 
@@ -50,17 +52,18 @@ public class Review {
     public DateTime getCreationTime() {
         return creationTime;
     }
-    public static Builder getBuilder(String content) {
-        return new Builder(content);
+    public static Builder getBuilder(Long studentId,String content) {
+        return new Builder(studentId,content);
     }
 
     public static class Builder {
 
         private Review built;
 
-        public Builder(String content) {
+        public Builder(Long studentId,String content) {
             built = new Review();
             built.content = content;
+            built.studentId=studentId;
         }
         public Builder book(Book book) {
             built.book = book;
@@ -73,11 +76,18 @@ public class Review {
 
 
     }
+    public Long getStudentId() {
+  		return studentId;
+  	}
+  	public void setStudentId(Long studentId) {
+  		this.studentId = studentId;
+  	}
     public ReviewDTO createDTO(Review model) {
         ReviewDTO dto = new ReviewDTO();
         dto.setId(model.getId());
         dto.setBookId(model.getBook().getId());
         dto.setContent(model.getContent());
+        dto.setStudentId(model.getStudentId());
         return dto;
     }
 
