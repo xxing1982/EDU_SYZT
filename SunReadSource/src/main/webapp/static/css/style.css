@@ -66,7 +66,7 @@ a:focus, input:focus
 
 #index-head
 {
-    margin-top:60px;
+    margin-top:30px;
 }
 
 .index-head-info-text
@@ -96,19 +96,12 @@ a:focus, input:focus
 
 .div-tag
 {
-    margin-top: 40px;
+    margin-top: 20px;
     background-color: white;
+    border-radius: 5px;
+    border: 1px #77B2D0 solid;
 }
 
-.tag-margin-blue
-{
-    border-top: 2px #77B2D0 solid;
-}
-
-.tag-margin-green
-{
-    border-top: 2px #AEC634 solid;
-}
 
 .tag-left
 {

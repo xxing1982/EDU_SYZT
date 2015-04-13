@@ -7,27 +7,30 @@
 					{{title}}
 				</div>
 				<div class="title">{{bookName}}</div>
-				<div class="total">一共{{total}}题，现在是第{{now + 1}}题</div>
-				<div class="question">{{current + questions.current.topic}}</div>
-				<div class="row option">
+				<div class="total">一共{{total}}题，现在是第{{current + 1}}题</div>
+				<div class="question">{{current + 1}}.{{questions.current.topic}}</div>
+				<div class="row option" ng-class="{true: 'active', false: ''}[isActiveA]" ng-click="Select(questions.current.options[0], 'A')">
 					<div class="col-md-1"><img src="../static/img/rank/Arank.png" class="img-circle"></div>
-					<div class="col-md-10 opContent">{{questions.current.options[0]}}</div>
+					<div class="col-md-10 opContent">{{questions.current.options[0].content}}</div>
 				</div>
-				<div class="row option">
+				<div class="row option" ng-class="{true: 'active', false: ''}[isActiveB]" ng-click="Select(questions.current.options[1], 'B')">
 					<div class="col-md-1"><img src="../static/img/rank/Brank.png" class="img-circle"></div>
-					<div class="col-md-10 opContent">{{questions.current.options[1]}}</div>
+					<div class="col-md-10 opContent">{{questions.current.options[1].content}}</div>
 				</div>
-				<div class="row option">
+				<div class="row option" ng-class="{true: 'active', false: ''}[isActiveC]" ng-click="Select(questions.current.options[2], 'C')">
 					<div class="col-md-1"><img src="../static/img/rank/Crank.png" class="img-circle"></div>
-					<div class="col-md-10 opContent">{{questions.current.options[2]}}</div>
+					<div class="col-md-10 opContent">{{questions.current.options[2].content}}</div>
 				</div>
-				<div class="row option">
+				<div class="row option" ng-class="{true: 'active', false: ''}[isActiveD]" ng-click="Select(questions.current.options[3], 'D')">
 					<div class="col-md-1"><img src="../static/img/rank/Drank.png" class="img-circle"></div>
-					<div class="col-md-10 opContent">{{questions.current.options[3]}}</div>
+					<div class="col-md-10 opContent">{{questions.current.options[3].content}}</div>
 				</div>
 				<div class="btn-next">
-					<button class="btn btn-green" ng-click="nextQuestion()">
+					<button class="btn btn-green" ng-click="nextQuestion()" ng-hide="IsFinish">
                 		下一题
+            		</button>
+            		<button class="btn btn-green" ng-click="FinishExam()" ng-show="IsFinish">
+                		提交
             		</button>
 				</div>
 			</div>
@@ -37,5 +40,5 @@
 </div>
 <script>
 	SetReadingCenterRightHeight();
-	SetOption();
+	//SetOption();
 </script>
