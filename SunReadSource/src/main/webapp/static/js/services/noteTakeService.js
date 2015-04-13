@@ -5,7 +5,7 @@ var NoteTake = function(bookDetails){
     
     // Initlizate the properties of details
     this.id = bookDetails.id;
-    this.name = bookDetails.bookDetails;
+    this.name = bookDetails.name;
     this.author = bookDetails.author;
     this.publisher = bookDetails.publisher;
     this.point = bookDetails.point;

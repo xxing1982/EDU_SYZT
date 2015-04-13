@@ -128,7 +128,7 @@ NoteView.prototype.ShowMoreComments = function (note){
 /*
     Invoke this method to add a comment to a note
 */
-NoteView.prototype.addComment = function(note){
+NoteView.prototype.addComment = function(note, username){
     // Check the content of comment is avaliable
     var content = note.newCommentContent;
     if ( content === "" || content === undefined ) return;
@@ -136,12 +136,15 @@ NoteView.prototype.addComment = function(note){
     // Get the comments reference and set the comment entity
     var comments = note.Comments.content;
     var comment = {content: content};
-
+        
     // POST the comment entity by Comment factory
     this.Comment.save({by: "notes", id: note.id}, comment);
+    
+    // Add creation time and username to the a temporary object 
+    var append = { creationTime: '刚刚', username: username} ;
 
     // Add the comment entity to the top of Comments list
-    comments.unshift(comment);
+    comments.unshift( $.extend({}, comment, append) );
 
     // Reset the form 
     note.newCommentContent = "";

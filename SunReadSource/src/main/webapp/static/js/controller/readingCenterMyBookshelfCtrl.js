@@ -48,8 +48,6 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         $rootScope.exam.bookName = data.bookName;
         $rootScope.exam.typeName = "我的书架 > 词汇训练";
     }
-    
-
 }]);
 
 //var booksCtrl = angular.module('nourControllers',['nourConfig', 'ngResource','bookInShelfService']);

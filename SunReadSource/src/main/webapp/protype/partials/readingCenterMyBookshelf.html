@@ -55,9 +55,9 @@
                                 <p class="row"></p>
                             </div>
 
-                            <!-- Review row -->
+                            <!-- Note row -->
                             <div>
-                                <div class="row" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/myBookshelf/review.png" class="img-responsive"></div>
+                                <div class="row"><img src="../static/img/myBookshelf/note.png" class="img-responsive"></div>
                                 <!-- Place Holder -->
                                 <p class="row"></p>
                             </div>
@@ -93,34 +93,14 @@
                                 <p class="row"></p>
                             </div>
 
-                            <!-- Review row -->
+                            <!-- Note row -->
                             <div>
-                                <div class="row" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/myBookshelf/review.png" class="img-responsive"></div>
+                                <div class="row"><img src="../static/img/myBookshelf/note.png" class="img-responsive"></div>
                                 <!-- Place Holder -->
                                 <p class="row"></p>
                             </div>
-
-                            
 							</div>				
 						</div>
-					</div>
-
-					<div id="readBooksTab" class="tab-pane" role="tabpanel">
-						<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
-							<div class="col-md-6">
-								<a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive"></div></a>
-								<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div>
-							</div>
-							<div class="col-md-6">
-								<div class="fsize12"><h4>{{readBook.bookName}}</h4></div>
-								<div class="fsize12">作者：{{readBook.author}}</div>
-								<div class="fsize12">积分：{{readBook.point}}</div>
-								<div><button type="button" class="btn btn-green">测试训练 <b class="caret"></b></button></div>
-								<div>
-									<div class="col-md-5 img-padding" data-toggle="modal" data-target="#book-evaluation-model"><img src="../static/img/write.jpg" class="img-responsive"></div>
-								</div>
-							</div>
-						</div>				
 					</div>
                 </div>
             </div>
@@ -129,50 +109,6 @@
 			<div class="bottom">更多加载中...</div>
 		</div>     			
         <div class="col-md-1"></div>
-	</div>
-
-	<!-- Create review modal -->
-	<div class="modal fade" id="book-evaluation-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="color: #2F5682">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-            <div class="modal-body">
-                
-                <!-- Row 0 -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="modal-title" id="myModalLabel">图书评价
-                        </h4>
-                    </div>
-                </div>
-                
-                <!-- Place holder -->
-                <p class="row"></p>
-                
-                <!-- Row 1 -->
-                <div class="row">
-                    <div class="col-md-12">     
-
-                        <p><small style="line-height:20px;">您的评分：×　×　×　×　× </small></p>
-                    </div>
-                </div>
-
-                <!-- Input form -->
-                <div class="row">
-                    <div class="col-md-12 input-textarea-group">
-                        <input class="form-control" placeholder="标题（必填）" />
-                        <textarea class="form-control message-input" placeholder="正文（不少于20字）" />
-                    </div>	
-                </div>
-          </div>
-          </div>
-                <div class="modal-footer">
-                    <div class="col-md-12">
-                        <button class="btn btn-green" ng-click="" type="button">发表评论</button>
-                    </div>
-                </div>
-          </div>
-        </div>
 	</div>
 </div>
 <script>

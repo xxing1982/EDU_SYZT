@@ -36,7 +36,7 @@
 				</div>
 				<div class="row msg-row" ng-show="Note.showComments">
 					<div class="col-md-10"><input class="form-control" placeholder="输入回复" ng-model="Note.newCommentContent"></div>
-					<input class="btn btn-green col-md-2" ng-click="noteView.addComment(Note)" type="button" value="发表评论">
+					<input class="btn btn-green col-md-2" ng-click="noteView.addComment(Note, student.username)" type="button" value="发表评论">
 					<div class="clearfix"></div>
 					<div class="col-md-12 reply">
                         <div class="col-md-12 total"><h5>共{{ Note.commentCount }}条评论</h5></div>
