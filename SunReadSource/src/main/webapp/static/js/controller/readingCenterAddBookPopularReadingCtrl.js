@@ -26,7 +26,7 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope', 'Con
     $scope.language = language;
     $scope.resource = resource;
             
-    $scope.statuses = [{
+    $scope.statuses_grade = [{
         id: 1,
         name:"全部年级"
     }, {
@@ -46,6 +46,27 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope', 'Con
         name: "5年级"        
     }];        
     $scope.selected_status = 1;
+            
+    $scope.statuses_category = [{
+        id: 1,
+        name:"全部类型"
+    }, {
+        id: 2,
+        name: "类型一"        
+    }, {
+        id: 3,
+        name: "类型二"        
+    }, {
+        id: 4,
+        name: "类型三"        
+    }, {
+        id: 5,
+        name: "类型四"        
+    }, {
+        id: 6,
+        name: "类型五"        
+    }];        
+    $scope.selected_status = 1;        
                     
     $scope.popularSearch=ConditionSearch.get({page:0,size:pageSize,level:level,category:category
                             ,testType:testType,literature:literature,category:category
