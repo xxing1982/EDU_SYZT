@@ -40,8 +40,10 @@ public class AnswerController {
     private SubjectiveAnswerService subjectiveService;
      
     @Autowired
-    public AnswerController(AnswerService service,ObjectiveAnswerService objService) {
+    public AnswerController(AnswerService service,ObjectiveAnswerService objService,SubjectiveAnswerService subjectiveService) {
         this.service = service;
+        this.objectiveService = objService;
+        this.subjectiveService = subjectiveService;
     }
 
     @RequestMapping(value = "/answer", method = RequestMethod.POST)

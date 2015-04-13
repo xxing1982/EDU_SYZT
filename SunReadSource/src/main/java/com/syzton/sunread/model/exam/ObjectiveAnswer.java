@@ -44,4 +44,12 @@ public class ObjectiveAnswer extends Answer {
 		
 		return this.option.equals(((ObjectiveQuestion)this.question).getCorrectAnswer());
 	}
+	
+	public Option getOption() {
+		return option;
+	}
+
+	public void setOption(Option option) {
+		this.option = option;
+	}
 }
