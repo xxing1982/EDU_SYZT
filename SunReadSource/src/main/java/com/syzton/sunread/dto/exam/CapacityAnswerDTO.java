@@ -1,25 +1,14 @@
 package com.syzton.sunread.dto.exam;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.syzton.sunread.model.exam.Answer;
+import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
-import com.syzton.sunread.model.exam.Question;
 
- 
-public class ObjectiveAnswerDTO {
-	
-	
-	protected ObjectiveQuestion question;
+public class CapacityAnswerDTO  {
+
+	protected CapacityQuestion question;
 	
 	protected Long studentId;
 	
@@ -41,11 +30,11 @@ public class ObjectiveAnswerDTO {
 		this.studentId = studentId;
 	}
 
-	public ObjectiveQuestion getQuestion() {
+	public CapacityQuestion getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(ObjectiveQuestion question) {
+	public void setQuestion(CapacityQuestion question) {
 		this.question = question;
 	}
 	

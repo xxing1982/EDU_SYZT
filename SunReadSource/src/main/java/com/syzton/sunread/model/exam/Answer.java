@@ -27,7 +27,7 @@ public abstract class Answer {
 	@GeneratedValue(strategy = GenerationType.AUTO)  
 	protected long id;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name="question_id")
 	protected Question question;
 	

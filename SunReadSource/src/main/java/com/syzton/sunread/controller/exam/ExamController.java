@@ -26,8 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.exam.AnswerDTO;
+import com.syzton.sunread.dto.exam.CapacityPaperDTO;
 import com.syzton.sunread.dto.exam.ExamDTO;
+import com.syzton.sunread.dto.exam.SubjectivePaperDTO;
 import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
+import com.syzton.sunread.dto.exam.VerifyPaperDTO;
 import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
 import com.syzton.sunread.exception.common.TodayVerifyTimesOverException;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
@@ -199,8 +202,9 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/verifypaper", method = RequestMethod.POST)
 	@ResponseBody
-	public Exam handInVerifyPaper(@Valid @RequestBody Exam exam)
+	public Exam handInVerifyPaper(@Valid @RequestBody VerifyPaperDTO dto)
 			throws NotFoundException, BookInShelfDuplicateVerifiedException {
+		Exam exam = dto.fromOTD();
 		LOGGER.debug("hand in exam entrie.");
 		long studentId = exam.getStudentId();
 		long bookId = exam.getBook().getId();
@@ -255,8 +259,9 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/wordpaper", method = RequestMethod.POST)
 	@ResponseBody
-	public Exam handInWordPaper(@Valid @RequestBody Exam exam)
+	public Exam handInWordPaper(@Valid @RequestBody VerifyPaperDTO dto)
 			throws NotFoundException {
+		Exam exam = dto.fromOTD();
 		LOGGER.debug("hand in exam entrie.");
 
 		Exam examResult = service.handInWordPaper(exam);
@@ -268,8 +273,9 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/capacitypaper", method = RequestMethod.POST)
 	@ResponseBody
-	public Exam handInThinkPaper(@Valid @RequestBody Exam exam)
+	public Exam handInThinkPaper(@Valid @RequestBody CapacityPaperDTO paper)
 			throws NotFoundException {
+		Exam exam = paper.fromOTD();
 		LOGGER.debug("hand in exam entrie.");
 		Exam examResult = service.handInThinkTest(exam);
 		LOGGER.debug("return a exam entry result with information: {}", exam);
@@ -279,8 +285,9 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/thinkpaper", method = RequestMethod.POST)
 	@ResponseBody
-	public Exam handInCapacityPaper(@Valid @RequestBody Exam exam)
+	public Exam handInCapacityPaper(@Valid @RequestBody SubjectivePaperDTO dto)
 			throws NotFoundException {
+		Exam exam = dto.fromOTD();
 		LOGGER.debug("hand in exam entrie.");
 		Exam examResult = service.handInCapacityTest(exam);
 		LOGGER.debug("return a exam entry result with information: {}", exam);
