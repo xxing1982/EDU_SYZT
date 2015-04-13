@@ -3,16 +3,16 @@
 //Main Angular script file for application
 
 //create a module with injected modules in brackets
-var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourControllers', 'nourConfig']);
+var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourControllers', 'nourConfig', 'userServices']);
 
 // router config
 routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
-    
+
     $urlRouterProvider
-        .when('/readingCenter', '/readingCenter/myBookshelf')
-        .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
-        .when('/readingCenter/bookDetails', '/readingCenter/bookDetails/bookOverview')
-        .otherwise('/');
+    .when('/readingCenter', '/readingCenter/myBookshelf')
+    .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
+    .when('/readingCenter/bookDetails', '/readingCenter/bookDetails/bookOverview')
+    .otherwise('/');
 
     $stateProvider
         //main page
@@ -40,9 +40,9 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
         })
         //reading center -> myBookshelf -> book details -> book overview
         .state('readingCenter.bookDetails.bookOverview',{
-        url: '/bookOverview',
-        templateUrl: 'partials/readingCenterBookDetailsBookOverview.html',
-        controller: 'readingCenterBookDetailsController'
+            url: '/bookOverview',
+            templateUrl: 'partials/readingCenterBookDetailsBookOverview.html',
+            controller: 'readingCenterBookDetailsController'
         })   
         //reading center -> myBookshelf -> add books
         .state('readingCenter.addBook',{
@@ -179,15 +179,18 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
             controller: "personalProfileController"
         })
             //personal show
-        .state('personalShow', {
-            url: '/personalShow',
-            templateUrl: "partials/personalShow.html",
-            controller: "personalShowController"
-        });
-}]);
+            .state('personalShow', {
+                url: '/personalShow',
+                templateUrl: "partials/personalShow.html",
+                controller: "personalShowController"
+            });
+        }]);
 
-routeApp.run(['$rootScope',function($rootScope){
-    $rootScope.id = 2;
+routeApp.run(['$rootScope', 'Student', function($rootScope, Student){
+    if (sessionStorage.getItem("userId") == null) {
+        window.location.href="/protype/login.html";
+    };
+    $rootScope.id = sessionStorage.getItem("userId");
     //get token
     //sessionStorage.getItem("access_token")
 }]);

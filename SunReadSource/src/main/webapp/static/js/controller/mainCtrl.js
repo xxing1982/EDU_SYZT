@@ -21,7 +21,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
         $scope.userInfo.class=classData.name;
         $scope.userInfo.school=classData.compusName;
       });
-    });    
+    });
     
     //bookshelf
     Bookshelf.get({id : $rootScope.id}, function(data){

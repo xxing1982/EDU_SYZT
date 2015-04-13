@@ -5,7 +5,7 @@
 
 	<div class="input-group search">
 		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchContent">
-		<span class="input-group-addon" ng-click="search()">搜索</span>
+		<span class="input-group-addon" ng-click="searchByName()">搜索</span>
 	</div>
 	
 	<div ng-repeat="terms in advancedSearch.content">
@@ -20,9 +20,9 @@
                     积分:{{terms.point}}&nbsp;&nbsp;等级:{{terms.extra.level}}&nbsp;&nbsp;财富：{{terms.coin}}</p></div>
                 <div class="row fsize12"><p>{{terms.description}}<br /></p></div>
                 <div class="row fsize12">
-                    <a class="btn btn-lg btn-green">加入书架</a>&nbsp;&nbsp;
-                    <a class="btn btn-lg btn-green">相关笔记</a>&nbsp;&nbsp;
-                    <a class="btn btn-lg btn-green">相关评价</a>
+                    <a class="btn btn-sm btn-green">加入书架</a>&nbsp;&nbsp;
+                    <a class="btn btn-sm btn-green">相关笔记</a>&nbsp;&nbsp;
+                    <a class="btn btn-sm btn-green">相关评价</a>
                 </div>
             </div>     
         </div>
@@ -40,28 +40,24 @@
                     <h5>级别及类别</h5>
                 </div><!---->
                 <div class="row">
-                    <div class="catogaryText"> <p>级别： </p></div>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-catogary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">无限制<span class="caret"></span></button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                      </ul>
+                   <div class="catogaryText"> <p>年级： </p></div>
+                   <div class="catogaryBtn">
+                    <bs-dropdown data-menu-type="button" 
+                        select-val="selected_status = selectedVal"
+                        preselected-item="selected_status" 
+                        data-dropdown-data="statuses_grade">
+                    </bs-dropdown>
                     </div>
                 </div>    
                 
                  <div class="row">
                     <div class="catogaryText"> <p>类别： </p></div>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-catogary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">无限制<span class="caret"></span></button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                      </ul>
+                   <div class="catogaryBtn">
+                    <bs-dropdown data-menu-type="button" 
+                        select-val="selected_status = selectedVal"
+                        preselected-item="selected_status" 
+                        data-dropdown-data="statuses_category">
+                    </bs-dropdown>
                     </div>
                 </div>  
                 
@@ -131,52 +127,6 @@
             </div>
         </div>
 
-        <div class="row conditionBlock"> 
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
-                <div class="row">
-                    <h5>年级</h5>
-                </div><!---->
-                
-                 <div class="row radio">
-                  <label>
-                    <input type="radio" ng-model="grade" name="gradeOptions" id="gradeOptions1" value="0" checked>
-                    所有年级
-                  </label>
-                </div>
-                <div class="row radio">
-                  <label>
-                    <input type="radio" ng-model="grade" name="gradeOptions" id="gradeOptions2" value="1">
-                    1年级
-                  </label>
-                </div>
-                <div class="row radio">
-                  <label>
-                    <input type="radio" ng-model="grade" name="gradeOptions" id="gradeOptions2" value="2">
-                    2年级
-                  </label>
-                </div>
-                <div class="row radio">
-                  <label>
-                    <input type="radio" ng-model="grade" name="gradeOptions" id="gradeOptions2" value="3">
-                    3年级
-                  </label>
-                </div>
-                <div class="row radio">
-                  <label>
-                    <input type="radio" ng-model="grade" name="gradeOptions" id="gradeOptions2" value="4">
-                    4年级
-                  </label>
-                </div>
-                <div class="row radio">
-                  <label>
-                    <input type="radio" ng-model="grade" name="gradeOptions" id="gradeOptions2" value="5">
-                    5年级
-                  </label>
-                </div>
-            </div>
-        </div>
-        
         <div class="row conditionBlock"> 
            <div class="col-md-2"></div>
            <div class="col-md-10">

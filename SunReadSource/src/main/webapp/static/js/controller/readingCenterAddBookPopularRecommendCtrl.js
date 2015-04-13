@@ -24,6 +24,48 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$scope', 'C
     $scope.category = category;
     $scope.language = language;
     $scope.resource = resource;
+            
+    $scope.statuses_grade = [{
+        id: 1,
+        name:"全部年级"
+    }, {
+        id: 2,
+        name: "1年级"        
+    }, {
+        id: 3,
+        name: "2年级"        
+    }, {
+        id: 4,
+        name: "3年级"        
+    }, {
+        id: 5,
+        name: "4年级"        
+    }, {
+        id: 6,
+        name: "5年级"        
+    }];        
+    $scope.selected_status = 1;
+            
+    $scope.statuses_category = [{
+        id: 1,
+        name:"全部类型"
+    }, {
+        id: 2,
+        name: "类型一"        
+    }, {
+        id: 3,
+        name: "类型二"        
+    }, {
+        id: 4,
+        name: "类型三"        
+    }, {
+        id: 5,
+        name: "类型四"        
+    }, {
+        id: 6,
+        name: "类型五"        
+    }];         
+    $scope.selected_status = 1;      
                     
                     
     $scope.recommendSearch=ConditionSearch.get({page:0,size:pageSize,level:level,category:category

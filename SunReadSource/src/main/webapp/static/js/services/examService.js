@@ -10,8 +10,14 @@ examServices.factory('VerifyExam',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
-		api.getAllInfo = function(userId ,callback){
+		api.getAllInfo = function(userId, callback){
 			$http.get(config.HOST + 'verifyexams/' + userId)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		};
+		api.submitExam = function(data, callback){
+			$http.post(config.HOST + 'exam/verifypaper', data)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});

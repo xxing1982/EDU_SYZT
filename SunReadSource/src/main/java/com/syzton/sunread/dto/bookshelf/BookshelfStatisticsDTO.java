@@ -18,9 +18,11 @@ public class BookshelfStatisticsDTO {
 	
 	private ArrayList<Integer> monthlyVerified;
 	
+	private ArrayList<Integer> monthlyPoints;
+	
 	private int semesterVerified;
 
-	
+	private int semesterPoints;
 	
 	public String getUsername() {
 		return username;
@@ -53,6 +55,23 @@ public class BookshelfStatisticsDTO {
 	public void setMonthlyVerified(ArrayList<Integer> monthlyVerified) {
 		this.monthlyVerified = monthlyVerified;
 	}
+
+	public ArrayList<Integer> getMonthlyPoints() {
+		return monthlyPoints;
+	}
+
+	public void setMonthlyPoints(ArrayList<Integer> monthlyPoints) {
+		this.monthlyPoints = monthlyPoints;
+	}
+
+	public int getSemesterPoints() {
+		return semesterPoints;
+	}
+
+	public void setSemesterPoints(int semesterPoints) {
+		this.semesterPoints = semesterPoints;
+	}
+	
 	
 	
 	
