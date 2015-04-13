@@ -29,6 +29,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
 
     });
     
+    console.log($scope.unreadBooks);
     $rootScope.exam = {};
     $scope.CertificationTest = function(data){
         $rootScope.exam.id = 0;

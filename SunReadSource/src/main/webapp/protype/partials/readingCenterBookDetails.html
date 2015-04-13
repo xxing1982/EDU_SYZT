@@ -13,58 +13,63 @@
             
             
         <div class="container-fluid bookDetailUp">
-            <div class="row">
+            <div class="row"><div class="col-md-12">
                <div class="col-md-3 bookDetailImg">
                  <img src="../static/img/book.jpg" class="img-responsive custom-shadow">
                </div>
             
               <div class="col-md-9 bookDetailText">
                   <div class="row">
-                      <h4><strong>{{bookDetails.name}}</strong></h4>
+                      <h5><big><strong>{{bookDetails.name}}</strong></big></h5>
                   </div>
                   <div class="row">
-                      <p>评分：{{bookDetails.evaluationNum}}</p>
+                      <p style="line-height: 23px;margin-bottom: 24px;"><small>
+                          评分：{{bookDetails.evaluationNum}} <br/>
+                          作者：{{bookDetails.author}} <br/>
+                          版权：{{bookDetails.publisher}} <br/>
+                          分值：{{bookDetails.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          字数：{{bookDetails.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          页数：{{bookDetails.pageCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+                          已有<span class="red-text">2087</span>人阅读，<span class="red-text">80</span>人测试，<span class="red-text">54</span>人做笔记，<span class="red-text">5</span>人推荐。
+                      </small></p>
                   </div>
+                  
                   <div class="row">
-                      <p>作者：{{bookDetails.author}}</p>
-                  </div>
-                  <div class="row">
-                      <p>版权：{{bookDetails.publisher}}</p>
-                  </div>
-                  <div class="row">
-                      <p>分值：{{bookDetails.point}}&nbsp; &nbsp;
-                         字数：{{bookDetails.wordCount}}&nbsp;&nbsp;
-                         页数：{{bookDetails.pageCount}}&nbsp;&nbsp;</p>
-                  </div>
-                  <div class="row">
-                      <p>已有2087人阅读，80人测试，54人笔记，5人推荐。</p>
-                  </div>
-                  <div class="row bookOperation">
-                         <div class="col-md-2">
-                            <bottom class="btn btn-green" href="#" role="button" data-toggle="modal" data-target="#book-takenote-model">做笔记</buttom>
-                         </div>
-                         <div class="col-md-2">
-                            <a href="#" >认证中</a>
-                         </div>
-                        <div class="col-md-2 bookExercise">
-                            <a href="">词汇训练题</a>
+                    <div class="col-sm-2" style="width:71px;">
+                        <bottom class="btn btn-green row" href="#" role="button" data-toggle="modal" data-target="#book-takenote-model">做笔记</buttom>
+                    </div>
+                    <div class="col-sm-6 text-center" style="margin-top: 6px;">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <div class="row"><a><p>认证中</p></a></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="row"><a><p class="dark-blue-1 bookExercise">词汇训练题</p></a></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="row"><a><p class="dark-blue-1 bookExercise">思维训练题</p></a></div>
+                            </div>
                         </div>
-                        <div class="col-md-2  bookExercise">
-                            <a href="">思维训练题</a>
+                    </div>
+                    <div class="col-sm-4 text-center" style="float:right; width:159px; margin-top: 5px;">
+                        <div class="row">
+                            <div class="col-xs-5 col-md-offset-1">   
+                                <div class="row"><a><small>购买比价</small></a></div>
+                            </div>
+
+                            <div class="col-xs-6 bookExercise">
+                                <div class="row"><a><small>从书架移除</small></a></div>
+                            </div>
                         </div>
-                        <div class="col-md-4"> 
-                           <p class="bookBuy">       
-                            <a href="">购买比价</a>
-                                &nbsp;|   &nbsp;        
-                            <a href="">从书架移除</a>   
-                            </p>    
-                        </div>                                
-                  </div>                
-                  </div>
-                 </div>                     
-            </div>
-            
-            
+                    </div>
+                    </div>
+                </div>
+            </div></div>
+                
+
+        </div>     
+        
+        
         <div class="container-fluid bookDetailMid">
             <div class="row bookDetailAlsoRead">
                 <h6>看过这本书的还看过</h6>
@@ -95,9 +100,9 @@
                   <div class="bookTital"><h6>查理日记</h6></div>
                 </div>
             </div>
-        
         </div>
-               
+        
+                       
         <div class="container-fluid bookDetailBottom ">
             <div class="row">
                	<a ui-sref='.bookOverview'>
@@ -114,66 +119,62 @@
             </div>
             <div ui-view></div>
         </div> 
-               
-    </div> <!--readingCenter Body-->
-		  
-	</div>
-	<div class="col-md-1"></div>
-    
-    <!-- Take note modal -->
-    <div class="modal fade" id="book-takenote-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-            <div class="modal-body">
-                
-                <!-- Row 0 -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="modal-title" id="myModalLabel" >做笔记
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </h4>
-                    </div>
-                </div>
-                
-                <!-- Row 1 -->
-                <div class="row title">
-                    <div class="col-md-2">
-                        <img src="../static/img/book.jpg" class="img-responsive custom-shadow">
-                    </div>
-                    <div class="col-md-10">
-                        <h4>{{noteTake.name}}</h4>
-                        <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：{{noteTake.author}}<br/>版权：{{noteTake.publisher}}<br/>分值：{{noteTake.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字数：{{noteTake.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：{{noteTake.pageCount}}</h5>
-                        
-                    </div>
-                </div>
+    </div>
+    </div>                     
+</div>
 
-                <!-- Input form -->
-                <div class="row">
-                    <div class="col-md-12 input-textarea-group">
-                        <input class="form-control" placeholder="标题（必填）" ng-model="noteTake.title"/>
-                        <textarea class="form-control message-input" placeholder="正文（不少于20字不大于300字）" ng-model="noteTake.content"/>
-                    </div>	
+<!-- Take note modal -->
+<div class="modal fade" id="book-takenote-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+        <div class="modal-body">
+
+            <!-- Row 0 -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="modal-title" id="myModalLabel" >做笔记
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </h4>
                 </div>
-          </div>
-                <div class="row">
-                    <div class="col-md-12"><div class="col-md-12">
-                        <img src="../static/img/myBookshelf/addPhoto.png" class="img-responsive">
-                    </div></div>
+            </div>
+
+            <!-- Row 1 -->
+            <div class="row title">
+                <div class="col-md-2">
+                    <img src="../static/img/book.jpg" class="img-responsive custom-shadow">
                 </div>
-          </div>
-                <div class="modal-footer">
-                    <div class="col-md-12">
-                        <a  class="btn-a" data-dismiss="modal">取消</a>
-                        <button class="btn btn-green" type="button" ng-click="noteTake.send()"  data-dismiss="modal">提交笔记</button>
-                    </div>
+                <div class="col-md-10">
+                    <h4>{{noteTake.name}}</h4>
+                    <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：{{noteTake.author}}<br/>版权：{{noteTake.publisher}}<br/>分值：{{noteTake.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字数：{{noteTake.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：{{noteTake.pageCount}}</h5>
+
                 </div>
-          </div>
-        </div>
+            </div>
+
+            <!-- Input form -->
+            <div class="row">
+                <div class="col-md-12 input-textarea-group">
+                    <input class="form-control" placeholder="标题（必填）" ng-model="noteTake.title"/>
+                    <textarea class="form-control message-input" placeholder="正文（不少于20字不大于300字）" ng-model="noteTake.content"/>
+                </div>	
+            </div>
+      </div>
+            <div class="row">
+                <div class="col-md-12"><div class="col-md-12">
+                    <img src="../static/img/myBookshelf/addPhoto.png" class="img-responsive">
+                </div></div>
+            </div>
+      </div>
+            <div class="modal-footer">
+                <div class="col-md-12">
+                    <a  class="btn-a" data-dismiss="modal">取消</a>
+                    <button class="btn btn-green" type="button" ng-click="noteTake.send()"  data-dismiss="modal">提交笔记</button>
+                </div>
+            </div>
+      </div>
     </div>
 </div>
 </div>
-
 <script>
     SetBookDetailList();
 </script>
