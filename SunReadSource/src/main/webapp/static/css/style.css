@@ -467,6 +467,12 @@ a:focus, input:focus
     font-size: 13px;
 }
 
+.book-row-right .overflow-text {
+  height: 96px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .msg-buttom{
     cursor: pointer;
     position: absolute; 
