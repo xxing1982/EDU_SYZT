@@ -11,12 +11,15 @@
 						<div class="col-md-9 col-md-offset-5 mustRead" ng-show='showMust'>
 							<img src="../static/img/mustRead.png" class="img-responsive">
 						</div>
-						<h5>查理日记</h5>
+						<h5>{{ Note.bookname }}</h5>
 					</div>
-					<div class="book-row-right">
-                        <div><h5><strong>{{ Note.title }}</strong></h5>
+					<div class="book-row-right" ng-init="Note.text_overflow=true;">
+                        <div ng-class="{'overflow-text' : Note.text_overflow}"><h5><strong>{{ Note.title }}</strong></h5>
                             <p><small>{{ Note.creationTime }}</small><br/>{{ Note.content }}</p></div>
-						<div class="book-thumbnail">
+				        <div style="float:right;" class="show-more-note-content">
+                            <a ng-click=" Note.text_overflow = !Note.text_overflow" ng-show="Note.text_overflow && Note.content.length > 84">更多</a>
+                        </div>
+                        <div class="book-thumbnail">
 							<div class="col-md-1 clear-padding">
 								<img src="../static/img/note.jpg" class="img-responsive">
 							</div>
@@ -24,6 +27,7 @@
 								<img src="../static/img/note.jpg" class="img-responsive">
 							</div>
 						</div>
+
 						<div class="msg-buttom" ng-click="noteView.ShowComments(Note)">
                             <div><h5>{{ Note.commentCount }}</h5></div>
                             <img src="../static/img/myNote/comment.png"/>

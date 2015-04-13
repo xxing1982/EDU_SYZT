@@ -79,7 +79,7 @@ public class Note extends AbstractEntity{
 		return user;
 	}
 	
-	public String getBook() {
+	public String getBookname() {
 		return book.getName();
 	}
     
