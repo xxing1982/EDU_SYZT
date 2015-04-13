@@ -26,6 +26,26 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope',
     $scope.language = language;
     $scope.resource = resource;
     
+    $scope.statuses = [{
+        id: 1,
+        name:"全部年级"
+    }, {
+        id: 2,
+        name: "1年级"        
+    }, {
+        id: 3,
+        name: "2年级"        
+    }, {
+        id: 4,
+        name: "3年级"        
+    }, {
+        id: 5,
+        name: "4年级"        
+    }, {
+        id: 6,
+        name: "5年级"        
+    }];        
+    $scope.selected_status = 1;
             
     $scope.advancedSearch=ConditionSearch.get({page:0,size:pageSize,level:level,category:category
                                                 ,testType:testType,literature:literature,category:category
@@ -34,8 +54,8 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope',
         console.log($scope.advancedSearch)
     });       
             
-    $scope.searchByIsbn=function(){
-        $scope.advancedSearch=QuickSearch.get({page:0,size:pageSize,searchTerm:searchTerm}
+    $scope.searchByName=function(){
+        $scope.advancedSearch=QuickSearch.get({page:0,size:pageSize,searchTerm:$scope.searchContent}
                                              ,function(){
             console.log($scope.advancedSearch);
             console.log($scope.searchContent);

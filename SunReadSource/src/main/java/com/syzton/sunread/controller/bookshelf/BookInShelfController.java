@@ -36,6 +36,9 @@ public class BookInShelfController {
 	private ArrayList<DateTime> month;
 	private ArrayList<String> monthly;
 	private ArrayList<Integer> monthlyVerified;
+	private ArrayList<Integer> monthlyPoints;
+	private int semesterPoints;
+	
     
     @Autowired
     public BookInShelfController(BookInShelfService service){
@@ -122,6 +125,7 @@ public class BookInShelfController {
     public BookshelfStatisticsDTO createBookshelfStatisticsDTO(ArrayList<BookInShelf> booksInShelf,DateTime startTime,DateTime endTime) {
 		BookshelfStatisticsDTO dto = new BookshelfStatisticsDTO();
 		String username = booksInShelf.get(0).getBookShelf().getUsername();
+		semesterPoints = 0;
 		int semesterVerified = booksInShelf.size();
 		startTime = startTime.dayOfMonth().withMinimumValue().toDateTime();
 		endTime = endTime.dayOfMonth().withMaximumValue().toDateTime();
@@ -130,11 +134,15 @@ public class BookInShelfController {
 			month.add(startTime.plusMonths(i));
 			monthly.add(month.get(i).toString());
 			monthlyVerified.add(bookNumDuration(booksInShelf, month.get(i), month.get(i).dayOfMonth().withMaximumValue().toDateTime()));
+			monthlyPoints.add(bookPointsDuration(booksInShelf,month.get(i), month.get(i).dayOfMonth().withMaximumValue().toDateTime()));
+			semesterPoints+=monthlyPoints.get(i);
 		}
 		
 		dto.setMonthly(monthly);
 		dto.setMonthlyVerified(monthlyVerified);
+		dto.setMonthlyPoints(monthlyPoints);
 		dto.setSemesterVerified(semesterVerified);
+		dto.setSemesterPoints(semesterPoints);
 		dto.setUsername(username);
 				
 		return dto;
@@ -148,6 +156,15 @@ public class BookInShelfController {
 		}
     	return count;
      }
+    
+    public int bookPointsDuration(ArrayList<BookInShelf> bookInShelfs, DateTime fromDate, DateTime toDate) {
+		int points = 0;
+		for (BookInShelf bookInShelf : bookInShelfs) {
+    		if(isInDuration(bookInShelf.getVerifiedTime(), fromDate, toDate))
+    			points+= bookInShelf.getPoint();
+		}
+		return points;
+    }
     
     public boolean isInDuration(DateTime currentTime,DateTime fromDate, DateTime toDate){
     	if (currentTime.isAfter(fromDate.getMillis())&&currentTime.isBefore(toDate.getMillis())) {
