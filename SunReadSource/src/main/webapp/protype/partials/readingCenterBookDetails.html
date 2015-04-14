@@ -40,7 +40,7 @@
                   
                   <div class="row">
                     <div class="col-sm-2" style="width:71px;">
-                        <bottom class="btn btn-green row" href="#" role="button" data-toggle="modal" data-target="#book-takenote-model">做笔记</buttom>
+                        <bottom id="takenote" class="btn btn-green row" href="#" role="button" data-toggle="modal" data-target="#book-takenote-model">做笔记</buttom>
                     </div>
                     <div class="col-sm-6 text-center" style="margin-top: 6px;">
                         <div class="row">
@@ -270,15 +270,5 @@
     $('#myTab a').click(function (e) {
         e.preventDefault()
         $(this).tab('show')
-    })
-    
-    // Check the hash and go to the tab
-    $(function() {
-        var hash = window.location.hash;
-        console.log(hash);
-        // do some validation on the hash here
-
-//        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
-    });
-    
+    })    
 </script>
