@@ -1,5 +1,5 @@
 ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 'para',
-    'BookDetail', 'NoteTake', function($scope, $rootScope, para, BookDetail, NoteTake){                                                    
+    'BookDetail','NoteView', 'NoteTake', function($scope, $rootScope, para, BookDetail, NoteView, NoteTake){                                                    
 	$scope.name = '书籍详情';
         
     var bookDetail = BookDetail.get(function(){
@@ -7,6 +7,13 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         
         // Initlizate the note entity
         $scope.noteTake = new NoteTake(bookDetail);
+            
+        // Make an instance of the NoteView
+        $scope.noteView = new NoteView();
+        $scope.arguments = {by: "books", id: bookDetail.id, sortBy: "commentCount" };
+
+        // Transmit arguments to note search engine
+        $scope.noteView.ShowMoreNotes($scope.arguments);
     })
     
     $scope.bookDetails = bookDetail;
@@ -23,5 +30,4 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         $rootScope.exam.bookName = $scope.bookDetail.name;
         $rootScope.exam.typeName = "我的书架 > 词汇训练";
     }
-
 }]);
