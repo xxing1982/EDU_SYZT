@@ -214,11 +214,10 @@ public class ExamRepositoryService implements ExamService {
 	@Override
 	public Exam handInVerifyPaper(Exam added) {
 		Exam exam = add(added);
-		CapacityExamHistory capacityHistory = new CapacityExamHistory();
+		
 		Set<Answer> answers = exam.getAnswers();
 		for (Answer answer : answers) {
 			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
-			updateCapacityHistory(capacityHistory,objectAnswer);
 			if (objectAnswer.isCorrect()) {
 				exam.setPassCount(exam.getPassCount() + 1);
 			} else {
@@ -243,8 +242,10 @@ public class ExamRepositoryService implements ExamService {
 	public Exam handInCapacityTest(Exam added) {
 		Exam exam = add(added);
 		Set<Answer> answers = exam.getAnswers();
+		CapacityExamHistory capacityHistory = new CapacityExamHistory();
 		for (Answer answer : answers) {
 			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
+			updateCapacityHistory(capacityHistory,objectAnswer);
 			if (objectAnswer.isCorrect()) {
 				exam.setPassCount(exam.getPassCount() + 1);
 			} else {
@@ -254,6 +255,7 @@ public class ExamRepositoryService implements ExamService {
 		}
 		int score = exam.getPassCount() * 100
 				/ (exam.getPassCount() + exam.getFailCount());
+		exam.setQuestionNum(added.getQuestions().size());
 		exam.setExamScore(score);
 		if (score >= 60) {
 			exam.setPass(true);
