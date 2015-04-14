@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import com.syzton.sunread.dto.organization.CompusDTO;
+import com.syzton.sunread.dto.organization.CampusDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.region.Region;
 
@@ -28,8 +28,8 @@ import com.syzton.sunread.model.region.Region;
  * 
  */
 @Entity
-@Table(name="compus")
-public class Compus extends AbstractEntity{
+@Table(name="campus")
+public class Campus extends AbstractEntity{
     
 	public static final int MAX_LENGTH_DESCRIPTION = 500;
     public static final int MAX_LENGTH_NAME = 100;
@@ -48,7 +48,7 @@ public class Compus extends AbstractEntity{
     @Column(name = "headmaster", nullable = false, length = MAX_LENGTH_HEADMASTER)
     private String headmaster;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "compus")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "campus")
     @Basic(fetch = FetchType.LAZY)
     private Set<Clazz> clazz = new HashSet<Clazz>();
     
@@ -107,18 +107,18 @@ public class Compus extends AbstractEntity{
     }
     
     public static class Builder{
-    	private Compus built;
+    	private Campus built;
     	
     	public Builder(String name, String headmaster
     			,Region region, School school){
-    		built = new Compus();
+    		built = new Campus();
     		built.name = name;
     		built.headmaster = headmaster;
     		built.region = region;
     		built.school = school;   		
     	}
     	
-    	public Compus build() {
+    	public Campus build() {
 			return built;					
 		}
     	
@@ -150,8 +150,8 @@ public class Compus extends AbstractEntity{
 		return new Builder(name, headmaster, region, school);
 	}
 
-    public CompusDTO createDTO(Compus model) {
-        CompusDTO dto = new CompusDTO();
+    public CampusDTO createDTO(Campus model) {
+        CampusDTO dto = new CampusDTO();
         dto.setId(model.id);
         dto.setName(model.getName());
         dto.setDescription(model.getDescription());

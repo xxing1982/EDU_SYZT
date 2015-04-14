@@ -4,25 +4,25 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.syzton.sunread.model.organization.Compus;
+import com.syzton.sunread.model.organization.Campus;
 
 /**
  * @author Morgan-Leon
  * @Date 2015年4月6日
  * 
  */
-public class CompusDTO {
+public class CampusDTO {
 	
 	private Long id;
     
-	@Length(max = Compus.MAX_LENGTH_DESCRIPTION)
+	@Length(max = Campus.MAX_LENGTH_DESCRIPTION)
     private String description;
 	
 	@NotNull
-	@Length(max = Compus.MAX_LENGTH_NAME)
+	@Length(max = Campus.MAX_LENGTH_NAME)
 	private String name;
 	
-	@Length(max = Compus.MAX_LENGTH_HEADMASTER)
+	@Length(max = Campus.MAX_LENGTH_HEADMASTER)
     private String headmaster;
 	
 	private Long regionId;

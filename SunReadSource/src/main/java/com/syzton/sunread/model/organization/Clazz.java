@@ -38,8 +38,8 @@ public class Clazz extends  AbstractEntity{
     private DateTime modificationTime;
   
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
-    @JoinColumn(name = "compus")
-    private Compus compus;
+    @JoinColumn(name = "campus")
+    private Campus campus;
     
     
 
@@ -54,8 +54,8 @@ public class Clazz extends  AbstractEntity{
 		return name;
 	}
 	
-    public static Builder getBuilder(String name, int grade, Compus compus) {
-    	return new Builder(name, grade, compus);	
+    public static Builder getBuilder(String name, int grade, Campus campus) {
+    	return new Builder(name, grade, campus);	
 	}
     
     public String getDescription() {
@@ -96,11 +96,11 @@ public class Clazz extends  AbstractEntity{
             return built;
         }
 
-        public Builder(String name,int grade, Compus compus) {
+        public Builder(String name,int grade, Campus campus) {
             built = new Clazz();
             built.name = name;
             built.grade = grade;
-            built.compus = compus;
+            built.campus = campus;
         }
 
 		public Builder description(String description) {
@@ -115,8 +115,8 @@ public class Clazz extends  AbstractEntity{
         dto.setId(model.id);
         dto.setName(model.getName());
         dto.setGrade(model.grade);
-        //dto.setCompusId(model.compus.getId());
-        dto.setCompusName(model.compus.getName());
+        //dto.setCampusId(model.campus.getId());
+        dto.setCampusName(model.campus.getName());
         dto.setDescription(model.getDescription());
         return dto;
     }

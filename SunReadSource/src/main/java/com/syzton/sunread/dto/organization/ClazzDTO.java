@@ -20,7 +20,7 @@ public class ClazzDTO {
 	@NotNull
 	private int grade;
 	
-	private String compusName;
+	private String campusName;
 	
 	public Long getId() {
 		return id;
@@ -38,12 +38,12 @@ public class ClazzDTO {
 		this.grade = grade;
 	}
 
-	public String getCompusName() {
-		return compusName;
+	public String getCampusName() {
+		return campusName;
 	}
 
-	public void setCompusName(String compusName) {
-		this.compusName = compusName;
+	public void setCampusName(String campusName) {
+		this.campusName = campusName;
 	}
 
 	public String getDescription() {
