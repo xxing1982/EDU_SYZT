@@ -1,8 +1,8 @@
-ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 'para',
-    'BookDetail','NoteView', 'NoteTake', function($scope, $rootScope, para, BookDetail, NoteView, NoteTake){                                                    
+ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', '$stateParams', 'para',
+    'BookDetail','NoteView', 'NoteTake', function($scope, $rootScope, $stateParams, para, BookDetail, NoteView, NoteTake){                                                    
 	$scope.name = '书籍详情';
         
-    var bookDetail = BookDetail.get(function(){
+    var bookDetail = BookDetail.get({ id: $stateParams.bookId }, function(){
         console.log(bookDetail);
         
         // Initlizate the note entity
