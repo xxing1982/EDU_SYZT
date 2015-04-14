@@ -5,6 +5,8 @@ import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.model.user.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Created by jerry on 3/9/15.
@@ -46,4 +48,6 @@ public interface UserService {
     public Student  addTask(long teacherId,long studentId,int targetBookNum,int targetPoint);
     
     public Student saveStudent(Student student);
+
+    public Page<Student> hotReadersInCampus(long campusId,Pageable pageable);
 }

@@ -1,21 +1,29 @@
 package com.syzton.sunread.service.user;
 
+import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.exception.common.AuthenticationException;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
+import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.user.*;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 import static org.springframework.util.Assert.notNull;
 
@@ -42,6 +50,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
     private TeacherClazzRepository teacherClazzRepository;
 
+    private SemesterRepository semesterRepository;
+
 
     @Autowired
     public UserRepositoryService(UserRepository userRepository,
@@ -49,12 +59,14 @@ public class UserRepositoryService implements UserService,UserDetailsService{
                                  ParentRepository parentRepository,
                                  TeacherRepository teacherRepository,
                                  TeacherClazzRepository teacherClazzRepository,
+                                 SemesterRepository semesterRepository,
                                  PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
         this.parentRepository = parentRepository;
         this.teacherRepository = teacherRepository;
         this.teacherClazzRepository = teacherClazzRepository;
+        this.semesterRepository = semesterRepository;
         this.passwordEncoder = passwordEncoder;
 
     }
@@ -110,13 +122,15 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         if(user == null){
             throw new NotFoundException("user id ="+ userId+" not found.." );
         }
-        user.setEmail(userExtraDTO.getEmail());
-        user.setPhoneNumber(userExtraDTO.getPhoneNumber());
-        user.setQqId(userExtraDTO.getQqId());
-        user.setWechatId(userExtraDTO.getWechatId());
-        user.setNickname(userExtraDTO.getNickname());
         if(userExtraDTO.getPassword()!=null && !"".equals(userExtraDTO.getPassword())){
             user.setPassword(encodePassword(userExtraDTO.getPassword().trim()));
+        }else{
+            user.setEmail(userExtraDTO.getEmail());
+            user.setPhoneNumber(userExtraDTO.getPhoneNumber());
+            user.setQqId(userExtraDTO.getQqId());
+            user.setWechatId(userExtraDTO.getWechatId());
+            user.setNickname(userExtraDTO.getNickname());
+
         }
 
         return userRepository.save(user);
@@ -192,7 +206,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         }
         return user;
     }
-
+    @Transactional
     @Override
     public Student addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
         Teacher teacher = teacherRepository.findOne(teacherId);
@@ -204,12 +218,12 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         if(student == null){
             throw new NotFoundException("student with id ="+studentId+" not found..");
         }
-        Task task = student.getTask();
+
+        Task task = new Task();
+
         task.setTargetBookNum(targetBookNum);
         task.setTargetPoint(targetPoint);
         task.setTeacherId(teacherId);
-
-        student.setTask(task);
 
         return studentRepository.save(student);
 
@@ -219,7 +233,6 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     /**
      * Locate the user and throw an exception if not found.
      *
-     * @param username
      * @return a User object is guaranteed.
      * @throws AuthenticationException if user not located.
      */
@@ -275,7 +288,16 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		return stu;
 	}
 
-	@Override
+    @Override
+    public Page<Student> hotReadersInCampus(long campusId, Pageable pageable) {
+
+
+        Page<Student> studentPage = studentRepository.findByCampusId(campusId,pageable);
+
+        return studentPage;
+    }
+
+    @Override
 	public User findByUserId(String userId) {
 		User user = userRepository.findByUserId(userId);
 		return user;

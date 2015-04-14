@@ -3,10 +3,14 @@ package com.syzton.sunread.model.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.task.Task;
+import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.util.DateSerializer;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,6 +23,7 @@ import java.util.Set;
 @Entity
 @Table(name="student")
 @DiscriminatorValue("S")
+@Configurable
 public class Student extends User{
 
     public static final int MAX_LENGTH_IDENTITY = 16;
@@ -27,7 +32,7 @@ public class Student extends User{
     private String identity;
 
     @NotNull
-    private long schoolId;
+    private long campusId;
     @NotNull
     private long clazzId;
     @NotNull
@@ -94,12 +99,12 @@ public class Student extends User{
         this.task = task;
     }
 
-    public long getSchoolId() {
-        return schoolId;
+    public long getCampusId() {
+        return campusId;
     }
 
-    public void setSchoolId(long schoolId) {
-        this.schoolId = schoolId;
+    public void setCampusId(long campusId) {
+        this.campusId = campusId;
     }
 
     public long getClazzId() {
