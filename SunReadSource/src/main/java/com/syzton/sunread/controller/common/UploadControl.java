@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.syzton.sunread.util.FtpUtil;
+
 
 @Controller
 public class UploadControl {
@@ -30,12 +32,21 @@ public class UploadControl {
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
-
+			
 			String realPath = request.getSession().getServletContext()
-					.getRealPath("/WEB-INF/upload/note");
+					.getRealPath("/upload/note");
+			String fileName = prefix + myfile.getOriginalFilename();
 			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
 					realPath, prefix + myfile.getOriginalFilename()));
+			try{
+				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt", "syzt2015", "/");
+				ftpUtil.login();
+				ftpUtil.upload(realPath + fileName, "/pic/notes/");
+			}catch(Exception e){
+				LOGGER.debug(e.getMessage());
+			}
 		}
+		
 		return "upload/note/" + prefix + myfile.getOriginalFilename();
 	}
 
@@ -48,10 +59,18 @@ public class UploadControl {
 			throw new RuntimeException("File is empty");
 		} else {
 			String realPath = request.getSession().getServletContext()
-					.getRealPath("/WEB-INF/upload/usericon");
+					.getRealPath("/upload/usericon");
 			LOGGER.debug(realPath);
+			String fileName = prefix + myfile.getOriginalFilename();
 			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
 					realPath, prefix + myfile.getOriginalFilename()));
+			try{
+				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt", "syzt2015", "/");
+				ftpUtil.login();
+				ftpUtil.upload(realPath + fileName, "/pic/userImages/");
+			}catch(Exception e){
+				LOGGER.debug(e.getMessage());
+			}
 		}
 
 		return "upload/usericon/" + prefix + myfile.getOriginalFilename();
@@ -66,12 +85,22 @@ public class UploadControl {
 			throw new RuntimeException("File is empty");
 		} else {
 			String realPath = request.getSession().getServletContext()
-					.getRealPath("/WEB-INF/upload/bookpic");
+					.getRealPath("/upload/bookpic");
+			String fileName = prefix + myfile.getOriginalFilename();
 			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
 					realPath, prefix + myfile.getOriginalFilename()));
+			try{
+				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt", "syzt2015", "/");
+				ftpUtil.login();
+				ftpUtil.upload(realPath + fileName, "/pic/bookscover/");
+			}catch(Exception e){
+				LOGGER.debug(e.getMessage());
+			}
 		}
 
 		return "upload/bookpic/" + prefix + myfile.getOriginalFilename();
 	}
+	
+	
 
 }

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.exam.CapacityPaperDTO;
+import com.syzton.sunread.dto.exam.CollatExamDTO;
 import com.syzton.sunread.dto.exam.SubjectivePaperDTO;
 import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.dto.exam.VerifyPaperDTO;
@@ -195,24 +196,29 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/verifypaper", method = RequestMethod.POST)
 	@ResponseBody
-	public Exam handInVerifyPaper(@Valid @RequestBody VerifyPaperDTO dto)
+	public CollatExamDTO handInVerifyPaper(@Valid @RequestBody VerifyPaperDTO dto)
 			throws NotFoundException, BookInShelfDuplicateVerifiedException {
 		Exam exam = dto.fromOTD();
+		CollatExamDTO collatExamDto = new CollatExamDTO();
 		LOGGER.debug("hand in exam entrie.");
 		long studentId = exam.getStudentId();
 		long bookId = exam.getBook().getId();
 		if (service.isPassVerifyTest(bookId, studentId)) {
-			throw new HaveVerifiedBookException("Student " + studentId
+			collatExamDto.setCode("2");
+			collatExamDto.setMessage("Student " + studentId
 					+ " have verified the book " + bookId);
+			return collatExamDto;
 		}
 		List<Exam> list = service.getTodayVerifyTestStatus(studentId, bookId);
 		if (list.size() >= 2) {
-			throw new TodayVerifyTimesOverException(
+			collatExamDto.setCode("3");
+			collatExamDto.setMessage(
 					"Student{"
 							+ studentId
 							+ "} verify test with book{"
 							+ bookId
 							+ "} greater than twice, system ignore this verify test request.");
+			return collatExamDto;
 		}
 		Exam examResult = service.handInVerifyPaper(exam);
 		if (examResult.isPass()) {
@@ -246,8 +252,10 @@ public class ExamController {
 
 		}
 		LOGGER.debug("return a exam entry result with information: {}", exam);
-
-		return examResult;
+		collatExamDto.setCode("1");
+		collatExamDto.setExam(exam);
+		collatExamDto.setMessage("Exam collat complete.");
+		return collatExamDto;
 	}
 
 	@RequestMapping(value = "/exam/wordpaper", method = RequestMethod.POST)
