@@ -145,7 +145,7 @@
                         <div class="row">
 
                             <!-- Rank of notes -->
-                            <div class="col-md-4" ng-repeat="n in ['golden', 'silver', 'bronze']">
+                            <div class="col-md-4" ng-repeat="note in noteView.Notes.content">
                                 <div class="row">
                                     <div class="col-xs-8 col-xs-offset-2">
                                         <div class="row">
@@ -154,8 +154,8 @@
                                     </div>
                                     <div class="col-xs-8 col-xs-offset-2">
                                         <div class="row text-center">
-                                            <h5>查理日记</h4>
-                                            <p style="line-height:20px;"><small>笔记名：一本很有意义</br>作者：张一凡&nbsp;&nbsp;评论：200条</small></p>
+                                            <h5>{{note.bookname}}</h4>
+                                            <p style="line-height:20px;"><small>{{note.title | limitTo:13}}</br>{{note.username}}&nbsp;&nbsp;评论：{{note.commentCount}}条</small></p>
                                         </div>
                                     </div>
                                 </div>

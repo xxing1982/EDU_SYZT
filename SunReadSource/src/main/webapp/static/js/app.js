@@ -6,14 +6,14 @@
 var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourControllers', 'nourConfig', 'userServices']);
 
 // router config
-routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
+routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider, $routeProvider) {
 
     $urlRouterProvider
     .when('/readingCenter', '/readingCenter/myBookshelf')
     .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
-    .when('/readingCenter/bookDetails', '/readingCenter/bookDetails/bookOverview')
     .otherwise('/');
 
+    
     $stateProvider
         //main page
         .state('main', {
@@ -34,16 +34,10 @@ routeApp.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider
         })
         //reading center -> myBookshelf -> book details
         .state('readingCenter.bookDetails',{
-            url: '/bookDetails',
+            url: '/bookDetails/:bookId',
             templateUrl: 'partials/readingCenterBookDetails.html',
             controller: 'readingCenterBookDetailsController'
         })
-        //reading center -> myBookshelf -> book details -> book overview
-        .state('readingCenter.bookDetails.bookOverview',{
-            url: '/bookOverview',
-            templateUrl: 'partials/readingCenterBookDetailsBookOverview.html',
-            controller: 'readingCenterBookDetailsController'
-        })   
         //reading center -> myBookshelf -> add books
         .state('readingCenter.addBook',{
             url: '/addBook',
@@ -191,6 +185,15 @@ routeApp.run(['$rootScope', 'Student', function($rootScope, Student){
         window.location.href="/protype/login.html";
     };
     $rootScope.id = sessionStorage.getItem("userId");
+    
+    //student info
+//    $rootScope.student = new Object();
+//    if ( $rootScope.student $rootScope=== undefined) {
+//        Student.get({id : $rootScope.id} ,function(data){
+//            $rootScope.student = data;
+//        });
+//    }
+    
     //get token
     //sessionStorage.getItem("access_token")
 }]);

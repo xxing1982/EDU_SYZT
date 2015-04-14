@@ -1,19 +1,23 @@
 <div class="readingCenter-right">
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 page-body-top">
-    <div class="readingCenter-right-body">
-
+    <div class="readingCenter-right-body page-body">
+        
+        <div class="col-md-12">
         <div class="col-md-12 addBookNavigation">
             <p class="cramb">
             <a href="index.html#/readingCenter/myBookshelf">我的书架</a> 
                > {{name}}
             </p>
+            <p class="row"></p>
+        </div>
         </div>
             
+
             
             
-        <div class="container-fluid bookDetailUp">
-            <div class="row"><div class="col-md-12">
+        <div class="bookDetailUp">
+           <div class="col-md-12">
                <div class="col-md-3 bookDetailImg">
                  <img src="../static/img/book.jpg" class="img-responsive custom-shadow">
                </div>
@@ -41,13 +45,13 @@
                     <div class="col-sm-6 text-center" style="margin-top: 6px;">
                         <div class="row">
                             <div class="col-xs-3">
-                                <div class="row"><a><p>认证中</p></a></div>
+                                <div class="row"><a><p>已认证</p></a></div>
                             </div>
                             <div class="col-xs-4">
-                                <div class="row"><a><p class="dark-blue-1 bookExercise">词汇训练题</p></a></div>
+                                <div class="row"><a><p class="dark-blue-1 bookExercise">词汇训练</p></a></div>
                             </div>
                             <div class="col-xs-4">
-                                <div class="row"><a><p class="dark-blue-1 bookExercise">思维训练题</p></a></div>
+                                <div class="row"><a><p class="dark-blue-1 bookExercise">思维训练</p></a></div>
                             </div>
                         </div>
                     </div>
@@ -63,117 +67,218 @@
                         </div>
                     </div>
                 </div>
-            </div></div>
-                
-
+            </div>
+            </div>
         </div>     
         
         
         <div class="container-fluid bookDetailMid">
-            <div class="row bookDetailAlsoRead">
-                <h6>看过这本书的还看过</h6>
+            
+            <!-- Place holder -->
+            <h3 class="row"></h3>
+            
+            <div class="row buttom-separator">
+                <h5 class="col-md-12" style="font-size:15px"><div class="col-md-12">看过这本书的还看过</div></h5>
             </div>
+            
+                        
+            <!-- Place holder -->
+            <h3 class="row"></h3>
+            
             <div class="row">
-                <div class="col-md-2">
-                  <img src="../static/img/book.jpg" class="img-responsive">
-                  <div class="bookTital"><h6>查理日记</h6></div>
-                </div>
-                <div class="col-md-2">
-                  <img src="../static/img/book.jpg" class="img-responsive">
-                  <div class="bookTital"><h6>查理日记</h6></div>
-                </div>
-                <div class="col-md-2">
-                  <img src="../static/img/book.jpg" class="img-responsive">
-                  <div class="bookTital"><h6>查理日记</h6></div>
-                </div>
-                <div class="col-md-2">
-                  <img src="../static/img/book.jpg" class="img-responsive">
-                  <div class="bookTital"><h6>查理日记</h6></div>
-                </div>
-                <div class="col-md-2">
-                  <img src="../static/img/book.jpg" class="img-responsive">
-                  <div class="bookTital"><h6>查理日记</h6></div>
-                </div>
-                <div class="col-md-2">
-                  <img src="../static/img/book.jpg" class="img-responsive">
-                  <div class="bookTital"><h6>查理日记</h6></div>
+                <div class="col-md-12">
+                    <div class="col-md-2" style="width:20%;" ng-repeat="n in [1,2,3,4,5]">
+                      <img src="../static/img/book.jpg" class="img-responsive img-center custom-shadow" >
+                      <div class="bookTital"><h5>查理日记</h5></div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Place holder -->
+            <p class="row"></p>
         </div>
         
                        
-        <div class="container-fluid bookDetailBottom ">
-            <div class="row">
-               	<a ui-sref='.bookOverview'>
-               	    <div class="col-md-2 select-tab myActive">图书简介</div>
-                </a>    
-                <a ui-sref='.bookOutline'>
-               	    <div class="col-md-2 select-tab">目录</div>
-                </a>
-				<div class="col-md-2 select-tab">图书评论</div>
-                <div class="col-md-2 select-tab">相关笔记</div>
-                <div class="col-md-1 select-tab">试读</div>
-                <div class="col-md-1 select-tab">推荐</div>
-                <div class="col-md-1 select-tab">音视频</div>
+        <div class="bookDetailBottom">
+            
+            <!-- Nav tabs -->
+            <div class="row buttom-separator">
+            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#intro" aria-controls="intro" role="tab" data-toggle="tab">图书简介</a></li>
+                <li role="presentation"><a href="#catalog" aria-controls="catalog" role="tab" data-toggle="tab">目录</a></li>
+                <li role="presentation"><a href="#review" aria-controls="review" role="tab" data-toggle="tab">图书评论</a></li>
+                <li role="presentation"><a href="#note" aria-controls="note" role="tab" data-toggle="tab">相关笔记</a></li>
+                <li role="presentation"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">试读</a></li>
+                <li role="presentation"><a href="#recommand" aria-controls="recommand" role="tab" data-toggle="tab">推荐</a></li>
+                <li role="presentation"><a href="#multimedia" aria-controls="multimedia" role="tab" data-toggle="tab">音视频</a></li>
+            </ul>
             </div>
-            <div ui-view></div>
+            
+            <!-- Tab panes -->
+            <div class="tab-content container-fluid paragraph" style="line-height:25px;">
+                
+                <!-- introduction -->
+                <div role="tabpanel" class="tab-pane in active" id="intro">
+                    <div>
+                        <p>内容包括天文、地理、生物、物理、化学、数学、文学……包罗万象。是了解这个世界各种现象的通天大道。内容包括天文、地理、生物、医学、物理、化学、数学、文学……包罗万象。是了解这个世界各种现象的通天大道。</p>
+                    </div>
+                </div>
+                
+                <!-- catalog -->
+                <div role="tabpanel" class="tab-pane" id="catalog">
+                    <div>
+                        <p>动物篇 <br/>　为什么鹦鹉善于学人说话 <br/>　为什么企鹅能抵御南极的严寒    <br/>　为什么煮熟的虾蟹会变红    <br/>　为什么企鹅不会飞  l <br/>　鱼身上的鳞片有什么用   <br/>　为什么螃蟹横着走路 <br/>　熊喜欢吃什么   <br/>　为什么海鸥跟着轮船飞   <br/>　小熊猫是大熊猫生的吗   <br/>　哺乳动物有哪些特征   <br/>　麇鹿为什么又叫“四不像" <br/>　藏羚为什么叫“独角兽”   <br/>　为什么猪特别爱拱泥土 <br/>　斑马身上的条纹有什么用 <br/>　为什么把大熊猫称为“国宝” <br/>　东北虎为什么被称为“丛林之王" <br/>　为什么把骆驼称为“沙漠之舟”   <br/>　大象的长鼻子是干什么用的   <br/>　蝴蝶和飞蛾一样吗   <br/>　昆虫中的老寿星是谁   <br/>植物篇 <br/>　把西瓜子吃进肚子里，会长出西瓜秧吗 <br/>　为什么含羞草一碰就会合拢它的叶子   <br/>　仙人掌为什么不怕渴   <br/>　什么是吃“荤”的植物   <br/>　年轮是什么   <br/>　九死还魂草的会“还魂”吗 <br/>　为什么玉米粒会爆花   <br/>　如何辨别蘑菇有没有毒   <br/>　卷心菜能开花吗   <br/>　烈日下为什么不宜给花儿浇水   <br/>　辣椒为什么会辣 <br/>　为什么把月季花尊为“花中皇后” <br/>　跳舞草为什么会“跳舞”   <br/>　为什么森林地区爱下雨   <br/>　树有性别之分吗   <br/>自然篇 </p>
+                    </div>
+                </div>   
+                
+                <!-- review -->
+                <div role="tabpanel" class="tab-pane fade" id="review">
+                    <div>
+                        <p>review</p>
+                    </div>
+                </div>
+                
+                <!-- note -->
+                <div role="tabpanel" class="tab-pane fade" id="note">
+                    <div class="row" style="margin-top:-20px;margin-bottom:-20px;">
+                    <div class="note-row row" style="padding-right: 15px;" ng-repeat="Note in noteView.Notes.content">
+                        <div class="container-fluid book-row" style="margin-top:0;">
+                            <div class="title book-row-right" style="width:100%;" ng-init="Note.text_overflow=true;">
+                                <div ng-class="{'overflow-text-2' : Note.text_overflow}">
+                                    <h5><strong>{{ Note.title }}</strong></h5>
+                                    <p><small>{{ Note.creationTime }}</small><br/>{{ Note.content }}</p></div>
+                                <div style="float:right;" class="show-more-note-content">
+                                    <a ng-click=" Note.text_overflow = !Note.text_overflow" ng-show="Note.text_overflow && Note.content.length > 101">更多</a>
+                                </div>
+                                <div class="book-thumbnail">
+                                    <div class="col-md-1 clear-padding">
+                                        <img src="../static/img/note.jpg" class="img-responsive">
+                                    </div>
+                                    <div class="col-md-1 clear-padding">
+                                        <img src="../static/img/note.jpg" class="img-responsive">
+                                    </div>
+                                </div>
+
+                                <div class="msg-buttom" ng-click="noteView.ShowComments(Note)">
+                                    <div><h5>{{ Note.commentCount }}</h5></div>
+                                    <img src="../static/img/myNote/comment.png"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row msg-row" ng-show="Note.showComments">
+                            <div class="col-md-10"><input class="form-control" placeholder="输入回复" ng-model="Note.newCommentContent"></div>
+                            <input class="btn btn-green col-md-2" ng-click="noteView.addComment(Note, student.username)" type="button" value="发表评论">
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 reply">
+                                <div class="col-md-12 total"><h5>共{{ Note.commentCount }}条评论</h5></div>
+                                <div class="col-md-12 block" ng-repeat="Comment in Note.Comments.content">
+                                    <div class="person"><h5>{{Comment.username}}&nbsp;&nbsp;&nbsp;{{Comment.creationTime}}</h5></div>
+                                    <div class="content"><p>{{Comment.content}}</p></div>
+                                </div>
+                                <div class="bottom col-md-12 block" style="margin-top:1px;" ng-show="Note.showShowMoreComment" ng-click="noteView.ShowMoreComments(Note)">{{ Note.loadingState }}</div>
+                            </div>
+                        </div>
+                        <p class="row"></p>
+                    </div>
+                        
+                    <div class="bottom row" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}</div>
+                    </div>
+                </div>
+                
+                <!-- preview -->
+                <div role="tabpanel" class="tab-pane fade" id="preview">
+                    <div>
+                        <p>试读服务</p>
+                    </div>
+                </div>
+                
+                <!-- recommand -->
+                <div role="tabpanel" class="tab-pane fade" id="recommand">
+                    <div>
+                        <p>好书推荐。</p>
+                    </div>
+                </div>
+                
+                <!-- multimedia -->
+                <div role="tabpanel" class="tab-pane fade" id="multimedia">
+                    <div>
+                        <p>音视频</p>
+                    </div>
+                </div>
+                
+            </div>
         </div> 
-    </div>
     </div>                     
-</div>
-
-<!-- Take note modal -->
-<div class="modal fade" id="book-takenote-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-body">
-        <div class="modal-body">
-
-            <!-- Row 0 -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="modal-title" id="myModalLabel" >做笔记
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </h4>
-                </div>
-            </div>
-
-            <!-- Row 1 -->
-            <div class="row title">
-                <div class="col-md-2">
-                    <img src="../static/img/book.jpg" class="img-responsive custom-shadow">
-                </div>
-                <div class="col-md-10">
-                    <h4>{{noteTake.name}}</h4>
-                    <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：{{noteTake.author}}<br/>版权：{{noteTake.publisher}}<br/>分值：{{noteTake.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字数：{{noteTake.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：{{noteTake.pageCount}}</h5>
-
-                </div>
-            </div>
-
-            <!-- Input form -->
-            <div class="row">
-                <div class="col-md-12 input-textarea-group">
-                    <input class="form-control" placeholder="标题（必填）" ng-model="noteTake.title"/>
-                    <textarea class="form-control message-input" placeholder="正文（不少于20字不大于300字）" ng-model="noteTake.content"/>
-                </div>	
-            </div>
-      </div>
-            <div class="row">
-                <div class="col-md-12"><div class="col-md-12">
-                    <img src="../static/img/myBookshelf/addPhoto.png" class="img-responsive">
-                </div></div>
-            </div>
-      </div>
-            <div class="modal-footer">
-                <div class="col-md-12">
-                    <a  class="btn-a" data-dismiss="modal">取消</a>
-                    <button class="btn btn-green" type="button" ng-click="noteTake.send()"  data-dismiss="modal">提交笔记</button>
-                </div>
-            </div>
-      </div>
     </div>
+    
+    <!-- Take note modal -->
+    <div class="modal fade" id="book-takenote-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            <div class="modal-body">
+
+                <!-- Row 0 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="modal-title" id="myModalLabel" >做笔记
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </h4>
+                    </div>
+                </div>
+
+                <!-- Row 1 -->
+                <div class="row title">
+                    <div class="col-md-2">
+                        <img src="../static/img/book.jpg" class="img-responsive custom-shadow">
+                    </div>
+                    <div class="col-md-10">
+                        <h4>{{noteTake.name}}</h4>
+                        <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：{{noteTake.author}}<br/>版权：{{noteTake.publisher}}<br/>分值：{{noteTake.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字数：{{noteTake.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：{{noteTake.pageCount}}</h5>
+
+                    </div>
+                </div>
+
+                <!-- Input form -->
+                <div class="row">
+                    <div class="col-md-12 input-textarea-group">
+                        <input class="form-control" placeholder="标题（必填）" ng-model="noteTake.title"/>
+                        <textarea class="form-control message-input" placeholder="正文（不少于20字不大于300字）" ng-model="noteTake.content"/>
+                    </div>	
+                </div>
+          </div>
+                <div class="row">
+                    <div class="col-md-12"><div class="col-md-12">
+                        <img src="../static/img/myBookshelf/addPhoto.png" class="img-responsive">
+                    </div></div>
+                </div>
+          </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <a  class="btn-a" data-dismiss="modal">取消</a>
+                        <button class="btn btn-green" type="button" ng-click="noteTake.send()"  data-dismiss="modal">提交笔记</button>
+                    </div>
+                </div>
+          </div>
+        </div>
+    </div>
+
 </div>
 </div>
-<script>
-    SetBookDetailList();
+<script>    
+    // Initlizate the nav tab
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+    
+    // Check the hash and go to the tab
+    $(function() {
+        var hash = window.location.hash;
+        console.log(hash);
+        // do some validation on the hash here
+
+//        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+    });
+    
 </script>

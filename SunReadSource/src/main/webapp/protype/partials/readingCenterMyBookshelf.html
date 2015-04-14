@@ -32,7 +32,7 @@
 				<div id="unreadBooksTab" class="tab-pane in active" role="tabpanel">
 					<div ng-repeat="unreadBook in unreadBooks" class="col-md-4 bookshelf-book clear-padding">
 						<div class="col-md-6">
-							<a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive custom-shadow"></div></a>
+							<a href="#readingCenter/bookDetails/{{unreadBook.bookId}}"><div><img src="../static/img/book.jpg" class="img-responsive custom-shadow"></div></a>
 							<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
 						</div>
 						<div class="col-md-6">
@@ -57,11 +57,7 @@
 
                             <!-- Note row -->
                             <div>
-<<<<<<< HEAD
                                 <div class="row"><img src="../static/img/myBookshelf/note.png" class="img-responsive"></div>
-=======
-                                <div class="row"><a><img src="../static/img/myBookshelf/review.png" class="img-responsive"></a></div>
->>>>>>> 2618a39e64735aa13fafdc8c8d477ace74320538
                                 <!-- Place Holder -->
                                 <p class="row"></p>
                             </div>
@@ -74,7 +70,7 @@
                 <div id="readBooksTab" class="tab-pane" role="tabpanel">
 					<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
 						<div class="col-md-6">
-							<a href="#readingCenter/bookDetails"><div><img src="../static/img/book.jpg" class="img-responsive custom-shadow"></div></a>
+							<a href="#readingCenter/bookDetails/{{readBook.bookId}}"><div><img src="../static/img/book.jpg" class="img-responsive custom-shadow"></div></a>
 							<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
 						</div>
 						<div class="col-md-6">

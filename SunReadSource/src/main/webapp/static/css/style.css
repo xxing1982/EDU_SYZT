@@ -466,6 +466,13 @@ a:focus, input:focus
   overflow: hidden;
 }
 
+.book-row-right .overflow-text-2 {
+  height: 108px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
 .msg-buttom{
     cursor: pointer;
     position: absolute; 

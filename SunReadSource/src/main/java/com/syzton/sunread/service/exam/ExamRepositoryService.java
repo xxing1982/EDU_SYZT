@@ -214,12 +214,12 @@ public class ExamRepositoryService implements ExamService {
 	@Override
 	public Exam handInVerifyPaper(Exam added) {
 		Exam exam = add(added);
-		CapacityExamHistory capacityHistory = new CapacityExamHistory();
+		
 		Set<Answer> answers = exam.getAnswers();
 		for (Answer answer : answers) {
 			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
-			updateCapacityHistory(capacityHistory,objectAnswer);
-			if (objectAnswer.isCorrect()) {
+			
+			if (isAnswerCorrect(objectAnswer)) {
 				exam.setPassCount(exam.getPassCount() + 1);
 			} else {
 				exam.setFailCount(exam.getFailCount() + 1);
@@ -243,9 +243,11 @@ public class ExamRepositoryService implements ExamService {
 	public Exam handInCapacityTest(Exam added) {
 		Exam exam = add(added);
 		Set<Answer> answers = exam.getAnswers();
+		CapacityExamHistory capacityHistory = new CapacityExamHistory();
 		for (Answer answer : answers) {
 			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
-			if (objectAnswer.isCorrect()) {
+			updateCapacityHistory(capacityHistory,objectAnswer);
+			if (isAnswerCorrect(objectAnswer)) {
 				exam.setPassCount(exam.getPassCount() + 1);
 			} else {
 				exam.setFailCount(exam.getFailCount() + 1);
@@ -254,6 +256,7 @@ public class ExamRepositoryService implements ExamService {
 		}
 		int score = exam.getPassCount() * 100
 				/ (exam.getPassCount() + exam.getFailCount());
+		exam.setQuestionNum(added.getQuestions().size());
 		exam.setExamScore(score);
 		if (score >= 60) {
 			exam.setPass(true);
@@ -438,7 +441,7 @@ public class ExamRepositoryService implements ExamService {
 		Set<Answer> answers = exam.getAnswers();
 		for (Answer answer : answers) {
 			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
-			if (objectAnswer.isCorrect()) {
+			if (isAnswerCorrect(objectAnswer)) {
 				exam.setPassCount(exam.getPassCount() + 1);
 			} else {
 				exam.setFailCount(exam.getFailCount() + 1);
@@ -549,56 +552,65 @@ public class ExamRepositoryService implements ExamService {
 		return map;
 	}
 	
+	public boolean isAnswerCorrect(ObjectiveAnswer answer){
+		ObjectiveQuestion question =  objectQsRepo.findOne(answer.getQuestion().getId());
+		if(answer.getOption().equals(question.getCorrectAnswer())){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
+	 
 	
 	private void updateCapacityHistory(CapacityExamHistory history,ObjectiveAnswer answer){
 		CapacityQuestion question = (CapacityQuestion) answer.getQuestion();
 		CapacityQuestionType type = question.getQuestionType();
 		if(type.equals(CapacityQuestionType.FIRST)){
-			if(answer.isCorrect()){
+			if(isAnswerCorrect(answer)){
 				history.setFirstPass(history.getFirstPass()+1);
 			}else{
 				history.setFirstFail(history.getFirstFail()+1);
 			}
 		}else if(type.equals(CapacityQuestionType.SECOND)){
-			if(answer.isCorrect()){
+			if(isAnswerCorrect(answer)){
 				history.setSecondPass(history.getSecondPass()+1);
 			}else{
 				history.setSecondFail(history.getSecondFail()+1);
 			}
 		}else if(type.equals(CapacityQuestionType.THIRD)){
-			if(answer.isCorrect()){
+			if(isAnswerCorrect(answer)){
 				history.setThirdPass(history.getThirdPass()+1);
 			}else{
 				history.setThirdFail(history.getThirdFail()+1);
 			}
 		}else if(type.equals(CapacityQuestionType.FOURTH)){
-			if(answer.isCorrect()){
+			if(isAnswerCorrect(answer)){
 				history.setFourthPass(history.getFourthPass()+1);
 			}else{
 				history.setFourthFail(history.getFourthFail()+1);
 			}
 		}else if(type.equals(CapacityQuestionType.FIFTH)){
-			if(answer.isCorrect()){
+			if(isAnswerCorrect(answer)){
 				history.setFifthPass(history.getFifthPass()+1);
 			}else{
 				history.setFifthFail(history.getFifthFail()+1);
 			}
 		}else if(type.equals(CapacityQuestionType.SIXTH)){
-			if(answer.isCorrect()){
+			if(isAnswerCorrect(answer)){
 				history.setSixthPass(history.getSixthPass()+1);
 			}else{
 				history.setSixthFail(history.getSixthFail()+1);
 			}
 		 
 		}else if(type.equals(CapacityQuestionType.SEVENTH)){
-			if(answer.isCorrect()){
+			if(isAnswerCorrect(answer)){
 				history.setSeventhPass(history.getSeventhPass()+1);
 			}else{
 				history.setSeventhFail(history.getSeventhFail()+1);
 			}
 		}else if(type.equals(CapacityQuestionType.EIGHTTH)){
-			if(answer.isCorrect()){
+			if(isAnswerCorrect(answer)){
 				history.setEightthPass(history.getEightthPass()+1);
 			}else{
 				history.setEightthFail(history.getEightthFail()+1);

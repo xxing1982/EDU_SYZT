@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.organization.Compus;
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.organization.ClazzRepository;
-import com.syzton.sunread.repository.organization.CompusRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 
 import javassist.NotFoundException;
@@ -32,21 +32,21 @@ public class ClazzRepositoryService implements ClazzService {
     
     private StudentRepository studentRepository;
     
-    private CompusRepository compusRepository;
+    private CampusRepository campusRepository;
 
     @Autowired
-    public ClazzRepositoryService(ClazzRepository repository,CompusRepository compusRepository,StudentRepository studentRepository) {
+    public ClazzRepositoryService(ClazzRepository repository,CampusRepository campusRepository,StudentRepository studentRepository) {
         this.repository = repository;
-        this.compusRepository = compusRepository;
+        this.campusRepository = campusRepository;
         this.studentRepository = studentRepository;
     }
 
     @Override
-    public Clazz add(ClazzDTO add, Long compusId) {
+    public Clazz add(ClazzDTO add, Long campusId) {
 
         LOGGER.debug("Adding a new clazz entry with information: {}", add);
-        Compus compus = compusRepository.findOne(compusId);
-        Clazz model = Clazz.getBuilder(add.getName(),add.getGrade(),compus)
+        Campus campus = campusRepository.findOne(campusId);
+        Clazz model = Clazz.getBuilder(add.getName(),add.getGrade(),campus)
         		.description(add.getDescription()).build();        
         return repository.save(model);
 

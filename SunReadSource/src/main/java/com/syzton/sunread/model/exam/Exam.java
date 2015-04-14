@@ -197,23 +197,6 @@ public class Exam extends AbstractEntity {
 		this.answers = answers;
 	}
 
-	private void countScore() {
-		if (!this.examType.equals(ExamType.THINK)
-				&&! this.examType.equals(ExamType.SPEED)) {
-			int total = answers.size();
-			for (Answer answer : answers) {
-				ObjectiveAnswer oAnswer = (ObjectiveAnswer) answer;
-				if (oAnswer.isCorrect()) {
-					this.passCount++;
-				} else {
-					this.failCount++;
-				}
-			}
-
-			this.examScore = 100 * this.passCount / total;
-		}
-
-	}
 
 	@Override
 	public String toString() {

@@ -12,7 +12,7 @@
         <div class="quickSearch row">
         <div class="input-group search col-md-9">
             <input type="text" class="form-control" placeholder="请输入书名" ng-model="searchTerm" ng-change="search(searchTerm)">
-            <span class="input-group-addon">搜索</span>
+            <span class="input-group-addon" ng-click="search(searchTerm)">搜索</span>
         </div>
 
         <div class="note-row row"  ng-repeat="Note in noteView.Notes.content">

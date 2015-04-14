@@ -36,6 +36,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 		}		
 		function Initial(data){
 			$scope.myAnswer = {
+                "book":  $rootScope.exam.book,
 				"studentId": $rootScope.id,
 				"question": data
 			};

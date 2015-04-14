@@ -14,7 +14,7 @@ var NoteView = function () {
 /*
     Some constants 
 */
-NoteView.prototype.notePageSize = 10;
+NoteView.prototype.notePageSize = 2;
 NoteView.prototype.commentPageSize = 5;
 NoteView.prototype.stateTexts = { more : "加载更多", loading: "更多加载中...", nomore: "没有了"};
 
@@ -52,6 +52,7 @@ NoteView.prototype.ShowMoreNotes = function (arguments){
                 Check the lastPage flag and set stateTexts
             */
             if (newPage.lastPage){
+                
                 // Get the last page of the Notes, 
                 // Change the state of the loading state and turn on finished
                 Notes.loadingState = NoteView.stateTexts.nomore;
@@ -106,6 +107,7 @@ NoteView.prototype.ShowMoreComments = function (note){
     // GET the Comments entity
     var newPage = this.Comment.get({by: "notes", id: note.id, page: note.page, size: note.size, sortBy: "id", direction: "DESC"}, function(){               
         if (newPage.lastPage){
+            
             // Get the last page of the Comments, 
             // Change the state of the loading state and turn on finished
             note.loadingState = NoteView.stateTexts.nomore;
@@ -129,6 +131,7 @@ NoteView.prototype.ShowMoreComments = function (note){
     Invoke this method to add a comment to a note
 */
 NoteView.prototype.addComment = function(note, username){
+    
     // Check the content of comment is avaliable
     var content = note.newCommentContent;
     if ( content === "" || content === undefined ) return;

@@ -33,6 +33,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     $rootScope.exam = {};
     $scope.CertificationTest = function(data){
         $rootScope.exam.id = 0;
+        $rootScope.exam.book = data;
         $rootScope.exam.bookId = data.bookId;
         $rootScope.exam.bookName = data.bookName;
         $rootScope.exam.typeName = "我的书架 > 认证训练";

@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.dto.organization.CompusDTO;
-import com.syzton.sunread.model.organization.Compus;
-import com.syzton.sunread.service.organization.CompusService;
+import com.syzton.sunread.dto.organization.CampusDTO;
+import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.service.organization.CampusService;
 
 /**
  * @author Morgan-Leon
@@ -32,75 +32,75 @@ import com.syzton.sunread.service.organization.CompusService;
 
 @Controller
 @RequestMapping(value="/api")
-public class CompusController {
+public class CampusController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CompusController.class);
-    private CompusService service;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CampusController.class);
+    private CampusService service;
     @Autowired
-    public  CompusController(CompusService service){
+    public  CampusController(CampusService service){
     	this.service = service;
     }
     
-//Add a Compus 
-    @RequestMapping(value = "/region/{regionId}/school/{schoolId}/compus", method = RequestMethod.POST)
+//Add a Campus 
+    @RequestMapping(value = "/region/{regionId}/school/{schoolId}/campus", method = RequestMethod.POST)
     @ResponseBody
-    public CompusDTO add(@Valid @RequestBody CompusDTO dto
+    public CampusDTO add(@Valid @RequestBody CampusDTO dto
     		,@PathVariable("regionId")Long regionId,@PathVariable("schoolId")Long schoolId) {
-        LOGGER.debug("Adding a new compus entry with information: {}", dto);
+        LOGGER.debug("Adding a new campus entry with information: {}", dto);
         
-        Compus added = service.add(dto, regionId,schoolId);
-        LOGGER.debug("Added a compus entry with information: {}", added);
+        Campus added = service.add(dto, regionId,schoolId);
+        LOGGER.debug("Added a campus entry with information: {}", added);
               
        return added.createDTO(added);
     }
     
     
-//Delete a Compus
-    @RequestMapping(value = "/compus/{id}", method = RequestMethod.DELETE)
+//Delete a Campus
+    @RequestMapping(value = "/campus/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public CompusDTO deleteById(@Valid @PathVariable("id") Long id) throws NotFoundException {
-        LOGGER.debug("Deleting a Compus entry with id: {}", id);
+    public CampusDTO deleteById(@Valid @PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Deleting a Campus entry with id: {}", id);
 
-        Compus deleted = service.deleteById(id);
-        LOGGER.debug("Deleted Compus entry with information: {}", deleted);
+        Campus deleted = service.deleteById(id);
+        LOGGER.debug("Deleted Campus entry with information: {}", deleted);
 
         return deleted.createDTO(deleted);
     }
     
-//Update a Compus    
-    @RequestMapping(value = "/compus/{id}", method = RequestMethod.PUT)
+//Update a Campus    
+    @RequestMapping(value = "/campus/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public CompusDTO update(@Valid @RequestBody CompusDTO dto,@PathVariable("id") long id) throws NotFoundException {
+    public CampusDTO update(@Valid @RequestBody CampusDTO dto,@PathVariable("id") long id) throws NotFoundException {
         LOGGER.debug("Adding a new book to shelf entry with information: {}", dto);
         
-        Compus updated = service.update(dto);
+        Campus updated = service.update(dto);
         LOGGER.debug("Added a to-do entry with information: {}", updated);
               
        return updated.createDTO(updated);
     } 
 
-//Get all Compuss
-    @RequestMapping(value = "/compuss", method = RequestMethod.GET)
+//Get all Campuss
+    @RequestMapping(value = "/campuss", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Compus> findAll(
+    public PageResource<Campus> findAll(
     						@RequestParam("page") int page,
                             @RequestParam("size") int size,
                             @RequestParam("sortBy") String sortBy) throws NotFoundException {
         LOGGER.debug("Finding  edugroups entry " );
         sortBy = sortBy==null?"id": sortBy;
         Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
-        Page<Compus> pageResult = service.findAll(pageable);
+        Page<Campus> pageResult = service.findAll(pageable);
 
         return new PageResource<>(pageResult,"page","size");
     }
     
-//Get a Compus    
-    @RequestMapping(value = "/compus/{id}", method = RequestMethod.GET)
+//Get a Campus    
+    @RequestMapping(value = "/campus/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public CompusDTO findById(@PathVariable("id") Long id) throws NotFoundException {
+    public CampusDTO findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding a edugroup entry with id: {}", id);
 
-        Compus found = service.findById(id);
+        Campus found = service.findById(id);
         LOGGER.debug("Found edugroup entry with information: {}", found);
 
         return found.createDTO(found);

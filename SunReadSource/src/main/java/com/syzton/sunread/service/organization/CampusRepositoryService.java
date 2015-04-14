@@ -8,12 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.syzton.sunread.dto.organization.CompusDTO;
+import com.syzton.sunread.dto.organization.CampusDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.organization.Compus;
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.School;
 import com.syzton.sunread.model.region.Region;
-import com.syzton.sunread.repository.organization.CompusRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.organization.SchoolRepository;
 import com.syzton.sunread.repository.region.RegionRepository;
 
@@ -23,17 +23,17 @@ import com.syzton.sunread.repository.region.RegionRepository;
  * 
  */
 @Service
-public class CompusRepositoryService implements CompusService{
+public class CampusRepositoryService implements CampusService{
 	
-    private static final Logger LOGGER = LoggerFactory.getLogger(CompusRepositoryService.class);
-    private CompusRepository repository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CampusRepositoryService.class);
+    private CampusRepository repository;
     private RegionRepository regionRepository;
     private SchoolRepository schoolRepository;
 	private Region region;
 	private School school;
  
     @Autowired
-    public CompusRepositoryService(CompusRepository repository,RegionRepository regionRepository
+    public CampusRepositoryService(CampusRepository repository,RegionRepository regionRepository
     		,SchoolRepository schoolRepository) {
         this.repository = repository;
         this.regionRepository = regionRepository;
@@ -42,9 +42,9 @@ public class CompusRepositoryService implements CompusService{
 
     @Override
     @Transactional(rollbackFor = {NotFoundException.class})
-    public Compus add(CompusDTO add, Long regionId, Long schoolId) {
+    public Campus add(CampusDTO add, Long regionId, Long schoolId) {
 
-        LOGGER.debug("Adding a new compus entry with information: {}", add);
+        LOGGER.debug("Adding a new campus entry with information: {}", add);
         
         region = regionRepository.findOne(regionId);
         school = schoolRepository.findOne(schoolId);
@@ -55,7 +55,7 @@ public class CompusRepositoryService implements CompusService{
         if (school == null) {
 			throw new NotFoundException("no school found with name :"+school.getName());
 		}             
-        Compus model = Compus.getBuilder(add.getName(),add.getHeadmaster(),region,school)
+        Campus model = Campus.getBuilder(add.getName(),add.getHeadmaster(),region,school)
         		.description(add.getDescription()).build();  
         
         return repository.save(model);
@@ -64,11 +64,11 @@ public class CompusRepositoryService implements CompusService{
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Compus deleteById(Long id) throws NotFoundException {
-        LOGGER.debug("Deleting a compus entry with id: {}", id);
+    public Campus deleteById(Long id) throws NotFoundException {
+        LOGGER.debug("Deleting a campus entry with id: {}", id);
         
-        Compus deleted = findById(id);
-        LOGGER.debug("Deleting compus entry: {}", deleted);
+        Campus deleted = findById(id);
+        LOGGER.debug("Deleting campus entry: {}", deleted);
 
         repository.delete(deleted);
         return deleted;
@@ -76,10 +76,10 @@ public class CompusRepositoryService implements CompusService{
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Compus update(CompusDTO updated)throws  NotFoundException{
+    public Campus update(CampusDTO updated)throws  NotFoundException{
         LOGGER.debug("Updating contact with information: {}", updated);
 
-        Compus model = findById(updated.getId());
+        Campus model = findById(updated.getId());
         LOGGER.debug("Found a note entry: {}", model);
 
         model.update(updated.getName(),updated.getHeadmaster());
@@ -88,14 +88,14 @@ public class CompusRepositoryService implements CompusService{
 
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
     @Override
-    public Compus findById(Long id) throws NotFoundException {
-        LOGGER.debug("Finding a compus entry with id: {}", id);
+    public Campus findById(Long id) throws NotFoundException {
+        LOGGER.debug("Finding a campus entry with id: {}", id);
 
-        Compus found = repository.findOne(id);
-        LOGGER.debug("Found compus entry: {}", found);
+        Campus found = repository.findOne(id);
+        LOGGER.debug("Found campus entry: {}", found);
 
         if (found == null) {
-            throw new NotFoundException("No compus entry found with id: " + id);
+            throw new NotFoundException("No campus entry found with id: " + id);
         }
 
         return found;
@@ -105,8 +105,8 @@ public class CompusRepositoryService implements CompusService{
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Page<Compus> findAll(Pageable pageable) throws NotFoundException {
-        LOGGER.debug("Finding all compus entries");
+    public Page<Campus> findAll(Pageable pageable) throws NotFoundException {
+        LOGGER.debug("Finding all campus entries");
         return repository.findAll(pageable);
     }
 

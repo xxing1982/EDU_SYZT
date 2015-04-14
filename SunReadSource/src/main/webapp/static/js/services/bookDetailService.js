@@ -2,5 +2,7 @@ var bookDetailServices = angular.module('bookDetailServices', ['ngResource', "no
 
 bookDetailServices.factory('BookDetail',['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "books/1");
+        return $resource(config.HOST + "books/:id",
+            {id:'@id'}, {}
+        );
 	}]);

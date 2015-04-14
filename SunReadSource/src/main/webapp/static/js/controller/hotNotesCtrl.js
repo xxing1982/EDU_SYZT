@@ -12,7 +12,7 @@ ctrls.controller("hotNotesController", ['$scope', 'NoteView',
         $scope.noteView = new NoteView();
         
         // Transmit arguments to search engine
-        $scope.arguments = { serchTerm: searchTerm };
+        $scope.arguments = { searchTerm: searchTerm };
         $scope.noteView.ShowMoreNotes( $scope.arguments );
     }
     

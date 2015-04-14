@@ -40,7 +40,7 @@ public class School extends AbstractEntity{
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy ="school")
     @Basic(fetch = FetchType.LAZY)
-    private Set<Compus> compus = new HashSet<>();
+    private Set<Campus> compus = new HashSet<>();
 
 
     public School() {
@@ -83,11 +83,11 @@ public class School extends AbstractEntity{
         this.eduGroup = eduGroup;
     }
 
-    public Set<Compus> getGrades() {
+    public Set<Campus> getGrades() {
         return compus;
     }
 
-    public void setGrades(Set<Compus> compus) {
+    public void setGrades(Set<Campus> compus) {
         this.compus = compus;
     }
 
@@ -115,7 +115,7 @@ public class School extends AbstractEntity{
             built.eduGroup = eduGroup;
         }
 
-        public Builder Grade(Set<Compus> compus) {
+        public Builder Grade(Set<Campus> compus) {
             built.compus = compus;
             return this;
         }
