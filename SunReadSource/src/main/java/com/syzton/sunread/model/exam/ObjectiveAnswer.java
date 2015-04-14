@@ -37,14 +37,7 @@ public class ObjectiveAnswer extends Answer {
 	 
 	}
 	
-	public boolean isCorrect(){
-		if(this.option==null||this.question==null||!(this.question instanceof ObjectiveQuestion)){
-			return false;
-		}
-		
-		return this.option.equals(((ObjectiveQuestion)this.question).getCorrectAnswer());
-	}
-	
+
 	public Option getOption() {
 		return option;
 	}

@@ -16,7 +16,7 @@ import com.syzton.sunread.model.exam.SubjectiveQuestion;
 public class SubjectivePaperDTO {
 	private Set<SubjectiveQuestion> questions;
 
-	private Book book;
+	private Long bookId;
  
 	private Long studentId;
 
@@ -39,6 +39,8 @@ public class SubjectivePaperDTO {
 			answerSet.add(answer.FromOTD());
 		}
 		exam.setAnswers(answerSet);
+		Book book = new Book();
+		book.setId(bookId);
 		exam.setBook(book);
 		exam.setExamType(examType);
 		exam.setStudentId(studentId);
@@ -53,12 +55,12 @@ public class SubjectivePaperDTO {
 		this.questions = questions;
 	}
 
-	public Book getBook() {
-		return book;
+	public Long getBook() {
+		return bookId;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBook(Long bookId) {
+		this.bookId = bookId;
 	}
 
 	public Long getStudentId() {

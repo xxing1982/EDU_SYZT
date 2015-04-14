@@ -1,9 +1,7 @@
 package com.syzton.sunread.controller.exam;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javassist.NotFoundException;
 
@@ -25,27 +23,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.dto.exam.CapacityPaperDTO;
-import com.syzton.sunread.dto.exam.ExamDTO;
 import com.syzton.sunread.dto.exam.SubjectivePaperDTO;
 import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.dto.exam.VerifyPaperDTO;
 import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
 import com.syzton.sunread.exception.common.TodayVerifyTimesOverException;
-import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.exception.exam.HaveVerifiedBookException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinFrom;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
-import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
