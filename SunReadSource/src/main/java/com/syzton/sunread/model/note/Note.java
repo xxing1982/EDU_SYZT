@@ -75,8 +75,8 @@ public class Note extends AbstractEntity{
 		return image;
 	}
 	
-	public User getUser() {
-		return user;
+	public String getUsername() {
+		return user.getUsername();
 	}
 	
 	public String getBookname() {
