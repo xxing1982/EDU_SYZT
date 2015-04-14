@@ -15,6 +15,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			testExam = VerifyExam;
 			VerifyExam.get($rootScope.id, $rootScope.exam.bookId, function(data){
 				Initial(data);
+				$scope.myAnswer.examType = 'VERIFY';
 				$scope.questions = data;
 				$scope.questions.current = $scope.questions[$scope.current];
 			});
@@ -36,7 +37,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 		}		
 		function Initial(data){
 			$scope.myAnswer = {
-                "book":  $rootScope.exam.book,
+                "bookId":  $rootScope.exam.bookId,
 				"studentId": $rootScope.id,
 				"question": data
 			};
