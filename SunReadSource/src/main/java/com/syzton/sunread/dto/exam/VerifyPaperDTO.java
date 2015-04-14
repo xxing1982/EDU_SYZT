@@ -32,7 +32,7 @@ public class VerifyPaperDTO {
 
 	private Set<ObjectiveQuestion> questions;
 
-	private Book book;
+	private Long bookId;
  
 	private Long studentId;
 
@@ -55,6 +55,8 @@ public class VerifyPaperDTO {
 			answerSet.add(answer.FromOTD());
 		}
 		exam.setAnswers(answerSet);
+		Book book = new Book();
+		book.setId(bookId);
 		exam.setBook(book);
 		exam.setExamType(examType);
 		exam.setStudentId(studentId);
@@ -71,13 +73,13 @@ public class VerifyPaperDTO {
 	}
 
 
-	public Book getBook() {
-		return book;
+	public Long getBookId() {
+		return bookId;
 	}
 
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
 
 
