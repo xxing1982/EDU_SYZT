@@ -16,10 +16,10 @@ conditionSearchServices.factory('ConditionSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource("/api/books/conditions?page=:page&size=:size&sortBy=id"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
-                         "&grade=:grade&language=:language&resource=:resource",
+                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
-                         ,language:'@_language',resource:'@_resource'},
+                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
                         {}
         );
 	}]);
@@ -42,10 +42,10 @@ weeklyHotServices.factory('WeeklyHotSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource("/api/books/conditions/weeklyhot?page=:page&size=:size&sortBy=id"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
-                         "&grade=:grade&language=:language&resource=:resource",
+                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
-                         ,language:'@_language',resource:'@_resource'},
+                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
                         {}
         );
 	}]);
@@ -57,10 +57,10 @@ monthlyHotServices.factory('MonthlyHotSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource("/api/books/conditions/monthlyhot?page=:page&size=:size&sortBy=id"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
-                         "&grade=:grade&language=:language&resource=:resource",
+                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
-                         ,language:'@_language',resource:'@_resource'},
+                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
                         {}
         );
 	}]);
@@ -72,10 +72,10 @@ weeklyRecommendServices.factory('WeeklyRecommendSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource("/api/books/conditions/weeklyRecommend?page=:page&size=:size&sortBy=id"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
-                         "&grade=:grade&language=:language&resource=:resource",
+                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
-                         ,language:'@_language',resource:'@_resource'},
+                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
                         {}
         );
 	}]);
@@ -87,10 +87,10 @@ monthlyRecommendServices.factory('MonthlyRecommendSearch',['$resource', 'config'
 	function($resource, config){
 		return $resource("/api/books/conditions/monthlyRecommend?page=:page&size=:size&sortBy=id"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
-                         "&grade=:grade&language=:language&resource=:resource",
+                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
-                         ,language:'@_language',resource:'@_resource'},
+                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
                         {}
         );
 	}]);
