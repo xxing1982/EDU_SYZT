@@ -3,17 +3,7 @@ package com.syzton.sunread.model.organization;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -60,6 +50,9 @@ public class Campus extends AbstractEntity{
     @JoinColumn(name = "school")
     private School school;
 
+	private String wish;
+
+
     
 	public String getName() {
 		return name;
@@ -92,8 +85,16 @@ public class Campus extends AbstractEntity{
 	public School getSchool() {
 		return school;
 	}
-    
-    @PrePersist
+
+	public String getWish() {
+		return wish;
+	}
+
+	public void setWish(String wish) {
+		this.wish = wish;
+	}
+
+	@PrePersist
     public void prePersist() {
         DateTime now = DateTime.now();
         creationTime = now;
@@ -126,11 +127,14 @@ public class Campus extends AbstractEntity{
 			// TODO Auto-generated method stub
 			built.description = description;
 			return this;
-		} 
-    }
+		}
+		public Builder wish(String wish) {
+			built.wish = wish;
+			return this;
+		}
+	}
 
 	/**
-	 * @param name2
 	 */
 	public void update(String name,String headmaster) {
 		this.name = name;
@@ -138,10 +142,6 @@ public class Campus extends AbstractEntity{
 	}
     
 	/**
-	 * @param name2
-	 * @param headmaster2
-	 * @param region2
-	 * @param school2
 	 * @return
 	 */
 	public static Builder getBuilder(String name, String headmaster,
@@ -160,6 +160,7 @@ public class Campus extends AbstractEntity{
         dto.setAddress(model.region.generateAddress());
         dto.setSchool(model.school.getName());
         dto.setClassNum(model.clazzNum());
+		dto.setWish(model.getWish());
         
         return dto;
     }

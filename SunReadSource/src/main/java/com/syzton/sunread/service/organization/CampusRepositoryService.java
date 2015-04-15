@@ -56,7 +56,7 @@ public class CampusRepositoryService implements CampusService{
 			throw new NotFoundException("no school found with name :"+school.getName());
 		}             
         Campus model = Campus.getBuilder(add.getName(),add.getHeadmaster(),region,school)
-        		.description(add.getDescription()).build();  
+        		.description(add.getDescription()).wish(add.getWish()).build();
         
         return repository.save(model);
 
