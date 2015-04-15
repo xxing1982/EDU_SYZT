@@ -3,6 +3,8 @@ package com.syzton.sunread.controller.exam;
 import java.util.List;
 import java.util.Map;
 
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.repository.organization.ClazzRepository;
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
@@ -83,10 +85,15 @@ public class ExamController {
 	
 	private SemesterService semesterService;
 
+	private ClazzRepository clazzRepository;
+
 	@Autowired
 	public ExamController(ExamService service, TestPassService tService,
 			CoinHistoryService coinService, PointHistoryService pointService,
-			UserService userService, BookService bookService,BookInShelfService shelfService,SemesterService semesterService) {
+			UserService userService, BookService bookService,
+			BookInShelfService shelfService,
+			ClazzRepository clazzRepository,
+			SemesterService semesterService) {
 		this.service = service;
 		this.testPassService = tService;
 		this.coinService = coinService;
@@ -241,13 +248,18 @@ public class ExamController {
 
 			Student student = userService.findByStudentId(studentId);
 			Book book = bookService.findById(bookId);
-			student.getStatistic().setPoint(2);
 			student.getStatistic().setCoin(
 					student.getStatistic().getCoin() + book.getCoin());
 			student.getStatistic().setPoint(
 					student.getStatistic().getPoint() + book.getPoint());
 			student.getStatistic().increaseTestPasses();
 			userService.saveStudent(student);
+
+			Clazz clazz = clazzRepository.findOne(studentId);
+			clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() + book.getPoint());
+			clazz.getClazzStatistic().increaseTotalReads();
+			clazzRepository.save(clazz);
+
 			shelfService.updateReadState(studentId, bookId);
 
 		}

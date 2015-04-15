@@ -3,11 +3,13 @@ package com.syzton.sunread.service.pointhistory;
 import java.util.List;
 
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.model.user.UserStatistic;
+import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.pointhistory.PointHistoryRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
@@ -29,9 +31,12 @@ public class PointHistoryRepositoryService implements PointHistoryService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PointHistoryRepositoryService.class);
     private PointHistoryRepository repository;
 
+    private ClazzRepository clazzRepository;
+
     @Autowired
-    public PointHistoryRepositoryService(PointHistoryRepository repository) {
+    public PointHistoryRepositoryService(PointHistoryRepository repository,ClazzRepository clazzRepository) {
         this.repository = repository;
+        this.clazzRepository = clazzRepository;
     }
 
     private StudentRepository studentRepository;
@@ -54,11 +59,19 @@ public class PointHistoryRepositoryService implements PointHistoryService {
         LOGGER.debug("Adding a new pointHistory entry with information: {}", add);
         Student student = studentRepository.findOne(add.getUserId());
         UserStatistic statistic = student.getStatistic();
+        Clazz clazz = clazzRepository.findOne(student.getClazzId());
+
+        clazzRepository.save(clazz);
+
         if (add.getPointType() == PointType.IN) {
         	statistic.setPoint( statistic.getPoint() + add.getNum() );
+            clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() + add.getNum());
         } else {
         	statistic.setPoint( statistic.getPoint() - add.getNum() );
+            clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() - add.getNum());
         }
+
+        clazzRepository.save(clazz);
         studentRepository.save(student);
         return repository.save(add);
     }

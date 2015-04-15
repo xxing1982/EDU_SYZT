@@ -1,5 +1,6 @@
 package com.syzton.sunread.controller.organization;
 
+import com.syzton.sunread.controller.BaseController;
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
@@ -26,7 +27,7 @@ import com.syzton.sunread.service.organization.ClazzService;
 
 @Controller
 @RequestMapping(value="/api")
-public class ClazzController {
+public class ClazzController extends BaseController{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClazzController.class);
     private ClazzService service;
@@ -36,10 +37,10 @@ public class ClazzController {
     }
     
 //Add a Clazz 
-    @RequestMapping(value = "/compus/{id}/clazz", method = RequestMethod.POST)
+    @RequestMapping(value = "/campus/{id}/clazz", method = RequestMethod.POST)
     @ResponseBody
     public ClazzDTO add(@Valid @RequestBody ClazzDTO dto
-    		,@PathVariable("id")Long id) {
+    		,@PathVariable("id")Long id) throws NotFoundException{
         LOGGER.debug("Adding a new edu group entry with information: {}", dto);
         
         Clazz added = service.add(dto, id);
@@ -85,6 +86,16 @@ public class ClazzController {
         Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
         Page<Clazz> pageResult = service.findAll(pageable);
 
+        return new PageResource<>(pageResult,"page","size");
+    }
+
+    @RequestMapping(value = "/campuses/{campusId}/hotclazzs", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Clazz> findAll(@PathVariable("campusId") long campusId,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size) throws NotFoundException {
+        Pageable pageable = this.getPageable(page,size,"clazzStatistic.avgPoints","desc");
+        Page<Clazz> pageResult = service.findByCampus(campusId,pageable);
         return new PageResource<>(pageResult,"page","size");
     }
     

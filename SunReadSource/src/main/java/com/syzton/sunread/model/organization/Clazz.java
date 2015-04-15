@@ -2,6 +2,7 @@ package com.syzton.sunread.model.organization;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
@@ -35,13 +36,23 @@ public class Clazz extends  AbstractEntity{
     
     @Column(name = "modification_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @JsonIgnore
     private DateTime modificationTime;
   
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "campus")
     private Campus campus;
-    
-    
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "calzz_statistic_id")
+    private ClazzStatistic clazzStatistic = new ClazzStatistic();
+
+    public ClazzStatistic getClazzStatistic() {
+        return clazzStatistic;
+    }
+
+    public void setClazzStatistic(ClazzStatistic clazzStatistic) {
+        this.clazzStatistic = clazzStatistic;
+    }
 
     public Clazz() {
     }

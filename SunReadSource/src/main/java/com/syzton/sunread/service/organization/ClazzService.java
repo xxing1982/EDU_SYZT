@@ -16,7 +16,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ClazzService {
 
-    public Clazz add(ClazzDTO Clazz, Long id);
+    public Clazz add(ClazzDTO Clazz, Long id) throws NotFoundException;
 
     public Clazz deleteById(Long id) throws NotFoundException;
 
@@ -25,6 +25,8 @@ public interface ClazzService {
     public Clazz findById(Long id) throws NotFoundException;
   
     Page<Clazz> findAll(Pageable pageable) throws NotFoundException;
+
+    Page<Clazz> findByCampus(Long campusId,Pageable pageable) throws NotFoundException;
     
     public List<Student> findAllStudentFromClazz(int clazzId)throws NotFoundException;
     

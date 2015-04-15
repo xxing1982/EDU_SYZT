@@ -4,10 +4,12 @@ import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.exception.common.AuthenticationException;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
 import com.syzton.sunread.repository.SemesterRepository;
+import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.*;
 
 import org.joda.time.DateTime;
@@ -51,6 +53,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     private TeacherClazzRepository teacherClazzRepository;
 
     private SemesterRepository semesterRepository;
+
+    private ClazzRepository clazzRepository;
 
 
     @Autowired
@@ -112,6 +116,12 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     @Override
     public Student addStudent(Student student) {
     	student.setPassword(encodePassword(student.getPassword()));
+        Clazz clazz = clazzRepository.findOne(student.getClazzId());
+        if(clazz == null){
+            throw new NotFoundException("clazz id = "+student.getClazzId()+" not found..");
+        }
+        clazz.getClazzStatistic().increaseStudentNum();
+        clazzRepository.save(clazz);
         return studentRepository.save(student);
     }
 
