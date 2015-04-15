@@ -1,7 +1,7 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
                                              ,'examServices', 'classServices', 'questionServices'
-                                             ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices'
+                                             ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices'
                                              ,'weeklyHotServices','monthlyHotServices'
                                              ,'weeklyRecommendServices','monthlyRecommendServices', 'campusServices']);
