@@ -8,32 +8,19 @@
 				</div>
 				<div class="title">{{bookName}}</div>
 				<div class="analysis">
-					<div class="category">
+					<!--<div class="category">
 						整合分析
-					</div>
+					</div>-->
 					<div class="lists">
-						<div class="list">
-							<div class="theme">威尔伯和夏洛之间的深厚友谊是怎么一步一步建立起来的？</div>
+						<div class="list" ng-repeat="item in questions">
+							<div class="theme">{{item.topic}}</div>
 							<div>
-							<textarea class="txt-content" rows="4" placeholder="正文（不少于20字）"></textarea>
+							<textarea class="txt-content" rows="4" placeholder="正文（不少于20字）">{{item.content}}</textarea>
 							</div>
 						</div>
 					</div>
 				</div>
 				<hr>
-				<div class="analysis" style="display:none">
-					<div class="category">
-						推理判断
-					</div>
-					<div class="lists">
-						<div class="list">
-							<div class="theme">威尔伯和夏洛之间的深厚友谊是怎么一步一步建立起来的？</div>
-							<div>
-							<textarea class="txt-content" rows="4" placeholder="正文（不少于20字）"></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

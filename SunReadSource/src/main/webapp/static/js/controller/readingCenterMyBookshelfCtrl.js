@@ -38,13 +38,13 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         $rootScope.exam.typeName = "我的书架 > 认证训练";
     }
     $scope.SubjectiveTest = function(data){
-        $rootScope.exam.id = 1;
+        $rootScope.exam.id = 2;
         $rootScope.exam.bookId = data.bookId;
         $rootScope.exam.bookName = data.bookName;
         $rootScope.exam.typeName = "我的书架 > 思维训练";
     }
     $scope.WordTest = function(data){
-        $rootScope.exam.id = 2;
+        $rootScope.exam.id = 1;
         $rootScope.exam.bookId = data.bookId;
         $rootScope.exam.bookName = data.bookName;
         $rootScope.exam.typeName = "我的书架 > 词汇训练";
