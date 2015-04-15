@@ -1,10 +1,22 @@
 //readingCenterMyBookshelfCtrl.js
 
 ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','para',
-    'Bookshelf','BookInShelf',function($rootScope, $scope, para, Bookshelf,BookInShelf) {
+    'Bookshelf','BookInShelf','DropBookFromShelf',function($rootScope, $scope, para, Bookshelf,BookInShelf,DropBookFromShelf) {
 	$scope.name='阅读中心->我的书架';
         
     var pageSize = 10;
+    
+    $scope.statuses = [{
+        id: 0,
+        name:"全部"
+    }, {
+        id: 1,
+        name: "必读"        
+    }, {
+        id: 2,
+        name: "选读"        
+    }];        
+    $scope.selected_status = 0;  
     
     var bookshelf = Bookshelf.get(function(){
         console.log(bookshelf);
@@ -28,6 +40,43 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         }
 
     });
+        
+    $scope.selectBookAttributes = function(){
+        
+        console.log($scope.selected_status);
+        $scope.bookInShelf = BookInShelf.get({page:0,size:pageSize},function(){
+        console.log($scope.bookInShelf);
+        var content = $scope.bookInShelf.content;
+        $scope.readBooks = new Array();
+        $scope.unreadBooks = new Array();
+        for(var i = 0; i < content.length; i++){
+            var j=0, k=0;
+            //console.log(content[i]);
+            if(content[i].readState){
+                if($scope.selected_status=== 1&& !content[i].bookAttribute)
+                    continue;
+                if($scope.selected_status=== 2&& content[i].bookAttribute)
+                    continue;
+                $scope.readBooks.push(content[i]);
+            }
+            else{
+                if($scope.selected_status=== 1&& !content[i].bookAttribute)
+                    continue;
+                if($scope.selected_status=== 2&& content[i].bookAttribute)
+                    continue;
+                $scope.unreadBooks.push(content[i]);
+            }
+        }
+
+    });
+    };
+
+    
+    $scope.dropBookFromShelf = function(book){
+        console.log(book.id);
+        $scope.dropBook = DropBookFromShelf.remove({id:book.id});
+        console.log($scope.dropBook);
+    };
     
     console.log($scope.unreadBooks);
     $rootScope.exam = {};

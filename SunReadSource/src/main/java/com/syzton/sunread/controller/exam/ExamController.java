@@ -230,24 +230,24 @@ public class ExamController {
 		Exam examResult = service.handInVerifyPaper(exam);
 		if (examResult.isPass()) {
 			testPassService.hotBookUpdate(bookId, studentId);
+			Student student = userService.findByStudentId(studentId);
+			Book book = bookService.findById(bookId);
 			CoinHistory coinHistory = new CoinHistory();
 			coinHistory.setCoinFrom(CoinFrom.FROM_VERIFY_TEST);
 			coinHistory.setCoinType(CoinType.IN);
-			User user = new Student();
-			user.setId(studentId);
-			coinHistory.setNum(2);
-			coinHistory.setUser(user);
+			coinHistory.setNum(book.getCoin());
+			coinHistory.setUser(student);
 			coinService.add(coinHistory);
-
+			
+			
 			PointHistory pointHistory = new PointHistory();
 			pointHistory.setPointFrom(PointFrom.FROM_VERIFY_TEST);
 			pointHistory.setPointType(PointType.IN);
-			pointHistory.setNum(2);
-			pointHistory.setUser(user);
+			pointHistory.setNum(book.getPoint());
+			pointHistory.setUser(student);
 			pointService.add(pointHistory);
 
-			Student student = userService.findByStudentId(studentId);
-			Book book = bookService.findById(bookId);
+			student.getStatistic().setPoint(book.getPoint());
 			student.getStatistic().setCoin(
 					student.getStatistic().getCoin() + book.getCoin());
 			student.getStatistic().setPoint(
@@ -284,9 +284,9 @@ public class ExamController {
 		return examResult;
 	}
 
-	@RequestMapping(value = "/exam/capacitypaper", method = RequestMethod.POST)
+	@RequestMapping(value = "/exam/thinkpaper", method = RequestMethod.POST)
 	@ResponseBody
-	public Exam handInThinkPaper(@Valid @RequestBody CapacityPaperDTO paper)
+	public Exam handInThinkPaper(@Valid @RequestBody SubjectivePaperDTO paper)
 			throws NotFoundException {
 		Exam exam = paper.fromOTD();
 		LOGGER.debug("hand in exam entrie.");
@@ -296,9 +296,9 @@ public class ExamController {
 		return examResult;
 	}
 
-	@RequestMapping(value = "/exam/thinkpaper", method = RequestMethod.POST)
+	@RequestMapping(value = "/exam/capacitypaper", method = RequestMethod.POST)
 	@ResponseBody
-	public Exam handInCapacityPaper(@Valid @RequestBody SubjectivePaperDTO dto)
+	public Exam handInCapacityPaper(@Valid @RequestBody CapacityPaperDTO dto)
 			throws NotFoundException {
 		Exam exam = dto.fromOTD();
 		LOGGER.debug("hand in exam entrie.");

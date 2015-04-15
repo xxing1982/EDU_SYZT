@@ -99,6 +99,13 @@ public interface BookInShelfService {
 	 */
 	boolean deleteByBookshelf(Bookshelf bookshelf);
 
+	/**
+	 * @param bookshelfId
+	 * @param bookId
+	 * @return
+	 */
+	BookInShelf deleteByBookshelfIdAndBookId(long bookshelfId, Long bookId);
+
    
     
 

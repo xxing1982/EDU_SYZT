@@ -23,6 +23,8 @@ public class SubjectivePaperDTO {
 	private ExamType examType;
 	 
 	private Set<SubjectiveAnswerDTO> answers;
+	
+ 
 
 	@Override
 	public String toString() {

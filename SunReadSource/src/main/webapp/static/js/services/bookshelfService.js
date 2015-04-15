@@ -25,3 +25,13 @@ addbookToShelfService.factory('AddbookToShelf',['$resource', 'config',
             {bookshelfId:'@_bookshelfId', bookId:'@_bookId'},{}
         ); 
     }]);
+
+var dropBookFromShelfService = angular.module('dropBookFromShelfServices', ['ngResource', "nourConfig"]);
+
+dropBookFromShelfService.factory('DropBookFromShelf',['$resource', 'config',
+	function($resource, config){
+		return $resource(
+            "/api/bookinshelf/:id",
+            {id:'@_id'},{}
+        ); 
+    }]);

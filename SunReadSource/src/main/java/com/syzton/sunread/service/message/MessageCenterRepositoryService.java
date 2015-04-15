@@ -109,7 +109,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 	}
 
 	@Transactional(readOnly = true,rollbackFor = {NotFoundException.class})
-	private Message findById(Long id) throws NotFoundException {
+	private Message findById(Long id){
 		
 		Message found = messageRepository.findOne(id);
 		

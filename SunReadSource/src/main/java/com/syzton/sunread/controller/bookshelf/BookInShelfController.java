@@ -1,13 +1,9 @@
 package com.syzton.sunread.controller.bookshelf;
 import java.util.ArrayList;
 
-import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
-import com.syzton.sunread.dto.bookshelf.BookshelfStatisticsDTO;
-import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.model.bookshelf.BookInShelf;
-import com.syzton.sunread.model.semester.Semester;
-import com.syzton.sunread.service.bookshelf.BookInShelfService;
-import com.syzton.sunread.service.semester.SemesterService;
+import javassist.NotFoundException;
+
+import javax.validation.Valid;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -18,11 +14,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javassist.NotFoundException;
-
-import javax.validation.Valid;
+import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
+import com.syzton.sunread.dto.bookshelf.BookshelfStatisticsDTO;
+import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.model.bookshelf.BookInShelf;
+import com.syzton.sunread.model.semester.Semester;
+import com.syzton.sunread.service.bookshelf.BookInShelfService;
+import com.syzton.sunread.service.semester.SemesterService;
 
 /**
  * @author Morgan-Leon
@@ -69,6 +74,18 @@ public class BookInShelfController {
 
         return deleted.createDTO(deleted);
     }
+    
+//Delete a book in shelf
+    @RequestMapping(value = "/bookshelf/{id}/books/{bookId}/bookinshelf}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public BookInShelfDTO deleteByStudentIdAndBookId(@PathVariable("bookshelfId")Long bookshelfId, @PathVariable("bookId")Long bookId) throws NotFoundException {
+        LOGGER.debug("Deleting a book in shelf entry with id: {}", bookshelfId);
+
+        BookInShelf deleted = service.deleteByBookshelfIdAndBookId(bookshelfId, bookId);
+        LOGGER.debug("Deleted book in shelf entry with information: {}", deleted);
+
+        return deleted.createDTO(deleted);
+    }    
     
 //Update a book in shelf    
     @RequestMapping(value = "/bookinshelf/{id}", method = RequestMethod.PUT)

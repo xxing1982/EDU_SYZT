@@ -85,7 +85,8 @@ public class ExamRepositoryService implements ExamService {
 		this.capacityQsRepo = capacityQsRepo;
 		this.capacityExamRepo = capacityExamRep;
 	}
-
+	
+	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
 	public Exam add(Exam added) {
 		LOGGER.debug("Adding a new Book entry with information: {}", added);
@@ -210,11 +211,15 @@ public class ExamRepositoryService implements ExamService {
 	
 	
 
-	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
 	public Exam handInVerifyPaper(Exam added) {
+		for(Answer xxx : added.getAnswers()){
+			LOGGER.debug("#############################xxx#"+xxx.getQuestion().getId());
+		}
 		Exam exam = add(added);
-		
+		for(Answer aaa : exam.getAnswers()){
+			LOGGER.debug("#############################aaa#"+aaa.getQuestion().getId());
+		}
 		Set<Answer> answers = exam.getAnswers();
 		for (Answer answer : answers) {
 			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
