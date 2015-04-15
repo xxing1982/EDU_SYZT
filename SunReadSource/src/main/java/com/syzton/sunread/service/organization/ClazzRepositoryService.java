@@ -42,10 +42,13 @@ public class ClazzRepositoryService implements ClazzService {
     }
 
     @Override
-    public Clazz add(ClazzDTO add, Long campusId) {
+    public Clazz add(ClazzDTO add, Long campusId) throws NotFoundException{
 
         LOGGER.debug("Adding a new clazz entry with information: {}", add);
         Campus campus = campusRepository.findOne(campusId);
+        if(campus == null){
+            throw new NotFoundException("campus id ="+campusId+" not found...");
+        }
         Clazz model = Clazz.getBuilder(add.getName(),add.getGrade(),campus)
         		.description(add.getDescription()).build();        
         return repository.save(model);
@@ -100,7 +103,18 @@ public class ClazzRepositoryService implements ClazzService {
         return repository.findAll(pageable);
     }
 
-	@Override
+    @Override
+    public Page<Clazz> findByCampus(Long campusId, Pageable pageable) throws NotFoundException {
+        Campus campus = campusRepository.findOne(campusId);
+        if(campus == null){
+            throw new NotFoundException("campus id "+campusId+"not found...");
+        }
+
+        Page<Clazz> clazzPage = repository.findByCampus(campus,pageable);
+        return clazzPage;
+    }
+
+    @Override
 	public List<Student> findAllStudentFromClazz(int clazzId) {
 		return studentRepository.findByClazzId(clazzId);
 	
