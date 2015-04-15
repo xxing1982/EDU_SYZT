@@ -64,7 +64,7 @@ public class FtpUtil {
      */  
     private FTPClientConfig getFTPClientConfig() {  
         // 创建配置对象  
-        FTPClientConfig conf = new FTPClientConfig(FTPClientConfig.SYST_UNIX);  
+        FTPClientConfig conf = new FTPClientConfig(FTPClientConfig.SYST_NT);  
         conf.setServerLanguageCode("zh");  
         return conf;  
     }  
