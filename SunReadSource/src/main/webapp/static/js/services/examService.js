@@ -20,6 +20,9 @@ examServices.factory('VerifyExam',['$resource', 'config', '$http',
 			$http.post(config.HOST + 'exam/verifypaper', data)
 			.success(function(data, status, headers, config){
 				callback(data);
+			})
+			.error(function(data,error){
+				console.log(data);
 			});
 		};
 		return api;
@@ -30,7 +33,7 @@ examServices.factory('WordExam',['$resource', 'config', '$http',
 	function($resource, config, $http){
 		var api = {};
 		api.get = function(studentId, bookId, callback){
-			$http.get(config.HOST + 'exam/verifypaper/'+studentId + '/' + bookId)
+			$http.get(config.HOST + 'exam/wordpaper/'+studentId + '/' + bookId)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});

@@ -8,6 +8,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 		$scope.title = $rootScope.exam.typeName;
 		$scope.bookName = $rootScope.exam.bookName;
 		$scope.IsFinish = false;
+		$scope.IsCilck = false;
 		var testExam;
 		$scope.current = 0;
 		switch($rootScope.exam.id){
@@ -58,6 +59,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			};
 
 			$scope.FinishExam = function(){
+				$scope.IsCilck = true;
 				testExam.submitExam($scope.myAnswer, function(examData){
 					if (examData.code == 1) {
 						var score = examData.exam.examScore;
