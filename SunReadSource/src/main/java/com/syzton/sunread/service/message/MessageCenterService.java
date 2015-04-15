@@ -17,6 +17,6 @@ public interface MessageCenterService {
 
 	public Page<Message> findMessagesByReceiveUser(Pageable pageable, Long userId);
 
-	public Message deleteById(Long id) throws NotFoundException;
+	public Message deleteById(Long id);
 	
 }
