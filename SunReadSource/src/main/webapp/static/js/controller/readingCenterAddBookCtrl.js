@@ -1,6 +1,6 @@
 ctrls.controller("readingCenterAddBookController", ['$scope', 'LackFeedback'
 ,function ($scope, LackFeedback) {
-	$scope.addBook = '我要选书';
+	$scope.addBook = '我要选书';  
     
     $scope.lackBookFeedback = function(){
         $scope.lackBook={

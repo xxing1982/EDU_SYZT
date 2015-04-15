@@ -1,6 +1,5 @@
 package com.syzton.sunread.service.bookshelf;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +20,6 @@ import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
-import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.bookshelf.BookInShelfRepository;
@@ -89,6 +87,16 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	public BookInShelf deleteById(long id){
 		// TODO Auto-generated method stub
 		BookInShelf bookInShelf = repository.findOne(id);
+		//repository.delete(bookInShelf);
+		repository.delete(id);
+		return bookInShelf;
+	}
+	
+	@Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+	@Override
+	public BookInShelf deleteByBookshelfIdAndBookId(long bookshelfId,Long bookId){
+		// TODO Auto-generated method stub
+		BookInShelf bookInShelf = repository.findByStudentIdAndBookId(bookshelfId, bookId);
 		repository.delete(bookInShelf);
 		return bookInShelf;
 	}

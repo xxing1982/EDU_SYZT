@@ -19,7 +19,7 @@
                     <a class="btn btn-fill-green" href="#readingCenter/addBook">+ 我要选书</a>
                 </div>
                 <div class="col-xs-2">
-                    <bs-dropdown data-menu-type="button" 
+                    <bs-dropdown ng-click="selectBookAttributes()" data-menu-type="button" 
                         select-val="selected_status = selectedVal"
                         preselected-item="selected_status" 
                         data-dropdown-data="statuses">
@@ -56,14 +56,16 @@
                             </div>
 
                             <!-- Note row -->
-                            <div>
-                                <div class="row">
+                            <div class="row">
+                                <div class="col-md-3">
+                                   <div class="row">
                                     <a href="#readingCenter/bookDetails/{{unreadBook.bookId}}/takenote">
                                         <img src="../static/img/myBookshelf/note.png" class="img-responsive">
                                     </a>
+                                    </div>
                                 </div>
                                 <!-- Place Holder -->
-                                <p class="row"></p>
+<!--                                <div class="col-md-9"><div class="row"><input type="button" class="btn btn-sm btn-green" value="从书架移除" ng-click="dropBookFromShelf(unreadBook)"/> </div></div>-->
                             </div>
 
                             
