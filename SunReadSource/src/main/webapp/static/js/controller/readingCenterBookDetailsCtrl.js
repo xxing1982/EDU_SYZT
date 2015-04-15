@@ -14,6 +14,28 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
 
         // Transmit arguments to note search engine
         $scope.noteView.ShowMoreNotes($scope.arguments);
+        
+        /* Goto or open the action defined $stateParams.action
+           example: 
+                /bookDetails/1/takenote
+                /bookDetails/1/intro
+                /bookDetails/1/catalog
+                /bookDetails/1/review
+                /bookDetails/1/note
+                /bookDetails/1/recommand
+                /bookDetails/1/multimedia
+        */
+        $(function() {
+            switch($stateParams.action){
+                case "takenote":
+                    $('#takenote').click();
+                    break;
+                default:
+                    if ($stateParams.action !== undefined){
+                        $('ul.nav a[href="#' + $stateParams.action + '"]').tab('show');
+                    }
+           }
+        });
     })
     
     $scope.bookDetails = bookDetail;

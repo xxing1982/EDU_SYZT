@@ -226,8 +226,13 @@ public class ExamRepositoryService implements ExamService {
 			}
 
 		}
-		int score = exam.getPassCount() * 100
+		int score = 0;
+		if((exam.getPassCount() + exam.getFailCount())==0){
+			score = 0;
+		}else{
+			score = exam.getPassCount() * 100
 				/ (exam.getPassCount() + exam.getFailCount());
+		}
 		exam.setExamScore(score);
 		if (score >= 60) {
 			exam.setPass(true);
@@ -311,33 +316,15 @@ public class ExamRepositoryService implements ExamService {
 	private List<ObjectiveQuestion> getRandomObjectiveQuestions(
 			final Long bookId,final QuestionType questionType) {
 		 
-		long total = objectQsRepo.count(new Specification<ObjectiveQuestion>() {
-
-			@Override
-			public Predicate toPredicate(Root<ObjectiveQuestion> root,
-					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				root = query.from(ObjectiveQuestion.class);
-				Path<Long> book = root.get("bookId");
-				
-				return cb.equal(book, bookId);
-			}
-		});
-		int i = this.getRandomPage((int) total, Exam.EXAM_QUESTION);
-		Pageable pageable = new PageRequest(i, Exam.EXAM_QUESTION, new Sort(
-				"id"));
-		Page<ObjectiveQuestion> pageResult = objectQsRepo.findAll(
-				new Specification<ObjectiveQuestion>() {
-
-					@Override
-					public Predicate toPredicate(Root<ObjectiveQuestion> root,
-							CriteriaQuery<?> query, CriteriaBuilder cb) {
-						root = query.from(ObjectiveQuestion.class);
-						Path<Book> book = root.get("bookId");
-						Path<QuestionType> type = root.get("objectiveType");
-						return cb.and(cb.equal(book, bookId),cb.equal(type,questionType));
-					}
-				}, pageable);
-		List<ObjectiveQuestion> list = pageResult.getContent();
+		List<ObjectiveQuestion> allList = objectQsRepo.findByBookIdAndObjectiveType(bookId, questionType);
+		long total = allList.size();
+		LOGGER.debug("###################################"+total);
+		int i = allList.size();
+		if(i<=Exam.EXAM_QUESTION){
+			return allList;
+		}
+		int from = new Random().nextInt(i-Exam.EXAM_QUESTION);
+		List<ObjectiveQuestion> list = allList.subList(from, from+Exam.EXAM_QUESTION);
 		return list;
 	}
 

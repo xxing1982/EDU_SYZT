@@ -34,7 +34,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         })
         //reading center -> myBookshelf -> book details
         .state('readingCenter.bookDetails',{
-            url: '/bookDetails/:bookId',
+            url: '/bookDetails/:bookId/:action',
             templateUrl: 'partials/readingCenterBookDetails.html',
             controller: 'readingCenterBookDetailsController'
         })

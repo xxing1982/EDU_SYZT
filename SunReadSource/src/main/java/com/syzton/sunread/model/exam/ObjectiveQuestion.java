@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,7 +35,7 @@ public class ObjectiveQuestion extends Question {
 	@JoinColumn(name="question_id")  
 	private List<Option> options;
 	
-	
+	@Enumerated(EnumType.STRING)
 	@Column(name="objective_type",nullable=false)
 	private QuestionType objectiveType;
 	
