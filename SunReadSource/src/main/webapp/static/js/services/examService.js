@@ -44,6 +44,15 @@ examServices.factory('WordExam',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
+		api.submitExam = function(data, callback){
+			$http.post(config.HOST + 'exam/wordpaper', data)
+			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,error){
+				console.log(data);
+			});
+		};
 		return api;
 	}]);
 
@@ -52,7 +61,7 @@ examServices.factory('ThinkExam',['$resource', 'config', '$http',
 	function($resource, config, $http){
 		var api = {};
 		api.get = function(bookId, callback){
-			$http.get(config.HOST + 'exam/verifypaper/'+ bookId)
+			$http.get(config.HOST + 'exam/thinkpaper/'+ bookId)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});
@@ -61,6 +70,15 @@ examServices.factory('ThinkExam',['$resource', 'config', '$http',
 			$http.get(config.HOST + 'thinkexams/' + userId)
 			.success(function(data, status, headers, config){
 				callback(data);
+			});
+		};
+		api.submitExam = function(data, callback){
+			$http.post(config.HOST + 'exam/thinkpaper', data)
+			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,error){
+				console.log(data);
 			});
 		};
 		return api;

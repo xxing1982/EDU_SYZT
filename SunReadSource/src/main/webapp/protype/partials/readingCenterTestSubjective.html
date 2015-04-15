@@ -15,10 +15,11 @@
 						<div class="list" ng-repeat="item in questions">
 							<div class="theme">{{item.topic}}</div>
 							<div>
-							<textarea class="txt-content" rows="4" placeholder="正文（不少于20字）">{{item.content}}</textarea>
+							<textarea class="txt-content" rows="4" placeholder="正文（不少于20字）" ng-model="item.content"></textarea>
 							</div>
 						</div>
 					</div>
+					<div class="btn-exam"><a class="btn btn-fill-green btn-lg" ng-click="finishExam()">提交</a></div>
 				</div>
 				<hr>
 			</div>
