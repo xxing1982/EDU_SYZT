@@ -25,18 +25,20 @@
                 </div>
 			</div>
 			
-			        <!-- Modal -->
+        <!-- Modal -->
         <div class="modal fade" id="supplementBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content lackBookModel container-fluid">
                 <div class="modal-body">
-
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <!-- Input form -->
                     <div >
                         <h4 class="modal-title" id="myModalLabel">缺书反馈</h4>
                         <p><br />没有找到您想要的书？请反馈此书的相关信息，方便我们及时添加！</p>
 <!--                        <div><textarea class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>	-->
+                        
                     </div>
+                    
                     <div>
                         <label class="radio-inline">
                           <input type="radio" ng-model="language" name="inlineRadioOptions" id="inlineRadio1" value="1" checked> 
@@ -80,7 +82,7 @@
                     </div>
                    
                     <div class="col-md-3">
-                        <button class="btn btn-green" ng-click="" type="button">取消</button>
+                        <button class="btn btn-green" ng-click="" type="button" data-dismiss="modal" aria-label="Close">取消</button>
                     </div> 
             </div>
                     

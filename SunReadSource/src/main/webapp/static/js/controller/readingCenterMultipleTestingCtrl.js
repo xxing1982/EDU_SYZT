@@ -39,7 +39,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			$scope.myAnswer = {
                 "bookId":  $rootScope.exam.bookId,
 				"studentId": $rootScope.id,
-				"question": data
+				"questions": data
 			};
 			$scope.myAnswer.answers = new Array();
 			$scope.total = data.length;
@@ -59,7 +59,20 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 
 			$scope.FinishExam = function(){
 				testExam.submitExam($scope.myAnswer, function(examData){
-					console.log(examData);
+					if (examData.code == 1) {
+						var score = examData.exam.examScore;
+						if (examData.exam.pass) {
+							$rootScope.exam.score = score;
+							window.location.href="/protype/index.html#/readingCenter/success";
+						}
+						else{
+							window.location.href="/protype/index.html#/readingCenter/failed";
+						}
+					}else if (examData.code == 3) {
+						alert('对不起，您今天已经考了2次，请明天再来！');
+					}else{
+						//用户已经验证了这本书
+					}
 				});
 			}
 

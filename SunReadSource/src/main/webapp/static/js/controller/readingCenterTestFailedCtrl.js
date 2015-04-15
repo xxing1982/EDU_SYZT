@@ -1,5 +1,5 @@
 //readingCenterTestFailedController.js
 
-ctrls.controller("readingCenterTestFailedController", ['$scope', function ($scope) {
-    $scope.name = '失败';
+ctrls.controller("readingCenterTestFailedController", ['$scope', '$rootScope', function ($scope, $rootScope) {
+    $scope.name = $rootScope.exam.bookName;
 }]);

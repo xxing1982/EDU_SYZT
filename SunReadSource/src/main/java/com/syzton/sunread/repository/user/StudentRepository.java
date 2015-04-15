@@ -1,6 +1,8 @@
 package com.syzton.sunread.repository.user;
 
 import com.syzton.sunread.model.user.Student;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -13,5 +15,7 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     public Student findByUserId(String userId);
 
     List<Student> findByClazzId(long clazzId);
+
+    Page<Student> findByCampusId(long campusId,Pageable pageable);
 
 }
