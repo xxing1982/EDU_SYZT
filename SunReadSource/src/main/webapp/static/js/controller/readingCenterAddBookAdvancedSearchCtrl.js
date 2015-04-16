@@ -30,7 +30,8 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope',
     $scope.pointRange = pointRange;
     $scope.statuses_grade = [{
         id: 0,
-        name:"全部年级"
+        name:"全部年级",
+        callback: function(){$scope.search()}
     }, {
         id: 1,
         name: "1年级"        

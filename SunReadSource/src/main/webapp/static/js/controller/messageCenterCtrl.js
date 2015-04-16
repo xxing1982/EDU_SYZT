@@ -1,18 +1,24 @@
 //messageCenter.js
 
 ctrls.controller("messageCenterController", ['$scope', function ($scope) {
+    
+    $scope.test = function(){alert("test")};
+    
     // Initlizate the dropdown statues
     $scope.statuses = [{
         id: 1       
     }, {
         id: 2,
-        name: "老校长"        
+        name: "老校长",
+        callback: $scope.test
     }, {
         id: 3,
-        name: "二校长"        
+        name: "二校长",
+        callback: $scope.test
     }, {
         id: 4,
-        name: "三校长"        
+        name: "三校长",
+        callback: $scope.test
     }, {
         id: 5,
         name: "斯校长"        
@@ -25,4 +31,5 @@ ctrls.controller("messageCenterController", ['$scope', function ($scope) {
     // Once the dropdown option changed
     // selected_status will changed simultaneity
     $scope.selected_status = 1;
+    
 }]);

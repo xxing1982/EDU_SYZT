@@ -5,7 +5,8 @@ ctrls.directive('bsDropdown', function ($compile) {
         scope: {
             items: '=dropdownData',
             doSelect: '&selectVal',
-            selectedItem: '=preselectedItem'
+            selectedItem: '=preselectedItem',
+            callback: '=callback'
         },
         link: function (scope, element, attrs) {
             var html = '';
@@ -37,8 +38,13 @@ ctrls.directive('bsDropdown', function ($compile) {
                 scope.doSelect({
                     selectedVal: item.id
                 });
+                if (item.callback && typeof item.callback === 'function'){
+                    item.callback();
+                }
             };
             scope.selectVal(scope.bSelectedItem);
+            
+
         }
     };
 });

@@ -6,7 +6,7 @@ ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView'
     var student = Student.get({id : $rootScope.id}, function(){
         
         // Get headmaster
-        $scope.campus = Campus.get({id: student.schoolId});
+        $scope.campus = Campus.get({id: student.campusId});
     });
 
     
