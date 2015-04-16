@@ -127,7 +127,7 @@ public class FtpUtil {
     public boolean upload(String localFilePath, String remoteFilePath) throws Exception {  
         boolean state = false;  
         File localFile = new File(localFilePath);  
-        if (!localFile.isFile() || localFile.length() == 0) {  
+        if (!localFile.isFile() || localFile.length() == 0) {
             return state;  
         }  
         FileInputStream localIn = new FileInputStream(localFile);  

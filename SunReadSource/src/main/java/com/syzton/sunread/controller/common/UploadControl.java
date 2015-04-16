@@ -42,7 +42,7 @@ public class UploadControl {
 			try{
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt", "syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + fileName, ftpPath+fileName);
+				ftpUtil.upload(realPath + "/"+ fileName, ftpPath+fileName);
 			}catch(Exception e){
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
@@ -69,7 +69,7 @@ public class UploadControl {
 			try{
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt", "syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + fileName, ftpPath+fileName);
+				ftpUtil.upload(realPath +"/"+ fileName, ftpPath+fileName);
 			}catch(Exception e){
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
@@ -98,7 +98,7 @@ public class UploadControl {
 			try{
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt", "syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + fileName, ftpPath+fileName);
+				ftpUtil.upload(realPath +"/"+  fileName, ftpPath+fileName);
 			}catch(Exception e){
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
