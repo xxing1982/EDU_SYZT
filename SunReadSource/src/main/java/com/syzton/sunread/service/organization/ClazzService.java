@@ -28,9 +28,9 @@ public interface ClazzService {
 
     Page<Clazz> findByCampus(Long campusId,Pageable pageable) throws NotFoundException;
     
-    public List<Student> findAllStudentFromClazz(int clazzId)throws NotFoundException;
+    public List<Student> findAllStudentFromClazz(Long clazzId)throws NotFoundException;
     
-    public int getAveragePointsfromClass(int clazzId) throws NotFoundException;
+    public int getAveragePointsfromClass(Long clazzId) throws NotFoundException;
     
-    public int getAverageReadingBookFromClass(int clazzId) throws NotFoundException;
+    public int getAverageReadingBookFromClass(Long clazzId) throws NotFoundException;
 }

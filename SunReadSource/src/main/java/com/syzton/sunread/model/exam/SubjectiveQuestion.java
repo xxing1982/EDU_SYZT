@@ -22,7 +22,6 @@ public class SubjectiveQuestion extends Question {
 	@Column(name="subjective_que_type",length=10,nullable=false)
 	private SubjectiveQuestionType questionType;
 	
-	//TODO.. SubjectiveQuestion Type Name
 	public enum SubjectiveQuestionType{FIRST,SECOND,THIRD,FOURTH,FIFTH}
 	
 	public static Builder getBuilder() {

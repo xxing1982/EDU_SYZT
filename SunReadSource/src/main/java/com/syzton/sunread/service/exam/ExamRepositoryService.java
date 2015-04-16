@@ -213,13 +213,7 @@ public class ExamRepositoryService implements ExamService {
 
 	@Override
 	public Exam handInVerifyPaper(Exam added) {
-		for(Answer xxx : added.getAnswers()){
-			LOGGER.debug("#############################xxx#"+xxx.getQuestion().getId());
-		}
 		Exam exam = add(added);
-		for(Answer aaa : exam.getAnswers()){
-			LOGGER.debug("#############################aaa#"+aaa.getQuestion().getId());
-		}
 		Set<Answer> answers = exam.getAnswers();
 		for (Answer answer : answers) {
 			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
@@ -396,9 +390,10 @@ public class ExamRepositoryService implements ExamService {
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
-		Date date = cal.getTime();
-		DateTime dt = new DateTime(date);    
+		DateTime dt = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 00, 00, 00, 000);
+		LOGGER.debug(dt.toString());
 		List<Exam> list = repository.findByStudentIdAndBookIdAndCreationTimeAfter(studentId, bookId,dt);
+		LOGGER.debug("####################################"+list.size());
 		return list;
 	}
 	

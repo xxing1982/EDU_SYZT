@@ -16,16 +16,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.syzton.sunread.dto.exam.AnswerDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
  
 
 @Entity  
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "answer_type", discriminatorType = DiscriminatorType.STRING, length = 30)   
-public abstract class Answer {
-	
-	@Id   
-	@GeneratedValue(strategy = GenerationType.AUTO)  
-	protected long id;
+public abstract class Answer extends AbstractEntity {
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name="question_id")
@@ -40,14 +37,6 @@ public abstract class Answer {
 
 	public void setStudentId(Long studentId) {
 		this.studentId = studentId;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public Question getQuestion() {
