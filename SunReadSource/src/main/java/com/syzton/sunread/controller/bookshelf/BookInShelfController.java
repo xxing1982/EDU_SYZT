@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.dto.bookshelf.BookshelfStatisticsDTO;
 import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.service.bookshelf.BookInShelfService;
@@ -76,12 +77,15 @@ public class BookInShelfController {
     }
     
 //Delete a book in shelf
-    @RequestMapping(value = "/bookshelf/{id}/books/{bookId}/bookinshelf}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/bookshelf/{bookshelfId}/books/{bookId}/bookinshelf", method = RequestMethod.DELETE)
     @ResponseBody
-    public BookInShelfDTO deleteByStudentIdAndBookId(@PathVariable("bookshelfId")Long bookshelfId, @PathVariable("bookId")Long bookId) throws NotFoundException {
+    public BookInShelfDTO deleteByStudentIdAndBookId(@PathVariable("bookshelfId")Long bookshelfId, @PathVariable("bookId")Long bookId) throws NotFoundException, BookInShelfDuplicateVerifiedException {
         LOGGER.debug("Deleting a book in shelf entry with id: {}", bookshelfId);
-
+        
+        //Boolean update = service.updateReadState(bookshelfId, bookId);
+              
         BookInShelf deleted = service.deleteByBookshelfIdAndBookId(bookshelfId, bookId);
+        
         LOGGER.debug("Deleted book in shelf entry with information: {}", deleted);
 
         return deleted.createDTO(deleted);

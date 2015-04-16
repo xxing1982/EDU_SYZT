@@ -96,7 +96,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	@Override
 	public BookInShelf deleteByBookshelfIdAndBookId(long bookshelfId,Long bookId){
 		// TODO Auto-generated method stub
-		BookInShelf bookInShelf = repository.findByStudentIdAndBookId(bookshelfId, bookId);
+		Bookshelf bookshelf = bookshelfRepository.findOne(bookshelfId);
+		BookInShelf bookInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
 		repository.delete(bookInShelf);
 		return bookInShelf;
 	}
@@ -191,7 +192,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	@Override
 	public boolean updateReadState(Long studentId,Long bookId) throws BookInShelfDuplicateVerifiedException{
 
-        BookInShelf bookInShelf = repository.findByStudentIdAndBookId(studentId, bookId);
+    	Bookshelf bookshelf = bookshelfRepository.findOne(studentId);
+        BookInShelf bookInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
         if (bookInShelf != null&&bookInShelf.updateReadState()) {
 			repository.saveAndFlush(bookInShelf);
 			return true;

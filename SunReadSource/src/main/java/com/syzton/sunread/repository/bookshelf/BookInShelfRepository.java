@@ -21,8 +21,8 @@ public interface BookInShelfRepository extends JpaRepository<BookInShelf,Long>,Q
 	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) ")
 	ArrayList<BookInShelf> findByBookShelf(@Param("bookshelf")Bookshelf bookshelf);
 	Page<BookInShelf> findByBookshelf(Bookshelf bookshelf,Pageable pageable);
-	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:studentId) AND bookId=(:bookId)")
-	BookInShelf findByStudentIdAndBookId(@Param("studentId")Long studentId,@Param("bookId")Long bookId);
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND bookId=(:bookId)")
+	BookInShelf findOneByBookshelfAndBookId(@Param("bookshelf")Bookshelf bookshelf,@Param("bookId")Long bookId);
 	ArrayList<BookInShelf> findByBookId(Long booId);
 	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE b.bookshelf = (:studentId) AND b.creationTime between (:startTime) AND (:endTime)")
 	ArrayList<BookInShelf> findByStudentIdAndSemester(@Param("studentId")Long studentId, @Param("startTime")DateTime startTime, @Param("endTime")DateTime endTime);
