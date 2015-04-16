@@ -111,5 +111,24 @@ public class ClazzController extends BaseController{
         return found.createDTO(found);
     }
     
+    @RequestMapping(value = "/clazz/averagepoint/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public int findAveragePointsFromClass(@PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Finding a edugroup entry with id: {}", id);
+
+        int averagePoint = service.getAveragePointsfromClass(id);
+        LOGGER.debug("Found class average point information: {}", averagePoint);
+
+        return averagePoint;
+    }
     
+    @RequestMapping(value = "/clazz/averagereadingbook/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public int findAverageReadingBookFromClass(@PathVariable("id") Long id) throws NotFoundException {
+        LOGGER.debug("Finding a edugroup entry with id: {}", id);
+        int averagePoint = service.getAverageReadingBookFromClass(id);
+        LOGGER.debug("Found class average point information: {}", averagePoint);
+
+        return averagePoint;
+    }
 }

@@ -57,11 +57,11 @@ public class SubjectivePaperDTO {
 		this.questions = questions;
 	}
 
-	public Long getBook() {
+	public Long getBookId() {
 		return bookId;
 	}
 
-	public void setBook(Long bookId) {
+	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
 

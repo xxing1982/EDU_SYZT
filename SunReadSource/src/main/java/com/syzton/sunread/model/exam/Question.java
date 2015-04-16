@@ -39,20 +39,6 @@ public abstract class Question extends AbstractEntity {
 	@Column(nullable=false,length= MAX_LENGTH_DESCRIPTION)
 	private String topic;
 	
-
-
-//	@ManyToMany(mappedBy="questions",cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
-//	private Set<Exam> exams;
-//	
-//
-//	public Set<Exam> getExams() {
-//		return exams;
-//	}
-//
-//	public void setExams(Set<Exam> exams) {
-//		this.exams = exams;
-//	}
-
 	public String getTopic() {
 		return topic;
 	}
