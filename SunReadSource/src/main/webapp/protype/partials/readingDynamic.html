@@ -44,7 +44,7 @@
                              ng-repeat="action in actionPageable.entities.content">
                             <div class="col-md-10">
                                 <a class="dark-blue-2"
-                                   ng-click="showAction(action)">
+                                   href="#/readingDynamic/actions/1/{{$index + 1}}">
                                     {{ action.title }}
                                 </a>
                             </div>
@@ -81,15 +81,21 @@
                         <div class="row">
 
                             <!-- Golden silver bronze clazzes -->
-                            <div class="col-md-4" ng-repeat="n in ['golden', 'silver', 'bronze']">
+                            <div class="col-md-4" ng-repeat="hotClazz in hotClazzs.content" ng-init="award=['golden', 'silver', 'bronze']">
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <img ng-src="../static/img/readingDynamic/{{n}}.png" class="img-responsive">
+                                        <img ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive">
                                     </div>
                                     <div class="col-md-7" style="margin-top:-10px;">
                                         <div class="row text-left">
-                                            <h5><big>三年(2)班</big></h4>
-                                            <p style="line-height:21px;"><small>班级人数：36<br/>班级平均积分(学期)：246<br/>班级人均阅读量(学期)：52</small></p>
+                                            <h5><big>{{hotClazz.name}}</big></h4>
+                                            <p style="line-height:21px;">
+                                                <small>
+                                                    班级人数：{{hotClazz.clazzStatistic.totalReads}}<br/>
+                                                    班级平均积分(学期)：{{hotClazz.clazzStatistic.avgPoints}}<br/>
+                                                    班级人均阅读量(学期)：{{hotClazz.clazzStatistic.avgReads}}
+                                                </small>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -117,19 +123,19 @@
                         <div class="row">
 
                             <!-- Rank of students -->
-                            <div class="col-md-4" ng-repeat="n in ['first', 'second', 'third']">
+                            <div class="col-md-4" ng-repeat="hotreader in hotReaders.content" ng-init="award = ['first', 'second', 'third']">
                                 <div class="row">
                                     <div class="col-xs-6 col-xs-offset-3">
                                         <div class="row">
                                             <div >
                                                 <img ng-src="../static/img/picture.jpg" class="img-responsive img-circle" src="../static/img/picture.jpg">
-                                                <img class="student-rank" ng-src="../static/img/readingDynamic/{{n}}.png" class="img-responsive img-circle">
+                                                <img class="student-rank" ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive img-circle">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xs-8 col-xs-offset-2">
-                                        <div class="text-center"><h4>夏亚珊</h4></div>
-                                        <div class="text-center"><p>203本</p></div>
+                                        <div class="text-center"><h4>{{hotreader.username}}</h4></div>
+                                        <div class="text-center"><p>{{hotreader.statistic.readNum}}本</p></div>
                                     </div>
                                 </div>
                             </div>

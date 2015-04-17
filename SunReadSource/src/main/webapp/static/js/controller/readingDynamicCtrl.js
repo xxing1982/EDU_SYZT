@@ -1,7 +1,7 @@
 //readingDynamic.js
 
-ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView', 'Student', 'Campus', 'Action', 'Pageable',
-    function ($scope, $rootScope, NoteView, Student, Campus, Action, Pageable) {
+ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView', 'Student', 'Campus', 'Action', 'Pageable', 'Hotclazz', 'Hotreader',
+    function ($scope, $rootScope, NoteView, Student, Campus, Action, Pageable, Hotclazz, Hotreader) {
     
         
         
@@ -10,6 +10,14 @@ ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView'
         
         // Get headmaster
         $scope.campus = Campus.get({id: student.campusId});
+        
+                
+        // Create a Hotclazzs entitiy
+        $scope.hotClazzs = Hotclazz.get({by: 'campuses', id: student.campusId, page: 0, size: 3 });
+        
+        
+        // Create a Hotreaders entitiy
+        $scope.hotReaders = Hotreader.get({campusId: student.campusId, page: 0, size: 3 });
     });
 
         
@@ -25,7 +33,7 @@ ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView'
         
     // Show the page 1
     $scope.actionPageable.showPage(1);
-        
+
 
     
     // Make an instance of the NoteView

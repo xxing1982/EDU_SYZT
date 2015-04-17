@@ -112,8 +112,5 @@ angular.module('pageableServices', []).
     factory('Pageable', function () {
         
         // Dependency injection
-
-        // Return the NoteView object with
-        // the reference to Note and Comment
         return Pageable;
     });
