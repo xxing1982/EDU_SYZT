@@ -1,7 +1,7 @@
 /******************************************************/
 
 .catogary {
-    border: 1px #DDD solid;
+    border: 1px #D6DEE6 solid;
 }
 
 .advancedSearch .input-group-addon {
@@ -12,8 +12,8 @@
     padding-left: 15px;
     padding-bottom: 5px;
     margin-right: 10px;
-    border-bottom: 1px #DDD solid;
-    border-left: 1px #DDD solid;
+    border-bottom: 1px #D6DEE6 solid;
+    border-left: 1px #D6DEE6 solid;
 }
  .btn-catogary{
   color: darkslateblue;
@@ -143,7 +143,7 @@
 }
 
 .bookDetailAlsoRead {
-    border-bottom: 1px #DDD solid;
+    border-bottom: 1px #D6DEE6 solid;
     padding-left: 15px;
     margin-bottom: 15px;
 }
@@ -182,7 +182,7 @@
 .readingCenter-right-body .bookDetailBottom {
     margin-left: 15px;
     margin-right: 15px;
-    border-bottom: 1px #DDD solid;   
+    border-bottom: 1px #D6DEE6 solid;   
 }
 
 .lackBookModal {
