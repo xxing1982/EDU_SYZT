@@ -34,7 +34,7 @@
                           分值：{{bookDetails.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           字数：{{bookDetails.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           页数：{{bookDetails.pageCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-                          已有<span class="red-text">{{bookDetails.statistic.readNums}}</span>人阅读，<span class="red-text">80</span>人测试，<span class="red-text">54</span>人做笔记，<span class="red-text">5</span>人推荐。
+                          已有<span class="red-text">{{bookDetails.statistic.readNums}}</span>人阅读，<span class="red-text">{{bookDetails.statistic.notes}}</span>人做笔记，<span class="red-text">{{bookDetails.statistic.recommends}}</span>人推荐。
                       </small></p>
                   </div>
                   
@@ -48,21 +48,19 @@
                                 <div class="row"><a><p>已认证</p></a></div>
                             </div>
                             <div class="col-xs-4">
-                                <div class="row"><a><p class="dark-blue-1 bookExercise">词汇训练</p></a></div>
+                                <div class="row"><a href="#readingCenter/multipleTesting"><p class="dark-blue-1 bookExercise">词汇训练</p></a></div>
                             </div>
                             <div class="col-xs-4">
-                                <div class="row"><a><p class="dark-blue-1 bookExercise">思维训练</p></a></div>
+                                <div class="row"><a href="#readingCenter/testSubjective"><p class="dark-blue-1 bookExercise">思维训练</p></a></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 text-center" style="float:right; width:159px; margin-top: 5px;">
                         <div class="row">
-                            <div class="col-xs-5 col-md-offset-1">   
-                                <div class="row"><a><small>购买比价</small></a></div>
-                            </div>
+                            <div class="col-xs-5 col-md-offset-1"></div>
 
-                            <div class="col-xs-6 bookExercise">
-                                <div class="row"><a><small>从书架移除</small></a></div>
+                            <div class="col-xs-6">
+                                <div class="row"><a><small>购买比价</small></a></div>
                             </div>
                         </div>
                     </div>
@@ -120,14 +118,14 @@
                 <!-- introduction -->
                 <div role="tabpanel" class="tab-pane in active" id="intro">
                     <div>
-                        <p>内容包括天文、地理、生物、物理、化学、数学、文学……包罗万象。是了解这个世界各种现象的通天大道。内容包括天文、地理、生物、医学、物理、化学、数学、文学……包罗万象。是了解这个世界各种现象的通天大道。</p>
+                        <p>{{bookDetails.description}}</p>
                     </div>
                 </div>
                 
                 <!-- catalog -->
                 <div role="tabpanel" class="tab-pane" id="catalog">
                     <div>
-                        <p>动物篇 <br/>　为什么鹦鹉善于学人说话 <br/>　为什么企鹅能抵御南极的严寒    <br/>　为什么煮熟的虾蟹会变红    <br/>　为什么企鹅不会飞  l <br/>　鱼身上的鳞片有什么用   <br/>　为什么螃蟹横着走路 <br/>　熊喜欢吃什么   <br/>　为什么海鸥跟着轮船飞   <br/>　小熊猫是大熊猫生的吗   <br/>　哺乳动物有哪些特征   <br/>　麇鹿为什么又叫“四不像" <br/>　藏羚为什么叫“独角兽”   <br/>　为什么猪特别爱拱泥土 <br/>　斑马身上的条纹有什么用 <br/>　为什么把大熊猫称为“国宝” <br/>　东北虎为什么被称为“丛林之王" <br/>　为什么把骆驼称为“沙漠之舟”   <br/>　大象的长鼻子是干什么用的   <br/>　蝴蝶和飞蛾一样吗   <br/>　昆虫中的老寿星是谁   <br/>植物篇 <br/>　把西瓜子吃进肚子里，会长出西瓜秧吗 <br/>　为什么含羞草一碰就会合拢它的叶子   <br/>　仙人掌为什么不怕渴   <br/>　什么是吃“荤”的植物   <br/>　年轮是什么   <br/>　九死还魂草的会“还魂”吗 <br/>　为什么玉米粒会爆花   <br/>　如何辨别蘑菇有没有毒   <br/>　卷心菜能开花吗   <br/>　烈日下为什么不宜给花儿浇水   <br/>　辣椒为什么会辣 <br/>　为什么把月季花尊为“花中皇后” <br/>　跳舞草为什么会“跳舞”   <br/>　为什么森林地区爱下雨   <br/>　树有性别之分吗   <br/>自然篇 </p>
+                        <p>{{bookDetails.catalogue}}</p>
                     </div>
                 </div>   
                 

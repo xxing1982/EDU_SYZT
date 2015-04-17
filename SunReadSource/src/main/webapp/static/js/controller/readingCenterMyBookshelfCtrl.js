@@ -18,12 +18,12 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     }];        
     $scope.selected_status = 0;  
     
-    var bookshelf = Bookshelf.get(function(){
+    var bookshelf = Bookshelf.get({id:$rootScope.id},function(){
         console.log(bookshelf);
     })
     $scope.shelf = bookshelf;
     
-    $scope.bookInShelf = BookInShelf.get({page:0,size:pageSize},function(){
+    $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:pageSize},function(){
         console.log($scope.bookInShelf);
         var content = $scope.bookInShelf.content;
         $scope.readBooks = new Array();
@@ -44,7 +44,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     $scope.selectBookAttributes = function(){
         
         console.log($scope.selected_status);
-        $scope.bookInShelf = BookInShelf.get({page:0,size:pageSize},function(){
+        $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:pageSize},function(){
         console.log($scope.bookInShelf);
         var content = $scope.bookInShelf.content;
         $scope.readBooks = new Array();
@@ -75,7 +75,14 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     $scope.dropBookFromShelf = function(book){
         console.log(book.id);
         $scope.dropBook = DropBookFromShelf.remove({id:book.id});
-        console.log($scope.dropBook);
+        if($scope.dropBook === null){
+            alert("删除失败");
+        }
+        else{
+            alert("移除成功");
+            location.reload();
+        }
+            
     };
     
     console.log($scope.unreadBooks);
@@ -99,5 +106,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         $rootScope.exam.typeName = "我的书架 > 词汇训练";
     }
 }]);
+
+
 
 //var booksCtrl = angular.module('nourControllers',['nourConfig', 'ngResource','bookInShelfService']);

@@ -28,46 +28,58 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope', 'Con
     $scope.language = language;
     $scope.resource = resource;
     $scope.pointRange = pointRange;
-    $scope.statuses_grade = [{
+   $scope.statuses_grade = [{
         id: 0,
-        name:"全部年级"
+        name:"全部年级",
+        callback: function(){$scope.search()}
     }, {
         id: 1,
-        name: "1年级"        
+        name: "1年级", 
+        callback: function(){$scope.search()}
     }, {
         id: 2,
-        name: "2年级"        
+        name: "2年级",
+        callback: function(){$scope.search()}
     }, {
         id: 3,
-        name: "3年级"        
+        name: "3年级", 
+        callback: function(){$scope.search()}
     }, {
         id: 4,
-        name: "4年级"        
+        name: "4年级",
+        callback: function(){$scope.search()}
     }, {
         id: 5,
-        name: "5年级"        
+        name: "5年级",
+        callback: function(){$scope.search()}
     }];        
             
     $scope.statuses_category = [{
         id: 0,
-        name:"全部类型"
+        name:"全部类型",
+        callback: function(){$scope.search()}
     }, {
         id: 1,
-        name: "类型一"        
+        name: "类型一",
+        callback: function(){$scope.search()}
     }, {
         id: 2,
-        name: "类型二"        
+        name: "类型二", 
+        callback: function(){$scope.search()}
     }, {
         id: 3,
-        name: "类型三"        
+        name: "类型三",        
+        callback: function(){$scope.search()}
     }, {
         id: 4,
-        name: "类型四"        
+        name: "类型四",
+        callback: function(){$scope.search()}
     }, {
         id: 5,
-        name: "类型五"        
+        name: "类型五",
+        callback: function(){$scope.search()}        
     }];        
-    $scope.selected_status = 0; 
+    $scope.selected_status = 0;  
             
     $scope.status = status;
             
@@ -80,9 +92,6 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope', 'Con
       ,function(){
         console.log($scope.popularSearch)
     });       
-            
-    
-
     
 	$scope.searchWeekly = function(){
         console.log(grade);
