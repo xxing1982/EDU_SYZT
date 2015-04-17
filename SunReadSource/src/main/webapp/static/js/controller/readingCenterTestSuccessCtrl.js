@@ -8,4 +8,8 @@ ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 
     	$scope.coin = data.coin;
     	$scope.point = data.point;
     })
+
+    $scope.evaluate = function(){
+    	window.location.href="/protype/index.html#/readingCenter/myBookshelf";
+    }
 }]);

@@ -37,6 +37,12 @@ a:focus, input:focus
     font-weight: 700;
 }
 
+.navbar-brand
+{
+    padding: 0;
+    padding-right: 30px;
+}
+
 .navbar li a:hover, .navbar li a:visited
 {
     background-color:transparent;
@@ -223,12 +229,14 @@ a:focus, input:focus
 {
     font-size: 14px;
     text-align: left;
+    padding-top: 3px;
 }
 
 .read-master-count
 {
     color: #BEBEBE;
     font-size: 12px;
+    padding-top: 3px;
 }
 /************main-body bottom************************/
 

@@ -9,6 +9,9 @@ function TopNav(){
 		$(".nav-underline").find(".myActive").removeClass("myActive");
 		$(this).parent().addClass("myActive");
 	});
+	setTopNav();
+}
+function setTopNav(){
 	//show underline
 	var urlStr = window.location.href;
 	if (urlStr.match("readingCenter")) {
