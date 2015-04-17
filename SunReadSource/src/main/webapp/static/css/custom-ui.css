@@ -10,13 +10,13 @@
     color: #5883C2;
 }
 
-.custom-page-number {
+.custom-page-number-group .custom-page-number {
     margin-left: auto;
     margin-right: auto;
     display: block;
 }
 
-.custom-page-number:hover {
+.custom-page-number-group .custom-page-number-current {
     background-color: #5883C2 ;
     color: #FFF;
     position: absolute;
@@ -26,6 +26,9 @@
     width: 100%;
 }
 
+.custom-page-number-group .custom-page-number:hover {
+}
+
 
 .custom-page-number-input {
     padding: 0;
@@ -33,6 +36,7 @@
     margin-left:5px;
     margin-right:5px;
     line-height: normal;
+    text-align: center;
 }
 
 .custom-page-number-container{

@@ -118,6 +118,18 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'partials/hotNotes.html',
             controller: 'hotNotesController'
         })
+        //reading dynamic -> actions
+        .state('actions',{
+            url: '/readingDynamic/actions',
+            templateUrl: 'partials/readingDynamicActions.html',
+            controller: 'readingDynamicActionsController'
+        })
+        //reading dynamic -> actions with parameters
+        .state('actionsParams',{
+            url: '/readingDynamic/actions/{page:int}/{index:int}',
+            templateUrl: 'partials/readingDynamicActions.html',
+            controller: 'readingDynamicActionsController'
+        })
         //reading center -> thinking test
         .state('readingCenter.myAnswers',{
             url: '/myEvaluating/myAnswers',
