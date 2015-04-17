@@ -27,6 +27,12 @@ Pageable.prototype.build = function(Entity){
     
     // Update the page number
     this.pageNumbers.update(this.pageNumbers.startPage);
+    
+    // Initlizate the entities 
+    this.entities = {content: new Array(0)};
+    
+    // Update the placeholders
+    this.placeHolders.update(this.size);
 }
 
 
@@ -38,6 +44,13 @@ Pageable.prototype.pageNumbers.update = function(startPage){
     this.startPage = startPage;
 }
     
+// Fill placeholder content with placeholders elements
+Pageable.prototype.placeHolders.update = function(count){
+    this.content = new Array(0);
+    for( var i = 0; i < count; i ++ ){
+        this.content.push( $.extend(true, {}, this.placeHoldersElement) );
+    }
+}
 
 // Get entities by page
 Pageable.prototype.showPage = function(page, callback){
@@ -65,11 +78,8 @@ Pageable.prototype.showPage = function(page, callback){
                 // Copy the content of data to entities
                 entities.content = data.content.splice(0);
 
-                // Fill space with placeholder
-                placeHolders.content = new Array(0);
-                for( var i = entities.content.length; i < size; i ++ ){
-                    placeHolders.content.push( $.extend(true, {}, placeHolders.placeHoldersElement) );
-                }
+                // Update the placeholders
+                placeHolders.update(size - entities.content.length);
 
                 // Update the page number
                 var startPage = pageNumbers.startPage;
@@ -88,7 +98,7 @@ Pageable.prototype.showPage = function(page, callback){
             }
             
             // Call the callback 
-            callback();
+            if (callback !== undefined) { callback(); }
 
         });
     }

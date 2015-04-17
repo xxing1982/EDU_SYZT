@@ -39,15 +39,27 @@
                 <div class="paragraph">
                     <div class="col-md-12">
                         
-                        <!-- Activities row -->
-                        <div class="row" ng-repeat="n in [1,2,3,4,5]">
+                        <!-- Actions row -->
+                        <div class="row" 
+                             ng-repeat="action in actionPageable.entities.content">
                             <div class="col-md-10">
-                                <p>{{n}}. 感恩成长 资助育人：王式廓奖学金2014年报告会举行	</p>
+                                <a class="dark-blue-2"
+                                   ng-click="showAction(action)">
+                                    {{ action.title }}
+                                </a>
                             </div>
                             <div class="col-md-2 text-right">
-                                <p>2015.3.3</p>
+                                <p>{{ action.creationTime }}</p>
                             </div>
                         </div>
+                        
+                        <!-- Place holder row copied from actions -->
+                        <div class="row" ng-repeat="placeHolder in actionPageable.placeHolders.content">
+                            <div class="col-md-10">
+                                <p>&nbsp;{{ placeHolder.title }}</p>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
