@@ -18,7 +18,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="clazz")
-@JsonIgnoreProperties(value = {"grade"})
+//@JsonIgnoreProperties(value = {"grade"})
 public class Clazz extends  AbstractEntity{
 
 
