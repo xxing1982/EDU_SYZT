@@ -3,6 +3,7 @@ package com.syzton.sunread.config;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author Petri Kainulainen
@@ -11,11 +12,13 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 @ComponentScan(basePackages = {
         "com.syzton.sunread.todo.service",
         "com.syzton.sunread.service",
-        "com.syzton.sunread.model"
+        "com.syzton.sunread.model",
+        "com.syzton.sunread.scheduler"
 
 })
 @Import({WebAppContext.class, PersistenceContext.class})
 @PropertySource("classpath:application.properties")
+@EnableScheduling
 public class ApplicationContext {
 
     private static final String MESSAGE_SOURCE_BASE_NAME = "i18n/messages";
@@ -29,6 +32,5 @@ public class ApplicationContext {
 
         return messageSource;
     }
-    
-   
+
 }

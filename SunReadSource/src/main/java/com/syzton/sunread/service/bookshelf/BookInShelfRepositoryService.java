@@ -82,17 +82,15 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         return model;
 	}
 	
-	@Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+	@Transactional(rollbackFor = {NotFoundException.class})
 	@Override
 	public BookInShelf deleteById(long id){
-		// TODO Auto-generated method stub
-		BookInShelf bookInShelf = repository.findOne(id);
-		//repository.delete(bookInShelf);
-		repository.delete(id);
-		return bookInShelf;
+		BookInShelf deleted = repository.findOne(id);
+		repository.delete(deleted);
+		return deleted;
 	}
 	
-	@Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+	@Transactional(rollbackFor = {NotFoundException.class})
 	@Override
 	public BookInShelf deleteByBookshelfIdAndBookId(long bookshelfId,Long bookId){
 		// TODO Auto-generated method stub

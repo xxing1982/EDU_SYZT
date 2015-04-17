@@ -1,7 +1,7 @@
 //readingCenterAddBookAdvancedSearchCtrl.js
 
-ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope',
-        'ConditionSearch','QuickSearch',function ($scope,ConditionSearch,QuickSearch) {
+ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$rootScope',
+        'ConditionSearch','QuickSearch','AddbookToShelf',function ($rootScope,$scope,ConditionSearch,QuickSearch,AddbookToShelf) {
 
     
     $scope.searchContent = "";
@@ -34,39 +34,50 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope',
         callback: function(){$scope.search()}
     }, {
         id: 1,
-        name: "1年级"        
+        name: "1年级", 
+        callback: function(){$scope.search()}
     }, {
         id: 2,
-        name: "2年级"        
+        name: "2年级",
+        callback: function(){$scope.search()}
     }, {
         id: 3,
-        name: "3年级"        
+        name: "3年级", 
+        callback: function(){$scope.search()}
     }, {
         id: 4,
-        name: "4年级"        
+        name: "4年级",
+        callback: function(){$scope.search()}
     }, {
         id: 5,
-        name: "5年级"        
+        name: "5年级",
+        callback: function(){$scope.search()}
     }];        
             
     $scope.statuses_category = [{
         id: 0,
-        name:"全部类型"
+        name:"全部类型",
+        callback: function(){$scope.search()}
     }, {
         id: 1,
-        name: "类型一"        
+        name: "类型一",
+        callback: function(){$scope.search()}
     }, {
         id: 2,
-        name: "类型二"        
+        name: "类型二", 
+        callback: function(){$scope.search()}
     }, {
         id: 3,
-        name: "类型三"        
+        name: "类型三",        
+        callback: function(){$scope.search()}
     }, {
         id: 4,
-        name: "类型四"        
+        name: "类型四",
+        callback: function(){$scope.search()}
     }, {
         id: 5,
-        name: "类型五"        
+        name: "类型五",
+        callback: function(){$scope.search()}        
     }];        
     $scope.selected_status = 0;        
             
@@ -105,8 +116,16 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope',
             bookAttribute: true,
             readState: false
             }
-        console.log(bookInShelf);
-        AddbookToShelf.save({bookshelfId:1,bookId:bookId},bookInShelf);
+        console.log(XMLHttpRequest.state);
+        try{
+             AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf)
+//             throw new Error("添加失败");
+            
+        }
+        catch(e){
+            
+            alert(e);
+        }      
     };
                 
 }]);

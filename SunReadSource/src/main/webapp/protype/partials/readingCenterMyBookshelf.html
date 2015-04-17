@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 <!-- Place Holder -->
-<!--                                <div class="col-md-9"><div class="row"><input type="button" class="btn btn-sm btn-green" value="从书架移除" ng-click="dropBookFromShelf(unreadBook)"/> </div></div>-->
+                                <div class="col-md-9"><div class="row"><a ng-click="dropBookFromShelf(unreadBook)">从书架移除</a> </div></div>
                             </div>
 
                             
@@ -91,7 +91,6 @@
 								<button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" aria-expanded="true">测试训练
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="CertificationTest(unreadBook)" href="#readingCenter/multipleTesting">认证测试</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="SubjectiveTest(unreadBook)" href="#readingCenter/multipleTesting">思维测试</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="WordTest(unreadBook)" href="#readingCenter/multipleTesting">词汇测试</a></li>
                                 </ul>

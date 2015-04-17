@@ -46,8 +46,8 @@ public class Bookshelf {
     
     private String username;
 
-    @OneToMany( cascade = {CascadeType.MERGE,CascadeType.REFRESH},mappedBy = "bookshelf")
-    @Basic(fetch = FetchType.EAGER)
+    @OneToMany( cascade = {CascadeType.ALL},mappedBy = "bookshelf")
+    @Basic(fetch = FetchType.LAZY)
     private Set<BookInShelf> booksInShelf = new HashSet<BookInShelf>();
     
 //    @OneToMany( cascade = CascadeType.ALL, mappedBy = "bookshelf")
@@ -84,11 +84,6 @@ public class Bookshelf {
     	return new Builder(username, id);
 		
 	}
-    //how to deal with  name  duplication ?
-//    public static Builder getBuilder(long owner,Set<BookInShelf> booksInShelf, 
-//    		Set<BookShelfOperation> bookShelfOperations) {
-//        return new Builder(owner,booksInShelf,bookShelfOperations);
-//    }
 
     public DateTime getModificationTime() {
         return modificationTime;

@@ -563,6 +563,13 @@
         	<artifactId>commons-net</artifactId>  
         	<version>3.2</version>  
     	</dependency>
+        <!-- Quartz framework -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+
 
         <!-- TESTING DEPENDENCIES -->
         <dependency>

@@ -3,7 +3,8 @@ var bookshelfServices = angular.module('bookshelfServices', ['ngResource', "nour
 // User object(s)
 bookshelfServices.factory('Bookshelf',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/bookshelf/4");
+		return $resource("/api/bookshelf/:id",
+                         {id:'@_id'},{});
 	}]);
 
 var bookInShelfService = angular.module('bookInShelfServices', ['ngResource', "nourConfig"]);
@@ -11,8 +12,8 @@ var bookInShelfService = angular.module('bookInShelfServices', ['ngResource', "n
 bookInShelfService.factory('BookInShelf',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-            "/api/bookshelf/1/bookinshelf?page=:page&size=:size&sortBy=id",
-            {page:'@_page', size:'@_size'},{}
+            "/api/bookshelf/:id/bookinshelf?page=:page&size=:size&sortBy=id",
+            {id:'@_id',page:'@_page', size:'@_size'},{}
         ); 
     }]);
 

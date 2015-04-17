@@ -12,17 +12,17 @@
             <p><h6>热门阅读</h6></p>
         </div>
         <div class="row">
-            <div class="col-md-4 clear-padding">
+            <div class="col-md-4 clear-padding" ng-repeat="hot in hots.content">
 					<div class="col-md-6">
-                        <a href="#readingCenter/bookDetails"><img src="../static/img/book.jpg" class="img-responsive"></a>   
+                        <a href="#readingCenter/bookDetails"><img src={{hot.pictureUrl}} class="img-responsive"></a>   
 					</div>
 					<div class="col-md-6">
 					   <div class="row">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">评分：</div>
-						<div class="fsize12">作者：张敬轩</div>
-				        <div class="fsize12">版权:</div>
-						<div class="fsize12">已有2087人阅读</div>
+						<div class="fsize12"><h4>{{hot.name}}</h4></div>
+						<div class="fsize12">评分：{{hot.evaluationNum}}</div>
+						<div class="fsize12">作者：{{hot.author}}</div>
+						<div class="fsize12">已有{{hot.statistic.readNums}}人阅读</div>
+                       <input class="btn btn-sm btn-green" ng-click="addBooktoShelf(hot)" type="button" value="加入书架">&nbsp;&nbsp;
                         </div>
 				    </div>
             </div>                    
@@ -36,47 +36,17 @@
             <p><h6>热门推荐</h6></p>
         </div>
         <div class="row">
-            <div class="col-md-4 clear-padding">
+            <div class="col-md-4 clear-padding" ng-repeat="recommend in recommends.content">
 					<div class="col-md-6">
-                        <a href="#readingCenter/bookDetails"><img src="../static/img/book.jpg" class="img-responsive"></a>   
+                        <a href="#readingCenter/bookDetails"><img src={{recommend.pictureUrl}} class="img-responsive"></a>   
 					</div>
 					<div class="col-md-6">
 					   <div class="row">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">评分：</div>
-						<div class="fsize12">作者：张敬轩</div>
-				        <div class="fsize12">版权:</div>
-						<div class="fsize12">已有2087人阅读</div>
-                        </div>
-				    </div>
-            </div>
-            
-        <div class="col-md-4 clear-padding">
-					<div class="col-md-6">
-                        <a href="#readingCenter/bookDetails"><img src="../static/img/book.jpg" class="img-responsive"></a>   
-					</div>
-					<div class="col-md-6">
-					   <div class="row">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">评分：</div>
-						<div class="fsize12">作者：张敬轩</div>
-				        <div class="fsize12">版权:</div>
-						<div class="fsize12">已有2087人阅读</div>
-                        </div>
-				    </div>
-            </div>
-            
-        <div class="col-md-4 clear-padding">
-					<div class="col-md-6">
-                        <a href="#readingCenter/bookDetails"><img src="../static/img/book.jpg" class="img-responsive"></a>   
-					</div>
-					<div class="col-md-6">
-					   <div class="row">
-						<div class="fsize12"><h4>查理日记</h4></div>
-						<div class="fsize12">评分：</div>
-						<div class="fsize12">作者：张敬轩</div>
-				        <div class="fsize12">版权:</div>
-						<div class="fsize12">已有2087人阅读</div>
+						<div class="fsize12"><h4>{{recommend.name}}</h4></div>
+						<div class="fsize12">评分：{{recommend.evaluationNum}}</div>
+						<div class="fsize12">作者：{{recommend.author}}</div>
+						<div class="fsize12">已有{{recommend.statistic.readNums}}人阅读</div>
+                       <input class="btn btn-sm btn-green" ng-click="addBooktoShelf(recommend)" type="button" value="加入书架">&nbsp;&nbsp;
                         </div>
 				    </div>
             </div>

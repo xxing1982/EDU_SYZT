@@ -57,7 +57,7 @@ public class BookInShelf extends AbstractEntity{
     private boolean isVerified;
     
     //a bookshelf can`t have the same books
-    @ManyToOne(cascade={CascadeType.ALL},optional=false)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "bookshelf")
     private Bookshelf bookshelf;
     
