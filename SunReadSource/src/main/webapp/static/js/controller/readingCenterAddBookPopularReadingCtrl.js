@@ -1,7 +1,7 @@
 //readingCenterAddBookPopularReadingCtrl.js
 
-ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope', 'ConditionSearch','AddbookToShelf'
-        ,'WeeklyHotSearch','MonthlyHotSearch',function ($scope,ConditionSearch,AddbookToShelf
+ctrls.controller("readingCenterAddBookPopularReadingController", ['$rootScope','$scope', 'ConditionSearch','AddbookToShelf'
+        ,'WeeklyHotSearch','MonthlyHotSearch',function ($rootScope,$scope,ConditionSearch,AddbookToShelf
                                                          ,WeeklyHotSearch,MonthlyHotSearch) {
 	$scope.name='阅读中心->添加书籍->热门阅读';
 	
@@ -86,7 +86,7 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope', 'Con
     var page = 0
     $scope.page = page; 
                     
-    $scope.popularSearch=ConditionSearch.get({page:$scope.page,size:pageSize,level:level,category:category
+    $scope.popularSearch=ConditionSearch.get({page:$scope.page,size:pageSize,level:level
                             ,testType:testType,literature:literature,category:category
                             ,grade:grade,language:language,resource:resource,pointRange:pointRange}
       ,function(){
@@ -123,7 +123,7 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope', 'Con
             readState: false
             }
         console.log(bookInShelf);
-        AddbookToShelf.save({bookshelfId:1,bookId:bookId},bookInShelf);
+        AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf);
     };
             
     if($scope.status === 0 ){

@@ -4,7 +4,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         'ConditionSearch','QuickSearch','AddbookToShelf',function ($rootScope,$scope,ConditionSearch,QuickSearch,AddbookToShelf) {
 
     
-    $scope.searchContent = "";
+    var searchContent="";
 	
     var pageSize = 4;
     var searchTerm='isbn';
@@ -28,6 +28,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
     $scope.language = language;
     $scope.resource = resource;
     $scope.pointRange = pointRange;
+    $scope.searchContent = searchContent;
     $scope.statuses_grade = [{
         id: 0,
         name:"全部年级",
@@ -89,8 +90,9 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         console.log($scope.advancedSearch)
     });       
             
-    $scope.searchByName=function(){
-        $scope.advancedSearch=QuickSearch.get({page:0,size:pageSize,searchTerm:$scope.searchContent}
+    $scope.searchByName=function(searchContent){
+        console.log(searchContent);
+        $scope.advancedSearch=QuickSearch.get({page:0,size:pageSize,searchTerm:searchContent}
                                              ,function(){
             console.log($scope.advancedSearch);
             console.log($scope.searchContent);
@@ -119,7 +121,8 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         console.log(XMLHttpRequest.state);
         try{
              AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf)
-//             throw new Error("添加失败");
+             alert("添加成功");
+             //throw new Error("添加失败");
             
         }
         catch(e){

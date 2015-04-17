@@ -17,6 +17,16 @@ bookInShelfService.factory('BookInShelf',['$resource', 'config',
         ); 
     }]);
 
+var oneBookInShelfService = angular.module('oneBookInShelfServices', ['ngResource', "nourConfig"]);
+
+oneBookInShelfService.factory('OneBookInShelf',['$resource', 'config',
+	function($resource, config){
+		return $resource(
+            "/api/bookshelf/:id/books/:bookId/bookinshelf",
+            {id:'@_id',bookId:'@_bookId'},{}
+        ); 
+    }]);
+
 var addbookToShelfService = angular.module('addbookToShelfServices', ['ngResource', "nourConfig"]);
 
 addbookToShelfService.factory('AddbookToShelf',['$resource', 'config',

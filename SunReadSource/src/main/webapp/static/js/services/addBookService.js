@@ -73,7 +73,7 @@ weeklyRecommendServices.factory('WeeklyRecommendSearch',['$resource', 'config',
 		return $resource("/api/books/conditions/weeklyRecommend?page=:page&size=:size&sortBy=id"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
-                        {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
+                        {page:'@_page',size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
                          ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
                         {}

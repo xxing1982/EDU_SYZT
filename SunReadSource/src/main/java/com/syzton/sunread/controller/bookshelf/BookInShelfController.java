@@ -130,6 +130,16 @@ public class BookInShelfController {
     }
     
  //Get a Book in bookshelf    
+    @RequestMapping(value = "/bookshelf/{id}/books/{bookId}/bookinshelf", method = RequestMethod.GET)
+    @ResponseBody
+    public BookInShelfDTO findByStudentIdAndBookId(@PathVariable("id") Long id,@PathVariable("bookId") Long bookId) throws NotFoundException {
+        LOGGER.debug("Finding a book in shelf entry with id: {}", id);
+
+        BookInShelf found = service.findByStudentIdAndBookId(id, bookId);
+
+        return found.createDTO(found);
+    }
+ //Get a Book in bookshelf    
     @RequestMapping(value = "/student/{studentId}/semester/{semesterId}/bookshelfStatistics", method = RequestMethod.GET)
     @ResponseBody
     public BookshelfStatisticsDTO findBySemester(@PathVariable("studentId") Long studentId,@PathVariable("semesterId") Long semesterId) throws NotFoundException {

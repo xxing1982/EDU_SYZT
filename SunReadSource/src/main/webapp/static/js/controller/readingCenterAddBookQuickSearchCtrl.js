@@ -1,6 +1,6 @@
 //readingCenterAddBookQuickSearchCtrl.js
 
-ctrls.controller("readingCenterAddBookQuickSearchController", ['$scope','WeeklyHotSearch', 'WeeklyRecommendSearch',function ($scope,WeeklyHotSearch,WeeklyRecommendSearch) {
+ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$scope','AddbookToShelf','WeeklyHotSearch', 'WeeklyRecommendSearch',function ($rootScope,$scope,AddbookToShelf,WeeklyHotSearch,WeeklyRecommendSearch) {
 	$scope.name='阅读中心->添加书籍->快速查找';
     
     var pageSize = 3;
@@ -44,7 +44,7 @@ ctrls.controller("readingCenterAddBookQuickSearchController", ['$scope','WeeklyH
             readState: false
             }
         console.log(bookInShelf);
-        AddbookToShelf.save({bookshelfId:1,bookId:bookId},bookInShelf);
+        AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf);
     };
     
 }]);

@@ -152,6 +152,20 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         return found;
 	}
     
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+	@Override
+	public BookInShelf findByStudentIdAndBookId(Long id,Long bookId)  {
+        LOGGER.debug("Finding a bookinshelf entry with id: {}", id);
+		Bookshelf bookshelf = bookshelfRepository.findOne(id);
+        
+        if (bookshelf == null) {
+            throw new NotFoundException("No bookshelf found with id: " + id);
+        }
+        
+        BookInShelf bookInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
+        return bookInShelf;
+	}
+    
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
     public Page<BookInShelf> findByBookshelfId(Pageable pageable,long id) {
@@ -244,5 +258,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		}
 		
 	}
+	
+	
 
 }

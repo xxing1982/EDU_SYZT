@@ -1,7 +1,7 @@
 <div class="quickSearch">
 	<div class="input-group search">
 		<input type="text" class="form-control" placeholder="请输入书名">
-		<span class="input-group-addon">搜索</span>
+		 <span class="input-group-addon" ng-click="searchByName()"><a href="#readingCenter/addBook/advanced">搜索</a></span>
 	</div>
 	<div class="tip">
 		请输入您想要查找图书的关键词，例如，想要查找金庸的著作和关于金庸的书籍，可以输入“金庸”关键字。如果您期望搜索的结果精确，请尽可能地输入接近您想查找的内容的关键字，例如，要查找“战争与和平”，请输入“战争与和平”。如果您想获得更大范围的搜索结果，请输入短且命中率高的关键字，例如，要查找关于“sql server”的图书，请输入“sql”。
@@ -22,7 +22,7 @@
 						<div class="fsize12">评分：{{hot.evaluationNum}}</div>
 						<div class="fsize12">作者：{{hot.author}}</div>
 						<div class="fsize12">已有{{hot.statistic.readNums}}人阅读</div>
-                       <input class="btn btn-sm btn-green" ng-click="addBooktoShelf(hot)" type="button" value="加入书架">&nbsp;&nbsp;
+                       <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">加入书架</a>&nbsp;&nbsp;
                         </div>
 				    </div>
             </div>                    
@@ -46,7 +46,7 @@
 						<div class="fsize12">评分：{{recommend.evaluationNum}}</div>
 						<div class="fsize12">作者：{{recommend.author}}</div>
 						<div class="fsize12">已有{{recommend.statistic.readNums}}人阅读</div>
-                       <input class="btn btn-sm btn-green" ng-click="addBooktoShelf(recommend)" type="button" value="加入书架">&nbsp;&nbsp;
+                       <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">加入书架</a>&nbsp;&nbsp;
                         </div>
 				    </div>
             </div>

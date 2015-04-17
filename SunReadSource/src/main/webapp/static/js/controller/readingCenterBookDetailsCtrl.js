@@ -1,7 +1,8 @@
-ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', '$stateParams', 'para',
-    'BookDetail','NoteView', 'NoteTake', function($scope, $rootScope, $stateParams, para, BookDetail, NoteView, NoteTake){                                                    
+ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', '$stateParams', 'para','WeeklyHotSearch','OneBookInShelf'
+    ,'BookDetail','NoteView', 'NoteTake', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, NoteView, NoteTake){                                                    
 	$scope.name = '书籍详情';
-        
+
+    
     var bookDetail = BookDetail.get({ id: $stateParams.bookId }, function(){
         console.log(bookDetail);
         
@@ -36,6 +37,22 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
                     }
            }
         });
+        
+
+        
+        var thisBookinshelf = OneBookInShelf.get({id:$rootScope.id,bookId:$stateParams.bookId},function(){
+            console.log(thisBookinshelf);
+            var verify;
+            if(thisBookinshelf.readState){
+                verify = "已认证";
+            }
+            else {
+                verify = "未认证";
+            }
+            $scope.verify = verify;
+        });
+
+
     })
     
     $scope.bookDetails = bookDetail;
@@ -52,4 +69,12 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         $rootScope.exam.bookName = $scope.bookDetail.name;
         $rootScope.exam.typeName = "我的书架 > 词汇训练";
     }
+    
+            
+    $scope.hots=WeeklyHotSearch.get({page:0,size:5,level:0,testType:0,literature:0,category:0
+                                        ,grade:0,language:0,resource:0,pointRange:0},function(){
+        }); 
+        
+        
+    
 }]);

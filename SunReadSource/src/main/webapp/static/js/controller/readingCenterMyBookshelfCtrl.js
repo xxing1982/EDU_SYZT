@@ -20,7 +20,14 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     
     var bookshelf = Bookshelf.get({id:$rootScope.id},function(){
         console.log(bookshelf);
-    })
+        });
+        
+    $scope.reBookshelf  = function(){  
+        bookshelf = Bookshelf.get({id:$rootScope.id},function(){
+        console.log(bookshelf);
+        });
+    };
+        
     $scope.shelf = bookshelf;
     
     $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:pageSize},function(){
@@ -80,7 +87,9 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         }
         else{
             alert("移除成功");
+            
             location.reload();
+            
         }
             
     };

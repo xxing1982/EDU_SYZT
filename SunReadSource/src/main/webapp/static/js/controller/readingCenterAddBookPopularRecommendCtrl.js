@@ -1,7 +1,7 @@
 //readingCenterAddBookPopularRecommendCtrl.js
 
-ctrls.controller("readingCenterAddBookPopularRecommendController", ['$scope', 'ConditionSearch'
-        ,'WeeklyRecommendSearch','MonthlyRecommendSearch',function ($scope,ConditionSearch,WeeklyRecommendSearch,MonthlyRecommendSearch) {
+ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope','$scope', 'ConditionSearch','AddbookToShelf'
+        ,'WeeklyRecommendSearch','MonthlyRecommendSearch',function ($rootScope,$scope,ConditionSearch,AddbookToShelf,WeeklyRecommendSearch,MonthlyRecommendSearch) {
 	$scope.name='阅读中心->添加书籍->热门阅读';
 	
     var pageSize = 4;
@@ -123,10 +123,10 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$scope', 'C
         console.log(terms);
         var bookId = terms.id;
         var bookInShelf = {
-            bookAttribute: true,
+            bookAttribute: false,
             readState: false
             }
         console.log(bookInShelf);
-        AddbookToShelf.save({bookshelfId:1,bookId:bookId},bookInShelf);
+        AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf);
     };
 }]);

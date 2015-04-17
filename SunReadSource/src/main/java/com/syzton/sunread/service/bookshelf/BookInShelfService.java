@@ -106,6 +106,13 @@ public interface BookInShelfService {
 	 */
 	BookInShelf deleteByBookshelfIdAndBookId(long bookshelfId, Long bookId);
 
+	/**
+	 * @param id
+	 * @param bookId
+	 * @return
+	 */
+	BookInShelf findByStudentIdAndBookId(Long id, Long bookId);
+
    
     
 

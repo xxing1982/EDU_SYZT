@@ -2,9 +2,9 @@
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
                                              ,'examServices', 'classServices', 'questionServices'
                                              ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
-                                             ,'lackFeedbackServices','conditionSearchServices','quickSearchServices'
-                                             ,'weeklyHotServices','monthlyHotServices'
-                                             ,'weeklyRecommendServices','monthlyRecommendServices', 'campusServices', 'actionServices', 'pageableServices', 'hotclazzServices', 'hotreaderServices']);
+                                             ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','oneBookInShelfServices'
+                                             ,'weeklyHotServices','monthlyHotServices','weeklyRecommendServices','monthlyRecommendServices'
+                                             , 'campusServices', 'actionServices', 'pageableServices', 'hotclazzServices', 'hotreaderServices']);
 
 ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam",
   function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam) {
