@@ -1,13 +1,13 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
-                                             ,'examServices', 'classServices', 'questionServices'
-                                             ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
-                                             ,'lackFeedbackServices','conditionSearchServices','quickSearchServices'
-                                             ,'weeklyHotServices','monthlyHotServices'
-                                             ,'weeklyRecommendServices','monthlyRecommendServices', 'campusServices', 'actionServices', 'pageableServices', 'hotclazzServices', 'hotreaderServices']);
+ ,'examServices', 'classServices', 'questionServices'
+ ,'bookDetailServices','bookshelfServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
+ ,'lackFeedbackServices','conditionSearchServices','quickSearchServices'
+ ,'weeklyHotServices','monthlyHotServices'
+ ,'weeklyRecommendServices','monthlyRecommendServices', 'campusServices', 'actionServices', 'pageableServices', 'hotclazzServices', 'hotreaderServices']);
 
-ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam",
-  function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam) {
+ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader',
+  function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader) {
     //$rootScope.id = 2;
     //get userid
     $rootScope.id = sessionStorage.getItem("userId");
@@ -17,9 +17,30 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     Student.get({id : $rootScope.id} ,function(data){
       $scope.userInfo = data;
       $rootScope.student = data;
+      // Create a classes entitiy
       Class.get({id: $scope.userInfo.clazzId}, function(classData){
         $scope.userInfo.class=classData.name;
         $scope.userInfo.school=classData.compusName;
+      });
+
+      // Create a pageable entity of actions
+      $scope.actionPageable = new Pageable();
+
+      // Set the parameters of pageable
+      $scope.actionPageable.size = 3;
+    
+      // Build the pageable object
+      $scope.actionPageable.build(Action);
+
+      // Show the page 1
+      $scope.actionPageable.showPage(1);
+
+      // Create a Hotreaders entitiy
+      $scope.hotReaders={};
+      Hotreader.get({campusId: data.campusId, page: 0, size: 3 }, function(dataHot){
+        $scope.hotReaders.first = dataHot.content[0];
+        //$scope.hotReaders.others = dataHot.content;
+        $scope.hotReaders.others = dataHot.content.slice(1);
       });
     });
     
@@ -29,7 +50,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
         //todo
         //目标完成率
-    })
+      })
 
     //testing
     PassExam.get($rootScope.id, function(data){

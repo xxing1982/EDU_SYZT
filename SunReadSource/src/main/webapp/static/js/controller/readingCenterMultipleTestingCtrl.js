@@ -25,6 +25,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			testExam = WordExam;
 			WordExam.get($rootScope.id, $rootScope.exam.bookId, function(data){
 				Initial(data);
+				$scope.myAnswer.examType = 'WORD';
 				$scope.questions = data;
 				$scope.questions.current = $scope.questions[$scope.current];
 			});
@@ -61,20 +62,14 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			$scope.FinishExam = function(){
 				$scope.IsCilck = true;
 				testExam.submitExam($scope.myAnswer, function(examData){
-					if (examData.code == 1) {
-						var score = examData.exam.examScore;
-						if (examData.exam.pass) {
+						var score = examData.examScore;
+						if (examData.pass) {
 							$rootScope.exam.score = score;
 							window.location.href="/protype/index.html#/readingCenter/success";
 						}
 						else{
 							window.location.href="/protype/index.html#/readingCenter/failed";
 						}
-					}else if (examData.code == 3) {
-						alert('对不起，您今天已经考了2次，请明天再来！');
-					}else{
-						//用户已经验证了这本书
-					}
 				});
 			}
 
