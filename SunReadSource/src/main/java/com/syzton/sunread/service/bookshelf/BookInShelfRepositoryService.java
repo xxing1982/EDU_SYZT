@@ -193,7 +193,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	public boolean updateReadState(Long studentId,Long bookId) throws BookInShelfDuplicateVerifiedException{
 
     	Bookshelf bookshelf = bookshelfRepository.findOne(studentId);
-        BookInShelf bookInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
+    	BookInShelf bookInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
         if (bookInShelf != null&&bookInShelf.updateReadState()) {
 			repository.saveAndFlush(bookInShelf);
 			return true;

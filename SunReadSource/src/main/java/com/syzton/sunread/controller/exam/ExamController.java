@@ -1,14 +1,17 @@
 package com.syzton.sunread.controller.exam;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.repository.organization.ClazzRepository;
+
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +105,7 @@ public class ExamController {
 		this.bookService = bookService;
 		this.shelfService = shelfService;
 		this.semesterService = semesterService;
+		this.clazzRepository = clazzRepository;
 	}
 
 	@RequestMapping(value = "/exam", method = RequestMethod.POST)
@@ -217,6 +221,7 @@ public class ExamController {
 			return collatExamDto;
 		}
 		List<Exam> list = service.getTodayVerifyTestStatus(studentId, bookId);
+		
 		if (list.size() >= 2) {
 			collatExamDto.setCode("3");
 			collatExamDto.setMessage(
@@ -254,9 +259,7 @@ public class ExamController {
 					student.getStatistic().getPoint() + book.getPoint());
 			student.getStatistic().increaseTestPasses();
 			userService.saveStudent(student);
-
-			Clazz clazz = clazzRepository.findOne(studentId);
-			clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() + book.getPoint());
+			Clazz clazz = clazzRepository.findOne(student.getClazzId());
 			clazz.getClazzStatistic().increaseTotalReads();
 			clazzRepository.save(clazz);
 
@@ -388,5 +391,4 @@ public class ExamController {
 		return passRate;
 	}
 	
-	 
 }

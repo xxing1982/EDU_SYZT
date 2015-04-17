@@ -115,13 +115,13 @@ public class ClazzRepositoryService implements ClazzService {
     }
 
     @Override
-	public List<Student> findAllStudentFromClazz(int clazzId) {
+	public List<Student> findAllStudentFromClazz(Long clazzId) {
 		return studentRepository.findByClazzId(clazzId);
 	
 	}
  
 	@Override
-	public int getAveragePointsfromClass(int clazzId) throws NotFoundException {
+	public int getAveragePointsfromClass(Long clazzId) throws NotFoundException {
 		List<Student> students = findAllStudentFromClazz(clazzId);
 		int total = 0;
 		if(students.size() == 0){
@@ -135,7 +135,7 @@ public class ClazzRepositoryService implements ClazzService {
 	}
 
 	@Override
-	public int getAverageReadingBookFromClass(int clazzId)
+	public int getAverageReadingBookFromClass(Long clazzId)
 			throws NotFoundException {
 		List<Student> students = findAllStudentFromClazz(clazzId);
 		int total = 0;

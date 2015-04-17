@@ -1,19 +1,12 @@
 package com.syzton.sunread.model.exam;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.syzton.sunread.dto.exam.AnswerDTO;
-import com.syzton.sunread.dto.exam.SubjectiveAnswerDTO;
-import com.syzton.sunread.model.exam.Exam.Builder;
-import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.util.DateSerializer;
 
 @Entity
@@ -27,8 +20,7 @@ public class SubjectiveAnswer extends Answer {
 	private String comment;
 	
 	@JsonSerialize(using = DateSerializer.class)
-	@Column(name = "comment_time", nullable = false)
-	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@Column(name = "comment_time", nullable = true)
 	private DateTime commentTime;
 	 
 	public String getContent() {

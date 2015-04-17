@@ -1,7 +1,8 @@
 .page-body {
     border-radius: 5px;
-    border: 1px #DDD solid;
+    border: 1px #547498 solid;
     background-color: #FFFFFF;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
 }
 
 .page-body-top {

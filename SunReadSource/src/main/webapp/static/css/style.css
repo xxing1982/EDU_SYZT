@@ -333,15 +333,16 @@ a:focus, input:focus
 
 .readingCenter-right-body
 {
-    border-radius:5px;
-    border:1px #DDD solid;
-    background-color:#FFFFFF;
+    border-radius: 5px;
+    border: 1px #547498 solid;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     padding-top: 15px;
 }
 
 #myBookshelfBody-top
 {
-    border-bottom: 1px #DDD solid;
+    border-bottom: 1px #D6DEE6 solid;
     margin-left: 15px;
     margin-right: 15px;
 }
@@ -350,7 +351,7 @@ a:focus, input:focus
 {
     margin-left: 15px;
     margin-right: 15px;
-    border-bottom: 1px #DDD solid;
+    border-bottom: 1px #D6DEE6 solid;
     padding-bottom: 20px;
 }
 
@@ -415,7 +416,7 @@ a:focus, input:focus
 
 .note-row
 {
-    border-bottom: 1px #DDD solid;
+    border-bottom: 1px #D6DEE6 solid;
 }
 
 .book-row
@@ -535,7 +536,7 @@ a:focus, input:focus
 {
     margin-left: 15px;
     margin-right: 15px;
-    border-bottom: 1px #DDD solid;
+    border-bottom: 1px #D6DEE6 solid;
 }
 
 /*******************find book bottom*******************/
@@ -623,7 +624,7 @@ a:focus, input:focus
 {
 	margin-left: 15px;
 	margin-right: 15px;	
-	border-bottom: 1px solid #DDD;
+	border-bottom: 1px solid #D6DEE6;
 }
 
 #myEvaluating .content
@@ -632,7 +633,7 @@ a:focus, input:focus
 	margin-right: 15px;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border-bottom: 1px solid #DDD;
+	border-bottom: 1px solid #D6DEE6;
 }
 
 #myEvaluating .content .name
@@ -686,7 +687,7 @@ a:focus, input:focus
     padding-bottom: 15px;
     margin-left: 15px;
     margin-right: 15px;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #D6DEE6;
 }
 
 /*******************my thinking test top****************/
@@ -704,7 +705,7 @@ a:focus, input:focus
     padding-bottom: 15px;
     margin-left: 15px;
     margin-right: 15px;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #D6DEE6;
 }
 
 .readingCenter-right-body .thinkingTest .title,
@@ -962,7 +963,7 @@ a:focus, input:focus
     height: 39px;
     box-shadow: none;
     border-style: none;
-    border-bottom: 1px dashed #DDD;
+    border-bottom: 1px dashed #D6DEE6;
     padding-left: 0px;
     border-radius: 0px;
 }
