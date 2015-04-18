@@ -19,6 +19,10 @@ public class SubjectiveAnswer extends Answer {
 	@Column
 	private String comment;
 	
+	private Long campusId;
+	
+	
+
 	@JsonSerialize(using = DateSerializer.class)
 	@Column(name = "comment_time", nullable = true)
 	private DateTime commentTime;
@@ -48,9 +52,19 @@ public class SubjectiveAnswer extends Answer {
 	}
 
 	
+	public Long getCampusId() {
+		return campusId;
+	}
+
+	public void setCampusId(Long campusId) {
+		this.campusId = campusId;
+	}
+
 	public static Builder getBuilder() {
         return new Builder();
     }
+	
+	 
 	
 	public static class Builder {
 

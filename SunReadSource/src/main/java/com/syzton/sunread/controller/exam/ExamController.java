@@ -3,6 +3,7 @@ package com.syzton.sunread.controller.exam;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.repository.organization.ClazzRepository;
@@ -40,11 +41,13 @@ import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinFrom;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
+import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
+import com.syzton.sunread.model.exam.SubjectiveAnswer;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
@@ -292,6 +295,12 @@ public class ExamController {
 	public Exam handInThinkPaper(@Valid @RequestBody SubjectivePaperDTO paper)
 			throws NotFoundException {
 		Exam exam = paper.fromOTD();
+		Student user = userService.findByStudentId(exam.getStudentId());
+		Set<Answer> answers = exam.getAnswers();
+		for(Answer answer : answers){
+			SubjectiveAnswer subjectAnswer = (SubjectiveAnswer)answer;
+			subjectAnswer.setCampusId(user.getCampusId());
+		}
 		LOGGER.debug("hand in exam entrie.");
 		Exam examResult = service.handInThinkTest(exam);
 		LOGGER.debug("return a exam entry result with information: {}", exam);

@@ -17,8 +17,13 @@ import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.SubjectiveAnswer;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.exam.AnswerRepository;
 import com.syzton.sunread.repository.exam.SubjectiveAnswerRepository;
+import com.syzton.sunread.repository.exam.SubjectiveQuestionRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
+import com.syzton.sunread.repository.user.UserRepository;
+import com.syzton.sunread.service.user.UserService;
 
 @Service
 public class SubjectiveAnswerRepositoryService implements SubjectiveAnswerService {
@@ -28,10 +33,16 @@ public class SubjectiveAnswerRepositoryService implements SubjectiveAnswerServic
 	
 	private SubjectiveAnswerRepository repository;
 	
+	private StudentRepository studentRepo;
+	
+	private SubjectiveQuestionRepository questionRepo;
+	
 	@Autowired
-	public SubjectiveAnswerRepositoryService(SubjectiveAnswerRepository repository) {
+	public SubjectiveAnswerRepositoryService(SubjectiveAnswerRepository repository,StudentRepository studentRepo,SubjectiveQuestionRepository questionRepo) {
 		
 		this.repository = repository;
+		this.studentRepo = studentRepo;
+		this.questionRepo = questionRepo;
 	}
 	
 	@Transactional(rollbackFor = { NotFoundException.class })
@@ -48,9 +59,10 @@ public class SubjectiveAnswerRepositoryService implements SubjectiveAnswerServic
 	@Override
 	public Page<SubjectiveAnswer> findOtherPersonAnswer(Long questionId,Long userId,
 			Pageable pageable) throws NotFoundException {
-		
-		Page<SubjectiveAnswer> subjectiveAnswerPages = repository.findAll(pageable);
-		return null;
+		SubjectiveQuestion question = questionRepo.findOne(questionId);
+		Student student = studentRepo.findOne(userId);
+		Page<SubjectiveAnswer> subjectiveAnswerPages = repository.findByQuestionAndCampusIdAndIdNot(question,student.getCampusId(),userId,pageable);
+		return subjectiveAnswerPages;
 	}
 	
 	@Transactional
