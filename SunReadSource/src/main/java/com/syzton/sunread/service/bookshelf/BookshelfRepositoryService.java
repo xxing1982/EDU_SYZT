@@ -66,13 +66,12 @@ public class BookshelfRepositoryService implements BookshelfService {
 		return true;
 	}
 	
-    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+    @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
 	public Boolean deleteBookshelfByStudent(Student student) {
     	
-    	bookshelf = repository.findOne(student.getId());
-    	
-		repository.delete(bookshelf);
+  	
+		repository.delete(student.getId());
 		return true;
 	}
 	

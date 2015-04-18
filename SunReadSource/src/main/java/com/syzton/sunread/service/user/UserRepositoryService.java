@@ -10,6 +10,7 @@ import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
 import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.SemesterRepository;
+import com.syzton.sunread.repository.bookshelf.BookshelfRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.*;
 
@@ -64,6 +65,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     private SemesterRepository semesterRepository;
 
     private ClazzRepository clazzRepository;
+    
 
 
     @Autowired
@@ -131,6 +133,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         }
         clazz.getClazzStatistic().increaseStudentNum();
         clazzRepository.save(clazz);
+        
         return studentRepository.save(student);
     }
 

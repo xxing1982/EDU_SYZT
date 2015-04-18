@@ -133,6 +133,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/students", method = RequestMethod.POST)
     @ResponseBody
     public Student add(@Valid @RequestBody Student student) {
+    	bookshelfService.addBookshelfByStudent(student);
         return userService.addStudent(student);
     }
 
