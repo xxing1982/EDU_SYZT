@@ -5,6 +5,7 @@ ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 
         $scope.name = $rootScope.exam.bookName;
         $scope.score = $rootScope.exam.score;
         $scope.content = "";
+		$scope.title = "";
         var bookid = $rootScope.exam.bookId;
         BookDetail.get({id: bookid}, function(data){
            $scope.coin = data.coin;
@@ -15,6 +16,7 @@ ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 
            var review = new Review();
            review.bookId = bookid;
            review.content = $scope.content;
+           review.title = $scope.title;
            review.$save(function(dataSave){
               console.log(dataSave);
            });

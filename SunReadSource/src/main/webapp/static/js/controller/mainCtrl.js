@@ -19,7 +19,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
       // Create a classes entitiy
       Class.get({id: $scope.userInfo.clazzId}, function(classData){
         $scope.userInfo.class=classData.name;
-        $scope.userInfo.school=classData.compusName;
+        $scope.userInfo.school=classData.campusName;
       });
 
       // Create a pageable entity of actions

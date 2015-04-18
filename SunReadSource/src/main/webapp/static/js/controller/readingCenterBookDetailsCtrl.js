@@ -19,6 +19,7 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         
         $scope.wordTest = function(){
             $rootScope.exam.id = 1;
+            $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
             $rootScope.exam.bookId = bookDetail.id;
             $rootScope.exam.bookName = bookDetail.name;
             $rootScope.exam.typeName = "我的书架 > 词汇训练";
@@ -26,6 +27,7 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
 
         $scope.thinkTest = function(){            
             $rootScope.exam.id = 2;
+            $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
             $rootScope.exam.bookId = bookDetail.id;
             $rootScope.exam.bookName = bookDetail.name;
             $rootScope.exam.typeName = "我的书架 > 思维训练";
@@ -71,19 +73,6 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
     })
     
     $scope.bookDetails = bookDetail;
-
-    $scope.SubjectiveTest = function(data){
-        $rootScope.exam.id = 1;
-        $rootScope.exam.bookId = $scope.bookDetail.name;
-        $rootScope.exam.bookName = $scope.bookDetail.name;
-        $rootScope.exam.typeName = "我的书架 > 思维训练";
-    }
-    $scope.WordTest = function(data){
-        $rootScope.exam.id = 2;
-        $rootScope.exam.bookId = $scope.bookDetail.name;
-        $rootScope.exam.bookName = $scope.bookDetail.name;
-        $rootScope.exam.typeName = "我的书架 > 词汇训练";
-    }
     
             
     $scope.hots=WeeklyHotSearch.get({page:0,size:5,level:0,testType:0,literature:0,category:0

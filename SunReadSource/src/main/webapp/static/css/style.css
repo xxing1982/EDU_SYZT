@@ -247,7 +247,7 @@ a:focus, input:focus
     max-width: 143px;
     position: fixed;
     top: 41px;
-    bottom: 30px;
+    bottom: 0px;
     left: 0px;
     z-index: 10;
     display: block;
@@ -646,14 +646,14 @@ a:focus, input:focus
 
 #myEvaluating .content .name
 {
-	padding-top: 20px;
+	padding-top: 15px;
 }
 
 #myEvaluating .content .value
 {
 	color: #BEBEBE;
 	text-align: right;
-	padding-top: 20px;
+	padding-top: 15px;
 }
 
 #myEvaluating .content .count
@@ -731,8 +731,7 @@ a:focus, input:focus
 {
     color: #BEBEBE;
     font-size: 14px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 15px;
 }
 
 .readingCenter-right-body .thinkingTest .analysis .lists,
@@ -743,19 +742,23 @@ a:focus, input:focus
     padding-right: 30px;
 }
 
+.underline
+{
+    border-bottom: 1px #92A5BB solid;
+}
+
 .readingCenter-right-body .thinkingTest .analysis .lists .list,
 .readingCenter-right-body .thinkingTesting .analysis .lists .list,
 .readingCenter-right-body .otherAnswer .lists .list
 {
-    padding-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .readingCenter-right-body .thinkingTest .analysis .list .theme,
 .readingCenter-right-body .thinkingTesting .analysis .list .theme
 {
     font-size: 16px;
-    font-weight: 900;
-    padding-top: 20px;
+    font-weight: 900;    
     margin-bottom: 10px;
 }
 
@@ -1145,4 +1148,5 @@ a:focus, input:focus
 {
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }

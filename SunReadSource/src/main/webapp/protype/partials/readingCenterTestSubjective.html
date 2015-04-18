@@ -7,20 +7,20 @@
 					我的书架 > 思维训练
 				</div>
 				<div class="title">{{bookName}}</div>
-				<div class="analysis">
-					<!--<div class="category">
-						整合分析
-					</div>-->
+				<div class="analysis underline" ng-repeat="item in questions">
+					<div class="category">
+						{{item.type}}
+					</div>
 					<div class="lists">
-						<div class="list" ng-repeat="item in questions">
-							<div class="theme">{{item.topic}}</div>
+						<div class="list" ng-repeat="item1 in item.array">
+							<div class="theme">{{item1.topic}}</div>
 							<div>
-							<textarea class="txt-content" rows="4" placeholder="正文（不少于20字）" ng-model="item.content"></textarea>
+							<textarea class="txt-content" rows="4" placeholder="正文（不少于20字）" ng-model="item1.content"></textarea>
 							</div>
 						</div>
 					</div>
-					<div class="btn-exam"><a class="btn btn-fill-green btn-lg" ng-click="finishExam()">提交</a></div>
 				</div>
+				<div class="btn-exam"><a class="btn btn-fill-green btn-lg" ng-click="finishExam()">提交</a></div>
 				<hr>
 			</div>
 		</div>

@@ -109,18 +109,21 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     $rootScope.exam = {};
     $scope.CertificationTest = function(data){
         $rootScope.exam.id = 0;
+        $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/myBookshelf";
         $rootScope.exam.bookId = data.bookId;
         $rootScope.exam.bookName = data.bookName;
         $rootScope.exam.typeName = "我的书架 > 认证训练";
     }
     $scope.SubjectiveTest = function(data){
         $rootScope.exam.id = 2;
+        $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/myBookshelf";
         $rootScope.exam.bookId = data.bookId;
         $rootScope.exam.bookName = data.bookName;
         $rootScope.exam.typeName = "我的书架 > 思维训练";
     }
     $scope.WordTest = function(data){
         $rootScope.exam.id = 1;
+        $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/myBookshelf";
         $rootScope.exam.bookId = data.bookId;
         $rootScope.exam.bookName = data.bookName;
         $rootScope.exam.typeName = "我的书架 > 词汇训练";
