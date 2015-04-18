@@ -10,6 +10,6 @@ ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 
     })
 
     $scope.evaluate = function(){
-    	window.location.href="/protype/index.html#/readingCenter/myBookshelf";
+    	//window.location.href="/protype/index.html#/readingCenter/myBookshelf";
     }
 }]);

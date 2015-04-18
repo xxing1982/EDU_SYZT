@@ -19,7 +19,7 @@
 						正确率：80%
 					</div>
 					<div class="col-md-1 value">
-						<a data-toggle="modal" data-target="#exam-evaluation-model">评价</a>
+						<p>已评价</p>
 					</div>
 					<div class="col-md-3 value">测试时间：2014.12.5</div>
 				</div>
@@ -32,7 +32,8 @@
 						正确率：{{100*item.passCount/item.questionNum}}%
 					</div>
 					<div class="col-md-1 value">
-						<a data-toggle="modal" data-target="#exam-evaluation-model">评价</a>
+						<a data-toggle="modal" data-target="#exam-evaluation-model"  ng-hide="item.verify">评价</a>
+						<p ng-show="item.verify">已评价</p>
 					</div>
 					<div class="col-md-3 value">测试时间：{{creationTime}}</div>
 				</div>
@@ -60,7 +61,8 @@
 						正确率：{{100*item.passCount/item.questionNum}}%
 					</div>
 					<div class="col-md-1 value">
-						<a>评价</a>
+						<a data-toggle="modal" data-target="#exam-evaluation-model"  ng-hide="item.verify">评价</a>
+						<p ng-show="item.verify">已评价</p>
 					</div>
 					<div class="col-md-3 value">测试时间：{{creationTime}}</div>
 				</div>

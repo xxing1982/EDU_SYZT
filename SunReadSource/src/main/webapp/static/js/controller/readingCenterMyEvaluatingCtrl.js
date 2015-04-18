@@ -1,18 +1,40 @@
 //readingCenterMyEvaluatingCtrl.js
 
-ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam',
-	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam) {
+ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'OneBookInShelf',
+	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, OneBookInShelf) {
+		
+		//source
 		VerifyExam.getAllInfo($rootScope.id, function(data){
 			$scope.verifyExams = data.examDTOs;
+			for(var i = 0; i < $scope.verifyExams.length, i++){
+				OneBookInShelf.get({id:$rootScope.id,bookId:$stateParams.bookId},function(dataDetail){
+					//TRUE 已认证
+					$scope.verifyExams[i].verify = dataDetail.readState;
+				});
+			}
 		});
-		//做到弹出框绑定id,是显示评价还是未评价
+
 		WordExam.getAllInfo($rootScope.id, function(data){
 			$scope.wordExams = data.examDTOs;
+			for(var i = 0; i < $scope.wordExams.length, i++){
+				OneBookInShelf.get({id:$rootScope.id,bookId:$stateParams.bookId},function(dataDetail){
+					//TRUE 已认证
+					$scope.wordExams[i].verify = dataDetail.readState;
+				});
+			}
 		});
 
 		ThinkExam.getAllInfo($rootScope.id, function(data){
 			$scope.thinkExams = data.examDTOs;
+			for(var i = 0; i < $scope.thinkExams.length, i++){
+				OneBookInShelf.get({id:$rootScope.id,bookId:$stateParams.bookId},function(dataDetail){
+					//TRUE 已认证
+					$scope.thinkExams[i].verify = dataDetail.readState;
+				});
+			}
 		});
+
+
 
 		$scope.MyAnswer = function(thinkExam){
 			$rootScope.selectThinkExam = thinkExam;

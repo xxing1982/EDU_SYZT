@@ -15,6 +15,21 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
 
         // Transmit arguments to note search engine
         $scope.noteView.ShowMoreNotes($scope.arguments);
+
+        
+        $scope.wordTest = function(){
+            $rootScope.exam.id = 1;
+            $rootScope.exam.bookId = bookDetail.id;
+            $rootScope.exam.bookName = bookDetail.name;
+            $rootScope.exam.typeName = "我的书架 > 词汇训练";
+        }
+
+        $scope.thinkTest = function(){            
+            $rootScope.exam.id = 2;
+            $rootScope.exam.bookId = bookDetail.id;
+            $rootScope.exam.bookName = bookDetail.name;
+            $rootScope.exam.typeName = "我的书架 > 思维训练";
+        }
         
         /* Goto or open the action defined $stateParams.action
            example: 
