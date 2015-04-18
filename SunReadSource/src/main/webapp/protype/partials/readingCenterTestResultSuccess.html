@@ -16,12 +16,46 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					增加积分{{point}}
 				</div>
-				<div class="btn-exam"><a class="btn btn-fill-green btn-lg" ng-click="evaluate()">去评价</a></div>
+				<div class="btn-exam"><a class="btn btn-fill-green btn-lg">去评价</a></div>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-1"></div>
 </div>
+<div class="modal fade" id="exam-evaluation-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="color: #2F5682">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            <div class="modal-body">
+                
+                <!-- Row 0 -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="modal-title" id="myModalLabel">测试评价
+                        </h4>
+                    </div>
+                </div>
+                
+                <!-- Place holder -->
+                <p class="row"></p>
+                
+                <!-- Input form -->
+                <div class="row">
+                    <div class="col-md-12 input-textarea-group">
+                        <!--<input class="form-control" placeholder="标题（必填）" />-->
+                        <textarea class="form-control message-input" placeholder="正文（不少于20字）" ng-model="content" />
+                    </div>	
+                </div>
+          </div>
+          </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <button class="btn btn-green" ng-click="evaluate()" type="button">发表评论</button>
+                    </div>
+                </div>
+          </div>
+        </div>
+	</div>
 <script>
 	SetReadingCenterRightHeight();
 </script>

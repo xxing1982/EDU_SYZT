@@ -32,7 +32,7 @@
 						正确率：{{100*item.passCount/item.questionNum}}%
 					</div>
 					<div class="col-md-1 value">
-						<a data-toggle="modal" data-target="#exam-evaluation-model"  ng-hide="item.verify">评价</a>
+						<a ng-click="chooseBook(item.id)" data-toggle="modal" data-target="#exam-evaluation-model" ng-hide="item.verify">评价</a>
 						<p ng-show="item.verify">已评价</p>
 					</div>
 					<div class="col-md-3 value">测试时间：{{creationTime}}</div>
@@ -61,7 +61,7 @@
 						正确率：{{100*item.passCount/item.questionNum}}%
 					</div>
 					<div class="col-md-1 value">
-						<a data-toggle="modal" data-target="#exam-evaluation-model"  ng-hide="item.verify">评价</a>
+						<a ng-click="chooseBook(item.id)" data-toggle="modal" data-target="#exam-evaluation-model"  ng-hide="item.verify">评价</a>
 						<p ng-show="item.verify">已评价</p>
 					</div>
 					<div class="col-md-3 value">测试时间：{{creationTime}}</div>
@@ -103,26 +103,18 @@
                 <!-- Place holder -->
                 <p class="row"></p>
                 
-                <!-- Row 1 -->
-                <div class="row">
-                    <div class="col-md-12">     
-
-                        <p><small style="line-height:20px;">您的评分：×　×　×　×　× </small></p>
-                    </div>
-                </div>
-
                 <!-- Input form -->
                 <div class="row">
                     <div class="col-md-12 input-textarea-group">
-                        <input class="form-control" placeholder="标题（必填）" />
-                        <textarea class="form-control message-input" placeholder="正文（不少于20字）" />
+                        <!--<input class="form-control" placeholder="标题（必填）" />-->
+                        <textarea class="form-control message-input" ng-model="content" placeholder="正文（不少于20字）" />
                     </div>	
                 </div>
           </div>
           </div>
                 <div class="modal-footer">
                     <div class="col-md-12">
-                        <button class="btn btn-green" ng-click="" type="button">发表评论</button>
+                        <button class="btn btn-green" ng-click="evaluate()" type="button">发表评论</button>
                     </div>
                 </div>
           </div>

@@ -6,3 +6,10 @@ bookDetailServices.factory('BookDetail',['$resource', 'config',
             {id:'@id'}, {}
         );
 	}]);
+
+bookDetailServices.factory('Review',['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "reviews/:id",
+            {id:'@id'}, {}
+        );
+	}]);

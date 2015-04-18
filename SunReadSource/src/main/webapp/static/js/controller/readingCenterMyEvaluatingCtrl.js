@@ -1,8 +1,8 @@
 //readingCenterMyEvaluatingCtrl.js
 
-ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'OneBookInShelf',
-	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, OneBookInShelf) {
-		
+ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'OneBookInShelf', 'Review'
+	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, OneBookInShelf, Review) {
+		$scope.content = "";
 		//source
 		VerifyExam.getAllInfo($rootScope.id, function(data){
 			$scope.verifyExams = data.examDTOs;
@@ -40,6 +40,10 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			$rootScope.selectThinkExam = thinkExam;
 		}
 
+		$scope.chooseBook = function(bookId){
+			$scope.chooseBookId = bookId;
+		}
+
 		function hideAllTabs(){
 			$scope.isCertification = false;
 			$scope.isWord = false;
@@ -58,4 +62,13 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			$scope.isThinking = true;
 		}
 		$scope.isCertification = true;
+
+		$scope.evaluate = function(){
+           var review = new Review();
+           review.bookId = $scope.chooseBookId;
+           review.content = $scope.content;
+           review.$save(function(dataSave){
+              console.log(dataSave);
+           });
+       }
 	}]);
