@@ -1,10 +1,14 @@
 package com.syzton.sunread.service.user;
 
+import java.util.List;
+
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.model.user.User;
+
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -50,4 +54,8 @@ public interface UserService {
     public Student saveStudent(Student student);
 
     public Page<Student> hotReadersInCampus(long campusId,Pageable pageable);
+    
+    public List<Student> addStudentsFromExcel(Sheet sheet);
+    
+    public List<Teacher> addTeachersFromExcel(Sheet sheet);
 }

@@ -1,13 +1,26 @@
 package com.syzton.sunread.service.book;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import com.syzton.sunread.assembler.book.BookAssembler;
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.book.BookExtraDTO;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.book.BookExtra;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,4 +149,38 @@ public class BookRepositoryService implements BookService {
         return bookPage;
 
     }
+
+
+	@Override
+	public List<Book> batchAddBookFromExcel(Sheet sheet) {
+		List<Book> list = new ArrayList<Book>();
+		for (int i = sheet.getFirstRowNum(); i < sheet.getPhysicalNumberOfRows(); i++) {  
+		    Book book = new Book();
+			Row row = sheet.getRow(i);  
+			//column 0 id is useful? should update book from id or ignore the column
+			book.setIsbn(row.getCell(1).toString());
+		    book.setName(row.getCell(2).toString());
+		    book.setAuthor(row.getCell(3).toString());
+		    book.setPrice(Float.parseFloat(row.getCell(4).toString()));
+		    book.setPublisher(row.getCell(5).toString());
+		    book.setPublicationDate(new DateTime(row.getCell(6).toString()));
+		    //picture contains domain name
+		    book.setPictureUrl(row.getCell(7).toString());
+		    book.setPageCount(Integer.parseInt(row.getCell(8).toString()));
+		    String wordNum = row.getCell(8).toString();
+		    book.setWordCount(wordNum==null?0:Integer.parseInt(wordNum));
+		    //Can't find packaging field in book model
+		    book.setDescription(row.getCell(10).toString());
+		    book.setCatalogue(row.getCell(11).toString());
+		    BookExtra extra = new BookExtra();
+		    //AgeRange is int can't convert rang value to int
+		    //type is category or not, May be we need method mapping string type to int category.
+		    //Can't find posters	video	evaluationNum	highPraise cloumn
+		    book.setAuthorIntroduction(row.getCell(18).toString());
+		    book.setExtra(extra);
+		    book = bookRepo.save(book);
+		    list.add(book);
+		}  
+		return list;
+	}
 }

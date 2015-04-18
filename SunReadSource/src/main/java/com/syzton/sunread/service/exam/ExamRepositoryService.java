@@ -119,8 +119,8 @@ public class ExamRepositoryService implements ExamService {
 	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
 	public VerifyExamPassDTO findAllByExamTypeAndPassStatus(Long studentId,ExamType type) throws NotFoundException {
-		Exam timeExam = repository.findByStudentIdOrderByCreationTimeDesc(studentId);
-		if(timeExam == null){
+		List<Exam> timeExams = repository.findByStudentIdOrderByCreationTimeDesc(studentId);
+		if(timeExams.size() == 0){
 			throw new NotFoundException("can't find exam record");
 		}
 		int passCount = 0;
@@ -150,7 +150,7 @@ public class ExamRepositoryService implements ExamService {
 		if(questionCount != 0){
 			passRate = passCount*100/questionCount;
 		}
-		String time = timeExam.getCreationTime().toString("yyyy"); 
+		String time = timeExams.get(0).getCreationTime().toString("yyyy"); 
 		VerifyExamPassDTO passDTO = new VerifyExamPassDTO(examDTOs,passRate,time);
 		return passDTO;
 	}
@@ -158,8 +158,8 @@ public class ExamRepositoryService implements ExamService {
 	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
 	public VerifyExamPassDTO findAllByExamType(Long studentId,ExamType type) throws NotFoundException {
-		Exam timeExam = repository.findByStudentIdOrderByCreationTimeDesc(studentId);
-		if(timeExam == null){
+		List<Exam> timeExams = repository.findByStudentIdOrderByCreationTimeDesc(studentId);
+		if(timeExams.size() == 0){
 			throw new NotFoundException("can't find exam record");
 		}
 		int passCount = 0;
@@ -189,7 +189,7 @@ public class ExamRepositoryService implements ExamService {
 		if(questionCount != 0){
 			passRate = passCount*100/questionCount;
 		}
-		String time = timeExam.getCreationTime().toString("yyyy"); 
+		String time = timeExams.get(0).getCreationTime().toString("yyyy"); 
 		VerifyExamPassDTO passDTO = new VerifyExamPassDTO(examDTOs,passRate,time);
 		return passDTO;
 	}
@@ -392,7 +392,7 @@ public class ExamRepositoryService implements ExamService {
 		cal.set(Calendar.MILLISECOND, 0);
 		DateTime dt = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 00, 00, 00, 000);
 		LOGGER.debug(dt.toString());
-		List<Exam> list = repository.findByStudentIdAndBookIdAndCreationTimeAfter(studentId, bookId,dt);
+		List<Exam> list = repository.findByStudentIdAndBookIdAndExamTypeAndCreationTimeAfter(studentId, bookId,ExamType.VERIFY,dt);
 		LOGGER.debug("####################################"+list.size());
 		return list;
 	}
@@ -401,7 +401,7 @@ public class ExamRepositoryService implements ExamService {
 	
 	public boolean isPassVerifyTest(Long bookId,Long studentId){
 		 
-		List<Exam> list = repository.findByStudentIdAndBookId(studentId,bookId);
+		List<Exam> list = repository.findByStudentIdAndBookIdAndExamType(studentId,bookId,ExamType.VERIFY);
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).isPass()){
 				return true;
