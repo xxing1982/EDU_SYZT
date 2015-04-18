@@ -40,7 +40,7 @@ var weeklyHotServices = angular.module('weeklyHotServices', ['ngResource', "nour
 // Note object(s)
 weeklyHotServices.factory('WeeklyHotSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions/weeklyhot?page=:page&size=:size&sortBy=id"+
+		return $resource("/api/books/conditions/weeklyhot?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
@@ -55,7 +55,7 @@ var monthlyHotServices = angular.module('monthlyHotServices', ['ngResource', "no
 // Note object(s)
 monthlyHotServices.factory('MonthlyHotSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions/monthlyhot?page=:page&size=:size&sortBy=id"+
+		return $resource("/api/books/conditions/monthlyhot?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
@@ -70,7 +70,7 @@ var weeklyRecommendServices = angular.module('weeklyRecommendServices', ['ngReso
 // Note object(s)
 weeklyRecommendServices.factory('WeeklyRecommendSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions/weeklyRecommend?page=:page&size=:size&sortBy=id"+
+		return $resource("/api/books/conditions/weeklyRecommend?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page',size:'@_size',level:'@_level',category:'@_category'
@@ -85,7 +85,7 @@ var monthlyRecommendServices = angular.module('monthlyRecommendServices', ['ngRe
 // Note object(s)
 monthlyRecommendServices.factory('MonthlyRecommendSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions/monthlyRecommend?page=:page&size=:size&sortBy=id"+
+		return $resource("/api/books/conditions/monthlyRecommend?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'

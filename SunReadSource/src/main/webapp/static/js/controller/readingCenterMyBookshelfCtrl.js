@@ -1,8 +1,19 @@
 //readingCenterMyBookshelfCtrl.js
 
-ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','para',
-    'Bookshelf','BookInShelf','DropBookFromShelf',function($rootScope, $scope, para, Bookshelf,BookInShelf,DropBookFromShelf) {
+ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','BookshelfView',
+    'Bookshelf','BookInShelf','DropBookFromShelf',function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf) {
 	$scope.name='阅读中心->我的书架';
+        
+        
+    // Get the user id form rootScope
+    $scope.arguments = {id: $rootScope.id};
+    
+    // Initlizate the noteView entity
+    $scope.BookshelfView = new BookshelfView();
+    $scope.BookshelfView.ShowMoreBooksInShelf($scope.arguments);
+    
+    console.log($scope.BookshelfView);    
+
         
     var pageSize = 10;
     
