@@ -10,9 +10,9 @@ import com.syzton.sunread.model.exam.Exam.ExamType;
 
 public interface ExamRepository extends JpaRepository<Exam, Long> {
 	//@Query("select exam from Exam exam wehre Exam.book = ?1 and ")
-	List<Exam> findByStudentIdAndBookIdAndCreationTimeAfter(Long studentId,Long bookId,DateTime date);
+	List<Exam> findByStudentIdAndBookIdAndExamTypeAndCreationTimeAfter(Long studentId,Long bookId,ExamType type,DateTime date);
 	
-	List<Exam> findByStudentIdAndBookId(Long studentId,Long bookId);
+	List<Exam> findByStudentIdAndBookIdAndExamType(Long studentId,Long bookId,ExamType type);
 	
 	List<Exam> findByStudentIdAndExamTypeAndIsPass(Long id,ExamType examType,boolean isPass);
 	
@@ -20,6 +20,6 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
 	
 	List<Exam> findByStudentIdAndExamType(Long id,ExamType examType);
 	
-	Exam findByStudentIdOrderByCreationTimeDesc(Long studentId);
+	List<Exam> findByStudentIdOrderByCreationTimeDesc(Long studentId);
 
 }

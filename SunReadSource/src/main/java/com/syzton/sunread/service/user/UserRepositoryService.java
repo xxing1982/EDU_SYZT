@@ -8,10 +8,14 @@ import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
+import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.*;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +29,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.logging.SimpleFormatter;
 
 import static org.springframework.util.Assert.notNull;
 
@@ -311,6 +320,49 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 	public User findByUserId(String userId) {
 		User user = userRepository.findByUserId(userId);
 		return user;
+	}
+
+	@Override
+	public List<Student> addStudentsFromExcel(Sheet sheet) {
+		
+		for (int i = sheet.getFirstRowNum(); i < sheet.getPhysicalNumberOfRows(); i++) {  
+		    Student student = new Student();
+			Row row = sheet.getRow(i);  
+		    student.setUserId(row.getCell(0).toString());
+		    student.setUsername(row.getCell(1).toString());
+		    //Can't handle grade, repository must provide method to get grade by name & school
+		    //Excel can't found school campus
+		    //student.setGradeId(gradeId);
+		    //student.setClazzId(clazzId);
+		    //unknow sexy field value
+		    String sex = row.getCell(4).toString();
+		    if(sex.equals("女")){
+		    	student.setGender(GenderType.famale);
+		    }else{
+		    	student.setGender(GenderType.male);
+		    }
+		   
+			try {
+				Date birthday = new SimpleDateFormat("yyyy-MM-dd").parse(row.getCell(5).toString());
+				student.setBirthday(birthday.getTime());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			student.setEmail(row.getCell(6).toString());
+			//Contact phone ? phone
+			student.setPhoneNumber(row.getCell(6).toString());
+			
+			
+		      
+		 
+		}  
+		return null;
+	}
+
+	@Override
+	public List<Teacher> addTeachersFromExcel(Sheet sheet) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
