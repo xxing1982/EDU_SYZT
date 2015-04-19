@@ -44,7 +44,7 @@ public class UploadControl {
 			HttpServletRequest request) throws IOException {
 		long prefix = Calendar.getInstance().getTimeInMillis();
 		String fileName = prefix + myfile.getOriginalFilename();
-		String ftpPath = "/pic/notes/";
+		String ftpPath = "/notes/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
@@ -73,7 +73,7 @@ public class UploadControl {
 			HttpServletRequest request) throws Exception {
 		long prefix = Calendar.getInstance().getTimeInMillis();
 		String fileName = prefix + myfile.getOriginalFilename();
-		String ftpPath = "/pic/userImages/";
+		String ftpPath = "/userImages/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
@@ -102,7 +102,7 @@ public class UploadControl {
 		long prefix = Calendar.getInstance().getTimeInMillis();
 		String originalFileName = new String(myfile.getOriginalFilename().getBytes("iso-8859-1"),"utf-8");
 		String fileName = prefix + originalFileName;
-		String ftpPath = "/pic/bookscover/";
+		String ftpPath = "/bookscover/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {

@@ -50,7 +50,14 @@ public class ReviewController {
 
         return deleted.createDTO(deleted);
     }
+    @RequestMapping(value = "/books/{bookId}/students/{studentId}/isreviewed", method = RequestMethod.GET)
+    @ResponseBody
+    public void checkReviewed(@PathVariable("bookId") long bookId,
+                                              @PathVariable("studentId") long studentId) throws NotFoundException {
 
+         reviewService.isReviewed(studentId,bookId);
+
+    }
     @RequestMapping(value = "/books/{bookId}/reviews", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<Review> findReviewsByBookId(@PathVariable("bookId") long bookId,

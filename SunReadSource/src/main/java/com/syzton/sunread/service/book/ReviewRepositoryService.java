@@ -2,6 +2,7 @@ package com.syzton.sunread.service.book;
 
 import com.syzton.sunread.dto.book.ReviewDTO;
 import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.Review;
@@ -62,7 +63,10 @@ public class ReviewRepositoryService implements ReviewService {
         if(student == null){
             throw new NotFoundException(" student with id = "+reviewDTO.getStudentId() +" not found...");
         }
-
+        Review exits = reviewRepository.findByStudentIdAndBook(student.getId(),book);
+        if(exits != null){
+            throw new DuplicateException("student with name =" +student.getUsername()+" is already reviewed");
+        }
         Review review = Review.getBuilder(reviewDTO.getStudentId(),reviewDTO.getTitle(),reviewDTO.getContent(),student.getUsername()).book(book).rate(reviewDTO.getRate()).build();
 
         Review added = reviewRepository.save(review);
@@ -83,6 +87,25 @@ public class ReviewRepositoryService implements ReviewService {
         reviewRepository.delete(review);
         return review;
     }
+
+    @Override
+    public boolean isReviewed(long studentId, long bookId) {
+        Book book = bookRepository.findOne(bookId);
+
+        if(book == null){
+            throw new NotFoundException(" book with id ="+bookId +" not found...");
+        }
+        Student student = studentRepository.findOne(studentId);
+        if(student == null){
+            throw new NotFoundException(" student with id = "+studentId +" not found...");
+        }
+        Review exits = reviewRepository.findByStudentIdAndBook(student.getId(),book);
+        if(exits != null){
+            throw new DuplicateException("student with name =" +student.getUsername()+" is already reviewed");
+        }
+        return true;
+    }
+
     @Transactional
     @Override
     public Page<Review> findByBookId(Pageable pageable, long bookId) {
