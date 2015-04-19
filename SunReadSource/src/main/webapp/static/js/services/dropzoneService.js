@@ -6,7 +6,7 @@
 angular.module('dropzoneServices', [])
     .factory('Dropzone', function(){
         
-        return function(imageParent, url){
+        return function(url, callback){
             
             // Image uploader
             return new Dropzone("div#image-uploader", {
@@ -25,14 +25,14 @@ angular.module('dropzoneServices', [])
                 dictFileTooBig: "你上传的文件太大({{filesize}}MB). 最大文件大小: {{maxFilesize}}MB.",
                 dictInvalidFileType: "你不能上传这种类型的文件",
                 dictResponseError: "Server responded with {{statusCode}} code.",
-                dictCancelUpload: "Cancel upload",
+                dictCancelUpload: "",
                 dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
-                dictRemoveFile: "Remove file",
+                dictRemoveFile: "",
                 dictRemoveFileConfirmation: null,
                 dictMaxFilesExceeded: "You can not upload any more files.",
                 dictRemoveFile: "",
                 success:  function(data){
-                    imageParent.image = data.xhr.responseText;
+                    callback(data.xhr.responseText);
                 }
             });
         };

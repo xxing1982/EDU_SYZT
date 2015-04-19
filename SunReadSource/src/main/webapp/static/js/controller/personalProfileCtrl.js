@@ -1,6 +1,6 @@
 //personalProfile.js
 
-ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', 'Dropzone',  function ($rootScope, $scope, User, Dropzone) {
+ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', 'Dropzone', 'config',  function ($rootScope, $scope, User, Dropzone, config) {
     
     // Basic information
     $scope.basicInformation = new Object();
@@ -48,6 +48,13 @@ ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', '
     }
     
     // Update the avatar
-    
+    $scope.updateAvatar = function(){
+        
+        // Image uploader
+        $scope.dropzone = Dropzone($scope.noteTake, config.USERICON);
+
+        // Get the image server
+        $scope.imageServer = config.IMAGESERVER;
+    }
     
 }]);

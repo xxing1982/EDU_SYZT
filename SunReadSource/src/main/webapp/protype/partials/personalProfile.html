@@ -5,15 +5,17 @@
         
         <!-- Avatar -->
         <div class="title col-md-12"><h4 class="row">个人中心</h4></div>
-        <div class="col-md-4 col-md-offset-4">
-            <img ng-src="../static/img/picture.jpg" class="img-responsive img-circle border-shadow avatar" src="../static/img/picture.jpg">
-        </div>
-        <div class="col-md-12  text-center">
-            <h2>{{basicInformation.content.username}}</h2>
-        </div>
-        <div class="col-md-12 text-center">
-            <a>修改头像</a>
-        </div>
+        <div id="image-uploader" class="dropzone">
+            <div class="col-md-4 col-md-offset-4">
+                <img ng-src="../static/img/picture.jpg" class="img-responsive img-circle border-shadow avatar" src="../static/img/picture.jpg">
+            </div>
+            <div class="col-md-12 text-center">
+                <h2>{{basicInformation.content.username}}</h2>
+            </div>
+            <div class="col-md-12 text-center">
+                <a ng-click="updateAvatar()">修改头像</a>
+            </div>
+        </div>    
         
         <!-- Basic information -->
         <div class="title row buttom-separator">
@@ -147,18 +149,7 @@
             <div class="col-md-1 text-right"><div class="row"><a class="title-link">编辑</a></div></div>
 
         </div>
-        
-        <div class="row">
-            <div class="col-md-2 text-right">
-                <div class="row"><h4>账号：</h4></div>
-            </div>
-            <div class="col-md-9 text-left">
-                        <h4>张晓晨</h4>
-<!--                <input type="text" class="form-control dark-blue-2" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">-->
-            </div>
-            <div class="col-md-1 text-right"><div class="row"><a class="title-link">编辑</a></div></div>
 
-        </div>
         </div>
         <!-- Place holder -->
         <div class="row title"/>

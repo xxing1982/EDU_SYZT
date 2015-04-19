@@ -141,8 +141,10 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
             $scope.noteTake = new NoteTake(bookDetail);
             
             // Image uploader
-            $scope.dropzone = Dropzone($scope.noteTake, config.NOTEPIC);
-
+            $scope.dropzone = Dropzone(config.NOTEPIC, function(url){
+                $scope.noteTake.image = url;
+            });
+            
             // Get the image server
             $scope.imageServer = config.IMAGESERVER;
         });
