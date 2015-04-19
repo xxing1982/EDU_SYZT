@@ -44,8 +44,12 @@ public class UploadControl {
 	@ResponseBody
 	public String notePicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws IOException {
-		long prefix = Calendar.getInstance().getTimeInMillis();
-		String fileName = prefix + myfile.getOriginalFilename();
+		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		int index = myfile.getOriginalFilename().lastIndexOf(".");
+		String suffix = "";
+		if(index!=-1){
+			suffix = myfile.getOriginalFilename().substring(index); 
+		}
 		String ftpPath = "/notes/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
@@ -53,79 +57,86 @@ public class UploadControl {
 
 			String realPath = request.getSession().getServletContext()
 					.getRealPath("/upload/note");
-			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-					realPath, prefix + myfile.getOriginalFilename()));
+//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
+//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName, ftpPrefix+ftpPath + fileName);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
 			}
 		}
 
-		return ftpPath + fileName;
+		return ftpPath + prefix + suffix;
 	}
 
 	@RequestMapping(value = "/api/upload/usericon", method = RequestMethod.POST)
 	@ResponseBody
 	public String userPicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		long prefix = Calendar.getInstance().getTimeInMillis();
-		String fileName = prefix + myfile.getOriginalFilename();
+		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		int index = myfile.getOriginalFilename().lastIndexOf(".");
+		String suffix = "";
+		if(index!=-1){
+			suffix = myfile.getOriginalFilename().substring(index); 
+		}
 		String ftpPath = "/userImages/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
+
 			String realPath = request.getSession().getServletContext()
-					.getRealPath("/upload/usericon");
-			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-					realPath, prefix + myfile.getOriginalFilename()));
+					.getRealPath("/upload/note");
+//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
+//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName,  ftpPrefix+ftpPath + fileName);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
 			}
 		}
 
-		return ftpPath + fileName;
+		return ftpPath + prefix + suffix;
 	}
 
 	@RequestMapping(value = "/api/upload/bookpic", method = RequestMethod.POST)
 	@ResponseBody
 	public String bookPicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		
-		long prefix = Calendar.getInstance().getTimeInMillis();
-		String fileName = prefix + myfile.getOriginalFilename();
- 
+		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		int index = myfile.getOriginalFilename().lastIndexOf(".");
+		String suffix = "";
+		if(index!=-1){
+			suffix = myfile.getOriginalFilename().substring(index); 
+		}
 		String ftpPath = "/bookscover/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
+
 			String realPath = request.getSession().getServletContext()
-					.getRealPath("/upload/bookpic");
-
-			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-					realPath, prefix + myfile.getOriginalFilename()));
-
+					.getRealPath("/upload/note");
+//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
+//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName,  ftpPrefix+ftpPath + fileName);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
 			}
 		}
-		return ftpPath + fileName;
+
+		return ftpPath + prefix + suffix;
 	}
 
 	@RequestMapping(value = "/api/upload/excel/book", method = RequestMethod.POST)
@@ -150,44 +161,6 @@ public class UploadControl {
 		}
 		return "Excel parse OK";
 	}
-	
-	public static String getEncoding(String str) {
-			String encode = "GBK";      
-	      try {      
-	          if (str.equals(new String(str.getBytes(encode), encode))) {      
-	               String s3 = encode;      
-	              return s3;      
-	           }      
-	       } catch (Exception exception3) {      
-	       }      
-		   encode = "ISO-8859-1";      
-	      try {      
-	          if (str.equals(new String(str.getBytes(encode), encode))) {      
-	               String s1 = encode;      
-	              return s1;      
-	           }      
-	       } catch (Exception exception1) {      
-	       }  
-	        encode = "GB2312";      
-	      try {      
-	          if (str.equals(new String(str.getBytes(encode), encode))) {      
-	               String s = encode;      
-	              return s;      
-	           }      
-	       } catch (Exception exception) {      
-	       }      
-	           
-	       encode = "UTF-8";      
-	      try {      
-	          if (str.equals(new String(str.getBytes(encode), encode))) {      
-	               String s2 = encode;      
-	              return s2;      
-	           }      
-	       } catch (Exception exception2) {      
-	       }      
-	     
-	      return "";      
-	   } 
 	
 	@RequestMapping(value = "/api/upload/excel/student", method = RequestMethod.POST)
 	@ResponseBody
