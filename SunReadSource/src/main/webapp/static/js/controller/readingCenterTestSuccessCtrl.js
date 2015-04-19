@@ -25,5 +25,5 @@ ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 
    }
    $scope.returnCode = function(){
     window.location.href = $rootScope.exam.returnURL;
-  });
+  }
 }]);

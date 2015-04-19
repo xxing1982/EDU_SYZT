@@ -111,7 +111,7 @@
                             <div class="col-md-1"></div>
                         </div>
                         <div><h4>{{item.book}}</h4></div>
-                        <div>笔记名：{{item.title}}</div>
+                        <div title="{{item.title}}">笔记名：{{item.title | formatSize4}}</div>
                         <div>作者：{{userInfo.username}}  评论：{{item.commentCount}}条</div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                         <div class="col-md-6"></div>
                         <div class="col-md-3" style="margin-top:-17%;"><img src="../static/img/readingDynamic/first.png" class="img-responsive img-circle"></div>
                     </div>
-                    <div><h3>{{hotReaders.first.username}} <span class="read-master-count">{{hotReaders.first.statistic.readNum}}本</span></h3></div>
+                    <div><h3>{{hotReaders.first.username}} <span class="read-master-count">{{hotReaders.first.statistic.testPasses}}本</span></h3></div>
                     <hr>
                     <div class="row" ng-repeat="hotreader in hotReaders.others" ng-init="award = ['second', 'third']">
                         <div class="col-md-1"></div>
@@ -164,7 +164,7 @@
                         <div class="col-md-5 read-master-name">
                             {{hotreader.username}}
                         </div>
-                        <div class="col-md-3 read-master-count">{{hotreader.statistic.readNum}}本</div>
+                        <div class="col-md-3 read-master-count">{{hotreader.statistic.testPasses}}本</div>
                     </div>
                 </div>
             </div>
