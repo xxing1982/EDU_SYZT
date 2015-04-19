@@ -59,7 +59,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                    <div class="row">
-                                    <a href="#readingCenter/bookDetails/{{unreadBook.bookId}}/takenote">
+                                    <a ng-click="takeNoteByBookinshelf(unreadBook)" data-toggle="modal" data-target="#book-takenote-model">
                                         <img src="../static/img/myBookshelf/note.png" class="img-responsive">
                                     </a>
                                     </div>
@@ -101,7 +101,7 @@
                             <!-- Note row -->
                             <div>
                                 <div class="row">
-                                    <a href="#readingCenter/bookDetails/{{readBook.bookId}}/takenote">
+                                    <a ng-click="takeNoteByBookinshelf(readBook)" data-toggle="modal" data-target="#book-takenote-model">
                                         <img src="../static/img/myBookshelf/note.png" class="img-responsive">
                                     </a>
                                 </div>

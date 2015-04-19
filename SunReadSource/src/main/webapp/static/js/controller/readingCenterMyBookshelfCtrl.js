@@ -1,7 +1,7 @@
 //readingCenterMyBookshelfCtrl.js
 
 ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','BookshelfView',
-    'Bookshelf','BookInShelf','DropBookFromShelf', 'NoteTake', 'BookDetail', function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf,NoteTake, BookDetail) {
+    'Bookshelf','BookInShelf','DropBookFromShelf', 'NoteTake', 'BookDetail', 'Dropzone', function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf,NoteTake, BookDetail, Dropzone) {
 	$scope.name='阅读中心->我的书架';
         
         
