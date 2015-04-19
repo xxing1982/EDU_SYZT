@@ -11,7 +11,7 @@
 			</div>
 			<div ng-show="isCertification">
 				<div class="content row" ng-repeat="item in verifyExams">
-					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-1"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
 					<div class="col-md-2 name">{{item.name}}</div>
 					<div class="col-md-5 value">
 						财富值：{{item.coin}}&nbsp;&nbsp;&nbsp;&nbsp;
@@ -27,7 +27,7 @@
 			</div>
 			<div ng-show="isWord">
 				<div class="content row" ng-repeat="item in wordExams">
-					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-1"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
 					<div class="col-md-2 name">{{item.name}}</div>
 					<div class="col-md-5 value">
 						正确率：{{item.examScore}}%
@@ -40,7 +40,7 @@
 			</div>
 			<div ng-show="isThinking">
 				<div class="content row" ng-repeat="item in thinkExams">
-					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
+					<div class="col-md-1"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
 					<div class="col-md-2 name">{{item.name}}</div>
 					<div class="col-md-3 value count">问答题目数：{{item.questionNum}}</div>
 					<div class="col-md-3 value"><a ng-click="MyAnswer(item)" href="#readingCenter/myEvaluating/myAnswers">查看我的回答</a></div>
@@ -69,6 +69,13 @@
                 
                 <!-- Place holder -->
                 <p class="row"></p>
+
+                <div class="row">
+                    <div class="col-md-1">评分:</div>
+                    <div class="col-md-2">
+                    <input type="number" class="form-control" ng-model="rate">
+                    </div>
+                </div>
                 
                 <!-- Input form -->
                 <div class="row">

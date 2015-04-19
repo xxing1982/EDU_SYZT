@@ -17,7 +17,7 @@
 					增加积分{{point}}
 				</div>
 				<div class="btn-exam">
-                <a ng-show="isVerify" ng-click="evaluate()" class="btn btn-fill-green btn-lg">去评价</a>
+                <a ng-show="isVerify" data-toggle="modal" data-target="#exam-evaluation-model" class="btn btn-fill-green btn-lg">去评价</a>
                 <a ng-hide="isVerify" ng-click="returnCode()" class="btn btn-fill-green btn-lg">返回</a>
                 </div>
 			</div>
@@ -42,6 +42,12 @@
                 <!-- Place holder -->
                 <p class="row"></p>
                 
+                <div class="row">
+                    <div class="col-md-1">评分:</div>
+                    <div class="col-md-2">
+                    <input type="number" class="form-control" ng-model="rate">
+                    </div>
+                </div>
                 <!-- Input form -->
                 <div class="row">
                     <div class="col-md-12 input-textarea-group">
