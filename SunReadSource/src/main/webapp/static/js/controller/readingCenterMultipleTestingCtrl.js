@@ -62,9 +62,22 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			$scope.FinishExam = function(){
 				$scope.IsCilck = true;
 				testExam.submitExam($scope.myAnswer, function(examData){
-						var score = examData.exam.examScore;
-						if (examData.pass) {
+						var score=0;
+						if ($rootScope.exam.id == 0) {
+							score = examData.exam.examScore;
+						}
+						else{
+							score = examData.examScore;
+						}
+						//examData.exam.examScore;
+						if($rootScope.exam.id == 1){
 							$rootScope.exam.score = score;
+							$rootScope.exam.isVerify = false;
+							window.location.href="/protype/index.html#/readingCenter/success";
+						}
+						else if (examData.pass) {
+							$rootScope.exam.score = score;
+							$rootScope.exam.isVerify = true;
 							window.location.href="/protype/index.html#/readingCenter/success";
 						}
 						else{

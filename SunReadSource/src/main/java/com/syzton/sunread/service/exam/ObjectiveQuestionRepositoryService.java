@@ -12,10 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.exam.QuestionDTO;
 import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
 import com.syzton.sunread.model.exam.Question;
+import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
+import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.exam.CapacityQuestionRepository;
 import com.syzton.sunread.repository.exam.ObjectiveQuestionRepository;
 import com.syzton.sunread.repository.exam.OptionRepository;
@@ -32,13 +35,16 @@ public class ObjectiveQuestionRepositoryService implements
 	private OptionRepository optionRepository;
 	
 	private CapacityQuestionRepository capacityRepository;
+	
+	private BookRepository bookRepository;
 
 	@Autowired
 	public ObjectiveQuestionRepositoryService(
-			ObjectiveQuestionRepository repository,OptionRepository optionRepository,CapacityQuestionRepository capacityRepository) {
+			ObjectiveQuestionRepository repository,OptionRepository optionRepository,CapacityQuestionRepository capacityRepository,BookRepository bookRepository) {
 		this.repository = repository;
 		this.optionRepository = optionRepository;
 		this.capacityRepository = capacityRepository;
+		this.bookRepository = bookRepository;
 	}
 
 	@Transactional(rollbackFor = { NotFoundException.class })
@@ -56,6 +62,18 @@ public class ObjectiveQuestionRepositoryService implements
 	@Override
 	public ObjectiveQuestion add(ObjectiveQuestion added) {
 		LOGGER.debug("Adding a new Objective question entry with information: {}", added);
+		Long bookId = added.getBookId();
+		Book book = null;
+		if(added.getObjectiveType().equals(QuestionType.VERIFY)){
+			book = bookRepository.findOne(bookId);
+			book.getExtra().setHasVerifyTest(true);
+			bookRepository.save(book);
+			
+		}else if(added.getObjectiveType().equals(QuestionType.WORD)){
+			book = bookRepository.findOne(bookId);
+			book.getExtra().setHasWordTest(true);
+			bookRepository.save(book);
+		}
 		return repository.save(added);
 	}
 

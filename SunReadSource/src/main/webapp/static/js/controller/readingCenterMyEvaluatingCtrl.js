@@ -5,28 +5,38 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.content = "";
 		$scope.title = "";
 		$scope.source = {};
-		$scope.count = 3;
+		$scope.countVerifyExam = 3;
+		$scope.countWordExam = 3;
+		$scope.countThinkExam = 3;
 		//source
 		VerifyExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.verifyExams = data.examDTOs;			
-			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.count);
+			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.countVerifyExam);
 		});
 
 		WordExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.wordExams = data.examDTOs;
-			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.count);
+			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.countWordExam);
 		});
 
 		ThinkExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.thinkExams = data.examDTOs;
-			$scope.thinkExams = $scope.source.thinkExams.slice(0, $scope.count);
+			$scope.thinkExams = $scope.source.thinkExams.slice(0, $scope.countThinkExam);
 		});
 
 		$scope.addCount = function(){
-			$scope.count = $scope.count + 3;
-			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.count);
-			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.count);
-			$scope.thinkExams = $scope.source.thinkExams.slice(0, $scope.count);
+			if ($scope.isCertification) {
+				$scope.countVerifyExam = $scope.countVerifyExam+ 3;
+			}
+			else if($scope.isWord){
+				$scope.countWordExam = $scope.countWordExam + 3;
+			}
+			else if($scope.isThinking){
+				$scope.countThinkExam = $scope.countThinkExam + 3;
+			}
+			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.countVerifyExam);
+			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.countWordExam);
+			$scope.thinkExams = $scope.source.thinkExams.slice(0, $scope.countThinkExam);
 		}
 
 		$scope.MyAnswer = function(thinkExam){
@@ -63,7 +73,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			review.content = $scope.content;
 			review.rate = 5;
 			AddReview.AddReview($scope.chooseBookId, review, function(data){
-
+				window.location.href = '/protype/index.html#/readingCenter/myEvaluating';
 			})
 		}
 	}]);

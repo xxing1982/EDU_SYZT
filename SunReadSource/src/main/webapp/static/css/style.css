@@ -21,7 +21,11 @@ a:focus, input:focus
 {
     outline: none;
 }
-
+#footer
+{
+    //height: 50px;
+    background: url(../img/index_bottom.png) no-repeat fixed center bottom;
+}
 /***********navigation top*************************/
 .navbar
 {
