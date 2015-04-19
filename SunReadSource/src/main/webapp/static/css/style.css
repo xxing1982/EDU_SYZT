@@ -989,11 +989,25 @@ a:focus, input:focus
     border-radius: 0px;
 }
 
-#personalCenter-page .avatar{
+#personalCenter-page #image-uploader{
+    width: 150px;
+    height: 150px;
     margin-left: auto;
     margin-right: auto;
-    width: 67%;
+    background-position: 50% 50%;
+    background-repeat:  no-repeat;
+    background-size: 100% 100%;
 }
+
+
+#personalCenter-page #image-uploader .dz-preview, 
+#personalCenter-page #image-uploader .dz-image, 
+#personalCenter-page #image-uploader img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
 
 /*******************personal profile buttom****************/
 
@@ -1048,10 +1062,6 @@ a:focus, input:focus
 
 #personal-show-page .fish {
     height: 255px;
-}
-
-#personal-show-page anking-container {
-    position: relative;
 }
 
 #personal-show-page .ranking {
