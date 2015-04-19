@@ -81,14 +81,14 @@
                         <div class="row">
 
                             <!-- Golden silver bronze clazzes -->
-                            <div class="col-md-4" ng-repeat="hotClazz in hotClazzs.content" ng-init="award=['golden', 'silver', 'bronze']; grades=['一','二','三','四','五','六']">
+                            <div class="col-md-4" ng-repeat="hotClazz in hotClazzs.content" ng-init="award=['golden', 'silver', 'bronze']">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <img ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive">
                                     </div>
                                     <div class="col-md-7" style="margin-top:-10px;">
                                         <div class="row text-left">
-                                            <h5><big>{{grades[hotClazz.grade - 1]}}年{{hotClazz.name}}</big></h4>
+                                            <h5><big>{{hotClazz.name}}</big></h4>
                                             <p style="line-height:21px;">
                                                 <small>
                                                     班级人数：{{hotClazz.clazzStatistic.totalReads}}<br/>
@@ -135,7 +135,7 @@
                                     </div>
                                     <div class="col-xs-8 col-xs-offset-2">
                                         <div class="text-center"><h4>{{hotreader.username}}</h4></div>
-                                        <div class="text-center"><p>{{hotreader.statistic.readNum}}本</p></div>
+                                        <div class="text-center"><p>{{hotreader.statistic.testPasses}}本</p></div>
                                     </div>
                                 </div>
                             </div>
