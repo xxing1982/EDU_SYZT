@@ -81,6 +81,12 @@ examServices.factory('ThinkExam',['$resource', 'config', '$http',
 				console.log(data);
 			});
 		};
+		api.getOne = function(userid, questionid, page, size, callback){
+			$http.get(config.HOST + 'subjectiveanswers/' + userid + '/' + questionid + '?page=' + page + '&size=' + size + '&sortBy=id')
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		};
 		return api;
 	}]);
 

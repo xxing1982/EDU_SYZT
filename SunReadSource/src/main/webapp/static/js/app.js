@@ -138,7 +138,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         })
         //reading center -> thinking test -> other answers
         .state('readingCenter.otherAnswer',{
-            url: '/myEvaluating/otherAnswer',
+            url: '/myEvaluating/otherAnswer/:questionId',
             templateUrl: 'partials/readingCenterOtherAnswer.html',
             controller: 'readingCenterOtherAnswerController'
         })
