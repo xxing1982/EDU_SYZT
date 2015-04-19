@@ -83,7 +83,7 @@
                 <div class="col-md-2 row-title-more"><a href="#readingCenter/myEvaluating">更多></a></div>
             </div>
             <div class="row row-content">
-                <div class="col-md-4 clear-padding" ng-repeat="item in exam.examDTOs">
+                <div class="col-md-3" ng-repeat="item in exam.examDTOs">
                     <div class="book-bottom-text">
                         <div class="row">
                             <div class="col-md-1"></div>
@@ -111,7 +111,7 @@
                             <div class="col-md-1"></div>
                         </div>
                         <div><h4>{{item.book}}</h4></div>
-                        <div>笔记名：{{item.afs}}</div>
+                        <div>笔记名：{{item.title}}</div>
                         <div>作者：{{userInfo.username}}  评论：{{item.commentCount}}条</div>
                     </div>
                 </div>
