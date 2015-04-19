@@ -152,8 +152,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
                 user.setWechatId(userExtraDTO.getWechatId());
             if(userExtraDTO.getNickname()!=null && !"".equals(userExtraDTO.getNickname()))
                 user.setNickname(userExtraDTO.getNickname());
-            if(userExtraDTO.getPictrue()!=null && !"".equals(userExtraDTO.getPictrue())){
-                user.setPicture(userExtraDTO.getPictrue());
+            if(userExtraDTO.getPicture()!=null && !"".equals(userExtraDTO.getPicture())){
+                user.setPicture(userExtraDTO.getPicture());
             }
 
         }
