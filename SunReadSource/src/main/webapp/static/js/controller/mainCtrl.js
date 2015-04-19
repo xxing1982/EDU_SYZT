@@ -52,6 +52,10 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     //testing
     PassExam.get($rootScope.id, function(data){
+      //examDTOs[i].pictureUrl
+      for(var i = 0; i < data.examDTOs.length; i++){
+        data.examDTOs[i].pictureUrl = data.examDTOs[i].pictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + data.examDTOs[i].pictureUrl;
+      }
       $scope.exam = data;
     })
 
@@ -59,7 +63,9 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     Note.get({by: "users", id: $rootScope.id,  page: 0, size: 4, direction: "DESC", sortBy: "creationTime"},
       function(data){
         $scope.notes = data.content;
-        $scope.bookPictureUrl = $scope.bookPictureUrl === ""? "../static/img/book.jpg" : config.BOOKPIC + data.picture;
+        for(var i = 0; i < data.content.length; i++){
+          $scope.notes[i].bookPictureUrl = $scope.notes[i].bookPictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + $scope.notes[i].bookPictureUrl;
+        }
       })
 
     //hot note
