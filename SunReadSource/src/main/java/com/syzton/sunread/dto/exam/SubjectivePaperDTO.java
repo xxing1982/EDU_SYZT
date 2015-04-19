@@ -46,6 +46,7 @@ public class SubjectivePaperDTO {
 		exam.setBook(book);
 		exam.setExamType(examType);
 		exam.setStudentId(studentId);
+		exam.setQuestionNum(set.size());
 		return exam;
 	}
 	

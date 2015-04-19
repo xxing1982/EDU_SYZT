@@ -390,10 +390,8 @@ public class ExamRepositoryService implements ExamService {
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
-		DateTime dt = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 00, 00, 00, 000);
-		LOGGER.debug(dt.toString());
+		DateTime dt = new DateTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH), 00, 00, 00, 000);
 		List<Exam> list = repository.findByStudentIdAndBookIdAndExamTypeAndCreationTimeAfter(studentId, bookId,ExamType.VERIFY,dt);
-		LOGGER.debug("####################################"+list.size());
 		return list;
 	}
 	
