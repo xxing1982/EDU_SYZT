@@ -7,13 +7,22 @@ ctrls.controller("readingCenterOtherAnswerController", ['$scope', '$rootScope', 
 		$scope.page = {};
 		$scope.page.page = 0;
 		$scope.page.size = 5;
+		$scope.answer = new Array();
 		getData();
 
 		function getData(){
 			ThinkExam.getOne($rootScope.id, $stateParams.questionId, $scope.page.page, $scope.page.size, function(data){
-				$scope.answer = data.content;
+				if($scope.answer == ""){
+					$scope.answer = data.content;
+				}
+				else{
+					$scope.answer.push(data.content);
+				}
 			});
-
+		}
+		$scope.addCount = function(){
+			$scope.page.page = $scope.page.page + 1;
+			getData();
 		}
 	}
 ]);
