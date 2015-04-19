@@ -3,7 +3,7 @@
 ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scope', 'VerifyExam', 'WordExam', 'ThinkExam', 
 	function ($rootScope, $scope, VerifyExam, WordExam, ThinkExam) {
 		if ($rootScope.exam == undefined) {
-			window.location.href=$rootScope.exam.returnURL;
+			window.location.href = '/protype/index.html#/readingCenter/myBookshelf';
 		};
 		$scope.title = $rootScope.exam.typeName;
 		$scope.bookName = $rootScope.exam.bookName;

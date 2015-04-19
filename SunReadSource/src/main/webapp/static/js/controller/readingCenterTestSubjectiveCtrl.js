@@ -2,35 +2,32 @@
 
 ctrls.controller("readingCenterTestSubjectiveController", ['$scope', '$rootScope', 'ThinkExam', function ($scope, $rootScope, ThinkExam) {
 	if ($rootScope.exam == undefined) {
-		window.location.href=$rootScope.exam.returnURL;
+		window.location.href = '/protype/index.html#/readingCenter/myBookshelf';
 	};
 	$scope.bookName = $rootScope.exam.bookName;
 
 	ThinkExam.get($rootScope.exam.bookId, function(data){
 		ThinkExam.get($rootScope.exam.bookId, function(dataquestion){
 			//get questions by type
-			$scope.questions = new Array();
-			var question = {};
+			
+			var map = {};
 			for(var i = 0; i < data.length; i++){
-				if (i == 0) {
-					question.array = new Array();
-					question.type = data[i].questionType;
-					question.array.push(data[i]);
-				}
-				else if(i == data.length - 1){
-					question.array.push(data[i]);
-					$scope.questions.push(question);
-				}
-				else if(question.type == data[i].questionType){
-					question.array.push(data[i]);
+				if (!(data[i].questionType in map)) {
+					if(map[data[i].questionType] == undefined){
+						map[data[i].questionType] = new Array();
+					}
+					map[data[i].questionType].push(data[i]);
 				}
 				else{
-					$scope.questions.push(question);
-					question = {};
-					question.array = new Array();
-					question.type = data[i].questionType;
-					question.array.push(data[i]);
+					map[data[i].questionType].push(data[i]);
 				}
+			}
+			$scope.questions = new Array();
+			for(value in map){
+				var question = {};
+				question.type = value;
+				question.array = map[value];
+				$scope.questions.push(question);
 			}
 
 			$scope.finishExam = function(){
