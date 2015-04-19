@@ -29,6 +29,14 @@ public class BookPredicates {
 
         BooleanBuilder builder = new BooleanBuilder();
 
+        if(condition.getSearchTerm()!=null && !"".equals(condition.getSearchTerm())){
+            String searchTerm = condition.getSearchTerm();
+            book.name.containsIgnoreCase(searchTerm)
+                    .or(book.isbn.containsIgnoreCase(searchTerm))
+                    .or(book.author.containsIgnoreCase(searchTerm)
+                            .or(book.publisher.containsIgnoreCase(searchTerm)));
+        }
+
         builder.and(book.status.eq(Book.Status.valid));
 
         if(condition.getLevel()!=0){
@@ -45,10 +53,10 @@ public class BookPredicates {
                     builder.and(book.extra.hasVerifyTest.eq(true));
                     break;
                 case 2:
-                    builder.and(book.extra.hasWorldTest.eq(true));
+                    builder.and(book.extra.hasWordTest.eq(true));
                     break;
                 case 3:
-                    builder.and(book.extra.hasCapacityTest.eq(true));
+                    builder.and(book.extra.hasThinkTest.eq(true));
                     break;
             }
 
