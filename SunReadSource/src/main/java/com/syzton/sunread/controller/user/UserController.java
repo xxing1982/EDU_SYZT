@@ -133,8 +133,9 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/students", method = RequestMethod.POST)
     @ResponseBody
     public Student add(@Valid @RequestBody Student student) {
-    	bookshelfService.addBookshelfByStudent(student);
-        return userService.addStudent(student);
+        Student added = userService.addStudent(student);
+    	bookshelfService.addBookshelfByStudent(added);
+        return added;
     }
 
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT)
@@ -151,7 +152,6 @@ public class UserController extends BaseController {
                        @RequestParam("targetBookNum") int targetBookNum,
                        @RequestParam("targetPoint") int targetPoint) {
         Student student = userService.addTask(teacherId, studentId, targetBookNum, targetPoint);
-        bookshelfService.addBookshelfByStudent(student);
         return student;
     }
 

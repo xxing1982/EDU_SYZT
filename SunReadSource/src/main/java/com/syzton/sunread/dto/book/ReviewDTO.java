@@ -7,11 +7,32 @@ public class ReviewDTO {
 
     private Long id;
 
-    private Long bookId;
 
     private String content;
+
+    private String title;
     
     private Long studentId;
+
+    private int rate;
+
+    private String studentName;
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
 
     public String getContent() {
         return content;
@@ -21,13 +42,6 @@ public class ReviewDTO {
         this.content = content;
     }
 
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
 
     public Long getId() {
         return id;
@@ -44,6 +58,12 @@ public class ReviewDTO {
 	public void setStudentId(Long studentId) {
 		this.studentId = studentId;
 	}
-    
-   
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

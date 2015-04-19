@@ -2,7 +2,6 @@ package com.syzton.sunread.service.book;
 
 import com.syzton.sunread.dto.book.ReviewDTO;
 import com.syzton.sunread.model.book.Review;
-import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,9 +10,9 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ReviewService {
 
-    public Review findById(Long id) throws NotFoundException;
+    public Review findById(Long id);
 
-    public Review add(ReviewDTO reviewDTO);
+    public Review add(ReviewDTO reviewDTO,long bookId);
 
     Review deleteById(Long id);
 

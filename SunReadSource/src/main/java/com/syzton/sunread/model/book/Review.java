@@ -1,5 +1,6 @@
 package com.syzton.sunread.model.book;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.book.ReviewDTO;
 import com.syzton.sunread.util.DateSerializer;
@@ -15,6 +16,11 @@ import javax.persistence.*;
 @Table(name = "review")
 public class Review {
 
+    private final static int CONTENT_MAX_LENGTH = 1000;
+    private final static int TITLE_MAX_LENGTH = 200;
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -23,14 +29,22 @@ public class Review {
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime creationTime;
 
-    @Column(name ="content",nullable = false)
+    @Column(length = TITLE_MAX_LENGTH,nullable = false)
+    private String title;
+
+    @Column(name ="content",nullable = false,length = CONTENT_MAX_LENGTH)
     private String content;
     
     private Long studentId;
 
+    private String studentName;
+
+    private int rate;
+
   
 	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @JoinColumn(name="book_id")
+    @JsonIgnore
     private Book book;
 
     public Book getBook() {
@@ -45,28 +59,47 @@ public class Review {
         return content;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public long getId() {
         return id;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public String getStudentName() {
+        return studentName;
     }
 
     public DateTime getCreationTime() {
         return creationTime;
     }
-    public static Builder getBuilder(Long studentId,String content) {
-        return new Builder(studentId,content);
+    public static Builder getBuilder(Long studentId,String title,String content,String studentName) {
+        return new Builder(studentId,title,content,studentName);
     }
 
     public static class Builder {
 
         private Review built;
 
-        public Builder(Long studentId,String content) {
+        public Builder(Long studentId,String title,String content,String studentName) {
             built = new Review();
             built.content = content;
+            built.title = title;
             built.studentId=studentId;
+            built.studentName = studentName;
         }
         public Builder book(Book book) {
             built.book = book;
+            return this;
+        }
+
+        public Builder rate(int rate){
+            built.rate = rate;
             return this;
         }
 
@@ -85,9 +118,11 @@ public class Review {
     public ReviewDTO createDTO(Review model) {
         ReviewDTO dto = new ReviewDTO();
         dto.setId(model.getId());
-        dto.setBookId(model.getBook().getId());
+        dto.setTitle(model.getTitle());
         dto.setContent(model.getContent());
         dto.setStudentId(model.getStudentId());
+        dto.setRate(model.getRate());
+        dto.setStudentName(model.getStudentName());
         return dto;
     }
 
