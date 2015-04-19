@@ -75,7 +75,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 							$rootScope.exam.isVerify = false;
 							window.location.href="/protype/index.html#/readingCenter/success";
 						}
-						else if (examData.pass) {
+						else if (examData.exam.pass) {
 							$rootScope.exam.score = score;
 							$rootScope.exam.isVerify = true;
 							window.location.href="/protype/index.html#/readingCenter/success";

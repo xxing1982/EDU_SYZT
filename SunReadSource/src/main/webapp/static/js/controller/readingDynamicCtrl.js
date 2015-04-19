@@ -1,7 +1,7 @@
 //readingDynamic.js
 
-ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView', 'Student', 'Campus', 'Action', 'Pageable', 'Hotclazz', 'Hotreader',
-    function ($scope, $rootScope, NoteView, Student, Campus, Action, Pageable, Hotclazz, Hotreader) {
+ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView', 'Student', 'Campus', 'Action', 'Pageable', 'Hotclazz', 'Hotreader', 'config',
+    function ($scope, $rootScope, NoteView, Student, Campus, Action, Pageable, Hotclazz, Hotreader, config) {
     
         
         
@@ -41,4 +41,7 @@ ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView'
 
     // Transmit arguments to search engine
     $scope.noteView.ShowMoreNotes( {page: 0, size: 3, direction: "DESC", sortBy: "commentCount"} );
+        
+    // Get the image server
+    $scope.imageServer = config.IMAGESERVER;
 }]);

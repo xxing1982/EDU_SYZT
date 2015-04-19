@@ -5,6 +5,7 @@ ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 
     $scope.name = $rootScope.exam.bookName;
     $scope.score = $rootScope.exam.score;
     $scope.content = "";
+    $scope.rate = 0;
     $scope.isVerify = $rootScope.exam.isVerify;
     $scope.title = "";
     var bookid = $rootScope.exam.bookId;
@@ -18,7 +19,7 @@ ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 
       review.studentId = $rootScope.id;
       review.title = $scope.title;
       review.content = $scope.content;
-      review.rate = 5;
+      review.rate = $scope.rate;
       AddReview.AddReview($scope.chooseBookId, review, function(data){
         window.location.href = $rootScope.exam.returnURL;
       })
