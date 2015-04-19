@@ -1,6 +1,6 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
-                                             ,'examServices', 'classServices', 'questionServices'
+                                             ,'examServices', 'classServices', 'questionServices','reviewServices'
                                              ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','oneBookInShelfServices'
                                              ,'weeklyHotServices','monthlyHotServices','weeklyRecommendServices','monthlyRecommendServices'
@@ -27,7 +27,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
       // Set the parameters of pageable
       $scope.actionPageable.size = 3;
-    
+
       // Build the pageable object
       $scope.actionPageable.build(Action);
 
@@ -42,7 +42,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
         $scope.hotReaders.others = dataHot.content.slice(1);
       });
     });
-    
+
     //bookshelf
     Bookshelf.get({id : $rootScope.id}, function(data){
       $scope.bookshelf = data;
@@ -57,7 +57,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     })
 
     //note
-    Note.get({by: "users", id: $rootScope.id,  page: 0, size: 4, direction: "DESC", sortBy: "creationTime"}, 
+    Note.get({by: "users", id: $rootScope.id,  page: 0, size: 4, direction: "DESC", sortBy: "creationTime"},
       function(data){
         $scope.notes = data.content;
       })

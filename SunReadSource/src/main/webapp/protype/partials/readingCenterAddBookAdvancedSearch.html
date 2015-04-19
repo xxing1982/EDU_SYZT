@@ -7,12 +7,12 @@
 		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchContent">
 		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
 	</div>
-	
+
 	<div ng-repeat="terms in advancedSearch.content">
         <div class="row bookList">
             <div class="col-md-3">
-                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img src="../static/img/book.jpg" class="img-responsive"></a> 
-            </div>  
+                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img src="../static/img/book.jpg" class="img-responsive"></a>
+            </div>
             <div class="col-md-9">
                 <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
             <div class="row fsize12"><p>评分：{{terms.evaluationNum}}&nbsp;&nbsp;已有2087人阅读</p></div>
@@ -24,17 +24,17 @@
                     <a href="#readingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-green">相关笔记</a>&nbsp;&nbsp;
                     <a href="#readingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-green">相关评价</a>
                 </div>
-            </div>     
+            </div>
         </div>
     </div>
-    
+
 
 </div><!--left part-->
-  
-  
+
+
    <!--right part -->
     <div class="rightpart">
-        <div class="row conditionBlock"> 
+        <div class="row conditionBlock">
            <div class="col-md-12">
                 <div class="row">
                     <h5>级别及类别</h5>
@@ -42,35 +42,35 @@
                 <div class="row">
                    <div class="catogaryText"> <p>年级： </p></div>
                    <div class="catogaryBtn">
-                    <bs-dropdown data-menu-type="button" 
+                    <bs-dropdown data-menu-type="button"
                         select-val="grade = selectedVal"
-                        preselected-item="grade" 
+                        preselected-item="grade"
                         data-dropdown-data="statuses_grade">
                     </bs-dropdown>
                     </div>
-                </div>    
-                
+                </div>
+
                  <div class="row">
                     <div class="catogaryText"> <p>类别： </p></div>
                    <div class="catogaryBtn">
-                    <bs-dropdown data-menu-type="button" 
+                    <bs-dropdown data-menu-type="button"
                         select-val="category = selectedVal"
-                        preselected-item="category" 
+                        preselected-item="category"
                         data-dropdown-data="statuses_category">
                     </bs-dropdown>
                     </div>
-                </div>  
-                
+                </div>
+
             </div>
         </div>
 
-        <div class="row conditionBlock"> 
+        <div class="row conditionBlock">
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
                     <h5>测试类型</h5>
                 </div><!---->
-                
+
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search()" ng-model="testType" name="testOptions" id="testOptions1" value="0" checked>
@@ -95,17 +95,17 @@
                     思维训练
                   </label>
                 </div>
-                
+
             </div>
         </div>
 
-        <div class="row conditionBlock"> 
+        <div class="row conditionBlock">
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
                     <h5>类型</h5>
                 </div><!---->
-                
+
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search()" ng-model="literature" name="typeOptions2" id="typeOptions1" value="0" checked>
@@ -127,13 +127,13 @@
             </div>
         </div>
 
-        <div class="row conditionBlock"> 
+        <div class="row conditionBlock">
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
                     <h5>积分</h5>
                 </div><!---->
-                
+
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search()" ng-model="pointRange" name="pointOptions" id="pointOptions1" value="0" checked>
@@ -167,13 +167,13 @@
             </div>
         </div>
 
-        <div class="row conditionBlock"> 
+        <div class="row conditionBlock">
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
                     <h5>语言</h5>
                 </div><!---->
-                
+
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search()" ng-model="language" name="languageOptions" id="languageOptions1" value="0" checked>
@@ -194,14 +194,14 @@
                 </div>
             </div>
         </div>
-        
-        <div class="row conditionBlock"> 
+
+        <div class="row conditionBlock">
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
                     <h5>配套资源</h5>
                 </div><!---->
-                
+
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search()" ng-model="resource" name="resoucesOptions" id="resoucesOptions1" value="0" checked>
@@ -226,17 +226,17 @@
                     视频
                   </label>
                 </div>
-                
+
             </div>
         </div>
 
         </div>
-    </div>       
-           
-            
+    </div>
+
+
     </div>
     <!-- End right part -->
-    
+
 </div><!--row-->
 
 </div>
