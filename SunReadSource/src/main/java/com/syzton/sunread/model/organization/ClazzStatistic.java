@@ -24,13 +24,17 @@ public class ClazzStatistic extends AbstractEntity{
     @PrePersist
     public void prePersist(){
         super.prePersist();
-        this.avgPoints = this.getAvgPoints();
-        this.avgReads = this.getAvgReads();
+        this.avgPoints = this.setAvgPoints();
+        this.avgReads = this.setAvgReads();
 
     }
 
-    public void increaseStudentNum(){
-        ++this.studentNum;
+    public int getStudentNum() {
+        return studentNum;
+    }
+
+    public void setStudentNum(int studentNum) {
+        this.studentNum = studentNum;
     }
 
     public void setTotalPoints(int totalPoints){
@@ -50,14 +54,24 @@ public class ClazzStatistic extends AbstractEntity{
     }
 
     public int getAvgPoints() {
-        if(studentNum == 0)
-            return 0;
-        return this.totalPoints/this.studentNum;
+        return avgPoints;
     }
 
     public int getAvgReads() {
+        return avgReads;
+    }
+
+    public int setAvgPoints() {
         if(studentNum == 0)
             return 0;
-        return this.totalReads/this.studentNum;
+        this.avgPoints =  this.totalPoints/this.studentNum;
+        return this.avgPoints;
+    }
+
+    public int setAvgReads() {
+        if(studentNum == 0)
+            return 0;
+        this.avgReads = this.totalReads/this.studentNum;
+        return this.avgReads;
     }
 }

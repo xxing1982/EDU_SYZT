@@ -122,14 +122,21 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     @Override
     public Student addStudent(Student student) {
     	student.setPassword(encodePassword(student.getPassword()));
+        adjustClazzStatistic(student);
+        
+        return studentRepository.save(student);
+    }
+
+    private void adjustClazzStatistic(Student student) {
         Clazz clazz = clazzRepository.findOne(student.getClazzId());
         if(clazz == null){
             throw new NotFoundException("clazz id = "+student.getClazzId()+" not found..");
         }
-        clazz.getClazzStatistic().increaseStudentNum();
+        Number studentNum = clazzRepository.countStudentsInClazz(student.getClazzId(),student.getCampusId());
+        clazz.getClazzStatistic().setStudentNum(studentNum.intValue());
+        clazz.getClazzStatistic().setAvgPoints();
+        clazz.getClazzStatistic().setAvgReads();
         clazzRepository.save(clazz);
-        
-        return studentRepository.save(student);
     }
 
     @Override
@@ -176,6 +183,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     public Student deleteByStudentId(Long id) {
         Student student =  this.findByStudentId(id);
         studentRepository.delete(student);
+        adjustClazzStatistic(student);
         return student;
     }
 
