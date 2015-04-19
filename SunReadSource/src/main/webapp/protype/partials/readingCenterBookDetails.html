@@ -149,12 +149,7 @@
                                     <a ng-click=" Note.text_overflow = !Note.text_overflow" ng-show="Note.text_overflow && Note.content.length > 101">更多</a>
                                 </div>
                                 <div class="book-thumbnail">
-                                    <div class="col-md-1 clear-padding">
-                                        <img src="../static/img/note.jpg" class="img-responsive">
-                                    </div>
-                                    <div class="col-md-1 clear-padding">
-                                        <img src="../static/img/note.jpg" class="img-responsive">
-                                    </div>
+                                    <div ng-style="{'background-image':'url('+imageServer+Note.image+')'}" ng-show="Note.image !== null"> </div>
                                 </div>
 
                                 <div class="msg-buttom" ng-click="noteView.ShowComments(Note)">

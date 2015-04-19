@@ -1,5 +1,5 @@
 ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', '$stateParams', 'para','WeeklyHotSearch','OneBookInShelf'
-    ,'BookDetail','NoteView', 'NoteTake', 'Dropzone', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, NoteView, NoteTake, Dropzone){                                                    
+    ,'BookDetail','NoteView', 'NoteTake', 'Dropzone', 'config', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, NoteView, NoteTake, Dropzone, config){                                                    
 	$scope.name = '书籍详情';
 
     
@@ -108,4 +108,6 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         }
     });
     
+    // Get the image server
+    $scope.imageServer = config.IMAGESERVER;
 }]);

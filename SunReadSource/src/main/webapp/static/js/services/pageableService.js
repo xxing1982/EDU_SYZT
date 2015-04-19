@@ -26,7 +26,7 @@ Pageable.prototype.build = function(Entity){
     this.Entity = Entity;
 
     // Update the page number
-    this.pageNumbers.update(this.pageNumbers.startPage);
+    this.pageNumbers.update(this.pageNumbers.startPage, this.pageNumbers.content.length);
 
     // Initlizate the entities
     this.entities = {content: new Array(0)};
@@ -37,7 +37,8 @@ Pageable.prototype.build = function(Entity){
 
 
 // Update page number entities
-Pageable.prototype.pageNumbers.update = function(startPage){
+Pageable.prototype.pageNumbers.update = function(startPage, count){
+    this.content = new Array(count);
     for (var i = 0; i < this.content.length; i ++){
         this.content[i] = startPage + i;
     }
@@ -67,6 +68,7 @@ Pageable.prototype.showPage = function(page, callback){
 
         // Get entities
         this.Entity.get($.extend({}, {size: this.size, page: page - 1}, this.arguments), function(data){
+            console.log("Entity");
             // Check the bounds of page
             if (page > data.totalPages) {
                 pageable.showPage(data.totalPages);
@@ -87,12 +89,12 @@ Pageable.prototype.showPage = function(page, callback){
 
                 // Page is at the right side of page numbers
                 if ( endPage <= page ){
-                    pageNumbers.update( page - length + 1 + (page !== data.totalPages) );
+                    pageNumbers.update( page - length + 1 + (page !== data.totalPages), Math.min(data.totalPages, length));
                 }
 
                 // Page is at the left side of page numbers
                 else if ( page <= startPage){
-                    pageNumbers.update( page - 1 +  (page === 1));
+                    pageNumbers.update( page - 1 +  (page === 1), Math.min(data.totalPages, length));
                 }
             }
 
