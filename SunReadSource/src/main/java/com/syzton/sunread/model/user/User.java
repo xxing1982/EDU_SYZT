@@ -74,6 +74,9 @@ public class User extends AbstractEntity implements UserDetails{
     @NotEmpty
     @Column(nullable = false,length = MAX_LENGTH_PHONENUMBER)
     private String phoneNumber;
+
+    private String contactPhone;
+
     @JsonIgnore
     @Column(name = "birthday")
     @JsonSerialize(using = DateSerializer.class)
@@ -147,6 +150,14 @@ public class User extends AbstractEntity implements UserDetails{
 
     public enum Status {
         valid,invalid,locked
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     public String getPicture() {

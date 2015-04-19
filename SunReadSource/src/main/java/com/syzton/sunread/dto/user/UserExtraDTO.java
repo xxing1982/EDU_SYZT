@@ -9,8 +9,16 @@ public class UserExtraDTO {
     private String wechatId;
     private String email;
     private String phoneNumber;
-
+    private String pictrue;
     private String password;
+
+    public String getPictrue() {
+        return pictrue;
+    }
+
+    public void setPictrue(String pictrue) {
+        this.pictrue = pictrue;
+    }
 
     public String getPassword() {
         return password;
