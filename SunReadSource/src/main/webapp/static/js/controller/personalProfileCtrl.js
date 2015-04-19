@@ -47,11 +47,22 @@ ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', '
         editObj.editable = !editObj.editable ;
     }
     
+    // Check the orginal avatar url
+    $scope.avatarUrl = $scope.student.picture === "" ? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + $scope.student.picture ;
+
+    // Save the orginal avatar
+    $scope.avatarOrg = $scope.student.picture;
 
     // Image uploader
-    $scope.dropzone = Dropzone(config.USERICON, function(){
+    $scope.dropzone = Dropzone(config.USERICON, function(url){
+         User.update({id: $rootScope.id}, {picture: url});
+    } );
     
+    // Update remove file callback
+    $scope.dropzone.on('removedfile', function(){
+        User.update({id: $rootScope.id}, {picture: $scope.avatarOrg});
     });
+    
 
     // Get the image server
     $scope.imageServer = config.IMAGESERVER;
