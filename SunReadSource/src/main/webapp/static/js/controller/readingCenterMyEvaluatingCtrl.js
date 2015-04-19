@@ -8,26 +8,12 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.count = 3;
 		//source
 		VerifyExam.getAllInfo($rootScope.id, function(data){
-			$scope.source.verifyExams = data.examDTOs;
-			for(var i = 0; i < $scope.source.verifyExams.length; i++){
-				getReviewStatus(i, $scope.source.verifyExams);
-			}
+			$scope.source.verifyExams = data.examDTOs;			
 			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.count);
 		});
 
 		WordExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.wordExams = data.examDTOs;
-			for(var i = 0; i < $scope.source.wordExams.length; i++){
-				var index = i;
-				/*ThinkExam.isReviewed(data.examDTOs[index].bookId, $rootScope.id, 
-					function(){
-					//TRUE 已认证
-					$scope.source.wordExams[index].verify = true;
-				},
-				function(){
-					$scope.source.wordExams[index].verify = false;
-				});*/
-			}
 			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.count);
 		});
 
@@ -79,15 +65,5 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			AddReview.AddReview($scope.chooseBookId, review, function(data){
 
 			})
-		}
-
-		function getReviewStatus(index, data){
-			VerifyExam.isReviewed(data[index].bookId, $rootScope.id, 
-				function(){					
-					$scope.source.verifyExams[index].verify = false;
-				},
-				function(){
-					$scope.source.verifyExams[index].verify = true;
-				});
 		}
 	}]);

@@ -40,8 +40,35 @@ public class BookPredicates {
         }
 
         if(condition.getTestType()!=0){
-            builder.and(book.extra.testType.eq(condition.getTestType()));
+            switch (condition.getTestType()){
+                case 1:
+                    builder.and(book.extra.hasVerifyTest.eq(true));
+                    break;
+                case 2:
+                    builder.and(book.extra.hasWorldTest.eq(true));
+                    break;
+                case 3:
+                    builder.and(book.extra.hasCapacityTest.eq(true));
+                    break;
+            }
+
         }
+
+        if(condition.getResource()!=0){
+            switch (condition.getTestType()){
+                case 1:
+                    builder.and(book.extra.hasEbook.eq(true));
+                    break;
+                case 2:
+                    builder.and(book.extra.hasRadio.eq(true));
+                    break;
+                case 3:
+                    builder.and(book.extra.hasVideo.eq(true));
+                    break;
+            }
+
+        }
+
 
         if(condition.getLiterature()!=0){
             builder.and(book.extra.literature.eq(condition.getLiterature()));
