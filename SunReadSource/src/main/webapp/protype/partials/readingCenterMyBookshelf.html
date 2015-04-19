@@ -48,8 +48,8 @@
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="CertificationTest(unreadBook)" href="#readingCenter/multipleTesting">认证测试</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="SubjectiveTest(unreadBook)" href="#readingCenter/testSubjective">思维测试</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="WordTest(unreadBook)" href="#readingCenter/multipleTesting">词汇测试</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="SubjectiveTest(unreadBook)" href="#readingCenter/testSubjective">思维测试</a></li>                                    
                                 </ul>
                                 <!-- Place Holder -->
                                 <p class="row"></p>
@@ -91,23 +91,26 @@
 								<button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" aria-expanded="true">测试训练
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="SubjectiveTest(readBook)" href="#readingCenter/multipleTesting">思维测试</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="WordTest(readBook)" href="#readingCenter/multipleTesting">词汇测试</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="WordTest(unreadBook)" href="#readingCenter/multipleTesting">词汇测试</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="SubjectiveTest(unreadBook)" href="#readingCenter/multipleTesting">思维测试</a></li>
                                 </ul>
                                 <!-- Place Holder -->
                                 <p class="row"></p>
                             </div>
 
                             <!-- Note row -->
-                            <div>
-                                <div class="row">
+                            <div class="row">
+                                <div class="col-md-3">
+                                   <div class="row">
                                     <a ng-click="takeNoteByBookinshelf(readBook)" data-toggle="modal" data-target="#book-takenote-model">
                                         <img src="../static/img/myBookshelf/note.png" class="img-responsive">
                                     </a>
+                                    </div>
                                 </div>
                                 <!-- Place Holder -->
-                                <p class="row"></p>
+                                <div class="col-md-9"><div class="row"><a ng-click="dropBookFromShelf(readBook)">从书架移除</a> </div></div>
                             </div>
+
 							</div>				
 						</div>
 					</div>

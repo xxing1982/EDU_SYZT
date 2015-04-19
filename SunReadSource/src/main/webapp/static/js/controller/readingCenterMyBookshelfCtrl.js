@@ -14,8 +14,8 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     
     console.log($scope.BookshelfView);    
 
-        
-    var pageSize = 10;
+    var page = 1;
+    var size = 9;
     
     $scope.statuses = [{
         id: 0,
@@ -27,7 +27,11 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         id: 2,
         name: "选读"        
     }];        
-    $scope.selected_status = 0;  
+    $scope.selected_status = 0; 
+        
+    function createLoadable(BookInShelf,page,size){
+        
+    }
     
     var bookshelf = Bookshelf.get({id:$rootScope.id},function(){
         console.log(bookshelf);
@@ -41,7 +45,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         
     $scope.shelf = bookshelf;
     
-    $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:pageSize},function(){
+    $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:size},function(){
         console.log($scope.bookInShelf);
         var content = $scope.bookInShelf.content;
         $scope.readBooks = new Array();
@@ -62,7 +66,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     $scope.selectBookAttributes = function(){
         
         console.log($scope.selected_status);
-        $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:pageSize},function(){
+        $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:size},function(){
         console.log($scope.bookInShelf);
         var content = $scope.bookInShelf.content;
         $scope.readBooks = new Array();

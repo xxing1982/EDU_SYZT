@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
+import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.exam.SubjectiveQuestionRepository;
 
 @Service
@@ -21,11 +23,14 @@ public class SubjectiveQuestionRepositoryService implements SubjectiveQuestionSe
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(SubjectiveQuestionRepositoryService.class);
 	private SubjectiveQuestionRepository repository;
+	
+	private BookRepository bookRepository;
 
 	@Autowired
 	public SubjectiveQuestionRepositoryService(
-			SubjectiveQuestionRepository repository) {
+			SubjectiveQuestionRepository repository,BookRepository bookRepository) {
 		this.repository = repository;
+		this.bookRepository = bookRepository;
 	}
 
 	@Transactional(rollbackFor = { NotFoundException.class })
@@ -58,6 +63,10 @@ public class SubjectiveQuestionRepositoryService implements SubjectiveQuestionSe
 	@Override
 	public SubjectiveQuestion add(SubjectiveQuestion added) {
 		LOGGER.debug("Adding a new Question entry with information: {}", added);
+		Long bookId = added.getBookId();
+		Book book = bookRepository.findOne(bookId);
+		book.getExtra().setHasThinkTest(true);
+		bookRepository.save(book);
 		return repository.save(added);
 	}
 
