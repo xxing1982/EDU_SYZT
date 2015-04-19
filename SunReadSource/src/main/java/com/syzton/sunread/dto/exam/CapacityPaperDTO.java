@@ -40,6 +40,7 @@ public class CapacityPaperDTO {
 		exam.setAnswers(answerSet);
 		exam.setExamType(examType);
 		exam.setStudentId(studentId);
+		exam.setQuestionNum(set.size());
 		return exam;
 	}
 	
