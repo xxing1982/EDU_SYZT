@@ -49,7 +49,7 @@ public class FtpUtil {
         ftpClient = new FTPClient();  
         ftpClient.configure(getFTPClientConfig());  
         ftpClient.setDefaultPort(port);  
-        ftpClient.setControlEncoding("UTF-8");  
+        ftpClient.setControlEncoding("UTF-8");     
         ftpClient.connect(hostname);  
         if (!ftpClient.login(username, password)) {  
             throw new Exception("FTP log error");  

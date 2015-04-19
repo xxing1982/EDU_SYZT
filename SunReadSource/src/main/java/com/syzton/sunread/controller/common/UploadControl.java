@@ -33,6 +33,8 @@ public class UploadControl {
 	
 	private SecurityContextUtil securityUtil;
 	
+	private String ftpPrefix = "/pic";
+	
 	@Autowired
 	public UploadControl(SecurityContextUtil securityUtil) {
 		this.securityUtil = securityUtil;
@@ -57,7 +59,7 @@ public class UploadControl {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName, ftpPath + fileName);
+				ftpUtil.upload(realPath + "/" + fileName, ftpPrefix+ftpPath + fileName);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
@@ -85,7 +87,7 @@ public class UploadControl {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName, ftpPath + fileName);
+				ftpUtil.upload(realPath + "/" + fileName,  ftpPrefix+ftpPath + fileName);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
@@ -99,9 +101,10 @@ public class UploadControl {
 	@ResponseBody
 	public String bookPicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
+		
 		long prefix = Calendar.getInstance().getTimeInMillis();
-		String originalFileName = new String(myfile.getOriginalFilename().getBytes("iso-8859-1"),"utf-8");
-		String fileName = prefix + originalFileName;
+		String fileName = prefix + myfile.getOriginalFilename();
+ 
 		String ftpPath = "/bookscover/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
@@ -116,7 +119,7 @@ public class UploadControl {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName, ftpPath + fileName);
+				ftpUtil.upload(realPath + "/" + fileName,  ftpPrefix+ftpPath + fileName);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
@@ -129,8 +132,9 @@ public class UploadControl {
 	@ResponseBody
 	public String bookExcelUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		
+		LOGGER.debug(request.getCharacterEncoding());
 		String fileName = myfile.getOriginalFilename();
+		
 
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
@@ -146,6 +150,44 @@ public class UploadControl {
 		}
 		return "Excel parse OK";
 	}
+	
+	public static String getEncoding(String str) {
+			String encode = "GBK";      
+	      try {      
+	          if (str.equals(new String(str.getBytes(encode), encode))) {      
+	               String s3 = encode;      
+	              return s3;      
+	           }      
+	       } catch (Exception exception3) {      
+	       }      
+		   encode = "ISO-8859-1";      
+	      try {      
+	          if (str.equals(new String(str.getBytes(encode), encode))) {      
+	               String s1 = encode;      
+	              return s1;      
+	           }      
+	       } catch (Exception exception1) {      
+	       }  
+	        encode = "GB2312";      
+	      try {      
+	          if (str.equals(new String(str.getBytes(encode), encode))) {      
+	               String s = encode;      
+	              return s;      
+	           }      
+	       } catch (Exception exception) {      
+	       }      
+	           
+	       encode = "UTF-8";      
+	      try {      
+	          if (str.equals(new String(str.getBytes(encode), encode))) {      
+	               String s2 = encode;      
+	              return s2;      
+	           }      
+	       } catch (Exception exception2) {      
+	       }      
+	     
+	      return "";      
+	   } 
 	
 	@RequestMapping(value = "/api/upload/excel/student", method = RequestMethod.POST)
 	@ResponseBody

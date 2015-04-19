@@ -10,7 +10,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		VerifyExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.verifyExams = data.examDTOs;
 			for(var i = 0; i < $scope.source.verifyExams.length; i++){
-				//getReviewStatus(i, $scope.source.verifyExams);
+				getReviewStatus(i, $scope.source.verifyExams);
 			}
 			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.count);
 		});
@@ -19,14 +19,14 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			$scope.source.wordExams = data.examDTOs;
 			for(var i = 0; i < $scope.source.wordExams.length; i++){
 				var index = i;
-				ThinkExam.isReviewed(data.examDTOs[index].bookId, $rootScope.id, 
+				/*ThinkExam.isReviewed(data.examDTOs[index].bookId, $rootScope.id, 
 					function(){
 					//TRUE 已认证
 					$scope.source.wordExams[index].verify = true;
 				},
 				function(){
 					$scope.source.wordExams[index].verify = false;
-				});
+				});*/
 			}
 			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.count);
 		});

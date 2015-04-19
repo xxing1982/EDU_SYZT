@@ -1,18 +1,18 @@
 <div id="actions-page" class="container">
     <div class="row">
-    
+
     <!-- The page body top -->
     <div class="page-body page-body-top readingCenter-right-body col-md-8 col-md-offset-2">
-        
+
         <!-- Latest Actions -->
         <div class="row">
             <div class="col-md-12">
                 <div><h4>最新活动</h4></div>
                 <div class="paragraph">
                     <div class="col-md-12">
-                        
+
                         <!-- Actions row -->
-                        <div class="row" 
+                        <div class="row"
                              ng-repeat="action in actionPageable.entities.content">
                             <div class="col-md-10">
                                 <a class="dark-blue-2"
@@ -24,14 +24,14 @@
                                 <p>{{ action.creationTime }}</p>
                             </div>
                         </div>
-                        
+
                         <!-- Place holder row copied from actions -->
                         <div class="row" ng-repeat="placeHolder in actionPageable.placeHolders.content">
                             <div class="col-md-10">
                                 <p>&nbsp;{{ placeHolder.title }}</p>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -44,14 +44,14 @@
                     <div class="col-xs-2"><div class="row">
                         <a ng-click="actionPageable.showPage(actionPageable.page - 1)">上一页</a>
                     </div></div>
-                    <div class="col-xs-1 custom-page-number-container" 
+                    <div class="col-xs-1 custom-page-number-container"
                          ng-repeat="pageNumber in actionPageable.pageNumbers.content">
-                        <a class="custom-page-number" 
-                           ng-class="{'custom-page-number-current': pageNumber === actionPageable.page}" 
+                        <a class="custom-page-number"
+                           ng-class="{'custom-page-number-current': pageNumber === actionPageable.page}"
                            ng-click="actionPageable.showPage(pageNumber)">
                             {{pageNumber}}
                         </a>
-                    </div>    
+                    </div>
                     <div class="col-xs-2">
                         <div class="row">
                             <a ng-click="actionPageable.showPage(actionPageable.page + 1)">下一页</a>
@@ -70,8 +70,8 @@
         </div>
 
     </div>
-        
-        
+
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

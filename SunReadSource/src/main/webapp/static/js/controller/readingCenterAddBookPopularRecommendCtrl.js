@@ -1,38 +1,64 @@
 //readingCenterAddBookPopularRecommendCtrl.js
 
-ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope','$scope', 'ConditionSearch','AddbookToShelf'
-        ,'WeeklyRecommendSearch','MonthlyRecommendSearch',function ($rootScope,$scope,ConditionSearch,AddbookToShelf,WeeklyRecommendSearch,MonthlyRecommendSearch) {
+ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope','$scope','$stateParams','Pageable', 'ConditionSearch','AddbookToShelf'
+        ,'WeeklyRecommendSearch','MonthlyRecommendSearch',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,AddbookToShelf,WeeklyRecommendSearch,MonthlyRecommendSearch) {
 	$scope.name='阅读中心->添加书籍->热门阅读';
 	
-    var pageSize = 4;
-    var searchTerm='isbn';
+    $scope.searchArguments = {
+        level:0,
+        category:0,
+        testType:0,
+        literature:0,
+        grade:0,
+        category:0,
+        language:0,
+        resource:0,
+        pointRange:0
+      
+    }
+
+    $scope.createPageable = function (searchEntity){
+        $scope.searchPageable = new Pageable();
+
+        $scope.searchPageable.size = 4;
+        $scope.searchPageable.page = 1;
+
+        $scope.searchPageable.arguments=$scope.searchArguments;
+        // Set the startPage and length of number page array
+        
+        $scope.searchPageable.pageNumbers.startPage = 1;
+        $scope.searchPageable.pageNumbers.content.length = 8;
+        // Set the placeholder elements
+        $scope.searchPageable.placeHolders.placeHoldersElement = {title: ""};
+
+        // Build the pageable object
+        $scope.searchPageable.build(searchEntity);
+        
+        $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
+        console.log($scope.searchPageable);
+    }
             
-    var level=0;
-    var category=0;
-    var testType=0;
-    var literature=0;
-    var grade=0;
-    var category=0; 
-    var language=0; 
-    var resource=0;
-    var pointRange=0;        
+    $scope.status = status;
+
+    $scope.search=function(){  
+        $scope.createPageable(ConditionSearch);
+    } 
     
-    $scope.level = level;
-    $scope.category = category;
-    $scope.testType = testType;
-    $scope.literature = literature;
-    $scope.grade = grade;
-    $scope.category = category;
-    $scope.language = language;
-    $scope.resource = resource;
-    $scope.pointRange = pointRange;
-   $scope.statuses_grade = [{
+    if($scope.status === 1){
+        $scope.search = $scope.searchWeekly;
+    }
+    if($scope.status === 2){
+        $scope.search = $scope.searchMonthly;
+    } 
+            
+    
+    $scope.statuses_grade = [{
         id: 0,
         name:"全部年级",
         callback: function(){$scope.search()}
     }, {
         id: 1,
-        name: "1年级", 
+        name: "1年级",
         callback: function(){$scope.search()}
     }, {
         id: 2,
@@ -40,7 +66,7 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
         callback: function(){$scope.search()}
     }, {
         id: 3,
-        name: "3年级", 
+        name: "3年级",
         callback: function(){$scope.search()}
     }, {
         id: 4,
@@ -50,8 +76,8 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
         id: 5,
         name: "5年级",
         callback: function(){$scope.search()}
-    }];        
-            
+    }];
+
     $scope.statuses_category = [{
         id: 0,
         name:"全部类型",
@@ -62,11 +88,11 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
         callback: function(){$scope.search()}
     }, {
         id: 2,
-        name: "类型二", 
+        name: "类型二",
         callback: function(){$scope.search()}
     }, {
         id: 3,
-        name: "类型三",        
+        name: "类型三",
         callback: function(){$scope.search()}
     }, {
         id: 4,
@@ -75,48 +101,16 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
     }, {
         id: 5,
         name: "类型五",
-        callback: function(){$scope.search()}        
-    }];        
-    $scope.selected_status = 0;       
-                    
-                    
-    $scope.recommendSearch=ConditionSearch.get({page:0,size:pageSize,level:level,category:category
-                            ,testType:testType,literature:literature,category:category
-                            ,grade:grade,language:language,resource:resource,pointRange:pointRange}
-      ,function(){
-        console.log($scope.recommendSearch)
-    });       
-            
-    $scope.search=function(){
-        $scope.recommendSearch=ConditionSearch.get({page:0,size:pageSize,level:level,category:category
-                                ,testType:testType,literature:literature,category:category
-                                ,grade:grade,language:language,resource:resource,pointRange:pointRange}
-          ,function(){
-            console.log($scope.recommendSearch)
-        });   
-    
-    };
+        callback: function(){$scope.search()}
+    }];
+    $scope.selected_status = 0;
             
 	$scope.searchWeekly = function(){
-        console.log(grade);
-        console.log($scope.testType)
-        console.log($scope.grade);
-        $scope.recommendSearch=WeeklyRecommendSearch.get({page:0,size:pageSize,level:$scope.level,category:$scope.category
-                                                ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-                                                ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:pointRange},function(){
-            console.log($scope.recommendSearch)
-        });       
+        $scope.createPageable(WeeklyRecommendSearch);
 	};
     
     $scope.searchMonthly = function(){
-        console.log(grade);
-        console.log($scope.testType)
-        console.log($scope.grade);
-        $scope.recommendSearch=MonthlyRecommendSearch.get({page:0,size:pageSize,level:$scope.level,category:$scope.category
-                                                ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-                                                ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:pointRange},function(){
-            console.log($scope.recommendSearch)
-        });       
+        $scope.createPageable(MonthlyRecommendSearch);
     };
             
     $scope.addBooktoShelf = function(terms){
