@@ -87,6 +87,15 @@ examServices.factory('ThinkExam',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
+		api.isReviewed = function(bookid, userid, callback, errorCallback){
+			$http.get(config.HOST + 'books/' + bookid + '/students/' + userid + '/isreviewed')
+			.success(function(data){
+				callback();
+			})
+			.error(function(data){
+				errorCallback();
+			});
+		}
 		return api;
 	}]);
 

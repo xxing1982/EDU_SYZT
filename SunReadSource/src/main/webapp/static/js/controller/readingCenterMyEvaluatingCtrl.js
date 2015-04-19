@@ -1,7 +1,7 @@
 //readingCenterMyEvaluatingCtrl.js
 
-ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'OneBookInShelf', 'AddReview',
-	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, OneBookInShelf, AddReview) {
+ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'AddReview',
+	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, AddReview) {
 		$scope.content = "";
 		$scope.title = "";
 		$scope.source = {};
@@ -10,11 +10,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		VerifyExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.verifyExams = data.examDTOs;
 			for(var i = 0; i < $scope.source.verifyExams.length; i++){
-				var index = i;
-				OneBookInShelf.get({id:$rootScope.id,bookId:data.examDTOs[index].bookId},function(dataDetail){
-					//TRUE 已认证
-					$scope.source.verifyExams[index].verify = dataDetail.readState;
-				});
+				//getReviewStatus(i, $scope.source.verifyExams);
 			}
 			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.count);
 		});
@@ -23,8 +19,13 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			$scope.source.wordExams = data.examDTOs;
 			for(var i = 0; i < $scope.source.wordExams.length; i++){
 				var index = i;
-				OneBookInShelf.get({id:$rootScope.id,bookId:data.examDTOs[index].bookId},function(dataDetail){
-					$scope.source.wordExams[index].verify = dataDetail.readState;
+				ThinkExam.isReviewed(data.examDTOs[index].bookId, $rootScope.id, 
+					function(){
+					//TRUE 已认证
+					$scope.source.wordExams[index].verify = true;
+				},
+				function(){
+					$scope.source.wordExams[index].verify = false;
 				});
 			}
 			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.count);
@@ -32,13 +33,6 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 
 		ThinkExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.thinkExams = data.examDTOs;
-			for(var i = 0; i < $scope.source.thinkExams.length; i++){
-				var index = i;
-				OneBookInShelf.get({id:$rootScope.id,bookId:data.examDTOs[index].bookId},function(dataDetail){
-					//TRUE 已认证
-					$scope.source.thinkExams[index].verify = dataDetail.readState;
-				});
-			}
 			$scope.thinkExams = $scope.source.thinkExams.slice(0, $scope.count);
 		});
 
@@ -77,13 +71,23 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.isCertification = true;
 
 		$scope.evaluate = function(){
-           var review = {};
-           review.studentId = $rootScope.id;
-           review.title = $scope.title;
-           review.content = $scope.content;
-           review.rate = 5;
-           AddReview.AddReview($scope.chooseBookId, review, function(data){
-           		
-           })
-       }
+			var review = {};
+			review.studentId = $rootScope.id;
+			review.title = $scope.title;
+			review.content = $scope.content;
+			review.rate = 5;
+			AddReview.AddReview($scope.chooseBookId, review, function(data){
+
+			})
+		}
+
+		function getReviewStatus(index, data){
+			VerifyExam.isReviewed(data[index].bookId, $rootScope.id, 
+				function(){					
+					$scope.source.verifyExams[index].verify = false;
+				},
+				function(){
+					$scope.source.verifyExams[index].verify = true;
+				});
+		}
 	}]);
