@@ -119,7 +119,7 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$rootScope','
         console.log(terms);
         var bookId = terms.id;
         var bookInShelf = {
-            bookAttribute: true,
+            bookAttribute: false,
             readState: false
             }
         console.log(bookInShelf);

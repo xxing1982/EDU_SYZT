@@ -1,5 +1,5 @@
-/* 
-    Pageable object work with page number, page nubmer input and 
+/*
+    Pageable object work with page number, page nubmer input and
     Spring pageable
 */
 var Pageable = function () {
@@ -21,16 +21,16 @@ Pageable.prototype.placeHolders = { placeHoldersElement: " " }
 
 // The build method to initlizate the pageable object
 Pageable.prototype.build = function(Entity){
-    
+
     // The resource and the entities
     this.Entity = Entity;
-    
+
     // Update the page number
     this.pageNumbers.update(this.pageNumbers.startPage);
-    
-    // Initlizate the entities 
+
+    // Initlizate the entities
     this.entities = {content: new Array(0)};
-    
+
     // Update the placeholders
     this.placeHolders.update(this.size);
 }
@@ -43,7 +43,7 @@ Pageable.prototype.pageNumbers.update = function(startPage){
     }
     this.startPage = startPage;
 }
-    
+
 // Fill placeholder content with placeholders elements
 Pageable.prototype.placeHolders.update = function(count){
     this.content = new Array(0);
@@ -54,10 +54,10 @@ Pageable.prototype.placeHolders.update = function(count){
 
 // Get entities by page
 Pageable.prototype.showPage = function(page, callback){
-    
+
     // Check the page
     if (typeof page === 'number' && page > 0){
-    
+
         // Make reference to this.entities and placeholder
         var entities = this.entities;
         var placeHolders = this.placeHolders;
@@ -65,11 +65,11 @@ Pageable.prototype.showPage = function(page, callback){
         var pageNumbers = this.pageNumbers;
         var pageable = this;
 
-        // Get entities 
+        // Get entities
         this.Entity.get($.extend({}, {size: this.size, page: page - 1}, this.arguments), function(data){
-
+            console.log("Entity");
             // Check the bounds of page
-            if (page > data.totalPages) {  
+            if (page > data.totalPages) {
                 pageable.showPage(data.totalPages);
             } else {
                 // Update the page of the pageable object
@@ -86,18 +86,18 @@ Pageable.prototype.showPage = function(page, callback){
                 var length = pageNumbers.content.length;
                 var endPage = pageNumbers.startPage + length - 1;
 
-                // Page is at the right side of page numbers 
-                if ( endPage <= page ){        
+                // Page is at the right side of page numbers
+                if ( endPage <= page ){
                     pageNumbers.update( page - length + 1 + (page !== data.totalPages) );
                 }
 
-                // Page is at the left side of page numbers 
-                else if ( page <= startPage){        
+                // Page is at the left side of page numbers
+                else if ( page <= startPage){
                     pageNumbers.update( page - 1 +  (page === 1));
                 }
             }
-            
-            // Call the callback 
+
+            // Call the callback
             if (callback !== undefined) { callback(); }
 
         });
@@ -110,7 +110,7 @@ Pageable.prototype.showPage = function(page, callback){
 */
 angular.module('pageableServices', []).
     factory('Pageable', function () {
-        
+
         // Dependency injection
         return Pageable;
     });

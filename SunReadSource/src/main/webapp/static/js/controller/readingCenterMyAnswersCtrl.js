@@ -9,7 +9,7 @@ ctrls.controller("readingCenterMyAnswersController", ['$scope', '$rootScope', 'T
 		for(var i = 0; i < model.length; i++){
 			if (i == 0) {
 				question.array = new Array();
-				question.type = model[i].questionType;
+				question.type = model[i].question.questionType;
 				question.array.push(model[i]);
 			}
 		}
