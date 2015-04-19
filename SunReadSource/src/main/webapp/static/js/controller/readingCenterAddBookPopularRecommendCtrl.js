@@ -1,7 +1,7 @@
 //readingCenterAddBookPopularRecommendCtrl.js
 
 ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope','$scope','$stateParams','Pageable', 'ConditionSearch','AddbookToShelf'
-        ,'WeeklyRecommendSearch','MonthlyRecommendSearch',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,AddbookToShelf,WeeklyRecommendSearch,MonthlyRecommendSearch) {
+        ,'WeeklyRecommendSearch','MonthlyRecommendSearch','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,AddbookToShelf,WeeklyRecommendSearch,MonthlyRecommendSearch,config) {
 	$scope.name='阅读中心->添加书籍->热门阅读';
 	
     $scope.searchArguments = {
@@ -123,4 +123,5 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
         console.log(bookInShelf);
         AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf);
     };
+$scope.imageServer = config.IMAGESERVER;
 }]);

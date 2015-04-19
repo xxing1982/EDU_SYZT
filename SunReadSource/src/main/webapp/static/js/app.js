@@ -64,7 +64,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         })
         //reading center -> myBookshelf -> add books -> advenced search
         .state('readingCenter.addBook.advanced', {
-            url: '/advanced',
+            url: '/advanced/:searchTerm',
             templateUrl: 'partials/readingCenterAddBookAdvancedSearch.html',
             controller: 'readingCenterAddBookAdvancedSearchController'
         })

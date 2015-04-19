@@ -149,6 +149,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
             $scope.imageServer = config.IMAGESERVER;
         });
     }
+    $scope.imageServer = config.IMAGESERVER;
 }]);
 
 

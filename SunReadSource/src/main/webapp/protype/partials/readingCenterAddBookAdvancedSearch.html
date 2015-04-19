@@ -4,18 +4,18 @@
     <div class="col-md-9 leftpart">
 
 	<div class="input-group search">
-		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchContent">
+		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
 		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
 	</div>
 
 	<div ng-repeat="terms in searchPageable.entities.content">
         <div class="row bookList" ng-init="terms.text_overflow=true;">
             <div class="col-md-3">
-                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img src="../static/img/book.jpg" class="img-responsive"></a>
+                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="img-responsive"></a>
             </div>
             <div class="col-md-9">
                 <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
-            <div class="row fsize12"><p>评分：{{terms.evaluationNum}}&nbsp;&nbsp;已有2087人阅读</p></div>
+            <div class="row fsize12"><p>评分：{{terms.evaluationNum}}&nbsp;&nbsp;已有<span class="red-text">{{terms.statistic.readNums}}</span>人阅读</p></div>
                 <div class="row fsize12"><p>作者：{{terms.author}}&nbsp;&nbsp;版权：{{terms.publisher}} &nbsp;&nbsp;
                     积分:{{terms.point}}&nbsp;&nbsp;等级:{{terms.extra.level}}&nbsp;&nbsp;财富：{{terms.coin}}</p></div>
                 <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
