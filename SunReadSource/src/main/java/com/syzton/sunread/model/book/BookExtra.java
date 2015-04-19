@@ -28,9 +28,9 @@ public class BookExtra extends AbstractEntity{
 
     private boolean hasVerifyTest;
 
-    private boolean hasWorldTest;
+    private boolean hasWordTest;
 
-    private boolean hasCapacityTest;
+    private boolean hasThinkTest;
 
     private boolean hasVideo;
 
@@ -63,20 +63,20 @@ public class BookExtra extends AbstractEntity{
         this.hasVerifyTest = hasVerifyTest;
     }
 
-    public boolean isHasWorldTest() {
-        return hasWorldTest;
+    public boolean isHasThinkTest() {
+        return hasThinkTest;
     }
 
-    public void setHasWorldTest(boolean hasWorldTest) {
-        this.hasWorldTest = hasWorldTest;
+    public void setHasThinkTest(boolean hasThinkTest) {
+        this.hasThinkTest = hasThinkTest;
     }
 
-    public boolean isHasCapacityTest() {
-        return hasCapacityTest;
+    public boolean isHasWordTest() {
+        return hasWordTest;
     }
 
-    public void setHasCapacityTest(boolean hasCapacityTest) {
-        this.hasCapacityTest = hasCapacityTest;
+    public void setHasWordTest(boolean hasWordTest) {
+        this.hasWordTest = hasWordTest;
     }
 
     public boolean isHasVideo() {

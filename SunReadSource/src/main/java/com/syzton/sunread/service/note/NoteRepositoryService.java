@@ -1,6 +1,5 @@
 package com.syzton.sunread.service.note;
 
-import static com.syzton.sunread.repository.book.predicates.BookPredicates.quickSearchContains;
 
 import java.util.List;
 
@@ -25,6 +24,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.syzton.sunread.repository.book.predicates.BookPredicates.quickSearchContains;
 
 
 /**
