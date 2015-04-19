@@ -75,6 +75,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
                                  TeacherRepository teacherRepository,
                                  TeacherClazzRepository teacherClazzRepository,
                                  SemesterRepository semesterRepository,
+                                 ClazzRepository clazzRepository,
                                  PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
@@ -82,6 +83,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         this.teacherRepository = teacherRepository;
         this.teacherClazzRepository = teacherClazzRepository;
         this.semesterRepository = semesterRepository;
+        this.clazzRepository = clazzRepository;
         this.passwordEncoder = passwordEncoder;
 
     }

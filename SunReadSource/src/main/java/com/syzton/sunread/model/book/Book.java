@@ -78,6 +78,8 @@ public class Book extends AbstractEntity{
 
     private int coin = DEFAULT_COIN;
 
+    private int avgRate;
+
     @Column(length = MAX_LENGTH_CATALOGUE)
     private String catalogue;
 
@@ -123,10 +125,13 @@ public class Book extends AbstractEntity{
     }
 
 
+    public int getAvgRate() {
+        return avgRate;
+    }
 
-
-
-
+    public void setAvgRate(int avgRate) {
+        this.avgRate = avgRate;
+    }
 
     public String getDescription() {
         return description;

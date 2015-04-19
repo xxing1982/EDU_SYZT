@@ -33,10 +33,10 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @RequestMapping(value = "/reviews", method = RequestMethod.POST)
+    @RequestMapping(value = "/books/{bookId}/reviews", method = RequestMethod.POST)
     @ResponseBody
-    public ReviewDTO add(@Valid @RequestBody ReviewDTO reviewDTO) {
-        Review review = reviewService.add(reviewDTO);
+    public ReviewDTO add(@PathVariable("bookId") long bookId,@Valid @RequestBody ReviewDTO reviewDTO) {
+        Review review = reviewService.add(reviewDTO,bookId);
         return review.createDTO(review);
     }
 

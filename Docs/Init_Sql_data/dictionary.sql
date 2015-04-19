@@ -44,3 +44,6 @@ INSERT INTO sunreading.dictionary (id, creation_time, description, name, type, v
 INSERT INTO sunreading.dictionary (id, creation_time, description, name, type, value) VALUES (44, '2015-04-15 16:58:23', '往哲先贤', '往哲先贤', 'CATEGORY', 16);
 INSERT INTO sunreading.dictionary (id, creation_time, description, name, type, value) VALUES (45, '2015-04-15 16:58:23', '社区小卫士', '社区小卫士', 'CATEGORY', 17);
 INSERT INTO sunreading.dictionary (id, creation_time, description, name, type, value) VALUES (46, '2015-04-15 16:58:23', '生命斑马线', '生命斑马线', 'CATEGORY', 18);
+INSERT INTO sunreading.dictionary (id, creation_time, description, name, type, value) VALUES (47, '2015-04-15 16:58:23', '六年级', '七年级', 'GRADE', 7);
+INSERT INTO sunreading.dictionary (id, creation_time, description, name, type, value) VALUES (48, '2015-04-15 16:58:23', '六年级', '八年级', 'GRADE', 8);
+INSERT INTO sunreading.dictionary (id, creation_time, description, name, type, value) VALUES (49, '2015-04-15 16:58:23', '六年级', '九年级', 'GRADE', 9);

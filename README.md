@@ -15,9 +15,15 @@
 * DB Password: 			sunreading2015
 
 # FTP server
-* Server Access URL:    123.57.139.159
-* User Name:            Syzton2015
-* Password: 		    Syzton2015
+* Server Access URL:   182.92.238.68
+* Port: 21
+* User Name:           syzt
+* Password:                 syzt2015
+* 
+* Path for books cover image：/pic/bookscover/
+* Path for user image： /pic/userImages/
+* Path for user note image： /pic/notes
+* Path for readingsea image： /pic/readingSea
 
 # Images PSD server:
 * Server Path: 			http://pan.baidu.com/s/1jGBZiM6

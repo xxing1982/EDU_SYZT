@@ -35,6 +35,7 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
 
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";
     private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
+    private static final String DEFAULT_ENCODING = "UTF-8";
     private static final long MAX_UPLOAD_FILE_SIZE = 200000;
 
     @Override
@@ -84,6 +85,7 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
     public CommonsMultipartResolver multipartResolver(){
     	CommonsMultipartResolver muliMultipartResolver = new CommonsMultipartResolver();
     	muliMultipartResolver.setMaxUploadSize(MAX_UPLOAD_FILE_SIZE);
+        muliMultipartResolver.setDefaultEncoding(DEFAULT_ENCODING);
     	return muliMultipartResolver;
     }
     

@@ -2,11 +2,13 @@ package com.syzton.sunread.service.book;
 
 import com.syzton.sunread.dto.book.ReviewDTO;
 import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.Review;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.ReviewRepository;
-import javassist.NotFoundException;
+import com.syzton.sunread.repository.user.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +24,22 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReviewRepositoryService implements ReviewService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReviewRepositoryService.class);
-    @Autowired
     private ReviewRepository reviewRepository;
-    @Autowired
+
     private BookRepository bookRepository;
 
-    public void setBookRepository(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    private StudentRepository studentRepository;
 
-    public void setReviewRepository(ReviewRepository reviewRepository) {
+    @Autowired
+    public ReviewRepositoryService(ReviewRepository reviewRepository, BookRepository bookRepository, StudentRepository studentRepository) {
         this.reviewRepository = reviewRepository;
+        this.bookRepository = bookRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
     @Override
-    public Review findById(Long id) throws NotFoundException {
+    public Review findById(Long id) {
 
         Review found = reviewRepository.findOne(id);
 
@@ -47,15 +49,32 @@ public class ReviewRepositoryService implements ReviewService {
 
         return found;
     }
-    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+    @Transactional
     @Override
-    public Review add(ReviewDTO reviewDTO) {
+    public Review add(ReviewDTO reviewDTO,long bookId) {
 
-        Book book = bookRepository.findOne(reviewDTO.getBookId());
+        Book book = bookRepository.findOne(bookId);
 
-        Review review = Review.getBuilder(reviewDTO.getStudentId(),reviewDTO.getContent()).book(book).build();
+        if(book == null){
+            throw new NotFoundException(" book with id ="+bookId +" not found...");
+        }
+        Student student = studentRepository.findOne(reviewDTO.getStudentId());
+        if(student == null){
+            throw new NotFoundException(" student with id = "+reviewDTO.getStudentId() +" not found...");
+        }
 
-        return reviewRepository.save(review);
+        Review review = Review.getBuilder(reviewDTO.getStudentId(),reviewDTO.getTitle(),reviewDTO.getContent(),student.getUsername()).book(book).rate(reviewDTO.getRate()).build();
+
+        Review added = reviewRepository.save(review);
+
+        Number avgRate = reviewRepository.countReviewByBook(book);
+
+        book.setAvgRate(avgRate.intValue());
+
+        bookRepository.save(book);
+
+
+        return added;
     }
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override

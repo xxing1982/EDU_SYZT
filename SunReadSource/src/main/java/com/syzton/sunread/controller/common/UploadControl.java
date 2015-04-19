@@ -100,7 +100,8 @@ public class UploadControl {
 	public String bookPicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
 		long prefix = Calendar.getInstance().getTimeInMillis();
-		String fileName = prefix + myfile.getOriginalFilename();
+		String originalFileName = new String(myfile.getOriginalFilename().getBytes("iso-8859-1"),"utf-8");
+		String fileName = prefix + originalFileName;
 		String ftpPath = "/pic/bookscover/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
