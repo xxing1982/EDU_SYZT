@@ -33,6 +33,8 @@ public class UploadControl {
 	
 	private SecurityContextUtil securityUtil;
 	
+	private String ftpPrefix = "/pic";
+	
 	@Autowired
 	public UploadControl(SecurityContextUtil securityUtil) {
 		this.securityUtil = securityUtil;
@@ -42,8 +44,12 @@ public class UploadControl {
 	@ResponseBody
 	public String notePicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws IOException {
-		long prefix = Calendar.getInstance().getTimeInMillis();
-		String fileName = prefix + myfile.getOriginalFilename();
+		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		int index = myfile.getOriginalFilename().lastIndexOf(".");
+		String suffix = "";
+		if(index!=-1){
+			suffix = myfile.getOriginalFilename().substring(index); 
+		}
 		String ftpPath = "/notes/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
@@ -51,86 +57,95 @@ public class UploadControl {
 
 			String realPath = request.getSession().getServletContext()
 					.getRealPath("/upload/note");
-			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-					realPath, prefix + myfile.getOriginalFilename()));
+//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
+//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName, ftpPath + fileName);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
 			}
 		}
 
-		return ftpPath + fileName;
+		return ftpPath + prefix + suffix;
 	}
 
 	@RequestMapping(value = "/api/upload/usericon", method = RequestMethod.POST)
 	@ResponseBody
 	public String userPicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		long prefix = Calendar.getInstance().getTimeInMillis();
-		String fileName = prefix + myfile.getOriginalFilename();
+		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		int index = myfile.getOriginalFilename().lastIndexOf(".");
+		String suffix = "";
+		if(index!=-1){
+			suffix = myfile.getOriginalFilename().substring(index); 
+		}
 		String ftpPath = "/userImages/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
+
 			String realPath = request.getSession().getServletContext()
-					.getRealPath("/upload/usericon");
-			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-					realPath, prefix + myfile.getOriginalFilename()));
+					.getRealPath("/upload/note");
+//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
+//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName, ftpPath + fileName);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
 			}
 		}
 
-		return ftpPath + fileName;
+		return ftpPath + prefix + suffix;
 	}
 
 	@RequestMapping(value = "/api/upload/bookpic", method = RequestMethod.POST)
 	@ResponseBody
 	public String bookPicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		long prefix = Calendar.getInstance().getTimeInMillis();
-		String originalFileName = new String(myfile.getOriginalFilename().getBytes("iso-8859-1"),"utf-8");
-		String fileName = prefix + originalFileName;
+		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		int index = myfile.getOriginalFilename().lastIndexOf(".");
+		String suffix = "";
+		if(index!=-1){
+			suffix = myfile.getOriginalFilename().substring(index); 
+		}
 		String ftpPath = "/bookscover/";
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
+
 			String realPath = request.getSession().getServletContext()
-					.getRealPath("/upload/bookpic");
-
-			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-					realPath, prefix + myfile.getOriginalFilename()));
-
+					.getRealPath("/upload/note");
+//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
+//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(realPath + "/" + fileName, ftpPath + fileName);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
 			}
 		}
-		return ftpPath + fileName;
+
+		return ftpPath + prefix + suffix;
 	}
 
 	@RequestMapping(value = "/api/upload/excel/book", method = RequestMethod.POST)
 	@ResponseBody
 	public String bookExcelUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		
+		LOGGER.debug(request.getCharacterEncoding());
 		String fileName = myfile.getOriginalFilename();
+		
 
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");

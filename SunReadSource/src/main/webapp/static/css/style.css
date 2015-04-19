@@ -454,11 +454,17 @@ a:focus, input:focus
 .book-row-right .book-thumbnail
 {
     margin-top: 10px;
+    height: 55px;
 }
 
 .book-row-right .book-thumbnail div
 {
     margin-right: 15px;
+    width:50px;
+    height:50px;
+    background-position: 50% 50%;
+    background-repeat:  no-repeat;
+    background-size: 100%;
 }
 
 .book-row-right .msg

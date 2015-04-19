@@ -4,7 +4,7 @@ var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userS
                                              ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','oneBookInShelfServices'
                                              ,'weeklyHotServices','monthlyHotServices','weeklyRecommendServices','monthlyRecommendServices'
-                                             , 'campusServices', 'actionServices', 'pageableServices', 'hotclazzServices', 'hotreaderServices']);
+                                             , 'campusServices', 'actionServices', 'pageableServices', 'hotclazzServices', 'hotreaderServices', 'dropzoneServices']);
 ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader',
   function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader) {
     //$rootScope.id = 2;

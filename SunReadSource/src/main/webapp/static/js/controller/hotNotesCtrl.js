@@ -1,7 +1,7 @@
 //hotNotesCtrl.js
 
-ctrls.controller("hotNotesController", ['$scope', 'NoteView',
-    function($scope, NoteView){
+ctrls.controller("hotNotesController", ['$scope', 'NoteView', 'config',
+    function($scope, NoteView, config){
     
 
         
@@ -18,4 +18,7 @@ ctrls.controller("hotNotesController", ['$scope', 'NoteView',
     
     // List all the Notes
     $scope.search();
+        
+    // Get the image server
+    $scope.imageServer = config.IMAGESERVER;
 }]);
