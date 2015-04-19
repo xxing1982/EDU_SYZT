@@ -6,7 +6,7 @@
 angular.module('dropzoneServices', [])
     .factory('Dropzone', function(){
         
-        return function(noteTake, url){
+        return function(imageParent, url){
             
             // Image uploader
             return new Dropzone("div#image-uploader", {
@@ -32,7 +32,7 @@ angular.module('dropzoneServices', [])
                 dictMaxFilesExceeded: "You can not upload any more files.",
                 dictRemoveFile: "",
                 success:  function(data){
-                    noteTake.image = data.xhr.responseText;
+                    imageParent.image = data.xhr.responseText;
                 }
             });
         };

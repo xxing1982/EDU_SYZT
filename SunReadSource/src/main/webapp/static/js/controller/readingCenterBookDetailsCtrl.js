@@ -71,7 +71,7 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
 
 
         // Image uploader
-        $scope.dropzone = Dropzone($scope.noteTake, config.);
+        $scope.dropzone = Dropzone($scope.noteTake, config.NOTEPIC);
 
         // Get the image server
         $scope.imageServer = config.IMAGESERVER;

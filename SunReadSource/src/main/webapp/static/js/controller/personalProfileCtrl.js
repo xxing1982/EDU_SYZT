@@ -1,6 +1,6 @@
 //personalProfile.js
 
-ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', function ($rootScope, $scope, User) {
+ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', 'Dropzone',  function ($rootScope, $scope, User, Dropzone) {
     
     // Basic information
     $scope.basicInformation = new Object();
@@ -46,5 +46,8 @@ ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', f
         }
         editObj.editable = !editObj.editable ;
     }
+    
+    // Update the avatar
+    
     
 }]);

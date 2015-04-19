@@ -1,7 +1,7 @@
 //readingCenterMyBookshelfCtrl.js
 
 ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','BookshelfView',
-    'Bookshelf','BookInShelf','DropBookFromShelf', 'NoteTake', 'BookDetail', 'Dropzone', function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf,NoteTake, BookDetail, Dropzone) {
+    'Bookshelf','BookInShelf','DropBookFromShelf', 'NoteTake', 'BookDetail', 'Dropzone', 'config', function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf,NoteTake, BookDetail, Dropzone, config) {
 	$scope.name='阅读中心->我的书架';
         
         
@@ -139,6 +139,12 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
 
             // Initlizate the note entity
             $scope.noteTake = new NoteTake(bookDetail);
+            
+            // Image uploader
+            $scope.dropzone = Dropzone($scope.noteTake, config.NOTEPIC);
+
+            // Get the image server
+            $scope.imageServer = config.IMAGESERVER;
         });
     }
 }]);
