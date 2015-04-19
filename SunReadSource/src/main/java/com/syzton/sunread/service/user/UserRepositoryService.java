@@ -1,23 +1,18 @@
 package com.syzton.sunread.service.user;
 
-import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.exception.common.AuthenticationException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
 import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.SemesterRepository;
-import com.syzton.sunread.repository.bookshelf.BookshelfRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.*;
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +29,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.SimpleFormatter;
 
 import static org.springframework.util.Assert.notNull;
 
@@ -149,11 +142,19 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         if(userExtraDTO.getPassword()!=null && !"".equals(userExtraDTO.getPassword())){
             user.setPassword(encodePassword(userExtraDTO.getPassword().trim()));
         }else{
-            user.setEmail(userExtraDTO.getEmail());
-            user.setPhoneNumber(userExtraDTO.getPhoneNumber());
-            user.setQqId(userExtraDTO.getQqId());
-            user.setWechatId(userExtraDTO.getWechatId());
-            user.setNickname(userExtraDTO.getNickname());
+            if(userExtraDTO.getEmail()!=null && !"".equals(userExtraDTO.getEmail()))
+                user.setEmail(userExtraDTO.getEmail());
+            if(userExtraDTO.getPhoneNumber()!=null && !"".equals(userExtraDTO.getPhoneNumber()))
+                user.setPhoneNumber(userExtraDTO.getPhoneNumber());
+            if(userExtraDTO.getQqId()!=null && !"".equals(userExtraDTO.getQqId()))
+                user.setQqId(userExtraDTO.getQqId());
+            if(userExtraDTO.getWechatId() !=null && !"".equals(userExtraDTO.getWechatId()))
+                user.setWechatId(userExtraDTO.getWechatId());
+            if(userExtraDTO.getNickname()!=null && !"".equals(userExtraDTO.getNickname()))
+                user.setNickname(userExtraDTO.getNickname());
+            if(userExtraDTO.getPicture()!=null && !"".equals(userExtraDTO.getPicture())){
+                user.setPicture(userExtraDTO.getPicture());
+            }
 
         }
 
