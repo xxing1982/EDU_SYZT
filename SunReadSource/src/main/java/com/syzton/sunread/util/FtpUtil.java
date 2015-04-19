@@ -77,7 +77,7 @@ public class FtpUtil {
             if (ftpClient != null) {  
                 ftpClient.logout();  
                 ftpClient.disconnect();  
-            }  
+            }
         } catch (IOException e) {  
             e.printStackTrace();  
         }  

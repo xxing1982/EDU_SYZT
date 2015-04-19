@@ -16,6 +16,7 @@ public interface ReviewService {
 
     Review deleteById(Long id);
 
+    boolean isReviewed(long studentId,long bookId);
 
     Page<Review> findByBookId(Pageable pageable, long bookId);
 }
