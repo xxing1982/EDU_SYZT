@@ -1,9 +1,11 @@
 //readingCenterMyEvaluatingCtrl.js
 
-ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'AddReview',
-	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, AddReview) {
+ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'AddReview', 'config',
+	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, AddReview, config) {
 		$scope.content = "";
 		$scope.title = "";
+		$scope.rate = 0;
+		$scope.imageServer = config.IMAGESERVER;
 		$scope.source = {};
 		$scope.countVerifyExam = 3;
 		$scope.countWordExam = 3;
@@ -20,7 +22,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		});
 
 		ThinkExam.getAllInfo($rootScope.id, function(data){
-			$scope.source.thinkExams = data.examDTOs;
+			$scope.source.thinkExams = data.examDTOs;//pictureUrl
 			$scope.thinkExams = $scope.source.thinkExams.slice(0, $scope.countThinkExam);
 		});
 
@@ -71,7 +73,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			review.studentId = $rootScope.id;
 			review.title = $scope.title;
 			review.content = $scope.content;
-			review.rate = 5;
+			review.rate = $scope.rate;
 			AddReview.AddReview($scope.chooseBookId, review, function(data){
 				window.location.href = '/protype/index.html#/readingCenter/myEvaluating';
 			})
