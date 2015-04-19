@@ -1,7 +1,7 @@
 //readingCenterTestSuccessCtrl.js
 
-ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 'BookDetail', 'Review', 
-  function ($scope, $rootScope, BookDetail, Review) {
+ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 'BookDetail', 'Review', 'AddReview',
+  function ($scope, $rootScope, BookDetail, Review, AddReview) {
     $scope.name = $rootScope.exam.bookName;
     $scope.score = $rootScope.exam.score;
     $scope.content = "";
@@ -20,7 +20,7 @@ ctrls.controller("readingCenterTestSuccessController", ['$scope', '$rootScope', 
       review.title = $scope.title;
       review.content = $scope.content;
       review.rate = $scope.rate;
-      AddReview.AddReview($scope.chooseBookId, review, function(data){
+      AddReview.AddReview($rootScope.exam.bookId, review, function(data){
         window.location.href = $rootScope.exam.returnURL;
       })
    }

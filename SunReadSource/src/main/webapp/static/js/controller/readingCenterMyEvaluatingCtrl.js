@@ -75,7 +75,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			review.content = $scope.content;
 			review.rate = $scope.rate;
 			AddReview.AddReview($scope.chooseBookId, review, function(data){
-				window.location.href = '/protype/index.html#/readingCenter/myEvaluating';
+				 location.reload();
 			})
 		}
 	}]);
