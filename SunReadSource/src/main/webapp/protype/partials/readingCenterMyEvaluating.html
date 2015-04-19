@@ -16,7 +16,7 @@
 					<div class="col-md-5 value">
 						财富值：{{item.coin}}&nbsp;&nbsp;&nbsp;&nbsp;
 						积分：{{item.point}}&nbsp;&nbsp;&nbsp;&nbsp;
-						正确率：{{100*item.passCount/item.questionNum}}%
+						正确率：{{item.examScore}}%
 					</div>
 					<div class="col-md-1 value">
 						<a ng-click="chooseBook(item.id)" data-toggle="modal" data-target="#exam-evaluation-model" ng-hide="item.verify">评价</a>
@@ -30,9 +30,7 @@
 					<div class="col-md-1"><img src="../static/img/book.jpg" class="img-responsive"></div>
 					<div class="col-md-2 name">{{item.name}}</div>
 					<div class="col-md-5 value">
-						财富值：{{item.coin}}&nbsp;&nbsp;&nbsp;&nbsp;
-						积分：{{item.point}}&nbsp;&nbsp;&nbsp;&nbsp;
-						正确率：{{100*item.passCount/item.questionNum}}%
+						正确率：{{item.examScore}}%
 					</div>
 					<div class="col-md-1 value">
 						<a ng-click="chooseBook(item.id)" data-toggle="modal" data-target="#exam-evaluation-model"  ng-hide="item.verify">评价</a>

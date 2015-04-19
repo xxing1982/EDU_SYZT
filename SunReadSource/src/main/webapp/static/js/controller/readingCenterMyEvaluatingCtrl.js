@@ -78,12 +78,12 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 
 		$scope.evaluate = function(){
            var review = {};
-           review.bookId = $scope.chooseBookId;
+           review.studentId = $rootScope.id;
            review.title = $scope.title;
            review.content = $scope.content;
            review.rate = 5;
-           AddReview.AddReview(review.bookId, review, function(data){
-           		console.log(data);
+           AddReview.AddReview($scope.chooseBookId, review, function(data){
+           		
            })
        }
 	}]);
