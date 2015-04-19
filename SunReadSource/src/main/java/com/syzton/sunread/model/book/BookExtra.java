@@ -16,19 +16,27 @@ public class BookExtra extends AbstractEntity{
 
     private int level;
 
-    private int testType;
-
     private int literature;
 
     private int language;
-
-    private int resource;
 
     private int grade;
 
     private int category;
 
     private int ageRange;
+
+    private boolean hasVerifyTest;
+
+    private boolean hasWorldTest;
+
+    private boolean hasCapacityTest;
+
+    private boolean hasVideo;
+
+    private boolean hasRadio;
+
+    private boolean hasEbook;
 
     @Transient
     private int pointRange;
@@ -46,6 +54,54 @@ public class BookExtra extends AbstractEntity{
 //    )
 //    private Set<Category> categories = new HashSet<>();
 
+
+    public boolean isHasVerifyTest() {
+        return hasVerifyTest;
+    }
+
+    public void setHasVerifyTest(boolean hasVerifyTest) {
+        this.hasVerifyTest = hasVerifyTest;
+    }
+
+    public boolean isHasWorldTest() {
+        return hasWorldTest;
+    }
+
+    public void setHasWorldTest(boolean hasWorldTest) {
+        this.hasWorldTest = hasWorldTest;
+    }
+
+    public boolean isHasCapacityTest() {
+        return hasCapacityTest;
+    }
+
+    public void setHasCapacityTest(boolean hasCapacityTest) {
+        this.hasCapacityTest = hasCapacityTest;
+    }
+
+    public boolean isHasVideo() {
+        return hasVideo;
+    }
+
+    public void setHasVideo(boolean hasVideo) {
+        this.hasVideo = hasVideo;
+    }
+
+    public boolean isHasRadio() {
+        return hasRadio;
+    }
+
+    public void setHasRadio(boolean hasRadio) {
+        this.hasRadio = hasRadio;
+    }
+
+    public boolean isHasEbook() {
+        return hasEbook;
+    }
+
+    public void setHasEbook(boolean hasEbook) {
+        this.hasEbook = hasEbook;
+    }
 
     public int getGrade() {
         return grade;
@@ -79,14 +135,6 @@ public class BookExtra extends AbstractEntity{
         this.level = level;
     }
 
-    public int getTestType() {
-        return testType;
-    }
-
-    public void setTestType(int testType) {
-        this.testType = testType;
-    }
-
     public int getLiterature() {
         return literature;
     }
@@ -101,14 +149,6 @@ public class BookExtra extends AbstractEntity{
 
     public void setLanguage(int language) {
         this.language = language;
-    }
-
-    public int getResource() {
-        return resource;
-    }
-
-    public void setResource(int resource) {
-        this.resource = resource;
     }
 
     public int getPointRange() {

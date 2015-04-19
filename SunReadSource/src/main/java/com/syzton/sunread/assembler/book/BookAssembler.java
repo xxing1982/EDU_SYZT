@@ -64,7 +64,6 @@ public class BookAssembler {
         extra.setLanguage(bookExtraDTO.getLanguage());
         extra.setLevel(bookExtraDTO.getLevel());
         extra.setLiterature(bookExtraDTO.getLiterature());
-        extra.setTestType(bookExtraDTO.getTestType());
         extra.setGrade(bookExtraDTO.getGrade());
         extra.setCategory(bookExtraDTO.getCategory());
         extra.setAgeRange(bookExtraDTO.getAgeRange());
