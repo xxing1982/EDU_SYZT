@@ -47,14 +47,13 @@ ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', '
         editObj.editable = !editObj.editable ;
     }
     
-    // Update the avatar
-    $scope.updateAvatar = function(){
-        
-        // Image uploader
-        $scope.dropzone = Dropzone($scope.noteTake, config.USERICON);
 
-        // Get the image server
-        $scope.imageServer = config.IMAGESERVER;
-    }
+    // Image uploader
+    $scope.dropzone = Dropzone(config.USERICON, function(){
+    
+    });
+
+    // Get the image server
+    $scope.imageServer = config.IMAGESERVER;
     
 }]);
