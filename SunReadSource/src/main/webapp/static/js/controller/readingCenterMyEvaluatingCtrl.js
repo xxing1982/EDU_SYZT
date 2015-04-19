@@ -1,7 +1,7 @@
 //readingCenterMyEvaluatingCtrl.js
 
-ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'OneBookInShelf', 'Review',
-	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, OneBookInShelf, Review) {
+ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope', 'VerifyExam', 'WordExam', 'ThinkExam', 'OneBookInShelf', 'AddReview',
+	function ($scope, $rootScope, VerifyExam, WordExam, ThinkExam, OneBookInShelf, AddReview) {
 		$scope.content = "";
 		$scope.title = "";
 		$scope.source = {};
@@ -77,12 +77,13 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.isCertification = true;
 
 		$scope.evaluate = function(){
-           var review = new Review();
+           var review = {};
            review.bookId = $scope.chooseBookId;
            review.title = $scope.title;
            review.content = $scope.content;
-           review.$save(function(dataSave){
-              console.log(dataSave);
-           });
+           review.rate = 5;
+           AddReview.AddReview(review.bookId, review, function(data){
+           		console.log(data);
+           })
        }
 	}]);
