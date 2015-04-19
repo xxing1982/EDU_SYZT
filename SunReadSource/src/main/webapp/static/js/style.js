@@ -1,5 +1,8 @@
 $(document).ready(function(){
 	TopNav();
+	$("a").on("click", function(){
+		setTopNav();
+	});
 });
 
 //top navigate event
