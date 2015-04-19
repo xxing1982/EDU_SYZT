@@ -20,7 +20,7 @@ var NoteTake = function(bookDetails){
 NoteTake.prototype.send = function(){
 
     // Create a note entity from input 
-    var note = {title: this.title, content: this.content};
+    var note = {title: this.title, content: this.content, image: this.image};
 
     // POST the note by the note service with book id
     this.Note.save({by: "books", id: this.id}, note);
