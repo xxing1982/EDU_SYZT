@@ -5,8 +5,8 @@ var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userS
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','oneBookInShelfServices'
                                              ,'weeklyHotServices','monthlyHotServices','weeklyRecommendServices','monthlyRecommendServices'
                                              , 'campusServices', 'actionServices', 'pageableServices','loadableServices','hotclazzServices', 'hotreaderServices', 'dropzoneServices']);
-ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader',
-  function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader) {
+ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader', 'config',
+  function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader, config) {
     //$rootScope.id = 2;
     //get userid
     $rootScope.id = sessionStorage.getItem("userId");
@@ -14,6 +14,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     //student info
     Student.get({id : $rootScope.id} ,function(data){
+      data.picture = data.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + data.picture;
       $scope.userInfo = data;
       $rootScope.student = data;
       // Create a classes entitiy
@@ -46,9 +47,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     //bookshelf
     Bookshelf.get({id : $rootScope.id}, function(data){
       $scope.bookshelf = data;
-
-        //todo
-        //目标完成率
+      $scope.bookshelf.finishStatus = 100 * data.readMust / (data.readMust + data.unreadMust);
       })
 
     //testing
@@ -60,6 +59,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     Note.get({by: "users", id: $rootScope.id,  page: 0, size: 4, direction: "DESC", sortBy: "creationTime"},
       function(data){
         $scope.notes = data.content;
+        $scope.bookPictureUrl = $scope.bookPictureUrl === ""? "../static/img/book.jpg" : config.BOOKPIC + data.picture;
       })
 
     //hot note
@@ -73,7 +73,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 ctrls.filter('formatImg', function(){
   return function(input){
     if (input == undefined || input == "") {
-      return "../static/img/picture.jpg";
+      return "../static/img/myBookshelf/addPhoto.png";
     };
     return input;
   }
