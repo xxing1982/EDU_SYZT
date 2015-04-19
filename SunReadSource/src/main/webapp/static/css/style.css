@@ -83,7 +83,6 @@ a:focus, input:focus
 {
     margin-top: 10px;
     font-size: 14px;
-    color: ;
 }
 
 .index-head-info-text:first-child
@@ -762,6 +761,7 @@ a:focus, input:focus
 .readingCenter-right-body .otherAnswer .lists .list
 {
     margin-bottom: 15px;
+    word-break: break-all;
 }
 
 .readingCenter-right-body .thinkingTest .analysis .list .theme,
@@ -789,6 +789,7 @@ a:focus, input:focus
 .readingCenter-right-body .otherAnswer
 {
     color: #2F5682;
+    border-bottom: 1px solid #D6DEE6;
 }
 
 .readingCenter-right-body .otherAnswer .title
