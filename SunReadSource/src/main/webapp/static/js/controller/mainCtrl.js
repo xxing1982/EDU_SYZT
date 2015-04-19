@@ -14,7 +14,8 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     //student info
     Student.get({id : $rootScope.id} ,function(data){
-      data.picture = data.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + data.picture;
+        $scope.picture = {};
+      $scope.picture.current = data.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + data.picture;
       $scope.userInfo = data;
       $rootScope.student = data;
       // Create a classes entitiy

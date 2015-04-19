@@ -16,10 +16,10 @@ conditionSearchServices.factory('ConditionSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource("/api/books/conditions?page=:page&size=:size&sortBy=id"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
-                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
+                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange&searchTerm=:searchTerm",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
-                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
+                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange',searchTerm:'@_searchTerm'},
                         {}
         );
 	}]);
@@ -57,7 +57,7 @@ monthlyHotServices.factory('MonthlyHotSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource("/api/books/conditions/monthlyhot?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
-                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
+                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange&searchTerm=:searchTerm",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
                          ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},

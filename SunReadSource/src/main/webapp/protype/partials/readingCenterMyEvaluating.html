@@ -19,8 +19,10 @@
 						正确率：{{item.examScore}}%
 					</div>
 					<div class="col-md-1 value">
-						<a ng-click="chooseBook(item.id)" data-toggle="modal" data-target="#exam-evaluation-model" ng-hide="item.comment">评价</a>
+					<div ng-show="item.pass">
+						<a ng-click="chooseBook(item.bookId)" data-toggle="modal" data-target="#exam-evaluation-model" ng-hide="item.comment">评价</a>
 						<p ng-show="item.comment">已评</p>
+						</div>
 					</div>
 					<div class="col-md-3 value">测试时间：{{item.creationTime}}</div>
 				</div>

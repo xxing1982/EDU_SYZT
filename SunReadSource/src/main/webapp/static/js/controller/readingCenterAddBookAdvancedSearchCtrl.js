@@ -1,9 +1,9 @@
 //readingCenterAddBookAdvancedSearchCtrl.jsc
 ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$rootScope','$stateParams','Pageable',
-        'ConditionSearch','QuickSearch','AddbookToShelf',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,AddbookToShelf) {
+        'ConditionSearch','QuickSearch','AddbookToShelf','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,AddbookToShelf,config) {
 
 
-    var searchContent="";
+//    $scope.searchContent="";
 
     var pageSize = 4;
     var searchTerm='isbn';
@@ -17,11 +17,11 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         category:0,
         language:0,
         resource:0,
-        pointRange:0
-      
-    }
+        pointRange:0,
+        searchTerm:""
+      }
     
-    $scope.searchContent = searchContent;
+//    $scope.searchContent = searchContent;
     $scope.statuses_grade = [{
         id: 0,
         name:"全部年级",
@@ -83,6 +83,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
         $scope.searchPageable.arguments=$scope.searchArguments;
         // Set the startPage and length of number page array
+        console.log($scope.searchArguments);
         
         $scope.searchPageable.pageNumbers.startPage = 1;
         $scope.searchPageable.pageNumbers.content.length = 8;
@@ -100,11 +101,12 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
     $scope.searchByName=function(searchContent){
         console.log(searchContent);
-        $scope.advancedSearch=QuickSearch.get({page:0,size:pageSize,searchTerm:searchContent}
-                                             ,function(){
-            console.log($scope.advancedSearch);
-            console.log($scope.searchContent);
-        })
+//        $scope.advancedSearch=QuickSearch.get({page:0,size:pageSize,searchTerm:searchContent}
+//                                             ,function(){
+//            console.log($scope.advancedSearch);
+//            console.log($scope.searchContent);
+//        })
+        $scope.createPageable();
 
     };
 
@@ -132,7 +134,11 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         }
     };
 
-
-
+if($stateParams.searchTerm!== ""){
+     $scope.searchByName($stateParams.searchTerm);
+     $scope.searchArguments.searchTerm = $stateParams.searchTerm;
+}
+$("#advanceSearchTab div")[0].click();
+$scope.imageServer = config.IMAGESERVER;
 
 }]);

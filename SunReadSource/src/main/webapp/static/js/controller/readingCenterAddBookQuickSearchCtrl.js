@@ -1,6 +1,6 @@
 //readingCenterAddBookQuickSearchCtrl.js
 
-ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$scope','AddbookToShelf','WeeklyHotSearch', 'WeeklyRecommendSearch',function ($rootScope,$scope,AddbookToShelf,WeeklyHotSearch,WeeklyRecommendSearch) {
+ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$scope','AddbookToShelf','WeeklyHotSearch', 'WeeklyRecommendSearch','config',function ($rootScope,$scope,AddbookToShelf,WeeklyHotSearch,WeeklyRecommendSearch,config) {
 	$scope.name='阅读中心->添加书籍->快速查找';
     
     var pageSize = 3;
@@ -47,4 +47,8 @@ ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$sc
         AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf);
     };
     
+    $scope.searchToAdvance=function(searchContent){
+        window.location.href="#readingCenter/addBook/advanced/"+searchContent;
+    }
+$scope.imageServer = config.IMAGESERVER;
 }]);

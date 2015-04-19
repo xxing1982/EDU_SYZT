@@ -85,4 +85,5 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
     $scope.hots=WeeklyHotSearch.get({page:0,size:5,level:0,testType:0,literature:0,category:0
                                         ,grade:0,language:0,resource:0,pointRange:0},function(){
         }); 
+    $scope.imageServer = config.IMAGESERVER;
 }]);
