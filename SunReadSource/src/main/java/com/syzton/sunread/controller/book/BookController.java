@@ -78,18 +78,18 @@ public class BookController extends BaseController {
 //        return new PageResource<>(pageResult, "page", "size");
 //    }
 
-//    @RequestMapping(value = "/books/search", method = RequestMethod.GET)
-//    @ResponseBody
-//    public PageResource<Book> quickSearch(@RequestParam("searchTerm") String searchTerm,
-//                                          @RequestParam("page") int page,
-//                                          @RequestParam("size") int size,
-//                                          @RequestParam(value = "sortBy", required = false) String sortBy) {
-//        Pageable pageable = getPageable(page, size, sortBy);
-//
-//        Page<Book> bookPage = bookService.quickSearch(searchTerm, pageable);
-//
-//        return new PageResource<>(bookPage, "page", "size");
-//    }
+    @RequestMapping(value = "/books/search", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Book> quickSearch(@RequestParam("searchTerm") String searchTerm,
+                                          @RequestParam("page") int page,
+                                          @RequestParam("size") int size,
+                                          @RequestParam(value = "sortBy", required = false) String sortBy) {
+        Pageable pageable = getPageable(page, size, sortBy);
+
+        Page<Book> bookPage = bookService.quickSearch(searchTerm, pageable);
+
+        return new PageResource<>(bookPage, "page", "size");
+    }
 
     @RequestMapping(value = "/books/conditions", method = RequestMethod.GET)
     @ResponseBody

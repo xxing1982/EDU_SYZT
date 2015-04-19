@@ -29,15 +29,16 @@ public class BookPredicates {
 
         BooleanBuilder builder = new BooleanBuilder();
 
-        if(condition.getSearchTerm()!=null && !"".equals(condition.getSearchTerm())){
-            String searchTerm = condition.getSearchTerm();
-            book.name.containsIgnoreCase(searchTerm)
-                    .or(book.isbn.containsIgnoreCase(searchTerm))
-                    .or(book.author.containsIgnoreCase(searchTerm)
-                            .or(book.publisher.containsIgnoreCase(searchTerm)));
-        }
+
 
         builder.and(book.status.eq(Book.Status.valid));
+        if(condition.getSearchTerm()!=null && !"".equals(condition.getSearchTerm())){
+            String searchTerm = condition.getSearchTerm();
+            builder.and(book.name.containsIgnoreCase(searchTerm)
+                    .or(book.isbn.containsIgnoreCase(searchTerm))
+                    .or(book.author.containsIgnoreCase(searchTerm)
+                            .or(book.publisher.containsIgnoreCase(searchTerm))));
+        }
 
         if(condition.getLevel()!=0){
             builder.and(book.extra.level.eq(condition.getLevel()));
