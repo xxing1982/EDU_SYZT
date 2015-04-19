@@ -62,7 +62,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			$scope.FinishExam = function(){
 				$scope.IsCilck = true;
 				testExam.submitExam($scope.myAnswer, function(examData){
-						var score = examData.examScore;
+						var score = examData.exam.examScore;
 						if (examData.pass) {
 							$rootScope.exam.score = score;
 							window.location.href="/protype/index.html#/readingCenter/success";

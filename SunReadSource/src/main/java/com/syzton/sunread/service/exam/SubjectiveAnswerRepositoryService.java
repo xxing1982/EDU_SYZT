@@ -61,7 +61,7 @@ public class SubjectiveAnswerRepositoryService implements SubjectiveAnswerServic
 			Pageable pageable) throws NotFoundException {
 		SubjectiveQuestion question = questionRepo.findOne(questionId);
 		Student student = studentRepo.findOne(userId);
-		Page<SubjectiveAnswer> subjectiveAnswerPages = repository.findByQuestionAndCampusIdAndIdNot(question,student.getCampusId(),userId,pageable);
+		Page<SubjectiveAnswer> subjectiveAnswerPages = repository.findByQuestionAndCampusIdAndStudentIdNot(question,student.getCampusId(),userId,pageable);
 		return subjectiveAnswerPages;
 	}
 	
