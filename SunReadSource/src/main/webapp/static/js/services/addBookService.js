@@ -29,7 +29,7 @@ var quickSearchServices = angular.module('quickSearchServices',['ngResource',"no
 quickSearchServices.factory('QuickSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-							"/api/books/conditions?page=:page&size=:size&sortBy=:sortBy"
+							"/api/books/conditions?page=:page&size=:size&sortBy=:sortBy&direction=desc"
             ,{page:'@_page', size:'@_size',sortBy:'@_sortBy'},{}
             );
 	}]);

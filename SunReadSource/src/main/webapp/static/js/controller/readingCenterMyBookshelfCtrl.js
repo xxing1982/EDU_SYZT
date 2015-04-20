@@ -54,7 +54,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         console.log($scope.selected_status);
         $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:size},function(){
         console.log($scope.bookInShelf);
-        spileBooks($scope.bookInShelf.content;);
+        spileBooks($scope.bookInShelf.content);
         // var content = $scope.bookInShelf.content;
         // $scope.readBooks = new Array();
         // $scope.unreadBooks = new Array();

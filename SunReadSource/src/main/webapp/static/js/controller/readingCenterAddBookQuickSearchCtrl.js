@@ -35,6 +35,13 @@ ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$sc
     //         console.log($scope.recommendSearch)
     //     });
 
+		$scope.hots=QuickSearch.get({page:0,size:3,sortBy:"statistic.readNums"},function(){
+			console.log($scope.hots);
+		})
+
+		$scope.recommends=QuickSearch.get({page:0,size:3,sortBy:"statistic.recommends"},function(){
+			console.log($scope.hots);
+		})
 
     $scope.addBooktoShelf = function(terms){
         console.log(terms);
