@@ -9,16 +9,16 @@ import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.Exam.ExamType;
 
 public interface ExamRepository extends JpaRepository<Exam, Long> {
-	//@Query("select exam from Exam exam wehre Exam.book = ?1 and ")
+	
 	List<Exam> findByStudentIdAndBookIdAndExamTypeAndCreationTimeAfter(Long studentId,Long bookId,ExamType type,DateTime date);
 	
-	List<Exam> findByStudentIdAndBookIdAndExamType(Long studentId,Long bookId,ExamType type);
+	List<Exam> findByStudentIdAndBookIdAndExamTypeOrderByCreationTimeDesc(Long studentId,Long bookId,ExamType type);
 	
-	List<Exam> findByStudentIdAndExamTypeAndIsPass(Long id,ExamType examType,boolean isPass);
+	List<Exam> findByStudentIdAndExamTypeAndIsPassOrderByCreationTimeDesc(Long id,ExamType examType,boolean isPass);
 	
-	List<Exam> findByStudentIdAndExamTypeAndIsPassAndCreationTimeBetween(Long id,ExamType examType,boolean isPass,DateTime from,DateTime to);
+	List<Exam> findByStudentIdAndExamTypeAndIsPassAndCreationTimeBetweenOrderByCreationTimeDesc(Long id,ExamType examType,boolean isPass,DateTime from,DateTime to);
 	
-	List<Exam> findByStudentIdAndExamType(Long id,ExamType examType);
+	List<Exam> findByStudentIdAndExamTypeOrderByCreationTimeDesc(Long id,ExamType examType);
 	
 	List<Exam> findByStudentIdOrderByCreationTimeDesc(Long studentId);
 

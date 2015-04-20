@@ -34,6 +34,7 @@ import com.syzton.sunread.dto.exam.CollatExamDTO;
 import com.syzton.sunread.dto.exam.SubjectivePaperDTO;
 import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.dto.exam.VerifyPaperDTO;
+import com.syzton.sunread.dto.exam.VerifyPaperExamDTO;
 import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
 import com.syzton.sunread.exception.common.TodayVerifyTimesOverException;
 import com.syzton.sunread.exception.exam.HaveVerifiedBookException;
@@ -150,27 +151,35 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/verifypaper/{studentid}/{bookid}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ObjectiveQuestion> createVerifyPaper(
+	public VerifyPaperDTO createVerifyPaper(
 			@PathVariable("studentid") Long studentId,
 			@PathVariable("bookid") Long bookId) throws NotFoundException {
 		LOGGER.debug("Finding all exam entries.");
+		VerifyPaperDTO dto = new VerifyPaperDTO();
 		if (service.isPassVerifyTest(bookId, studentId)) {
-			throw new HaveVerifiedBookException("Student " + studentId
+			dto.setCode("2");
+			dto.setMessage("Student " + studentId
 					+ " have verified the book " + bookId);
+			return dto;
 		}
 		List<Exam> list = service.getTodayVerifyTestStatus(bookId, studentId);
 		if (list.size() >= 2) {
-			throw new TodayVerifyTimesOverException(
+			dto.setCode("3");
+			dto.setMessage(
 					"Student{"
 							+ studentId
 							+ "} verify test with book{"
 							+ bookId
 							+ "} greater than twice, system ignore this verify test request.");
+			return dto;
 		}
 		List<ObjectiveQuestion> questions = service.takeVerifyTest(bookId);
+		dto.setQuestions(questions);
+		dto.setCode("1");
+		dto.setMessage("Get questions complete.");
 		LOGGER.debug("Found {} exam entries.", questions.size());
 
-		return questions;
+		return dto;
 	}
 
 	@RequestMapping(value = "/exam/wordpaper/{studentid}/{bookid}", method = RequestMethod.GET)
@@ -210,7 +219,7 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/verifypaper", method = RequestMethod.POST)
 	@ResponseBody
-	public CollatExamDTO handInVerifyPaper(@Valid @RequestBody VerifyPaperDTO dto)
+	public CollatExamDTO handInVerifyPaper(@Valid @RequestBody VerifyPaperExamDTO dto)
 			throws NotFoundException, BookInShelfDuplicateVerifiedException {
 		Exam exam = dto.fromOTD();
 		CollatExamDTO collatExamDto = new CollatExamDTO();
@@ -278,7 +287,7 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/wordpaper", method = RequestMethod.POST)
 	@ResponseBody
-	public Exam handInWordPaper(@Valid @RequestBody VerifyPaperDTO dto)
+	public Exam handInWordPaper(@Valid @RequestBody VerifyPaperExamDTO dto)
 			throws NotFoundException {
 		Exam exam = dto.fromOTD();
 		LOGGER.debug("hand in exam entrie.");

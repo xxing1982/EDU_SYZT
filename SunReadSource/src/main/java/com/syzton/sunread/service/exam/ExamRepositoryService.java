@@ -126,7 +126,7 @@ public class ExamRepositoryService implements ExamService {
 		int passCount = 0;
 		int questionCount = 0;
 		int passRate = 0;
-		List<Exam> exams = repository.findByStudentIdAndExamTypeAndIsPass(studentId,type,true);
+		List<Exam> exams = repository.findByStudentIdAndExamTypeAndIsPassOrderByCreationTimeDesc(studentId,type,true);
 		List<ExamDTO> examDTOs = new ArrayList<ExamDTO>();
 		for(int i=0;i<exams.size();i++){
 			Exam exam = exams.get(i);
@@ -165,7 +165,7 @@ public class ExamRepositoryService implements ExamService {
 		int passCount = 0;
 		int questionCount = 0;
 		int passRate = 0;
-		List<Exam> exams = repository.findByStudentIdAndExamType(studentId,type);
+		List<Exam> exams = repository.findByStudentIdAndExamTypeOrderByCreationTimeDesc(studentId,type);
 		List<ExamDTO> examDTOs = new ArrayList<ExamDTO>();
 		for(int i=0;i<exams.size();i++){
 			Exam exam = exams.get(i);
@@ -399,7 +399,7 @@ public class ExamRepositoryService implements ExamService {
 	
 	public boolean isPassVerifyTest(Long bookId,Long studentId){
 		 
-		List<Exam> list = repository.findByStudentIdAndBookIdAndExamType(studentId,bookId,ExamType.VERIFY);
+		List<Exam> list = repository.findByStudentIdAndBookIdAndExamTypeOrderByCreationTimeDesc(studentId,bookId,ExamType.VERIFY);
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).isPass()){
 				return true;
@@ -454,7 +454,7 @@ public class ExamRepositoryService implements ExamService {
 	@Transactional
 	@Override
 	public int findPassVerifyExamPassRate(Long studentId, DateTime from,DateTime to) {
-		List<Exam> exams = repository.findByStudentIdAndExamTypeAndIsPassAndCreationTimeBetween(studentId, ExamType.VERIFY, true, from, to);
+		List<Exam> exams = repository.findByStudentIdAndExamTypeAndIsPassAndCreationTimeBetweenOrderByCreationTimeDesc(studentId, ExamType.VERIFY, true, from, to);
 		int pass = 0;
 		int total = 0;
 		int passRate = 0;
