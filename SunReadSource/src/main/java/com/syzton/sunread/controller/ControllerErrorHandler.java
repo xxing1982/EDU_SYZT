@@ -1,11 +1,11 @@
 package com.syzton.sunread.controller;
 
-import com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException;
 import com.syzton.sunread.exception.common.DatabaseException;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.common.dto.ValidationErrorDTO;
 
+import com.syzton.sunread.exception.store.InSufficientCoinsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +109,14 @@ public class ControllerErrorHandler {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public String handleNumberFormatException(Exception ex) {
+        LOGGER.debug(ex.getMessage());
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(InSufficientCoinsException.class)
+    @ResponseStatus(value = HttpStatus.INSUFFICIENT_STORAGE)
+    @ResponseBody
+    public String handleInSufficientCoinsException(Exception ex) {
         LOGGER.debug(ex.getMessage());
         return ex.getMessage();
     }
