@@ -29,8 +29,8 @@ var quickSearchServices = angular.module('quickSearchServices',['ngResource',"no
 quickSearchServices.factory('QuickSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-            "/api/books/search?page=:page&size=:size&sortBy=id&searchTerm=:searchTerm"
-            ,{page:'@_page', size:'@_size',searchTerm:'@_searchTerm'},{}
+							"/api/books/conditions?page=:page&size=:size&sortBy=:sortBy"
+            ,{page:'@_page', size:'@_size',sortBy:'@_sortBy'},{}
             );
 	}]);
 
@@ -57,13 +57,28 @@ monthlyHotServices.factory('MonthlyHotSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource("/api/books/conditions/monthlyhot?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
-                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange&searchTerm=:searchTerm",
+                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
                          ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
                          ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
                         {}
         );
 	}]);
+
+var yearlyHotServices = angular.module('yearlyHotServices', ['ngResource', "nourConfig"]);
+
+	// Note object(s)
+	yearlyHotServices.factory('YearlyHotSearch',['$resource', 'config',
+		function($resource, config){
+			return $resource("/api/books/conditions/yearlyhot?page=:page&size=:size"+
+	                         "&level=:level&category=:category&testType=:testType&literature=:literature"+
+	                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
+	                        {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
+	                         ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
+	                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
+	                        {}
+	        );
+		}]);
 
 var weeklyRecommendServices = angular.module('weeklyRecommendServices', ['ngResource', "nourConfig"]);
 
@@ -94,3 +109,18 @@ monthlyRecommendServices.factory('MonthlyRecommendSearch',['$resource', 'config'
                         {}
         );
 	}]);
+
+var yearlyRecommendServices = angular.module('yearlyRecommendServices', ['ngResource', "nourConfig"]);
+
+	// Note object(s)
+yearlyRecommendServices.factory('YearlyRecommendSearch',['$resource', 'config',
+		function($resource, config){
+			return $resource("/api/books/conditions/yearlyRecommend?page=:page&size=:size"+
+	                         "&level=:level&category=:category&testType=:testType&literature=:literature"+
+	                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
+	                        {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
+	                         ,testType:'@_testType',literature:'@_literature',grade:'@_grade'
+	                         ,language:'@_language',resource:'@_resource',pointRange:'@_pointRange'},
+	                        {}
+	        );
+		}]);

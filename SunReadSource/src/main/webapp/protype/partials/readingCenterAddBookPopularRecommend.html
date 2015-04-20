@@ -4,21 +4,22 @@
 
         <div class="input-group popularChoice">
 
+
             <label class="radio-inline">
-              <input type="radio" ng-click="search()" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> 
-                <p class="popularText">全部</p>
-            </label>
-            <label class="radio-inline">
-              <input type="radio" ng-click="searchWeekly()" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 
+              <input type="radio" ng-click="searchWeekly()" name="inlineRadioOptions" id="inlineRadio2" value="1" checked>
                 <p class="popularText">周热门</p>
             </label>
             <label class="radio-inline">
-              <input type="radio" ng-click="searchMonthly()" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 
+              <input type="radio" ng-click="searchMonthly()" name="inlineRadioOptions" id="inlineRadio3" value="2">
                  <p class="popularText">月热门</p>
+            </label>
+            <label class="radio-inline">
+              <input type="radio" ng-click="searchYearly()" name="inlineRadioOptions" id="inlineRadio1" value="3">
+                <p class="popularText">年热门</p>
             </label>
 
         </div>
-        
+
 	<div ng-repeat="terms in searchPageable.entities.content">
         <div class="row bookList" ng-init="terms.text_overflow=true;">
             <div class="col-md-3">
@@ -26,7 +27,7 @@
             </div>
             <div class="col-md-9">
                 <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
-            <div class="row fsize12"><p>评分：{{terms.evaluationNum}}&nbsp;&nbsp;已有2087人阅读</p></div>
+            <div class="row fsize12"><p>评分：{{terms.evaluationNum}}&nbsp;&nbsp;已有{{terms.statistic.readNums}}人阅读</p></div>
                 <div class="row fsize12"><p>作者：{{terms.author}}&nbsp;&nbsp;版权：{{terms.publisher}} &nbsp;&nbsp;
                     积分:{{terms.point}}&nbsp;&nbsp;等级:{{terms.extra.level}}&nbsp;&nbsp;财富：{{terms.coin}}</p></div>
                 <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
@@ -41,7 +42,7 @@
 
     <!-- Place holder row copied from searchs -->
     <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
-        <div class="col-md-10 searchHolder"> 
+        <div class="col-md-10 searchHolder">
             <p>&nbsp;{{ placeHolder.title }}</p>
         </div>
     </div>
@@ -63,15 +64,20 @@
         </div>
         <div class="col-xs-3"
             <!-- Custom goto page number goes here -->
-            <div class="custom-page-number-group"><a>去第</a><input type="text" class="custom-page-number-input" />页</div>
+<!--            <div class="custom-page-number-group"><a>去第</a><input type="text" class="custom-page-number-input" />页</div>-->
+                <div class="custom-page-number-group">
+                    <a ng-click="searchPageable.showPage(goto)">去第</a>
+                    <input type="number" class="custom-page-number-input" ng-model="goto"/>
+                    <a ng-click="searchPageable.showPage(goto)">页</a>
+                </div>
         </div>
 
     </div>
  </div><!--end page -->
-	
+
 	</div><!--end Left part-->
 
-  
+
   <!--right part -->
     <div class="rightpart">
         <div class="row conditionBlock">
@@ -276,7 +282,7 @@
 
     </div>
     <!-- End right part -->
-    
+
 </div><!--row-->
 
 </div>

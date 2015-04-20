@@ -1,9 +1,9 @@
 //readingCenterAddBookPopularRecommendCtrl.js
 
 ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope','$scope','$stateParams','Pageable', 'ConditionSearch','AddbookToShelf'
-        ,'WeeklyRecommendSearch','MonthlyRecommendSearch','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,AddbookToShelf,WeeklyRecommendSearch,MonthlyRecommendSearch,config) {
+        ,'WeeklyRecommendSearch','MonthlyRecommendSearch','YearlyRecommendSearch','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,AddbookToShelf,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch,config) {
 	$scope.name='阅读中心->添加书籍->热门阅读';
-	
+
     $scope.searchArguments = {
         level:0,
         category:0,
@@ -14,7 +14,7 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
         language:0,
         resource:0,
         pointRange:0
-      
+
     }
 
     $scope.createPageable = function (searchEntity){
@@ -25,7 +25,7 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
 
         $scope.searchPageable.arguments=$scope.searchArguments;
         // Set the startPage and length of number page array
-        
+
         $scope.searchPageable.pageNumbers.startPage = 1;
         $scope.searchPageable.pageNumbers.content.length = 8;
         // Set the placeholder elements
@@ -33,25 +33,28 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
 
         // Build the pageable object
         $scope.searchPageable.build(searchEntity);
-        
+
         $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
         console.log($scope.searchPageable);
     }
-            
+
     $scope.status = status;
 
-    $scope.search=function(){  
+    $scope.search=function(){
         $scope.createPageable(ConditionSearch);
-    } 
-    
+    }
+
     if($scope.status === 1){
         $scope.search = $scope.searchWeekly;
     }
     if($scope.status === 2){
         $scope.search = $scope.searchMonthly;
-    } 
-            
-    
+    }
+    if($scope.status === 3){
+        $scope.search = $scope.searchYearly;
+    }
+
+
     $scope.statuses_grade = [{
         id: 0,
         name:"全部年级",
@@ -104,15 +107,17 @@ ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope'
         callback: function(){$scope.search()}
     }];
     $scope.selected_status = 0;
-            
+
 	$scope.searchWeekly = function(){
         $scope.createPageable(WeeklyRecommendSearch);
 	};
-    
+
     $scope.searchMonthly = function(){
         $scope.createPageable(MonthlyRecommendSearch);
     };
-            
+    $scope.searchYearly = function(){
+        $scope.createPageable(MonthlyRecommendSearch);
+    };
     $scope.addBooktoShelf = function(terms){
         console.log(terms);
         var bookId = terms.id;
