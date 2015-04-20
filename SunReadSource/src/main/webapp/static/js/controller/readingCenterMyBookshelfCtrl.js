@@ -7,7 +7,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
 
     // Get the user id form rootScope
     $scope.arguments = {id: $rootScope.id};
-    var stateTexts = { more : "加载更多", loading: "更多加载中...", nomore: "没有了"};
+    var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
     $scope.unreadLoading = stateTexts.loading;
     $scope.readLoading = stateTexts.loading;
 
@@ -17,7 +17,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     console.log($scope.BookshelfView);
 
     var page = 1;
-    var size = 9;
+    var size = 3;
 
     $scope.statuses = [{
         id: 0,
@@ -36,51 +36,80 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     //     console.log(bookshelf);
     //     });
     // };
+    var unreadBooksALL = new Array();
+    var readBooksALL = new Array();
 
     var bookshelf = Bookshelf.get({id:$rootScope.id},function(){
         console.log(bookshelf);
+        var content = bookshelf.booksInShelf;
+        for(var i = 0; i < content.length; i++){
+            var j=0, k=0;
+            //console.log(content[i]);
+            if(content[i].readState){
+                if($scope.selected_status=== 1&& !content[i].bookAttribute)
+                    continue;
+                if($scope.selected_status=== 2&& content[i].bookAttribute)
+                    continue;
+                readBooksALL.push(content[i]);
+            }
+            else{
+                if($scope.selected_status=== 1&& !content[i].bookAttribute)
+                    continue;
+                if($scope.selected_status=== 2&& content[i].bookAttribute)
+                    continue;
+                unreadBooksALL.push(content[i]);
+            }
+        }
+
+        if(unreadBooksALL.length > size)
+          $scope.unreadLoading = stateTexts.more;
+        else
+          $scope.unreadLoading = stateTexts.nomore;
+
+        if(readBooksALL.length > size)
+          $scope.readLoading = stateTexts.more;
+        else
+          $scope.readLoading = stateTexts.nomore;
     });
+
 
     $scope.shelf = bookshelf;
 
     $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:size},function(){
         console.log($scope.bookInShelf);
         spileBooks($scope.bookInShelf.content);
-
     });
 
     $scope.selectBookAttributes = function(){
-
         console.log($scope.selected_status);
         $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:size},function(){
-        console.log($scope.bookInShelf);
-        spileBooks($scope.bookInShelf.content);
-        // var content = $scope.bookInShelf.content;
-        // $scope.readBooks = new Array();
-        // $scope.unreadBooks = new Array();
-        // for(var i = 0; i < content.length; i++){
-        //     var j=0, k=0;
-        //     //console.log(content[i]);
-        //     if(content[i].readState){
-        //         if($scope.selected_status=== 1&& !content[i].bookAttribute)
-        //             continue;
-        //         if($scope.selected_status=== 2&& content[i].bookAttribute)
-        //             continue;
-        //         $scope.readBooks.push(content[i]);
-        //     }
-        //     else{
-        //         if($scope.selected_status=== 1&& !content[i].bookAttribute)
-        //             continue;
-        //         if($scope.selected_status=== 2&& content[i].bookAttribute)
-        //             continue;
-        //         $scope.unreadBooks.push(content[i]);
-        //     }
-        // }
-
-    });
+          console.log($scope.bookInShelf);
+          spileBooks($scope.bookInShelf.content);
+        });
     };
 
+    $scope.unreadBooksLoadingMore = function(){
+      if($scope.unreadLoading === stateTexts.nomore)
+        return;
+      if(loadingMore($scope.unreadBooks,unreadBooksALL,size))
+        $scope.unreadLoading = stateTexts.more;
+      else{
+        $scope.unreadLoading = stateTexts.nomore;
+      }
+    }
 
+    $scope.readBooksLoadingMore = function(){
+      if($scope.readLoading === stateTexts.nomore)
+        return;
+      if(loadingMore($scope.readBooks,readBooksALL,size))
+        $scope.readLoading = stateTexts.more;
+      else{
+        $scope.readLoading = stateTexts.nomore;
+      }
+    }
+
+
+//DELETE A BOOK IN SHELF
     $scope.dropBookFromShelf = function(book){
         console.log(book.id);
         $scope.dropBook = DropBookFromShelf.remove({id:book.id});
@@ -89,11 +118,8 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         }
         else{
             alert("移除成功");
-
             location.reload();
-
         }
-
     };
 
     var spileBooks = function(content){
@@ -119,7 +145,25 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
       }
     };
 
-    console.log($scope.unreadBooks);
+/*
+  For loding more
+  return false means nomore, then set loadingState to nomore.
+  return true means more. And you can click again,
+  ONE click loads nine books at most
+*/
+    var loadingMore = function(bookArray,bookALL,pageSize){
+      var allNum = bookALL.length;
+        for(var i=0;i<pageSize;i++){
+          if(bookArray.length<allNum)
+            bookArray.push(bookALL[bookArray.length+i]);
+          else
+            return false;
+          }
+      return true;
+  };
+//End loadingMore
+
+
     $rootScope.exam = {};
     $scope.CertificationTest = function(data){
         $rootScope.exam.id = 0;
