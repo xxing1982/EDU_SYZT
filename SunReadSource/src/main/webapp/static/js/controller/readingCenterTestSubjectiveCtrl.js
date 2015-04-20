@@ -39,6 +39,10 @@ ctrls.controller("readingCenterTestSubjectiveController", ['$scope', '$rootScope
 				$scope.myAnswer.answers = new Array();
 				$scope.myAnswer.questions = dataquestion;
 				for (var i = 0; i < data.length; i++) {
+					if (data[i].content == undefined ||data[i].content.length < 20) {
+						alert("题目：" + data[i].topic + "长度少于20！");
+						return;
+					};
 					answer = {};
 					answer.question = dataquestion[i];
 					answer.studentId = $rootScope.id;

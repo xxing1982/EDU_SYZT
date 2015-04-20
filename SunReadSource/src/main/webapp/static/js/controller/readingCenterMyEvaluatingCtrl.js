@@ -10,30 +10,56 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.countVerifyExam = 3;
 		$scope.countWordExam = 3;
 		$scope.countThinkExam = 3;
+		var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
+		$scope.status = {
+			current : stateTexts.loading,
+			verify : stateTexts.loading,
+			word : stateTexts.loading,
+			think : stateTexts.loading
+		};
+		$scope.status.current = $scope.status.verify;
 		//source
 		VerifyExam.getAllInfo($rootScope.id, function(data){
-			$scope.source.verifyExams = data.examDTOs;			
+			$scope.source.verifyExams = data.examDTOs;
 			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.countVerifyExam);
+			$scope.status.verify = stateTexts.more;
+			$scope.status.current = $scope.status.verify;
 		});
 
 		WordExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.wordExams = data.examDTOs;
 			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.countWordExam);
+			$scope.status.word = stateTexts.more;
+			$scope.status.current = $scope.status.word;
 		});
 
 		ThinkExam.getAllInfo($rootScope.id, function(data){
 			$scope.source.thinkExams = data.examDTOs;//pictureUrl
 			$scope.thinkExams = $scope.source.thinkExams.slice(0, $scope.countThinkExam);
+			$scope.status.think = stateTexts.more;
+			$scope.status.current = $scope.status.think;
 		});
 
 		$scope.addCount = function(){
 			if ($scope.isCertification) {
+				if ($scope.countVerifyExam >= $scope.source.verifyExams.length) {
+					$scope.status.verify = stateTexts.nomore;
+					$scope.status.current = $scope.status.verify;
+				}
 				$scope.countVerifyExam = $scope.countVerifyExam+ 3;
 			}
 			else if($scope.isWord){
+				if ($scope.countWordExam >= $scope.source.wordExams.length) {
+					$scope.status.word = stateTexts.nomore;
+					$scope.status.current = $scope.status.word;
+				}
 				$scope.countWordExam = $scope.countWordExam + 3;
 			}
 			else if($scope.isThinking){
+				if ($scope.countThinkExam >= $scope.source.thinkExams.length) {
+					$scope.status.think = stateTexts.nomore;
+					$scope.status.current = $scope.status.think;
+				}
 				$scope.countThinkExam = $scope.countThinkExam + 3;
 			}
 			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.countVerifyExam);
@@ -57,14 +83,17 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.showCertification = function(){
 			hideAllTabs();
 			$scope.isCertification = true;
+			$scope.status.current = $scope.status.verify;
 		}
 		$scope.showWord = function(){
 			hideAllTabs();
 			$scope.isWord = true;
+			$scope.status.current = $scope.status.word;
 		}
 		$scope.showThinking = function(){
 			hideAllTabs();
 			$scope.isThinking = true;
+			$scope.status.current = $scope.status.think;
 		}
 		$scope.isCertification = true;
 

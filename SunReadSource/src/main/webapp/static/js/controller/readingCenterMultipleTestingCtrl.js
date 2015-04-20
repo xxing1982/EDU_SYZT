@@ -46,6 +46,10 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			$scope.myAnswer.answers = new Array();
 			$scope.total = data.length;
 			$scope.nextQuestion = function(){
+				if (!$scope.isActiveA && !$scope.isActiveB && !$scope.isActiveC && !$scope.isActiveD) {
+					alert("请选择一项！");
+					return;
+				};
 				$scope.isActiveA = false;
 				$scope.isActiveB = false;
 				$scope.isActiveC = false;
