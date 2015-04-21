@@ -1,21 +1,22 @@
 ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', '$stateParams', 'para','WeeklyHotSearch','OneBookInShelf'
-    ,'BookDetail','NoteView', 'NoteTake', 'Dropzone', 'config', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, NoteView, NoteTake, Dropzone, config){                                                    
+    ,'BookDetail' , 'Student', 'NoteView', 'NoteTake', 'Dropzone', 'config', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, Student, NoteView, NoteTake, Dropzone, config){                                                    
 	$scope.name = '书籍详情';
 
     
     var bookDetail = BookDetail.get({ id: $stateParams.bookId }, function(){
         console.log(bookDetail);
         
-        // Initlizate the note entity
-        $scope.noteTake = new NoteTake(bookDetail);
-            
-        // Make an instance of the NoteView
-        $scope.noteView = new NoteView();
-        $scope.arguments = {by: "books", id: bookDetail.id, sortBy: "commentCount" };
+        $scope.student = Student.get({id: $rootScope.id}, function(){
+            // Initlizate the note entity
+            $scope.noteTake = new NoteTake(bookDetail);
 
-        // Transmit arguments to note search engine
-        $scope.noteView.ShowMoreNotes($scope.arguments);
+            // Make an instance of the NoteView
+            $scope.noteView = new NoteView();
+            $scope.arguments = {by: "books", id: bookDetail.id, sortBy: "commentCount" };
 
+            // Transmit arguments to note search engine
+            $scope.noteView.ShowMoreNotes($scope.arguments);
+        });
         
         $scope.wordTest = function(){
             $rootScope.exam.id = 1;

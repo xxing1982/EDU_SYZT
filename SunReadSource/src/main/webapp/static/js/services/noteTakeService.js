@@ -11,6 +11,7 @@ var NoteTake = function(bookDetails){
     this.point = bookDetails.point;
     this.wordCount = bookDetails.wordCount;
     this.pageCount = bookDetails.pageCount;
+    this.pictureUrl = bookDetails.pictureUrl;
 };
 
 

@@ -83,7 +83,7 @@
                     <div class="col-md-12">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="title text-center" id="myModalLabel"><strong>{{showAction.action.title}}</strong></h4>
-                        <p style="line-height:26px;" id="myModalLabel">{{showAction.action.content}}</p>
+                        <p style="line-height:26px;" id="myModalLabel" ng-bind-html="showAction.action.content | formatParagraph"></p>
                     </div>
                 </div>
           </div>

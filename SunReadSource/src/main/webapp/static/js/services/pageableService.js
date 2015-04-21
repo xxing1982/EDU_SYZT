@@ -68,7 +68,6 @@ Pageable.prototype.showPage = function(page, callback){
 
         // Get entities
         this.Entity.get($.extend({}, {size: this.size, page: page - 1}, this.arguments), function(data){
-            console.log("Entity");
             // Check the bounds of page
             if (page > data.totalPages) {
                 pageable.showPage(data.totalPages);
