@@ -1,6 +1,6 @@
 //readingCenterMultipleTestingCtrl.js
 
-ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scope', 'VerifyExam', 'WordExam', 'ThinkExam', 
+ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scope', 'VerifyExam', 'WordExam', 'ThinkExam',
 	function ($rootScope, $scope, VerifyExam, WordExam, ThinkExam) {
 		if ($rootScope.exam == undefined) {
 			window.location.href = '/protype/index.html#/readingCenter/myBookshelf';
@@ -17,7 +17,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			VerifyExam.get($rootScope.id, $rootScope.exam.bookId, function(data){
 				Initial(data);
 				$scope.myAnswer.examType = 'VERIFY';
-				$scope.questions = data;
+				$scope.questions = data.questions;
 				$scope.questions.current = $scope.questions[$scope.current];
 			});
 			break;
@@ -36,7 +36,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 					console.log(data);
 				});
 			break;
-		}		
+		}
 		function Initial(data){
 			$scope.myAnswer = {
                 "bookId":  $rootScope.exam.bookId,
@@ -117,5 +117,5 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 				}
 			}
 		}
-		
+
 	}]);
