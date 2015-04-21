@@ -14,7 +14,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     //student info
     Student.get({id : $rootScope.id} ,function(data){
-        $scope.picture = {};
+      $scope.picture = {};
       $scope.picture.current = data.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + data.picture;
       $scope.userInfo = data;
       $rootScope.student = data;
@@ -39,6 +39,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
       // Create a Hotreaders entitiy
       $scope.hotReaders={};
       Hotreader.get({campusId: data.campusId, page: 0, size: 3 }, function(dataHot){
+        dataHot.content[0].picture = dataHot.content[0].picture == "" ? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + dataHot.content[0].picture;
         $scope.hotReaders.first = dataHot.content[0];
         //$scope.hotReaders.others = dataHot.content;
         $scope.hotReaders.others = dataHot.content.slice(1);

@@ -17,5 +17,11 @@ reviewServices.factory('AddReview',['$resource', 'config', '$http',
 				callback(data);
 			});
 		}
+		api.getAllById = function(bookid, page, size, callback){
+			$http.get(config.HOST + 'books/' + bookid + '/reviews?page=' + page + '&size=' + size)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
 		return api;
 	}]); 

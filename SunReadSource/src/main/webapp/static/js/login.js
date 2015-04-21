@@ -2,6 +2,7 @@ $(document).ready(function(){
 	$(".btn-login").on("click", function(){
 		var username = $("#username").val();
 		var password = $("#password").val();
+		$(this).attr("disabled", true).text("登录中...");
 		$.ajax({
 			type: 'POST',
 			url: '/oauth/token?grant_type=password&username=' + username + '&password=' + password,
@@ -31,6 +32,7 @@ $(document).ready(function(){
 			},
 			error : function(error){
 				alert('用户名或密码错误');
+				$(".btn-login").attr("disabled", false).text("立即登录");
 			},
 		});
 });

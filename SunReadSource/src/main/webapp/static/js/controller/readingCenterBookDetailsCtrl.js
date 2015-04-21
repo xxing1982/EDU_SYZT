@@ -1,5 +1,5 @@
 ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', '$stateParams', 'para','WeeklyHotSearch','OneBookInShelf'
-    ,'BookDetail' , 'Student', 'NoteView', 'NoteTake', 'Dropzone', 'config', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, Student, NoteView, NoteTake, Dropzone, config){                                                    
+    ,'BookDetail' , 'Student', 'NoteView', 'NoteTake', 'Dropzone', 'config', 'AddReview', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, Student, NoteView, NoteTake, Dropzone, config, AddReview){
 	$scope.name = '书籍详情';
 
     
@@ -62,12 +62,19 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
             console.log(thisBookinshelf);
             var verify;
             if(thisBookinshelf.readState){
-                verify = "已认证";
+                verify = true;
             }
             else {
-                verify = "未认证";
+                verify = false;
             }
             $scope.verify = verify;
+            $scope.verifyExam = function(){
+                $rootScope.exam.id = 0;
+                $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
+                $rootScope.exam.bookId = bookDetail.id;
+                $rootScope.exam.bookName = bookDetail.name;
+                $rootScope.exam.typeName = "我的书架 > 认证训练";
+            }
         });
 
 
@@ -75,6 +82,18 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         $scope.dropzone = Dropzone(config.NOTEPIC, function(url){
             $scope.noteTake.image = url;
         });
+
+        //get review
+        $scope.review = {};
+        $scope.review.page = 0;
+        $scope.review.size = 3;
+        $scope.review.state = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
+        $scope.review.currentStete = $scope.review.state.loading;
+        getReviewData();
+        $scope.showMoreReview = function(){
+            $scope.review.page = $scope.review.page + 1;
+            getReviewData();
+        }
 
         // Get the image server
         $scope.imageServer = config.IMAGESERVER;
@@ -87,4 +106,22 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
                                         ,grade:0,language:0,resource:0,pointRange:0},function(){
         }); 
     $scope.imageServer = config.IMAGESERVER;
+
+    function getReviewData(){
+        if ($scope.review.currentStete == $scope.review.state.nomore) {
+            return;
+        };
+        AddReview.getAllById(bookDetail.id, $scope.review.page, $scope.review.size, function(dataReview){
+            if ($scope.review.source == undefined) {
+                $scope.review.source = dataReview.content;
+            }
+            else{
+                $scope.review.source.push(dataReview.content);
+            }
+            $scope.review.currentStete = $scope.review.state.more;
+            if ($scope.review.source.length >=dataReview.totalElements) {
+                $scope.review.currentStete = $scope.review.state.nomore;
+            }
+        });
+    }
 }]);

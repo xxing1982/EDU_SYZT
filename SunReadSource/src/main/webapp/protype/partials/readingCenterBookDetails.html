@@ -45,7 +45,10 @@
                     <div class="col-sm-6 text-center" style="margin-top: 6px;">
                         <div class="row">
                             <div class="col-xs-3">
-                                <div class="row"><a><p>{{verify}}</p></a></div>
+                                <div class="row">
+                                    <p ng-show="verify">已认证</p>
+                                    <p ng-hide="verify"><a ng-click="verifyExam()" href="#readingCenter/multipleTesting">未认证</a></p>
+                                </div>
                             </div>
                             <div class="col-xs-4">
                                 <div class="row"><a ng-click="wordTest()" href="#readingCenter/multipleTesting"><p class="dark-blue-1 bookExercise">词汇训练</p></a></div>
@@ -131,9 +134,13 @@
                 
                 <!-- review -->
                 <div role="tabpanel" class="tab-pane fade" id="review">
-                    <div>
-                        <p>review</p>
+                    <div ng-repeat="item in review.source">
+                        <div><strong>{{item.title}}</strong></div>
+                        <div>评分：{{item.rate}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.studentName}} - {{item.creationTime}}</div>
+                        <div>{{item.content}}</div>
+                        <hr>
                     </div>
+                    <div class="bottom row" ng-click="showMoreReview()">{{review.currentStete}}</div>
                 </div>
                 
                 <!-- note -->
