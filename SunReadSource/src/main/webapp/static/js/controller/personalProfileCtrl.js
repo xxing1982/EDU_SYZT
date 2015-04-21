@@ -1,44 +1,24 @@
 //personalProfile.js
 
-ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', 'Dropzone', 'config',  function ($rootScope, $scope, User, Dropzone, config) {
-    
-    // Basic information
-    $scope.basicInformation = new Object();
-    $scope.basicInformation.content = { username: $rootScope.student.username,
-                                        gender: $rootScope.student.gender,
-                                        birthday: $rootScope.student.birthday,
-                                        school: $rootScope.student.school,
-                                        class: $rootScope.student.class };
-    
-    // Personal information
-    $scope.personalInformation = new Object();
-    $scope.personalInformation.content = { nickname: $rootScope.student.nickname,
-                                           qqId: $rootScope.student.qqId,
-                                           wechatId: $rootScope.student.wechatId,
-                                           email: $rootScope.student.email,
-                                           phoneNumber: $rootScope.student.phoneNumber };
-    
-    // Turn off the edit of personal infomation
-    $scope.personalInformation.editable = false;
-    
+ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', 'Student', 'Dropzone', 'config',  function ($rootScope, $scope, User, Student,Dropzone, config) {
     
     // Invoke this with the entity object
     $scope.toggleEdit = function(editObj, save){
-        
+
         if (save) {
-            
+
             // Clone entity
             for (var key in editObj.cached){
                 editObj.content[key] = editObj.cached[key];
             }
-            
+
             // Update the user entity
             User.update({id: $rootScope.id}, editObj.cached);
         } else {
-            
+
             // Create cached entity
             editObj.cached = new Object();
-            
+
             // Clone entity
             for (var key in editObj.content){
                 editObj.cached[key] = editObj.content[key];
@@ -47,24 +27,92 @@ ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', '
         editObj.editable = !editObj.editable ;
     }
     
-    // Check the orginal avatar url
-    $scope.avatarUrl = $scope.student.picture === "" ? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + $scope.student.picture ;
+    // All information base on the student id in roootScope
+    $scope.student = Student.get( {id: $rootScope.id}, function(){
+        
+        // Basic information
+        $scope.basicInformation = new Object();
+        $scope.basicInformation.content = { username: $scope.student.username,
+                                            gender: $scope.student.gender,
+                                            birthday: $scope.student.birthday,
+                                            school: $scope.student.school,
+                                            class: $scope.student.class };
 
-    // Save the orginal avatar
-    $scope.avatarOrg = $scope.student.picture;
+        // Personal information
+        $scope.personalInformation = new Object();
+        $scope.personalInformation.content = { nickname: $scope.student.nickname,
+                                               qqId: $scope.student.qqId,
+                                               wechatId: $scope.student.wechatId,
+                                               email: $scope.student.email,
+                                               phoneNumber: $scope.student.phoneNumber };
 
-    // Image uploader
-    $scope.dropzone = Dropzone(config.USERICON, function(url){
-         User.update({id: $rootScope.id}, {picture: url});
+        // Turn off the edit of personal infomation
+        $scope.personalInformation.editable = false;
+
+        // Check the orginal avatar url
+        $scope.avatarUrl = $scope.student.picture === "" ? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + $scope.student.picture ;
+
+        // Save the orginal avatar
+        $scope.avatarOrg = $scope.student.picture;
+
+        // Image uploader
+        $scope.dropzone = Dropzone(config.USERICON, function(url){
+             User.update({id: $rootScope.id}, {picture: url});
+        } );
+
+        // Update remove file callback
+        $scope.dropzone.on('removedfile', function(){
+            User.update({id: $rootScope.id}, {picture: $scope.avatarOrg});
+        });
+
+        // Get the image server
+        $scope.imageServer = config.IMAGESERVER;
+        
+        // Security setting
+        $scope.securitySetting = new Object();
+        $scope.securitySetting.content = new Object();
+        $scope.securitySetting.cached = {password: "", confirmPassword: ""};
+        
+        // Turn off the edit of security setting
+        $scope.securitySetting.editable = false;
+        
+        // Hide the hint of password
+        $scope.securitySetting.tooShort = false;
+        $scope.securitySetting.different = false;
+
+        // Invoke this to verify the password and save
+        $scope.securitySetting.togglePasswordEdit = function(save){
+
+            // Clean the form
+            if (!save){
+                this.content = new Object();
+                this.cached = new Object();
+            }
+            this.tooShort = false;
+            this.different = false;
+
+            // ToggleEdit the password when avaliable
+            if (save){
+                if (this.validatePassword()) { 
+                    delete this.cached.confirmPassword;
+                    $scope.toggleEdit(this, save); 
+                }
+            } else {
+                $scope.toggleEdit(this, save); 
+            }
+        }
+
+        // Invoke this to verify the password and save
+        $scope.securitySetting.validatePassword = function(){
+            
+            // Check the length of password
+            this.tooShort = this.cached.password.length < 6;
+
+            // Password and confirmPassword not equal
+            this.different = this.cached.password !== this.cached.confirmPassword 
+                             && this.cached.confirmPassword !== undefined;
+            return !this.different && !this.tooShort;
+
+        }
     } );
-    
-    // Update remove file callback
-    $scope.dropzone.on('removedfile', function(){
-        User.update({id: $rootScope.id}, {picture: $scope.avatarOrg});
-    });
-    
-
-    // Get the image server
-    $scope.imageServer = config.IMAGESERVER;
-    
 }]);

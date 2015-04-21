@@ -1009,6 +1009,13 @@ a:focus, input:focus
     border-radius: 50%;
 }
 
+#personalCenter-page .password-span {
+    color: #F22;
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 
 /*******************personal profile buttom****************/
 

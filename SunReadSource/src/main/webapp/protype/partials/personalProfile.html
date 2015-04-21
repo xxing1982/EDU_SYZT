@@ -142,16 +142,40 @@
         </div>
     
         <div class="col-md-12">
+        
+        <!-- Password -->
         <div class="row">
-            <div class="col-md-2 text-right">
-                <div class="row"><h4>账号：</h4></div>
+            <div class="col-xs-2 text-right">
+                <div class="row" ng-show="!securitySetting.editable"> <h4>密码：</h4></div>
+                <div class="row" ng-show="securitySetting.editable"> <h4>新密码：</h4></div>
             </div>
-            <div class="col-md-9 text-left">
-<!--                        <h4>张晓晨</h4>-->
-                <input type="text" class="form-control dark-blue-2 theme-font" value="张晓晨" id="exampleInputName2" placeholder="Jane Doe">
+            <div class="col-xs-8 text-left">
+                <h4 ng-show="!securitySetting.editable">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</h4>
+                <input ng-change="securitySetting.validatePassword()" ng-show="securitySetting.editable" type="password" class="form-control dark-blue-2 theme-font" ng-model="securitySetting.cached.password">
             </div>
-            <div class="col-md-1 text-right"><div class="row"><a class="title-link">编辑</a></div></div>
-
+            <div class="col-xs-1 text-left">
+                <p class="title-link row password-span" ng-show="securitySetting.tooShort"><small>密码太短</small></p>
+            </div>
+            <div class="col-xs-1 text-right">
+                <div class="row"><div class="row">
+                    <a class="title-link" ng-show="!securitySetting.editable" ng-click="securitySetting.togglePasswordEdit(false)">编辑</a>
+                    <a class="title-link" ng-show="securitySetting.editable" ng-click="securitySetting.togglePasswordEdit(false)">取消</a>
+                    <a class="title-link" ng-show="securitySetting.editable" ng-click="securitySetting.togglePasswordEdit(true)">保存</a>
+                </div></div>
+            </div>    
+        </div>
+            
+        <!-- Confirm password -->
+        <div class="row">
+            <div class="col-xs-2 text-right" ng-show="securitySetting.editable">
+                <div class="row"><h4>确认密码：</h4></div>
+            </div>
+            <div class="col-xs-8 text-left">
+                <input ng-change="securitySetting.validatePassword()" ng-show="securitySetting.editable" type="password" class="form-control dark-blue-2 theme-font" ng-model="securitySetting.cached.confirmPassword">
+            </div>
+            <div class="col-xs-1 text-left">
+                <p class="title-link row password-span" ng-show="securitySetting.different"><small>两次不同</small></p>
+            </div>
         </div>
 
         </div>
