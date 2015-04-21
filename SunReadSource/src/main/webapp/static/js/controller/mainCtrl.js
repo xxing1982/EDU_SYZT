@@ -4,7 +4,7 @@ var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userS
                                              ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','oneBookInShelfServices'
                                              ,'weeklyHotServices','monthlyHotServices','yearlyHotServices','weeklyRecommendServices','monthlyRecommendServices','yearlyRecommendServices'
-                                             , 'campusServices', 'actionServices', 'pageableServices','loadableServices','hotclazzServices', 'hotreaderServices', 'dropzoneServices']);
+                                             , 'campusServices', 'actionServices', 'pageableServices','loadableServices','hotclazzServices', 'hotreaderServices', 'dropzoneServices', 'ngSanitize']);
 ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader', 'config',
   function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader, config) {
     //$rootScope.id = 2;
@@ -100,9 +100,18 @@ ctrls.filter('formatSize6', function(){
 
 ctrls.filter('formatGender', function(){
  return function(input){
-  if (input == 'male') {
-    return "男生";
-  };
-  return "女生";
-}
+      if (input == 'male') {
+        return "男生";
+      };
+      return "女生";
+  }
 });
+
+ctrls.filter('formatParagraph', function(){
+  return function(data) {
+   if (!data) return data;
+   return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
+ };
+});
+
+

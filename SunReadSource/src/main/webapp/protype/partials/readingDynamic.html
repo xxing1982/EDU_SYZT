@@ -15,8 +15,7 @@
                 <div class="title"><h4>校长寄语</h4></div>
                 <div class="paragraph ">
                     <div class="col-md-12">
-                        <p style="line-height: 24px;">亲爱的同学们：<br/><br/>
-                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{campus.headmaster}}
+                        <p style="line-height: 24px;" ng-bind-html="campus.headmaster | formatParagraph">
                         </p>
 <!--                        <p class="text-right">  ——校长王长贵</p>-->
                     </div>
