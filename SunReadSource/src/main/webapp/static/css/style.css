@@ -1009,6 +1009,10 @@ a:focus, input:focus
     border-radius: 50%;
 }
 
+#personalCenter-page #image-uploader .dz-error-message {
+    left: 2%
+}
+
 #personalCenter-page .password-span {
     color: #F22;
     font-style: italic;
