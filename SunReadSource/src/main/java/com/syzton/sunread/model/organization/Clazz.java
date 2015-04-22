@@ -78,8 +78,11 @@ public class Clazz extends  AbstractEntity{
         return grade;
     }
 
+    public Campus getCampus() {
+        return campus;
+    }
 
-	@PrePersist
+    @PrePersist
     public void prePersist() {
         DateTime now = DateTime.now();
         creationTime = now;
