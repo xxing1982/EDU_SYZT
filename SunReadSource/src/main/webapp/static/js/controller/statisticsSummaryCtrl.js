@@ -34,6 +34,8 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', 'Stude
                                                });
                 
             }
+            
+            // Chooese the latest semester 
             $scope.semestersSelected_status = 0;
         
         });
