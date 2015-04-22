@@ -1,5 +1,5 @@
 
-ctrls.directive('bsDropdown', function ($compile) {
+ctrls.directive('bsDropdown', function ($interpolate, $compile) {
     return {
         restrict: 'E',
         scope: {
@@ -27,24 +27,27 @@ ctrls.directive('bsDropdown', function ($compile) {
                 }
             }
             scope.selectVal = function (item) {
-                switch (attrs.menuType) {
-                    case "button":
-                        $('button.button-label', element).html(item.name);
-                        break;
-                    default:
-                        $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
-                        break;
-                }
-                scope.doSelect({
-                    selectedVal: item.id
-                });
-                if (item.callback && typeof item.callback === 'function'){
-                    item.callback();
+                if (item !== undefined) {
+                    switch (attrs.menuType) {
+                        case "button":
+                            $('button.button-label', element).html(item.name);
+                            break;
+                        default:
+                            $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
+                            break;
+                    }
+                    scope.doSelect({
+                        selectedVal: item.id
+                    });
+                    if (item.callback && typeof item.callback === 'function'){
+                        item.callback();
+                    }
                 }
             };
             scope.selectVal(scope.bSelectedItem);
             
-
+            // recompilation
+            $compile(element.contents())(scope); 
         }
     };
 });

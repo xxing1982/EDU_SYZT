@@ -181,6 +181,7 @@ public class BookInShelfController {
 			semesterPoints+=monthlyPoints.get(i);
 		}
 		
+		dto.setSemesterReadNum(booksInShelf.size());
 		dto.setMonthly(monthly);
 		dto.setMonthlyVerified(monthlyVerified);
 		dto.setMonthlyPoints(monthlyPoints);

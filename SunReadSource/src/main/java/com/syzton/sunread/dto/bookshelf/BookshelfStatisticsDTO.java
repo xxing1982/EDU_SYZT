@@ -14,6 +14,8 @@ public class BookshelfStatisticsDTO {
 	
 	private String username;
 	
+	private int semesterReadNum;
+	
 	private ArrayList<String> monthly;
 	
 	private ArrayList<Integer> monthlyVerified;
@@ -70,6 +72,14 @@ public class BookshelfStatisticsDTO {
 
 	public void setSemesterPoints(int semesterPoints) {
 		this.semesterPoints = semesterPoints;
+	}
+
+	public int getSemesterReadNum() {
+		return semesterReadNum;
+	}
+
+	public void setSemesterReadNum(int semesterReadNum) {
+		this.semesterReadNum = semesterReadNum;
 	}
 	
 	
