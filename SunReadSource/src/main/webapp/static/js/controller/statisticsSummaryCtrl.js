@@ -4,7 +4,7 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', 'Stude
                                                   function ($scope, $rootScope, Student, Semester) {
                                                       
     // Initlizate the dropdown statues
-    $scope.semestersStatuses = [];
+    $scope.semestersStatuses = []
     $scope.semestersSelected_status = 0;
                                                       
     // Get student by id 
@@ -34,6 +34,7 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', 'Stude
                                                });
                 
             }
+            $scope.semestersSelected_status = 0;
         
         });
     });     

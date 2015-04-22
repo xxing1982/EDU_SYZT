@@ -1,5 +1,5 @@
 
-ctrls.directive('bsDropdown', function ($interpolate, $compile) {
+ctrls.directive('bsDropdown', function ($compile) {
     return {
         restrict: 'E',
         scope: {
@@ -12,7 +12,7 @@ ctrls.directive('bsDropdown', function ($interpolate, $compile) {
             var html = '';
             switch (attrs.menuType) {
                 case "button":
-                    html += '<div class="btn-group"><button class="btn button-label">请选择</button><button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
+                    html += '<div class="btn-group"><button class="btn button-label">{{items[selectedItem].name || "请选择"}}</button><button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
                     break;
                 default:
                     html += '<div class="dropdown"><a class="dropdown-toggle" role="button" data-toggle="dropdown"  href="javascript:;">Dropdown<b class="caret"></b></a>';
@@ -45,9 +45,6 @@ ctrls.directive('bsDropdown', function ($interpolate, $compile) {
                 }
             };
             scope.selectVal(scope.bSelectedItem);
-            
-            // recompilation
-            $compile(element.contents())(scope); 
         }
     };
 });
