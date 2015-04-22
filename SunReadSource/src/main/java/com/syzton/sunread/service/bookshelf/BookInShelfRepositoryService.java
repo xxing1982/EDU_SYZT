@@ -181,8 +181,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
     public ArrayList<BookInShelf> findByStudentIdAndSemester(Long studentId, DateTime startTime,DateTime endTime) {
-    	
-	    ArrayList<BookInShelf> booksInSemester = repository.findByStudentIdAndSemester(studentId, startTime, endTime);  
+    	Bookshelf bookshelf = bookshelfRepository.findOne(studentId);
+	    ArrayList<BookInShelf> booksInSemester = repository.findByStudentIdAndSemester(bookshelf, startTime, endTime);  
 	    return booksInSemester;
     }
     

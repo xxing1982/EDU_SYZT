@@ -41,6 +41,16 @@ public class SemesterRepositoryService implements SemesterService{
     	this.semesterRepo = repository;
 	}
     
+    @Autowired
+    public void StudentRepositoryService(StudentRepository studentRepository) {
+    	this.studentRepository = studentRepository;
+	}
+    
+    @Autowired
+    public void ClazzRepositoryService(ClazzRepository clazzRepository) {
+    	this.clazzRepository = clazzRepository;
+	}
+    
     @Transactional(rollbackFor = {DuplicateException.class})
 	@Override
 	public SemesterDTO add(SemesterDTO added) {
@@ -135,7 +145,7 @@ public class SemesterRepositoryService implements SemesterService{
         Clazz clazz = clazzRepository.findOne(student.getClazzId());
         int grade = clazz.getGrade();
         DateTime currentTime = DateTime.now();
-        DateTime fromTime = currentTime.minusYears(grade-1);
+        DateTime fromTime = currentTime.minusYears(grade);
         ArrayList<Semester> semesters = (ArrayList<Semester>) semesterRepo.findByDuration(fromTime,currentTime);
          
         if (semesters == null) {
