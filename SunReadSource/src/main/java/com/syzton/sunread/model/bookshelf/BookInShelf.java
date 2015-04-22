@@ -70,6 +70,9 @@ public class BookInShelf extends AbstractEntity{
 //    @JoinColumn(name = "book")
 //    private Book book;
 
+    @Column(name = "deleted", nullable = false)
+    private Boolean deleted = false;
+    
     public BookInShelf() {
 
     }
@@ -94,6 +97,10 @@ public class BookInShelf extends AbstractEntity{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
     
 

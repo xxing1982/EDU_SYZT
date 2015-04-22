@@ -39,10 +39,10 @@ public class BookInShelfController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookshelfController.class);
     private BookInShelfService service;
     private SemesterService semesterService;
-	private ArrayList<DateTime> month = new ArrayList<DateTime>();
-	private ArrayList<String> monthly = new ArrayList<String>();
-	private ArrayList<Integer> monthlyVerified = new ArrayList<Integer>();
-	private ArrayList<Integer> monthlyPoints = new ArrayList<Integer>();
+	private ArrayList<DateTime> month;
+	private ArrayList<String> monthly;
+	private ArrayList<Integer> monthlyVerified;
+	private ArrayList<Integer> monthlyPoints;
 	private int semesterPoints;
 	
     
@@ -167,6 +167,11 @@ public class BookInShelfController {
 		int semesterVerified = booksInShelf.size();
 		startTime = startTime.dayOfMonth().withMinimumValue().toDateTime();
 		endTime = endTime.dayOfMonth().withMaximumValue().toDateTime();
+		
+		month = new ArrayList<DateTime>();
+		monthly = new ArrayList<String>();
+		monthlyVerified = new ArrayList<Integer>();
+		monthlyPoints = new ArrayList<Integer>();
 		
 		for (int i = 0; i < booksInShelf.size(); i++) {
 			month.add(startTime.plusMonths(i));
