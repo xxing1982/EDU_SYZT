@@ -41,6 +41,7 @@ public class Clazz extends  AbstractEntity{
   
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "campus")
+    @JsonIgnore
     private Campus campus;
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "calzz_statistic_id")
