@@ -86,7 +86,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 	@Override
 	public BookInShelf deleteById(long id){
 		BookInShelf deleted = repository.findOne(id);
-		repository.delete(deleted);
+		deleted.setDeleted(true);
+		repository.save(deleted);
 		return deleted;
 	}
 	
@@ -96,7 +97,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		// TODO Auto-generated method stub
 		Bookshelf bookshelf = bookshelfRepository.findOne(bookshelfId);
 		BookInShelf bookInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
-		repository.delete(bookInShelf);
+		bookInShelf.setDeleted(true);
+		repository.save(bookInShelf);
 		return bookInShelf;
 	}
 	
@@ -111,7 +113,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         for (BookInShelf bookInShelf : booksInShelf) {
 			if(bookInShelf != null){
 		        LOGGER.warn("delete a Book  with information: {}", bookInShelf);
-				repository.delete(bookInShelf);
+		        bookInShelf.setDeleted(true);
+				repository.save(bookInShelf);
 				continue;
 			}
 			else {
@@ -129,7 +132,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         for (BookInShelf bookInShelf : booksInShelf) {
 			if(bookInShelf != null){
 		        LOGGER.warn("delete a Book  with information: {}", bookInShelf);
-				repository.delete(bookInShelf);
+		        bookInShelf.setDeleted(true);
+				repository.save(bookInShelf);
 				continue;
 			}
 			else {
@@ -181,8 +185,8 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
     public ArrayList<BookInShelf> findByStudentIdAndSemester(Long studentId, DateTime startTime,DateTime endTime) {
-    	
-	    ArrayList<BookInShelf> booksInSemester = repository.findByStudentIdAndSemester(studentId, startTime, endTime);  
+    	Bookshelf bookshelf = bookshelfRepository.findOne(studentId);
+	    ArrayList<BookInShelf> booksInSemester = repository.findByStudentIdAndSemester(bookshelf, startTime, endTime);  
 	    return booksInSemester;
     }
     

@@ -12,7 +12,7 @@ ctrls.directive('bsDropdown', function ($compile) {
             var html = '';
             switch (attrs.menuType) {
                 case "button":
-                    html += '<div class="btn-group"><button class="btn button-label">请选择</button><button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
+                    html += '<div class="btn-group"><button class="btn button-label">{{items[selectedItem].name || "请选择"}}</button><button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
                     break;
                 default:
                     html += '<div class="dropdown"><a class="dropdown-toggle" role="button" data-toggle="dropdown"  href="javascript:;">Dropdown<b class="caret"></b></a>';
@@ -27,24 +27,24 @@ ctrls.directive('bsDropdown', function ($compile) {
                 }
             }
             scope.selectVal = function (item) {
-                switch (attrs.menuType) {
-                    case "button":
-                        $('button.button-label', element).html(item.name);
-                        break;
-                    default:
-                        $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
-                        break;
-                }
-                scope.doSelect({
-                    selectedVal: item.id
-                });
-                if (item.callback && typeof item.callback === 'function'){
-                    item.callback();
+                if (item !== undefined) {
+                    switch (attrs.menuType) {
+                        case "button":
+                            $('button.button-label', element).html(item.name);
+                            break;
+                        default:
+                            $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
+                            break;
+                    }
+                    scope.doSelect({
+                        selectedVal: item.id
+                    });
+                    if (item.callback && typeof item.callback === 'function'){
+                        item.callback();
+                    }
                 }
             };
             scope.selectVal(scope.bSelectedItem);
-            
-
         }
     };
 });

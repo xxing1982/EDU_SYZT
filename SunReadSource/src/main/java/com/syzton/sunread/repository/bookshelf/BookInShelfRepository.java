@@ -18,12 +18,18 @@ import com.syzton.sunread.model.bookshelf.Bookshelf;
  * @Author Morgan-Leon
  */
 public interface BookInShelfRepository extends JpaRepository<BookInShelf,Long>,QueryDslPredicateExecutor<BookInShelf>{
-	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) ORDER BY b.id DESC")
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND b.deleted=0 ORDER BY b.id DESC")
 	ArrayList<BookInShelf> findByBookShelf(@Param("bookshelf")Bookshelf bookshelf);
+	
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND b.deleted=0")
 	Page<BookInShelf> findByBookshelf(Bookshelf bookshelf,Pageable pageable);
-	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND bookId=(:bookId)")
+	
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND bookId=(:bookId) AND b.deleted=0")
 	BookInShelf findOneByBookshelfAndBookId(@Param("bookshelf")Bookshelf bookshelf,@Param("bookId")Long bookId);
-	ArrayList<BookInShelf> findByBookId(Long booId);
-	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE b.bookshelf = (:studentId) AND b.creationTime between (:startTime) AND (:endTime)")
-	ArrayList<BookInShelf> findByStudentIdAndSemester(@Param("studentId")Long studentId, @Param("startTime")DateTime startTime, @Param("endTime")DateTime endTime);
+	
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookId=(:bookId) AND b.deleted=0")
+	ArrayList<BookInShelf> findByBookId(Long bookId);
+	
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE b.bookshelf = (:bookshelf) AND b.creationTime between (:startTime) AND (:endTime)")
+	ArrayList<BookInShelf> findByStudentIdAndSemester(@Param("bookshelf")Bookshelf bookshelf, @Param("startTime")DateTime startTime, @Param("endTime")DateTime endTime);
 }

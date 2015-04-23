@@ -51,6 +51,11 @@ public class BookInShelfController {
     	this.service = service;    	
     }
     
+    @Autowired
+    public void SemesterServiceController(SemesterService semesterService){
+    	this.semesterService = semesterService;    	
+    }
+    
 //Add a Book to bookshelf    
     @RequestMapping(value = "/bookshelf/{id}/books/{bookId}/bookinshelf", method = RequestMethod.POST)
     @ResponseBody
@@ -149,6 +154,8 @@ public class BookInShelfController {
     	DateTime endTime = semester.getEndTime(); 
     	
         ArrayList<BookInShelf> founds = service.findByStudentIdAndSemester(studentId, startTime,endTime);
+        if ( founds.size() == 0 ) { throw new NotFoundException("Student with ID :"+studentId + " and semester with ID :"+semesterId); }
+        
         LOGGER.debug("Found to-do entry with information: {}", founds);
         return createBookshelfStatisticsDTO(founds,startTime,endTime);
     }
@@ -161,6 +168,11 @@ public class BookInShelfController {
 		startTime = startTime.dayOfMonth().withMinimumValue().toDateTime();
 		endTime = endTime.dayOfMonth().withMaximumValue().toDateTime();
 		
+		month = new ArrayList<DateTime>();
+		monthly = new ArrayList<String>();
+		monthlyVerified = new ArrayList<Integer>();
+		monthlyPoints = new ArrayList<Integer>();
+		
 		for (int i = 0; i < booksInShelf.size(); i++) {
 			month.add(startTime.plusMonths(i));
 			monthly.add(month.get(i).toString());
@@ -169,6 +181,7 @@ public class BookInShelfController {
 			semesterPoints+=monthlyPoints.get(i);
 		}
 		
+		dto.setSemesterReadNum(booksInShelf.size());
 		dto.setMonthly(monthly);
 		dto.setMonthlyVerified(monthlyVerified);
 		dto.setMonthlyPoints(monthlyPoints);
@@ -182,7 +195,7 @@ public class BookInShelfController {
     public int bookNumDuration(ArrayList<BookInShelf> booksInShelfs, DateTime fromDate, DateTime toDate){
 		int count = 0;
     	for (BookInShelf bookInShelf : booksInShelfs) {
-    		if(isInDuration(bookInShelf.getVerifiedTime(), fromDate, toDate))
+    		if( bookInShelf.getVerifiedTime() != null && isInDuration(bookInShelf.getVerifiedTime(), fromDate, toDate))
     			count++;
 		}
     	return count;
@@ -191,7 +204,7 @@ public class BookInShelfController {
     public int bookPointsDuration(ArrayList<BookInShelf> bookInShelfs, DateTime fromDate, DateTime toDate) {
 		int points = 0;
 		for (BookInShelf bookInShelf : bookInShelfs) {
-    		if(isInDuration(bookInShelf.getVerifiedTime(), fromDate, toDate))
+    		if(bookInShelf.getVerifiedTime() != null && isInDuration(bookInShelf.getVerifiedTime(), fromDate, toDate))
     			points+= bookInShelf.getPoint();
 		}
 		return points;

@@ -40,7 +40,11 @@ ctrls.controller("readingCenterTestSubjectiveController", ['$scope', '$rootScope
 				$scope.myAnswer.questions = dataquestion;
 				for (var i = 0; i < data.length; i++) {
 					if (data[i].content == undefined ||data[i].content.length < 20) {
-						alert("题目：" + data[i].topic + "长度少于20！");
+						//alert("题目：" + data[i].topic + "长度少于20！");
+						$rootScope.modal = {};
+						$rootScope.modal.title="提示";
+						$rootScope.modal.content="题目：" + data[i].topic + "长度少于20！";
+						$('#alert-modal').modal();
 						return;
 					};
 					answer = {};
