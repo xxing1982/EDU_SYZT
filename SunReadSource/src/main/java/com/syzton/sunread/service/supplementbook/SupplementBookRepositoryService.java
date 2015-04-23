@@ -2,7 +2,9 @@ package com.syzton.sunread.service.supplementbook;
 
 import com.syzton.sunread.dto.supplementbook.SupplementBookDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.supplementbook.SupplementBook;
+import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.supplementbook.SupplementBookRepository;
 
 import org.joda.time.DateTime;
@@ -21,10 +23,12 @@ public class SupplementBookRepositoryService implements SupplementBookService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SupplementBookRepositoryService.class);
     private SupplementBookRepository repository;
+    private BookRepository bookRepository;
 
     @Autowired
-    public SupplementBookRepositoryService(SupplementBookRepository repository) {
+    public SupplementBookRepositoryService(SupplementBookRepository repository,BookRepository bookRepository) {
         this.repository = repository;
+        this.bookRepository = bookRepository;
     }
 
     @Override
@@ -32,12 +36,23 @@ public class SupplementBookRepositoryService implements SupplementBookService {
         LOGGER.debug("Adding a new SupplementBook entry with information: {}", added);
         DateTime date = new DateTime(added.getPublicationDate());
         
-        SupplementBook bookModel = SupplementBook.getBuilder(added.getLanguage()
-        		,added.getAuthor(),added.getPublisher(),date
-        		,added.getIsbn(), added.getName())
-                .description(added.getDescription())
-                .build();
-        return repository.save(bookModel);
+        Book book = bookRepository.findByIsbn(added.getIsbn());
+        if(book == null){
+	        SupplementBook bookModel = SupplementBook.getBuilder(added.getLanguage()
+	        		,added.getAuthor(),added.getPublisher(),date
+	        		,added.getIsbn(), added.getName())
+	                .description(added.getDescription())
+	                .build();
+	        return repository.save(bookModel);
+        }
+        else{
+	        SupplementBook bookModel = SupplementBook.getBuilder(added.getLanguage()
+	        		,added.getAuthor(),added.getPublisher(),date
+	        		,"", added.getName())
+	                .description(added.getDescription())
+	                .build();
+	        return bookModel;
+        }
     }
 
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})

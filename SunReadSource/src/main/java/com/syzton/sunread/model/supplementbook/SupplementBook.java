@@ -134,7 +134,7 @@ public class SupplementBook extends AbstractEntity{
         dto.setPublisher(model.getPublisher());
         dto.setLanguage(model.getLanguage());
         dto.setDescription(model.getDescription());
-        dto.setPublicationDate(model.getPublicationDate().getMillis());
+        dto.setPublicationDate(model.getPublicationDate().toDate());
         return dto;
     }
     @Override

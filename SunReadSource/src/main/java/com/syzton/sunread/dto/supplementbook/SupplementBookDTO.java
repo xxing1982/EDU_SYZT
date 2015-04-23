@@ -1,5 +1,9 @@
 package com.syzton.sunread.dto.supplementbook;
 
+import java.util.Date;
+
+import org.joda.time.DateTime;
+
 /*
  * @Data 2015/03/13
  * @Author Morgan-Leon
@@ -20,9 +24,9 @@ public class SupplementBookDTO {
 
 	    private String description;
 
-	    private Long publicationDate;
+	    private Date publicationDate;
 
-	    public Long getPublicationDate() {
+	    public Date getPublicationDate() {
 	        return publicationDate;
 	    }
 
@@ -42,7 +46,7 @@ public class SupplementBookDTO {
 			this.publisher = publisher;
 		}
 
-		public void setPublicationDate(Long publicationDate) {
+		public void setPublicationDate(Date publicationDate) {
 	        this.publicationDate = publicationDate;
 	    }
 

@@ -42,10 +42,10 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     $scope.selectBookAttributes = function(){
           unreadBooksALL = new Array();
           readBooksALL = new Array();
-        console.log($scope.selected_status);
+        // console.log($scope.selected_status);
         // $scope.bookInShelf = BookInShelf.get({id:$rootScope.id,page:0,size:size},function(){
         var bookshelf = Bookshelf.get({id:$rootScope.id},function(){
-          console.log(bookshelf.booksInShelf);
+          // console.log(bookshelf.booksInShelf);
           $scope.shelf = bookshelf;
           var content = bookshelf.booksInShelf;
           for(var i = 0; i < content.length; i++){
@@ -101,7 +101,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         return 0;
       for(var i=0; i<booksALL.length&&i<size;i++)
         books.push(booksALL[i]);
-      console.log(books);
+      // console.log(books);
       return books.length;
    };
 
@@ -132,7 +132,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
 
 //DELETE A BOOK IN SHELF
     $scope.dropBookFromShelf = function(book){
-        console.log(book.id);
+        // console.log(book.id);
         $scope.dropBook = DropBookFromShelf.remove({id:book.id});
         if(typeof($scope.dropBook) === "undefined"){
             alert("删除失败");
@@ -167,15 +167,15 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         $rootScope.exam.typeName = "我的书架 > 词汇训练";
     }
 
-    
+
     // Image uploader
     $scope.dropzone = Dropzone(config.NOTEPIC, function(url){
         $scope.noteTake.image = url;
     });
-        
+
     $scope.takeNoteByBookinshelf = function(bookinshelf){
         var bookDetail = BookDetail.get({ id: bookinshelf.bookId }, function(){
-            console.log(bookDetail);
+            // console.log(bookDetail);
 
             // Initlizate the note entity
             $scope.noteTake = new NoteTake(bookDetail);

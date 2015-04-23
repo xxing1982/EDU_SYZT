@@ -41,6 +41,25 @@
     background-color: #FFAF25;
 }
 
+.btn-blue
+{
+    border: 1px #6c82a0 solid;
+    background-color: #FFFFFF;
+    color: #6c82a0;
+}
+
+.btn-blue:hover
+{
+    background-color: #F0F0F0;
+    color: #6c82a0;
+}
+
+.btn-blue:focus
+{
+    color: #6c82a0;
+    background-color: #F0F0F0;
+}
+
 .btn-green
 {
     border: 1px #B6D023 solid;
