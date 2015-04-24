@@ -26,8 +26,10 @@
 * Path for readingsea image： /pic/readingSea
 
 # Images PSD server:
-* Server Path: 			http://pan.baidu.com/s/1jGBZiM6
+* Path for student:     http://pan.baidu.com/s/1jGBZiM6
 * PSW:					r6nu
+* Path for teacher: 	http://pan.baidu.com/s/1eQzXdIU
+* PSW:					ribf
 
 # EDU_SYZT reference
 
