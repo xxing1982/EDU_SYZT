@@ -1,7 +1,7 @@
 //readingCenterAddBookPopularReadingCtrl.js
 
-ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$rootScope','$stateParams','Pageable','ConditionSearch','AddbookToShelf'
-        ,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch','config',function ($scope,$rootScope,$stateParams,Pageable,ConditionSearch,AddbookToShelf
+ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$rootScope','$stateParams','Pageable','ConditionSearch','JoinShelf'
+        ,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch','config',function ($scope,$rootScope,$stateParams,Pageable,ConditionSearch,JoinShelf
                                                          ,WeeklyHotSearch,MonthlyHotSearch,YearlyHotSearch,config) {
 	$scope.name='阅读中心->添加书籍->热门阅读';
 
@@ -116,7 +116,7 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$roo
          $scope.createPageable(WeeklyHotSearch);
 	};
 
-    $scope.searchMonthly = function(){
+  $scope.searchMonthly = function(){
 
         $scope.createPageable(MonthlyHotSearch);
 	};
@@ -125,17 +125,13 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$roo
   $scope.searchYearly = function(){
 
       $scope.createPageable(YearlyHotSearch);
-};
-    $scope.addBooktoShelf = function(terms){
-        console.log(terms);
-        var bookId = terms.id;
-        var bookInShelf = {
-            bookAttribute: false,
-            readState: false
-            }
-        console.log(bookInShelf);
-        AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf);
     };
+
+  $scope.addBooktoShelf = function(terms){
+    var addBook = new JoinShelf();
+    addBook.joinShelf(terms);
+  } ;
+
 
     $scope.imageServer = config.IMAGESERVER;
 

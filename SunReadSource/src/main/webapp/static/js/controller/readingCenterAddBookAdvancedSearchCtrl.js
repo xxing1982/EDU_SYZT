@@ -1,13 +1,13 @@
 //readingCenterAddBookAdvancedSearchCtrl.jsc
 ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$rootScope','$stateParams','Pageable',
-        'ConditionSearch','QuickSearch','AddbookToShelf','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,AddbookToShelf,config) {
+        'ConditionSearch','QuickSearch','JoinShelf','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,JoinShelf,config) {
 
 
 //    $scope.searchContent="";
 
     var pageSize = 4;
     var searchTerm='isbn';
-            
+
     $scope.searchArguments = {
         level:0,
         category:0,
@@ -20,7 +20,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         pointRange:0,
         searchTerm:""
       }
-    
+
 //    $scope.searchContent = searchContent;
     $scope.statuses_grade = [{
         id: 0,
@@ -74,7 +74,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         callback: function(){$scope.search($scope.searchArguments)}
     }];
     $scope.selected_status = 0;
-            
+
     $scope.createPageable = function (){
         $scope.searchPageable = new Pageable();
 
@@ -84,7 +84,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         $scope.searchPageable.arguments=$scope.searchArguments;
         // Set the startPage and length of number page array
         console.log($scope.searchArguments);
-        
+
         $scope.searchPageable.pageNumbers.startPage = 1;
         $scope.searchPageable.pageNumbers.content.length = 8;
         // Set the placeholder elements
@@ -92,7 +92,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
         // Build the pageable object
         $scope.searchPageable.build(ConditionSearch);
-        
+
         $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
         console.log($scope.searchPageable);
     }
@@ -115,24 +115,11 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
 	};
 
-    $scope.addBooktoShelf = function(terms){
-        console.log(terms);
-        var bookId = terms.id;
-        var bookInShelf = {
-            bookAttribute: false,
-            readState: false
-            }
-        console.log(XMLHttpRequest.state);
-        try{
-             AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf)
-             alert("添加成功");
-             //throw new Error("添加失败");
-        }
-        catch(e){
+  $scope.addBooktoShelf = function(terms){
+    var addBook = new JoinShelf();
+    addBook.joinShelf(terms);
+  } ;
 
-            alert(e);
-        }
-    };
 
 if($stateParams.searchTerm!== ""){
      $scope.searchByName($stateParams.searchTerm);

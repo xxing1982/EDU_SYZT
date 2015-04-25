@@ -1,5 +1,6 @@
 //readingCenterAddBookQuickSearchCtrl.js
-ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$scope','AddbookToShelf','QuickSearch','config',function ($rootScope,$scope,AddbookToShelf,QuickSearch,config) {
+ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$scope','QuickSearch','config','JoinShelf',
+																											function ($rootScope,$scope,QuickSearch,config,JoinShelf) {
 	$scope.name='阅读中心->添加书籍->快速查找';
 
     var pageSize = 3;
@@ -23,17 +24,6 @@ ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$sc
     $scope.resource = resource;
     $scope.pointRange = pointRange;
 
-    // $scope.hots=WeeklyHotSearch.get({page:0,size:3,level:$scope.level,category:$scope.category
-    //                                             ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-    //                                             ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:pointRange},function(){
-    //         console.log($scope.popularSearch)
-    //     });
-		//
-    // $scope.recommends=WeeklyRecommendSearch.get({page:0,size:3,level:$scope.level,category:$scope.category
-    //                                             ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-    //                                             ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:pointRange},function(){
-    //         console.log($scope.recommendSearch)
-    //     });
 
 		$scope.hots=QuickSearch.get({page:0,size:3,sortBy:"statistic.readNums"},function(){
 			console.log($scope.hots);
@@ -43,16 +33,11 @@ ctrls.controller("readingCenterAddBookQuickSearchController", ['$rootScope','$sc
 			console.log($scope.hots);
 		})
 
-    $scope.addBooktoShelf = function(terms){
-        console.log(terms);
-        var bookId = terms.id;
-        var bookInShelf = {
-            bookAttribute: false,
-            readState: false
-            }
-        console.log(bookInShelf);
-        AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf);
-    };
+		$scope.addBooktoShelf = function(terms){
+			var addBook = new JoinShelf();
+			addBook.joinShelf(terms);
+		} ;
+
 
     $scope.searchToAdvance=function(searchContent){
         window.location.href="#readingCenter/addBook/advanced/"+searchContent;

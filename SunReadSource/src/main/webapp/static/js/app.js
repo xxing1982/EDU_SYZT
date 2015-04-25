@@ -6,14 +6,14 @@
 var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourControllers', 'nourConfig', 'userServices']);
 
 // router config
-routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider, $routeProvider) {
+routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider, $routeProvider,$httpProvider) {
 
     $urlRouterProvider
     .when('/readingCenter', '/readingCenter/myBookshelf')
     .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
     .otherwise('/');
+    // $httpProvider.responseInterceptors.push('SecurityHttpInterceptor');
 
-    
     $stateProvider
         //main page
         .state('main', {
@@ -184,12 +184,15 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/personalProfile.html",
             controller: "personalProfileController"
         })
-            //personal show
-            .state('personalShow', {
-                url: '/personalShow',
-                templateUrl: "partials/personalShow.html",
-                controller: "personalShowController"
-            });
+        //personal show
+        .state('personalShow', {
+            url: '/personalShow',
+            templateUrl: "partials/personalShow.html",
+            controller: "personalShowController"
+        });
+
+
+
         }]);
 
 routeApp.run(['$rootScope', 'Student', function($rootScope, Student){
@@ -197,7 +200,7 @@ routeApp.run(['$rootScope', 'Student', function($rootScope, Student){
         window.location.href="/protype/login.html";
     };
     $rootScope.id = sessionStorage.getItem("userId");
-    
+
     //student info
 //    $rootScope.student = new Object();
 //    if ( $rootScope.student $rootScope=== undefined) {
@@ -205,7 +208,7 @@ routeApp.run(['$rootScope', 'Student', function($rootScope, Student){
 //            $rootScope.student = data;
 //        });
 //    }
-    
+
     //get token
     //sessionStorage.getItem("access_token")
 }]);

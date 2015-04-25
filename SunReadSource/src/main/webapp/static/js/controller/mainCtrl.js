@@ -1,6 +1,6 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
-                                             ,'examServices', 'classServices', 'questionServices','reviewServices'
+                                             ,'examServices', 'classServices', 'questionServices','reviewServices','joinShelfServices'
                                              ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','oneBookInShelfServices'
                                              ,'weeklyHotServices','monthlyHotServices','yearlyHotServices','weeklyRecommendServices','monthlyRecommendServices','yearlyRecommendServices'
@@ -114,5 +114,3 @@ ctrls.filter('formatParagraph', function(){
    return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
  };
 });
-
-

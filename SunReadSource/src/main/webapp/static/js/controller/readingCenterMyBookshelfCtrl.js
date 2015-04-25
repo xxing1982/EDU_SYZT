@@ -133,15 +133,16 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
 //DELETE A BOOK IN SHELF
     $scope.dropBookFromShelf = function(book){
         // console.log(book.id);
-        $scope.dropBook = DropBookFromShelf.remove({id:book.id});
-        if(typeof($scope.dropBook) === "undefined"){
-            alert("删除失败");
-        }
-        else{
-            alert("移除成功");
-            $scope.selectBookAttributes();
-            // location.reload();
-        }
+        $scope.dropBook = DropBookFromShelf.remove({id:book.id},function(){
+          if(typeof($scope.dropBook) === "undefined"){
+              alert("删除失败");
+          }
+          else{
+              alert("移除成功");
+              $scope.selectBookAttributes();
+          }
+        });
+
     };
 
     $rootScope.exam = {};
