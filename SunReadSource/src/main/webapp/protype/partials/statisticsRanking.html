@@ -13,10 +13,13 @@
         </div>
         </div>
         
+        <!-- Place holder -->
+        <div class="title"></div>
+
         <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="col-md-12 title">
-            <div role="tabpanel" class="tab-pane fade in active" id="receive">
+        <div class="tab-content row buttom-separator">
+            <div class="col-md-12">
+            <div role="tabpanel" class="tab-pane fade in active col-md-12" id="receive">
               <table class="table text-center">
                 <thead>
                   <tr>
@@ -28,21 +31,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="n in [1,2,3,4,5,6,7,8,9]">
-                    <td>{{n}}</td>
-                    <td>顾小北</td>
-                    <td>233</td>
-                    <td>90</td>
-                    <td>2</td>
+                  <tr ng-repeat="hotreader in hotreaderLoadable.entities.content">
+                    <td>{{$index + 1}}</td>
+                    <td>{{hotreader.username}}</td>
+                    <td>{{hotreader.statistic.point}}</td>
+                    <td>{{hotreader.statistic.coin}}</td>
+                    <td>{{hotreader.statistic.level}}</td>
                   </tr>
                   <tr>
                 </tbody>
               </table>
+ 
             </div>
             </div>
         </div>
-        
+        <div class="row bottom" ng-click="hotreaderLoadable.get(arguments)">{{ hotreaderLoadable.loadingState }}</div>
+
 	</div>
+
     </div>
 </div>
 <script>

@@ -1,57 +1,68 @@
 /*
+    Loadable object work with load more buttom and
+    Spring pageable
 */
 var Loadable = function(){
 
 }
 
-Loadable.prototype.page= 1;
+/*
+    The properites to of pageable
+*/
+Loadable.prototype.page = 0;
 Loadable.prototype.size = 9;
-Loadable.prototype.arguments = {};
+Loadable.prototype.finished = false;
 Loadable.prototype.entities = new Object();
-Loadable.prototype.loadingState = "加载更多";
-
 Loadable.prototype.stateTexts = { more : "加载更多", loading: "更多加载中...", nomore: "没有了"};
+Loadable.prototype.loadingState = Loadable.prototype.stateTexts.more;
+Loadable.prototype.arguments = {};
 
-// The build method to initlizate the pageable object                                              //
+// The build method to initlizate the loadable object
 Loadable.prototype.build = function(Entity){
 
     // The resource and the entities
     this.Entity = Entity;
 
     // Initlizate the entities
-    this.entities = {content: new Array()};
+    this.entities = { content: new Array() };
 
 }
 
-Loadable.prototype.ShowMore = function (arguments,page,size){
+Loadable.prototype.get = function (callback){
 
+    // Make the reference to the entities
+    var entities = this.entities;
+    
+    // Make the reference to the stateTexts
     var stateTexts = this.stateTexts;
-//
-//    var entities = this.entities;
+    
+    // Get the entities of new page
     var newPage = this.Entity.get(
-        $.extend({}, {page: page - 1,size: this.size}, this.arguments), function(data){
+        $.extend({}, {page: this.page, size: this.size}, this.arguments), function(){
 
             /*
                 Check the lastPage flag and set stateTexts
             */
-
             if (newPage.lastPage){
 
                 // Get the last page of the Notes,
                 // Change the state of the loading state and turn on finished
                 this.loadingState = stateTexts.nomore;
-                console.log(this.loadingState);
+                if (!this.finished) {
+                    entities.content = entities.content.concat(newPage.content);
+                }
+                this.finished = true;
+                
             } else {
+                this.finished = false;
                 this.loadingState = stateTexts.more;
-//                this.entities.content
+                entities.content = entities.content.concat(newPage.content);
                 this.page ++;
             }
-           this.entities = newPage;
         });
-    console.log(newPage);
-
-
-    console.log(this.entities.content);
+    
+    // Invoke the callback
+    if (callback && typeof callback === 'function') { callback(); };
 };
 
 angular.module('loadableServices', []).

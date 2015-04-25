@@ -5,7 +5,7 @@ var hotreaderServices = angular.module('hotreaderServices', ['ngResource', "nour
 */
 hotreaderServices.factory('Hotreader', ['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "students/hotreaders/:campusId",
-            {campusId:'@campusId'}, {}
+		return $resource(config.HOST + ":by/:id/hotreaders",
+            {by:'@by', id:'@id'}, {}
         );
 }]);

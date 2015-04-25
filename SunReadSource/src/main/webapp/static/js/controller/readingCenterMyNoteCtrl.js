@@ -7,7 +7,7 @@ ctrls.controller("readingCenterMyNoteController", ['$rootScope', '$scope', 'Note
 
         // Get the user id form rootScope
         $scope.arguments = { by: "users",
-                             id: $rootScope.id};
+                             id: $rootScope.id };
 
         // Initlizate the noteView entity
         $scope.noteView = new NoteView();
