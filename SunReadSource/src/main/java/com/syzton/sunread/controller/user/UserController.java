@@ -206,15 +206,30 @@ public class UserController extends BaseController {
         userService.deleteByTeacherId(teacherId);
     }
 
-    @RequestMapping(value = "/students/hotreaders/{campusId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/campus/{campusId}/hotreaders", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Student> hotReaders(@PathVariable("campusId") Long campusId,
+    public PageResource<Student> hotReadersInCampus(@PathVariable("campusId") Long campusId,
                                             @RequestParam("page") int page,
                                             @RequestParam("size") int size,
                                             @RequestParam(value = "sortBy", required = false) String sortBy) {
 
         Pageable pageable = this.getPageable(page,size,"statistic.testPasses","desc");
         Page<Student> hotReaders = userService.hotReadersInCampus(campusId,pageable);
+
+        return new PageResource<>(hotReaders,"page","size") ;
+
+
+    }
+    
+    @RequestMapping(value = "/clazz/{clazzId}/hotreaders", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Student> hotReadersInClazz(@PathVariable("clazzId") Long clazzId,
+                                            @RequestParam("page") int page,
+                                            @RequestParam("size") int size,
+                                            @RequestParam(value = "sortBy", required = false) String sortBy) {
+
+        Pageable pageable = this.getPageable(page,size,"statistic.testPasses","desc");
+        Page<Student> hotReaders = userService.hotReadersInClazz(clazzId,pageable);
 
         return new PageResource<>(hotReaders,"page","size") ;
 

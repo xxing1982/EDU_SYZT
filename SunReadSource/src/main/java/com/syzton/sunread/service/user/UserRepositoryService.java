@@ -329,6 +329,16 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
         return studentPage;
     }
+    
+
+    @Override
+    public Page<Student> hotReadersInClazz(long clazzId, Pageable pageable) {
+
+
+        Page<Student> studentPage = studentRepository.findByClazzId(clazzId, pageable);
+
+        return studentPage;
+    }
 
     @Override
 	public User findByUserId(String userId) {
