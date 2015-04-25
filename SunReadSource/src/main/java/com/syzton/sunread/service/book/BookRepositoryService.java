@@ -72,6 +72,27 @@ public class BookRepositoryService implements BookService {
         return bookDTO;
     }
 
+    @Transactional
+    @Override
+    public BookDTO update(BookDTO bookDTO,Long bookId) {
+
+        Book exits = bookRepo.findOne(bookId);
+        if(exits == null){
+            throw new NotFoundException("No book found with id: " + bookId);
+        }
+
+        BookAssembler assembler = new BookAssembler();
+
+        assembler.fillBook(bookDTO, exits);
+
+        assembler.fillBookExta(bookDTO.getExtra(),exits.getExtra());
+
+        exits = bookRepo.save(exits);
+        bookDTO.setId(exits.getId());
+        return bookDTO;
+    }
+
+
     @Override
     public Book findById(Long id) {
         LOGGER.debug("Finding a book entry with id: {}", id);

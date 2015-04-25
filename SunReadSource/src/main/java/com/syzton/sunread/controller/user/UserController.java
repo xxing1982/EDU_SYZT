@@ -211,10 +211,58 @@ public class UserController extends BaseController {
     public PageResource<Student> hotReaders(@PathVariable("campusId") Long campusId,
                                             @RequestParam("page") int page,
                                             @RequestParam("size") int size,
-                                            @RequestParam(value = "sortBy", required = false) String sortBy) {
+                                            @RequestParam(value = "sortBy", required = false) String sortBy,
+                                            @RequestParam(value = "direction", required = false) String direction) {
 
         Pageable pageable = this.getPageable(page,size,"statistic.testPasses","desc");
-        Page<Student> hotReaders = userService.hotReadersInCampus(campusId,pageable);
+        Page<Student> hotReaders = userService.hotReadersInCampus(campusId, pageable);
+
+        return new PageResource<>(hotReaders,"page","size") ;
+
+
+    }
+    @RequestMapping(value = "/students/campuses/{campusId}/orders", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Student> hotReadersInCampus(@PathVariable("campusId") Long campusId,
+                                            @RequestParam("page") int page,
+                                            @RequestParam("size") int size,
+                                            @RequestParam(value = "sortBy", required = false) String sortBy,
+                                            @RequestParam(value = "direction", required = false) String direction) {
+        sortBy = sortBy == null ? "statistic.point" : sortBy;
+
+        Pageable pageable = this.getPageable(page,size,sortBy,direction);
+        Page<Student> hotReaders = userService.hotReadersInCampus(campusId, pageable);
+
+        return new PageResource<>(hotReaders,"page","size") ;
+
+
+    }
+
+    @RequestMapping(value = "/students/clazzs/{clazzId}/orders", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Student> hotReadersInClazz(@PathVariable("clazzId") Long clazzId,
+                                                    @RequestParam("page") int page,
+                                                    @RequestParam("size") int size,
+                                                    @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                    @RequestParam(value = "direction", required = false) String direction) {
+        sortBy = sortBy == null ? "statistic.point" : sortBy;
+        Pageable pageable = this.getPageable(page,size,sortBy,direction);
+        Page<Student> hotReaders = userService.hotReadersInClazz(clazzId, pageable);
+
+        return new PageResource<>(hotReaders,"page","size") ;
+
+
+    }
+    @RequestMapping(value = "/students/grades/{gradeId}/orders", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Student> hotReadersInGrade(@PathVariable("gradeId") Long gradeId,
+                                                   @RequestParam("page") int page,
+                                                   @RequestParam("size") int size,
+                                                   @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                   @RequestParam(value = "direction", required = false) String direction) {
+        sortBy = sortBy == null ? "statistic.point" : sortBy;
+        Pageable pageable = this.getPageable(page,size,sortBy,direction);
+        Page<Student> hotReaders = userService.hotReadersInGrade(gradeId, pageable);
 
         return new PageResource<>(hotReaders,"page","size") ;
 

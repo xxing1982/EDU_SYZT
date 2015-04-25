@@ -17,6 +17,8 @@ public interface BookService {
 
     public BookDTO add(BookDTO bookDTO);
 
+    public BookDTO update(BookDTO bookDTO,Long bookId);
+
     public Book findById(Long id);
 
     public Book deleteById(Long id);

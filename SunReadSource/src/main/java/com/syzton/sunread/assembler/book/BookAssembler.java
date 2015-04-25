@@ -36,6 +36,14 @@ public class BookAssembler {
         BookExtra extra = this.fromDTOToExtra(bookDTO.getExtra());
 
         Book book = new Book();
+        fillBook(bookDTO, book);
+        book.setExtra(extra);
+
+
+        return book;
+    }
+
+    public void fillBook(BookDTO bookDTO, Book book) {
         book.setName(bookDTO.getName());
         book.setIsbn(bookDTO.getIsbn());
         book.setAuthor(bookDTO.getAuthor());
@@ -52,15 +60,15 @@ public class BookAssembler {
         book.setHighPrice(bookDTO.getHighPrice());
         book.setEvaluationNum(bookDTO.getEvaluationNum());
         book.setBinding(bookDTO.getBinding());
-
-        book.setExtra(extra);
-
-
-        return book;
     }
 
     public BookExtra fromDTOToExtra(final BookExtraDTO bookExtraDTO){
         BookExtra extra = new BookExtra();
+        fillBookExta(bookExtraDTO, extra);
+        return extra;
+    }
+
+    public void fillBookExta(BookExtraDTO bookExtraDTO, BookExtra extra) {
         extra.setLanguage(bookExtraDTO.getLanguage());
         extra.setLevel(bookExtraDTO.getLevel());
         extra.setLiterature(bookExtraDTO.getLiterature());
@@ -68,6 +76,5 @@ public class BookAssembler {
         extra.setCategory(bookExtraDTO.getCategory());
         extra.setAgeRange(bookExtraDTO.getAgeRange());
         extra.setPointRange(bookExtraDTO.getPointRange());
-        return extra;
     }
 }

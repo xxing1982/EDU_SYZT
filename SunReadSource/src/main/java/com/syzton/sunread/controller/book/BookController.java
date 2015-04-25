@@ -53,7 +53,17 @@ public class BookController extends BaseController {
         return added;
     }
 
-//    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    @RequestMapping(value = "/books/{bookId}", method = RequestMethod.PUT)
+    @ResponseBody
+    public BookDTO update(@Valid @RequestBody BookDTO bookDTO,@PathVariable("bookId") long bookId) {
+        LOGGER.debug("Adding a new book entry with information: {}", bookDTO);
+
+        BookDTO updated = bookService.update(bookDTO,bookId);
+
+        LOGGER.debug("Added a book entry with information: {}", updated);
+
+        return updated;
+    }//    @RequestMapping(value = "/books", method = RequestMethod.GET)
 //    @ResponseBody
 //    public PageResource<Book> findByCategories(@RequestParam(value = "categories", required = false) String categories,
 //                                               @RequestParam("page") int page,
