@@ -223,7 +223,7 @@ public class UserController extends BaseController {
     }
     @RequestMapping(value = "/students/campuses/{campusId}/orders", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Student> hotReadersInCampus(@PathVariable("campusId") Long campusId,
+    public PageResource<Student> ordersInCampus(@PathVariable("campusId") Long campusId,
                                             @RequestParam("page") int page,
                                             @RequestParam("size") int size,
                                             @RequestParam(value = "sortBy", required = false) String sortBy,
@@ -240,7 +240,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/students/clazzs/{clazzId}/orders", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Student> hotReadersInClazz(@PathVariable("clazzId") Long clazzId,
+    public PageResource<Student> ordersInClazz(@PathVariable("clazzId") Long clazzId,
                                                     @RequestParam("page") int page,
                                                     @RequestParam("size") int size,
                                                     @RequestParam(value = "sortBy", required = false) String sortBy,
@@ -255,7 +255,7 @@ public class UserController extends BaseController {
     }
     @RequestMapping(value = "/students/grades/{gradeId}/orders", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Student> hotReadersInGrade(@PathVariable("gradeId") Long gradeId,
+    public PageResource<Student> ordersInGrade(@PathVariable("gradeId") Long gradeId,
                                                    @RequestParam("page") int page,
                                                    @RequestParam("size") int size,
                                                    @RequestParam(value = "sortBy", required = false) String sortBy,

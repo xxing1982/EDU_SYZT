@@ -54,7 +54,11 @@ public interface UserService {
     public Student saveStudent(Student student);
 
     public Page<Student> hotReadersInCampus(long campusId,Pageable pageable);
-    
+
+    public Page<Student> hotReadersInClazz(long clazzId,Pageable pageable);
+
+    public Page<Student> hotReadersInGrade(long clazzId,Pageable pageable);
+
     public List<Student> addStudentsFromExcel(Sheet sheet);
     
     public List<Teacher> addTeachersFromExcel(Sheet sheet);
