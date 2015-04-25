@@ -18,10 +18,6 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
 
     List<Student> findByClazzId(long clazzId);
 
-    Page<Student> findByClazzId(long clazzId,Pageable pageable);
-
-    Page<Student> findByGradeId(long clazzId,Pageable pageable);
-
     Page<Student> findByCampusId(long campusId,Pageable pageable);
 
  }
