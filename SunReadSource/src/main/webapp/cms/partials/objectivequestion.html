@@ -4,21 +4,10 @@
     <div class="col-md-9 leftpart">
 
 	<div class="input-group search">
-	 
-		<input type="text" class="form-control" placeholder="è¯·è¾“å…¥ä¹¦å" ng-model="searchArguments.searchTerm">
-		<span class="input-group-addon" ng-click="searchByName(searchContent)">æœç´¢</span>
-		<span class="input-group-addon" ng-click="addNewBook()">æ·»åŠ æ–°ä¹¦</span>
- 
-		
-		 
-	</div>
-	<div class="input-group search">
-	<form action="http://localhost:8080/api/upload/excel/book" method="POST" enctype="multipart/form-data">  
-    
-    	Excel: <input type="file" name="myfile"/><br/>  
-   
-    	<input type="submit" value="ä»Excelå¯¼å…¥ä¹¦ç±" /> 
-		</form>
+		<input type="text" class="form-control" placeholder="ÇëÊäÈëÊéÃû" ng-model="searchArguments.searchTerm">
+		<span class="input-group-addon" ng-click="searchByName(searchContent)">ËÑË÷</span>
+		<span class="input-group-addon" ng-click="addNewBook()">Ìí¼ÓĞÂÌâ</span>
+		<span class="input-group-addon" ng-click="importFromExcel()">´ÓExcelµ¼ÈëÊÔÌâ</span>
 	</div>
 
 	<div ng-repeat="terms in searchPageable.entities.content">
@@ -28,14 +17,14 @@
             </div>
             <div class="col-md-9">
                 <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
-            <div class="row fsize12"><p>è¯„åˆ†ï¼š{{terms.evaluationNum}}&nbsp;&nbsp;å·²æœ‰<span class="red-text">{{terms.statistic.readNums}}</span>äººé˜…è¯»</p></div>
-                <div class="row fsize12"><p>ä½œè€…ï¼š{{terms.author}}&nbsp;&nbsp;ç‰ˆæƒï¼š{{terms.publisher}} &nbsp;&nbsp;
-                    ç§¯åˆ†:{{terms.point}}&nbsp;&nbsp;ç­‰çº§:{{terms.extra.level}}&nbsp;&nbsp;è´¢å¯Œï¼š{{terms.coin}}</p></div>
+            <div class="row fsize12"><p>ÆÀ·Ö£º{{terms.evaluationNum}}&nbsp;&nbsp;ÒÑÓĞ<span class="red-text">{{terms.statistic.readNums}}</span>ÈËÔÄ¶Á</p></div>
+                <div class="row fsize12"><p>×÷Õß£º{{terms.author}}&nbsp;&nbsp;°æÈ¨£º{{terms.publisher}} &nbsp;&nbsp;
+                    »ı·Ö:{{terms.point}}&nbsp;&nbsp;µÈ¼¶:{{terms.extra.level}}&nbsp;&nbsp;²Æ¸»£º{{terms.coin}}</p></div>
                 <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
                 <div class="row fsize12">
-                    <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">æ›´æ–°</a>&nbsp;&nbsp;
-                    <a href="#" class="btn btn-sm btn-green">åˆ é™¤</a>&nbsp;&nbsp;
-                    <a href="#" class="btn btn-sm btn-green">æ·»åŠ è¯•é¢˜</a>&nbsp;&nbsp;
+                    <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">¸üĞÂ</a>&nbsp;&nbsp;
+                    <a href="#" class="btn btn-sm btn-green">É¾³ı</a>&nbsp;&nbsp;
+                    <a href="#" class="btn btn-sm btn-green">Ìí¼ÓÊÔÌâ</a>&nbsp;&nbsp;
                 </div>
             </div>
         </div>
@@ -55,21 +44,21 @@
         <div class="col-xs-7">
             <!-- Custom page number goes here -->
             <div class="row custom-page-number-group">
-                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page - 1)">ä¸Šä¸€é¡µ</a></div></div>
+                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page - 1)">ÉÏÒ»Ò³</a></div></div>
                 <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
                     <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}"
                     ng-click="searchPageable.showPage(pageNumber)">{{pageNumber}}</a>
                 </div>
-                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page + 1)">ä¸‹ä¸€é¡µ</a></div></div>
+                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page + 1)">ÏÂÒ»Ò³</a></div></div>
             </div>
         </div>
         <div class="col-xs-3">
             <!-- Custom goto page number goes here -->
-<!--            <div class="custom-page-number-group"><a>å»ç¬¬</a><input type="text" class="custom-page-number-input" />é¡µ</div>-->
+<!--            <div class="custom-page-number-group"><a>È¥µÚ</a><input type="text" class="custom-page-number-input" />Ò³</div>-->
                 <div class="custom-page-number-group">
-                    <a ng-click="searchPageable.showPage(goto)">å»ç¬¬</a>
+                    <a ng-click="searchPageable.showPage(goto)">È¥µÚ</a>
                     <input type="number" class="custom-page-number-input" ng-model="goto"/>
-                    <a ng-click="searchPageable.showPage(goto)">é¡µ</a>
+                    <a ng-click="searchPageable.showPage(goto)">Ò³</a>
                 </div>
         </div>
 
@@ -84,10 +73,10 @@
         <div class="row conditionBlock">
            <div class="col-md-12">
                 <div class="row">
-                    <h5>çº§åˆ«åŠç±»åˆ«</h5>
+                    <h5>¼¶±ğ¼°Àà±ğ</h5>
                 </div><!---->
                 <div class="row">
-                   <div class="catogaryText"> <p>å¹´çº§ï¼š </p></div>
+                   <div class="catogaryText"> <p>Äê¼¶£º </p></div>
                    <div class="catogaryBtn">
                     <bs-dropdown data-menu-type="button"
                         select-val="searchArguments.grade = selectedVal"
@@ -98,7 +87,7 @@
                 </div>
 
                  <div class="row">
-                    <div class="catogaryText"> <p>ç±»åˆ«ï¼š </p></div>
+                    <div class="catogaryText"> <p>Àà±ğ£º </p></div>
                    <div class="catogaryBtn">
                     <bs-dropdown data-menu-type="button"
                         select-val="searchArguments.category = selectedVal"
@@ -115,31 +104,31 @@
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
-                    <h5>æµ‹è¯•ç±»å‹</h5>
+                    <h5>²âÊÔÀàĞÍ</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions1" value="0" checked>
-                    æ‰€æœ‰ç±»å‹
+                    ËùÓĞÀàĞÍ
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions2" value="1">
-                    è®¤è¯æµ‹è¯•
+                    ÈÏÖ¤²âÊÔ
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions3" value="2">
-                    è¯æ±‡è®­ç»ƒ
+                    ´Ê»ãÑµÁ·
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions4" value="3">
-                    æ€ç»´è®­ç»ƒ
+                    Ë¼Î¬ÑµÁ·
                   </label>
                 </div>
 
@@ -150,25 +139,25 @@
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
-                    <h5>ç±»å‹</h5>
+                    <h5>ÀàĞÍ</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions1" value="0" checked>
-                    å°è¯´åŠéå°è¯´
+                    Ğ¡Ëµ¼°·ÇĞ¡Ëµ
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions2" value="1">
-                    å°è¯´
+                    Ğ¡Ëµ
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions2" value="2">
-                    éå°è¯´
+                    ·ÇĞ¡Ëµ
                   </label>
                 </div>
             </div>
@@ -178,37 +167,37 @@
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
-                    <h5>ç§¯åˆ†</h5>
+                    <h5>»ı·Ö</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions1" value="0" checked>
-                    å…¨éƒ¨ç§¯åˆ†
+                    È«²¿»ı·Ö
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="1">
-                    0-5ç§¯åˆ†
+                    0-5»ı·Ö
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="2">
-                    6-10ç§¯åˆ†
+                    6-10»ı·Ö
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="3">
-                    10-20ç§¯åˆ†
+                    10-20»ı·Ö
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="4">
-                    20ä»¥ä¸Šç§¯åˆ†
+                    20ÒÔÉÏ»ı·Ö
                   </label>
                 </div>
             </div>
@@ -218,25 +207,25 @@
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
-                    <h5>è¯­è¨€</h5>
+                    <h5>ÓïÑÔ</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.language" name="languageOptions" id="languageOptions1" value="0" checked>
-                    å…¨éƒ¨è¯­è¨€
+                    È«²¿ÓïÑÔ
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.language" name="languageOptions" id="languageOptions2" value="1">
-                    ä¸­æ–‡ä¹¦
+                    ÖĞÎÄÊé
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.language" name="languageOptions" id="languageOptions2" value="2">
-                    è‹±æ–‡ä¹¦
+                    Ó¢ÎÄÊé
                   </label>
                 </div>
             </div>
@@ -246,31 +235,31 @@
            <div class="col-md-2"></div>
            <div class="col-md-10">
                 <div class="row">
-                    <h5>é…å¥—èµ„æº</h5>
+                    <h5>ÅäÌ××ÊÔ´</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions1" value="0" checked>
-                    ä¸é™åˆ¶
+                    ²»ÏŞÖÆ
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="1">
-                    ç”µå­ä¹¦
+                    µç×ÓÊé
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="2">
-                    éŸ³é¢‘
+                    ÒôÆµ
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
                     <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="3">
-                    è§†é¢‘
+                    ÊÓÆµ
                   </label>
                 </div>
 
@@ -287,4 +276,3 @@
 </div><!--row-->
 
 </div>
-

@@ -12,21 +12,28 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         .otherwise('/');
 
      $stateProvider
-        //main page
+        // main page
         .state('main', {
             url: '/',
-            templateUrl: "partials/main.html"
+            templateUrl: "partials/main.html",
+            controller: 'mainController'
         })
-        //book page
+        // book page
         .state('book', {
             url: '/book',
             templateUrl: "partials/book.html",
-            controller: 'bookCtrl'
+            controller: 'readingCenterAddBookAdvancedSearchController'
         })
-        //user page
-        .state('user', {
-            url: '/user',
-            templateUrl: "partials/user.html",
-            controller: 'userCtrl'
-        });
+        // user page
+        .state('student', {
+            url: '/student',
+            templateUrl: "partials/student.html",
+            controller: 'studentCtrl'
+        })
+     	// relation with book question page
+     	.state('objectivequestion', {
+     		url: '/objectivequestion',
+     		templateUrl: "partials/objectivequestion.html",
+     		controller: 'objectiveQuestionCtrl'
+     	});
 }]);
