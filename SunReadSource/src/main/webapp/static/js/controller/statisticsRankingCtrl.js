@@ -10,7 +10,7 @@ ctrls.controller("statisticsRankingController", ['$scope', '$rootScope', 'Studen
         $scope.hotreaderLoadable = new Loadable();
         
         // Set the parameters of loadable
-        $scope.hotreaderLoadable.size = 2;
+        $scope.hotreaderLoadable.size = 10;
         $scope.hotreaderLoadable.page = 0;
     
         // Set the $resource arguments like {by: "books"}

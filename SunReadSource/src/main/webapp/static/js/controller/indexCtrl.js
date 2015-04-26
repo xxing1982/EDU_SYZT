@@ -5,7 +5,7 @@ ctrls.controller('indexCtrl', ['$rootScope', '$scope', '$location','Student', fu
         index: /^\/$/,
         readingCenter: /\/readingCenter.*/,
         readingDynamic: /\/readingDynamic.*/,
-        statisticsSummary: /\/statisticsSummary.*/,
+        statisticsSummary: /\/statistics.*/,
         readingSea: /\/readingSea.*/,
         readingTraining: /\/readingTraining.*/,
         prizeCenter: /\/prizeCenter.*/,
