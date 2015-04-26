@@ -1,0 +1,22 @@
+.prizeTitle {
+
+    font-size: large;
+    margin-top: 4px;
+
+}
+
+.bottom-separator {
+    border-bottom: 1px #D6DEE6 solid;
+    margin-top: 45px;
+}
+
+.giftRow {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px #D6DEE6 solid;
+}
+
+.giftImg {
+    margin-top: -25px;
+    height: 80px;
+}

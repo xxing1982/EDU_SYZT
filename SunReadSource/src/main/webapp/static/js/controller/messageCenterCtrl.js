@@ -33,4 +33,6 @@ ctrls.controller("messageCenterController", ['$scope','SendMessages','GetMessage
     // selected_status will changed simultaneity
     $scope.selected_status = 1;
 
+
+
 }]);
