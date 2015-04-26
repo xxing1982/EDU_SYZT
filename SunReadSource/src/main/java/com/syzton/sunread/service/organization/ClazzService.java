@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import com.syzton.sunread.model.user.Student;
 
 import javassist.NotFoundException;
@@ -33,4 +34,8 @@ public interface ClazzService {
     public int getAveragePointsfromClass(Long clazzId) throws NotFoundException;
     
     public int getAverageReadingBookFromClass(Long clazzId) throws NotFoundException;
+
+    public ClazzSumStatistic getSumClazzStatistic(int grade) throws NotFoundException;
+
+    List<Clazz> findByGrade(int grade);
 }

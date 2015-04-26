@@ -5,6 +5,7 @@ import java.util.List;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.organization.CampusRepository;
@@ -148,4 +149,17 @@ public class ClazzRepositoryService implements ClazzService {
 		}
 		return total/students.size();
 	}
+
+    @Override
+    public ClazzSumStatistic getSumClazzStatistic(int grade) throws NotFoundException{
+
+        ClazzSumStatistic clazzSumStatistic = repository.getSumStatisticClazz(grade);
+
+        return clazzSumStatistic;
+    }
+
+    @Override
+    public List<Clazz> findByGrade(int grade) {
+        return repository.findByGrade(grade);
+    }
 }

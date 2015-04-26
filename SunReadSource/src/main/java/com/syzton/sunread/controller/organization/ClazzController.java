@@ -1,6 +1,8 @@
 package com.syzton.sunread.controller.organization;
 
 import com.syzton.sunread.controller.BaseController;
+import com.syzton.sunread.dto.book.ReviewDTO;
+import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
@@ -24,6 +26,8 @@ import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.service.organization.ClazzService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value="/api")
@@ -131,4 +135,19 @@ public class ClazzController extends BaseController{
 
         return averagePoint;
     }
+
+    @RequestMapping(value = "/grade/{id}/sumstatistic", method = RequestMethod.GET)
+    @ResponseBody
+    public ClazzSumStatistic sumStatistic(@PathVariable("id") int id) throws NotFoundException {
+        return service.getSumClazzStatistic(id);
+
+    }
+    @RequestMapping(value = "/grade/{id}/clazzs", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Clazz> findClazzsByGrade(@PathVariable("id") int id) throws NotFoundException {
+        return service.findByGrade(id);
+
+    }
+
+
 }

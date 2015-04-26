@@ -270,9 +270,11 @@ public class ExamController {
 			student.getStatistic().setPoint(
 					student.getStatistic().getPoint() + book.getPoint());
 			student.getStatistic().increaseTestPasses();
+
 			userService.saveStudent(student);
 			Clazz clazz = clazzRepository.findOne(student.getClazzId());
 			clazz.getClazzStatistic().increaseTotalReads();
+			clazz.getClazzStatistic().setTotalReadWords(clazz.getClazzStatistic().getTotalReadWords() + book.getWordCount());
 			clazzRepository.save(clazz);
 
 			shelfService.updateReadState(studentId, bookId);
