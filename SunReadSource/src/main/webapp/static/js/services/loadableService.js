@@ -36,6 +36,15 @@ Loadable.prototype.get = function (callback){
     // Make the reference to the stateTexts
     var stateTexts = this.stateTexts;
     
+    // Make the reference to the loadingState
+    var loadingState = this.loadingState;
+    
+    // Make the reference to the finished
+    var finished = this.finished;
+
+    // Make the reference to the finished
+    var page = this.page;
+    
     // Get the entities of new page
     var newPage = this.Entity.get(
         $.extend({}, {page: this.page, size: this.size}, this.arguments), function(){
@@ -47,17 +56,17 @@ Loadable.prototype.get = function (callback){
 
                 // Get the last page of the Notes,
                 // Change the state of the loading state and turn on finished
-                this.loadingState = stateTexts.nomore;
+                loadingState = stateTexts.nomore;
                 if (!this.finished) {
                     entities.content = entities.content.concat(newPage.content);
                 }
-                this.finished = true;
+                finished = true;
                 
             } else {
-                this.finished = false;
-                this.loadingState = stateTexts.more;
+                finished = false;
+                loadingState = stateTexts.more;
                 entities.content = entities.content.concat(newPage.content);
-                this.page ++;
+                page ++;
             }
         });
     

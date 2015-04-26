@@ -35,20 +35,20 @@
 			</button>
 			<a class="navbar-brand hidden-sm" href="#/"><img src="../static/img/sunnnyReading.jpg"></a>
 		</div>
-		<div class="collapse navbar-collapse">
+		<div class="collapse navbar-collapse" ng-controller="indexCtrl">
 			<ul class="nav navbar-nav nav-underline">
-				<li><a href="#/">首页</a></li>
-				<li><a href="#/readingCenter">阅读中心</a></li>
-				<li><a href="#/readingDynamic">阅读动态</a></li>
-				<li><a href="#/statisticsSummary">阅读轨迹</a></li>
-				<li><a href="#readingSea">阅读海洋</a></li>
-				<li><a href="#readingTraining">阅读训练</a></li>
-				<li><a href="#prizeCenter">奖品中心</a></li>
+				<li ng-class="{myActive:isActive(routeMap.index)}"><a href="#/">首页</a></li>
+				<li ng-class="{myActive:isActive(routeMap.readingCenter)}"><a href="#/readingCenter">阅读中心</a></li>
+				<li ng-class="{myActive:isActive(routeMap.readingDynamic)}"><a href="#/readingDynamic">阅读动态</a></li>
+				<li ng-class="{myActive:isActive(routeMap.statisticsSummary)}"><a href="#/statisticsSummary">阅读轨迹</a></li>
+				<li ng-class="{myActive:isActive(routeMap.readingSea)}"><a href="#readingSea">阅读海洋</a></li>
+				<li ng-class="{myActive:isActive(routeMap.readingTraining)}"><a href="#readingTraining">阅读训练</a></li>
+				<li ng-class="{myActive:isActive(routeMap.prizeCenter)}"><a href="#prizeCenter">奖品中心</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right hidden-sm">
 				<li class="dropdown">
 					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"
-					aria-expanded="false">张晓晨<b class="caret"></b></a>
+					aria-expanded="false">{{student.username}}<b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="#personalProfile">个人中心</a> </li>
 					</ul>
@@ -133,7 +133,9 @@
 	<script type="text/javascript" src="../static/js/lib/tokenInjector.js"></script>
 
 	<!-- Controllers: make sure libs loaded firstly -->
-	<script type="text/javascript" src="../static/js/controller/mainCtrl.js"></script>
+    
+	<script type="text/javascript" src="../static/js/controller/mainCtrl.js"></script>    
+	<script type="text/javascript" src="../static/js/controller/indexCtrl.js"></script>
 	<script type="text/javascript" src="../static/js/controller/readingSeaCtrl.js"></script>
 	<script type="text/javascript" src="../static/js/controller/readingTrainingCtrl.js"></script>
 	<script type="text/javascript" src="../static/js/controller/prizeCenterCtrl.js"></script>
@@ -201,11 +203,11 @@
 	<script type="text/javascript" src="../static/js/style.js"></script>
 
 	<script type="text/javascript">
-		TopNav();
-		$(".navbar-brand").on("click", function(){
-			$(".nav-underline").find(".myActive").removeClass("myActive");
-			$(".nav-underline li").eq(0).addClass("myActive");
-		});
+//		TopNav();
+//		$(".navbar-brand").on("click", function(){
+//			$(".nav-underline").find(".myActive").removeClass("myActive");
+//			$(".nav-underline li").eq(0).addClass("myActive");
+//		});
 	</script>
 </body>
 </html>

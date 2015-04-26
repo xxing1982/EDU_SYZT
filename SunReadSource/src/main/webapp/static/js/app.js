@@ -200,15 +200,4 @@ routeApp.run(['$rootScope', 'Student', function($rootScope, Student){
         window.location.href="/protype/login.html";
     };
     $rootScope.id = sessionStorage.getItem("userId");
-
-    //student info
-//    $rootScope.student = new Object();
-//    if ( $rootScope.student $rootScope=== undefined) {
-//        Student.get({id : $rootScope.id} ,function(data){
-//            $rootScope.student = data;
-//        });
-//    }
-
-    //get token
-    //sessionStorage.getItem("access_token")
 }]);
