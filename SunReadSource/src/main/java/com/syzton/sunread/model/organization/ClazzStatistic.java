@@ -15,6 +15,8 @@ public class ClazzStatistic extends AbstractEntity{
 
     private int avgPoints;
 
+    private int avgCoin;
+
     private int avgReads;
 
     private int avgReadWords;
@@ -25,6 +27,8 @@ public class ClazzStatistic extends AbstractEntity{
 
     private int totalReadWords;
 
+    private int totalCoin;
+
 
 
     @PrePersist
@@ -33,6 +37,7 @@ public class ClazzStatistic extends AbstractEntity{
         this.avgPoints = this.setAvgPoints();
         this.avgReads = this.setAvgReads();
         this.avgReadWords = this.setAvgReadWords();
+        this.avgCoin = this.setAvgCoin();
     }
 
     public int getStudentNum() {
@@ -45,6 +50,14 @@ public class ClazzStatistic extends AbstractEntity{
 
     public void setTotalPoints(int totalPoints){
         this.totalPoints = totalPoints;
+    }
+
+    public void setTotalCoin(int totalCoin) {
+        this.totalCoin = totalCoin;
+    }
+
+    public int getTotalCoin() {
+        return totalCoin;
     }
 
     public int getTotalPoints() {
@@ -84,6 +97,13 @@ public class ClazzStatistic extends AbstractEntity{
             return 0;
         this.avgPoints =  this.totalPoints/this.studentNum;
         return this.avgPoints;
+    }
+
+    public int setAvgCoin() {
+        if(studentNum == 0)
+            return 0;
+        this.avgCoin =  this.totalCoin/this.studentNum;
+        return this.avgCoin;
     }
 
     public int setAvgReadWords() {

@@ -22,7 +22,8 @@ public interface ClazzRepository extends JpaRepository<Clazz,Long> {
     Number countStudentsInClazz(@Param("clazzId") long clazzId , @Param("campusId")long campusId);
 
     @Query("select new com.syzton.sunread.model.organization.ClazzSumStatistic(avg(cs.clazzStatistic.avgReads),max(cs.clazzStatistic.avgReads),min(cs.clazzStatistic.avgReads)," +
-            "avg(cs.clazzStatistic.avgReadWords),max(cs.clazzStatistic.avgReadWords),min(cs.clazzStatistic.avgReadWords)) from Clazz cs where cs.grade = :grade GROUP BY cs.grade ")
+            "avg(cs.clazzStatistic.avgReadWords),max(cs.clazzStatistic.avgReadWords),min(cs.clazzStatistic.avgReadWords)," +
+            "avg(cs.clazzStatistic.avgCoin),max(cs.clazzStatistic.avgCoin),min(cs.clazzStatistic.avgCoin)) from Clazz cs where cs.grade = :grade GROUP BY cs.grade ")
     ClazzSumStatistic getSumStatisticClazz(@Param("grade") int grade);
 
     List<Clazz> findByGrade(int grade);
