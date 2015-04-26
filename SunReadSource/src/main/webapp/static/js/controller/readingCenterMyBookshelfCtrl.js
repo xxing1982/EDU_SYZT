@@ -4,7 +4,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     'Bookshelf','BookInShelf','DropBookFromShelf', 'NoteTake', 'BookDetail', 'Dropzone', 'config', function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf,NoteTake, BookDetail, Dropzone, config) {
 	$scope.name='阅读中心->我的书架';
 
-    var size = 3;
+    var size = 9;
     var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
     $scope.unreadLoading = stateTexts.loading;
     $scope.readLoading = stateTexts.loading;

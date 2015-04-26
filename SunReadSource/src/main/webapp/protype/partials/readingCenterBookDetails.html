@@ -129,7 +129,7 @@
                 <!-- catalog -->
                 <div role="tabpanel" class="tab-pane" id="catalog">
                     <div>
-                        <p>{{bookDetails.catalogue}}</p>
+	                        <p ng-bind-html="bookDetails.catalogue | formatParagraph"></p>
                     </div>
                 </div>
 
