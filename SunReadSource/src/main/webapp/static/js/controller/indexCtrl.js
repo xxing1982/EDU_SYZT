@@ -19,4 +19,14 @@ ctrls.controller('indexCtrl', ['$rootScope', '$scope', '$location','Student', fu
     
     // Get the information of student
     $rootScope.student = Student.get({id: $rootScope.id}, function(){});
+    
+    // The logout method
+    $scope.logout = function(){
+        delete $rootScope.id;
+        delete $rootScope.student;
+        delete sessionStorage.access_token;
+        delete sessionStorage.userId;
+        delete sessionStorage.length;
+        window.location.href="index.html";
+    }
 }]);
