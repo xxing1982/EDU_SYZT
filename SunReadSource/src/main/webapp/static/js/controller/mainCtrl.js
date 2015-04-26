@@ -1,6 +1,6 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
-                                             ,'examServices', 'classServices', 'questionServices','reviewServices','joinShelfServices'
+                                             ,'examServices', 'classServices', 'questionServices','reviewServices','joinShelfServices','sendMessageServices','getMessageServices'
                                              ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','oneBookInShelfServices'
                                              ,'weeklyHotServices','monthlyHotServices','yearlyHotServices','weeklyRecommendServices','monthlyRecommendServices','yearlyRecommendServices'
@@ -12,7 +12,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     $rootScope.id = sessionStorage.getItem("userId");
 
 
-    //student info
+    //student info``
     Student.get({id : $rootScope.id} ,function(data){
       $scope.picture = {};
       $scope.picture.current = data.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + data.picture;
