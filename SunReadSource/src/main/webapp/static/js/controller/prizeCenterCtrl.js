@@ -36,4 +36,6 @@ ctrls.controller("prizeCenterController", ['$scope', 'Question', 'Option',
 				console.log(optionData);
 			})
 		})
+
+
 	}]);

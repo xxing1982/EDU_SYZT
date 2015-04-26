@@ -213,24 +213,3 @@
   padding-top: 5px;
   margin-left: 15px;
   text-align: right;
-}
-
-.lackBookInput {
-  width: 60%;
-  float: left;
-  margin-bottom: 10px;
-}
-
-.catogaryBtn {
-    width: 100px;
-    float: left;
-
-}
-
-.searchHolder {
-    height: 192px;
-}
-
-.bookshelfIMG {
-    height: 135px;
-}
