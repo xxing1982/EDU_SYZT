@@ -20,6 +20,8 @@ public class Gift extends AbstractEntity{
 
     private float price;
 
+    private String picture;
+
     private int coin;
 
     private boolean exchangeable;
@@ -77,5 +79,11 @@ public class Gift extends AbstractEntity{
         this.giftType = giftType;
     }
 
+    public String getPicture() {
+        return picture;
+    }
 
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 }
