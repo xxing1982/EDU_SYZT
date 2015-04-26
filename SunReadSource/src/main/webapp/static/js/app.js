@@ -160,6 +160,12 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/prizeCenter.html",
             controller: "prizeCenterController"
         })
+        //gift center
+        .state('giftCenter', {
+            url: '/giftCenter',
+            templateUrl: "partials/giftCenter.html",
+            controller: "giftCenterController"
+        })
         //message center
         .state('messageCenter', {
             url: '/messageCenter',
