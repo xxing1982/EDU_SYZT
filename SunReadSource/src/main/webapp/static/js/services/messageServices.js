@@ -15,7 +15,7 @@ var getMessageServices = angular.module('getMessageServices', ['ngResource', "no
 
 getMessageServices.factory('GetMessages', ['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "/:source/:id/messages",
-            {source:'@source', id:'@id'}, {}
+		return $resource(config.HOST + "/:source/:id/messages?page=:page&size=:size&sortBy=id",
+            {source:'@source', id:'@id',page:'@_page', size:'@_size'}, {}
         );
 }]);

@@ -3,7 +3,7 @@ var bookshelfServices = angular.module('bookshelfServices', ['ngResource', "nour
 // User object(s)
 bookshelfServices.factory('Bookshelf',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/bookshelf/:id",
+		return $resource(config.HOST+"bookshelf/:id",
                          {id:'@_id'},{});
 	}]);
 
@@ -12,9 +12,9 @@ var bookInShelfService = angular.module('bookInShelfServices', ['ngResource', "n
 bookInShelfService.factory('BookInShelf',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-            "/api/bookshelf/:id/bookinshelf?page=:page&size=:size&sortBy=id",
+            config.HOST+"bookshelf/:id/bookinshelf?page=:page&size=:size&sortBy=id",
             {id:'@_id',page:'@_page', size:'@_size'},{}
-        ); 
+        );
     }]);
 
 var oneBookInShelfService = angular.module('oneBookInShelfServices', ['ngResource', "nourConfig"]);
@@ -22,9 +22,9 @@ var oneBookInShelfService = angular.module('oneBookInShelfServices', ['ngResourc
 oneBookInShelfService.factory('OneBookInShelf',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-            "/api/bookshelf/:id/books/:bookId/bookinshelf",
+            config.HOST+"bookshelf/:id/books/:bookId/bookinshelf",
             {id:'@_id',bookId:'@_bookId'},{}
-        ); 
+        );
     }]);
 
 var addbookToShelfService = angular.module('addbookToShelfServices', ['ngResource', "nourConfig"]);
@@ -32,9 +32,9 @@ var addbookToShelfService = angular.module('addbookToShelfServices', ['ngResourc
 addbookToShelfService.factory('AddbookToShelf',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-            "/api/bookshelf/:bookshelfId/books/:bookId/bookinshelf",
+            config.HOST+"bookshelf/:bookshelfId/books/:bookId/bookinshelf",
             {bookshelfId:'@_bookshelfId', bookId:'@_bookId'},{}
-        ); 
+        );
     }]);
 
 var dropBookFromShelfService = angular.module('dropBookFromShelfServices', ['ngResource', "nourConfig"]);
@@ -42,7 +42,7 @@ var dropBookFromShelfService = angular.module('dropBookFromShelfServices', ['ngR
 dropBookFromShelfService.factory('DropBookFromShelf',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-            "/api/bookinshelf/:id",
+            config.HOST+"bookinshelf/:id",
             {id:'@_id'},{}
-        ); 
+        );
     }]);

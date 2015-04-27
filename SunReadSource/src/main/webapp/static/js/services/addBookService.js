@@ -3,7 +3,7 @@ var lackFeedbackServices = angular.module('lackFeedbackServices', ['ngResource',
 // Note object(s)
 lackFeedbackServices.factory('LackFeedback',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/supplementbooks",
+		return $resource(config.HOST+"supplementbooks",
                         {},
                         {}
         );
@@ -14,7 +14,7 @@ var conditionSearchServices = angular.module('conditionSearchServices', ['ngReso
 // Note object(s)
 conditionSearchServices.factory('ConditionSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions?page=:page&size=:size&sortBy=id"+
+		return $resource(config.HOST+"books/conditions?page=:page&size=:size&sortBy=id"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange&searchTerm=:searchTerm",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
@@ -29,7 +29,7 @@ var quickSearchServices = angular.module('quickSearchServices',['ngResource',"no
 quickSearchServices.factory('QuickSearch',['$resource', 'config',
 	function($resource, config){
 		return $resource(
-							"/api/books/conditions?page=:page&size=:size&sortBy=:sortBy&direction=desc"
+							config.HOST+"books/conditions?page=:page&size=:size&sortBy=:sortBy&direction=desc"
             ,{page:'@_page', size:'@_size',sortBy:'@_sortBy'},{}
             );
 	}]);
@@ -40,7 +40,7 @@ var weeklyHotServices = angular.module('weeklyHotServices', ['ngResource', "nour
 // Note object(s)
 weeklyHotServices.factory('WeeklyHotSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions/weeklyhot?page=:page&size=:size"+
+		return $resource(config.HOST+"books/conditions/weeklyhot?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
@@ -55,7 +55,7 @@ var monthlyHotServices = angular.module('monthlyHotServices', ['ngResource', "no
 // Note object(s)
 monthlyHotServices.factory('MonthlyHotSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions/monthlyhot?page=:page&size=:size"+
+		return $resource(config.HOST+"books/conditions/monthlyhot?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
@@ -70,7 +70,7 @@ var yearlyHotServices = angular.module('yearlyHotServices', ['ngResource', "nour
 	// Note object(s)
 	yearlyHotServices.factory('YearlyHotSearch',['$resource', 'config',
 		function($resource, config){
-			return $resource("/api/books/conditions/yearlyhot?page=:page&size=:size"+
+			return $resource(config.HOST+"books/conditions/yearlyhot?page=:page&size=:size"+
 	                         "&level=:level&category=:category&testType=:testType&literature=:literature"+
 	                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
 	                        {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
@@ -85,7 +85,7 @@ var weeklyRecommendServices = angular.module('weeklyRecommendServices', ['ngReso
 // Note object(s)
 weeklyRecommendServices.factory('WeeklyRecommendSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions/weeklyRecommend?page=:page&size=:size"+
+		return $resource(config.HOST+"books/conditions/weeklyRecommend?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page',size:'@_size',level:'@_level',category:'@_category'
@@ -100,7 +100,7 @@ var monthlyRecommendServices = angular.module('monthlyRecommendServices', ['ngRe
 // Note object(s)
 monthlyRecommendServices.factory('MonthlyRecommendSearch',['$resource', 'config',
 	function($resource, config){
-		return $resource("/api/books/conditions/monthlyRecommend?page=:page&size=:size"+
+		return $resource(config.HOST+"books/conditions/monthlyRecommend?page=:page&size=:size"+
                          "&level=:level&category=:category&testType=:testType&literature=:literature"+
                          "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
                         {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
@@ -115,7 +115,7 @@ var yearlyRecommendServices = angular.module('yearlyRecommendServices', ['ngReso
 	// Note object(s)
 yearlyRecommendServices.factory('YearlyRecommendSearch',['$resource', 'config',
 		function($resource, config){
-			return $resource("/api/books/conditions/yearlyRecommend?page=:page&size=:size"+
+			return $resource(config.HOST+"books/conditions/yearlyRecommend?page=:page&size=:size"+
 	                         "&level=:level&category=:category&testType=:testType&literature=:literature"+
 	                         "&grade=:grade&language=:language&resource=:resource&pointRange=:pointRange",
 	                        {page:'@_page', size:'@_size',level:'@_level',category:'@_category'
