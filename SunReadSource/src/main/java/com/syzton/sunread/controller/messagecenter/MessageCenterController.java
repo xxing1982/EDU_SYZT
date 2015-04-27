@@ -73,10 +73,8 @@ public class MessageCenterController extends BaseController{
 												   @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
 		LOGGER.debug("Finding messages entry with sendUserId:{}",userId);
 		
-		sortBy = sortBy ==null ? "id" : sortBy;
-		Pageable pageable = new PageRequest(
-				page,size,new Sort(sortBy)
-				);
+		sortBy = sortBy ==null ? "creationTime" : sortBy;
+		Pageable pageable = this.getPageable(page,size,sortBy,"desc") ;
 		
 		Page<Message> messagePage = messageService.findMessagesBySendUser(pageable,userId);
 		
@@ -91,10 +89,9 @@ public class MessageCenterController extends BaseController{
 												     @RequestParam("page") int page,
 												     @RequestParam("size") int size,
 												     @RequestParam(value = "sortBy" ,required = false) String sortBy) throws NotFoundException {
-		sortBy = sortBy == null ? "id" : sortBy;
-		Pageable pageable = new PageRequest(
-				page,size,new Sort(sortBy)
-				);
+		sortBy = sortBy == null ? "creationTime" : sortBy;
+
+		Pageable pageable = this.getPageable(page,size,sortBy,"desc") ;
 		
 		Page<Message> messagePage = messageService.findMessagesByReceiveUser(pageable,userId);
 		

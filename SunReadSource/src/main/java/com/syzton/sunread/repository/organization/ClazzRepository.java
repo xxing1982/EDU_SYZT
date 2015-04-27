@@ -27,4 +27,6 @@ public interface ClazzRepository extends JpaRepository<Clazz,Long> {
     ClazzSumStatistic getSumStatisticClazz(@Param("grade") int grade);
 
     List<Clazz> findByGrade(int grade);
+
+
 }
