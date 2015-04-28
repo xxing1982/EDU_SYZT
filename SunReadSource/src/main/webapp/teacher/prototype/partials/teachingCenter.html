@@ -1,0 +1,15 @@
+<div>
+    <div class="sidebar myBlock">
+        <ul class="nav-sidebar nav" ng-controller="leftNavCtrl">
+            <li ng-class="{myActive:isActiveLeft(routeMapLeft.myTask)}"><a ui-sref='.myTask'><img src="../static/img/myTask.png"></img><span>我的任务</span></a></li>
+            <li ng-class="{myActive:isActiveLeft(routeMapLeft.myRecommend)}"><a ui-sref='.myRecommend'><img src="../static/img/myTask.png"></img><span>我的推荐</span></a></li>
+            <li ng-class="{myActive:isActiveLeft(routeMapLeft.myReward)}"><a ui-sref='.myReward'><img src="../static/img/myTask.png"></img><span>我的奖励</span></a></li>
+            <li ng-class="{myActive:isActiveLeft(routeMapLeft.myResource)}"><a ui-sref='.myResource'><img src="../static/img/myTask.png"></img><span>学科资源</span></a></li>
+        </ul>
+    </div>
+    <div class="container" style="margin-top:120px">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" ui-view></div>
+        </div>
+    </div>
+</div>

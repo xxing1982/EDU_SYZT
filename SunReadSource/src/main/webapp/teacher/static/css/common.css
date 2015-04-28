@@ -1,0 +1,15 @@
+.bgc-gray{
+	background-color: #ECECEC;
+}
+
+.myBlock{
+	background-color: #FFFFFF;
+	border-radius: 5px;
+	border: 1px #E1E1E1 solid;
+}
+.mt20{
+	margin-top: 20px;
+}
+.mt30{
+	margin-top: 30px;
+}

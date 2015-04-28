@@ -1,0 +1,113 @@
+/*----------------top navigate top-----------------*/
+.navbar {
+	padding-top: 5px;
+	box-shadow: 0 0px 7px #888888;
+}
+
+.navbar-dark{
+	background-color: #708490;
+	box-shadow: 0 0px 0px;
+}
+
+.navbar-dark a{
+	color: #FFFFFF;
+}
+
+.navbar-dark li a:focus, .navbar-dark li a:hover, .navbar-dark .open a, .navbar-dark .open a:focus, .navbar-dark .open a:hover{
+  text-decoration: none;
+  background-color: #8094A0;
+}
+
+.nav-underline li a:focus, .nav-underline li a:hover{
+	text-decoration: none;
+	background-color: #FFFFFF;
+}
+
+.nav-underline li a{
+	font-weight: 900;
+	color: #8094A0;
+	margin-top: 6px;
+}
+
+.nav-underline li.myActive{
+	border-bottom: 3px #8094A0 solid;
+	margin-bottom: 3px;
+}
+
+.dropdown-menu{
+	background-color: #FFFFFF;
+	position: fixed;
+	top: 55px;
+	right: 128px !important;
+}
+
+.dropdown-menu li a{
+	background-color: #FFFFFF !important;
+}
+
+.dropdown-menu li a:hover{
+	background-color: #8094A0 !important;
+}
+
+.navbar-brand {
+	padding: 0;
+	padding-right: 30px;
+}
+/*----------------top navigate bottom-----------------*/
+
+/*----------------left navigate top-----------------*/
+.sidebar
+{
+    width: 14%;
+    max-width: 180px;
+    position: fixed;
+    top: 150px;
+    left: 10px;
+    z-index: 10;
+    display: block;
+    padding: 0px 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #EEE;
+}
+
+.nav-sidebar li a:hover, .nav-sidebar li a:focus
+{
+    background-color:transparent !important;
+}
+
+.nav-sidebar li.myActive
+{
+    border-left: 5px #55C9D2 solid;
+    z-index: 100;
+    background-color: #F5F5F5;
+}
+
+.nav-sidebar>li.myActive>a {
+    border-bottom: 1px #ECECEC solid;
+}
+
+.nav-sidebar
+{
+    margin-right: -21px;
+    margin-left: -20px;
+}
+
+.nav-sidebar>li>a
+{
+    color: #8094A0;
+    font-weight: 700;
+    padding: 17px 0 17px 9%
+}
+
+.nav-sidebar>li>a>img {
+    margin-right: 5px;
+    height: 20px;
+}
+
+.nav-sidebar>li>a>span {
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+/*----------------left navigate bottom-----------------*/

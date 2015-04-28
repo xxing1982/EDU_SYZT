@@ -1,0 +1,74 @@
+<!doctype html>
+<html data-ng-app="route" lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	
+	<link href="../static/css/common.css" rel="stylesheet" type="text/css" />
+
+	<link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="bgc-gray">
+	<!--navigation-->
+	<div class="navbar navbar-fixed-top" style="top:55px; background-color:white">
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav nav-underline" ng-controller="headNavCtrl">
+				<li ng-class="{myActive:isActive(routeMap.index)}"><a href="#/">首页</a></li>
+				<li ng-class="{myActive:isActive(routeMap.teachingCenter)}"><a href="#/teachingCenter">教学中心</a></li>
+				<li ng-class="{myActive:isActive(routeMap.readingDynamic)}"><a href="#/readingDynamic">阅读动态</a></li>
+				<li ng-class="{myActive:isActive(routeMap.statisticsSummary)}"><a href="#/statisticsSummary">统计分析</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="navbar navbar-fixed-top navbar-dark">
+		<div class="navbar-header">
+			<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand hidden-sm" href="#/"><img src="../static/img/sunnnyReading.png"></a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right hidden-sm">
+				<li class="dropdown">
+					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"
+					aria-expanded="false">{{teacher.username}}<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#personalProfile">个人中心</a> </li>
+						<li><a href="#personalProfile" ng-click="logout()">注销</a> </li>
+					</ul>
+				</li>
+				<li><a href="#/messageCenter" style="margin-right:100px">
+					<div class="glyphicon glyphicon-envelope">
+					</div>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<!--body-->
+	<div data-ui-view></div>
+
+	<!--jQuery-->
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+
+	<!--bootstrap-->
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<!--angularjs-->
+	<script src="http://cdn.bootcss.com/angular.js/1.3.14/angular.min.js"></script>
+	<script src="http://cdn.bootcss.com/angular.js/1.3.14/angular-resource.min.js"></script>
+	<script src="http://cdn.bootcss.com/angular.js/1.3.14/angular-sanitize.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+
+	<!--Nourriture scripts-->
+	<script src="../static/js/app.js"></script>
+	<script src="../static/js/config.js"></script>
+
+	<!--Controllers-->
+	<script src="../static/js/controller/mainCtrl.js"></script>
+	<script src="../static/js/controller/indexCtrl.js"></script>
+</body>
+</html>
