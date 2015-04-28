@@ -27,6 +27,6 @@ ctrls.controller('indexCtrl', ['$rootScope', '$scope', '$location','Student', fu
         delete sessionStorage.access_token;
         delete sessionStorage.userId;
         delete sessionStorage.length;
-        window.location.href="index.html";
+        window.location.href="/protype/login.html";;
     }
 }]);
