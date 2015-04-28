@@ -1,15 +1,13 @@
 package com.syzton.sunread.controller.common;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -24,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.service.book.BookService;
 import com.syzton.sunread.util.FtpUtil;
 
 @Controller
@@ -33,11 +32,14 @@ public class UploadControl {
 	
 	private SecurityContextUtil securityUtil;
 	
+	private BookService bookService;
+	
 	private String ftpPrefix = "/pic";
 	
 	@Autowired
-	public UploadControl(SecurityContextUtil securityUtil) {
+	public UploadControl(SecurityContextUtil securityUtil,BookService bookService) {
 		this.securityUtil = securityUtil;
+		this.bookService = bookService;
 	}
 
 	@RequestMapping(value = "/api/upload/notepic", method = RequestMethod.POST)
@@ -150,14 +152,15 @@ public class UploadControl {
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
+			Sheet sheet = null;
 			if (fileName.endsWith(".xls")) {
 				HSSFWorkbook wb = new HSSFWorkbook(myfile.getInputStream());
-				HSSFSheet sheet = wb.getSheetAt(0);
+				sheet = wb.getSheetAt(0);
 			} else if (fileName.endsWith(".xlsx")) {
 				XSSFWorkbook xwb = new XSSFWorkbook(myfile.getInputStream());
-				XSSFSheet sheet = xwb.getSheetAt(0);
+				sheet = xwb.getSheetAt(0);
 			}
-
+			bookService.batchSaveOrUpdateBookFromExcel(sheet);
 		}
 		return "Excel parse OK";
 	}
@@ -181,7 +184,7 @@ public class UploadControl {
 				XSSFWorkbook xwb = new XSSFWorkbook(myfile.getInputStream());
 				XSSFSheet sheet = xwb.getSheetAt(0);
 			}
-
+			
 		}
 		return "Excel parse OK";
 	}

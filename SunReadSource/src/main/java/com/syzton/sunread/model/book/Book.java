@@ -24,7 +24,7 @@ public class Book extends AbstractEntity{
     public static final int MAX_LENGTH_ISBN = 16;
     public static final int MAX_LENGTH_AUTHOR = 10;
     public static final int MAX_LENGTH_PUBLISHER = 50;
-    public static final int MAX_LENGTH_AUTHOR_INTRODUCTION =100;
+    public static final int MAX_LENGTH_AUTHOR_INTRODUCTION =256;
     public static final int MAX_LENGTH_CATALOGUE =1000;
 
     public static final int DEFAULT_POINT = 5;

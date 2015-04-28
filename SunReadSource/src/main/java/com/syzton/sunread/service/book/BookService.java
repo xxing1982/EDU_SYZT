@@ -29,5 +29,5 @@ public interface BookService {
 
     Page<Book> searchByCondition(BookExtraDTO condition,Pageable pageable);
     
-    public List<Book> batchAddBookFromExcel(Sheet sheet);
+    public List<Integer> batchSaveOrUpdateBookFromExcel(Sheet sheet);
 }

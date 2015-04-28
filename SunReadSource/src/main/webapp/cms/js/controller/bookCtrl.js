@@ -1,77 +1,139 @@
-var ctrls = angular.module('nourControllers',['ngResource', 'nourConfig', 'bookServices', 'userServices']);
+//readingCenterAddBookAdvancedSearchCtrl.jsc
+ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$rootScope','$stateParams','Pageable',
+        'ConditionSearch','QuickSearch','Book','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,config) {
 
-ctrls.controller("bookCtrl", ['$scope', 'Book', function ($scope, Book) {
-	$scope.books = [
-	{
-		"id": 2,
-		"creationTime": "18-03-2015",
-		"description": null,
-		"modificationTime": "18-03-2015",
-		"name": "name1",
-		"isbn": "isbn1rrr11131311",
-		"avgRate": 0
-	},
-	{
-		"id": 3,
-		"creationTime": "18-03-2015",
-		"description": null,
-		"modificationTime": "18-03-2015",
-		"name": "name1",
-		"isbn": "isbn1rrr111313111",
-		"avgRate": 0
-	},
-	{
-		"id": 4,
-		"creationTime": "18-03-2015",
-		"description": null,
-		"modificationTime": "18-03-2015",
-		"name": "name1",
-		"isbn": "isbn1",
-		"avgRate": 0
-	}]
-	$scope.selected={};
-	$scope.Add = function(){
-		$scope.selected={};
-		$scope.selected.title = "Add";
-		
-		var book = new Book();
-		
-		book = $scope.selected;
-		/*book.name = $scope.selected.book.name;
-		book.description = $scope.selected.book.description;
-		book.isbn = $scope.selected.book.isbn;
-		book.publicationDate = $scope.selected.book.publicationDate;
-		book.author = $scope.selected.book.author;
-		book.publisher = $scope.selected.book.publisher;
-		book.point = $scope.selected.book.point;
-		book.coin = $scope.selected.book.coin;
-		book.level = $scope.selected.book.level;
-		book.language = $scope.selected.book.language;
-		book.literature = $scope.selected.book.literature;
-		book.testType = $scope.selected.book.testType;
-		book.categories = $scope.selected.book.categories;*/
 
-		//save option
-		book.$save(function(res){
+//    $scope.searchContent="";
 
-		});
-	}
-	$scope.Update = function(bookid){
-		$scope.selected.title = "Edit";
-		$scope.selected.book = Book.get({id: bookid});
+    var pageSize = 4;
+    var searchTerm='isbn';
+            
+    $scope.searchArguments = {
+        level:0,
+        category:0,
+        testType:0,
+        literature:0,
+        grade:0,
+        category:0,
+        language:0,
+        resource:0,
+        pointRange:0,
+        searchTerm:""
+      }
+    
+//    $scope.searchContent = searchContent;
+    $scope.statuses_grade = [{
+        id: 0,
+        name:"全部年级",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 1,
+        name: "1年级",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 2,
+        name: "2年级",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 3,
+        name: "3年级",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 4,
+        name: "4年级",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 5,
+        name: "5年级",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }];
 
-		//save option
-		$scope.selected.book.$update(function(res){
+    $scope.statuses_category = [{
+        id: 0,
+        name:"全部类型",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 1,
+        name: "类型一",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 2,
+        name: "类型二",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 3,
+        name: "类型三",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 4,
+        name: "类型四",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }, {
+        id: 5,
+        name: "类型五",
+        callback: function(){$scope.search($scope.searchArguments)}
+    }];
+    $scope.selected_status = 0;
+            
+    $scope.createPageable = function (){
+        $scope.searchPageable = new Pageable();
 
-		});
-	}
-	$scope.Delete = function(bookid){
-		Book.delete({id: bookid}, function(){
+        $scope.searchPageable.size = 4;
+        $scope.searchPageable.page = 1;
 
-		})
-	}
-	/*var testDataList = Book.query({page: 0, size: 4}, function(){
-        console.log(testDataList);
-    });*/
-	
+        $scope.searchPageable.arguments=$scope.searchArguments;
+        // Set the startPage and length of number page array
+        console.log($scope.searchArguments);
+        
+        $scope.searchPageable.pageNumbers.startPage = 1;
+        $scope.searchPageable.pageNumbers.content.length = 8;
+        // Set the placeholder elements
+        $scope.searchPageable.placeHolders.placeHoldersElement = {title: ""};
+
+        // Build the pageable object
+        $scope.searchPageable.build(ConditionSearch);
+        
+        $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
+        console.log($scope.searchPageable);
+    }
+
+    $scope.createPageable();
+
+    $scope.searchByName=function(searchContent){
+        console.log(searchContent);
+        $scope.createPageable();
+
+    };
+
+	$scope.search = function(searchArguments){
+        $scope.createPageable();
+
+	};
+
+    $scope.addBooktoShelf = function(terms){
+        console.log(terms);
+        var bookId = terms.id;
+        var bookInShelf = {
+            bookAttribute: false,
+            readState: false
+            }
+        console.log(XMLHttpRequest.state);
+        try{
+             AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf)
+             alert("添加成功");
+             //throw new Error("添加失败");
+        }
+        catch(e){
+
+            alert(e);
+        }
+    };
+
+if($stateParams.searchTerm!== ""){
+     $scope.searchByName($stateParams.searchTerm);
+     $scope.searchArguments.searchTerm = $stateParams.searchTerm;
+}
+
+$scope.imageServer = config.IMAGESERVER;
+
 }]);

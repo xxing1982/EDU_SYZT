@@ -1,13 +1,32 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html data-ng-app="routeApp">
 <head>
 	<title>CMS</title>
-
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<!-- Bootstrap core CSS -->
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
+    <link href="../static/css/common.css" rel="stylesheet" type="text/css" />
 
-	<!-- Custom styles for this template -->
-	<link href="css/style.css" rel="stylesheet">
+    <!-- style for controls like page numbers-->
+    <link href="../static/css/custom-ui.css" rel="stylesheet" type="text/css" />
+    
+    <!-- style for all the bodies inside the xxx-page -->
+    <link href="../static/css/pagebody.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Color manage -->
+    <link href="../static/css/color.css" rel="stylesheet" type="text/css" /> 
+    
+    <!-- Font manage -->
+    <link href="../static/css/fonts.css" rel="stylesheet" type="text/css" /> 
+    
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/bookshelf.css" rel="stylesheet" type="text/css" /> 
+    
+    <!-- Dropzone upload plugins -->
+    <link href="../static/css/dropzone.css" rel="stylesheet" type="text/css" /> 
 </head>
 
 <body>
@@ -32,10 +51,10 @@
 				<ul class="nav nav-sidebar">
 					<li><a href="#/">index</a></li>
 				</ul>
-				model
 				<ul class="nav nav-sidebar">
 					<li><a href="#book">Book</a></li>
-					<li><a href="#user">User</a></li>
+					<li><a href="#student">Student</a></li>
+					<li><a href="#objectivequestion">Word&Verify Question</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" data-ui-view>
@@ -54,16 +73,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular-resource.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
     <script src="js/config.js"></script>
-
+	<script src="js/controller/mainCtrl.js"></script>
     <script src="js/controller/bookCtrl.js"></script>
     <script src="js/controller/userCtrl.js"></script>
 
     <script src="js/services/bookService.js"></script>
     <script src="js/services/userService.js"></script>
+    <script src="js/services/pageableService.js"></script>
     <script src="js/app.js"></script>
 
     <script src="js/index.js"></script>
-
-
 </body>
 </html>

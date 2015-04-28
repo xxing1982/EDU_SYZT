@@ -252,11 +252,12 @@ public class UserRepositoryService implements UserService,UserDetailsService{
             throw new NotFoundException("student with id ="+studentId+" not found..");
         }
 
-        Task task = new Task();
+        Task task = student.getTask();
 
         task.setTargetBookNum(targetBookNum);
         task.setTargetPoint(targetPoint);
         task.setTeacherId(teacherId);
+        student.setTask(task);
 
         return studentRepository.save(student);
 

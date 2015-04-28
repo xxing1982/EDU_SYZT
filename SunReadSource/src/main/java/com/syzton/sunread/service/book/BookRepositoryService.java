@@ -1,5 +1,7 @@
 package com.syzton.sunread.service.book;
 
+import java.awt.Point;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,13 +13,18 @@ import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.book.BookExtraDTO;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.book.Binding;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.BookExtra;
+import com.syzton.sunread.model.book.Dictionary;
+import com.syzton.sunread.model.book.DictionaryType;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
+import com.syzton.sunread.repository.book.DictionaryRepository;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.joda.time.DateTime;
@@ -42,14 +49,17 @@ public class BookRepositoryService implements BookService {
     private BookRepository bookRepo;
 
     private CategoryRepository categoryRepo;
+    
+    private DictionaryRepository dictionaryRepo;
 
 
 
     @Autowired
-    public BookRepositoryService(BookRepository bookRepo,CategoryRepository categoryRepo)
+    public BookRepositoryService(BookRepository bookRepo,CategoryRepository categoryRepo,DictionaryRepository dictionaryRepo)
     {
         this.bookRepo = bookRepo;
         this.categoryRepo = categoryRepo;
+        this.dictionaryRepo = dictionaryRepo;
     }
 
 
@@ -171,37 +181,143 @@ public class BookRepositoryService implements BookService {
 
     }
 
-
+    @Transactional
 	@Override
-	public List<Book> batchAddBookFromExcel(Sheet sheet) {
-		List<Book> list = new ArrayList<Book>();
-		for (int i = sheet.getFirstRowNum(); i < sheet.getPhysicalNumberOfRows(); i++) {  
-		    Book book = new Book();
+	public List<Integer> batchSaveOrUpdateBookFromExcel(Sheet sheet) {
+		List<Dictionary> grades = dictionaryRepo.findByType(DictionaryType.GRADE);
+		List<Dictionary> literatures = dictionaryRepo.findByType(DictionaryType.LITERATURE);
+		List<Dictionary> languages = dictionaryRepo.findByType(DictionaryType.LANGUAGE);
+		List<Dictionary> categorys = dictionaryRepo.findByType(DictionaryType.CATEGORY);
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
+	 
 			Row row = sheet.getRow(i);  
 			//column 0 id is useful? should update book from id or ignore the column
-			book.setIsbn(row.getCell(1).toString());
-		    book.setName(row.getCell(2).toString());
-		    book.setAuthor(row.getCell(3).toString());
-		    book.setPrice(Float.parseFloat(row.getCell(4).toString()));
+			String isbn = row.getCell(1).toString();
+			
+			if("".equals(isbn)||(isbn==null)){
+				return new ArrayList<Integer>();
+			}
+			Book book = bookRepo.findByIsbn(isbn);
+			if(book == null){
+				book = new Book();
+			}
+			BookExtra extra = book.getExtra();
+			if(extra == null){
+				extra = new BookExtra();
+				book.setExtra(extra);
+			}
+			book.setIsbn(isbn);
+		    book.setName(getStringFromExcelCell(row.getCell(2)));
+		    LOGGER.debug("compare:婴儿画报精品故事书（蓝莓蓝）:"+book.getName().equals("婴儿画报精品故事书（蓝莓蓝）"));
+		    LOGGER.debug(book.getName());
+		    LOGGER.debug(row.getCell(2).toString());
+		    book.setName("婴儿画报精品故事书（蓝莓蓝）");
+		    book.setAuthor(getStringFromExcelCell(row.getCell(3)));
+		    book.setPrice(getFloatFromExcelCell(row.getCell(4)));
 		    book.setPublisher(row.getCell(5).toString());
-		    book.setPublicationDate(new DateTime(row.getCell(6).toString()));
-		    //picture contains domain name
-		    book.setPictureUrl(row.getCell(7).toString());
-		    book.setPageCount(Integer.parseInt(row.getCell(8).toString()));
-		    String wordNum = row.getCell(8).toString();
-		    book.setWordCount(wordNum==null?0:Integer.parseInt(wordNum));
+		    book.setPublicationDate(new DateTime(getStringFromExcelCell(row.getCell(6))));
+		    book.setPictureUrl(getStringFromExcelCell(row.getCell(7)));
+		    book.setPageCount(getIntFromExcelCell(row.getCell(8)));
+		    book.setWordCount(getIntFromExcelCell(row.getCell(9)));
 		    //Can't find packaging field in book model
-		    book.setDescription(row.getCell(10).toString());
-		    book.setCatalogue(row.getCell(11).toString());
-		    BookExtra extra = new BookExtra();
-		    //AgeRange is int can't convert rang value to int
-		    //type is category or not, May be we need method mapping string type to int category.
-		    //Can't find posters	video	evaluationNum	highPraise cloumn
-		    book.setAuthorIntroduction(row.getCell(18).toString());
+		    String binding = getStringFromExcelCell(row.getCell(10));
+		    if(binding == "精装"){
+		    	book.setBinding(Binding.softback);
+		    }else{
+		    	book.setBinding(Binding.hardback);
+		    }
+		    book.setDescription(getStringFromExcelCell(row.getCell(11)));
+		    book.setCatalogue(getStringFromExcelCell(row.getCell(12)));
+		    book.setAuthorIntroduction(getStringFromExcelCell(row.getCell(13)));
+		    //unused field.
+		    extra.setAgeRange(0);
+		    String gradeKey = getStringFromExcelCell(row.getCell(15));
+		    extra.setGrade(getValueFromDic(grades, gradeKey));
+		    extra.setLevel(getIntFromExcelCell(row.getCell(16)));
+		    
+		    String literatureKey = getStringFromExcelCell(row.getCell(17));
+		    extra.setLiterature(getValueFromDic(literatures, literatureKey));
+		    
+		    String languageKey = getStringFromExcelCell(row.getCell(18));
+		    extra.setLanguage(getValueFromDic(languages, languageKey));
+		    
+		    String categoryKey = getStringFromExcelCell(row.getCell(19));
+		    extra.setCategory(getValueFromDic(categorys,categoryKey));
+		    int coin = getIntFromExcelCell(row.getCell(20));
+		    int point = getIntFromExcelCell(row.getCell(21));
+		    book.setPoint(point);
+		    book.setCoin(coin);
+		    int pointRange = 0;
+		    if(point<=20&&point>0){
+		    	pointRange = point/5;
+		    }
+		    
+		    extra.setPointRange(pointRange);		
+		    extra.setHasVideo(getBoolFromExcelCell(row.getCell(22)));
+		    extra.setHasRadio(getBoolFromExcelCell(row.getCell(23)));
+		    extra.setHasEbook(getBoolFromExcelCell(row.getCell(24)));
+		   
 		    book.setExtra(extra);
+		   
 		    book = bookRepo.save(book);
-		    list.add(book);
+		 
+		    
 		}  
 		return list;
 	}
+	
+	private int getValueFromDic(List<Dictionary> list,String key){
+		for(int i=0;i<list.size();i++){
+			Dictionary dictionary = list.get(i);
+			String name = dictionary.getName();
+			if(name.equals(key)){
+				return dictionary.getValue();
+			}
+		}
+		
+		return -1;
+	}
+	
+	private String getStringFromExcelCell(Cell cell){
+		String ret = "";
+		try {
+			ret =  cell.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	private boolean getBoolFromExcelCell(Cell cell){
+		boolean ret = false;
+		try{
+			ret = cell.getBooleanCellValue();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	private int getIntFromExcelCell(Cell cell){
+		int ret = 0;
+		try{
+			ret = (int)Double.parseDouble(cell.toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	private float getFloatFromExcelCell(Cell cell){
+		float ret = 0;
+		try{
+			ret = (float)Double.parseDouble(cell.toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
 }

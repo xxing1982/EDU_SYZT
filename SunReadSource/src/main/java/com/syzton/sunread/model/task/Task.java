@@ -7,12 +7,14 @@ import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.Teacher;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  * Created by jerry on 3/28/15.
  */
 @Entity
 public class Task extends AbstractEntity implements Serializable{
+
 
     private long teacherId;
 
@@ -43,4 +45,5 @@ public class Task extends AbstractEntity implements Serializable{
     public void setTeacherId(long teacherId) {
         this.teacherId = teacherId;
     }
+
 }
