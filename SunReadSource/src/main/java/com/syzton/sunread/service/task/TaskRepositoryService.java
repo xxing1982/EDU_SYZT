@@ -8,6 +8,8 @@ import com.syzton.sunread.repository.task.TaskRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -44,8 +46,22 @@ public class TaskRepositoryService implements TaskService{
          taskRepository.delete(id);
     }
 
-    @Override
-    public Task findByStudentId(Long studentId) {
-        return taskRepository.findOne(studentId);
-    }
+//    @Override
+//    public Task findByStudentId(Long studentId) {
+//        Student student = studentRepository.findOne(studentId);
+//        if(student == null){
+//            throw new NotFoundException("student id = "+studentId+" not found...");
+//        }
+//        return taskRepository.findByStudent(student);
+//    }
+//
+//    @Override
+//    public Page<Task> findByTeacherId(Long teacherId,Pageable pageable) {
+//        Teacher teacher = teacherRepository.findOne(teacherId);
+//        if(teacher == null){
+//            throw new NotFoundException("teacher id = "+teacherId+" not found...");
+//        }
+//
+//        return taskRepository.findByTeacherId(teacherId,pageable);
+//    }
 }

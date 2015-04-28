@@ -4,6 +4,8 @@ import com.syzton.sunread.dto.tag.TagDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.model.task.Task;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -31,7 +33,9 @@ public interface TaskService {
      * Returns a list of tag entries.
      * @return
      */
-    public Task findByStudentId(Long studentId);
+//    public Task findByStudentId(Long studentId);
+//
+//    public Page<Task> findByTeacherId(Long teacherId,Pageable pageable);
 
 
 }

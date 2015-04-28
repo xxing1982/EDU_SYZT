@@ -42,6 +42,7 @@ import javax.persistence.Table;
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="TYPE", discriminatorType=DiscriminatorType.STRING,length=10)
 @DiscriminatorValue("U")
+
 public class User extends AbstractEntity implements UserDetails{
 
     public static final int MAX_LENGTH_USERNAME = 15;
