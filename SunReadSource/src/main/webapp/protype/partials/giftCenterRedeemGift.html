@@ -1,0 +1,45 @@
+<div class="readingCenter-right">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="row page-body page-body-top  readingCenter-right-body container-fluid">
+
+            <!--head-->
+            <div class="col-md-12 addBookNavigation">
+                <p class="cramb">
+                <a href="index.html#/readingCenter/myBookshelf">已兑换商品</a>
+                   > &nbsp; 商城
+                </p>
+            </div>
+
+            <div class="row bottom-separator"></div>
+<!--     Left part   -->
+        <div class="leftpart">
+            <div class="col-md-4 clear-padding" ng-repeat="gift in gifts.content">
+                <div class="row" align="center">
+									<a href="#readingCenter/bookDetails"><img ng-src="../static/img/giftCenter/helookettyBag.png" class="img-responsive"></a>
+                <!-- </div> -->
+                <!-- <div class="col-md-6"> -->
+                   <!-- <div class="row"> -->
+										<!-- <div class="fsize12">{{gift.coin}}金贝</div>
+										<div class="fsize12"><h4>{{gift.name}}</h4></div>
+
+                    <div class="fsize12">2015年新款书包</div> -->
+
+										<div class="giftRedeem"><p><span class="yellow-text">{{gift.coin}}</span><span class="giftCoin">金贝</span></br>
+											{{gift.name}}</br>
+											<span class="giftAdv">2015年新款书包</span></p>
+                    <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(hot)" type="button">我要兑换</a>&nbsp;&nbsp;
+                    </div>
+                </div>
+						</div>
+
+            <div class="bottom col-md-12 block" style="margin-top:1px;" >更多加载中</div>
+        </div>
+<!--Right part   -->
+        <div class="rightpart">
+
+        </div>
+
+      </div>
+
+	</div>
+</div>

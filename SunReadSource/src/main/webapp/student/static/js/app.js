@@ -31,6 +31,8 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/myBookshelf',
             templateUrl: 'partials/readingCenterMyBookshelf.html',
             controller: 'readingCenterMyBookshelfController'
+            // templateUrl: "partials/messageCenter.html",
+            // controller: "messageCenterController"
         })
         //reading center -> myBookshelf -> book details
         .state('readingCenter.bookDetails',{
@@ -165,6 +167,14 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/giftCenter',
             templateUrl: "partials/giftCenter.html",
             controller: "giftCenterController"
+        })
+        //Gift Center -> Redeem Gift
+        .state('redeemGift', {
+            url: '/redeemGift',
+            templateUrl: "partials/giftCenterRedeemGift.html",
+            controller: "giftCenterRedeemGiftController"
+            // templateUrl: "partials/messageCenter.html",
+            // controller: "messageCenterController"
         })
         //message center
         .state('messageCenter', {

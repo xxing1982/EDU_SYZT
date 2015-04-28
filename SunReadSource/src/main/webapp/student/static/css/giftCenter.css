@@ -20,3 +20,21 @@
     margin-top: -25px;
     height: 80px;
 }
+
+.giftRedeem {
+    text-align: center;
+}
+
+.yellow-text {
+    color: #E6C44F;
+}
+
+.giftCoin {
+    color: rgba(128, 128, 128, 0.8);
+    font-size: 14px;
+}
+
+.giftAdv {
+    color: rgb(139, 153, 176);
+    font-size: 8px;    
+}

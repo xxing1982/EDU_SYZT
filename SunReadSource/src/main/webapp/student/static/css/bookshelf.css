@@ -13,7 +13,6 @@
     padding-bottom: 5px;
     margin-right: 10px;
     border-bottom: 1px #D6DEE6 solid;
-    border-left: 1px #D6DEE6 solid;
 }
  .btn-catogary{
   color: darkslateblue;
@@ -39,7 +38,7 @@
 .catogaryText {
     float:left;
     margin-top: 8px;
-    width: 50px;
+    width: 42px;
 }
 
 
@@ -70,10 +69,12 @@
 .leftpart {
     float: left;
     width: 75%;
+    padding-right: 15px;
 }
 
 .rightpart {
-    padding-left: 10px;
+    padding-left: 15px;
+    border-left: 1px #D6DEE6 solid;
     float: right;
     width: 24%;
 }
@@ -210,6 +211,24 @@
 .lackBookText {
   width: 80px;
   float: left;
-  padding-top: 5px;
+  padding-top: 15px;
   margin-left: 15px;
   text-align: right;
+}
+
+
+.placeHolder {
+    height: 135px;
+}
+
+.catogaryBtn {
+    float: left;
+    width: 108px;
+}
+
+.lackBookInput {
+    margin-top: 10px;
+    float :left;
+    width: 295px;
+    margin-bottom: 10px;
+}

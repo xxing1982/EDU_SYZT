@@ -53,16 +53,16 @@
 										<div class="row">
 												<div class="lackBookText"><p>ISBN号：</p></div>
 												<input type="text" ng-model="isbn" class="form-control lackBookInput" placeholder="请输入isbn号（10位或13位）" aria-describedby="sizing-addon2"
-													ng-minlength=10 ng-maxlength=13 ng-required> &nbsp;&nbsp;
-													<span style="color:rgba(229, 105, 105, 0.7)" ng-show="!isbnValid()">
+													ng-minlength=10 ng-maxlength=13 ng-required>
+													<div style="margin-top: 15px;"><span style="color:rgba(229, 105, 105, 0.7);padding-top:15px" ng-show="!isbnValid()">
 													<span ng-show="!isbnValid()">ISBN 不合法</span>
-													</span>
+												</span></div>
 										</div>
 
                     <div class="row">
                         <div class="lackBookText"><p>作者姓名：</p></div>
                         <input type="text" ng-model="author" class="form-control lackBookInput" placeholder="J.K.罗琳" aria-describedby="sizing-addon2">
-										</div>
+                    </div>
 
                     <div class="row">
                         <div class="lackBookText"><p>系列名称：</p></div>

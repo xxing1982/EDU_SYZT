@@ -26,7 +26,7 @@ $(document).ready(function(){
 					},
 					success: function(dataLogin){
 						sessionStorage.setItem("userId", dataLogin.id);
-						window.location.href="index.html";
+						window.location.href="student/protype/index.html";
 					}
 				});
 			},

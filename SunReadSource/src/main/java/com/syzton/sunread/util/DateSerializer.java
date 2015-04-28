@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class DateSerializer extends JsonSerializer<DateTime> {
 
-        private static DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy");
+        private static DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:SS");
 
         @Override
         public void serialize(DateTime value, JsonGenerator gen,

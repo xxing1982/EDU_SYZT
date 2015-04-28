@@ -10,7 +10,7 @@ ctrls.controller("giftCenterController", ['$rootScope','$scope', 'GetGifts','Get
 			console.log($scope.gifts);
 			if($scope.gifts.content.exchanges==="exchanges")
 				$scope.gifts.content.status==="已发货";
-				
+
 		})
 
 
