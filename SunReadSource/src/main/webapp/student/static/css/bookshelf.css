@@ -11,7 +11,7 @@
 .conditionBlock {
     padding-left: 15px;
     padding-bottom: 5px;
-    margin-right: 10px;
+    margin-right: 5px;
     border-bottom: 1px #D6DEE6 solid;
 }
  .btn-catogary{
@@ -75,7 +75,7 @@
 .rightpart {
     padding-left: 15px;
     border-left: 1px #D6DEE6 solid;
-    float: right;
+    float: left;
     width: 24%;
 }
 
@@ -199,7 +199,7 @@
 
 .lackBookModel {
     /*margin-top: 260px;*/
-    margin-left: 250px;
+/*    margin-left: 250px;*/
     width: 65%;
     min-width: 400px;
 }

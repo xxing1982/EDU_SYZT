@@ -38,3 +38,28 @@
     color: rgb(139, 153, 176);
     font-size: 8px;    
 }
+
+.redeemIMG {
+    height: 165px;
+    width: 130px;
+    margin-top: 18px;
+}
+
+.redeemBlock {
+    padding-left: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px #D6DEE6 solid;
+    min-height: 100px;
+}
+
+.placeHolder {
+    height: 100px;
+}
+
+.giftPlaceHolder {
+    height: 105px;
+}
+
+.redeemBtn {
+    width: 80px;
+}

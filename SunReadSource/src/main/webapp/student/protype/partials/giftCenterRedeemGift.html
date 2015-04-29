@@ -5,7 +5,7 @@
             <!--head-->
             <div class="col-md-12 addBookNavigation">
                 <p class="cramb">
-                <a href="index.html#/readingCenter/myBookshelf">已兑换商品</a>
+                <a href="#/giftCenter">已兑换商品</a>
                    > &nbsp; 商城
                 </p>
             </div>
@@ -15,7 +15,7 @@
         <div class="leftpart">
             <div class="col-md-4 clear-padding" ng-repeat="gift in gifts.content">
                 <div class="row" align="center">
-									<a href="#readingCenter/bookDetails"><img ng-src="../static/img/giftCenter/helookettyBag.png" class="img-responsive"></a>
+									<a href=""><img ng-src="../static/img/giftCenter/bookBag_lg.png" class="redeemIMG img-responsive"></a>
                 <!-- </div> -->
                 <!-- <div class="col-md-6"> -->
                    <!-- <div class="row"> -->
@@ -27,15 +27,93 @@
 										<div class="giftRedeem"><p><span class="yellow-text">{{gift.coin}}</span><span class="giftCoin">金贝</span></br>
 											{{gift.name}}</br>
 											<span class="giftAdv">2015年新款书包</span></p>
-                    <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(hot)" type="button">我要兑换</a>&nbsp;&nbsp;
+                    <a class="btn btn-sm btn-green modal-title" id="myModalLabel"  data-toggle="modal" data-target="#redeemGift" type="button">我要兑换</a>&nbsp;&nbsp;
                     </div>
                 </div>
 						</div>
-
-            <div class="bottom col-md-12 block" style="margin-top:1px;" >更多加载中</div>
+            <div class="row bottom bottom-separator" ></div>
+            <div class="row block bottom" >更多加载中</div>
         </div>
+<!-- Modal-->
+<div class="modal fade" id="redeemGift" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content lackBookModel container-fluid">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <!-- Input form -->
+            <div >
+                <h4 class="modal-title" >数量确认</h4>
+                <p><br />没有找到您想要的书？请反馈此书的相关信息，方便我们及时添加！</p>
+            </div>
+        </div>
+        <div class="row modal-footer" align="center">
+            <div class="col-md-offset-3 col-md-3">
+                <button class="btn btn-green redeemBtn" ng-disabled="!isbnValid()" ng-click="lackBookFeedback()" type="button">确认</button>
+            </div>
+
+            <div class="col-md-3">
+                <button class="btn btn-green redeemBtn" ng-click="" type="button" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+</div>
+       
+       
+       
 <!--Right part   -->
         <div class="rightpart">
+            <div class="row redeemBlock">
+                   <div class="col-md-off-1 col-md-10">
+                        <div class="row">
+                            <h5>是否可兑换</h5>
+                        </div>
+                         <div class="row radio">
+                          <label>
+                            <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions1" value="0" checked>
+                            所有商品
+                          </label>
+                        </div>
+                        <div class="row radio">
+                          <label>
+                            <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions2" value="1">
+                            可兑换
+                          </label>
+                        </div>
+                        <div class="row radio">
+                          <label>
+                            <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions3" value="2">
+                            不可兑换
+                          </label>
+                        </div>
+                        
+                    
+                </div><!---->
+            </div>
+            
+            <div class="row redeemBlock">
+                <div class="col-md-off-1 col-md-10">
+                        <div class="row">
+                            <h5>商品类型</h5>
+                        </div>
+                        <div class="row">
+                            <bs-dropdown data-menu-type="button"
+                            select-val="searchArguments.category = selectedVal"
+                            preselected-item="searchArguments.category"
+                            data-dropdown-data="statuses_category">
+                            </bs-dropdown>
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="row giftPlaceHolder"> 
+                <p>&nbsp;</p>
+            </div>
+
+            
 
         </div>
 
