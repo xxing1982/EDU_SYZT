@@ -165,6 +165,30 @@ public class UploadControl {
 		return "Excel parse OK";
 	}
 	
+	@RequestMapping(value = "/api/upload/excel/Question", method = RequestMethod.POST)
+	@ResponseBody
+	public String questionExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		
+		User user = securityUtil.getUser();
+		
+		String fileName = myfile.getOriginalFilename();
+
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			if (fileName.endsWith(".xls")) {
+				HSSFWorkbook wb = new HSSFWorkbook(myfile.getInputStream());
+				HSSFSheet sheet = wb.getSheetAt(0);
+			} else if (fileName.endsWith(".xlsx")) {
+				XSSFWorkbook xwb = new XSSFWorkbook(myfile.getInputStream());
+				XSSFSheet sheet = xwb.getSheetAt(0);
+			}
+			
+		}
+		return "Excel parse OK";
+	}
+	
 	@RequestMapping(value = "/api/upload/excel/student", method = RequestMethod.POST)
 	@ResponseBody
 	public String studentExcelUpload(@RequestParam MultipartFile myfile,

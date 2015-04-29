@@ -194,9 +194,10 @@ public class BookRepositoryService implements BookService {
 	 
 			Row row = sheet.getRow(i);  
 			//column 0 id is useful? should update book from id or ignore the column
-			String isbn = row.getCell(1).toString();
+			String isbn = getStringFromExcelCell(row.getCell(1));
 			
-			if("".equals(isbn)||(isbn==null)){
+			
+			if("".equals(isbn)){
 				return new ArrayList<Integer>();
 			}
 			Book book = bookRepo.findByIsbn(isbn);
@@ -210,10 +211,7 @@ public class BookRepositoryService implements BookService {
 			}
 			book.setIsbn(isbn);
 		    book.setName(getStringFromExcelCell(row.getCell(2)));
-		    LOGGER.debug("compare:婴儿画报精品故事书（蓝莓蓝）:"+book.getName().equals("婴儿画报精品故事书（蓝莓蓝）"));
-		    LOGGER.debug(book.getName());
-		    LOGGER.debug(row.getCell(2).toString());
-		    book.setName("婴儿画报精品故事书（蓝莓蓝）");
+		
 		    book.setAuthor(getStringFromExcelCell(row.getCell(3)));
 		    book.setPrice(getFloatFromExcelCell(row.getCell(4)));
 		    book.setPublisher(row.getCell(5).toString());
@@ -283,7 +281,11 @@ public class BookRepositoryService implements BookService {
 	private String getStringFromExcelCell(Cell cell){
 		String ret = "";
 		try {
-			ret =  cell.toString();
+			if(Cell.CELL_TYPE_NUMERIC == cell.getCellType()){
+				ret ="" + (int)cell.getNumericCellValue();
+			}else{
+				ret =  cell.toString();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

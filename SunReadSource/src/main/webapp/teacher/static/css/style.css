@@ -25,12 +25,12 @@
 
 .nav-underline li a{
 	font-weight: 900;
-	color: #4F4F4F;
+	color: #8094A0;
 	margin-top: 6px;
 }
 
 .nav-underline li.myActive{
-	border-bottom: 3px #4F4F4F solid;
+	border-bottom: 3px #8094A0 solid;
 	margin-bottom: 3px;
 }
 
@@ -95,7 +95,7 @@
 
 .nav-sidebar>li>a
 {
-    color: #4F4F4F;
+    color: #8094A0;
     font-weight: 700;
     padding: 17px 0 17px 9%
 }
@@ -111,3 +111,55 @@
 }
 
 /*----------------left navigate bottom-----------------*/
+
+/*---------------------index top----------------------*/
+
+.index-left-info{
+    margin-left: 4%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.index-rigth-name{
+    font-size: 22px;
+    font-weight: 700;
+    padding-top: 35px;
+    padding-left: 15px;
+}
+
+.index-rigth-class{
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+.myBlock .head{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.myBlock .head div:first-child{
+    padding-left: 30px;
+    font-weight: 700;
+}
+
+.myBlock .head div:last-child{
+    text-align: right;
+    color: #2BB5FF;
+    padding-right: 30px;
+}
+
+.book-style .body{
+    margin-bottom: 20px;
+}
+
+.book-style .body div div:last-child{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.index-image-padding{
+    padding-left: 45px;
+    padding-right: 30px;
+}
+
+/*---------------------index bottom----------------------*/
