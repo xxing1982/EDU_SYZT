@@ -16,13 +16,6 @@
             <div class="col-md-4 clear-padding" ng-repeat="gift in gifts.content">
                 <div class="row" align="center">
 									<a href=""><img ng-src="../static/img/giftCenter/bookBag_lg.png" class="redeemIMG img-responsive"></a>
-                <!-- </div> -->
-                <!-- <div class="col-md-6"> -->
-                   <!-- <div class="row"> -->
-										<!-- <div class="fsize12">{{gift.coin}}金贝</div>
-										<div class="fsize12"><h4>{{gift.name}}</h4></div>
-
-                    <div class="fsize12">2015年新款书包</div> -->
 
 										<div class="giftRedeem"><p><span class="yellow-text">{{gift.coin}}</span><span class="giftCoin">金贝</span></br>
 											{{gift.name}}</br>
@@ -44,6 +37,8 @@
             <div >
                 <h4 class="modal-title" >数量确认</h4>
                 <p><br />没有找到您想要的书？请反馈此书的相关信息，方便我们及时添加！</p>
+                <button class="btn aBtn" type="button" style="padding: 0;outline: none;">-</button>
+                <button class="btn aBtn" type="button" style="padding: 0;outline: none;">+</button>
             </div>
         </div>
         <div class="row modal-footer" align="center">

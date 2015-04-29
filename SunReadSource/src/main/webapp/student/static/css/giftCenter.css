@@ -63,3 +63,28 @@
 .redeemBtn {
     width: 80px;
 }
+
+.aBtn {
+    text-align: center;
+    height: 26px;
+    width: 25px;
+    border: 1px cadetblue solid;
+    border-radius: 7px;
+    color: cadetblue;
+    background-color: #FFFFFF;
+    font-size: 18px;
+}
+.aBtn:hover
+{
+    background-color: #F0F0F0;
+    color:cadetblue ;
+/*    border: 1px aquamarine solid;*/
+}
+
+.aBtn:focus
+{
+    color:cadetblue ;
+/*    border: 1px aquamarine solid;*/
+    background-color: #F0F0F0;
+
+}
