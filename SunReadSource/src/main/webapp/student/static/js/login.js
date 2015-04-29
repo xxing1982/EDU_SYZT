@@ -25,6 +25,13 @@ $(document).ready(function(){
 						request.setRequestHeader("Authorization", "bearer " + data.access_token);
 					},
 					success: function(dataLogin){
+						for(var i = 0; i < dataLogin.roles.length; i++){
+							if (dataLogin.roles[i].id == 2) {
+								sessionStorage.setItem("teacherId", dataLogin.id);
+								window.location.href="teacher/protype/index.html";
+								return;
+							}
+						}
 						sessionStorage.setItem("userId", dataLogin.id);
 						window.location.href="student/protype/index.html";
 					}
