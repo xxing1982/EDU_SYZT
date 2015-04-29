@@ -1,0 +1,96 @@
+<!-- Header bar -->
+<div class="myBlock mt30 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height">
+            <div class="col-xs-8 col-xs-height">
+                <h5 class="title"><big><a ng-href="#/teachingCenter/myReward" class="dark-gray-2">已发布的奖励</a></big><big> > </big><big>创建奖励</big></h5>
+            </div>
+            <div class="col-xs-4 col-xs-height col-middle">
+                <button class="btn btn-fill-blue pull-right" type="button">
+                    发布奖励
+                </button>
+            </div>
+        </div>
+    </div>
+    </div></div>
+</div>
+
+<!-- Options -->
+<div class="mt20 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height">
+            <div class="col-xs-1 col-xs-height">
+                <h5 class="text-right">学校：</h5>
+            </div>
+            <div class="col-xs-2 col-xs-height col-middle">
+                <bs-dropdown data-menu-type="button"
+                    select-val="selected_status = selectedVal"
+                    preselected-item="selected_status"
+                    data-dropdown-data="statuses"
+                    callback="alert">
+                </bs-dropdown>
+            </div>
+            <div class="col-xs-1 col-xs-height">
+                <h5 class="text-right">年级：</h5>
+            </div>
+            <div class="col-xs-2 col-xs-height col-middle">
+                <bs-dropdown data-menu-type="button"
+                    select-val="selected_status = selectedVal"
+                    preselected-item="selected_status"
+                    data-dropdown-data="statuses"
+                    callback="alert">
+                </bs-dropdown>
+            </div>
+            <div class="col-xs-1 col-xs-height">
+                <h5 class="text-right">班级：</h5>
+            </div>
+            <div class="col-xs-2 col-xs-height col-middle">
+                <bs-dropdown data-menu-type="button"
+                    select-val="selected_status = selectedVal"
+                    preselected-item="selected_status"
+                    data-dropdown-data="statuses"
+                    callback="alert">
+                </bs-dropdown>
+            </div>
+            <!-- Placeholder -->
+            <div class="col-xs-2 col-xs-height col-middle"></div>
+        </div>
+    </div>
+    </div></div>
+</div>
+
+<!-- Items -->
+<div class="myBlock mt20 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height text-center">
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">张楚璐</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">持有财富：12</p></div>
+            <div class="col-xs-3 col-xs-height col-middle"><p class="row title">奖励财富值：<input type="text" class="custom-input" /></p></div>
+            <div class="col-xs-4 col-xs-height col-middle"><p class="row title">奖励原因：<input type="text" class="custom-input" style="width:70%"/></p></div>
+        </div>
+    </div>
+    </div></div>
+</div>
+
+
+<!-- Items -->
+<div class="myBlock mt20 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height text-center">
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">张楚璐</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">持有财富：12</p></div>
+            <div class="col-xs-3 col-xs-height col-middle"><p class="row title">奖励财富值：<input type="text" class="custom-input" /></p></div>
+            <div class="col-xs-4 col-xs-height col-middle"><p class="row title">奖励原因：<input type="text" class="custom-input" style="width:70%"/></p></div>
+        </div>
+    </div>
+    </div></div>
+</div>
+
+<!-- Loadmore -->
+<div class="myBlock mt20 page-body">
+    <div class="load-more-bottom" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}加载更多</div>
+</div>

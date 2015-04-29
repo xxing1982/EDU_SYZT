@@ -18,11 +18,11 @@ p, .paragraph,
 /* Light blue for link and so on */
 a,
 .light-blue {
-    color: #55C9D2;
+    color: #2BB5FF;
 }
 
 a:focus, a:hover {
-    color: #55C9D2;
+    color: #2BB5FF;
     text-decoration: none;
     cursor: pointer;
 }

@@ -37,6 +37,7 @@
     margin-right:5px;
     line-height: normal;
     text-align: center;
+    border: 1px solid #72BEE7;
 }
 
 .custom-page-number-container{
@@ -95,13 +96,15 @@ bs-dropdown, bs-dropdown .btn-group {
     width: 100%;
 }
 
-bs-dropdown .button-label {
+bs-dropdown .button-label,
+bs-dropdown .button-label:focus,
+bs-dropdown .button-label:hover{
     width: 70%;
     width: -webkit-calc(100% - 26px);
     width: -moz-calc(100% - 26px);
     width: calc(100% - 26px);
     color: #55C9D2;
-    background: none;
+    background-color: #FFF;
     border-color: #55C9D2;
     padding-left: 0;
     padding-right: 0;
@@ -117,7 +120,7 @@ bs-dropdown .dropdown-toggle:hover,
 bs-dropdown .dropdown-toggle:focus,
 bs-dropdown .dropdown-toggle:active {
     color: #FFF;
-    background-color: #3b6ea8;
+    background-color: #55C9D2;
     border-color: #55C9D2;
 }
 
@@ -162,4 +165,43 @@ textarea.form-control, textarea {
     padding-left: 12px;
     padding-right: 12px;
     padding-top: 6px;
+}
+
+/* Button theme */
+.btn-blue
+{
+    border: 1px #72BEE7 solid;
+    background-color: #FFFFFF;
+    color: #72BEE7;
+}
+
+.btn-blue:hover
+{
+    background-color: #F0F0F0;
+    color: #72BEE7;
+}
+
+.btn-blue:focus
+{
+    color: #72BEE7;
+    background-color: #F0F0F0;
+}
+
+.btn-fill-blue
+{
+    border: 1px #72BEE7 solid;
+    background-color: #72BEE7;
+    color: #FFFFFF;
+}
+
+.btn-fill-blue:hover
+{
+    background-color: #74c4ef;
+    color: #FFFFFF;
+}
+
+.btn-fill-blue:focus
+{
+    color: #FFFFFF;
+    background-color: #74c4ef;
 }

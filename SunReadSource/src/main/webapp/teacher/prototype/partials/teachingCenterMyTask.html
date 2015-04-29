@@ -1,8 +1,54 @@
-<div class="myBlock mt30">
-    已发布的奖励
-
+<!-- Header bar -->
+<div class="myBlock mt30 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height">
+            <div class="col-xs-8 col-xs-height">
+                <h5 class="title"><big>已发布的任务</big></h5>
+            </div>
+            <div class="col-xs-4 col-xs-height col-middle">
+                <a class="btn btn-fill-blue pull-right" type="button" ng-href="#/teachingCenter/myTask/dispatchTask">
+                    创建任务
+                </a>
+            </div>
+        </div>
+    </div>
+    </div></div>
 </div>
 
-<div class="myBlock mt20">task
+<!-- Items -->
+<div class="myBlock mt20 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height text-center">
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">红英小学</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">三年（2）班</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">张孝祥</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">任务目标：5本</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">积分：50本</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a>修改</a></p></div>
+        </div>
+    </div>
+    </div></div>
+</div>
 
+<!-- Items -->
+<div class="myBlock mt20 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height text-center">
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">红英小学</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">三年（2）班</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">张孝祥</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">任务目标：5本</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">积分：50本</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a>修改</a></p></div>
+        </div>
+    </div>
+    </div></div>
+</div>
+
+<!-- Loadmore -->
+<div class="myBlock mt20 page-body">
+    <div class="load-more-bottom" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}加载更多</div>
 </div>

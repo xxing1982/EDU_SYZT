@@ -28,17 +28,29 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         //teachingCenter my task page
         .state('teachingCenter.myTask',{
             url: '/myTask',
-            templateUrl: 'partials/teachingCenterMyTask.html'
+            templateUrl: 'partials/teachingCenterMyTask.html',
+            controller: "myTaskController"
+        })
+        //teachingCenter my task dispatch task page
+        .state('teachingCenter.myTaskDispatchTask',{
+            url: '/myTask/dispatchTask',
+            templateUrl: 'partials/teachingCenterMyTaskDispatchTask.html',
+            controller: "myTaskDispatchTaskController"
         })
         //teachingCenter my task page
         .state('teachingCenter.myRecommend',{
             url: '/myRecommend',
             templateUrl: 'partials/teachingCenterMyRecommend.html'
         })
-        //teachingCenter my task page
+        //teachingCenter my reward page
         .state('teachingCenter.myReward',{
             url: '/myReward',
             templateUrl: 'partials/teachingCenterMyReward.html'
+        })
+        //teachingCenter my reward dispatch award page
+        .state('teachingCenter.myRewardDispatchReward',{
+            url: '/myReward/dispatchReward',
+            templateUrl: 'partials/teachingCenterMyRewardDispatchReward.html'
         })
         //teachingCenter my task page
         .state('teachingCenter.myResource',{
