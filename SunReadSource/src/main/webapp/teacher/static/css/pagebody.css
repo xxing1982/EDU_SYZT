@@ -33,6 +33,17 @@
     background-color: #F7F7F7;
 }
 
+.page-body .custom-input {
+    height: 30px;
+    padding: 0;
+    width: 50px;
+    margin-left:5px;
+    margin-right:5px;
+    line-height: normal;
+    text-align: center;
+    border: 1px solid #72BEE7;
+}
+
 /*modal related*/
 
 @media (min-width: 768px){

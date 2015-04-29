@@ -42,10 +42,15 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/myRecommend',
             templateUrl: 'partials/teachingCenterMyRecommend.html'
         })
-        //teachingCenter my task page
+        //teachingCenter my reward page
         .state('teachingCenter.myReward',{
             url: '/myReward',
             templateUrl: 'partials/teachingCenterMyReward.html'
+        })
+        //teachingCenter my reward dispatch award page
+        .state('teachingCenter.myRewardDispatchReward',{
+            url: '/myReward/dispatchReward',
+            templateUrl: 'partials/teachingCenterMyRewardDispatchReward.html'
         })
         //teachingCenter my task page
         .state('teachingCenter.myResource',{
