@@ -25,12 +25,12 @@
 
 .nav-underline li a{
 	font-weight: 900;
-	color: #8094A0;
+	color: #4F4F4F;
 	margin-top: 6px;
 }
 
 .nav-underline li.myActive{
-	border-bottom: 3px #8094A0 solid;
+	border-bottom: 3px #4F4F4F solid;
 	margin-bottom: 3px;
 }
 
@@ -95,7 +95,7 @@
 
 .nav-sidebar>li>a
 {
-    color: #8094A0;
+    color: #4F4F4F;
     font-weight: 700;
     padding: 17px 0 17px 9%
 }
