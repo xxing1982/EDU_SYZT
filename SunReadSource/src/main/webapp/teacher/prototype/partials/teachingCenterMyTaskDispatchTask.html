@@ -4,11 +4,11 @@
     <div class="row">
         <div class="row-same-height">
             <div class="col-xs-8 col-xs-height">
-                <h5 class="title"><big>已发布的奖励</big></h5>
+                <h5 class="title"><big class="dark-gray-2">已发布的奖励</big><big> > </big><big>创建任务</big></h5>
             </div>
             <div class="col-xs-4 col-xs-height col-middle">
                 <button class="btn btn-fill-blue pull-right" type="button">
-                    创建任务
+                    发布任务
                 </button>
             </div>
         </div>
@@ -21,10 +21,10 @@
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height">
-            <div class="col-xs-8 col-xs-height">
-                <h5 class=""><big>已布的奖励</big></h5>
+            <div class="col-xs-1 col-xs-height">
+                <h5 class="text-right">学校：</h5>
             </div>
-            <div class="col-xs-4 col-xs-height col-middle">
+            <div class="col-xs-2 col-xs-height col-middle">
                 <bs-dropdown data-menu-type="button"
                     select-val="selected_status = selectedVal"
                     preselected-item="selected_status"
@@ -32,6 +32,30 @@
                     callback="alert">
                 </bs-dropdown>
             </div>
+            <div class="col-xs-1 col-xs-height">
+                <h5 class="text-right">年级：</h5>
+            </div>
+            <div class="col-xs-2 col-xs-height col-middle">
+                <bs-dropdown data-menu-type="button"
+                    select-val="selected_status = selectedVal"
+                    preselected-item="selected_status"
+                    data-dropdown-data="statuses"
+                    callback="alert">
+                </bs-dropdown>
+            </div>
+            <div class="col-xs-1 col-xs-height">
+                <h5 class="text-right">班级：</h5>
+            </div>
+            <div class="col-xs-2 col-xs-height col-middle">
+                <bs-dropdown data-menu-type="button"
+                    select-val="selected_status = selectedVal"
+                    preselected-item="selected_status"
+                    data-dropdown-data="statuses"
+                    callback="alert">
+                </bs-dropdown>
+            </div>
+            <!-- Placeholder -->
+            <div class="col-xs-2 col-xs-height col-middle"></div>
         </div>
     </div>
     </div></div>
@@ -65,4 +89,9 @@
         </div>
     </div>
     </div></div>
+</div>
+
+<!-- Loadmore -->
+<div class="myBlock mt20 page-body">
+    <div class="load-more-bottom" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}加载更多</div>
 </div>
