@@ -1,0 +1,119 @@
+/*
+.page-body {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+*/
+
+.page-body .title, .modal-content .title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.page-body .paragraph, .modal-content .paragraph {
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.page-body .title-link {
+    line-height:40px;
+}
+
+.page-body .load-more-bottom {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: #6C82A0;
+    font-size: 12px;
+}
+
+.page-body .load-more-bottom:hover
+{
+    background-color: #F7F7F7;
+}
+
+/*modal related*/
+
+@media (min-width: 768px){
+    .modal-dialog {
+      width: 500px;
+    }
+}
+
+@media (min-width: 992px){
+    .modal-dialog {
+      width: 646px;
+    }
+}
+
+
+@media (min-width: 1200px){
+    .modal-dialog {
+      width: 780px;
+    }
+}
+
+.modal-content {
+     background-color: #F5F5F5;
+}
+
+.modal-content .btn-green {
+     background: none;
+}
+
+
+/*
+  Copy from here  
+  http://www.minimit.com/demos/bootstrap-3-responsive-columns-of-same-height
+*/
+/* vertical alignment styles */
+
+.col-top {
+  vertical-align: top;
+}
+.col-middle {
+  vertical-align: middle;
+}
+.col-bottom {
+  vertical-align: bottom;
+}
+
+/* columns of same height styles */
+
+.row-full-height {
+  height: 100%;
+}
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+.row-same-height {
+  display: table;
+  width: 100%;
+  /* fix overflow */
+  table-layout: fixed;
+}
+.col-xs-height {
+  display: table-cell;
+  float: none !important;
+}
+
+@media (min-width: 768px) {
+  .col-sm-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}

@@ -28,7 +28,8 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         //teachingCenter my task page
         .state('teachingCenter.myTask',{
             url: '/myTask',
-            templateUrl: 'partials/teachingCenterMyTask.html'
+            templateUrl: 'partials/teachingCenterMyTask.html',
+            controller: "myTaskController"
         })
         //teachingCenter my task page
         .state('teachingCenter.myRecommend',{
