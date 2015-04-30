@@ -21,7 +21,7 @@ ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', function( 
         delete sessionStorage.access_token;
         delete sessionStorage.userId;
         delete sessionStorage.length;
-        window.location.href="/";;
+        window.location.href="/login.html"; 
     }*/
 }]);
 
