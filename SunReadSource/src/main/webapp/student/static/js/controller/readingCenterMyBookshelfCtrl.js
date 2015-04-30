@@ -1,4 +1,4 @@
-//readingCenterMyBookshelfCtrl.js
+``//readingCenterMyBookshelfCtrl.js
 
 ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','BookshelfView',
     'Bookshelf','BookInShelf','DropBookFromShelf', 'NoteTake', 'BookDetail', 'Dropzone', 'config', function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf,NoteTake, BookDetail, Dropzone, config) {

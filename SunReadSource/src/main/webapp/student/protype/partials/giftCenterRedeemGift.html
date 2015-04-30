@@ -1,4 +1,4 @@
-<div class="readingCenter-right">
+ <div class="readingCenter-right">
 	<div class="col-md-8 col-md-offset-2">
 		<div class="row page-body page-body-top  readingCenter-right-body container-fluid">
 
@@ -20,7 +20,7 @@
 										<div class="giftRedeem"><p><span class="yellow-text">{{gift.coin}}</span><span class="giftCoin">金贝</span></br>
 											{{gift.name}}</br>
 											<span class="giftAdv">2015年新款书包</span></p>
-                    <a class="btn btn-sm btn-green modal-title" id="myModalLabel"  data-toggle="modal" data-target="#redeemGift" type="button">我要兑换</a>&nbsp;&nbsp;
+                    <a class="btn btn-sm btn-green modal-title" id="myModalLabel" ng-click="getGiftId(gift)"  data-toggle="modal" data-target="#redeemGift" type="button">我要兑换</a>&nbsp;&nbsp;
                     </div>
                 </div>
 						</div>
@@ -36,18 +36,20 @@
             <!-- Input form -->
             <div >
                 <h4 class="modal-title" >数量确认</h4>
-                <p><br />没有找到您想要的书？请反馈此书的相关信息，方便我们及时添加！</p>
-                <button class="btn aBtn" type="button" style="padding: 0;outline: none;">-</button>
-                <button class="btn aBtn" type="button" style="padding: 0;outline: none;">+</button>
+                <div align="center" style="  margin-top: 30px;">
+                    <button class="btn aBtn" type="button" ng-click="minusQuantity()" style="padding: 0;outline: none;">-</button>
+                    <input type="text" ng-model="quantity"class="redeemInput" placeholder="1">
+                    <button class="btn aBtn" type="button" ng-click="addQuantity()" style="padding: 0;outline: none;">+</button>
+                </div>
             </div>
         </div>
-        <div class="row modal-footer" align="center">
+        <div class="row" style="margin-bottom: 20px; margin-top: 5px;" align="center">
             <div class="col-md-offset-3 col-md-3">
-                <button class="btn btn-green redeemBtn" ng-disabled="!isbnValid()" ng-click="lackBookFeedback()" type="button">确认</button>
+                <button class="btn btn-fill-green redeemBtn" ng-click="exchangeGifts(gift)"ng-disabled="!isValid()" type="button">确认</button>
             </div>
 
             <div class="col-md-3">
-                <button class="btn btn-green redeemBtn" ng-click="" type="button" data-dismiss="modal" aria-label="Close">取消</button>
+                <button class="btn btn-green redeemBtn"  ng-click="" type="button" data-dismiss="modal" aria-label="Close">取消</button>
             </div>
         </div>
 
@@ -55,9 +57,9 @@
     </div>
     </div>
 </div>
-       
-       
-       
+
+
+
 <!--Right part   -->
         <div class="rightpart">
             <div class="row redeemBlock">
@@ -83,32 +85,33 @@
                             不可兑换
                           </label>
                         </div>
-                        
-                    
+
+
                 </div><!---->
             </div>
-            
+
             <div class="row redeemBlock">
                 <div class="col-md-off-1 col-md-10">
                         <div class="row">
                             <h5>商品类型</h5>
                         </div>
                         <div class="row">
-                            <bs-dropdown data-menu-type="button"
-                            select-val="searchArguments.category = selectedVal"
-                            preselected-item="searchArguments.category"
-                            data-dropdown-data="statuses_category">
-                            </bs-dropdown>
+													<bs-dropdown data-menu-type="button"
+															select-val="selected_status = selectedVal"
+															preselected-item="selected_status"
+															data-dropdown-data="statuses"
+															callback="alert">
+													</bs-dropdown>
                         </div>
-                    
+
                 </div>
             </div>
 
-            <div class="row giftPlaceHolder"> 
+            <div class="row giftPlaceHolder">
                 <p>&nbsp;</p>
             </div>
 
-            
+
 
         </div>
 

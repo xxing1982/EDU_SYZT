@@ -22,3 +22,32 @@ getGiftsExNumServices.factory('GetGiftsExNum', ['$resource', 'config',
             {id:'@_id', page:'@_page', size:'@_size'}, {}
         );
 }]);
+
+
+var exchangeGiftsServices = angular.module('exchangeGiftsServices', ['ngResource', "nourConfig"]);
+/*
+    getGifts object(s)
+*/
+exchangeGiftsServices.factory('ExchangeGifts', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "students/:studentId/gifts/:giftId?count=:count",
+            {studentId:'@_studentId', giftId:'@_giftId',count:'@_count'},
+						{update:{
+							method:'PUT'
+						}
+        });
+}]);
+
+// var exchangeGiftsServices = angular.module('exchangeGiftsServices', ['ngResource', "nourConfig"]);
+// /*
+//     getGifts object(s)
+// */
+// exchangeGiftsServices.factory('ExchangeGifts', ['$resource', 'config',
+// 	function($resource, config){
+// 		return $resource(config.HOST + "students/1/gifts/3?count=10",
+//             {},
+// 						{update:{
+// 							method:'PUT'
+// 						}
+//         });
+// }]);
