@@ -28,7 +28,7 @@ $(document).ready(function(){
 						for(var i = 0; i < dataLogin.roles.length; i++){
 							if (dataLogin.roles[i].id == 2) {
 								sessionStorage.setItem("teacherId", dataLogin.id);
-								window.location.href="teacher/protype/index.html";
+								window.location.href="teacher/prototype/index.html";
 								return;
 							}
 						}

@@ -70,5 +70,8 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
 }]);
 
 routeApp.run(['$rootScope', function($rootScope){
-    
+    if (sessionStorage.getItem("teacherId") == null) {
+        window.location.href="../login.html";
+    };
+    $rootScope.id = sessionStorage.getItem("teacherId");
 }]);
