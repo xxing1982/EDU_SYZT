@@ -1,12 +1,12 @@
 <div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-7">
-		<div class="myBlock mt30 row">
-			<div class="col-md-2 index-left-info">
+		<div class="myBlock mt30 row" style="display:table">
+			<div class="col-md-2 index-left-info col-xs-height">
 				<img class="img-responsive img-circle" src="../static/img/head.jpg">
 			</div>
-			<div class="col-md-8">
-				<div class="index-rigth-name">{{student.username}}老师</div>
+			<div class="col-md-9 col-xs-height col-middle">
+				<div class="index-rigth-name">张晓晨老师</div>
 				<div class="index-rigth-class">
 					中学&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 					班级&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -43,6 +43,7 @@
 				</div>
 				<div class="col-md-1"></div>
 			</div>
+			<div class="foot"></div>
 		</div>
 		<div class="myBlock mt20 book-style row">
 			<div class="head row">
@@ -55,6 +56,7 @@
 					<div>精卫填海</div>
 				</div>
 			</div>
+			<div class="foot"></div>
 		</div>
 		<div class="myBlock mt20 book-style row">
 			<div class="head row">
@@ -67,17 +69,62 @@
 					<div>精卫填海</div>
 				</div>
 			</div>
+			<div class="foot"></div>
 		</div>
 	</div>
-	<div class="col-md-3" style="margin-left:20px">
+	<div class="col-md-3" style="margin-left:20px; width: 20%">
 		<div class="myBlock mt30 row">
 			<div class="head row">
-				<div class="col-md-4">正在发生</div>
-				<div class="col-md-8"></div>
+				<div class="col-md-8">正在发生</div>
+				<div class="col-md-4"></div>
 			</div>
 			<div class="body row">
-				
+				<ul class="ml20">
+					<li>正在发生</li>
+				</ul>
 			</div>
+			<div class="foot"></div>
+		</div>
+		<div class="myBlock mt20 row">
+			<div class="head row">
+				<div class="col-md-8">班级阅读达人</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="body row">
+				<div class="row">
+					<div class="col-md-3"></div>
+					<div class="col-md-6"><img class="img-responsive img-circle" src="../static/img/head.jpg"></div>
+					<div class="col-md-3"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-6"></div>
+					<div class="col-md-3" style="margin-top:-17%;"><img src="../static/img/readingDynamic/first.png" class="img-responsive img-circle"></div>
+				</div>
+				<div class="tc"><h3>陈赫&nbsp;&nbsp;<span style="font-size:20px">211本</span></h3></div>
+				<hr>
+				<div class="row row-same-height" ng-init="award = ['second', 'third']">
+					<div class="col-md-1 col-xs-height col-middle"></div>
+					<div class="col-md-2 col-xs-height col-middle"><img ng-src="../static/img/readingDynamic/second.png" class="img-responsive img-circle" src="../static/img/readingDynamic/second.png"></div>
+					<div class="col-md-5 col-xs-height col-middle">
+						李晨
+					</div>
+					<div class="col-md-3 col-xs-height col-middle">144本</div>
+				</div>
+			</div>
+			<div class="foot"></div>
+		</div>
+		<div class="myBlock mt20 row">
+			<div class="head row">
+				<div class="col-md-8">正在发生</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="body row">
+				<div class="row ml20" ng-repeat="item in hotNotes">
+					<div class="col-md-7" title="{{item.content}}">{{item.content | formatSize6}}</div>
+					<div class="col-md-5">评论：{{item.commentCount}}</div>
+				</div>
+			</div>
+			<div class="foot"></div>
 		</div>
 	</div>
 </div>

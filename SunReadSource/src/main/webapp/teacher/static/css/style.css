@@ -115,21 +115,17 @@
 /*---------------------index top----------------------*/
 
 .index-left-info{
-    margin-left: 4%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .index-rigth-name{
     font-size: 22px;
     font-weight: 700;
-    padding-top: 35px;
-    padding-left: 15px;
 }
 
 .index-rigth-class{
     padding-top: 10px;
-    padding-left: 15px;
 }
 
 .myBlock .head{
@@ -140,6 +136,7 @@
 .myBlock .head div:first-child{
     padding-left: 30px;
     font-weight: 700;
+    font-size: 16px;
 }
 
 .myBlock .head div:last-child{
@@ -148,13 +145,13 @@
     padding-right: 30px;
 }
 
-.book-style .body{
-    margin-bottom: 20px;
-}
-
 .book-style .body div div:last-child{
     margin-top: 20px;
     text-align: center;
+}
+
+.myBlock .foot{
+    margin-bottom: 20px;
 }
 
 .index-image-padding{
