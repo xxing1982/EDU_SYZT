@@ -36,7 +36,17 @@ public class Teacher extends User{
 
     private long classId;
 
-//    @ManyToMany
+    private String teaching;
+
+    public String getTeaching() {
+        return teaching;
+    }
+
+    public void setTeaching(String teaching) {
+        this.teaching = teaching;
+    }
+
+    //    @ManyToMany
 //    @JoinTable(name="teacher_clazz",
 //            joinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"),
 //            inverseJoinColumns = @JoinColumn(name="clazz_id", referencedColumnName="id")
