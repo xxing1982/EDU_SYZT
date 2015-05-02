@@ -16,5 +16,6 @@ public interface ObjectiveQuestionRepository extends JpaRepository<ObjectiveQues
 	
 	public List<ObjectiveQuestion> findByBookIdAndObjectiveType(Long bookId,QuestionType type);
 	
+	public ObjectiveQuestion findByTopicAndBookId(String topic,Long bookId);
 	 
 }

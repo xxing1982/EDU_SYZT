@@ -35,5 +35,10 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
      		url: '/objectivequestion',
      		templateUrl: "partials/objectivequestion.html",
      		controller: 'objectiveQuestionCtrl'
+     	})
+     	.state('subjectivequestion', {
+     		url: '/subjectivequestion',
+     		templateUrl: "partials/subjectivequestion.html",
+     		controller: 'subjectiveQuestionCtrl'
      	});
 }]);

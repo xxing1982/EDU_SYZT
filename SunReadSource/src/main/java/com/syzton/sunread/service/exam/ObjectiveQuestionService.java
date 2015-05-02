@@ -1,7 +1,10 @@
 package com.syzton.sunread.service.exam;
 
+import java.util.Map;
+
 import javassist.NotFoundException;
 
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -45,5 +48,7 @@ public interface ObjectiveQuestionService {
 	public CapacityQuestion findCapacityQuestionById(Long id) throws NotFoundException ;
 
 	public CapacityQuestion updateCapacityQuestion(CapacityQuestion updated) throws NotFoundException;
+	
+	public Map<Integer,String> batchSaveOrUpdateObjectiveQuestionFromExcel(Sheet sheet);
 	
 }

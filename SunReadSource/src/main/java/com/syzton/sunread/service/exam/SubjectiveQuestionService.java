@@ -1,7 +1,10 @@
 package com.syzton.sunread.service.exam;
 
+import java.util.Map;
+
 import javassist.NotFoundException;
 
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,4 +23,6 @@ public interface SubjectiveQuestionService {
 	public SubjectiveQuestion deleteById(Long id) throws  NotFoundException;
 	                                            
 	public SubjectiveQuestion update(SubjectiveQuestion updated) throws NotFoundException;
+	
+	public Map<Integer,String> batchSaveOrUpdateSubjectQuestionFromExcel(Sheet sheet);
 }

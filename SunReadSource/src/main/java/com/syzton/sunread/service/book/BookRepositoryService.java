@@ -23,6 +23,7 @@ import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
 import com.syzton.sunread.repository.book.DictionaryRepository;
+import com.syzton.sunread.util.ExcelUtil;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -191,10 +192,13 @@ public class BookRepositoryService implements BookService {
 		
 		List<Integer> list = new ArrayList<Integer>();
 		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
-	 
+			
 			Row row = sheet.getRow(i);  
+			if(row.getCell(1) == null){
+				break;
+			}
 			//column 0 id is useful? should update book from id or ignore the column
-			String isbn = getStringFromExcelCell(row.getCell(1));
+			String isbn = ExcelUtil.getStringFromExcelCell(row.getCell(1));
 			
 			
 			if("".equals(isbn)){
@@ -210,41 +214,41 @@ public class BookRepositoryService implements BookService {
 				book.setExtra(extra);
 			}
 			book.setIsbn(isbn);
-		    book.setName(getStringFromExcelCell(row.getCell(2)));
+		    book.setName(ExcelUtil.getStringFromExcelCell(row.getCell(2)));
 		
-		    book.setAuthor(getStringFromExcelCell(row.getCell(3)));
-		    book.setPrice(getFloatFromExcelCell(row.getCell(4)));
+		    book.setAuthor(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
+		    book.setPrice(ExcelUtil.getFloatFromExcelCell(row.getCell(4)));
 		    book.setPublisher(row.getCell(5).toString());
-		    book.setPublicationDate(new DateTime(getStringFromExcelCell(row.getCell(6))));
-		    book.setPictureUrl(getStringFromExcelCell(row.getCell(7)));
-		    book.setPageCount(getIntFromExcelCell(row.getCell(8)));
-		    book.setWordCount(getIntFromExcelCell(row.getCell(9)));
+		    book.setPublicationDate(new DateTime(ExcelUtil.getStringFromExcelCell(row.getCell(6))));
+		    book.setPictureUrl(ExcelUtil.getStringFromExcelCell(row.getCell(7)));
+		    book.setPageCount(ExcelUtil.getIntFromExcelCell(row.getCell(8)));
+		    book.setWordCount(ExcelUtil.getIntFromExcelCell(row.getCell(9)));
 		    //Can't find packaging field in book model
-		    String binding = getStringFromExcelCell(row.getCell(10));
+		    String binding = ExcelUtil.getStringFromExcelCell(row.getCell(10));
 		    if(binding == "精装"){
 		    	book.setBinding(Binding.softback);
 		    }else{
 		    	book.setBinding(Binding.hardback);
 		    }
-		    book.setDescription(getStringFromExcelCell(row.getCell(11)));
-		    book.setCatalogue(getStringFromExcelCell(row.getCell(12)));
-		    book.setAuthorIntroduction(getStringFromExcelCell(row.getCell(13)));
+		    book.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(11)));
+		    book.setCatalogue(ExcelUtil.getStringFromExcelCell(row.getCell(12)));
+		    book.setAuthorIntroduction(ExcelUtil.getStringFromExcelCell(row.getCell(13)));
 		    //unused field.
 		    extra.setAgeRange(0);
-		    String gradeKey = getStringFromExcelCell(row.getCell(15));
+		    String gradeKey = ExcelUtil.getStringFromExcelCell(row.getCell(15));
 		    extra.setGrade(getValueFromDic(grades, gradeKey));
-		    extra.setLevel(getIntFromExcelCell(row.getCell(16)));
+		    extra.setLevel(ExcelUtil.getIntFromExcelCell(row.getCell(16)));
 		    
-		    String literatureKey = getStringFromExcelCell(row.getCell(17));
+		    String literatureKey = ExcelUtil.getStringFromExcelCell(row.getCell(17));
 		    extra.setLiterature(getValueFromDic(literatures, literatureKey));
 		    
-		    String languageKey = getStringFromExcelCell(row.getCell(18));
+		    String languageKey = ExcelUtil.getStringFromExcelCell(row.getCell(18));
 		    extra.setLanguage(getValueFromDic(languages, languageKey));
 		    
-		    String categoryKey = getStringFromExcelCell(row.getCell(19));
+		    String categoryKey = ExcelUtil.getStringFromExcelCell(row.getCell(19));
 		    extra.setCategory(getValueFromDic(categorys,categoryKey));
-		    int coin = getIntFromExcelCell(row.getCell(20));
-		    int point = getIntFromExcelCell(row.getCell(21));
+		    int coin = ExcelUtil.getIntFromExcelCell(row.getCell(20));
+		    int point = ExcelUtil.getIntFromExcelCell(row.getCell(21));
 		    book.setPoint(point);
 		    book.setCoin(coin);
 		    int pointRange = 0;
@@ -253,9 +257,9 @@ public class BookRepositoryService implements BookService {
 		    }
 		    
 		    extra.setPointRange(pointRange);		
-		    extra.setHasVideo(getBoolFromExcelCell(row.getCell(22)));
-		    extra.setHasRadio(getBoolFromExcelCell(row.getCell(23)));
-		    extra.setHasEbook(getBoolFromExcelCell(row.getCell(24)));
+		    extra.setHasVideo(ExcelUtil.getBoolFromExcelCell(row.getCell(22)));
+		    extra.setHasRadio(ExcelUtil.getBoolFromExcelCell(row.getCell(23)));
+		    extra.setHasEbook(ExcelUtil.getBoolFromExcelCell(row.getCell(24)));
 		   
 		    book.setExtra(extra);
 		   
@@ -278,48 +282,6 @@ public class BookRepositoryService implements BookService {
 		return -1;
 	}
 	
-	private String getStringFromExcelCell(Cell cell){
-		String ret = "";
-		try {
-			if(Cell.CELL_TYPE_NUMERIC == cell.getCellType()){
-				ret ="" + (int)cell.getNumericCellValue();
-			}else{
-				ret =  cell.toString();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return ret;
-	}
 	
-	private boolean getBoolFromExcelCell(Cell cell){
-		boolean ret = false;
-		try{
-			ret = cell.getBooleanCellValue();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return ret;
-	}
-	
-	private int getIntFromExcelCell(Cell cell){
-		int ret = 0;
-		try{
-			ret = (int)Double.parseDouble(cell.toString());
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return ret;
-	}
-	
-	private float getFloatFromExcelCell(Cell cell){
-		float ret = 0;
-		try{
-			ret = (float)Double.parseDouble(cell.toString());
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return ret;
-	}
 	
 }
