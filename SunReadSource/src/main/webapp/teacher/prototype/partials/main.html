@@ -8,8 +8,8 @@
 			<div class="col-md-9 col-xs-height col-middle">
 				<div class="index-rigth-name">张晓晨老师</div>
 				<div class="index-rigth-class">
-					中学&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					班级&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					{{teacher.school}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					{{teacher.class}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 					语文老师
 				</div>
 			</div>
@@ -76,11 +76,13 @@
 		<div class="myBlock mt30 row">
 			<div class="head row">
 				<div class="col-md-8">正在发生</div>
-				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					
+				</div>
 			</div>
 			<div class="body row">
 				<ul class="ml20">
-					<li>正在发生</li>
+					<li ng-repeat="action in actionPageable.entities.content">{{ action.title }}</li>
 				</ul>
 			</div>
 			<div class="foot"></div>
@@ -115,8 +117,10 @@
 		</div>
 		<div class="myBlock mt20 row">
 			<div class="head row">
-				<div class="col-md-8">正在发生</div>
-				<div class="col-md-4"></div>
+				<div class="col-md-8">热门笔记</div>
+				<div class="col-md-4">
+					
+				</div>
 			</div>
 			<div class="body row">
 				<div class="row ml20" ng-repeat="item in hotNotes">
