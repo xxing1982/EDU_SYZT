@@ -2,19 +2,37 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope'
                                           ,'GetGifts','GetGiftsExNum','ExchangeGifts'
   ,function ($rootScope,$scope, GetGifts,GetGiftsExNum,ExchangeGifts) {
     var page = 0;
-    var size = 6;
+    var size = 1;
+    var pageSize = 1024;
+    var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
+    $scope.loading = stateTexts.loading;
 
-    $scope.gifts = GetGifts.get({page:page,size:size},function(){
-    	console.log($scope.gifts);
+    $scope.redeemState = 0;
+    // $scope.currentCoin = $rootScope.student.
+    var student = $rootScope.student;
+    console.log('student :')
+    console.log(student);
+    console.log('statistic :'+student.statistic);
+
+    // var currentCoin = student.statistic.coin;
+    // console.log(currentCoin);
+    $scope.gifts = new Array(0);
+
+    var allGifts = GetGifts.get({page:page,size:pageSize},function(){
+      console.log(allGifts);
+      var content = allGifts.content;
+      $scope.loading = setLoadingState(content,size);
+      initLoad($scope.gifts,content,size);
     })
 
-    // $scope.gifts = GetGiftsExNum.get({id:1, page:page,size:size},function(){
-    //   console.log($scope.gifts);
-    //   if($scope.gifts.content.exchanges==="exchanges")
-    //     $scope.gifts.content.status==="已发货";
-    //
-    // })
-
+    $scope.giftsLoadingMore = function(){
+      if($scope.loading === stateTexts.nomore)
+        return;
+      if(loadingMore($scope.gifts,allGifts.content,size))
+        $scope.loading = stateTexts.more;
+      else
+        $scope.loading = stateTexts.nomore;
+    }
 
   $scope.quantity = 1;
   $scope.addQuantity = function(){
@@ -36,8 +54,10 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope'
     $scope.giftId = gift.id;
   }
 
-  $scope.exchangeGifts = function(gift){
-    ExchangeGifts.update({},function(){
+
+  $scope.redeemGift = new ExchangeGifts();
+  $scope.exchangeGifts  = function(gift){
+    $scope.redeemGift.$update({studentId:$rootScope.id,giftId:$scope.giftId,count:$scope.quantity},function(){
       $rootScope.modal ={
           title: "兑换成功",
           content:''
@@ -57,12 +77,58 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope'
       name:"全部类型"
   }, {
       id: 1,
-      name: "文具",
+      name: "TYPE_1",
       callback: $scope.test
   }, {
       id: 2,
-      name: "饰品",
+      name: "TYPE_2",
       callback: $scope.test
   }];
   $scope.selected_status = 0;
+
+  var initLoad = function(part,all,size){
+    if(typeof(all)=== 'undefined')
+      return 0;
+    for(var i=0; i<all.length&&i<size;i++)
+      part.push(all[i]);
+    // console.log(part);
+    return part.length;
+  }
+
+  var setLoadingState = function(arr,size){
+    if(arr.length<=size)
+      return stateTexts.nomore;
+    else if(arr.length>size)
+      return stateTexts.more;
+  };
+
+  var loadingMore = function(part,all,size){
+    var allNum = all.length;
+    for(var i=0;i<size;i++){
+      if(part.length<allNum)
+        part.push(all[part.length]);
+      else
+        return false;
+    }
+    return true;
+  }
+
+  $scope.giftTypeFilter = function(e){
+    // console.log($scope.statuses[$scope.selected_status].name);
+    if($scope.selected_status>0)
+      return e.giftType == $scope.statuses[$scope.selected_status].name;
+    else
+      return e;
+    };
+
+    $scope.redeemStateFilter = function(e){
+      console.log($scope.redeemState);
+
+    }
 }]);
+
+//
+// ctrls.filter('formatGiftType',function(){
+//   return function(data){
+//
+//   }

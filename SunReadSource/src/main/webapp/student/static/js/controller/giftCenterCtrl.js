@@ -1,7 +1,8 @@
 ctrls.controller("giftCenterController", ['$rootScope','$scope', 'GetGifts','GetGiftsExNum',
 	function ($rootScope,$scope, GetGifts,GetGiftsExNum) {
 		var page = 0;
-		var size = 1;
+		var size = 3;
+		var pageSize = 1024;
 		var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
 		$scope.loading = stateTexts.loading;
 		// $scope.gifts = GetGifts.get({page:page,size:size},function(){
@@ -9,7 +10,7 @@ ctrls.controller("giftCenterController", ['$rootScope','$scope', 'GetGifts','Get
 		// })
 
 		$scope.gifts = new Array(0);
-		var allGifts = GetGiftsExNum.get({id:$rootScope.id, page:page,size:100},function(){
+		var allGifts = GetGiftsExNum.get({id:$rootScope.id, page:page,size:pageSize},function(){
 			console.log($scope.gifts);
 			var content = allGifts.content;
 			$scope.loading = setLoadingState(content,size);
@@ -51,6 +52,13 @@ ctrls.controller("giftCenterController", ['$rootScope','$scope', 'GetGifts','Get
 		  }
 		  return true;
 		}
-
-
   }]);
+
+	ctrls.filter('formatDeliver',function(){
+		return function(input){
+			if(input == 'DELIVERED')
+				return '已发货';
+			else
+				return '已送达';
+		}
+	})
