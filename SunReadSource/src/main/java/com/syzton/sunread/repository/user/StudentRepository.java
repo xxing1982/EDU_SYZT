@@ -24,4 +24,6 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
 
     Page<Student> findByCampusId(long campusId,Pageable pageable);
 
+
+
  }

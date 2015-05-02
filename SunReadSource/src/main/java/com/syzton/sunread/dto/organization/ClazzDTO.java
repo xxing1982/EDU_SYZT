@@ -7,6 +7,9 @@ import org.hibernate.validator.constraints.Length;
 
 import com.syzton.sunread.model.organization.Clazz;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ClazzDTO {
 	private Long id;
     
@@ -21,7 +24,17 @@ public class ClazzDTO {
 	private int grade;
 	
 	private String campusName;
-	
+
+	private Set<CategoryCountDTO> categoryCountDTOs = new HashSet();
+
+	public Set<CategoryCountDTO> getCategoryCountDTOs() {
+		return categoryCountDTOs;
+	}
+
+	public void setCategoryCountDTOs(Set<CategoryCountDTO> categoryCountDTOs) {
+		this.categoryCountDTOs = categoryCountDTOs;
+	}
+
 	public Long getId() {
 		return id;
 	}

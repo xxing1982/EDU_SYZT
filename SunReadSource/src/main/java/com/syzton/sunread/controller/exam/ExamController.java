@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.syzton.sunread.model.book.Dictionary;
+import com.syzton.sunread.model.book.DictionaryType;
 import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.organization.ClazzCategoryCount;
+import com.syzton.sunread.model.user.CategoryCount;
+import com.syzton.sunread.repository.book.DictionaryRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 
 import javassist.NotFoundException;
@@ -94,12 +99,15 @@ public class ExamController {
 
 	private ClazzRepository clazzRepository;
 
+	private DictionaryRepository dictionaryRepository;
+
 	@Autowired
 	public ExamController(ExamService service, TestPassService tService,
 			CoinHistoryService coinService, PointHistoryService pointService,
 			UserService userService, BookService bookService,
 			BookInShelfService shelfService,
 			ClazzRepository clazzRepository,
+			DictionaryRepository dictionaryRepository,
 			SemesterService semesterService) {
 		this.service = service;
 		this.testPassService = tService;
@@ -110,6 +118,7 @@ public class ExamController {
 		this.shelfService = shelfService;
 		this.semesterService = semesterService;
 		this.clazzRepository = clazzRepository;
+		this.dictionaryRepository = dictionaryRepository;
 	}
 
 	@RequestMapping(value = "/exam", method = RequestMethod.POST)
@@ -271,10 +280,50 @@ public class ExamController {
 					student.getStatistic().getPoint() + book.getPoint());
 			student.getStatistic().increaseTestPasses();
 
+			Dictionary dictionary = dictionaryRepository.findByTypeAndValue(DictionaryType.CATEGORY,book.getExtra().getCategory());
+
+			Set<CategoryCount> categoryCounts = student.getCategoryCount();
+			if(categoryCounts.size()>0){
+				for(CategoryCount categoryCount : categoryCounts){
+					if(categoryCount.getDictionary().getId() == dictionary.getId()){
+						categoryCount.increaseCount();
+						categoryCounts.add(categoryCount);
+					}
+				}
+			}else{
+				CategoryCount categoryCount = new CategoryCount();
+				categoryCount.increaseCount();
+				categoryCount.setDictionary(dictionary);
+				categoryCounts.add(categoryCount);
+			}
+
 			userService.saveStudent(student);
 			Clazz clazz = clazzRepository.findOne(student.getClazzId());
 			clazz.getClazzStatistic().increaseTotalReads();
 			clazz.getClazzStatistic().setTotalReadWords(clazz.getClazzStatistic().getTotalReadWords() + book.getWordCount());
+
+			Set<ClazzCategoryCount> clazzCategoryCounts = clazz.getCategoryCount();
+			if(clazzCategoryCounts.size()>0){
+				for(ClazzCategoryCount categoryCount : clazzCategoryCounts){
+					if(categoryCount.getDictionary().getId() == dictionary.getId()){
+						categoryCount.increaseCount();
+						clazzCategoryCounts.add(categoryCount);
+					}
+				}
+			}else{
+				List<Dictionary> categoryDics = dictionaryRepository.findByType(DictionaryType.CATEGORY);
+				for(Dictionary categoryDic : categoryDics){
+					if (categoryDic.getId() == 0) continue;
+					ClazzCategoryCount categoryCount = new ClazzCategoryCount();
+					categoryCount.setDictionary(categoryDic);
+					if(categoryDic.getId()==dictionary.getId() ){
+						categoryCount.increaseCount();
+					}
+					clazzCategoryCounts.add(categoryCount);
+				}
+
+			}
+
 			clazzRepository.save(clazz);
 
 			shelfService.updateReadState(studentId, bookId);

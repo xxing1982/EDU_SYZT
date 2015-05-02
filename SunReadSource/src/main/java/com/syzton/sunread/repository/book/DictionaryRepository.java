@@ -14,4 +14,6 @@ public interface DictionaryRepository extends JpaRepository<Dictionary,Long> {
 
     public List<Dictionary> findByType(DictionaryType type);
 
+    public Dictionary findByTypeAndValue(DictionaryType type,int value);
+
 }

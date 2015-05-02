@@ -1,12 +1,16 @@
 package com.syzton.sunread.model.organization;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.syzton.sunread.dto.organization.CategoryCountDTO;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.CategoryCount;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Morgan-Leon on 2015/3/16.
@@ -43,6 +47,11 @@ public class Clazz extends  AbstractEntity{
     @JoinColumn(name = "calzz_statistic_id")
     private ClazzStatistic clazzStatistic = new ClazzStatistic();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "clazz_id")
+    private Set<ClazzCategoryCount> categoryCount = new HashSet<>();
+
+
     public ClazzStatistic getClazzStatistic() {
         return clazzStatistic;
     }
@@ -77,6 +86,10 @@ public class Clazz extends  AbstractEntity{
 
     public Campus getCampus() {
         return campus;
+    }
+
+    public Set<ClazzCategoryCount> getCategoryCount() {
+        return categoryCount;
     }
 
     @PrePersist
@@ -129,6 +142,14 @@ public class Clazz extends  AbstractEntity{
         //dto.setCampusId(model.campus.getId());
         dto.setCampusName(model.campus.getName());
         dto.setDescription(model.getDescription());
+
+        for (ClazzCategoryCount c : model.getCategoryCount()){
+            CategoryCountDTO cDto = new CategoryCountDTO();
+            cDto.setCount(c.getCount());
+            cDto.setCategoryName(c.getDictionary().getName());
+            dto.getCategoryCountDTOs().add(cDto);
+        }
+
         return dto;
     }
     

@@ -66,11 +66,17 @@ public class StoreRepositoryService implements StoreService {
         int needCoins = count * gift.getCoin();
 
         if(currentCoins >= needCoins){
-            ExchangeHistory exchangeHistory = new ExchangeHistory();
+
+            ExchangeHistory exchangeHistory = exchangeHistoryRepository.findByStudentIdAndGift(studentId,gift);
+
+            if(exchangeHistory == null){
+                exchangeHistory =  new ExchangeHistory();
+            }
+
             exchangeHistory.setGift(gift);
             exchangeHistory.setStudentId(studentId);
             exchangeHistory.setStatus(GiftStatus.SUCCESSED);
-            exchangeHistory.setCount(count);
+            exchangeHistory.setCount(count + exchangeHistory.getCount());
             exchangeHistoryRepository.save(exchangeHistory);
             student.getStatistic().setCoin(currentCoins - needCoins);
             studentRepository.save(student);

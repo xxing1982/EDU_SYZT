@@ -45,6 +45,10 @@ public class Student extends User{
     @JoinColumn(name = "user_statistic_id")
     private UserStatistic statistic = new UserStatistic();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id")
+    private Set<CategoryCount> categoryCount = new HashSet<>();
+
 
     @Transient
     private long enrollmentTime; // for receive json
@@ -82,6 +86,13 @@ public class Student extends User{
         this.enrollmentTime = enrollmentTime;
     }
 
+    public Set<CategoryCount> getCategoryCount() {
+        return categoryCount;
+    }
+
+    public void setCategoryCount(Set<CategoryCount> categoryCount) {
+        this.categoryCount = categoryCount;
+    }
 
     public Set<CoinHistory> getCoinHistorySet() {
         return coinHistorySet;

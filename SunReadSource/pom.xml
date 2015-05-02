@@ -570,7 +570,16 @@
             <version>1.8.6</version>
         </dependency>
 
-
+        <!--<dependency>-->
+            <!--<groupId>com.lowagie</groupId>-->
+            <!--<artifactId>itext</artifactId>-->
+            <!--<version>2.1.7</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.itextpdf</groupId>-->
+            <!--<artifactId>itext-asian</artifactId>-->
+            <!--<version>5.2.0</version>-->
+        <!--</dependency>-->
         <!-- TESTING DEPENDENCIES -->
         <dependency>
             <groupId>org.hamcrest</groupId>
