@@ -1,9 +1,11 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource', 
-	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices']);
+	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices', 'quickSearchServices',
+	'hotreaderServices']);
 
-ctrls.controller("mainController",['$scope', '$rootScope', 'Teacher', "Class", "Note", 'Action', 'Pageable',
-	function($scope, $rootScope, Teacher, Class, Note, Action, Pageable){
+ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader',
+	function($scope, $rootScope, config, Teacher, Class, Note, Action, Pageable, QuickSearch, Hotreader){
+		$scope.imageServer = config.IMAGESERVER;
 		Teacher.get({id: $rootScope.id}, function(teacher){
 			$scope.teacher = teacher;
 			// Create a classes entitiy
@@ -16,7 +18,7 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'Teacher', "Class", "
 			$scope.actionPageable = new Pageable();
 
      		// Set the parameters of pageable
-      		$scope.actionPageable.size = 3;
+     		$scope.actionPageable.size = 3;
 
       		// Build the pageable object
       		$scope.actionPageable.build(Action);
@@ -28,6 +30,20 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'Teacher', "Class", "
 			Note.get({page:0, size: 3, sortBy: 'commentCount', direction: 'DESC'}, function(noteData){
 				$scope.hotNotes = noteData.content;
 			})
+
+			//
+			QuickSearch.get({page:0,size:4,sortBy:"statistic.recommends"},function(popularDate){
+				$scope.recommends = popularDate.content;
+			})
+
+			// Create a Hotreaders entitiy
+			$scope.hotReaders={};
+			//Hotreader.get({by: 'campus', id : teacher.campusId, page: 0, size: 3 }, function(hotData){
+			Hotreader.get({by: 'campus', id : 1, page: 0, size: 3 }, function(hotData){
+				hotData.content[0].picture = hotData.content[0].picture == "" ? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + dataHot.content[0].picture;
+				$scope.hotReaders.first = hotData.content[0];
+				$scope.hotReaders.others = hotData.content.slice(1);
+			});
 		});
 	}]);
 

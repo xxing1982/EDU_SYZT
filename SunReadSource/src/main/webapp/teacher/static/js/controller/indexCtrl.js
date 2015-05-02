@@ -1,4 +1,4 @@
-ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', function( $rootScope, $scope, $location) {
+ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', 'Teacher', function( $rootScope, $scope, $location, Teacher) {
 
     // Route map regexp
     $rootScope.routeMap = {
@@ -8,6 +8,10 @@ ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', function( 
         statisticsSummary: /\/statisticsSummary.*/,
     }
     
+    // Get the information of teacher
+    Teacher.get({id: $rootScope.id}, function(data){
+        $rootScope.teacher = data
+    });
     
     // Update the nav bar active
     $rootScope.isActive = function(routeRegexp) {
@@ -15,14 +19,14 @@ ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', function( 
     }
     
     // The logout method
-    /*$rootScope.logout = function(){
+    $rootScope.logout = function(){
         delete $rootScope.id;
-        delete $rootScope.student;
+        delete $rootScope.teacher;
         delete sessionStorage.access_token;
         delete sessionStorage.userId;
         delete sessionStorage.length;
         window.location.href="/login.html"; 
-    }*/
+    }
 }]);
 
 ctrls.controller('leftNavCtrl', ['$rootScope', '$scope', '$location', 

@@ -16,6 +16,10 @@
 	margin-top: 30px;
 }
 
+.mt8{
+	margin-top: 8px;
+}
+
 .ml20{
 	margin-left: 20px;
 }
@@ -31,3 +35,4 @@
 .tc{
 	text-align: center;
 }
+
