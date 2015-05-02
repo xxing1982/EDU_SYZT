@@ -33,8 +33,8 @@ public class Teacher extends User{
     private int experience;
 
     private String graduateSchool;
-    @Transient
-    private Set<Long> clazzIds;
+
+    private long classId;
 
 //    @ManyToMany
 //    @JoinTable(name="teacher_clazz",
@@ -94,12 +94,12 @@ public class Teacher extends User{
         this.graduateSchool = graduateSchool;
     }
 
-    public Set<Long> getClazzIds() {
-        return clazzIds;
+    public long getClassId() {
+        return classId;
     }
 
-    public void setClazzIds(Set<Long> clazzIds) {
-        this.clazzIds = clazzIds;
+    public void setClassId(long classId) {
+        this.classId = classId;
     }
 }
 

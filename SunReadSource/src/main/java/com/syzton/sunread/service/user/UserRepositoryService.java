@@ -296,13 +296,13 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     public Teacher addTeacher(Teacher teacher) {
         teacher.setPassword(encodePassword(teacher.getPassword()));
         teacher = teacherRepository.save(teacher);
-        for (Long clazzId: teacher.getClazzIds()){
-            TeacherClazz teacherClazz = new TeacherClazz();
-            teacherClazz.setClazzId(clazzId);
-            teacherClazz.setTeacherId(teacher.getId());
-            teacherClazzRepository.save(teacherClazz);
-
-        }
+//        for (Long clazzId: teacher.getClazzIds()){
+//            TeacherClazz teacherClazz = new TeacherClazz();
+//            teacherClazz.setClazzId(clazzId);
+//            teacherClazz.setTeacherId(teacher.getId());
+//            teacherClazzRepository.save(teacherClazz);
+//
+//        }
         return teacher ;
     }
 
