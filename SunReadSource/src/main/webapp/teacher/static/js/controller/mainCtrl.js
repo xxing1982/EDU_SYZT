@@ -7,10 +7,10 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'Teacher', "Class", "
 		Teacher.get({id: $rootScope.id}, function(teacher){
 			$scope.teacher = teacher;
 			// Create a classes entitiy
-			/*Class.get({id: $scope.teacher.clazzId}, function(classData){
+			Class.get({id: $scope.teacher.classId}, function(classData){
 				$scope.teacher.class=classData.name;
 				$scope.teacher.school=classData.campusName;
-			});*/
+			});
 
 			//hot note
 			Note.get({page:0, size: 3, sortBy: 'commentCount', direction: 'DESC'}, function(noteData){
@@ -22,5 +22,11 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'Teacher', "Class", "
 ctrls.filter('formatSize6', function(){
   return function(input){
     return input.substring(0, 6) + '...';
+  }
+});
+
+ctrls.filter('formatSize6', function(){
+  return function(input){
+    
   }
 });
