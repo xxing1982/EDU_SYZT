@@ -36,6 +36,8 @@ public class Teacher extends User{
 
     private long classId;
 
+    private long campusId;
+
     private String teaching;
 
     public String getTeaching() {
@@ -65,6 +67,15 @@ public class Teacher extends User{
 //        }
 //
 //    }
+
+
+    public long getCampusId() {
+        return campusId;
+    }
+
+    public void setCampusId(long campusId) {
+        this.campusId = campusId;
+    }
 
     @Override
     public String toString() {

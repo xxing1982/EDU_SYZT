@@ -13,4 +13,6 @@ public interface SubjectiveQuestionRepository extends JpaRepository<SubjectiveQu
 	
 	public List<SubjectiveQuestion> findByQuestionTypeAndBookId(SubjectiveQuestionType questionType,Long bookId );
 	
+	public SubjectiveQuestion findByTopicAndBookIdAndQuestionType(String content,Long bookId,SubjectiveQuestionType questionType);
+	
 }

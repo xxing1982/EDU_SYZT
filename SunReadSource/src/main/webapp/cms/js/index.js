@@ -19,6 +19,9 @@ function TopNav(){
 	else if (urlStr.match("/objectivequestion")){
 		$(".nav-sidebar li").eq(3).addClass("active");
 	}
+	else if (urlStr.match("/subjectivequestion")){
+		$(".nav-sidebar li").eq(4).addClass("active");
+	}
 	else{
 		$(".nav-sidebar li").eq(0).addClass("active");
 	}

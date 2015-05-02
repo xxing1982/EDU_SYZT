@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -23,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.book.BookService;
+import com.syzton.sunread.service.exam.ObjectiveQuestionService;
+import com.syzton.sunread.service.exam.SubjectiveQuestionService;
 import com.syzton.sunread.util.FtpUtil;
 
 @Controller
@@ -34,12 +37,18 @@ public class UploadControl {
 	
 	private BookService bookService;
 	
+	private SubjectiveQuestionService subjectQService;
+	
+	private ObjectiveQuestionService objectQService;
+	
 	private String ftpPrefix = "/pic";
 	
 	@Autowired
-	public UploadControl(SecurityContextUtil securityUtil,BookService bookService) {
+	public UploadControl(SecurityContextUtil securityUtil,BookService bookService,SubjectiveQuestionService subjectQService,ObjectiveQuestionService objectQService) {
 		this.securityUtil = securityUtil;
 		this.bookService = bookService;
+		this.subjectQService = subjectQService;
+		this.objectQService = objectQService;
 	}
 
 	@RequestMapping(value = "/api/upload/notepic", method = RequestMethod.POST)
@@ -145,46 +154,40 @@ public class UploadControl {
 	@ResponseBody
 	public String bookExcelUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		LOGGER.debug(request.getCharacterEncoding());
-		String fileName = myfile.getOriginalFilename();
-		
-
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
-			Sheet sheet = null;
-			if (fileName.endsWith(".xls")) {
-				HSSFWorkbook wb = new HSSFWorkbook(myfile.getInputStream());
-				sheet = wb.getSheetAt(0);
-			} else if (fileName.endsWith(".xlsx")) {
-				XSSFWorkbook xwb = new XSSFWorkbook(myfile.getInputStream());
-				sheet = xwb.getSheetAt(0);
-			}
-			bookService.batchSaveOrUpdateBookFromExcel(sheet);
+			Workbook wb = getWorkBookFromExcel(myfile);
+			bookService.batchSaveOrUpdateBookFromExcel(wb.getSheetAt(0));
+			wb.close();
 		}
 		return "Excel parse OK";
 	}
 	
-	@RequestMapping(value = "/api/upload/excel/Question", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/upload/excel/objectquestion", method = RequestMethod.POST)
 	@ResponseBody
-	public String questionExcelUpload(@RequestParam MultipartFile myfile,
+	public String objectiveQuestionExcelUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		
-		User user = securityUtil.getUser();
-		
-		String fileName = myfile.getOriginalFilename();
-
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
-			if (fileName.endsWith(".xls")) {
-				HSSFWorkbook wb = new HSSFWorkbook(myfile.getInputStream());
-				HSSFSheet sheet = wb.getSheetAt(0);
-			} else if (fileName.endsWith(".xlsx")) {
-				XSSFWorkbook xwb = new XSSFWorkbook(myfile.getInputStream());
-				XSSFSheet sheet = xwb.getSheetAt(0);
-			}
-			
+			Workbook wb = getWorkBookFromExcel(myfile);
+			objectQService.batchSaveOrUpdateObjectiveQuestionFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		return "Excel parse OK";
+	}
+	
+	@RequestMapping(value = "/api/upload/excel/subjectivequestion", method = RequestMethod.POST)
+	@ResponseBody
+	public String subjectiveQuestionExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			subjectQService.batchSaveOrUpdateSubjectQuestionFromExcel(wb.getSheetAt(0));
+			wb.close();
 		}
 		return "Excel parse OK";
 	}
@@ -193,24 +196,23 @@ public class UploadControl {
 	@ResponseBody
 	public String studentExcelUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		
-		User user = securityUtil.getUser();
-		
-		String fileName = myfile.getOriginalFilename();
 
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
-			if (fileName.endsWith(".xls")) {
-				HSSFWorkbook wb = new HSSFWorkbook(myfile.getInputStream());
-				HSSFSheet sheet = wb.getSheetAt(0);
-			} else if (fileName.endsWith(".xlsx")) {
-				XSSFWorkbook xwb = new XSSFWorkbook(myfile.getInputStream());
-				XSSFSheet sheet = xwb.getSheetAt(0);
-			}
 			
 		}
 		return "Excel parse OK";
 	}
-
+	
+	private Workbook getWorkBookFromExcel(MultipartFile myfile) throws IOException{
+		String fileName = myfile.getOriginalFilename();
+		Workbook wb = null;
+		if (fileName.endsWith(".xls")) {
+			wb = new HSSFWorkbook(myfile.getInputStream());
+		} else if (fileName.endsWith(".xlsx")) {
+			wb = new XSSFWorkbook(myfile.getInputStream());
+		}
+		return wb;
+	}
 }

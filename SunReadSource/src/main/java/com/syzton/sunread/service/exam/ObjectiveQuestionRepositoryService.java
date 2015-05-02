@@ -1,7 +1,13 @@
 package com.syzton.sunread.service.exam;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javassist.NotFoundException;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +29,7 @@ import com.syzton.sunread.repository.exam.CapacityQuestionRepository;
 import com.syzton.sunread.repository.exam.ObjectiveQuestionRepository;
 import com.syzton.sunread.repository.exam.OptionRepository;
 import com.syzton.sunread.service.book.BookRepositoryService;
+import com.syzton.sunread.util.ExcelUtil;
 
 @Service
 public class ObjectiveQuestionRepositoryService implements
@@ -248,6 +255,78 @@ public class ObjectiveQuestionRepositoryService implements
 		return model;
 	}
 	
-
+	@Transactional
+	@Override
+	public Map<Integer,String> batchSaveOrUpdateObjectiveQuestionFromExcel(Sheet sheet){
+		ObjectiveQuestion currentQuestion = null;
+		Map<Integer,String> failMap = new HashMap<Integer,String>();
+		int total = sheet.getPhysicalNumberOfRows();
+		for(int i=sheet.getFirstRowNum()+1;i<total-1;i++){
+			Row row = sheet.getRow(i);
+			if(row.getCell(0) == null){
+				break;
+			}
+			String type = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			if("词汇测试".equals(type)||"验证测试".equals(type)){
+				currentQuestion = updateOrSaveQuestionFromRow(failMap,row);
+			}else if("选项".equals(type)){
+				updateOrSavOptionFromRow(failMap,row,currentQuestion);
+			}
+		}
+		return failMap;
+	}
+	
+	private ObjectiveQuestion updateOrSaveQuestionFromRow(Map<Integer,String> map,Row row){
+		String type = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+		String topic = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+		String isbn = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+		Book book = bookRepository.findByIsbn(isbn);
+		if(book == null){
+			map.put(row.getRowNum(), "can't find book with isbn:"+isbn);
+			return null;
+		}
+		if(topic.length()>500){
+			map.put(row.getRowNum(), "Question content is too long, the lenth limit 0-500");
+		}
+		ObjectiveQuestion question = repository.findByTopicAndBookId(topic,book.getId());
+		if(question == null){
+			question = new ObjectiveQuestion();
+		}
+		if("词汇测试".equals(type)){
+			question.setObjectiveType(QuestionType.WORD);
+		}else if("验证测试".equals(type)){
+			question.setObjectiveType(QuestionType.VERIFY);
+		}else{
+			question.setObjectiveType(QuestionType.CAPACITY);
+		}
+		
+		question.setBookId(book.getId());
+		return repository.save(question);
+	}
+	
+	private void updateOrSavOptionFromRow(Map<Integer,String>map,Row row,ObjectiveQuestion currentQuestion){
+		if(currentQuestion == null){
+			map.put(row.getRowNum(), "Insert Error:Can't connect this option with question");
+		}
+		String content = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+		Option option = new Option();
+		List<Option> options = currentQuestion.getOptions();
+		for(int i=0;i<options.size();i++){
+			if(options.get(i).getContent().equals(content)){
+				option = options.get(i);
+				break;
+			}
+		}
+		String tag = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+		option.setTag(tag);
+		
+		option = optionRepository.save(option);
+		boolean isCorrectAnswer = ExcelUtil.getBoolFromExcelCell(row.getCell(3));
+		if(isCorrectAnswer){
+			currentQuestion.setCorrectAnswer(option);
+			repository.save(currentQuestion);
+		}
+	}
+	 
  
 }

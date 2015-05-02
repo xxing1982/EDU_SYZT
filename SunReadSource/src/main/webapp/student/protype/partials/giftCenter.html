@@ -18,7 +18,7 @@
 
               <div class="col-md-3"><p>兑换数量：{{exchanges.count}}</p></div>
               <div class="col-md-3"><p>兑换时间：{{exchanges.creationTime}}</p></div>
-              <div class="col-md-2"><p>{{exchanges.status}}</p></div>
+              <div class="col-md-2"><p>{{exchanges.status | formatDeliver}}</p></div>
           </div>
 				<div class="bottom col-md-12 block" ng-click ="giftsLoadingMore()" style="margin-top:1px;" >{{loading}}</div>
       </div>
