@@ -13,7 +13,7 @@
             <div class="row bottom-separator"></div>
 <!--     Left part   -->
         <div class="leftpart">
-            <div class="col-md-4 clear-padding" ng-repeat="gift in gifts | filter : giftTypeFilter">
+            <div class="col-md-4 clear-padding" ng-repeat="gift in gifts | filter : giftTypeFilter ">
                 <div class="row" align="center">
 									<a href=""><img ng-src="../static/img/giftCenter/bookBag_lg.png" class="redeemIMG img-responsive"></a>
 
@@ -69,19 +69,19 @@
                         </div>
                          <div class="row radio">
                           <label>
-                            <input type="radio" ng-model="redeemState" name="testOptions" id="testOptions1" value="0" checked>
+                            <input type="radio" ng-model="redeemState"ng-click="getAllGifts()" name="testOptions" id="testOptions1" value="0" checked>
                             所有商品
                           </label>
                         </div>
                         <div class="row radio">
                           <label>
-                            <input type="radio" ng-model="redeemState" name="testOptions" id="testOptions2" value="1">
+                            <input type="radio" ng-model="redeemState" ng-click="getAllGifts()" name="testOptions" id="testOptions2" value="1">
                             可兑换
                           </label>
                         </div>
                         <div class="row radio">
                           <label>
-                            <input type="radio" ng-model="redeemState" name="testOptions" id="testOptions3" value="2">
+                            <input type="radio" ng-model="redeemState" ng-click="getAllGifts()" name="testOptions" id="testOptions3" value="2">
                             不可兑换
                           </label>
                         </div>

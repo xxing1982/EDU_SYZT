@@ -101,7 +101,6 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
     $scope.recieveUserId = $rootScope.id;
     $scope.student = Student.get({id:$rootScope.id},function(){
       // console.log($scope.student.campusId);
-
       var classmates = Hotreader.get({by:'campus',id:$scope.student.campusId,sortBy:"point",page:0,size:10},function(){
         console.log(classmates.content);
         $scope.classmates = classmates.content;
