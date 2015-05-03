@@ -89,15 +89,15 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 						if($rootScope.exam.id == 1){
 							$rootScope.exam.score = score;
 							$rootScope.exam.isVerify = false;
-							window.location.href="/protype/index.html#/readingCenter/success";
+							window.location.href="/student/protype/index.html#/readingCenter/success";
 						}
 						else if (examData.exam.pass) {
 							$rootScope.exam.score = score;
 							$rootScope.exam.isVerify = true;
-							window.location.href="/protype/index.html#/readingCenter/success";
+							window.location.href="/student/protype/index.html#/readingCenter/success";
 						}
 						else{
-							window.location.href="/protype/index.html#/readingCenter/failed";
+							window.location.href="/student/protype/index.html#/readingCenter/failed";
 						}
 					});
 			}

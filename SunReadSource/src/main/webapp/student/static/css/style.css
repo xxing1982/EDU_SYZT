@@ -1,7 +1,9 @@
 
 body
 {
-    background: url(../img/background.jpg) no-repeat fixed center top #b4d6d8;
+    /*background: url(../img/background.jpg) no-repeat fixed center top #b4d6d8;*/
+    background: url(../img/background.jpg) no-repeat;
+    background-color: #b4d6d8;
     padding-top: 50px;
 }
 /*change placeholder color*/
@@ -24,7 +26,8 @@ a:focus, input:focus
 #footer
 {
     /*//height: 50px;*/
-    background: url(../img/index_bottom.png) no-repeat fixed center bottom;
+    background: url(../img/foot.png) no-repeat fixed center bottom;
+    height: 50px;
 }
 /***********navigation top*************************/
 .navbar

@@ -51,17 +51,15 @@
                         <!-- Row 1 -->
                         <div class="col-md-10">
                             <div class="row">
-                            <div class="col-md-5 select-group">
-                                <div class="col-md-6 row select-label">学生姓名：</div>
-                                <div class="col-md-6 row">
-                                  <!-- Single button -->
-                                    <div class="btn-group">
-                                      <input type="text" ng-model="searchTextStudent" class="btn btn-default placeholder="请输入学生姓名" dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                      <ul class="dropdown-menu" role="menu">
-                                        <li ><a href="#"></a></li>
-                                        <li ng-repeat="mate in classmates" ng-click="chooseStudent(mate)"  ><a>{{mate.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{mate.email}}</a></li>
-                                      </ul>
-                                    </div>
+                            <div class="col-md-4 select-group">
+                                <div class="col-md-5 row select-label">校长：</div>
+                                <div class="col-md-9 row">
+                                  <bs-dropdown data-menu-type="button"
+                                      select-val="selected_status = selectedVal"
+                                      preselected-item="selected_status"
+                                      data-dropdown-data="statuses"
+                                      callback="alert">
+                                  </bs-dropdown>
 
                                 </div>
                             </div>
@@ -72,48 +70,35 @@
                         <div class="col-md-10">
                             <div class="row">
                             <div class="col-md-4 select-group">
-                                <div class="col-md-5 row select-label">年级：</div>
-                                <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 select-group">
                                 <div class="col-md-5 row select-label">老师：</div>
                                 <div class="col-md-9 row">
-                                    <select class="form-control">
-                                        <option>请选择</option>
-                                    </select>
+                                  <!-- Single button -->
+                                    <div class="btn-group">
+                                      <input type="text" ng-model="searchTextStudent" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                      <ul class="dropdown-menu" role="menu">
+                                        <li ><a href="#"></a></li>
+                                        <li ng-repeat="mate in classmates | filter:searchTextStudent" ng-click="chooseStudent(mate)" ><a>{{mate.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{mate.email}}</a></li>
+                                      </ul>
+                                    </div>
                                 </div>
                             </div>
                             </div>
                         </div>
 
-                        <!-- Row 3 -->
+                        <!-- Row  3 student-->
                         <div class="col-md-10">
                             <div class="row">
                             <div class="col-md-4 select-group">
-                                <div class="col-md-5 row select-label">班级</div>
-                                <div class="col-md-9 row">
-                                    <bs-dropdown data-menu-type="button"
-                                        select-val="selected_status = selectedVal"
-                                        preselected-item="selected_status"
-                                        data-dropdown-data="statuses"
-                                        callback="alert">
-                                    </bs-dropdown>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 select-group">
                                 <div class="col-md-5 row select-label">同学：</div>
                                 <div class="col-md-9 row">
-                                    <bs-dropdown data-menu-type="button"
-                                        select-val="selected_status = selectedVal"
-                                        preselected-item="selected_status"
-                                        data-dropdown-data="statuses"
-                                        callback="alert">
-                                    </bs-dropdown>
+                                  <!-- Single button -->
+                                    <div class="btn-group">
+                                      <input type="text" ng-model="searchTextStudent" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                      <ul class="dropdown-menu" role="menu">
+                                        <li ><a href="#"></a></li>
+                                        <li ng-repeat="mate in classmates | filter:searchTextStudent" ng-click="chooseStudent(mate)" ><a>{{mate.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{mate.email}}</a></li>
+                                      </ul>
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -123,13 +108,13 @@
                     <!-- Input form -->
                     <div >
                         <h4 class="modal-title" id="myModalLabel">消息内容</h4>
-                        <div><textarea class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>
+                        <div><textarea ng-model="text.message" class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>
                     </div>
               </div>
               </div>
                     <div class="modal-footer">
                         <div class="col-md-12">
-                            <button class="btn btn-green" ng-click="" type="button">发送信息</button>
+                            <button class="btn btn-green" ng-click="sendMessage()" type="button">发送信息</button>
                         </div>
                     </div>
               </div>
