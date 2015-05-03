@@ -216,5 +216,4 @@ routeApp.run(['$rootScope', 'Student', function($rootScope, Student){
         window.location.href="../../login.html";
     };
     $rootScope.id = sessionStorage.getItem("userId");
-    SetBodyHeight();
 }]);
