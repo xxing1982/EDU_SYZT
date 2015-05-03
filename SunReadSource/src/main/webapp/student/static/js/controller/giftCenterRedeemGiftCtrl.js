@@ -1,11 +1,25 @@
-ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope'
+ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Student'
                                           ,'GetGifts','GetGiftsExNum','ExchangeGifts'
-  ,function ($rootScope,$scope, GetGifts,GetGiftsExNum,ExchangeGifts) {
+  ,function ($rootScope,$scope, Student,GetGifts,GetGiftsExNum,ExchangeGifts) {
     var page = 0;
     var size = 1;
     var pageSize = 1024;
     var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
     $scope.loading = stateTexts.loading;
+
+    $scope.statuses = [{
+        id: 0,
+        name:"全部类型"
+    }, {
+        id: 1,
+        name: "TYPE_1",
+        callback: $scope.test
+    }, {
+        id: 2,
+        name: "TYPE_2",
+        callback: $scope.test
+    }];
+    $scope.selected_status = 0;
 
     $scope.redeemState = 0;
     // $scope.currentCoin = $rootScope.student.
@@ -16,23 +30,49 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope'
 
     // var currentCoin = student.statistic.coin;
     // console.log(currentCoin);
+    $scope.userCoin = null;
     $scope.gifts = new Array(0);
+    var all = new Array(0);
 
-    var allGifts = GetGifts.get({page:page,size:pageSize},function(){
-      console.log(allGifts);
-      var content = allGifts.content;
-      $scope.loading = setLoadingState(content,size);
-      initLoad($scope.gifts,content,size);
-    })
+    Student.get({id:$rootScope.id},function(data){
+      $scope.userCoin = data.statistic.coin;
+      console.log($scope.userCoin);
+      $scope.getAllGifts();
+      })
 
+    $scope.getAllGifts = function(){
+        $scope.gifts = new Array(0);
+        GetGifts.get({page:page,size:pageSize},function(data){
+        console.log(data);
+        var content = data.content;
+        all = content;
+        if($scope.userCoin>=0){
+          if($scope.redeemState != 0){
+            all = new Array(0);
+            redeemStateFilter(all,content,$scope.userCoin);
+          }
+          $scope.loading = setLoadingState(all,size);
+          initLoad($scope.gifts,all,size);
+        }
+      })};
+
+    // $scope.getAllGifts();
     $scope.giftsLoadingMore = function(){
       if($scope.loading === stateTexts.nomore)
         return;
-      if(loadingMore($scope.gifts,allGifts.content,size))
+      if(loadingMore($scope.gifts,all,size))
         $scope.loading = stateTexts.more;
       else
         $scope.loading = stateTexts.nomore;
-    }
+      }
+    // $scope.giftsLoadingMore = function(){
+    //   if($scope.loading === stateTexts.nomore)
+    //     return;
+    //   if(loadingMore($scope.gifts,allGifts.content,size))
+    //     $scope.loading = stateTexts.more;
+    //   else
+    //     $scope.loading = stateTexts.nomore;
+    // }
 
   $scope.quantity = 1;
   $scope.addQuantity = function(){
@@ -72,20 +112,6 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope'
     });
   }
 
-  $scope.statuses = [{
-      id: 0,
-      name:"全部类型"
-  }, {
-      id: 1,
-      name: "TYPE_1",
-      callback: $scope.test
-  }, {
-      id: 2,
-      name: "TYPE_2",
-      callback: $scope.test
-  }];
-  $scope.selected_status = 0;
-
   var initLoad = function(part,all,size){
     if(typeof(all)=== 'undefined')
       return 0;
@@ -121,10 +147,60 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope'
       return e;
     };
 
-    $scope.redeemStateFilter = function(e){
-      console.log($scope.redeemState);
+  // var student = Student.get({id:$rootScope.id},function(){
+  //   $scope.userCoin = student.statistic.coin;
+  //   console.log($scope.userCoin);
+  //   var redeemStateFilter = function(all,content){
+  //       if(typeof(content) === 'undefined'){
+  //         console.log('content is undefined');
+  //         return;
+  //       }
+  //
+  //       if($scope.redeemState === 0 ){
+  //           all = content;
+  //           return;
+  //       }
+  //       else if($scope.redeemState === 1){
+  //         for(var i=0;i<content.length;i++)
+  //           if(content[i].coin <= $scope.userCoin)
+  //             all.push(content[i]);
+  //       }
+  //       else if($scope.redeemState === 2){
+  //         for(var j=0;j<content.length;j++)
+  //           if(content[j].coin > $scope.userCoin)
+  //             all.push(content[j]);
+  //       }
+  //     }
+  //   })
+    var redeemStateFilter = function(all,content,userCoin){
+        if(typeof(content) === 'undefined'){
+          console.log('content is undefined');
+          return;
+        }
+        if($scope.redeemState === '1'){
+          for(var i=0;i<content.length;i++)
+            if(content[i].coin <= userCoin)
+              all.push(content[i]);
+        }
+        else if($scope.redeemState === '2'){
+          for(var j=0;j<content.length;j++)
+            if(content[j].coin > userCoin)
+              all.push(content[j]);
+        }
+        return;
+      }
+    // $scope.redeemStateFilter = function(e){
+    //   // console.log($scope.redeemState);
+    //   if($scope.redeemState === 0 )
+    //     return e;
+    //   else if($scope.redeemState === 1){
+    //     return e.coin <= $scope.userCoin;
+    //   }
+    //   else if($scope.redeemState === 2){
+    //     return e.coin > $scope.userCoin;
+    //   }
+    // }
 
-    }
 }]);
 
 //
