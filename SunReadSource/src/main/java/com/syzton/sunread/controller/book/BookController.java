@@ -118,6 +118,7 @@ public class BookController extends BaseController {
             @RequestParam("size") int size,
             @RequestParam(value = "sortBy", required = false) String sortBy,
             @RequestParam(value = "direction", required = false) String direction) {
+    	LOGGER.debug("###################################:"+searchTerm);
         int levelNum = level == null ? 0 : Integer.parseInt(level);
         int testTypeNum = testType == null ? 0 : Integer.parseInt(testType);
         int literatureNum = literature == null ? 0 : Integer.parseInt(literature);
@@ -127,7 +128,7 @@ public class BookController extends BaseController {
         int resourceNum = resource == null ? 0 : Integer.parseInt(resource);
         int ageRangeNum = ageRange == null ? 0 : Integer.parseInt(ageRange);
         int pointRangeNum = pointRange == null ? 0 : Integer.parseInt(pointRange);
-
+        
 
         Pageable pageable = getPageable(page, size, sortBy, direction);
         BookExtraDTO condition = new BookExtraDTO();

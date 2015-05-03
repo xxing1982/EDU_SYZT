@@ -287,45 +287,57 @@ public class ObjectiveQuestionRepositoryService implements
 		}
 		if(topic.length()>500){
 			map.put(row.getRowNum(), "Question content is too long, the lenth limit 0-500");
+			return null;
 		}
-		ObjectiveQuestion question = repository.findByTopicAndBookId(topic,book.getId());
+		
+		QuestionType questionType = null;
+		if("词汇测试".equals(type)){
+			questionType = QuestionType.WORD;
+		}else if("验证测试".equals(type)){
+			questionType = QuestionType.VERIFY;
+		}else{
+			questionType = QuestionType.CAPACITY;
+		}
+		ObjectiveQuestion question = repository.findByTopicAndBookIdAndObjectiveType(topic,book.getId(),questionType);
+		 
 		if(question == null){
 			question = new ObjectiveQuestion();
 		}
-		if("词汇测试".equals(type)){
-			question.setObjectiveType(QuestionType.WORD);
-		}else if("验证测试".equals(type)){
-			question.setObjectiveType(QuestionType.VERIFY);
-		}else{
-			question.setObjectiveType(QuestionType.CAPACITY);
-		}
 		
+		question.setTopic(topic);
+		question.setObjectiveType(questionType);
 		question.setBookId(book.getId());
 		return repository.save(question);
 	}
 	
 	private void updateOrSavOptionFromRow(Map<Integer,String>map,Row row,ObjectiveQuestion currentQuestion){
+		LOGGER.debug("#############################option:"+row.getRowNum());
 		if(currentQuestion == null){
 			map.put(row.getRowNum(), "Insert Error:Can't connect this option with question");
+			return;
 		}
 		String content = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+		String tag = ExcelUtil.getStringFromExcelCell(row.getCell(2));
 		Option option = new Option();
+		option.setContent(content);
 		List<Option> options = currentQuestion.getOptions();
-		for(int i=0;i<options.size();i++){
-			if(options.get(i).getContent().equals(content)){
-				option = options.get(i);
-				break;
+		option.setTag(tag);
+		if(options!=null){
+			for(int i=0;i<options.size();i++){
+				if(options.get(i).getTag().equals(tag)){
+					option = options.get(i);
+					break;
+				}
 			}
 		}
-		String tag = ExcelUtil.getStringFromExcelCell(row.getCell(2));
-		option.setTag(tag);
 		
-		option = optionRepository.save(option);
+		option.setContent(content);
+		currentQuestion.getOptions().add(option);
 		boolean isCorrectAnswer = ExcelUtil.getBoolFromExcelCell(row.getCell(3));
 		if(isCorrectAnswer){
 			currentQuestion.setCorrectAnswer(option);
-			repository.save(currentQuestion);
 		}
+		repository.save(currentQuestion);
 	}
 	 
  
