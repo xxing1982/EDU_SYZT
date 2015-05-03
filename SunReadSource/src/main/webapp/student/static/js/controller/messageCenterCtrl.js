@@ -121,11 +121,27 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
       if($scope.recieveUserId != undefined && $scope.message != ""){
         console.log($scope.text);
         SendMessages.save({sendUserId:$rootScope.id,recieveUserId:$scope.recieveUserId},$scope.text,function(){
-          console.log("发送成功");
+          $rootScope.modal ={
+              title: "发送成功",
+              content:$scope.text.message
+            };
+          $('#alert-modal').modal();
+          location.reload();
+        },function(e){
+          $rootScope.modal ={
+              title: "",
+              content:"发送失败"
+            };
+          $('#alert-modal').modal();
         })
       }
-      else
-        alert("Message  null");
+      else{
+        $rootScope.modal ={
+            title: "",
+            content:"发送失败"
+          };
+        $('#alert-modal').modal();
+        }
     }
     // $scope.classmatesFilter = function(e){
     //   e.username
