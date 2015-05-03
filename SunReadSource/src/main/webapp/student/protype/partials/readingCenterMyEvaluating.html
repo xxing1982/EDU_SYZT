@@ -12,7 +12,7 @@
 			<div ng-show="isCertification">
 				<div class="content row row-same-height" ng-repeat="item in verifyExams">
 					<div class="width-1 col-xs-height col-middle col-full-height"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
-					<div class="col-md-2 name col-xs-height col-middle col-full-height">{{item.name}}</div>
+					<div class="col-md-2 name col-xs-height col-middle col-full-height" title="{{item.name}}">{{item.name | formatSize5}}</div>
 					<div class="width-2 value col-xs-height col-middle col-full-height">
 						财富值：{{item.coin}}
 					</div>
@@ -34,7 +34,7 @@
 			<div ng-show="isWord">
 				<div class="content row row-same-height" ng-repeat="item in wordExams">
 					<div class="width-1 col-xs-height col-middle col-full-height"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
-					<div class="col-md-2 name col-xs-height col-middle col-full-height">{{item.name}}</div>
+					<div class="col-md-2 name col-xs-height col-middle col-full-height" title="{{item.name}}">{{item.name | formatSize5}}</div>
 					<div class="col-md-5 value tr col-xs-height col-middle col-full-height">
 						正确率：{{item.examScore}}%
 					</div>
@@ -47,7 +47,7 @@
 			<div ng-show="isThinking">
 				<div class="content row  row-same-height" ng-repeat="item in thinkExams">
 					<div class="width-1 col-xs-height col-middle col-full-height"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
-					<div class="col-md-2 name col-xs-height col-middle col-full-height">{{item.name}}</div>
+					<div class="col-md-2 name col-xs-height col-middle col-full-height" title="{{item.name}}">{{item.name | formatSize5}}</div>
 					<div class="col-md-3 value tr count col-xs-height col-middle col-full-height">问答题目数：{{item.questionNum}}</div>
 					<div class="col-md-3 value tr col-xs-height col-middle col-full-height"><a ng-click="MyAnswer(item)" href="#readingCenter/myEvaluating/myAnswers">查看我的回答</a></div>
 					<div class="col-md-3 value tr col-xs-height col-middle col-full-height">测试时间：{{item.creationTime}}</div>
