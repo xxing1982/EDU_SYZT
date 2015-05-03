@@ -21,10 +21,10 @@ angular.module('editableServices', []).
         /*
             Invoke this method to load more notes
         */
-        Editable.prototype.toggleEdit = function(save, callback){
+        Editable.prototype.toggleEdit = function(save, validation, transmit){
 
             // save === true means click on "Save"
-            if (save) {
+            if (save && validation(this.cached)) {
 
                 // Clone entity
                 for (var key in this.cached){
@@ -32,7 +32,7 @@ angular.module('editableServices', []).
                 }
 
                 // The callback to save the entity
-                if (typeof callback === 'function') { callback(); } 
+                if (typeof transmit === 'function') { transmit(this.cached); } 
             } else {
 
                 // Create cached entity
@@ -47,10 +47,6 @@ angular.module('editableServices', []).
             // Inverse the state of editing
             this.editing = !this.editing ;
         };
-
-        /*
-            Invoke this method to load more notes
-        */
         
         // Return the Editable object with
         // the reference to Note and Comment
