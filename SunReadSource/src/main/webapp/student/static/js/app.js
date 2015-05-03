@@ -213,7 +213,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
 
 routeApp.run(['$rootScope', 'Student', function($rootScope, Student){
     if (sessionStorage.getItem("userId") == null) {
-        window.location.href="../login.html";
+        window.location.href="../../login.html";
     };
     $rootScope.id = sessionStorage.getItem("userId");
 }]);

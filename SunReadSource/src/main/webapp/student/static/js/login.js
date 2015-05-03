@@ -31,6 +31,11 @@ $(document).ready(function(){
 								window.location.href="teacher/prototype/index.html";
 								return;
 							}
+							if (dataLogin.roles[i].id == 5) {
+								sessionStorage.setItem("cmsId", dataLogin.id);
+								window.location.href="cms/index.html";
+								return;
+							}
 						}
 						sessionStorage.setItem("userId", dataLogin.id);
 						window.location.href="student/protype/index.html";
