@@ -1,9 +1,6 @@
-//$(document).ready(function(){
-//	TopNav();
-//	$("a").on("click", function(){
-//		setTopNav();
-//	});
-//});
+$(document).ready(function(){
+	SetBodyHeight();
+});
 
 //top navigate event
 //function TopNav(){
@@ -60,6 +57,13 @@ function SetReadingCenterRightHeight(){
 	$(".readingCenter-right").css('min-height' ,document.documentElement.clientHeight - 80);
 	$(window).resize(function(){
 		$(".readingCenter-right").css('min-height' ,document.documentElement.clientHeight - 80);
+	});
+}
+
+function SetBodyHeight(){
+	$(".myBody").css('min-height' ,document.documentElement.clientHeight - 136);
+	$(window).resize(function(){
+		$(".myBody").css('min-height' ,document.documentElement.clientHeight - 136);
 	});
 }
 
