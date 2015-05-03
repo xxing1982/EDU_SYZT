@@ -14,3 +14,13 @@ userServices.factory('User',['$resource', 'config',
 			}
 		});
 	}]);
+
+userServices.factory('Student',['$resource', 'config',
+                            	function($resource, config){
+                            		return $resource(config.HOST + "students/:id",{},{
+                            			query:{
+                            				method: "get",
+                            				isArray: true
+                            			}
+                            		});
+                            	}]);

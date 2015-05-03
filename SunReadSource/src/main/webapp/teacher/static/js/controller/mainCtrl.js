@@ -7,6 +7,7 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', 
 	function($scope, $rootScope, config, Teacher, Class, Note, Action, Pageable, QuickSearch, Hotreader){
 		$scope.imageServer = config.IMAGESERVER;
 		Teacher.get({id: $rootScope.id}, function(teacher){
+			teacher.currentPicture = teacher.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + teacher.picture;
 			$scope.teacher = teacher;
 			// Create a classes entitiy
 			Class.get({id: $scope.teacher.classId}, function(classData){

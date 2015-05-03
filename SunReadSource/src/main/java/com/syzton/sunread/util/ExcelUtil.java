@@ -13,7 +13,6 @@ public class ExcelUtil {
 				ret =  cell.toString();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return ret;
 	}
@@ -23,7 +22,6 @@ public class ExcelUtil {
 		try{
 			ret = cell.getBooleanCellValue();
 		}catch(Exception e){
-			e.printStackTrace();
 		}
 		return ret;
 	}
@@ -33,7 +31,6 @@ public class ExcelUtil {
 		try{
 			ret = (int)Double.parseDouble(cell.toString());
 		}catch(Exception e){
-			e.printStackTrace();
 		}
 		return ret;
 	}
@@ -43,7 +40,6 @@ public class ExcelUtil {
 		try{
 			ret = (float)Double.parseDouble(cell.toString());
 		}catch(Exception e){
-			e.printStackTrace();
 		}
 		return ret;
 	}
