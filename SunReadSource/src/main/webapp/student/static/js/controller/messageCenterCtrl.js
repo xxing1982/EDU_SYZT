@@ -98,8 +98,10 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
     createDeliveredPageable();
     createRecievedPageable();
 
+    $scope.recieveUserId = $rootScope.id;
     $scope.student = Student.get({id:$rootScope.id},function(){
       // console.log($scope.student.campusId);
+
       var classmates = Hotreader.get({by:'campus',id:$scope.student.campusId,sortBy:"point",page:0,size:10},function(){
         console.log(classmates.content);
         $scope.classmates = classmates.content;
@@ -107,11 +109,26 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
         $scope.chooseStudent=function(student){
           console.log(student);
           $scope.searchTextStudent = student.username;
+          $scope.recieveUserId = student.id;
         };
       });
     });
+    $scope.text = {
+      message:""
+    };
 
-    $scope.classmatesFilter = function(e){
-      
+    $scope.sendMessage = function(){
+      console.log($scope.recieveUserId);
+      if($scope.recieveUserId != undefined && $scope.message != ""){
+        console.log($scope.text);
+        SendMessages.save({sendUserId:$rootScope.id,recieveUserId:$scope.recieveUserId},$scope.text,function(){
+          console.log("发送成功");
+        })
+      }
+      else
+        alert("Message  null");
     }
+    // $scope.classmatesFilter = function(e){
+    //   e.username
+    // }
 }]);
