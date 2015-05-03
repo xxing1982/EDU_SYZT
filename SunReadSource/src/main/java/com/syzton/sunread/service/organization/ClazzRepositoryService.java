@@ -94,7 +94,23 @@ public class ClazzRepositoryService implements ClazzService {
 
         return found;
     }
+    
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+    @Override
+    public Clazz findByClazzName(String clazzName) throws NotFoundException {
+        LOGGER.debug("Finding a clazz entry with name: {}", clazzName);
 
+        Clazz found = repository.findByName(clazzName);
+        LOGGER.debug("Found clazz entry: {}", found);
+
+        if (found == null) {
+            throw new NotFoundException("No clazz entry found with name: " + clazzName);
+        }
+
+        return found;
+    }
+
+    
 
 
     @Transactional(rollbackFor = {NotFoundException.class})

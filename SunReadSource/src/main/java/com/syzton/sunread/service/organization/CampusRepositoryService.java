@@ -101,7 +101,20 @@ public class CampusRepositoryService implements CampusService{
         return found;
     }
 
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+    @Override
+    public Campus findByCompusName(String campusName) throws NotFoundException {
+        LOGGER.debug("Finding a campus entry with id: {}", campusName);
 
+        Campus found = repository.findByName(campusName);
+        LOGGER.debug("Found campus entry: {}", found);
+
+        if (found == null) {
+            throw new NotFoundException("No campus entry found with id: " + campusName);
+        }
+
+        return found;
+    }
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override

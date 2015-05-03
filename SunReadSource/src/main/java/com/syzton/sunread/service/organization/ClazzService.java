@@ -38,4 +38,11 @@ public interface ClazzService {
     public ClazzSumStatistic getSumClazzStatistic(int grade) throws NotFoundException;
 
     List<Clazz> findByGrade(int grade);
+
+	/**
+	 * @param clazzName
+	 * @return
+	 * @throws NotFoundException
+	 */
+	Clazz findByClazzName(String clazzName) throws NotFoundException;
 }
