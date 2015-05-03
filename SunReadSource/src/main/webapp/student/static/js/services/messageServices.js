@@ -5,8 +5,8 @@ var sendMessageServices = angular.module('sendMessageServices', ['ngResource', "
 */
 sendMessageServices.factory('SendMessages', ['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "/from/:sendUserId/to/:receiveUserId/messages",
-            {sendUserId:'@sendUserId', receiveUserId:'@receiveUserId'}, {}
+		return $resource(config.HOST + "from/:sendUserId/to/:recieveUserId/messages",
+            {sendUserId:'@sendUserId', recieveUserId:'@recieveUserId'}, {}
         );
 }]);
 
