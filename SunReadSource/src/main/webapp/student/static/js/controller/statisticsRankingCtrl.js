@@ -20,7 +20,7 @@ ctrls.controller("statisticsRankingController", ['$scope', '$rootScope', 'Studen
         $scope.hotreaderLoadable.build(Hotreader);
         
         // Show the first page
-        $scope.hotreaderLoadable.get($scope.hotreaderLoadable.arguments);
+        $scope.hotreaderLoadable.get();
     });
     
 }]);

@@ -1,8 +1,5 @@
 package com.syzton.sunread.controller.user;
 
-import com.syzton.sunread.controller.BaseController;
-import com.syzton.sunread.controller.util.SecurityContextUtil;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,17 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.dto.user.UserDTO;
-
-import com.syzton.sunread.dto.user.UserExtraDTO;
-
-import com.syzton.sunread.model.user.Parent;
-import com.syzton.sunread.model.user.Student;
-import com.syzton.sunread.model.user.Teacher;
-import com.syzton.sunread.model.user.User;
-import com.syzton.sunread.service.bookshelf.BookshelfService;
-import com.syzton.sunread.service.user.UserService;
+import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -43,10 +27,24 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
+import com.syzton.sunread.controller.BaseController;
+import com.syzton.sunread.controller.util.SecurityContextUtil;
+import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.dto.user.UserDTO;
+import com.syzton.sunread.dto.user.UserExtraDTO;
+import com.syzton.sunread.model.user.Parent;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.Teacher;
+import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.service.bookshelf.BookshelfService;
+import com.syzton.sunread.service.user.UserService;
 
 /**
  * Created by jerry on 3/9/15.
