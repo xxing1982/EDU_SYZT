@@ -26,7 +26,7 @@ a:focus, input:focus
 #footer
 {
     /*//height: 50px;*/
-    background: url(../img/foot.png) no-repeat fixed center bottom;
+    background: url(../img/foot.png) no-repeat;
     height: 50px;
 }
 /***********navigation top*************************/
@@ -253,7 +253,7 @@ a:focus, input:focus
     max-width: 143px;
     position: fixed;
     top: 41px;
-    bottom: 0px;
+    bottom: 66px;
     left: 0px;
     z-index: 10;
     display: block;
@@ -658,14 +658,11 @@ a:focus, input:focus
 
 #myEvaluating .content .name
 {
-	padding-top: 15px;
 }
 
 #myEvaluating .content .value
 {
 	color: #BEBEBE;
-	text-align: right;
-	padding-top: 15px;
 }
 
 #myEvaluating .content .count

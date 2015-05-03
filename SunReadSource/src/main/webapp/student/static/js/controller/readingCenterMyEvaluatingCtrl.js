@@ -108,3 +108,9 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 			})
 		}
 	}]);
+
+ctrls.filter('formatSize5', function(){
+  return function(input){
+    return input.substring(0, 5) + '...';
+  }
+});

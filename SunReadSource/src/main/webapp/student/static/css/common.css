@@ -97,3 +97,34 @@
     color: #FFFFFF;
     background-color: #c5e225;
 }
+
+.width-1{
+    width: 7%;
+    float: left;
+}
+
+.width-2{
+    width: 13%;
+    float: left;
+}
+
+.width-3{
+    width: 18%;
+    float: left;
+}
+
+.width-4{
+    width: 24%;
+    float: left;
+}
+
+.width-5{
+    width: 14%;
+    float: left;
+}
+
+.tr{
+    text-align: right;
+}
+
+
