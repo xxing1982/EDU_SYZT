@@ -38,8 +38,7 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', 
 
 			// Create a Hotreaders entitiy
 			$scope.hotReaders={};
-			//Hotreader.get({by: 'campus', id : teacher.campusId, page: 0, size: 3 }, function(hotData){
-			Hotreader.get({by: 'campus', id : 1, page: 0, size: 3 }, function(hotData){
+			Hotreader.get({by: 'campus', id : teacher.campusId, page: 0, size: 3 }, function(hotData){
 				hotData.content[0].picture = hotData.content[0].picture == "" ? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + dataHot.content[0].picture;
 				$scope.hotReaders.first = hotData.content[0];
 				$scope.hotReaders.others = hotData.content.slice(1);
