@@ -1,7 +1,7 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource', 
 	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices', 'quickSearchServices',
-	'hotreaderServices']);
+	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices']);
 
 ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader',
 	function($scope, $rootScope, config, Teacher, Class, Note, Action, Pageable, QuickSearch, Hotreader){
