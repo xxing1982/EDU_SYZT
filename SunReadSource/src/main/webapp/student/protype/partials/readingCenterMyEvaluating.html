@@ -10,43 +10,43 @@
 				<div class="col-md-2 select-tab" ng-click="showThinking()">思维训练</div>
 			</div>
 			<div ng-show="isCertification">
-				<div class="content row" ng-repeat="item in verifyExams">
-					<div class="col-md-1"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
-					<div class="col-md-2 name">{{item.name}}</div>
-					<div class="col-md-5 value">
+				<div class="content row row-same-height" ng-repeat="item in verifyExams">
+					<div class="col-md-1 col-xs-height col-middle"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
+					<div class="col-md-2 name col-xs-height col-middle">{{item.name}}</div>
+					<div class="col-md-5 value col-xs-height col-middle">
 						财富值：{{item.coin}}&nbsp;&nbsp;&nbsp;&nbsp;
 						积分：{{item.point}}&nbsp;&nbsp;&nbsp;&nbsp;
 						正确率：{{item.examScore}}%
 					</div>
-					<div class="col-md-1 value">
+					<div class="col-md-1 value col-xs-height col-middle">
 					<div ng-show="item.pass">
 						<a ng-click="chooseBook(item.bookId)" data-toggle="modal" data-target="#exam-evaluation-model" ng-hide="item.comment">评价</a>
 						<p ng-show="item.comment">已评</p>
 						</div>
 					</div>
-					<div class="col-md-3 value">测试时间：{{item.creationTime}}</div>
+					<div class="col-md-3 value col-xs-height col-middle">测试时间：{{item.creationTime}}</div>
 				</div>
 			</div>
 			<div ng-show="isWord">
-				<div class="content row" ng-repeat="item in wordExams">
-					<div class="col-md-1"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
-					<div class="col-md-2 name">{{item.name}}</div>
-					<div class="col-md-5 value">
+				<div class="content row row-same-height" ng-repeat="item in wordExams">
+					<div class="col-md-1 col-xs-height col-middle"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
+					<div class="col-md-2 name col-xs-height col-middle">{{item.name}}</div>
+					<div class="col-md-5 value col-xs-height col-middle">
 						正确率：{{item.examScore}}%
 					</div>
-					<div class="col-md-1 value">
+					<div class="col-md-1 value col-xs-height col-middle">
 						
 					</div>
-					<div class="col-md-3 value">测试时间：{{item.creationTime}}</div>
+					<div class="col-md-3 value col-xs-height col-middle">测试时间：{{item.creationTime}}</div>
 				</div>
 			</div>
 			<div ng-show="isThinking">
-				<div class="content row" ng-repeat="item in thinkExams">
-					<div class="col-md-1"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
-					<div class="col-md-2 name">{{item.name}}</div>
-					<div class="col-md-3 value count">问答题目数：{{item.questionNum}}</div>
-					<div class="col-md-3 value"><a ng-click="MyAnswer(item)" href="#readingCenter/myEvaluating/myAnswers">查看我的回答</a></div>
-					<div class="col-md-3 value">测试时间：{{item.creationTime}}</div>
+				<div class="content row  row-same-height" ng-repeat="item in thinkExams">
+					<div class="col-md-1 col-xs-height col-middle"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>
+					<div class="col-md-2 name col-xs-height col-middle">{{item.name}}</div>
+					<div class="col-md-3 value count col-xs-height col-middle">问答题目数：{{item.questionNum}}</div>
+					<div class="col-md-3 value col-xs-height col-middle"><a ng-click="MyAnswer(item)" href="#readingCenter/myEvaluating/myAnswers">查看我的回答</a></div>
+					<div class="col-md-3 value col-xs-height col-middle">测试时间：{{item.creationTime}}</div>
 				</div>
 			</div>
 			<div class="bottom" ng-click="addCount()">{{status.current}}</div>

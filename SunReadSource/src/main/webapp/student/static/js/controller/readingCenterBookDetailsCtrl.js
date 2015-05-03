@@ -28,7 +28,7 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
 
         $scope.thinkTest = function(){            
             $rootScope.exam.id = 2;
-            $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
+            $rootScope.exam.returnURL = "/student/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
             $rootScope.exam.bookId = bookDetail.id;
             $rootScope.exam.bookName = bookDetail.name;
             $rootScope.exam.typeName = "我的书架 > 思维训练";
@@ -70,7 +70,7 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
             $scope.verify = verify;
             $scope.verifyExam = function(){
                 $rootScope.exam.id = 0;
-                $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
+                $rootScope.exam.returnURL = "/student/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
                 $rootScope.exam.bookId = bookDetail.id;
                 $rootScope.exam.bookName = bookDetail.name;
                 $rootScope.exam.typeName = "我的书架 > 认证训练";
