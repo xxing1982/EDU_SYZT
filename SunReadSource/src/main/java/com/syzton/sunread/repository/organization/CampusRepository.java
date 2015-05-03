@@ -13,5 +13,7 @@ import com.syzton.sunread.model.organization.Campus;
  * 
  */
 public interface CampusRepository extends JpaRepository<Campus,Long> {
+	
+	Campus findByName(String campusName);
 
 }

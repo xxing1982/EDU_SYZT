@@ -31,5 +31,13 @@ public interface CampusService {
 
     Page<Campus> findAll(Pageable pageable) throws NotFoundException;
 
+	/**
+	 * @param campusName
+	 * @return
+	 * @throws NotFoundException
+	 */
+	Campus findByCompusName(String campusName)
+			throws com.syzton.sunread.exception.common.NotFoundException;
+
 	
 }

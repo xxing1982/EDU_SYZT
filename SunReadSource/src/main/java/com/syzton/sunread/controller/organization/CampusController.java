@@ -94,13 +94,25 @@ public class CampusController {
         return new PageResource<>(pageResult,"page","size");
     }
     
-//Get a Campus    
+//Get a Campus by id  
     @RequestMapping(value = "/campus/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CampusDTO findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding a edugroup entry with id: {}", id);
 
         Campus found = service.findById(id);
+        LOGGER.debug("Found edugroup entry with information: {}", found);
+
+        return found.createDTO(found);
+    }
+    
+ //Get a Campus by Name   
+    @RequestMapping(value = "/campus", method = RequestMethod.GET)
+    @ResponseBody
+    public CampusDTO findById(@RequestParam("campusName") String campusName) throws NotFoundException {
+        LOGGER.debug("Finding a edugroup entry with id: {}", campusName);
+
+        Campus found = service.findByCompusName(campusName);
         LOGGER.debug("Found edugroup entry with information: {}", found);
 
         return found.createDTO(found);

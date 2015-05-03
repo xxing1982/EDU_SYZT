@@ -103,13 +103,25 @@ public class ClazzController extends BaseController{
         return new PageResource<>(pageResult,"page","size");
     }
     
-//Get a Clazz    
+//Get a Clazz by id 
     @RequestMapping(value = "/clazz/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ClazzDTO findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding a edugroup entry with id: {}", id);
 
         Clazz found = service.findById(id);
+        LOGGER.debug("Found edugroup entry with information: {}", found);
+
+        return found.createDTO(found);
+    }
+    
+//Get a Clazz by name 
+    @RequestMapping(value = "/clazz", method = RequestMethod.GET)
+    @ResponseBody
+    public ClazzDTO findById(@RequestParam("clazzName")String clazzName) throws NotFoundException {
+        LOGGER.debug("Finding a edugroup entry with id: {}", clazzName);
+
+        Clazz found = service.findByClazzName(clazzName);
         LOGGER.debug("Found edugroup entry with information: {}", found);
 
         return found.createDTO(found);

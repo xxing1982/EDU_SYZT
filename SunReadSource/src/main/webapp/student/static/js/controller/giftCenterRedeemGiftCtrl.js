@@ -2,7 +2,7 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Stude
                                           ,'GetGifts','GetGiftsExNum','ExchangeGifts'
   ,function ($rootScope,$scope, Student,GetGifts,GetGiftsExNum,ExchangeGifts) {
     var page = 0;
-    var size = 1;
+    var size = 6;
     var pageSize = 1024;
     var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
     $scope.loading = stateTexts.loading;

@@ -51,8 +51,6 @@ public class Campus extends AbstractEntity{
     private School school;
 
 	private String wish;
-
-
     
 	public String getName() {
 		return name;
