@@ -1,7 +1,7 @@
 //messageCenter.js
 
-ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams','Pageable','SendMessages','GetMessages',
-                                    function ($rootScope,$scope,$stateParams,Pageable,SendMessages,GetMessages) {
+ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams','Pageable','Student','Hotreader','SendMessages','GetMessages',
+                                    function ($rootScope,$scope,$stateParams,Pageable,Student,Hotreader,SendMessages,GetMessages) {
 
     // $scope.test = function(){alert("test")};
 
@@ -98,4 +98,20 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
     createDeliveredPageable();
     createRecievedPageable();
 
+    $scope.student = Student.get({id:$rootScope.id},function(){
+      // console.log($scope.student.campusId);
+      var classmates = Hotreader.get({by:'campus',id:$scope.student.campusId,sortBy:"point",page:0,size:10},function(){
+        console.log(classmates.content);
+        $scope.classmates = classmates.content;
+        $scope.searchTextStudent = "";
+        $scope.chooseStudent=function(student){
+          console.log(student);
+          $scope.searchTextStudent = student.username;
+        };
+      });
+    });
+
+    $scope.classmatesFilter = function(e){
+      
+    }
 }]);
