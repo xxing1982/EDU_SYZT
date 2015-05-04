@@ -19,3 +19,13 @@ getMessageServices.factory('GetMessages', ['$resource', 'config',
             {source:'@source', id:'@id',page:'@_page', size:'@_size'}, {}
         );
 }]);
+
+
+var deleteMessagesServices = angular.module('deleteMessagesServices', ['ngResource', "nourConfig"]);
+
+deleteMessagesServices.factory('DeleteMessages', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "/messages/:id",
+            {id:'@id'}
+        );
+}]);

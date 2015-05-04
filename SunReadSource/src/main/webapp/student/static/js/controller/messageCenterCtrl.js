@@ -1,7 +1,9 @@
 //messageCenter.js
 
-ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams','Pageable','Student','Hotreader','SendMessages','GetMessages',
-                                    function ($rootScope,$scope,$stateParams,Pageable,Student,Hotreader,SendMessages,GetMessages) {
+ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams','Pageable'
+                                        ,'Student','Hotreader','SendMessages','GetMessages','DeleteMessages'
+                                      ,function ($rootScope,$scope,$stateParams,Pageable
+                                        ,Student,Hotreader,SendMessages,GetMessages,DeleteMessages) {
 
     // $scope.test = function(){alert("test")};
 
@@ -143,7 +145,22 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
         $('#alert-modal').modal();
         }
     }
-    // $scope.classmatesFilter = function(e){
-    //   e.username
-    // }
+
+    $scope.deleteMessage = function(message){
+      console.log(message);
+      DeleteMessages.delete({id:message.id},function(){
+        $rootScope.modal ={
+            title: "删除成功",
+            content:$scope.text.message
+          };
+        $('#alert-modal').modal();
+        location.reload();
+      },function(e){
+        $rootScope.modal ={
+            title: "",
+            content:"删除失败"
+          };
+        $('#alert-modal').modal();
+    });
+  };
 }]);
