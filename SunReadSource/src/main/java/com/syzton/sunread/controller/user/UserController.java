@@ -197,6 +197,18 @@ public class UserController extends BaseController {
     public Teacher findByTeacherId(@PathVariable("teacherId") Long teacherId) {
         return userService.findByTeacherId(teacherId);
     }
+    @RequestMapping(value = "/campuses/{campusId}/teachers", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Teacher> findTeacherByCampusId(@PathVariable("campusId") Long campusId,
+                                         @RequestParam("page") int page,
+                                         @RequestParam("size") int size,
+                                         @RequestParam(value = "sortBy", required = false) String sortBy,
+                                         @RequestParam(value = "direction", required = false) String direction) {
+        Pageable pageable = this.getPageable(page,size);
+        Page<Teacher> teacherPage = userService.findTeacherByCampusId(campusId,pageable);
+        return  new PageResource<>(teacherPage,"page","size") ;
+    }
+
 
     @RequestMapping(value = "/teachers/{teacherId}", method = RequestMethod.DELETE)
     @ResponseBody

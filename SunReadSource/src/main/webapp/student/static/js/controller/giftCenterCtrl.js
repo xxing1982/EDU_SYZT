@@ -11,7 +11,7 @@ ctrls.controller("giftCenterController", ['$rootScope','$scope', 'GetGifts','Get
 
 		$scope.gifts = new Array(0);
 		var allGifts = GetGiftsExNum.get({id:$rootScope.id, page:page,size:pageSize},function(){
-			console.log($scope.gifts);
+			// console.log($scope.gifts);
 			var content = allGifts.content;
 			$scope.loading = setLoadingState(content,size);
 			initLoad($scope.gifts,content,size);

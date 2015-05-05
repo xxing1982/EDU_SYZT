@@ -1,0 +1,238 @@
+/******************************************************/
+
+.catogary {
+    border: 1px #D6DEE6 solid;
+}
+
+.advancedSearch .input-group-addon {
+    padding-right: 5%;
+}
+
+.conditionBlock {
+    padding-left: 15px;
+    padding-bottom: 5px;
+    margin-right: 5px;
+    border-bottom: 1px #D6DEE6 solid;
+}
+ .btn-catogary{
+  color: darkslateblue;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  *background-color: #fff;
+/*
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+  background-repeat: repeat-x;
+*/
+  border-color: #0044cc #0044cc #002a80;
+/*  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*/
+  border-color: darkslateblue;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+
+.catogaryText {
+    float:left;
+    margin-top: 8px;
+    width: 42px;
+}
+
+
+
+.addBookNavigation {
+    float: left;
+/*
+    margin-left: 38px;
+    margin-top: 20px;
+    margin-bottom: -5px;
+*/
+    font-weight: bold;
+    text-rendering: optimizelegibility;
+}
+
+.lackFeadback {
+    color: darkslateblue;
+    text-align: right;
+    cursor: pointer;
+    padding: 15px 2px;
+
+}
+
+.condition {
+    width: 80%;
+}
+
+.leftpart {
+    float: left;
+    width: 75%;
+    padding-right: 15px;
+}
+
+.rightpart {
+    padding-left: 15px;
+    border-left: 1px #D6DEE6 solid;
+    float: left;
+    width: 24%;
+}
+
+.popularChoice {
+    margin: 15px 40px;
+}
+
+.popularChoice .popularText {
+    margin-right: 30px;
+    color: darkslateblue;
+}
+
+#myBookshelf-button {
+    font-size: 14px;
+    float: right;
+    margin: 8px 0;
+}
+
+
+
+.bookDetailImg {
+    float: left;
+}
+
+.bookDetailUp {
+    padding-top: 35px;
+    margin-bottom: 30px;
+}
+
+
+.bookDetailText {
+    padding-left: 20px;
+/*    font-size: 12px;*/
+}
+
+.bookDetailText .red-text {
+    color: #FFA267;
+}
+
+.cramb {
+    margin: 0px 0px 15px 0px;
+}
+
+.bookExercise {
+    border-left: 1px #D5DDE6 solid;
+}
+
+.bookOperation {
+    padding-top: 20px;
+    margin-left: -30px;
+}
+
+
+
+
+.bookBuy {
+    text-align: right;
+    font-size: 10px;
+    margin: 5px 0px 15px 0px;
+}
+
+.bookRemove {
+    text-align: left;
+    font-size: 10px;
+    margin: 5px 0px 15px 0px;
+}
+
+.bookDetailAlsoRead {
+    border-bottom: 1px #D6DEE6 solid;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.bookDetailMid {
+    margin-bottom: 5px;
+}
+
+.bookDetailMid .img-center{
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+.bookTital {
+    text-align: center;
+}
+
+.bookOverview {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+.input-group {
+}
+
+
+
+.bookList {
+    margin-bottom: 25px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.readingCenter-right-body .bookDetailBottom {
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px #D6DEE6 solid;
+}
+
+.lackBookModal {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    width: auto;
+    margin: 0;
+}
+
+
+
+.lackBookModel {
+    /*margin-top: 260px;*/
+/*    margin-left: 250px;*/
+    width: 65%;
+    min-width: 400px;
+}
+
+.lackbook-input {
+    height: 30px;
+}
+
+.lackBookText {
+  width: 80px;
+  float: left;
+  padding-top: 15px;
+  margin-left: 15px;
+  text-align: right;
+}
+
+
+.placeHolder {
+    height: 135px;
+}
+
+.catogaryBtn {
+    float: left;
+    width: 108px;
+}
+
+.lackBookInput {
+    margin-top: 10px;
+    float :left;
+    width: 295px;
+    margin-bottom: 10px;
+}
+
+.bookshelfIMG {
+    height: 135px;
+}
