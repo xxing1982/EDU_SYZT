@@ -1,0 +1,67 @@
+<div class="quickSearch">
+	<div class="input-group search">
+		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchContent">
+		 <span class="input-group-addon" ng-click="searchToAdvance(searchContent)">搜索</span>
+	</div>
+	<div class="tip">
+		请输入您想要查找图书的关键词，例如，想要查找金庸的著作和关于金庸的书籍，可以输入“金庸”关键字。如果您期望搜索的结果精确，请尽可能地输入接近您想查找的内容的关键字，例如，要查找“战争与和平”，请输入“战争与和平”。如果您想获得更大范围的搜索结果，请输入短且命中率高的关键字，例如，要查找关于“sql server”的图书，请输入“sql”。
+	</div>
+
+    <div class="container-fluid bookDetailMid">
+        <div class="row bookDetailAlsoRead">
+            <p><h6>热门阅读</h6></p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 clear-padding" ng-repeat="hot in hots.content">
+					<div class="col-md-6">
+                        <a href="#readingCenter/bookDetails"><img ng-src={{imageServer+hot.pictureUrl}} class="img-responsive"></a>
+					</div>
+					<div class="col-md-6">
+					   <div class="row">
+						<div class="fsize12"><h4>{{hot.name}}</h4></div>
+						<div class="fsize12">评分：{{hot.evaluationNum}}</div>
+						<div class="fsize12">作者：{{hot.author}}</div>
+						<div class="fsize12">已有{{hot.statistic.readNums}}人阅读</div>
+                       <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(hot)" type="button">加入书架</a>&nbsp;&nbsp;
+                        </div>
+				    </div>
+            </div>
+
+
+            </div>
+        </div>
+
+    <div class="container-fluid bookDetailMid">
+        <div class="row bookDetailAlsoRead">
+            <p><h6>热门推荐</h6></p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 clear-padding" ng-repeat="recommend in recommends.content">
+					<div class="col-md-6">
+                        <a href="#readingCenter/bookDetails"><img ng-src={{imageServer+recommend.pictureUrl}} class="img-responsive"></a>
+					</div>
+					<div class="col-md-6">
+					   <div class="row">
+						<div class="fsize12"><h4>{{recommend.name}}</h4></div>
+						<div class="fsize12">评分：{{recommend.evaluationNum}}</div>
+						<div class="fsize12">作者：{{recommend.author}}</div>
+						<div class="fsize12">已有{{recommend.statistic.recommends}}人推荐</div>
+                       <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(recommend)" type="button">加入书架</a>&nbsp;&nbsp;
+                        </div>
+				    </div>
+            </div>
+        </div>
+
+        <!-- Place holder -->
+        <h5 class="row"></h5>
+    </div>
+
+
+
+
+<!--
+	<div class="advert">
+		<img src="../static/img/advert.jpg" class="img-responsive">
+	</div>
+-->
+</div>

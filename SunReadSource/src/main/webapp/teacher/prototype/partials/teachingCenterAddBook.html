@@ -1,0 +1,113 @@
+<!--AddBook -->
+
+
+<div class="readingCenter-right">
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="row readingCenter-right-top"></div>
+		<div class="readingCenter-right-body page-body container-fluid">
+
+               <div class="col-md-12 addBookNavigation">
+                <p class="cramb">
+                <a href="index.html#/readingCenter/myBookshelf">我的书架</a>
+                   > {{addBook}}
+                </p>
+            </div>
+			<div class="row find">
+				<a ui-sref='.quick'><div class="col-md-2 select-tab">快速查找</div></a>
+				<a id="advanceSearchTab" ui-sref='.advanced'><div class="col-md-2 select-tab">全部的书</div></a>
+				<a ui-sref='.popular'><div class="col-md-2 select-tab">热门阅读</div></a>
+				<a ui-sref=".recommend"><div class="col-md-2 select-tab">热门推荐</div></a>
+				<div class="col-md-2"></div>
+                <div class="col-md-2 lackFeadback">
+                    <a id="lackFeadBack" data-toggle="modal" data-target="#supplementBook" type="button">
+                        缺书反馈</a>
+                </div>
+			</div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="supplementBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content lackBookModel container-fluid">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <!-- Input form -->
+                    <div >
+                        <h4 class="modal-title" id="myModalLabel">缺书反馈</h4>
+                        <p><br />没有找到您想要的书？请反馈此书的相关信息，方便我们及时添加！</p>
+                    </div>
+
+                    <div>
+                        <label class="radio-inline">
+                          <input type="radio" ng-model="language" name="inlineRadioOptions" id="inlineRadio1" value="1" checked>
+                            <p class="popularText">中文</p>
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="radio-inline">
+                          <input type="radio" ng-model="language" name="inlineRadioOptions" id="inlineRadio2" value="2">
+                            <p class="popularText">英文</p>
+                        </label>
+                    </div>
+
+										<div class="row">
+												<div class="lackBookText"><p>ISBN号：</p></div>
+												<input type="text" ng-model="isbn" class="form-control lackBookInput" placeholder="请输入isbn号（10位或13位）" aria-describedby="sizing-addon2"
+													ng-minlength=10 ng-maxlength=13 ng-required>
+													<div style="margin-top: 15px;"><span style="color:rgba(229, 105, 105, 0.7);padding-top:15px" ng-show="!isbnValid()">
+													<span ng-show="!isbnValid()">ISBN 不合法</span>
+												</span></div>
+										</div>
+
+                    <div class="row">
+                        <div class="lackBookText"><p>作者姓名：</p></div>
+                        <input type="text" ng-model="author" class="form-control lackBookInput" placeholder="J.K.罗琳" aria-describedby="sizing-addon2">
+                    </div>
+
+                    <div class="row">
+                        <div class="lackBookText"><p>系列名称：</p></div>
+                        <input type="text" ng-model="name" class="form-control lackBookInput" placeholder="哈利·波特" aria-describedby="sizing-addon2">
+                    </div>
+
+                    <div class="row">
+                        <div class="lackBookText"><p>出版社：</p></div>
+                        <input type="text" ng-model="publisher" class="form-control lackBookInput" placeholder="人民文学出版社" aria-describedby="sizing-addon2">
+                    </div>
+
+                    <div class="row">
+                        <div class="lackBookText"><p>出版日期：</p></div>
+                        <input type="date" ng-model="publishDate" class="form-control lackBookInput" placeholder="2014-10-01" value="2015-01-01" aria-describedby="sizing-addon2">
+                    </div>
+
+            </div>
+            <div class="row modal-footer">
+                    <div class="col-md-offset-2 col-md-3">
+                        <button class="btn btn-blue" ng-disabled="!isbnValid()" ng-click="lackBookFeedback()" type="button">提交</button>
+                    </div>
+
+                    <div class="col-md-3">
+                        <button class="btn btn-blue" ng-click="" type="button" data-dismiss="modal" aria-label="Close">取消</button>
+                    </div>
+            </div>
+
+
+            </div>
+            </div>
+        </div>
+
+
+			<div ui-view></div>
+		  </div><!--readingCenter Body-->
+
+	</div>
+
+    <div class="modal fade" id="supplementBook" tabindex="-1" role="dialog" aria-labelledby="supplementBookLabel" aria-hidden="true">
+
+    </div>
+
+	<div class="col-md-1"></div>
+
+</div>
+</div>
+<script>
+	SetReadingCenterRightHeight();
+	SetBookList();
+</script>

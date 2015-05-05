@@ -46,18 +46,6 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'partials/readingCenterAddBook.html',
             controller: 'readingCenterAddBookController'
         })
-        //reading center -> myBookshelf -> test subjective
-        .state('readingCenter.testSubjective',{
-            url: '/testSubjective',
-            templateUrl: 'partials/readingCenterTestSubjective.html',
-            controller: 'readingCenterTestSubjectiveController'
-        })
-        //reading center -> myBookshelf -> authentication testing
-        .state('readingCenter.multipleTesting',{
-            url: '/multipleTesting',
-            templateUrl: 'partials/readingCenterMultipleTesting.html',
-            controller: 'readingCenterMultipleTestingController'
-        })
         //reading center -> myBookshelf -> add books -> quick search
         .state('readingCenter.addBook.quick', {
             url: '/quick',
@@ -82,6 +70,19 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'partials/readingCenterAddBookPopularRecommend.html',
             controller: 'readingCenterAddBookPopularRecommendController'
         })
+        //reading center -> myBookshelf -> test subjective
+        .state('readingCenter.testSubjective',{
+            url: '/testSubjective',
+            templateUrl: 'partials/readingCenterTestSubjective.html',
+            controller: 'readingCenterTestSubjectiveController'
+        })
+        //reading center -> myBookshelf -> authentication testing
+        .state('readingCenter.multipleTesting',{
+            url: '/multipleTesting',
+            templateUrl: 'partials/readingCenterMultipleTesting.html',
+            controller: 'readingCenterMultipleTestingController'
+        })
+
         //reading center -> myNote
         .state('readingCenter.myNote',{
             url: '/myNote',
