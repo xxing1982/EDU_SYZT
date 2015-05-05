@@ -1,0 +1,190 @@
+<div id="personalCenter-page" class="container">
+    <div class="row">
+    <div class="page-body page-body-top personalProfile-body col-md-8 col-md-offset-2 myBlock mt30">
+    <div class="col-md-12">
+        
+        <!-- Avatar -->
+        <div class="title col-md-12"><h4 class="row">个人中心</h4></div>
+        <div>
+            <div id="avatar" class="col-md-12">
+                <div class="dropzone img-circle border-shadow" id="image-uploader" ng-style="{'background-image':'url('+avatarUrl+')'}">
+<!--                    <img ng-src="{{avatarUrl}}" />-->
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <h2>{{basicInformation.content.username}}</h2>
+            </div>
+<!--
+            <div class="col-md-12 text-center">
+                <a ng-click="updateAvatar()">修改头像</a>
+            </div>
+-->
+        </div>    
+        
+        <!-- Basic information -->
+        <div class="title row buttom-separator">
+            <div class="col-md-11"><h4>基本信息</h4></div>
+        </div>
+    
+        <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>姓名：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4>{{basicInformation.content.username}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>性别：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4>{{basicInformation.content.gender}}</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>出生日期：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                 <h4>{{basicInformation.content.birthday}}</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>学校：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                 <h4>{{basicInformation.content.school}}</h4>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>班级：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                  <h4>{{basicInformation.content.class}}</h4>
+            </div>
+        </div>        
+        </div>
+        <!-- Place holder -->
+        <div class="row title"/>
+        
+        <!-- Personal information -->
+        <div class="title row buttom-separator">
+            <div class="col-md-10"><h4>个人资料</h4></div>
+            <div class="col-md-2 text-right">
+                <div class="row">
+                    <a class="title-link" ng-show="!personalInformation.editable" ng-click="toggleEdit(personalInformation, false)">编辑</a>
+                    <a class="title-link" ng-show="personalInformation.editable" ng-click="toggleEdit(personalInformation, false)">取消</a>
+                    <a class="title-link" ng-show="personalInformation.editable" ng-click="toggleEdit(personalInformation, true)">保存</a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>昵称：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.nickname}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.nickname">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>QQ：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.qqId}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.qqId">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>微信：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.wechatId}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.wechatId">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>邮箱：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable">{{personalInformation.content.email}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <div class="row"><h4>手机：</h4></div>
+            </div>
+            <div class="col-md-9 text-left">
+                <h4 ng-show="!personalInformation.editable" >{{personalInformation.content.phoneNumber}}</h4>
+                <input ng-show="personalInformation.editable" type="text" class="form-control dark-blue-2 theme-font" ng-model="personalInformation.cached.phoneNumber">
+            </div>
+        </div>
+            
+        
+        
+        </div>
+        <!-- Place holder -->
+        <div class="row title"/>
+        
+        <!-- Security setting -->
+        <div class="title row buttom-separator">
+            <div class="col-md-11"><h4>安全设置</h4></div>
+        </div>
+    
+        <div class="col-md-12">
+        
+        <!-- Password -->
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                <div class="row" ng-show="!securitySetting.editable"> <h4>密码：</h4></div>
+                <div class="row" ng-show="securitySetting.editable"> <h4>新密码：</h4></div>
+            </div>
+            <div class="col-xs-8 text-left">
+                <h4 ng-show="!securitySetting.editable">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</h4>
+                <input ng-change="securitySetting.validatePassword()" ng-show="securitySetting.editable" type="password" class="form-control dark-blue-2 theme-font" ng-model="securitySetting.cached.password">
+            </div>
+            <div class="col-xs-1 text-left">
+                <p class="title-link row password-span" ng-show="securitySetting.tooShort"><small>密码太短</small></p>
+            </div>
+            <div class="col-xs-1 text-right">
+                <div class="row"><div class="row">
+                    <a class="title-link" ng-show="!securitySetting.editable" ng-click="securitySetting.togglePasswordEdit(false)">编辑</a>
+                    <a class="title-link" ng-show="securitySetting.editable" ng-click="securitySetting.togglePasswordEdit(false)">取消</a>
+                    <a class="title-link" ng-show="securitySetting.editable" ng-click="securitySetting.togglePasswordEdit(true)">保存</a>
+                </div></div>
+            </div>    
+        </div>
+            
+        <!-- Confirm password -->
+        <div class="row">
+            <div class="col-xs-2 text-right" ng-show="securitySetting.editable">
+                <div class="row"><h4>确认密码：</h4></div>
+            </div>
+            <div class="col-xs-8 text-left">
+                <input ng-change="securitySetting.validatePassword()" ng-show="securitySetting.editable" type="password" class="form-control dark-blue-2 theme-font" ng-model="securitySetting.cached.confirmPassword">
+            </div>
+            <div class="col-xs-1 text-left">
+                <p class="title-link row password-span" ng-show="securitySetting.different"><small>两次不同</small></p>
+            </div>
+        </div>
+
+        </div>
+        <!-- Place holder -->
+        <div class="row title"/>
+    
+    </div>    
+    </div>
+    </div>
+</div>
+<script>
+</script>

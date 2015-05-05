@@ -160,3 +160,47 @@
 }
 
 /*---------------------index bottom----------------------*/
+
+/*-----------------personal profile top------------------*/
+#personalCenter-page input{
+    font-size: 18px;
+    height: 39px;
+    box-shadow: none;
+    border-style: none;
+    border-bottom: 1px dashed #D6DEE6;
+    padding-left: 0px;
+    border-radius: 0px;
+}
+
+#personalCenter-page #image-uploader{
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    background-position: 50% 50%;
+    background-repeat:  no-repeat;
+    background-size: 100% 100%;
+}
+
+
+#personalCenter-page #image-uploader .dz-preview,
+#personalCenter-page #image-uploader .dz-image,
+#personalCenter-page #image-uploader img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#personalCenter-page #image-uploader .dz-error-message {
+    left: 2%
+}
+
+#personalCenter-page .password-span {
+    color: #F22;
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+/*------------------personal profile buttom------------------*/

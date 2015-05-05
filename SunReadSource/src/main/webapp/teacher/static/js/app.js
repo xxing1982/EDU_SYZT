@@ -67,6 +67,12 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/statisticsSummary',
             templateUrl: 'partials/statisticsSummary.html'
         })
+        //personalProfile page
+        .state('personalProfile',{
+            url: '/personalProfile',
+            templateUrl: 'partials/personalProfile.html',
+            controller: "personalProfileController"
+        })
 }]);
 
 routeApp.run(['$rootScope', function($rootScope){
