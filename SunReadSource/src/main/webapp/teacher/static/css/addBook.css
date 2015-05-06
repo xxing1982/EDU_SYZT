@@ -55,10 +55,8 @@
 }
 
 .lackFeadback {
-    color: darkslateblue;
     text-align: right;
     cursor: pointer;
-    padding: 15px 2px;
 
 }
 
@@ -127,9 +125,6 @@
     padding-top: 20px;
     margin-left: -30px;
 }
-
-
-
 
 .bookBuy {
     text-align: right;
@@ -233,6 +228,34 @@
     margin-bottom: 10px;
 }
 
-.bookshelfIMG {
-    height: 135px;
+/****Add Book***/
+.select-tab
+{
+    text-align: center;
+    cursor: pointer;
+/*    padding: 15px 0px;*/
+    color:#000000;
+}
+
+.select-tab.myActive
+{
+    border-bottom: 2px #55C9D2  solid;
+    color: #55C9D2 ;
+}
+.addBook-body {
+    margin-top: 15px;
+}
+
+.addBook-body .addBookFind {
+    color: black;
+    border-bottom: 1px #D6DEE6 solid;
+    list-style:none;
+}
+.find ul{
+    list-style:none;
+}
+
+.addBookFindRight {
+    border-bottom: 1px #D6DEE6 solid;
+    padding-bottom: 2px;    
 }

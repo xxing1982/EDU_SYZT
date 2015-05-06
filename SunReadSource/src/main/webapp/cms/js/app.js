@@ -30,6 +30,36 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/student.html",
             controller: 'studentCtrl'
         })
+        .state('teacher',{
+        	url: '/teacher',
+            templateUrl: "partials/teacher.html",
+            controller: 'teacherCtrl'
+        })
+        .state('region',{
+        	url: '/region',
+            templateUrl: "partials/region.html",
+            controller: 'regionCtrl'
+        })
+         .state('edugroup',{
+        	url: '/edugroup',
+            templateUrl: "partials/edugroup.html",
+            controller: 'edugroupCtrl'
+        })
+        .state('school',{
+        	url: '/school',
+            templateUrl: "partials/school.html",
+            controller: 'schoolCtrl'
+        })
+        .state('campus',{
+        	url: '/campus',
+            templateUrl: "partials/campus.html",
+            controller: 'campusCtrl'
+        })
+        .state('clazz',{
+        	url: '/clazz',
+            templateUrl: "partials/clazz.html",
+            controller: 'clazzCtrl'
+        })
      	// relation with book question page
      	.state('objectivequestion', {
      		url: '/objectivequestion',

@@ -27,6 +27,10 @@ public class UserStatistic extends AbstractEntity implements Serializable{
     public int getLevel() {
         return level;
     }
+    
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public void increaseLevel() {
         this.level = ++this.level;

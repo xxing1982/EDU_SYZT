@@ -1,13 +1,19 @@
 package com.syzton.sunread.service.organization;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.syzton.sunread.dto.organization.SchoolDTO;
 import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.model.organization.School;
 import com.syzton.sunread.repository.organization.EduGroupRepository;
 import com.syzton.sunread.repository.organization.SchoolRepository;
+import com.syzton.sunread.util.ExcelUtil;
 
 import javassist.NotFoundException;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +93,38 @@ public class SchoolRepositoryService implements SchoolService {
     public Page<School> findAll(Pageable pageable) throws NotFoundException {
         LOGGER.debug("Finding all school entries");
         return  repository.findAll(pageable);
+    }
+    
+    @Transactional
+    @Override
+    public Map<Integer,String> batchSaveOrUpdateSchoolFromExcel(Sheet sheet){
+    	Map<Integer,String> failMap = new HashMap<Integer,String>();
+		
+		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
+			Row row = sheet.getRow(i);  
+			String name = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			String eduName = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+			if("".equals(name)){
+				break;
+			}
+			if("".equals(eduName)){
+				failMap.put(row.getRowNum()+1, "学校和教育集团不能为空！");
+				continue;
+			}
+			EduGroup group = eduRepository.findByName(eduName);
+			if(group == null){
+				failMap.put(row.getRowNum()+1, "无效的教育集团，数据库中未能发现该教育集团记录！");
+				continue;
+			}
+			School school = repository.findByNameAndEduGroup(name, group);
+			if(school == null){
+				school = new School();
+				school.setName(name);
+				school.setEduGroup(group);
+			}
+			school.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(2)));
+			repository.save(school);
+		}
+		return failMap;
     }
 }

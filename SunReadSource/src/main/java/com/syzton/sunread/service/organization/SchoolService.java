@@ -1,10 +1,13 @@
 package com.syzton.sunread.service.organization;
 
+import java.util.Map;
+
 import com.syzton.sunread.dto.organization.SchoolDTO;
 import com.syzton.sunread.model.organization.School;
 
 import javassist.NotFoundException;
 
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,4 +25,6 @@ public interface SchoolService {
     public School findById(Long id) throws NotFoundException;
 
     Page<School> findAll(Pageable pageable) throws NotFoundException;
+    
+    public Map<Integer,String> batchSaveOrUpdateSchoolFromExcel(Sheet sheet);
 }

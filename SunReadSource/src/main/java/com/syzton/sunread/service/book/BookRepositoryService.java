@@ -6,7 +6,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.syzton.sunread.assembler.book.BookAssembler;
 import com.syzton.sunread.dto.book.BookDTO;
@@ -184,13 +186,13 @@ public class BookRepositoryService implements BookService {
 
     @Transactional
 	@Override
-	public List<Integer> batchSaveOrUpdateBookFromExcel(Sheet sheet) {
+	public Map<Integer,String> batchSaveOrUpdateBookFromExcel(Sheet sheet) {
 		List<Dictionary> grades = dictionaryRepo.findByType(DictionaryType.GRADE);
 		List<Dictionary> literatures = dictionaryRepo.findByType(DictionaryType.LITERATURE);
 		List<Dictionary> languages = dictionaryRepo.findByType(DictionaryType.LANGUAGE);
 		List<Dictionary> categorys = dictionaryRepo.findByType(DictionaryType.CATEGORY);
 		
-		List<Integer> list = new ArrayList<Integer>();
+		 Map<Integer,String>  map = new HashMap<Integer,String>();
 		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
 			
 			Row row = sheet.getRow(i);  
@@ -202,7 +204,7 @@ public class BookRepositoryService implements BookService {
 			
 			
 			if("".equals(isbn)){
-				return new ArrayList<Integer>();
+				break;
 			}
 			Book book = bookRepo.findByIsbn(isbn);
 			if(book == null){
@@ -267,7 +269,7 @@ public class BookRepositoryService implements BookService {
 		 
 		    
 		}  
-		return list;
+		return map;
 	}
 	
 	private int getValueFromDic(List<Dictionary> list,String key){

@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Created by Morgan-Leon on 2015/3/16.
  */
 public interface EduGroupRepository extends JpaRepository<EduGroup,Long> {
+	public EduGroup findByName(String name);
 }

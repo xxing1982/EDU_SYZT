@@ -1,6 +1,7 @@
 package com.syzton.sunread.service.book;
 
 import java.util.List;
+import java.util.Map;
 
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.book.BookExtraDTO;
@@ -29,5 +30,5 @@ public interface BookService {
 
     Page<Book> searchByCondition(BookExtraDTO condition,Pageable pageable);
     
-    public List<Integer> batchSaveOrUpdateBookFromExcel(Sheet sheet);
+    public Map<Integer,String> batchSaveOrUpdateBookFromExcel(Sheet sheet);
 }

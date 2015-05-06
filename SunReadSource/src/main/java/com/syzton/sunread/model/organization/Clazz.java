@@ -67,6 +67,30 @@ public class Clazz extends  AbstractEntity{
         return modificationTime;
     }
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setModificationTime(DateTime modificationTime) {
+		this.modificationTime = modificationTime;
+	}
+
+	public void setCampus(Campus campus) {
+		this.campus = campus;
+	}
+
+	public void setCategoryCount(Set<ClazzCategoryCount> categoryCount) {
+		this.categoryCount = categoryCount;
+	}
+
 	public String getName() {
 		return name;
 	}

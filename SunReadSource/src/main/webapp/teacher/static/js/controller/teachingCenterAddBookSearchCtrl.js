@@ -1,7 +1,16 @@
-ctrls.controller("readingCenterAddBookSearchController", ['$scope','AddbookToShelf'
+ctrls.controller("teachingCenterAddBookSearchController", ['$scope','AddbookToShelf'
         ,'ConditionSearch','QuickSearch','WeeklyHotSearch','MonthlyHotSearch','WeeklyRecommendSearch','MonthlyRecommendSearch',
         ,function ($scope,ConditionSearch,QuickSearch,AddbookToShelf,WeeklyHotSearch,MonthlyHotSearch,WeeklyRecommendSearch,MonthlyRecommendSearch) {
 
+    $scope.addBook = {
+        addBook: '我要推荐',
+        QuickSearch:'快速查找',
+        AdvanceSearch:'全部的书',
+        PopularReading:'热门阅读',
+        PopularRecommend:'热门推荐'
+    }
+    
+            
     $scope.searchContent = "";
 
     var pageSize = 4;

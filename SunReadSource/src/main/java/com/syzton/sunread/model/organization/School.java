@@ -49,7 +49,10 @@ public class School extends AbstractEntity{
     public DateTime getModificationTime() {
         return modificationTime;
     }
-
+    
+    public void setName(String name){
+    	this.name = name;
+    }
 
 	public String getName() {
 		return name;
@@ -57,6 +60,10 @@ public class School extends AbstractEntity{
 	
 	private String getDescription() {
 		return this.description;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
 	}
 	
     public static Builder getBuilder(String name, EduGroup eduGroup) {
@@ -86,7 +93,7 @@ public class School extends AbstractEntity{
     public Set<Campus> getGrades() {
         return compus;
     }
-
+    
     public void setGrades(Set<Campus> compus) {
         this.compus = compus;
     }

@@ -28,6 +28,9 @@ public interface ClazzRepository extends JpaRepository<Clazz,Long> {
 
     List<Clazz> findByGrade(int grade);
     
+
     Clazz findByName(String clazzName);
+
+    Clazz findByNameAndCampus(String name,Campus campus);
 
 }

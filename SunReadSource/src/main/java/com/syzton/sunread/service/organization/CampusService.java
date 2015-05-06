@@ -1,7 +1,10 @@
 package com.syzton.sunread.service.organization;
 
+import java.util.Map;
+
 import javassist.NotFoundException;
 
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -39,5 +42,8 @@ public interface CampusService {
 	Campus findByCompusName(String campusName)
 			throws com.syzton.sunread.exception.common.NotFoundException;
 
-	
+    public Map<Integer,String> batchSaveOrUpdateCampusFromExcel(Sheet sheet);
+    
+    
+
 }
