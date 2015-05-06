@@ -2,17 +2,20 @@ package com.syzton.sunread.service.coinhistory;
 
 import java.util.List;
 
+import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.model.user.UserStatistic;
 import com.syzton.sunread.repository.coinhistory.CoinHistoryRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,11 +42,21 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
     public void StudentRepositoryService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
+    
+    private SecurityContextUtil securityContextUtil;
+    
+    @Autowired
+    public void setSecurityContextUtil(SecurityContextUtil securityContextUtil) {
+        this.securityContextUtil = securityContextUtil;
+    }
 
     @Override
     public CoinHistory add(CoinHistory add) {
-        LOGGER.debug("Adding a new coinHistory entry with information: {}", add);
-        Student student = studentRepository.findOne(add.getUserId());
+    	 
+        // Get the student entity
+        Student student = studentRepository.findOne(add.getStudentId());
+        
+        // Calculate the statistic
         UserStatistic statistic = student.getStatistic();
         if (add.getCoinType() == CoinType.IN) {
         	statistic.setCoin( statistic.getCoin() + add.getNum() );
@@ -51,6 +64,35 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         	statistic.setCoin( statistic.getCoin() - add.getNum() );
         }
         studentRepository.save(student);
+        
+
+        switch(add.getCoinFrom()){
+        	case FROM_TEACHER: 
+        		
+        		// Get the teacher entity
+                User teacher = securityContextUtil.getUser();
+                
+                // Save the coinhistory entity
+                add.setFromId(teacher.getId());
+                break;
+        	case FROM_BOOK: 
+        		
+                // Save the coinhistory entity
+//                add.setFromId(teacher.getId());
+                break;
+        	case FROM_NOTE: 
+        		
+                // Save the coinhistory entity
+//                add.setFromId(teacher.getId());
+                break;
+        	case FROM_VERIFY_TEST: 
+        		
+                // Save the coinhistory entity
+//                add.setFromId(teacher.getId());
+                break;                
+        	default:
+        		break; 
+        }
         return repository.save(add);
     }
     
@@ -87,7 +129,14 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
 
         return found;
     }
-
+    
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+    @Override
+    public Page<CoinHistory> findByTeacherId(Pageable pageable, Long teacherId) throws NotFoundException {
+        Page<CoinHistory> coinhistoryPage = repository.findByFromIdAndCoinFrom(teacherId, CoinHistory.CoinFrom.FROM_TEACHER, pageable);
+        return coinhistoryPage;
+    }
+    
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
     public CoinHistory update(CoinHistory update) throws NotFoundException {

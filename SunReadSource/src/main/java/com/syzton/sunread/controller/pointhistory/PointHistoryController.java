@@ -8,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.service.pointhistory.PointHistoryService;
-
-import javax.validation.Valid;
 
 
 /**
@@ -30,6 +27,7 @@ public class PointHistoryController {
     public PointHistoryController(PointHistoryService service) {
         this.service = service;
     }
+
 //
 //    @RequestMapping(value = "/api/pointhistories", method = RequestMethod.POST)
 //    @ResponseBody
@@ -56,10 +54,10 @@ public class PointHistoryController {
 //    
     @RequestMapping(value = "/api/users/{userId}/pointhistories", method = RequestMethod.GET)
     @ResponseBody
-    public List<PointHistory> findPointHistoriesByUserId( @PathVariable("userId") long userId ) {
+    public List<PointHistory> findPointHistoriesByStudentId( @PathVariable("studentId") long studentId ) {
         LOGGER.debug("Finding all pointhistory entries by userId.");
 
-        List<PointHistory> models = service.findByUserId(userId);
+        List<PointHistory> models = service.findByStudentId(studentId);
         LOGGER.debug("Found {} pointhistory entries.", models.size());
 
         return models;

@@ -58,7 +58,7 @@ public class Student extends User{
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime enrollmentDate; // for insert DB
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "student")
     private Set<CoinHistory> coinHistorySet = new HashSet<>();
 
 

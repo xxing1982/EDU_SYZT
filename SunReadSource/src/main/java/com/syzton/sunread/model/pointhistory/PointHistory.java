@@ -1,7 +1,9 @@
 package com.syzton.sunread.model.pointhistory;
 
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
@@ -28,8 +30,8 @@ public class PointHistory extends AbstractEntity {
 	
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-	private User user;
+    @JoinColumn(name="student_id")
+	private Student student;
 	
 	@Column
 	private int num;
@@ -56,12 +58,12 @@ public class PointHistory extends AbstractEntity {
 		this.pointFrom = pointFrom;
 	}
     
-    public Long getUserId() {
-		return user.getId();
+    public Long getStudentId() {
+		return student.getId();
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public int getNum() {

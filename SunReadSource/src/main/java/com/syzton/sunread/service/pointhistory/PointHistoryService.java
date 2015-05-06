@@ -47,5 +47,5 @@ public interface PointHistoryService {
      */
     public PointHistory update(PointHistory updated) throws NotFoundException;
 
-    public List<PointHistory> findByUserId(Long UserId);
+    public List<PointHistory> findByStudentId(Long StudentId);
 }

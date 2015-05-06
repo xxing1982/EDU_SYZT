@@ -262,7 +262,7 @@ public class ExamController {
 			coinHistory.setCoinFrom(CoinFrom.FROM_VERIFY_TEST);
 			coinHistory.setCoinType(CoinType.IN);
 			coinHistory.setNum(book.getCoin());
-			coinHistory.setUser(student);
+			coinHistory.setStudent(student);
 			coinService.add(coinHistory);
 			
 			
@@ -270,7 +270,7 @@ public class ExamController {
 			pointHistory.setPointFrom(PointFrom.FROM_VERIFY_TEST);
 			pointHistory.setPointType(PointType.IN);
 			pointHistory.setNum(book.getPoint());
-			pointHistory.setUser(student);
+			pointHistory.setStudent(student);
 			pointService.add(pointHistory);
 
 			student.getStatistic().setPoint(book.getPoint());

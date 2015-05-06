@@ -1,6 +1,10 @@
 package com.syzton.sunread.service.coinhistory;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 
@@ -47,5 +51,13 @@ public interface CoinHistoryService {
      */
     public CoinHistory update(CoinHistory updated) throws NotFoundException;
 
+    /**
+     * Finds a list of coinHistory entries.
+     * @param teacherId    The teacherId of the wanted coinHistory entry.
+     * @return  The found coinHistory entries.
+     * @throws CoinHistoryNotFoundException    if no coinHistory entry is found with the given id.
+     */
+
+	public Page<CoinHistory> findByTeacherId(Pageable pageable, Long teacherId) throws NotFoundException;
 
 }

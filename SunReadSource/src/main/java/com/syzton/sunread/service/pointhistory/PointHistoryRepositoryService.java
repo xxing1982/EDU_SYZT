@@ -46,18 +46,10 @@ public class PointHistoryRepositoryService implements PointHistoryService {
         this.studentRepository = studentRepository;
     }
 
-    private UserRepository userRepository;
-
-    @Autowired
-    public void UserRepositoryService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-
     @Override
     public PointHistory add(PointHistory add) {
         LOGGER.debug("Adding a new pointHistory entry with information: {}", add);
-        Student student = studentRepository.findOne(add.getUserId());
+        Student student = studentRepository.findOne(add.getStudentId());
         UserStatistic statistic = student.getStatistic();
         Clazz clazz = clazzRepository.findOne(student.getClazzId());
 
@@ -131,9 +123,9 @@ public class PointHistoryRepositoryService implements PointHistoryService {
 
     @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
 	@Override
-	public List<PointHistory> findByUserId(Long userId) {
+	public List<PointHistory> findByStudentId(Long studentId) {
         LOGGER.debug("Finding all pointHistory entries by user id");
-        User user = userRepository.findOne(userId);
-        return repository.findByUser(user);
+        Student student = studentRepository.findOne(studentId);
+        return repository.findByStudent(student);
 	}
 }

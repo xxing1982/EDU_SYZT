@@ -1,7 +1,7 @@
 package com.syzton.sunread.model.coinhistory;
 
 import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.model.user.Student;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
@@ -28,19 +28,21 @@ public class CoinHistory extends AbstractEntity {
 	
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-	private User user;
+    @JoinColumn(name="student_id")
+	private Student student;
 	
-	@Column
+	@Column(name="num")
 	private int num;
-    
 	
-    public Long getUserId() {
-		return user.getId();
+	@Column(name="form_id")
+	private Long fromId;
+    
+    public Long getStudentId() {
+		return student.getId();
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public int getNum() {
@@ -72,7 +74,16 @@ public class CoinHistory extends AbstractEntity {
 		this.coinFrom = coinFrom;
 	}
     
-    @Override
+	
+    public Long getFromId() {
+		return fromId;
+	}
+
+	public void setFromId(Long fromId) {
+		this.fromId = fromId;
+	}
+
+	@Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
