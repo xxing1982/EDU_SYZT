@@ -1,6 +1,6 @@
 //myTaskDisapatchTaskCtrl.js
-ctrls.controller("myTaskDispatchTaskController",['$scope', '$rootScope', 'Teacher', 'Hotreader', 'Class',
-	function($scope, $rootScope, Teacher, Hotreader, Class){
+ctrls.controller("myTaskDispatchTaskController",['$scope', '$rootScope', 'Teacher', 'Hotreader', 'Class', 'Task',
+	function($scope, $rootScope, Teacher, Hotreader, Class, Task){
 		    
         // Initlizate the dropdown statues
         $scope.campusStatuses = [];
@@ -49,17 +49,25 @@ ctrls.controller("myTaskDispatchTaskController",['$scope', '$rootScope', 'Teache
             
             // Publish the selected entities
             $scope.hotreaderLoadable.publish = function(){
-                
-                console.log(this.selected);
+                for(var i = 0; i < this.selected.length; i++ ){
+                    if (this.entities.content[i].targetBookNum &&  this.entities.content[i].targetPoint){
+                        Task.update({ teacherId: $scope.teacher.id, 
+                                      studentId: this.selected[i].id, 
+                                      targetBookNum: this.entities.content[i].targetBookNum,
+                                      targetPoint: this.entities.content[i].targetPoint },{}
+                        );
+                    }
+                }
             };
             
             // The select all method
-            $scope.hotreaderLoadable.selectAll = function(selectedAll){
-                if (selectedAll) {
-                    this.selected = angular.copy(this.roles);
+            $scope.hotreaderLoadable.selectAll = function(){
+                if (!this.selectedAllValue) {
+                    this.selected = angular.copy(this.entities.content);
                 } else {
-                
+                    this.selected = [];
                 }
+                this.selectedAllValue = !this.selectedAllValue;
             };
         });
    
