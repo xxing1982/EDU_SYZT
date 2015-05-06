@@ -1,6 +1,6 @@
-ctrls.controller("readingCenterAddBookController", ['$scope', 'LackFeedback'
+ctrls.controller("teachingCenterAddBookController", ['$scope', 'LackFeedback'
 ,function ($scope, LackFeedback) {
-	$scope.addBook = '我要选书';
+	$scope.addBook = '我要推荐';
 	$scope.language = 1;
 
 	function validateCtrl($scope) {

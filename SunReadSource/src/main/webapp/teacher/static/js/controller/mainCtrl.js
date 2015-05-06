@@ -1,6 +1,7 @@
 //mainCtrl.js
-var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource', 
+var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
 	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices', 'quickSearchServices',
+	'lackFeedbackServices',
 	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices']);
 
 
