@@ -23,9 +23,9 @@ ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', 'Teacher',
         delete $rootScope.id;
         delete $rootScope.teacher;
         delete sessionStorage.access_token;
-        delete sessionStorage.userId;
+        delete sessionStorage.teacherId;
         delete sessionStorage.length;
-        window.location.href="/login.html"; 
+        location.reload();
     }
 }]);
 
