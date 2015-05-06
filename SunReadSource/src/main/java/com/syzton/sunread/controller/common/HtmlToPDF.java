@@ -26,8 +26,8 @@ public class HtmlToPDF {
     protected void processRequest(@RequestParam("url") String url,HttpServletRequest request, HttpServletResponse response)
             throws  Exception {
         try {
-            IOUtils.copy(generationPdfDzOrder(url), response.getOutputStream());
-            TimeUnit.SECONDS.sleep(5);
+            IOUtils.copy(generationPdfDzOrder(url, request.getSession().getServletContext().getRealPath("/")), response.getOutputStream());
+            TimeUnit.SECONDS.sleep(2);
         }catch (Exception e){
             System.out.print(e.toString());
         }finally {
@@ -35,13 +35,14 @@ public class HtmlToPDF {
         }
     }
 
-    public InputStream generationPdfDzOrder(String url) throws Exception{
+    public InputStream generationPdfDzOrder(String url,String root) throws Exception{
         String tmpFileName = UUID.randomUUID().toString(); //生成随机文件名
-        String pdfFileName = "/tmp/" + tmpFileName + ".pdf" ;
+        String pdfFileName = root + tmpFileName + ".pdf" ;
         File pdfFile = new  File(pdfFileName); //pdf文件
         String command = getCommand(url , pdfFileName);
-        Runtime.getRuntime().exec(command);
-        TimeUnit.SECONDS.sleep(5);
+        Process p =  Runtime.getRuntime().exec(command);
+        p.waitFor();
+        TimeUnit.SECONDS.sleep(1);
         InputStream inputStream = new FileInputStream(pdfFile);
         pdfFile.delete();
         return inputStream;
