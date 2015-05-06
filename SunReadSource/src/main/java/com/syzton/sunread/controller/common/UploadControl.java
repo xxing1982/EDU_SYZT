@@ -2,9 +2,12 @@ package com.syzton.sunread.controller.common;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -26,40 +29,71 @@ import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.book.BookService;
 import com.syzton.sunread.service.exam.ObjectiveQuestionService;
 import com.syzton.sunread.service.exam.SubjectiveQuestionService;
+import com.syzton.sunread.service.organization.CampusService;
+import com.syzton.sunread.service.organization.ClazzService;
+import com.syzton.sunread.service.organization.EduGroupService;
+import com.syzton.sunread.service.organization.SchoolService;
+import com.syzton.sunread.service.region.RegionService;
+import com.syzton.sunread.service.user.UserService;
 import com.syzton.sunread.util.FtpUtil;
 
 @Controller
 public class UploadControl {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(UploadControl.class);
-	
+
 	private SecurityContextUtil securityUtil;
-	
+
 	private BookService bookService;
-	
+
 	private SubjectiveQuestionService subjectQService;
-	
+
 	private ObjectiveQuestionService objectQService;
-	
+
+	private UserService userService;
+
+	private RegionService regionService;
+
+	private EduGroupService eduGroupService;
+
+	private ClazzService clazzService;
+
+	private SchoolService schoolService;
+
+	private CampusService campusService;
+
 	private String ftpPrefix = "/pic";
-	
+
 	@Autowired
-	public UploadControl(SecurityContextUtil securityUtil,BookService bookService,SubjectiveQuestionService subjectQService,ObjectiveQuestionService objectQService) {
+	public UploadControl(SecurityContextUtil securityUtil,
+			BookService bookService, SubjectiveQuestionService subjectQService,
+			ObjectiveQuestionService objectQService, UserService userService,
+			RegionService regionService, EduGroupService eduGroupService,
+			ClazzService clazzService, SchoolService schoolService,
+			CampusService campusService) {
 		this.securityUtil = securityUtil;
 		this.bookService = bookService;
 		this.subjectQService = subjectQService;
 		this.objectQService = objectQService;
+		this.userService = userService;
+		this.regionService = regionService;
+		this.eduGroupService = eduGroupService;
+		this.clazzService = clazzService;
+		this.schoolService = schoolService;
+		this.campusService = campusService;
+
 	}
 
 	@RequestMapping(value = "/api/upload/notepic", method = RequestMethod.POST)
 	@ResponseBody
 	public String notePicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws IOException {
-		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		String prefix = Calendar.getInstance().getTimeInMillis() + ""
+				+ myfile.getOriginalFilename().hashCode();
 		int index = myfile.getOriginalFilename().lastIndexOf(".");
 		String suffix = "";
-		if(index!=-1){
-			suffix = myfile.getOriginalFilename().substring(index); 
+		if (index != -1) {
+			suffix = myfile.getOriginalFilename().substring(index);
 		}
 		String ftpPath = "/notes/";
 		if (myfile.isEmpty()) {
@@ -68,13 +102,16 @@ public class UploadControl {
 
 			String realPath = request.getSession().getServletContext()
 					.getRealPath("/upload/note");
-//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
+			// FileUtils.copyInputStreamToFile(myfile.getInputStream(), new
+			// File(
+			// realPath, prefix +
+			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath
+						+ prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
@@ -88,11 +125,12 @@ public class UploadControl {
 	@ResponseBody
 	public String userPicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		String prefix = Calendar.getInstance().getTimeInMillis() + ""
+				+ myfile.getOriginalFilename().hashCode();
 		int index = myfile.getOriginalFilename().lastIndexOf(".");
 		String suffix = "";
-		if(index!=-1){
-			suffix = myfile.getOriginalFilename().substring(index); 
+		if (index != -1) {
+			suffix = myfile.getOriginalFilename().substring(index);
 		}
 		String ftpPath = "/userImages/";
 		if (myfile.isEmpty()) {
@@ -101,13 +139,16 @@ public class UploadControl {
 
 			String realPath = request.getSession().getServletContext()
 					.getRealPath("/upload/note");
-//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
+			// FileUtils.copyInputStreamToFile(myfile.getInputStream(), new
+			// File(
+			// realPath, prefix +
+			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath
+						+ prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
@@ -121,11 +162,12 @@ public class UploadControl {
 	@ResponseBody
 	public String bookPicUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-		String prefix = Calendar.getInstance().getTimeInMillis()+ "" +myfile.getOriginalFilename().hashCode();
+		String prefix = Calendar.getInstance().getTimeInMillis() + ""
+				+ myfile.getOriginalFilename().hashCode();
 		int index = myfile.getOriginalFilename().lastIndexOf(".");
 		String suffix = "";
-		if(index!=-1){
-			suffix = myfile.getOriginalFilename().substring(index); 
+		if (index != -1) {
+			suffix = myfile.getOriginalFilename().substring(index);
 		}
 		String ftpPath = "/bookscover/";
 		if (myfile.isEmpty()) {
@@ -134,13 +176,16 @@ public class UploadControl {
 
 			String realPath = request.getSession().getServletContext()
 					.getRealPath("/upload/note");
-//			FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(
-//					realPath, prefix + myfile.getOriginalFilename()).hashCode()+suffix);
+			// FileUtils.copyInputStreamToFile(myfile.getInputStream(), new
+			// File(
+			// realPath, prefix +
+			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
 						"syzt2015", "/");
 				ftpUtil.login();
-				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath + prefix + suffix);
+				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath
+						+ prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
 				return "upload file to image sever error";
@@ -152,60 +197,171 @@ public class UploadControl {
 
 	@RequestMapping(value = "/api/upload/excel/book", method = RequestMethod.POST)
 	@ResponseBody
-	public String bookExcelUpload(@RequestParam MultipartFile myfile,
+	public Map<Integer,String> bookExcelUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
 			Workbook wb = getWorkBookFromExcel(myfile);
-			bookService.batchSaveOrUpdateBookFromExcel(wb.getSheetAt(0));
+			map = bookService.batchSaveOrUpdateBookFromExcel(wb.getSheetAt(0));
 			wb.close();
 		}
-		return "Excel parse OK";
+		map.put(0, "parser Excel complete");
+		return map;
 	}
-	
+
 	@RequestMapping(value = "/api/upload/excel/objectquestion", method = RequestMethod.POST)
 	@ResponseBody
-	public String objectiveQuestionExcelUpload(@RequestParam MultipartFile myfile,
-			HttpServletRequest request) throws Exception {
+	public Map<Integer,String> objectiveQuestionExcelUpload(
+			@RequestParam MultipartFile myfile, HttpServletRequest request)
+			throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
 			Workbook wb = getWorkBookFromExcel(myfile);
-			objectQService.batchSaveOrUpdateObjectiveQuestionFromExcel(wb.getSheetAt(0));
+			map = objectQService.batchSaveOrUpdateObjectiveQuestionFromExcel(wb
+					.getSheetAt(0));
 			wb.close();
 		}
-		return "Excel parse OK";
+		map.put(0, "parser Excel complete");
+		return map;
 	}
-	
+
 	@RequestMapping(value = "/api/upload/excel/subjectivequestion", method = RequestMethod.POST)
 	@ResponseBody
-	public String subjectiveQuestionExcelUpload(@RequestParam MultipartFile myfile,
-			HttpServletRequest request) throws Exception {
+	public Map<Integer,String> subjectiveQuestionExcelUpload(
+			@RequestParam MultipartFile myfile, HttpServletRequest request)
+			throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
 			Workbook wb = getWorkBookFromExcel(myfile);
-			subjectQService.batchSaveOrUpdateSubjectQuestionFromExcel(wb.getSheetAt(0));
+			map = subjectQService.batchSaveOrUpdateSubjectQuestionFromExcel(wb
+					.getSheetAt(0));
 			wb.close();
 		}
-		return "Excel parse OK";
+		map.put(0, "parser Excel complete");
+		return map;
 	}
-	
+
 	@RequestMapping(value = "/api/upload/excel/student", method = RequestMethod.POST)
 	@ResponseBody
-	public String studentExcelUpload(@RequestParam MultipartFile myfile,
+	public Map<Integer,String> studentExcelUpload(@RequestParam MultipartFile myfile,
 			HttpServletRequest request) throws Exception {
-
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
-			
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = userService.batchSaveOrUpdateStudentFromExcel(wb.getSheetAt(0));
+			wb.close();
 		}
-		return "Excel parse OK";
+		map.put(0, "parser Excel complete");
+		return map;
+	}
+
+	@RequestMapping(value = "/api/upload/excel/teacher", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer,String> teacherExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = userService.batchSaveOrUpdateTeacherFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		map.put(0, "parser Excel complete");
+		return map;
+	}
+
+	@RequestMapping(value = "/api/upload/excel/region", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer,String> regionExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = regionService.batchSaveOrUpdateRegionFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		map.put(0, "parser Excel complete");
+		return map;
 	}
 	
-	private Workbook getWorkBookFromExcel(MultipartFile myfile) throws IOException{
+	@RequestMapping(value = "/api/upload/excel/edugroup", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer,String> edugroupExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = eduGroupService.batchSaveOrUpdateEduGroupFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		map.put(0, "parser Excel complete");
+		return map;
+	}
+	
+	@RequestMapping(value = "/api/upload/excel/school", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer,String> schoolExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = schoolService.batchSaveOrUpdateSchoolFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		map.put(0, "parser Excel complete");
+		return map;
+	}
+	
+	@RequestMapping(value = "/api/upload/excel/campus", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer,String> campusExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = campusService.batchSaveOrUpdateCampusFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		map.put(0, "parser Excel complete");
+		return map;
+	}
+	
+	@RequestMapping(value = "/api/upload/excel/clazz", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer,String> clazzExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = clazzService.batchSaveOrUpdateClazzFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		map.put(0, "parser Excel complete");
+		return map;
+	}
+
+	private Workbook getWorkBookFromExcel(MultipartFile myfile)
+			throws IOException {
 		String fileName = myfile.getOriginalFilename();
 		Workbook wb = null;
 		if (fileName.endsWith(".xls")) {

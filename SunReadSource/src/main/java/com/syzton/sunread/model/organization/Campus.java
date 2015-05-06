@@ -55,9 +55,17 @@ public class Campus extends AbstractEntity{
 	public String getName() {
 		return name;
 	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
 
 	public String getDescription() {
 		return description;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
 	}
 
 	public DateTime getModificationTime() {
@@ -66,6 +74,10 @@ public class Campus extends AbstractEntity{
 
 	public String getHeadmaster() {
 		return headmaster;
+	}
+	
+	public void setHeadmaster(String headmaster) {
+		this.headmaster = headmaster;
 	}
 
 	public Set<Clazz> getClazz() {
@@ -80,13 +92,22 @@ public class Campus extends AbstractEntity{
 		return region;
 	}
 
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
 	public School getSchool() {
 		return school;
+	}
+	
+	public void setSchool(School school){
+		this.school = school;
 	}
 
 	public String getWish() {
 		return wish;
 	}
+	
 
 	public void setWish(String wish) {
 		this.wish = wish;

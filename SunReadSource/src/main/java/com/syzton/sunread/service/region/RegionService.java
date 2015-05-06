@@ -1,5 +1,8 @@
 package com.syzton.sunread.service.region;
 
+import java.util.Map;
+
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,4 +26,6 @@ public interface RegionService {
     public Region findOne(Long id) ;
 
     Page<Region> findAll(Pageable pageable);
+    
+    public Map<Integer,String> batchSaveOrUpdateRegionFromExcel(Sheet sheet);
 }

@@ -13,13 +13,31 @@ function TopNav(){
 	if (urlStr.match("/book")) {
 		$(".nav-sidebar li").eq(1).addClass("active");
 	}
-	else if (urlStr.match("/user")) {
+	else if (urlStr.match("/objectivequestion")){
 		$(".nav-sidebar li").eq(2).addClass("active");
 	}
-	else if (urlStr.match("/objectivequestion")){
+	else if (urlStr.match("/subjectivequestion")){
 		$(".nav-sidebar li").eq(3).addClass("active");
 	}
-	else if (urlStr.match("/subjectivequestion")){
+	else if (urlStr.match("/region")){
+		$(".nav-sidebar li").eq(4).addClass("active");
+	}
+	else if (urlStr.match("/edugroup")){
+		$(".nav-sidebar li").eq(5).addClass("active");
+	}
+	else if (urlStr.match("/school")){
+		$(".nav-sidebar li").eq(6).addClass("active");
+	}
+	else if (urlStr.match("/campus")){
+		$(".nav-sidebar li").eq(7).addClass("active");
+	}
+	else if (urlStr.match("/clazz")){
+		$(".nav-sidebar li").eq(4).addClass("active");
+	}
+	else if (urlStr.match("/teacher")){
+		$(".nav-sidebar li").eq(4).addClass("active");
+	}
+	else if (urlStr.match("/student")){
 		$(".nav-sidebar li").eq(4).addClass("active");
 	}
 	else{

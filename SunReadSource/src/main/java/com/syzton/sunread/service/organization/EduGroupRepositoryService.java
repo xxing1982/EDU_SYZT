@@ -1,11 +1,17 @@
 package com.syzton.sunread.service.organization;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.syzton.sunread.dto.organization.EduGroupDTO;
 import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.repository.organization.EduGroupRepository;
+import com.syzton.sunread.util.ExcelUtil;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,4 +101,25 @@ public class EduGroupRepositoryService implements EduGroupService {
         }
         return eduPages;
     }
+    
+    @Override
+    public Map<Integer,String> batchSaveOrUpdateEduGroupFromExcel(Sheet sheet) {
+		Map<Integer,String> failMap = new HashMap<Integer,String>();
+		
+		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
+			Row row = sheet.getRow(i);  
+			String name = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			if("".equals(name)){
+				break;
+			}
+			EduGroup group = repository.findByName(name);
+			if(group == null){
+				group = new EduGroup();
+			}
+			group.setName(name);
+			group.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(1)));
+			repository.save(group);
+		}
+		return failMap;
+	}
 }

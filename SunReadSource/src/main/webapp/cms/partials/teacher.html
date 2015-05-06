@@ -1,0 +1,60 @@
+<!--AdvancedSearch-->
+<div class="advancedSearch">
+<div class="row">
+    <div class="col-md-9 leftpart">
+
+	<div class="input-group search">
+		<input type="text" class="form-control" placeholder="请输入教师" ng-model="searchArguments.searchTerm">
+		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
+		<span class="input-group-addon" ng-click="addNewSubjectQuestion()">添加</span>
+	</div>
+	
+	<div class="input-group search">
+	<form action="/api/upload/excel/teacher" method="POST" enctype="multipart/form-data">  
+    
+    	Excel: <input type="file" name="myfile"/><br/>  
+   
+    	<input type="submit" value="Excel导入教师" /> 
+		</form>
+	</div>
+	
+
+    <!-- Place holder row copied from searchs -->
+    <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
+        <div class="col-md-10 searchHolder"> 
+            <p>&nbsp;{{ placeHolder.title }}</p>
+        </div>
+    </div>
+
+    <!-- Footer and page numbers  -->
+    <div class="container-fluid">
+    <div class="row paragraph">
+       <div class="col-xs-1"></div>
+        <div class="col-xs-7">
+            <!-- Custom page number goes here -->
+            <div class="row custom-page-number-group">
+                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page - 1)"></a></div></div>
+                <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
+                    <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}"
+                    ng-click="searchPageable.showPage(pageNumber)">{{pageNumber}}</a>
+                </div>
+                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page + 1)"></a></div></div>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <!-- Custom goto page number goes here -->
+<!--            <div class="custom-page-number-group"><a>ȥ��</a><input type="text" class="custom-page-number-input" />ҳ</div>-->
+                <div class="custom-page-number-group">
+                    <a ng-click="searchPageable.showPage(goto)">上一页</a>
+                    <input type="number" class="custom-page-number-input" ng-model="goto"/>
+                    <a ng-click="searchPageable.showPage(goto)">下一页</a>
+                </div>
+        </div>
+
+    </div>
+ </div><!--end page -->
+
+</div><!--left part-->
+</div><!--row-->
+
+</div>

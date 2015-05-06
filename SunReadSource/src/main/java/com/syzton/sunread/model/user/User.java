@@ -135,7 +135,11 @@ public class User extends AbstractEntity implements UserDetails{
     @PrePersist
     public void prePersist(){
         super.prePersist();
-        this.userId = String.valueOf(NumberUtil.generateRandom16());
+        //this.userId = String.valueOf(NumberUtil.generateRandom16());
+        this.enabled = true;
+        this.accountNonExpired = true;
+        this.accountNonLocked = true;
+        this.credentialsNonExpired = true;
         this.expireTimeDB = new DateTime(this.expireTime);
         this.birthdayDB = new DateTime(this.birthday);
 

@@ -1,6 +1,7 @@
 package com.syzton.sunread.service.user;
 
 import java.util.List;
+import java.util.Map;
 
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.model.user.Parent;
@@ -59,9 +60,12 @@ public interface UserService {
 
     public Page<Student> hotReadersInGrade(long clazzId,Pageable pageable);
 
+
     public Page<Teacher> findTeacherByCampusId(long campusId,Pageable pageable);
 
-    public List<Student> addStudentsFromExcel(Sheet sheet);
+
+    public Map<Integer,String> batchSaveOrUpdateStudentFromExcel(Sheet sheet);
+
     
-    public List<Teacher> addTeachersFromExcel(Sheet sheet);
+    public Map<Integer,String> batchSaveOrUpdateTeacherFromExcel(Sheet sheet);
 }
