@@ -22,28 +22,21 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Stude
     $scope.selected_status = 0;
 
     $scope.redeemState = 0;
-    // $scope.currentCoin = $rootScope.student.
-    var student = $rootScope.student;
-    console.log('student :')
-    console.log(student);
-    console.log('statistic :'+student.statistic);
 
-    // var currentCoin = student.statistic.coin;
-    // console.log(currentCoin);
     $scope.userCoin = null;
     $scope.gifts = new Array(0);
     var all = new Array(0);
 
     Student.get({id:$rootScope.id},function(data){
       $scope.userCoin = data.statistic.coin;
-      console.log($scope.userCoin);
+      // console.log($scope.userCoin);
       $scope.getAllGifts();
       })
 
     $scope.getAllGifts = function(){
         $scope.gifts = new Array(0);
         GetGifts.get({page:page,size:pageSize},function(data){
-        console.log(data);
+        // console.log(data);
         var content = data.content;
         all = content;
         if($scope.userCoin>=0){
@@ -90,7 +83,7 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Stude
   }
 
   $scope.getGiftId = function(gift){
-    console.log(gift);
+    // console.log(gift);
     $scope.giftId = gift.id;
   }
 

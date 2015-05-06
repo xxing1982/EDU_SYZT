@@ -59,6 +59,8 @@ public interface UserService {
 
     public Page<Student> hotReadersInGrade(long clazzId,Pageable pageable);
 
+    public Page<Teacher> findTeacherByCampusId(long campusId,Pageable pageable);
+
     public List<Student> addStudentsFromExcel(Sheet sheet);
     
     public List<Teacher> addTeachersFromExcel(Sheet sheet);

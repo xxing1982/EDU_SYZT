@@ -1,0 +1,280 @@
+<!--AdvancedSearch-->
+<div class="advancedSearch">
+<div class="row">
+    <div class="col-md-9 leftpart">
+
+	<div class="input-group search">
+		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
+		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
+	</div>
+
+	<div ng-repeat="terms in searchPageable.entities.content">
+        <div class="row bookList" ng-init="terms.text_overflow=true;">
+            <div class="col-md-3">
+                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="img-responsive"></a>
+            </div>
+            <div class="col-md-9">
+                <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
+            <div class="row fsize12"><p>评分：{{terms.evaluationNum}}&nbsp;&nbsp;已有<span class="red-text">{{terms.statistic.readNums}}</span>人阅读</p></div>
+                <div class="row fsize12"><p>作者：{{terms.author}}&nbsp;&nbsp;版权：{{terms.publisher}} &nbsp;&nbsp;
+                    积分:{{terms.point}}&nbsp;&nbsp;等级:{{terms.extra.level}}&nbsp;&nbsp;财富：{{terms.coin}}</p></div>
+                <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
+                <div class="row fsize12">
+                    <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">加入书架</a>&nbsp;&nbsp;
+                    <a href="#readingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-green">相关笔记</a>&nbsp;&nbsp;
+                    <a href="#readingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-green">相关评价</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Place holder row copied from searchs -->
+    <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
+        <div class="col-md-10 searchHolder"> 
+            <p>&nbsp;{{ placeHolder.title }}</p>
+        </div>
+    </div>
+
+    <!-- Footer and page numbers  -->
+    <div class="container-fluid">
+    <div class="row paragraph">
+       <div class="col-xs-1"></div>
+        <div class="col-xs-7">
+            <!-- Custom page number goes here -->
+            <div class="row custom-page-number-group">
+                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page - 1)">上一页</a></div></div>
+                <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
+                    <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}"
+                    ng-click="searchPageable.showPage(pageNumber)">{{pageNumber}}</a>
+                </div>
+                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page + 1)">下一页</a></div></div>
+            </div>
+        </div>
+        <div class="col-xs-3"
+            <!-- Custom goto page number goes here -->
+<!--            <div class="custom-page-number-group"><a>去第</a><input type="text" class="custom-page-number-input" />页</div>-->
+                <div class="custom-page-number-group">
+                    <a ng-click="searchPageable.showPage(goto)">去第</a>
+                    <input type="number" class="custom-page-number-input" ng-model="goto"/>
+                    <a ng-click="searchPageable.showPage(goto)">页</a>
+                </div>
+        </div>
+
+    </div>
+ </div><!--end page -->
+
+</div><!--left part-->
+
+
+   <!--right part -->
+    <div class="rightpart">
+        <div class="row conditionBlock">
+           <div class="col-md-12">
+                <div class="row">
+                    <h5>级别及类别</h5>
+                </div><!---->
+                <div class="row">
+                   <div class="catogaryText"> <p>年级： </p></div>
+                   <div class="catogaryBtn">
+                    <bs-dropdown data-menu-type="button"
+                        select-val="searchArguments.grade = selectedVal"
+                        preselected-item="searchArguments.grade"
+                        data-dropdown-data="statuses_grade">
+                    </bs-dropdown>
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <div class="catogaryText"> <p>类别： </p></div>
+                   <div class="catogaryBtn">
+                    <bs-dropdown data-menu-type="button"
+                        select-val="searchArguments.category = selectedVal"
+                        preselected-item="searchArguments.category"
+                        data-dropdown-data="statuses_category">
+                    </bs-dropdown>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row conditionBlock">
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>测试类型</h5>
+                </div><!---->
+
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions1" value="0" checked>
+                    所有类型
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions2" value="1">
+                    认证测试
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions3" value="2">
+                    词汇训练
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.testType" name="testOptions" id="testOptions4" value="3">
+                    思维训练
+                  </label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row conditionBlock">
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>类型</h5>
+                </div><!---->
+
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions1" value="0" checked>
+                    小说及非小说
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions2" value="1">
+                    小说
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions2" value="2">
+                    非小说
+                  </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row conditionBlock">
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>积分</h5>
+                </div><!---->
+
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions1" value="0" checked>
+                    全部积分
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="1">
+                    0-5积分
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="2">
+                    6-10积分
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="3">
+                    10-20积分
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="4">
+                    20以上积分
+                  </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row conditionBlock">
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>语言</h5>
+                </div><!---->
+
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.language" name="languageOptions" id="languageOptions1" value="0" checked>
+                    全部语言
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.language" name="languageOptions" id="languageOptions2" value="1">
+                    中文书
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.language" name="languageOptions" id="languageOptions2" value="2">
+                    英文书
+                  </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row conditionBlock">
+           <div class="col-md-2"></div>
+           <div class="col-md-10">
+                <div class="row">
+                    <h5>配套资源</h5>
+                </div><!---->
+
+                 <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions1" value="0" checked>
+                    不限制
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="1">
+                    电子书
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="2">
+                    音频
+                  </label>
+                </div>
+                <div class="row radio">
+                  <label>
+                    <input type="radio" ng-click="search(searchArguments)" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="3">
+                    视频
+                  </label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="placeHolder"> 
+            <p>&nbsp;</p>
+        </div>
+
+        </div>
+    </div>
+
+
+    </div>
+    <!-- End right part -->
+
+</div><!--row-->
+
+</div>
