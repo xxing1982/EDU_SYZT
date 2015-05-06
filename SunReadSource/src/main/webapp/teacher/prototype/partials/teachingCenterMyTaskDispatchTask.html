@@ -7,7 +7,7 @@
                 <h5 class="title"><big><a ng-href="#/teachingCenter/myTask" class="dark-gray-2">已发布的任务</a></big><big> > </big><big>创建任务</big></h5>
             </div>
             <div class="col-xs-4 col-xs-height col-middle">
-                <button class="btn btn-fill-blue pull-right" type="button">
+                <button class="btn btn-fill-blue pull-right" type="button" ng-click="hotreaderLoadable.publish()">
                     发布任务
                 </button>
             </div>
@@ -21,54 +21,54 @@
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height">
+            <div class="col-xs-1 col-xs-height" style="width:12%">
+                <h5 class="text-right"><input type="checkbox" ng-model="hotreaderLoadable.selectAllValue" ng-click="hotreaderLoadable.selectAll(hotreaderLoadable.selectAllValue)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全选</h5>
+            </div>
             <div class="col-xs-1 col-xs-height">
                 <h5 class="text-right">学校：</h5>
             </div>
             <div class="col-xs-2 col-xs-height col-middle">
-                <bs-dropdown data-menu-type="button"
-                    select-val="selected_status = selectedVal"
-                    preselected-item="selected_status"
-                    data-dropdown-data="statuses"
-                    callback="alert">
+                <bs-dropdown data-menu-type="button" 
+                    select-val="campusSelected_status = selectedVal"
+                    preselected-item="campusSelected_status" 
+                    data-dropdown-data="campusStatuses">
                 </bs-dropdown>
             </div>
             <div class="col-xs-1 col-xs-height">
                 <h5 class="text-right">年级：</h5>
             </div>
             <div class="col-xs-2 col-xs-height col-middle">
-                <bs-dropdown data-menu-type="button"
-                    select-val="selected_status = selectedVal"
-                    preselected-item="selected_status"
-                    data-dropdown-data="statuses"
-                    callback="alert">
+                <bs-dropdown data-menu-type="button" 
+                    select-val="gradeSelected_status = selectedVal"
+                    preselected-item="gradeSelected_status" 
+                    data-dropdown-data="gradeStatuses">
                 </bs-dropdown>
             </div>
             <div class="col-xs-1 col-xs-height">
                 <h5 class="text-right">班级：</h5>
             </div>
             <div class="col-xs-2 col-xs-height col-middle">
-                <bs-dropdown data-menu-type="button"
-                    select-val="selected_status = selectedVal"
-                    preselected-item="selected_status"
-                    data-dropdown-data="statuses"
-                    callback="alert">
+                <bs-dropdown data-menu-type="button" 
+                    select-val="classSelected_status = selectedVal"
+                    preselected-item="classSelected_status" 
+                    data-dropdown-data="classStatuses">
                 </bs-dropdown>
             </div>
             <!-- Placeholder -->
-            <div class="col-xs-2 col-xs-height col-middle"></div>
+            <div class="col-xs-1 col-xs-height col-middle"></div>
         </div>
     </div>
     </div></div>
 </div>
 
 <!-- Items -->
-<div class="myBlock mt20 page-body">
+<div class="myBlock mt20 page-body" ng-repeat="hotreader in hotreaderLoadable.entities.content">
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">张楚璐</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">已认证图书数量：12</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">当前阅读积分：12</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><input checklist-model="hotreaderLoadable.selected" checklist-value="hotreader" type="checkbox" ng-model="checkboxModel.value1"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{hotreader.username}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">已认证图书数量：{{hotreader.statistic.testPasses}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">当前阅读积分：{{hotreader.statistic.point}}</p></div>
             <div class="col-xs-3 col-xs-height col-middle"><p class="row title">目标阅读数量：<input type="text" class="custom-input" />　本</p></div>
             <div class="col-xs-3 col-xs-height col-middle"><p class="row title">目标阅读积分：<input type="text" class="custom-input" /></p></div>
         </div>
@@ -76,22 +76,8 @@
     </div></div>
 </div>
 
-<!-- Items -->
-<div class="myBlock mt20 page-body">
-    <div class="container-fluid"><div class="container-fluid">
-    <div class="row">
-        <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">张楚璐</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">已认证图书数量：12</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">当前阅读积分：12</p></div>
-            <div class="col-xs-3 col-xs-height col-middle"><p class="row title">目标阅读数量：<input type="text" class="custom-input" />　本</p></div>
-            <div class="col-xs-3 col-xs-height col-middle"><p class="row title">目标阅读积分：<input type="text" class="custom-input" /></p></div>
-        </div>
-    </div>
-    </div></div>
-</div>
 
 <!-- Loadmore -->
 <div class="myBlock mt20 page-body">
-    <div class="load-more-bottom" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}加载更多</div>
+    <div class="load-more-bottom" ng-click="hotreaderLoadable.get()">{{ hotreaderLoadable.loadingState }}</div>
 </div>

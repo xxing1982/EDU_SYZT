@@ -34,18 +34,18 @@
 	margin-bottom: 3px;
 }
 
-.dropdown-menu{
+.navbar-nav .dropdown-menu{
 	background-color: #FFFFFF;
 	position: fixed;
 	top: 55px;
 	right: 128px !important;
 }
 
-.dropdown-menu li a{
+.navbar-nav .dropdown-menu li a{
 	background-color: #FFFFFF !important;
 }
 
-.dropdown-menu li a:hover{
+.navbar-nav .dropdown-menu li a:hover{
 	background-color: #8094A0 !important;
 }
 
