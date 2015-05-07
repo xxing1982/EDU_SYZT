@@ -1,4 +1,4 @@
-ctrls.controller('headNavCtrl', ['$route', '$rootScope', '$scope', '$location', 'Teacher', function( $route, $rootScope, $scope, $location, Teacher) {
+ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window', 'Teacher', function( $rootScope, $scope, $location, $window, Teacher) {
 
     // Route map regexp
     $rootScope.routeMap = {
@@ -25,7 +25,7 @@ ctrls.controller('headNavCtrl', ['$route', '$rootScope', '$scope', '$location', 
         delete sessionStorage.access_token;
         delete sessionStorage.teacherId;
         delete sessionStorage.length;
-        $route.reload();
+        $location.href = '/login.html';
     }
 }]);
 
