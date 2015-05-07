@@ -108,10 +108,10 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
      console.log($scope.searchPageable);
  }
 
- $scope.createPageable();
+ $scope.createPageable(ConditionSearch);
  $scope.searchByName=function(searchContent){
      console.log(searchContent);
-     $scope.createPageable();
+     $scope.createPageable(ConditionSearch);
  };
 
 // Popular
