@@ -25,53 +25,53 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
     $scope.statuses_grade = [{
         id: 0,
         name:"全部年级",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 1,
         name: "1年级",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 2,
         name: "2年级",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 3,
         name: "3年级",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 4,
         name: "4年级",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 5,
         name: "5年级",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }];
 
     $scope.statuses_category = [{
         id: 0,
         name:"全部类型",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 1,
         name: "类型一",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 2,
         name: "类型二",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 3,
         name: "类型三",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 4,
         name: "类型四",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }, {
         id: 5,
         name: "类型五",
-        callback: function(){$scope.search($scope.searchArguments)}
+        callback: function(){$scope.search()}
     }];
     $scope.selected_status = 0;
 
@@ -94,25 +94,18 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         $scope.searchPageable.build(ConditionSearch);
 
         $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
-        console.log($scope.searchPageable);
+        // console.log($scope.searchPageable);
     }
 
     $scope.createPageable();
 
     $scope.searchByName=function(searchContent){
         console.log(searchContent);
-//        $scope.advancedSearch=QuickSearch.get({page:0,size:pageSize,searchTerm:searchContent}
-//                                             ,function(){
-//            console.log($scope.advancedSearch);
-//            console.log($scope.searchContent);
-//        })
         $scope.createPageable();
-
     };
 
 	$scope.search = function(searchArguments){
         $scope.createPageable();
-
 	};
 
   $scope.addBooktoShelf = function(terms){

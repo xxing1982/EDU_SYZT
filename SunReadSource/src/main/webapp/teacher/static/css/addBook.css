@@ -11,8 +11,8 @@
 .conditionBlock {
     padding-left: 15px;
     padding-bottom: 5px;
-    margin-right: 5px;
-    border-bottom: 1px #D6DEE6 solid;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
  .btn-catogary{
   color: darkslateblue;
@@ -72,7 +72,6 @@
 
 .rightpart {
     padding-left: 15px;
-    border-left: 1px #D6DEE6 solid;
     float: left;
     width: 24%;
 }
@@ -83,7 +82,7 @@
 
 .popularChoice .popularText {
     margin-right: 30px;
-    color: darkslateblue;
+    
 }
 
 #myBookshelf-button {
@@ -173,7 +172,7 @@
 .bookList {
     margin-bottom: 25px;
     margin-top: 15px;
-    margin-left: 10px;
+    margin-left: 0px;
 }
 
 .readingCenter-right-body .bookDetailBottom {
@@ -266,4 +265,18 @@
     margin-top: 10px;
     padding-top: 10px;
     margin-bottom: 10px;
+}
+
+.addBookIMG {
+      height: 135px;
+  margin-top: 16px;
+}
+
+.searchHolder {
+    height: 201px;
+}
+
+.addBookPageNum {
+    height: 50px;
+    padding-top: 13px;
 }

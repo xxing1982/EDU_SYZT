@@ -1,96 +1,10 @@
-ctrls.controller("teachingCenterAddBookSearchController", ['$scope','QuickSearch'
-        // ,'ConditionSearch','WeeklyHotSearch','MonthlyHotSearch','WeeklyRecommendSearch','MonthlyRecommendSearch',
-        ,function ($scope,QuickSearch){
-        $scope.imageServer="http://images.sunreading.cn" ;
+ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParams','config','QuickSearch','ConditionSearch'
+        ,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch','WeeklyRecommendSearch','MonthlyRecommendSearch','YearlyRecommendSearch'
+        ,function ($scope,$stateParams,config,QuickSearch,ConditionSearch
+          ,WeeklyHotSearch,MonthlyHotSearch,YearlyHotSearch,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch){
+        $scope.imageServer=config.IMAGESERVER; ;
 
-    // $scope.addBook = {
-    //     addBook: '我要推荐',
-    //     QuickSearch:'快速查找',
-    //     AdvanceSearch:'全部的书',
-    //     PopularReading:'热门阅读',
-    //     PopularRecommend:'热门推荐'
-    // }
-
-    //
-    // $scope.searchContent = "";
-    //
-    // var pageSize = 4;
-    // var searchTerm='isbn';
-    // var status = 0;
-    //
-    // var level=0;
-    // var category=0;
-    // var testType=0;
-    // var literature=0;
-    // var grade=0;
-    // var category=0;
-    // var language=0;
-    // var resource=0;
-    // var pointRange=0;
-    //
-    // $scope.level = level;
-    // $scope.category = category;
-    // $scope.testType = testType;
-    // $scope.literature = literature;
-    // $scope.grade = grade;
-    // $scope.category = category;
-    // $scope.language = language;
-    // $scope.resource = resource;
-    // $scope.pointRange = pointRange;
-    // $scope.statuses_grade = [{
-    //     id: 0,
-    //     name:"全部年级",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 1,
-    //     name: "1年级",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 2,
-    //     name: "2年级",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 3,
-    //     name: "3年级",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 4,
-    //     name: "4年级",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 5,
-    //     name: "5年级",
-    //     callback: function(){$scope.search()}
-    // }];
-    //
-    // $scope.statuses_category = [{
-    //     id: 0,
-    //     name:"全部类型",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 1,
-    //     name: "类型一",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 2,
-    //     name: "类型二",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //      id: 3,
-    //     name: "类型三",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 4,
-    //     name: "类型四",
-    //     callback: function(){$scope.search()}
-    // }, {
-    //     id: 5,
-    //     name: "类型五",
-    //     callback: function(){$scope.search()}
-    // }];
-    // $scope.selected_status = 0;
-    // $scope.status = status;
-
+//QuickSearch
     $scope.hots=QuickSearch.get({page:0,size:3,sortBy:"statistic.readNums"},function(){
       console.log($scope.hots);
     })
@@ -98,93 +12,156 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','QuickSearch
     $scope.recommends=QuickSearch.get({page:0,size:3,sortBy:"statistic.recommends"},function(){
       console.log($scope.hots);
     })
-  //
-  //   $scope.addBookSearch=ConditionSearch.get({page:0,size:pageSize,level:level,category:category
-  //                                               ,testType:testType,literature:literature,category:category
-  //                                               ,grade:grade,language:language,resource:resource,pointRange:pointRange}
-  //   ,function(){
-  //       console.log($scope.advancedSearch)
-  //   });
-  //
-  //   $scope.searchByName=function(){
-  //       $scope.addBookSearch=QuickSearch.get({page:0,size:pageSize,searchTerm:$scope.searchContent}
-  //                                            ,function(){
-  //           console.log($scope.advancedSearch);
-  //           console.log($scope.searchContent);
-  //       })
-  //
-  //   };
-  //
-	// $scope.search = function(){
-  //       console.log();
-  //       console.log($scope.testType)
-  //       console.log($scope.grade);
-  //       $scope.addBookSearch=ConditionSearch.get({page:0,size:pageSize,level:$scope.level,category:$scope.category
-  //                                                   ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-  //                                                   ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:$scope.pointRange},function(){
-  //           console.log($scope.advancedSearch)
-  //       });
-	// };
-  //
-  //
-	// $scope.searchWeeklyH = function(){
-  //       console.log(grade);
-  //       console.log($scope.testType)
-  //       console.log($scope.grade);
-  //       $scope.addBookSearch=WeeklyHotSearch.get({page:$scope.page,size:pageSize,level:$scope.level,category:$scope.category
-  //                                               ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-  //                                               ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:pointRange},function(){
-  //           console.log($scope.addBookSearch)
-  //       });
-	// };
-  //
-  //   $scope.searchMonthlyH = function(){
-  //       console.log(grade);
-  //       console.log($scope.testType)
-  //       console.log($scope.grade);
-  //       $scope.addBookSearch=MonthlyHotSearch.get({page:$scope.page,size:pageSize,level:$scope.level,category:$scope.category
-  //                                               ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-  //                                               ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:pointRange},function(){
-  //           console.log($scope.addBookSearch)
-  //       });
-	// };
-  //
-  //   $scope.searchWeeklyR = function(){
-  //       console.log(grade);
-  //       console.log($scope.testType)
-  //       console.log($scope.grade);
-  //       $scope.addBookSearch=WeeklyRecommendSearch.get({page:0,size:pageSize,level:$scope.level,category:$scope.category
-  //                                               ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-  //                                               ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:pointRange},function(){
-  //           console.log($scope.recommendSearch)
-  //       });
-	// };
-  //
-  //   $scope.searchMonthlyR = function(){
-  //       console.log(grade);
-  //       console.log($scope.testType)
-  //       console.log($scope.grade);
-  //       $scope.addBookSearch=MonthlyRecommendSearch.get({page:0,size:pageSize,level:$scope.level,category:$scope.category
-  //                                               ,testType:$scope.testType,literature:$scope.literature,category:$scope.category
-  //                                               ,grade:$scope.grade,language:$scope.language,resource:$scope.resource,pointRange:pointRange},function(){
-  //           console.log($scope.recommendSearch)
-  //       });
-  //   };
-  //
-  //   $scope.addBooktoShelf = function(terms){
-  //       console.log(terms);
-  //       var bookId = terms.id;
-  //       var bookInShelf = {
-  //           bookAttribute: true,
-  //           readState: false
-  //           }
-  //       console.log(bookInShelf);
-  //       AddbookToShelf.save({bookshelfId:1,bookId:bookId},bookInShelf);
-        //
-        //   var futureResponse = $http.get('date.json');
-        //       futureResponse.error(function(date,status,headers,config){
-        //         throw new Error('Something went wrong...');
-        //       })
-        // };
+
+
+ //AdvancedSearch
+
+ var pageSize = 4;
+ var searchTerm='isbn';
+
+ $scope.searchArguments = {
+     level:0,
+     category:0,
+     testType:0,
+     literature:0,
+     grade:0,
+     category:0,
+     language:0,
+     resource:0,
+     pointRange:0,
+     searchTerm:""
+   }
+
+//    $scope.searchContent = searchContent;
+ $scope.statuses_grade = [{
+     id: 0,
+     name:"全部年级",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 1,
+     name: "1年级",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 2,
+     name: "2年级",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 3,
+     name: "3年级",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 4,
+     name: "4年级",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 5,
+     name: "5年级",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }];
+
+ $scope.statuses_category = [{
+     id: 0,
+     name:"全部类型",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 1,
+     name: "类型一",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 2,
+     name: "类型二",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 3,
+     name: "类型三",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 4,
+     name: "类型四",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }, {
+     id: 5,
+     name: "类型五",
+     callback: function(){$scope.search($scope.searchArguments)}
+ }];
+ $scope.selected_status = 0;
+
+ $scope.createPageable = function (searchEntity){
+     $scope.searchPageable = new Pageable();
+
+     $scope.searchPageable.size = 4;
+     $scope.searchPageable.page = 1;
+
+     $scope.searchPageable.arguments=$scope.searchArguments;
+     // Set the startPage and length of number page array
+     console.log($scope.searchArguments);
+
+     $scope.searchPageable.pageNumbers.startPage = 1;
+     $scope.searchPageable.pageNumbers.content.length = 8;
+     // Set the placeholder elements
+     $scope.searchPageable.placeHolders.placeHoldersElement = {title: ""};
+
+     // Build the pageable object
+     $scope.searchPageable.build(searchEntity);
+
+     $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
+     console.log($scope.searchPageable);
+ }
+
+ $scope.createPageable();
+ $scope.searchByName=function(searchContent){
+     console.log(searchContent);
+     $scope.createPageable();
+ };
+
+// Popular
+
+$scope.status = status;
+
+$scope.search=function(){
+    $scope.createPageable(ConditionSearch);
+}
+
+if($scope.status === 1){
+    $scope.search = $scope.searchWeeklyH;
+}
+if($scope.status === 2){
+    $scope.search = $scope.searchMonthlyH;
+}
+if($scope.status === 3){
+    $scope.search = $scope.searchYearlyH;
+}
+if($scope.status === 4){
+    $scope.search = $scope.searchWeeklyC;
+}
+if($scope.status === 5){
+    $scope.search = $scope.searchMonthlyC;
+}
+if($scope.status === 6){
+    $scope.search = $scope.searchYearlyC;
+}
+
+$scope.searchWeeklyH = function(){
+       $scope.createPageable(WeeklyHotSearch);
+};
+
+$scope.searchMonthlyH = function(){
+      $scope.createPageable(MonthlyHotSearch);
+};
+
+$scope.searchYearlyH = function(){
+    $scope.createPageable(YearlyHotSearch);
+};
+$scope.searchWeeklyC = function(){
+    $scope.createPageable(WeeklyRecommendSearch);
+};
+
+$scope.searchMonthlyC = function(){
+    $scope.createPageable(MonthlyRecommendSearch);
+};
+$scope.searchYearlyC = function(){
+    $scope.createPageable(MonthlyRecommendSearch);
+};
+
 
 }]);

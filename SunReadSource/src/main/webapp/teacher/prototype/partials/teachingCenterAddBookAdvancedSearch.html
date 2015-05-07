@@ -1,17 +1,17 @@
 <!--AdvancedSearch-->
 <div class="advancedSearch">
 <div class="row">
-    <div class="col-md-9 leftpart">
+    <div class="leftpart">
 
-	<div class="input-group search">
+	<div class="col-md-11 input-group search">
 		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
 		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
 	</div>
 
-	<div ng-repeat="terms in searchPageable.entities.content">
-        <div class="row bookList" ng-init="terms.text_overflow=true;">
+	<div  ng-repeat="terms in searchPageable.entities.content">
+        <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
             <div class="col-md-3">
-                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="img-responsive"></a>
+                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
             </div>
             <div class="col-md-9">
                 <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
@@ -30,13 +30,13 @@
 
     <!-- Place holder row copied from searchs -->
     <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
-        <div class="col-md-10 searchHolder"> 
+        <div class="col-md-10 searchHolder">
             <p>&nbsp;{{ placeHolder.title }}</p>
         </div>
     </div>
 
     <!-- Footer and page numbers  -->
-    <div class="container-fluid">
+    <div class="container-fluid addBookPageNum myBlock">
     <div class="row paragraph">
        <div class="col-xs-1"></div>
         <div class="col-xs-7">
@@ -68,8 +68,9 @@
 
    <!--right part -->
     <div class="rightpart">
-        <div class="row conditionBlock">
-           <div class="col-md-12">
+        <div class="row conditionBlock myBlock">
+            <div class="col-md-1"></div>
+           <div class="col-md-11">
                 <div class="row">
                     <h5>级别及类别</h5>
                 </div><!---->
@@ -98,9 +99,9 @@
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
                 <div class="row">
                     <h5>测试类型</h5>
                 </div><!---->
@@ -133,9 +134,9 @@
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
                 <div class="row">
                     <h5>类型</h5>
                 </div><!---->
@@ -161,9 +162,9 @@
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
                 <div class="row">
                     <h5>积分</h5>
                 </div><!---->
@@ -201,9 +202,9 @@
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
                 <div class="row">
                     <h5>语言</h5>
                 </div><!---->
@@ -229,9 +230,9 @@
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
                 <div class="row">
                     <h5>配套资源</h5>
                 </div><!---->
@@ -264,7 +265,7 @@
             </div>
         </div>
 
-        <div class="placeHolder"> 
+        <div class="placeHolder">
             <p>&nbsp;</p>
         </div>
 
