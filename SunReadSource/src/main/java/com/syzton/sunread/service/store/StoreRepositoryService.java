@@ -67,12 +67,12 @@ public class StoreRepositoryService implements StoreService {
 
         if(currentCoins >= needCoins){
 
-            ExchangeHistory exchangeHistory = exchangeHistoryRepository.findByStudentIdAndGift(studentId,gift);
+           // ExchangeHistory exchangeHistory = exchangeHistoryRepository.findByStudentIdAndGift(studentId,gift);
 
-            if(exchangeHistory == null){
-                exchangeHistory =  new ExchangeHistory();
-            }
-
+           // if(exchangeHistory == null){
+//                exchangeHistory =  new ExchangeHistory();
+//            }
+            ExchangeHistory exchangeHistory = new ExchangeHistory();
             exchangeHistory.setGift(gift);
             exchangeHistory.setStudentId(studentId);
             exchangeHistory.setStatus(GiftStatus.SUCCESSED);
