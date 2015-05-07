@@ -36,7 +36,7 @@ ctrls.controller("myTaskDispatchTaskController",['$scope', '$rootScope', 'Teache
             $scope.hotreaderLoadable.page = 0;
 
             // Set the $resource arguments like {by: "books"}
-            $scope.hotreaderLoadable.arguments = { by: 'clazz', id: $scope.teacher.classId, sortBy: 'id'};
+            $scope.hotreaderLoadable.arguments = { by: 'clazz', id: $scope.teacher.classId, sortBy: 'testPasses'};
 
             // Build the loadable object
             $scope.hotreaderLoadable.build(Hotreader);
@@ -50,11 +50,11 @@ ctrls.controller("myTaskDispatchTaskController",['$scope', '$rootScope', 'Teache
             // Publish the selected entities
             $scope.hotreaderLoadable.publish = function(){
                 for(var i = 0; i < this.selected.length; i++ ){
-                    if (this.entities.content[i].targetBookNum &&  this.entities.content[i].targetPoint){
+                    if (this.selected[i].targetBookNum &&  this.selected[i].targetPoint){
                         Task.update({ teacherId: $scope.teacher.id, 
                                       studentId: this.selected[i].id, 
-                                      targetBookNum: this.entities.content[i].targetBookNum,
-                                      targetPoint: this.entities.content[i].targetPoint },{}
+                                      targetBookNum: this.selected[i].targetBookNum,
+                                      targetPoint: this.selected[i].targetPoint },{}
                         );
                     }
                 }

@@ -37,8 +37,15 @@ public class CoinHistory extends AbstractEntity {
 	@Column(name="form_id")
 	private Long fromId;
     
+	@Column(name="reason")
+	private String reason;
+	
     public Long getStudentId() {
 		return student.getId();
+	}
+    
+    public String getStudentUsername() {
+		return student.getUsername();
 	}
 
 	public void setStudent(Student student) {
@@ -81,6 +88,14 @@ public class CoinHistory extends AbstractEntity {
 
 	public void setFromId(Long fromId) {
 		this.fromId = fromId;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
 	@Override

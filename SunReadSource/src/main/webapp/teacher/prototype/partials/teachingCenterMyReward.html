@@ -17,30 +17,15 @@
 </div>
 
 <!-- Items -->
-<div class="myBlock mt20 page-body">
+<div class="myBlock mt20 page-body" ng-repeat="coinhistory in coinhistoryLoadable.entities.content">
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">红英小学</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">三年（2）班</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">张孝祥</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">奖励财富值：20</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">奖励原因：太聪明</p></div>
-        </div>
-    </div>
-    </div></div>
-</div>
-
-<!-- Items -->
-<div class="myBlock mt20 page-body">
-    <div class="container-fluid"><div class="container-fluid">
-    <div class="row">
-        <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">红英小学</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">三年（2）班</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">张孝祥</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">奖励财富值：20</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">奖励原因：太聪明</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{class.campusName}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{class.name}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{coinhistory.studentUsername}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">奖励财富值：{{coinhistory.num}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">奖励原因：{{coinhistory.reason}}</p></div>
         </div>
     </div>
     </div></div>
@@ -48,5 +33,5 @@
 
 <!-- Loadmore -->
 <div class="myBlock mt20 page-body">
-    <div class="load-more-bottom" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}加载更多</div>
+    <div class="load-more-bottom" ng-click="coinhistoryLoadable.get()">{{ coinhistoryLoadable.loadingState }}</div>
 </div>

@@ -76,12 +76,14 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         //teachingCenter my reward page
         .state('teachingCenter.myReward',{
             url: '/myReward',
-            templateUrl: 'partials/teachingCenterMyReward.html'
+            templateUrl: 'partials/teachingCenterMyReward.html',
+            controller: 'myRewardController'
         })
         //teachingCenter my reward dispatch award page
         .state('teachingCenter.myRewardDispatchReward',{
             url: '/myReward/dispatchReward',
-            templateUrl: 'partials/teachingCenterMyRewardDispatchReward.html'
+            templateUrl: 'partials/teachingCenterMyRewardDispatchReward.html',
+            controller: 'myRewardDispatchRewardController'
         })
         //teachingCenter my task page
         .state('teachingCenter.myResource',{

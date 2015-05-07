@@ -1,9 +1,12 @@
 //myTaskCtrl.js
-ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order', 'Loadable', 'Editable', 'Task',
-	function($scope, $rootScope, Teacher, Order, Loadable, Editable, Task){
+ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order', 'Class', 'Loadable', 'Editable', 'Task', 
+	function($scope, $rootScope, Teacher, Order, Class, Loadable, Editable, Task){
 		
         // Get the teacher entity by rootScope id 
         $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
+            
+            // Get the class by teacher classId
+            $scope.class = Class.get({ id: $scope.teacher.classId });
                 
             // Get the orders pagable by teacher classId
             // The best practice of loadable
@@ -15,7 +18,7 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
             $scope.orderLoadable.page = 0;
 
             // Set the $resource arguments like {by: "books"}
-            $scope.orderLoadable.arguments = { by: 'clazzs', id: $scope.teacher.classId };
+            $scope.orderLoadable.arguments = { by: 'clazzs', id: $scope.teacher.classId, sortBy: "id" };
 
             // Build the loadable object
             $scope.orderLoadable.build(Order);

@@ -21,16 +21,16 @@
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">红英小学</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">三年（2）班</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{class.campusName}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{class.name}}</p></div>
             <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.username}}</p></div>
             <div class="col-xs-2 col-xs-height col-middle">
                 <p class="row title" ng-show="!order.editable.editing">任务目标：{{order.task.targetBookNum}}本</p>
-                <p class="row title" ng-show="order.editable.editing">任务目标：<input type="number" class="custom-input" ng-model="order.editable.cached.targetBookNum" />本d</p>
+                <p class="row title" ng-show="order.editable.editing">任务目标：<input type="number" min="1" class="custom-input" ng-model="order.editable.cached.targetBookNum" />本</p>
             </div>
             <div class="col-xs-2 col-xs-height col-middle">
                 <p class="row title" ng-show="!order.editable.editing">积分：{{order.task.targetPoint}}</p>
-                <p class="row title" ng-show="order.editable.editing">积分：<input type="number" class="custom-input" ng-model="order.editable.cached.targetPoint" /></p>
+                <p class="row title" ng-show="order.editable.editing">积分：<input type="number" min="1" class="custom-input" ng-model="order.editable.cached.targetPoint" /></p>
             </div>
             <div class="col-xs-2 col-xs-height col-middle">
                 <p class="text-right title">

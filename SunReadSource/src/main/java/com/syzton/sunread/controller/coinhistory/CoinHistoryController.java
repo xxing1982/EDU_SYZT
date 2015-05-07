@@ -16,7 +16,9 @@ import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.note.Comment;
 import com.syzton.sunread.model.pointhistory.PointHistory;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
+import com.syzton.sunread.service.user.UserService;
 
 import javax.validation.Valid;
 
@@ -33,17 +35,23 @@ public class CoinHistoryController extends BaseController {
 
     private CoinHistoryService service;
 
+	private UserService userService;
+
     @Autowired
-    public CoinHistoryController(CoinHistoryService service) {
+    public CoinHistoryController(CoinHistoryService service, UserService userService) {
         this.service = service;
+        this.userService = userService;
     }
 
+	
     
-    @RequestMapping(value = "/coinhistories", method = RequestMethod.POST)
+    @RequestMapping(value = "/students/{studentId}/coinhistories", method = RequestMethod.POST)
     @ResponseBody
-    public CoinHistory add(@Valid @RequestBody CoinHistory add) {
+    public CoinHistory add(@Valid @RequestBody CoinHistory add, @PathVariable("studentId") long studentId) {
         LOGGER.debug("Adding a new coinhistory entry with information: {}", add);
 
+		Student student = userService.findByStudentId(studentId);
+		add.setStudent(student);
         CoinHistory added = service.add(add);
 
         LOGGER.debug("Added a coinhistory entry with information: {}", added);

@@ -19,9 +19,11 @@
             <div class="row book-row">
                 <div class="col-md-2 book-row-left">
                     <div><img ng-src="{{imageServer+Note.bookPictureUrl}}" class="img-responsive custom-shadow"/></div>
+<!--
                     <div class="col-md-9 col-md-offset-5 mustRead" ng-show='showMust'>
                         <img src="../static/img/mustRead.png" class="img-responsive">
                     </div>
+-->
                     <h5>{{ Note.bookname }}</h5>
                 </div>
                 <div class="book-row-right" ng-init="Note.text_overflow=true;">
