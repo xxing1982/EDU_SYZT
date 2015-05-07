@@ -28,6 +28,7 @@ public class UtilTest {
     }
 
     @Test
+    @Ignore
     public void htmlToPdf() throws Exception {
         generationPdfDzOrder(null);
     }
