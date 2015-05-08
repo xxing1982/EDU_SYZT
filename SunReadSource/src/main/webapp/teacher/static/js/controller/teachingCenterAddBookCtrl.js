@@ -18,8 +18,6 @@ ctrls.controller("teachingCenterAddBookController", ['$scope', 'LackFeedback'
         }
         console.log($scope.lackBook);
         var added =  LackFeedback.save($scope.lackBook);
-				if(added.isbn ==="")
-					alert("书已存在");
     }
 
 		$scope.isbnValid = function(){

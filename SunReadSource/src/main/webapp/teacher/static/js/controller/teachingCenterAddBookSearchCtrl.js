@@ -8,35 +8,6 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
         $scope.statuses_category = new Array();
         $scope.selected_status = 0;
 
-//Dictionary
-Dictionary.query({type:"GRADE"},function(data){
-  // console.log(grade);
-  var temp;
-  for(var i=0; i<data.length; i++){
-    temp = {
-      id:i,
-      name:data[i].name,
-      callback:function(){$scope.search()}
-    }
-    $scope.statuses_grade.push(temp);
-  }
-  console.log($scope.statuses_grade);
-})
-
-Dictionary.query({type:"CATEGORY"},function(data){
-  // console.log(grade);
-  var temp;
-  for(var i=0; i<data.length; i++){
-    temp = {
-      id:i,
-      name:data[i].name,
-      callback:function(){$scope.search()}
-    }
-    $scope.statuses_category.push(temp);
-  }
-  console.log($scope.statuses_category);
-})
-
 //QuickSearch
     $scope.hots=QuickSearch.get({page:0,size:3,sortBy:"statistic.readNums"},function(){
       console.log($scope.hots);
@@ -87,16 +58,48 @@ Dictionary.query({type:"CATEGORY"},function(data){
      console.log($scope.searchPageable);
  }
 
- $scope.createPageable(ConditionSearch);
+ // $scope.createPageable(ConditionSearch);
 
- $scope.search = function(){
+ $scope.searchBooks = function(){
      $scope.createPageable(ConditionSearch);
  };
+
+ $scope.searchBooks();
 
  $scope.searchByName=function(searchContent){
      console.log(searchContent);
      $scope.createPageable(ConditionSearch);
  };
+
+ //Dictionary
+ Dictionary.query({type:"GRADE"},function(data){
+   // console.log(grade);
+   var temp;
+   for(var i=0; i<data.length; i++){
+     temp = {
+       id:i,
+       name:data[i].name,
+       callback:function(){$scope.searchBooks()}
+     }
+    //  console(typeof(temp));
+     $scope.statuses_grade.push(temp);
+   }
+   console.log($scope.statuses_grade);
+ })
+
+ Dictionary.query({type:"CATEGORY"},function(data){
+   // console.log(grade);
+   var temp;
+   for(var i=0; i<data.length; i++){
+     temp = {
+       id:i,
+       name:data[i].name,
+       callback:function(){$scope.searchBooks()}
+     }
+     $scope.statuses_category.push(temp);
+   }
+   console.log($scope.statuses_category);
+ })
 
 // Popular
 
