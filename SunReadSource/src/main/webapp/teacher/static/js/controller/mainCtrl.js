@@ -1,6 +1,6 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
-	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices', 'quickSearchServices','conditionSearchServices',
+	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices', 'quickSearchServices','conditionSearchServices','dictionariesService',
 	'lackFeedbackServices','weeklyHotServices','monthlyHotServices','yearlyHotServices','weeklyRecommendServices','monthlyRecommendServices','yearlyRecommendServices',
 	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices', 'coinHistoryServices']);
 

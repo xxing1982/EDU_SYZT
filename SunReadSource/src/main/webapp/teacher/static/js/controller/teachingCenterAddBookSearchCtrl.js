@@ -1,8 +1,41 @@
-ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParams','config','QuickSearch','ConditionSearch'
+ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParams','config','QuickSearch','ConditionSearch','Dictionary'
         ,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch','WeeklyRecommendSearch','MonthlyRecommendSearch','YearlyRecommendSearch'
-        ,function ($scope,$stateParams,config,QuickSearch,ConditionSearch
+        ,function ($scope,$stateParams,config,QuickSearch,ConditionSearch,Dictionary
           ,WeeklyHotSearch,MonthlyHotSearch,YearlyHotSearch,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch){
+
         $scope.imageServer=config.IMAGESERVER; ;
+        $scope.statuses_grade = new Array();
+        $scope.statuses_category = new Array();
+        $scope.selected_status = 0;
+
+//Dictionary
+Dictionary.query({type:"GRADE"},function(data){
+  // console.log(grade);
+  var temp;
+  for(var i=0; i<data.length; i++){
+    temp = {
+      id:i,
+      name:data[i].name,
+      callback:function(){$scope.search()}
+    }
+    $scope.statuses_grade.push(temp);
+  }
+  console.log($scope.statuses_grade);
+})
+
+Dictionary.query({type:"CATEGORY"},function(data){
+  // console.log(grade);
+  var temp;
+  for(var i=0; i<data.length; i++){
+    temp = {
+      id:i,
+      name:data[i].name,
+      callback:function(){$scope.search()}
+    }
+    $scope.statuses_category.push(temp);
+  }
+  console.log($scope.statuses_category);
+})
 
 //QuickSearch
     $scope.hots=QuickSearch.get({page:0,size:3,sortBy:"statistic.readNums"},function(){
@@ -13,9 +46,7 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
       console.log($scope.hots);
     })
 
-
  //AdvancedSearch
-
  var pageSize = 4;
  var searchTerm='isbn';
 
@@ -33,58 +64,6 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
    }
 
 //    $scope.searchContent = searchContent;
- $scope.statuses_grade = [{
-     id: 0,
-     name:"全部年级",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 1,
-     name: "1年级",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 2,
-     name: "2年级",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 3,
-     name: "3年级",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 4,
-     name: "4年级",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 5,
-     name: "5年级",
-     callback: function(){$scope.search($scope.searchArguments)}
- }];
-
- $scope.statuses_category = [{
-     id: 0,
-     name:"全部类型",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 1,
-     name: "类型一",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 2,
-     name: "类型二",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 3,
-     name: "类型三",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 4,
-     name: "类型四",
-     callback: function(){$scope.search($scope.searchArguments)}
- }, {
-     id: 5,
-     name: "类型五",
-     callback: function(){$scope.search($scope.searchArguments)}
- }];
- $scope.selected_status = 0;
 
  $scope.createPageable = function (searchEntity){
      $scope.searchPageable = new Pageable();
@@ -109,6 +88,11 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
  }
 
  $scope.createPageable(ConditionSearch);
+
+ $scope.search = function(){
+     $scope.createPageable(ConditionSearch);
+ };
+
  $scope.searchByName=function(searchContent){
      console.log(searchContent);
      $scope.createPageable(ConditionSearch);
@@ -116,28 +100,25 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
 
 // Popular
 
-$scope.status = status;
+$scope.statusH = 1;
+$scope.statusR = 1;
 
-$scope.search=function(){
-    $scope.createPageable(ConditionSearch);
-}
-
-if($scope.status === 1){
+if($scope.statusH === 1){
     $scope.search = $scope.searchWeeklyH;
 }
-if($scope.status === 2){
+if($scope.statusH === 2){
     $scope.search = $scope.searchMonthlyH;
 }
-if($scope.status === 3){
+if($scope.statusH === 3){
     $scope.search = $scope.searchYearlyH;
 }
-if($scope.status === 4){
+if($scope.statusR === 1){
     $scope.search = $scope.searchWeeklyC;
 }
-if($scope.status === 5){
+if($scope.statusR === 2){
     $scope.search = $scope.searchMonthlyC;
 }
-if($scope.status === 6){
+if($scope.statusR === 3){
     $scope.search = $scope.searchYearlyC;
 }
 
@@ -162,6 +143,5 @@ $scope.searchMonthlyC = function(){
 $scope.searchYearlyC = function(){
     $scope.createPageable(MonthlyRecommendSearch);
 };
-
 
 }]);
