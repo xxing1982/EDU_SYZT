@@ -83,7 +83,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
         $scope.searchPageable.arguments=$scope.searchArguments;
         // Set the startPage and length of number page array
-        console.log($scope.searchArguments);
+        // console.log($scope.searchArguments);
 
         $scope.searchPageable.pageNumbers.startPage = 1;
         $scope.searchPageable.pageNumbers.content.length = 8;
@@ -94,7 +94,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         $scope.searchPageable.build(ConditionSearch);
 
         $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
-        // console.log($scope.searchPageable);
+        console.log($scope.searchPageable);
     }
 
     $scope.createPageable();

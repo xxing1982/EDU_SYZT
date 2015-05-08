@@ -1,7 +1,7 @@
 ctrls.controller("giftCenterController", ['$rootScope','$scope', 'GetGifts','GetGiftsExNum',
 	function ($rootScope,$scope, GetGifts,GetGiftsExNum) {
 		var page = 0;
-		var size = 3;
+		var size = 6;
 		var pageSize = 1024;
 		var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
 		$scope.loading = stateTexts.loading;

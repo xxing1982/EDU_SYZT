@@ -100,6 +100,15 @@ ctrls.filter('formatSize6', function(){
   }
 });
 
+ctrls.filter('messageFormatSize', function(){
+  return function(input){
+    if(input.length>70)
+      return input.substring(0, 70) + '...';
+    else
+      return input;
+  }
+});
+
 ctrls.filter('formatGender', function(){
  return function(input){
       if (input == 'male') {

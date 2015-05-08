@@ -92,16 +92,21 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Stude
   $scope.exchangeGifts  = function(gift){
     $scope.redeemGift.$update({studentId:$rootScope.id,giftId:$scope.giftId,count:$scope.quantity},function(){
       $rootScope.modal ={
-          title: "兑换成功",
-          content:''
+          title: "",
+          content:'兑换成功'
         };
       $('#alert-modal').modal();
+      $rootScope.modal.click = function(){
+          location.href="#/giftCenter";
+          }
+      // location.reload();
     },function(error){
       $rootScope.modal ={
           title: "兑换失败",
           content:'财富不够'
         };
       $('#alert-modal').modal();
+
     });
   }
 
