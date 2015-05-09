@@ -26,7 +26,7 @@ ctrls.controller("teachingCenterAddBookController", [
 	$scope.searchToAdvance=function(searchContent){
 		if(searchContent!=""){
 			createPageable(ConditionSearch);
-			window.location.href="#teachingCenter/addBook/advanced/"+searchContent;xww
+			window.location.href="#teachingCenter/addBook/advanced/"+searchContent;
 		}
 	}
 
