@@ -76,6 +76,13 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			};
 
 			$scope.FinishExam = function(){
+				if (!$scope.isActiveA && !$scope.isActiveB && !$scope.isActiveC && !$scope.isActiveD) {
+					$rootScope.modal = {};
+					$rootScope.modal.title="提示";
+					$rootScope.modal.content="请选择一项";
+					$('#alert-modal').modal();
+					return;
+				};
 				$scope.IsCilck = true;
 				testExam.submitExam($scope.myAnswer, function(examData){
 					var score=0;
