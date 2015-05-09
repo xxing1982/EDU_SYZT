@@ -26,9 +26,7 @@ ctrls.controller("teachingCenterAddBookController", [
 	$scope.searchToAdvance=function(searchContent){
 		if(searchContent!=""){
 			createPageable(ConditionSearch);
-			window.location.href="#teachingCenter/addBook/advanced/"+searchContent;
-			// $scope.searchByName(searchContent);
-			// $scope.searchArguments.searchTerm = searchContent;
+			window.location.href="#teachingCenter/addBook/advanced/"+searchContent;xww
 		}
 	}
 
@@ -73,9 +71,6 @@ if(!$scope.statuses_category.length > 0){
 
 
 //AdvancedSearch
-	var pageSize = 4;
-	var searchTerm='isbn';
-
 	$scope.searchArguments = {
 			level:0,
 			category:0,
@@ -90,8 +85,8 @@ if(!$scope.statuses_category.length > 0){
 		}
 
 		//refresh when AdvancedSearch
-	if(typeof($scope.searchPageable === 'undefined'))
-		createPageable(ConditionSearch);
+	// if(typeof($scope.searchPageable === 'undefined'))
+	// 	createPageable(ConditionSearch);
 
 		$scope.searchBooks = createPageable(ConditionSearch);
 
@@ -103,8 +98,6 @@ if(!$scope.statuses_category.length > 0){
 
 	     $scope.searchPageable.arguments=$scope.searchArguments;
 	     // Set the startPage and length of number page array
-// 	     console.log($scope.searchArguments);
-
 	     $scope.searchPageable.pageNumbers.startPage = 1;
 	     $scope.searchPageable.pageNumbers.content.length = 8;
 	     // Set the placeholder elements
@@ -116,11 +109,55 @@ if(!$scope.statuses_category.length > 0){
 	     $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
 	     console.log($scope.searchPageable);
 	 }
-	//
-	//  $scope.searchByName=function(searchContent){
-	//      console.log(searchContent);
-	//      $scope.createPageable(ConditionSearch);
-	//  };
+
+	// Popular
+  $scope.popularHot = function(){
+		$scope.searchArguments.searchTerm = "";
+	}
+	$scope.popularRecommend = function(){
+		$scope.searchArguments.searchTerm = "";
+	}
+
+	if($scope.statusH === 1){
+	    $scope.searchBooks = $scope.searchWeeklyH;
+	}
+	if($scope.statusH === 2){
+	    $scope.searchBooks = $scope.searchMonthlyH;
+	}
+	if($scope.statusH === 3){
+	    $scope.searchBooks = $scope.searchYearlyH;
+	}
+	if($scope.statusR === 1){
+	    $scope.searchBooks = $scope.searchWeeklyC;
+	}
+	if($scope.statusR === 2){
+	    $scope.searchBooks = $scope.searchMonthlyC;
+	}
+	if($scope.statusR === 3){
+	    $scope.searchBooks = $scope.searchYearlyC;
+	}
+
+	$scope.searchWeeklyH = function(){
+	       createPageable(WeeklyHotSearch);
+	};
+
+	$scope.searchMonthlyH = function(){
+	      createPageable(MonthlyHotSearch);
+	};
+
+	$scope.searchYearlyH = function(){
+	    createPageable(YearlyHotSearch);
+	};
+	$scope.searchWeeklyC = function(){
+	    createPageable(WeeklyRecommendSearch);
+	};
+
+	$scope.searchMonthlyC = function(){
+	    createPageable(MonthlyRecommendSearch);
+	};
+	$scope.searchYearlyC = function(){
+	    createPageable(MonthlyRecommendSearch);
+	};
 
 
 // LackFeedback
