@@ -5,7 +5,7 @@
 
 	<div class="col-md-11 input-group">
 		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
-		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
+		<span class="input-group-addon" ng-click="searchByName(searchArguments.searchTerm)">搜索</span>
 	</div>
 
 	<div  ng-repeat="terms in searchPageable.entities.content">
