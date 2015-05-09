@@ -4,8 +4,8 @@
     border: 1px #D6DEE6 solid;
 }
 
-.advancedSearch .input-group-addon {
-    padding-right: 5%;
+.quickSearch .input-group-addon, .advancedSearch .input-group-addon {
+    padding-right: 3%;
 }
 
 .conditionBlock {
@@ -77,7 +77,8 @@
 }
 
 .popularChoice {
-    margin: 15px 40px;
+    margin: 10px 40px;
+    margin-bottom: 0px;
 }
 
 .popularChoice .popularText {
@@ -170,8 +171,8 @@
 
 
 .bookList {
-    margin-bottom: 25px;
-    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-top: 0px;
     margin-left: 0px;
 }
 
@@ -277,7 +278,52 @@
     height: 201px;
 }
 
+/*******************quick search*******************/
+/*
+.quickSearch, .advancedSearch, .popularSearch, .recommendSearch
+{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+*/
+
+.quickSearch .search, .advancedSearch .search
+{
+    margin-top: 5px;
+    /* padding-left: 20px; */
+    /* padding-right: 3%; */
+    padding-bottom: 10px;
+}
+
+.quickSearch .search input, .advancedSearch .search input
+{
+    border: 1px #72BEE6 solid;
+}
+
+.quickSearch .search span, .advancedSearch .search span
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #72BEE6;
+    color: #FFFFFF;
+    cursor: pointer;
+    border: none;
+}
+
+.quickSearch .search span:hover, .advancedSearch .search span:hover
+{
+    background-color: #83CFF7;
+}
+
 .addBookPageNum {
+    padding-right: 0px;
     height: 50px;
     padding-top: 13px;
+    margin-right: -30px;
+    margin-left: -15px;
+}
+
+
+.conditionBlock .radioCondition {
+    margin-bottom: -10px;
 }

@@ -9,7 +9,7 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
         $scope.selected_status = 0;
 
 //QuickSearch
-  if($scope.hots){
+  if($scope.hots == 0){
     $scope.hots=QuickSearch.get({page:0,size:3,sortBy:"statistic.readNums"},function(){
       console.log($scope.hots);
     });
@@ -20,7 +20,6 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
 
 
     $scope.searchToAdvance=function(searchContent){
-
       if(searchContent!=""){
         $scope.createPageable(ConditionSearch);
         window.location.href="#teachingCenter/addBook/advanced/"+searchContent;
@@ -85,39 +84,6 @@ ctrls.controller("teachingCenterAddBookSearchController", ['$scope','$stateParam
 
  // $("#allBookTab span")[0].click();
 
- //Dictionary
- if(!$scope.statuses_grade.length > 0){
-   Dictionary.query({type:"GRADE"},function(data){
-     // console.log(grade);
-     var temp;
-     for(var i=0; i<data.length; i++){
-       temp = {
-         id:i,
-         name:data[i].name,
-         callback:function(){$scope.searchBooks()}
-       }
-      //  console(typeof(temp));
-       $scope.statuses_grade.push(temp);
-     }
-     console.log($scope.statuses_grade);
-   })
- }
-
-if(!$scope.statuses_category.length > 0){
-  Dictionary.query({type:"CATEGORY"},function(data){
-    // console.log(grade);
-    var temp;
-    for(var i=0; i<data.length; i++){
-      temp = {
-        id:i,
-        name:data[i].name,
-        callback:function(){$scope.searchBooks()}
-      }
-      $scope.statuses_category.push(temp);
-    }
-    console.log($scope.statuses_category);
-  })
-}
 
 
 // Popular

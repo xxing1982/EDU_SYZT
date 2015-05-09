@@ -53,25 +53,21 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         .state('teachingCenter.addBook.quick', {
             url: '/quick',
             templateUrl: 'partials/teachingCenterAddBookQuickSearch.html',
-            controller: 'teachingCenterAddBookSearchController'
         })
         //reading center -> myBookshelf -> add books -> advenced search
         .state('teachingCenter.addBook.advanced', {
             url: '/advanced/:searchTerm',
             templateUrl: 'partials/teachingCenterAddBookAdvancedSearch.html',
-            controller: 'teachingCenterAddBookSearchController'
         })
         //reading center -> myBookshelf -> add books -> popular reading
         .state('teachingCenter.addBook.popular', {
             url: '/popular',
             templateUrl: 'partials/teachingCenterAddBookPopularReading.html',
-            controller: 'teachingCenterAddBookSearchController'
         })
         //reading center -> myBookshelf -> add books -> popular recommend
         .state('teachingCenter.addBook.recommend', {
             url: '/recommend',
             templateUrl: 'partials/teachingCenterAddBookPopularRecommend.html',
-            controller: 'teachingCenterAddBookSearchController'
         })
         //teachingCenter my reward page
         .state('teachingCenter.myReward',{
