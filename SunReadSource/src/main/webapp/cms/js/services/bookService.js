@@ -65,3 +65,15 @@ bookServices
 										sortBy : '@_sortBy'
 									}, {});
 						} ]);
+
+bookServices.factory('BookOperation',['config', '$http',
+	function(config, $http){
+		var api = {};
+		api.deleteBook = function(bookId, callBack){
+			$http.delete(config.HOST + 'books/' + bookId)
+			.success(function(data){
+				callBack();
+			});
+		};
+		return api;
+	}]);

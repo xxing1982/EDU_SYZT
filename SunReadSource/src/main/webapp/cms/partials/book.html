@@ -7,7 +7,7 @@
 	 
 		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
 		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
-		<span class="input-group-addon" ng-click="addNewBook()">添加新书</span>
+		<!--<span class="input-group-addon" ng-click="addNewBook()">添加新书</span>-->
  
 		
 		 
@@ -34,7 +34,7 @@
                 <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
                 <div class="row fsize12">
                     <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">更新</a>&nbsp;&nbsp;
-                    <a href="#" class="btn btn-sm btn-green">删除</a>&nbsp;&nbsp;
+                    <a href="#" class="btn btn-sm btn-green" ng-click="DeleteBook(terms)">删除</a>&nbsp;&nbsp;
                     <a href="#" class="btn btn-sm btn-green">添加试题</a>&nbsp;&nbsp;
                 </div>
             </div>
@@ -80,7 +80,7 @@
 
 
    <!--right part -->
-    <div class="rightpart">
+    <div class="rightpart col-md-3">
         <div class="row conditionBlock">
            <div class="col-md-12">
                 <div class="row">
