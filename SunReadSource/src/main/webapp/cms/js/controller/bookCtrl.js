@@ -5,6 +5,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
 //    $scope.searchContent="";
     $scope.imageServer = config.IMAGESERVER;
+    $scope.selectBook = {};
     var pageSize = 4;
     var searchTerm='isbn';
             
@@ -110,23 +111,8 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
 	};
 
-    $scope.addBooktoShelf = function(terms){
-        //console.log(terms);
-        var bookId = terms.id;
-        var bookInShelf = {
-            bookAttribute: false,
-            readState: false
-            }
-        //console.log(XMLHttpRequest.state);
-        try{
-             AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf)
-             alert("添加成功");
-             //throw new Error("添加失败");
-        }
-        catch(e){
-
-            alert(e);
-        }
+    $scope.Update = function(terms){
+        $scope.selectBook = angular.copy(terms);
     };
 
     $scope.DeleteBook = function(terms){
@@ -140,6 +126,12 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
             }
         };
         $('#confirm-modal').modal('show');
+    }
+
+    $scope.submitForm = function(isValid){
+        if (isValid) {
+            alert(true);
+        };
     }
 
 if($stateParams.searchTerm!== ""){

@@ -1,6 +1,6 @@
 $(document).ready(function(){
+	$("#password").focus();
 	$(document).keydown(function(event){
-		$("#password").focus();  
 		//press Enter
 		if(event.keyCode == 13){
 			$(".btn-login").click();
