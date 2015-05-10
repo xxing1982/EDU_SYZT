@@ -2,9 +2,8 @@
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
                                              ,'examServices', 'classServices', 'questionServices','reviewServices','joinShelfServices','dictionariesService'
                                              ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
-                                             ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','oneBookInShelfServices'
+                                             ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','popularSearchServices','oneBookInShelfServices'
                                              ,'sendMessageServices','getMessageServices','deleteMessagesServices','getGiftsServices','getGiftsExNumServices','exchangeGiftsServices'
-                                             ,'weeklyHotServices','monthlyHotServices','yearlyHotServices','weeklyRecommendServices','monthlyRecommendServices','yearlyRecommendServices'
                                              , 'campusServices', 'actionServices', 'pageableServices','loadableServices','hotclazzServices', 'hotreaderServices', 'dropzoneServices', 'ngSanitize', 'semesterServices']);
 ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader', 'config',
   function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader, config) {

@@ -1,6 +1,5 @@
 <div class="popularSearch">
-<div class="row">
-    <div class="leftpart">
+<div class="leftpart">
 
         <div class="input-group popularChoice">
             <label class="radio-inline">
@@ -17,8 +16,8 @@
             </label>
 
         </div>
-
-	<div ng-repeat="terms in searchPageable.entities.content">
+        
+	<div class="row" ng-repeat="terms in searchPageable.entities.content">
         <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
             <div class="col-md-3">
                 <a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
@@ -79,7 +78,7 @@
 	</div>
 
 
-  <!--right part -->
+   <!--right part -->
     <div class="rightpart">
         <div class="row conditionBlock myBlock">
             <div class="col-md-1"></div>
@@ -113,9 +112,9 @@
         </div>
 
         <div class="row conditionBlock myBlock">
-            <div class="col-md-1"></div>
+           <div class="col-md-1"></div>
            <div class="col-md-11">
-                <div class="row">
+                <div class="row radioCondition">
                     <h5>测试类型</h5>
                 </div><!---->
 
@@ -148,9 +147,9 @@
         </div>
 
         <div class="row conditionBlock myBlock">
-            <div class="col-md-1"></div>
+           <div class="col-md-1"></div>
            <div class="col-md-11">
-                <div class="row">
+                <div class="row radioCondition">
                     <h5>类型</h5>
                 </div><!---->
 
@@ -176,9 +175,9 @@
         </div>
 
         <div class="row conditionBlock myBlock">
-            <div class="col-md-1"></div>
+           <div class="col-md-1"></div>
            <div class="col-md-11">
-                <div class="row">
+                <div class="row radioCondition">
                     <h5>积分</h5>
                 </div><!---->
 
@@ -216,9 +215,9 @@
         </div>
 
         <div class="row conditionBlock myBlock">
-            <div class="col-md-1"></div>
+           <div class="col-md-1"></div>
            <div class="col-md-11">
-                <div class="row">
+                <div class="row radioCondition">
                     <h5>语言</h5>
                 </div><!---->
 
@@ -244,9 +243,9 @@
         </div>
 
         <div class="row conditionBlock myBlock">
-            <div class="col-md-1"></div>
+           <div class="col-md-1"></div>
            <div class="col-md-11">
-                <div class="row">
+                <div class="row radioCondition">
                     <h5>配套资源</h5>
                 </div><!---->
 
@@ -277,12 +276,12 @@
 
             </div>
         </div>
+
         <div class="placeHolder">
             <p>&nbsp;</p>
         </div>
 
         </div>
-    </div>
 
     </div>
     <!-- End right part -->

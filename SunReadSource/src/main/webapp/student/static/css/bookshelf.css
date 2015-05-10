@@ -85,7 +85,7 @@
 
 .popularChoice .popularText {
     margin-right: 30px;
-    color: darkslateblue;
+    color: rgb(47, 86, 130);
 }
 
 #myBookshelf-button {
@@ -174,8 +174,8 @@
 
 
 .bookList {
-    margin-bottom: 25px;
-    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     margin-left: 10px;
 }
 

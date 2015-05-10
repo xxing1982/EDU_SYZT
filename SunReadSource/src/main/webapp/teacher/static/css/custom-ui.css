@@ -103,25 +103,25 @@ bs-dropdown .button-label:hover{
     width: -webkit-calc(100% - 26px);
     width: -moz-calc(100% - 26px);
     width: calc(100% - 26px);
-    color: #55C9D2;
+    color: #72BEE6;
     background-color: #FFF;
-    border-color: #55C9D2;
+    border-color: #72BEE6;
     padding-left: 0;
     padding-right: 0;
 }
 
 bs-dropdown .dropdown-toggle {
     color: #FFF;
-    background-color: #55C9D2;
-    border-color: #55C9D2;
+    background-color: #72BEE6;
+    border-color: #72BEE6;
 }
 
 bs-dropdown .dropdown-toggle:hover,
 bs-dropdown .dropdown-toggle:focus,
 bs-dropdown .dropdown-toggle:active {
     color: #FFF;
-    background-color: #55C9D2;
-    border-color: #55C9D2;
+    background-color: #83CFF7;
+    border-color: #83CFF7;
 }
 
 bs-dropdown .dropdown-menu, .dropdown-menu {
