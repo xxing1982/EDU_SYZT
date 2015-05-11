@@ -16,7 +16,7 @@ ctrls.controller("teachingCenterAddBookController", [
 		$scope.addBook = '我要推荐';
 		$scope.language = 1;
 
-	//QuickSearch
+	//QuickSearc
 	// $scope.quickSearch = addBookQuickSearch();
 
 	if(typeof($scope.hots) === 'undefined'){
@@ -84,11 +84,13 @@ if(!$scope.statuses_category.length > 0){
 			searchTerm:""
 		}
 
+		if(typeof($scope.searchPageable) == 'undefined')
+			createPageable(ConditionSearch);
 		//refresh when AdvancedSearch
-	// if(typeof($scope.searchPageable === 'undefined'))
-	// 	createPageable(ConditionSearch);
 
-		$scope.searchBooks = createPageable(ConditionSearch);
+		$scope.searchBooks = function(){
+			createPageable(ConditionSearch);
+		};
 
 	 function createPageable (searchEntity){
 	     $scope.searchPageable = new Pageable();
