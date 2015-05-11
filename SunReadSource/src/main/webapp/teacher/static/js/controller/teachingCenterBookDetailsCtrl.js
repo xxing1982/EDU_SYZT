@@ -1,5 +1,5 @@
 ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$stateParams', 'WeeklyHotSearch'
-    ,'BookDetail','config',function($scope, $stateParams,WeeklyHotSearch,BookDetail,config){
+    ,'BookDetail','Review','config',function($scope, $stateParams,WeeklyHotSearch,BookDetail,Review,config){
 	$scope.name = '书籍详情';
 
 
@@ -74,42 +74,39 @@ ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$stateParams
         // });
 
         //get review
-        // $scope.review = {};
-        // $scope.review.page = 0;
-        // $scope.review.size = 3;
-        // $scope.review.state = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
-        // $scope.review.currentStete = $scope.review.state.loading;
-        // getReviewData();
-        // $scope.showMoreReview = function(){
-        //     $scope.review.page = $scope.review.page + 1;
-        //     getReviewData();
-        // }
-
-        // Get the image server
-
+        $scope.review = {};
+        $scope.review.page = 0;
+        $scope.review.size = 3;
+        $scope.review.state = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
+        $scope.review.currentStete = $scope.review.state.loading;
+        getReviewData();
+        $scope.showMoreReview = function(){
+            $scope.review.page = $scope.review.page + 1;
+            getReviewData();
+        }
     })
+
     $scope.bookDetails = bookDetail;
 
     $scope.hots=WeeklyHotSearch.get({page:0,size:5,level:0,testType:0,literature:0,category:0
-                                        ,grade:0,language:0,resource:0,pointRange:0},function(){
-        });
+                                        ,grade:0,language:0,resource:0,pointRange:0});
     $scope.imageServer = config.IMAGESERVER;
 
-    // function getReviewData(){
-    //     if ($scope.review.currentStete == $scope.review.state.nomore) {
-    //         return;
-    //     };
-    //     AddReview.getAllById(bookDetail.id, $scope.review.page, $scope.review.size, function(dataReview){
-    //         if ($scope.review.source == undefined) {
-    //             $scope.review.source = dataReview.content;
-    //         }
-    //         else{
-    //             $scope.review.source.push(dataReview.content);
-    //         }
-    //         $scope.review.currentStete = $scope.review.state.more;
-    //         if ($scope.review.source.length >=dataReview.totalElements) {
-    //             $scope.review.currentStete = $scope.review.state.nomore;
-    //         }
-    //     });
-    // }
+    function getReviewData(){
+        if ($scope.review.currentStete == $scope.review.state.nomore) {
+            return;
+        };
+        AddReview.getAllById(bookDetail.id, $scope.review.page, $scope.review.size, function(dataReview){
+            if ($scope.review.source == undefined) {
+                $scope.review.source = dataReview.content;
+            }
+            else{
+                $scope.review.source.push(dataReview.content);
+            }
+            $scope.review.currentStete = $scope.review.state.more;
+            if ($scope.review.source.length >=dataReview.totalElements) {
+                $scope.review.currentStete = $scope.review.state.nomore;
+            }
+        });
+    }
 }]);

@@ -99,8 +99,8 @@
 }
 
 .bookDetailUp {
-    /* padding-top: 35px; */
-    margin-bottom: 30px;
+     padding-top: 20px; 
+/*    margin-bottom: 23px;*/
 }
 
 
@@ -325,4 +325,10 @@
 
 .conditionBlock .radioCondition {
     margin-bottom: -10px;
+}
+
+.bookDetailTabPanes {
+    line-height: 25px;
+    height: 80px;
+    padding-top: 30px;
 }

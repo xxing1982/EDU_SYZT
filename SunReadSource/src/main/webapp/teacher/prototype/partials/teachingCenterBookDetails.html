@@ -14,33 +14,31 @@
 
 
 <div class="myBlock mt20">
-	<div class="page-body-top">
+    <div class="bookDetailUp">
+       <div class="col-md-12">
+           <div class="col-md-3 bookDetailImg">
+             <img ng-src={{imageServer+bookDetails.pictureUrl}} class="img-responsive custom-shadow">
+           </div>
 
-        <div class="bookDetailUp">
-           <div class="col-md-12">
-               <div class="col-md-3 bookDetailImg">
-                 <img ng-src={{imageServer+bookDetails.pictureUrl}} class="img-responsive custom-shadow">
-               </div>
+          <div class="col-md-9 bookDetailText">
+              <div class="row">
+                  <h5><big><strong>{{bookDetails.name}}</strong></big></h5>
+              </div>
+              <div class="row">
+                  <p style="line-height: 23px;margin-bottom: 24px;"><small>
+                      评分：{{bookDetails.evaluationNum}} <br/>
+                      作者：{{bookDetails.author}} <br/>
+                      版权：{{bookDetails.publisher}} <br/>
+                      分值：{{bookDetails.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      字数：{{bookDetails.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      页数：{{bookDetails.pageCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+                      已有<span class="red-text">{{bookDetails.statistic.readNums}}</span>人阅读，<span class="red-text">{{bookDetails.statistic.notes}}</span>人做笔记，<span class="red-text">{{bookDetails.statistic.recommends}}</span>人推荐。
+                  </small></p>
+              </div>
 
-              <div class="col-md-9 bookDetailText">
-                  <div class="row">
-                      <h5><big><strong>{{bookDetails.name}}</strong></big></h5>
-                  </div>
-                  <div class="row">
-                      <p style="line-height: 23px;margin-bottom: 24px;"><small>
-                          评分：{{bookDetails.evaluationNum}} <br/>
-                          作者：{{bookDetails.author}} <br/>
-                          版权：{{bookDetails.publisher}} <br/>
-                          分值：{{bookDetails.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          字数：{{bookDetails.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          页数：{{bookDetails.pageCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-                          已有<span class="red-text">{{bookDetails.statistic.readNums}}</span>人阅读，<span class="red-text">{{bookDetails.statistic.notes}}</span>人做笔记，<span class="red-text">{{bookDetails.statistic.recommends}}</span>人推荐。
-                      </small></p>
-                  </div>
-
-            </div>
-            </div>
         </div>
+        </div>
+    </div>
 
 
         <div class="container-fluid bookDetailMid">
@@ -86,7 +84,7 @@
             </div>
 
             <!-- Tab panes -->
-            <div class="tab-content container-fluid paragraph" style="line-height:25px;">
+            <div class="tab-content container-fluid paragraph bookDetailTabPanes">
 
                 <!-- introduction -->
                 <div role="tabpanel" class="tab-pane in active" id="intro">
@@ -98,7 +96,8 @@
                 <!-- catalog -->
                 <div role="tabpanel" class="tab-pane" id="catalog">
                     <div>
-	                        <p ng-bind-html="bookDetails.catalogue | formatParagraph"></p>
+                        <p ng-bind-html="bookDetails.catalogue | formatParagraph"></p>
+<!--                        <p>{{bookDetails.catalogue | formatParagraph }}</p>-->
                     </div>
                 </div>
 
@@ -178,7 +177,6 @@
 
             </div>
         </div>
-    </div>
 
     <!-- Take note modal -->
     <div class="modal fade" id="book-takenote-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
