@@ -75,5 +75,11 @@ bookServices.factory('BookOperation',['config', '$http',
 				callBack();
 			});
 		};
+		api.updateBook = function(bookId, book, callBack){
+			$http.put(config.HOST + 'books/' + bookId, book)
+			.success(function(data){
+				callBack();
+			});
+		}
 		return api;
 	}]);

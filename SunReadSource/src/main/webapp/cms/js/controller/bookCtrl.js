@@ -113,6 +113,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
     $scope.Update = function(terms){
         $scope.selectBook = angular.copy(terms);
+        $("#updateBook").modal({backdrop: 'static', keyboard: false});
     };
 
     $scope.DeleteBook = function(terms){
@@ -128,10 +129,17 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         $('#confirm-modal').modal('show');
     }
 
-    $scope.submitForm = function(isValid){
-        if (isValid) {
-            alert(true);
+    $scope.submitForm = function(isValid, isDirty){
+        if (!isValid) {
+            return;
         };
+        if (!isDirty) {
+            $("#updateBook").modal("hide");
+            return;
+        };
+        BookOperation.updateBook($scope.selectBook.id, $scope.selectBook, function(){
+            location.reload();
+        })
     }
 
 if($stateParams.searchTerm!== ""){
