@@ -1,5 +1,5 @@
 ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$stateParams', 'WeeklyHotSearch'
-    ,'BookDetail','Review','config',function($scope, $stateParams,WeeklyHotSearch,BookDetail,Review,config){
+    ,'BookDetail','Review','AddReview','config',function($scope, $stateParams,WeeklyHotSearch,BookDetail,Review,AddReview,config){
 	$scope.name = '书籍详情';
 
 
