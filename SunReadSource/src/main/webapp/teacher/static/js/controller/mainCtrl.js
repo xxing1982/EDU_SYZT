@@ -1,7 +1,7 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
 	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices', 'quickSearchServices',
-	'lackFeedbackServices','popularSearchServices','conditionSearchServices','dictionariesService',
+	'lackFeedbackServices','popularSearchServices','conditionSearchServices','dictionariesService','bookDetailServices',
 	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices', 'coinHistoryServices']);
 
 
@@ -53,4 +53,11 @@ ctrls.filter('formatSize6', function(){
 	return function(input){
 		return input.substring(0, 6) + '...';
 	}
+});
+
+ctrls.filter('formatParagraph', function(){
+  return function(data) {
+   if (!data) return data;
+   return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
+ 	};
 });
