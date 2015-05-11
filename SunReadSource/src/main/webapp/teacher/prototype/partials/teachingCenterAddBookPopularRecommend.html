@@ -3,7 +3,6 @@
 
         <div class="input-group popularChoice">
 
-
             <label class="radio-inline">
               <input type="radio" ng-click="searchWeeklyC()" name="inlineRadioOptions" ng-model="statusR" id="inlineRadio2" value="1" checked>
                 <p class="popularText">周热门</p>
@@ -31,7 +30,7 @@
                     积分:{{terms.point}}&nbsp;&nbsp;等级:{{terms.extra.level}}&nbsp;&nbsp;财富：{{terms.coin}}</p></div>
                 <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
                 <div class="row fsize12">
-                    <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">加入书架</a>&nbsp;&nbsp;
+                    <a href="#teachingCenter/addBookToShelf" class="btn btn-sm btn-green" type="button">加入书架</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-green">相关笔记</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-green">相关评价</a>
                 </div>

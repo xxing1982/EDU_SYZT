@@ -68,12 +68,17 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         //teaching center -> myBookshelf -> add books -> popular teaching
         .state('teachingCenter.addBook.popular', {
             url: '/popular',
-            templateUrl: 'partials/teachingCenterAddBookPopularteaching.html',
+            templateUrl: 'partials/teachingCenterAddBookPopularReading.html',
         })
         //teaching center -> myBookshelf -> add books -> popular recommend
         .state('teachingCenter.addBook.recommend', {
             url: '/recommend',
             templateUrl: 'partials/teachingCenterAddBookPopularRecommend.html',
+        })
+        .state('teachingCenter.addBookToShelf', {
+            url: '/addBookToShelf',
+            templateUrl: 'partials/teachingCenterAddToShelf.html',
+            controller: 'teachingCenterAddToShelfController'
         })
         //teachingCenter my reward page
         .state('teachingCenter.myReward',{
