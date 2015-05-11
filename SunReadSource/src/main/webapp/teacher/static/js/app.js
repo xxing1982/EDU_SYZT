@@ -43,28 +43,34 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/myRecommend',
             templateUrl: 'partials/teachingCenterMyRecommend.html'
         })
-        //reading center -> myBookshelf -> add books
+        //teaching center -> book details
+        .state('teachingCenter.bookDetails',{
+            url: '/bookDetails/:bookId/:action',
+            templateUrl: 'partials/teachingCenterBookDetails.html',
+            controller: 'teachingCenterBookDetailsController'
+        })
+        //teaching center -> myBookshelf -> add books
         .state('teachingCenter.addBook',{
             url: '/addBook',
             templateUrl: 'partials/teachingCenterAddBook.html',
             controller: 'teachingCenterAddBookController'
         })
-        //reading center -> myBookshelf -> add books -> quick search
+        //teaching center -> myBookshelf -> add books -> quick search
         .state('teachingCenter.addBook.quick', {
             url: '/quick',
             templateUrl: 'partials/teachingCenterAddBookQuickSearch.html',
         })
-        //reading center -> myBookshelf -> add books -> advenced search
+        //teaching center -> myBookshelf -> add books -> advenced search
         .state('teachingCenter.addBook.advanced', {
             url: '/advanced/:searchTerm',
             templateUrl: 'partials/teachingCenterAddBookAdvancedSearch.html',
         })
-        //reading center -> myBookshelf -> add books -> popular reading
+        //teaching center -> myBookshelf -> add books -> popular teaching
         .state('teachingCenter.addBook.popular', {
             url: '/popular',
-            templateUrl: 'partials/teachingCenterAddBookPopularReading.html',
+            templateUrl: 'partials/teachingCenterAddBookPopularteaching.html',
         })
-        //reading center -> myBookshelf -> add books -> popular recommend
+        //teaching center -> myBookshelf -> add books -> popular recommend
         .state('teachingCenter.addBook.recommend', {
             url: '/recommend',
             templateUrl: 'partials/teachingCenterAddBookPopularRecommend.html',
@@ -86,7 +92,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/myResource',
             templateUrl: 'partials/teachingCenterMyResource.html'
         })
-        //readingDynamic page
+        //teachingDynamic page
         .state('readingDynamic',{
             url: '/readingDynamic',
             templateUrl: 'partials/readingDynamic.html'

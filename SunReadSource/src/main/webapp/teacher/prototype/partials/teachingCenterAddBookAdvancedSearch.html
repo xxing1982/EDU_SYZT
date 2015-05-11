@@ -10,7 +10,7 @@
 	<div class="row" ng-repeat="terms in searchPageable.entities.content">
         <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
             <div class="col-md-3">
-                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
+                <a href="#teachingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
             </div>
             <div class="col-md-9">
                 <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
@@ -20,8 +20,8 @@
                 <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
                 <div class="row fsize12">
                     <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">加入书架</a>&nbsp;&nbsp;
-                    <a href="#readingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-green">相关笔记</a>&nbsp;&nbsp;
-                    <a href="#readingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-green">相关评价</a>
+                    <a href="#teachingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-green">相关笔记</a>&nbsp;&nbsp;
+                    <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-green">相关评价</a>
                 </div>
             </div>
         </div>
