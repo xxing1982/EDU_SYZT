@@ -12,8 +12,8 @@
     </div></div>
 </div>
 
-
 <div class="readingCenter-right-body">
+
     <div class="bookDetailUp">
        <div class="col-md-12">
            <div class="col-md-3 bookDetailImg">
@@ -107,9 +107,9 @@
                         <div><strong>{{item.title}}</strong></div>
                         <div>评分：{{item.rate}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.studentName}} - {{item.creationTime}}</div>
                         <div>{{item.content}}</div>
-                        <hr>
+                        <div class="row"><hr></div>
                     </div>
-                    <div class="bottom row" ng-click="showMoreReview()">{{review.currentStete}}</div>
+                    <div class="bottom" ng-click="showMoreReview()">{{review.currentStete}}</div>
                 </div>
 
                 <!-- note -->
@@ -230,7 +230,6 @@
           </div>
         </div>
     </div>
-
 </div>
 <script>
     // Initlizate the nav tab

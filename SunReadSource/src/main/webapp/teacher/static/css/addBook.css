@@ -177,9 +177,9 @@
 }
 
 .readingCenter-right-body .bookDetailBottom {
-    margin-left: 15px;
-    margin-right: 15px;
-    border-bottom: 1px #D6DEE6 solid;
+    /* margin-left: 15px; */
+    /* margin-right: 15px; */
+    /* border-bottom: 1px #D6DEE6 solid; */
 }
 
 .lackBookModal {
@@ -329,8 +329,8 @@
 
 .bookDetailTabPanes {
     line-height: 25px;
-    height: 80px;
-    padding-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .readingCenter-right-body {
