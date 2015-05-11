@@ -2,10 +2,10 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
     ,'BookDetail' , 'Student', 'NoteView', 'NoteTake', 'Dropzone', 'config', 'AddReview', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, Student, NoteView, NoteTake, Dropzone, config, AddReview){
 	$scope.name = '书籍详情';
 
-    
+
     var bookDetail = BookDetail.get({ id: $stateParams.bookId }, function(){
         console.log(bookDetail);
-        
+
         $scope.student = Student.get({id: $rootScope.id}, function(){
             // Initlizate the note entity
             $scope.noteTake = new NoteTake(bookDetail);
@@ -17,7 +17,7 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
             // Transmit arguments to note search engine
             $scope.noteView.ShowMoreNotes($scope.arguments);
         });
-        
+
         $scope.wordTest = function(){
             $rootScope.exam.id = 1;
             $rootScope.exam.returnURL = "/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
@@ -26,16 +26,16 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
             $rootScope.exam.typeName = "我的书架 > 词汇训练";
         }
 
-        $scope.thinkTest = function(){            
+        $scope.thinkTest = function(){
             $rootScope.exam.id = 2;
             $rootScope.exam.returnURL = "/student/protype/index.html#/readingCenter/bookDetails/" + bookDetail.id + "/";
             $rootScope.exam.bookId = bookDetail.id;
             $rootScope.exam.bookName = bookDetail.name;
             $rootScope.exam.typeName = "我的书架 > 思维训练";
         }
-        
+
         /* Goto or open the action defined $stateParams.action
-           example: 
+           example:
                 /bookDetails/1/takenote
                 /bookDetails/1/intro
                 /bookDetails/1/catalog
@@ -55,9 +55,9 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
                     }
            }
         });
-        
 
-        
+
+
         var thisBookinshelf = OneBookInShelf.get({id:$rootScope.id,bookId:$stateParams.bookId},function(){
             console.log(thisBookinshelf);
             var verify;
@@ -98,13 +98,13 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         // Get the image server
         $scope.imageServer = config.IMAGESERVER;
     })
-    
+
     $scope.bookDetails = bookDetail;
-    
-            
+
+
     $scope.hots=WeeklyHotSearch.get({page:0,size:5,level:0,testType:0,literature:0,category:0
                                         ,grade:0,language:0,resource:0,pointRange:0},function(){
-        }); 
+        });
     $scope.imageServer = config.IMAGESERVER;
 
     function getReviewData(){

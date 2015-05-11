@@ -96,7 +96,7 @@
                 <!-- catalog -->
                 <div role="tabpanel" class="tab-pane" id="catalog">
                     <div>
-                        <p ng-bind-html="bookDetails.catalogue | formatParagraph"></p>
+                        <p ng-bind-html="to_trusted(bookDetails.catalogue)"></p>
 <!--                        <p>{{bookDetails.catalogue | formatParagraph }}</p>-->
                     </div>
                 </div>

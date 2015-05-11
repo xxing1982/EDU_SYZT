@@ -1,7 +1,12 @@
-ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$stateParams', 'WeeklyHotSearch'
-    ,'BookDetail','Review','AddReview','config',function($scope, $stateParams,WeeklyHotSearch,BookDetail,Review,AddReview,config){
+ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$sce','$stateParams', 'WeeklyHotSearch'
+    ,'BookDetail','AddReview','config',function($scope,$sce,$stateParams,WeeklyHotSearch,BookDetail,AddReview,config){
 	$scope.name = '书籍详情';
+  $scope.imageServer = config.IMAGESERVER;
 
+  $scope.to_trusted = function(html_code) {
+    if (!html_code) return html_code;
+    return $sce.trustAsHtml(html_code.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>'));
+}
 
     var bookDetail = BookDetail.get({ id: $stateParams.bookId }, function(){
         console.log(bookDetail);
@@ -84,13 +89,11 @@ ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$stateParams
             $scope.review.page = $scope.review.page + 1;
             getReviewData();
         }
-    })
-
+    });
     $scope.bookDetails = bookDetail;
 
     $scope.hots=WeeklyHotSearch.get({page:0,size:5,level:0,testType:0,literature:0,category:0
                                         ,grade:0,language:0,resource:0,pointRange:0});
-    $scope.imageServer = config.IMAGESERVER;
 
     function getReviewData(){
         if ($scope.review.currentStete == $scope.review.state.nomore) {
