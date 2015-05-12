@@ -101,7 +101,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 
 		}
 
-		Page<MessageDTO> messageDTOPage = new PageImpl<>(messageDTOList,pageable,messageDTOList.size());
+		Page<MessageDTO> messageDTOPage = new PageImpl<>(messageDTOList,pageable,messagePage.getTotalPages());
 
 		return messageDTOPage;
 	}
@@ -123,11 +123,12 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 			messageDTO.setSendUsername(sendUser.getUsername());
 			messageDTO.setReceiveUserId(message.getReceiveUserId());
 			messageDTO.setReceiveUserName(receiveUser.getUsername());
+			messageDTO.setCreationTime(message.getCreationTime().toDate());
 			messageDTOList.add(messageDTO);
 
 		}
 
-		Page<MessageDTO> messageDTOPage = new PageImpl<>(messageDTOList,pageable,messageDTOList.size());
+		Page<MessageDTO> messageDTOPage = new PageImpl<>(messageDTOList,pageable,messagePage.getTotalPages());
 
 		return messageDTOPage;
 	}
