@@ -36,7 +36,7 @@ public class WebAppContext extends WebMvcConfigurerAdapter {
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";
     private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
     private static final String DEFAULT_ENCODING = "UTF-8";
-    private static final long MAX_UPLOAD_FILE_SIZE = 200000;
+    private static final long MAX_UPLOAD_FILE_SIZE = 1000000;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
