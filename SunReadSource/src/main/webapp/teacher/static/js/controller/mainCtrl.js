@@ -2,7 +2,8 @@
 var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
 	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices', 'quickSearchServices',
 	'lackFeedbackServices','popularSearchServices','conditionSearchServices','dictionariesService','bookDetailServices','reviewServices',
-	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices', 'coinHistoryServices']);
+	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices', 'coinHistoryServices','campusServices',
+	'ngSanitize','hotclazzServices']);
 
 
 ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader',

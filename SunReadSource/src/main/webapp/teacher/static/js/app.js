@@ -100,7 +100,13 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         //teachingDynamic page
         .state('readingDynamic',{
             url: '/readingDynamic',
-            templateUrl: 'partials/readingDynamic.html'
+            templateUrl: 'partials/readingDynamic.html',
+            controller:'readingDynamicController'
+        })
+        .state('actions',{
+            url: '/readingDynamic/actions',
+            templateUrl: 'partials/readingDynamicActions.html',
+            controller: 'readingDynamicActionsController'
         })
         //statisticsSummary page
         .state('statisticsSummary',{
