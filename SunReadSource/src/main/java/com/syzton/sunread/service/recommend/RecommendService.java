@@ -1,5 +1,7 @@
 package com.syzton.sunread.service.recommend;
 
+import java.util.ArrayList;
+
 import javassist.NotFoundException;
 
 import org.springframework.data.domain.Page;
@@ -32,4 +34,18 @@ public interface RecommendService {
 	 * @return
 	 */
 	RecommendDTO add(RecommendDTO recommendDTO, Long teacherId, Long bookInShelfId);
+
+	/**
+	 * @param teacherId
+	 * @return
+	 */
+	ArrayList<RecommendDTO> findByTeacher(Long teacherId);
+
+	/**
+	 * @param teacherId
+	 * @param pageable
+	 * @return
+	 */
+	Page<RecommendDTO> findByTeacher(Long teacherId, Pageable pageable);
+			
 }

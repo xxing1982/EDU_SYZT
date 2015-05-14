@@ -57,20 +57,22 @@ public class RecommendController extends BaseController{
         return added;
     }
     
-//    @RequestMapping(value = "/teacher/{teacherId}/recommend", method = RequestMethod.GET)
-//    @ResponseBody
-//    public PageResource<RecommendDTO> getExchanges(@PathVariable("studentId") long studentId,
-//                                       @RequestParam("page") int page,
-//                                       @RequestParam("size") int size) {
-//
-//        Pageable pageable = this.getPageable(page,size);
-//
-//        Page<ExchangeHistory> exchangeHistoryPage = storeService.getExchangeHistory(pageable,studentId);
-//
-//        return new PageResource<>(exchangeHistoryPage,"page","size");
-//
-//    }
-//    
+    @RequestMapping(value = "/teacher/{teacherId}/recommend", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<RecommendDTO> getExchanges(@PathVariable("teacherId") long teacherId,
+                                       @RequestParam("page") int page,
+                                       @RequestParam("size") int size,
+                                       @RequestParam(value = "sortBy",required = false) String sortBy) {
+    	sortBy = sortBy ==null ? "creationTime" : sortBy;
+    	
+        Pageable pageable = this.getPageable(page,size,sortBy,"desc");
+
+        Page<RecommendDTO> recommendByTeacher = recommendService.findByTeacher(teacherId,pageable);
+
+        return new PageResource<>(recommendByTeacher,"page","size");
+
+    }
+    
     
     
     

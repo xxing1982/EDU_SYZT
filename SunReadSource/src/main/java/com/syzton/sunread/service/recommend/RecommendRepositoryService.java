@@ -1,22 +1,35 @@
 package com.syzton.sunread.service.recommend;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.syzton.sunread.dto.message.MessageDTO;
 import com.syzton.sunread.dto.recommend.RecommendDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.bookshelf.Bookshelf;
+import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.recommend.Recommend;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.bookshelf.BookInShelfRepository;
 import com.syzton.sunread.repository.bookshelf.BookshelfRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
+import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.recommend.RecommendRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.TeacherRepository;
 
 /**
@@ -29,20 +42,27 @@ public class RecommendRepositoryService implements RecommendService{
 	
 	private RecommendRepository recommendRepository;
 	private TeacherRepository teacherRepositiry;
+	private StudentRepository studentRepository;
 	private BookInShelfRepository bookInShelfRepository;
 	private BookRepository bookRepository;
 	private BookshelfRepository bookshelfRepository;
+	private ClazzRepository clazzRepository;
+	private CampusRepository campusRepository;
 	private Teacher teacher;
 	private Book book;
 	private Bookshelf bookshelf;
 	
 	@Autowired
 	public RecommendRepositoryService(RecommendRepository recommendRepository,BookshelfRepository bookshelfRepository
-			,TeacherRepository teacherRepositiry,BookInShelfRepository bookInShelfRepository,BookRepository bookRepository) {
+			,TeacherRepository teacherRepositiry,StudentRepository studentRepository,ClazzRepository clazzRepository
+			,CampusRepository campusRepository,BookInShelfRepository bookInShelfRepository,BookRepository bookRepository) {
 		// TODO Auto-generated constructor stub
 		this.recommendRepository = recommendRepository;
 		this.bookshelfRepository = bookshelfRepository;
 		this.teacherRepositiry = teacherRepositiry;
+		this.studentRepository = studentRepository;
+		this.clazzRepository = clazzRepository;
+		this.campusRepository = campusRepository;
 		this.bookInShelfRepository = bookInShelfRepository;
 		this.bookRepository = bookRepository;
 	}
@@ -125,4 +145,57 @@ public class RecommendRepositoryService implements RecommendService{
 		return null;
 	}
 
+	@Override
+	public ArrayList<RecommendDTO> findByTeacher(Long teacherId) {
+		// TODO Auto-generated method stub
+		ArrayList<RecommendDTO>  recommendDTOs = new ArrayList<RecommendDTO>();
+		teacher = teacherRepositiry.findOne(teacherId);
+	 
+		if(teacher == null)
+			throw new NotFoundException("Not Found Teacher with id" + teacher.getId());
+		
+		ArrayList<Recommend> recommends = recommendRepository.findByTeacher(teacher);
+		if(recommends.isEmpty()){
+			throw new NotFoundException("Not Found any recommends from teacher :"+teacher.getUsername());
+		}
+		for (Recommend recommend : recommends) {
+			BookInShelf bookInShelf =  recommend.getBookinshelf();
+			Student student = studentRepository.findOne(bookInShelf.getBookShelf().getId());
+			Campus campus = campusRepository.findOne(student.getCampusId());
+			Clazz clazz = clazzRepository.findOne(student.getClazzId());
+			RecommendDTO dto =  RecommendDTO.getBuilder(bookInShelf.getBookName(),campus.getName(),clazz.getName(),student.getUsername(),bookInShelf.getBookAttribute(),recommend.getDescription()).build();
+			recommendDTOs.add(dto);
+		}
+		return recommendDTOs;
+	}
+	
+	@Override
+	public Page<RecommendDTO> findByTeacher(Long teacherId,Pageable pageable) {
+		// TODO Auto-generated method stub
+		ArrayList<RecommendDTO>  recommendDTOs = new ArrayList<RecommendDTO>();
+		teacher = teacherRepositiry.findOne(teacherId);
+	 
+		if(teacher == null)
+			throw new NotFoundException("Not Found Teacher with id" + teacher.getId());
+		
+		Page<Recommend> pageRecommends = recommendRepository.findByTeacher(teacher,pageable);
+		List<Recommend> recommends = pageRecommends.getContent();
+		if(recommends.isEmpty()){
+			throw new NotFoundException("Not Found any recommends from teacher :"+teacher.getUsername());
+		}
+		for (Recommend recommend : recommends) {
+			BookInShelf bookInShelf =  recommend.getBookinshelf();
+			Student student = studentRepository.findOne(bookInShelf.getBookShelf().getId());
+			Campus campus = campusRepository.findOne(student.getCampusId());
+			Clazz clazz = clazzRepository.findOne(student.getClazzId());
+			RecommendDTO dto =  RecommendDTO.getBuilder(bookInShelf.getBookName(),campus.getName(),clazz.getName(),student.getUsername(),bookInShelf.getBookAttribute(),recommend.getDescription()).build();
+			recommendDTOs.add(dto);
+		}
+		Page<RecommendDTO> recommendDTOPage = new PageImpl<>(recommendDTOs,pageable,pageRecommends.getTotalPages());
+		return recommendDTOPage;
+	}
 }
+
+
+
+
