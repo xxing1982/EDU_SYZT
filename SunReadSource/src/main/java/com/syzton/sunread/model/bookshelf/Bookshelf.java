@@ -26,7 +26,7 @@ public class Bookshelf {
     @Id
     @Column(unique = true, nullable = false)
     private Long id;
-    
+
     @JsonSerialize(using = DateSerializer.class)
     @Column(name = "creation_time", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")

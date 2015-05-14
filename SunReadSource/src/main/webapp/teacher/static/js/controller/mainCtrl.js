@@ -1,8 +1,9 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
 	'userServices', 'classServices', 'noteServices', 'actionServices', 'pageableServices', 'quickSearchServices',
-	'lackFeedbackServices',
-	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices', 'coinHistoryServices']);
+	'lackFeedbackServices','popularSearchServices','conditionSearchServices','dictionariesService','bookDetailServices','reviewServices',
+	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices', 'coinHistoryServices','campusServices',
+	'ngSanitize','hotclazzServices']);
 
 
 ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader',
@@ -53,4 +54,11 @@ ctrls.filter('formatSize6', function(){
 	return function(input){
 		return input.substring(0, 6) + '...';
 	}
+});
+
+ctrls.filter('formatParagraph', function(){
+  return function(data) {
+   if (!data) return data;
+   return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
+ 	};
 });

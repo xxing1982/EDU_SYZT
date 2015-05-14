@@ -123,6 +123,11 @@
     float: left;
 }
 
+.width-6{
+    width: 10%;
+    float: left;
+}
+
 .tr{
     text-align: right;
 }

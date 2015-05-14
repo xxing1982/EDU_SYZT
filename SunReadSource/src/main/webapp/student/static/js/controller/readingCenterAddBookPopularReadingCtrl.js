@@ -112,20 +112,17 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$roo
 
 
 	$scope.searchWeekly = function(){
-
          $scope.createPageable(WeeklyHotSearch);
 	};
 
   $scope.searchMonthly = function(){
-
         $scope.createPageable(MonthlyHotSearch);
 	};
 
 
   $scope.searchYearly = function(){
-
       $scope.createPageable(YearlyHotSearch);
-    };
+  };
 
   $scope.addBooktoShelf = function(terms){
     var addBook = new JoinShelf();

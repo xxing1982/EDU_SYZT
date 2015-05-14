@@ -3,6 +3,7 @@ package com.syzton.sunread.service.user;
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.exception.common.AuthenticationException;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.EduGroup;
@@ -16,6 +17,8 @@ import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.organization.EduGroupRepository;
 import com.syzton.sunread.repository.organization.SchoolRepository;
 import com.syzton.sunread.repository.user.*;
+import com.syzton.sunread.service.bookshelf.BookInShelfService;
+import com.syzton.sunread.service.bookshelf.BookshelfService;
 import com.syzton.sunread.service.organization.EduGroupService;
 import com.syzton.sunread.service.organization.SchoolService;
 import com.syzton.sunread.util.ExcelUtil;
@@ -76,6 +79,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     private EduGroupRepository eduGroupRepo;
     
     private SchoolRepository schoolRepo;
+
+    private BookshelfService bookshelfService;
     
     
 
@@ -90,7 +95,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
                                  ClazzRepository clazzRepository,
                                  PasswordEncoder passwordEncoder,
                                  CampusRepository campusRepository,
-                                 EduGroupRepository eduGroupRepo,SchoolRepository schoolRepo) {
+                                 EduGroupRepository eduGroupRepo,SchoolRepository schoolRepo,
+                                 BookshelfService bookshelfService) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
         this.parentRepository = parentRepository;
@@ -102,6 +108,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         this.campusRepository = campusRepository;
         this.eduGroupRepo = eduGroupRepo;
         this.schoolRepo = schoolRepo;
+        this.bookshelfService = bookshelfService;
         
     }
 
@@ -414,23 +421,26 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		   	student.setPassword(password);
 		   	student.setAddress(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
 		   	String birthday = ExcelUtil.getStringFromExcelCell(row.getCell(4));
-		   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		   	Date date;
-			try {
-				date = format.parse(birthday);
-			} catch (ParseException e) {
-				failMap.put(row.getRowNum()+1, "birthday date must yyyy-MM-dd,eg:1987-01-12."+e.getMessage());
-				e.printStackTrace();
-				continue;
-			}
-		   	student.setBirthday(date.getTime());
-		   	Calendar calendar = Calendar.getInstance();
-		   	calendar.setTime(date);
-		   	int year = calendar.get(Calendar.YEAR);
-		   	Calendar now  = Calendar.getInstance();
-		   	now.setTime(new Date());
-		   	int age = now.get(Calendar.YEAR)-year;
-		   	student.setAge(age);
+            if (birthday!=null && !birthday.equals("")) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                Date date;
+                try {
+                    date = format.parse(birthday);
+                } catch (ParseException e) {
+                    failMap.put(row.getRowNum() + 1, "birthday date must yyyy-MM-dd,eg:1987-01-12." + e.getMessage());
+                    e.printStackTrace();
+                    continue;
+                }
+
+		    	student.setBirthday(date.getTime());
+		    	Calendar calendar = Calendar.getInstance();
+		   	    calendar.setTime(date);
+		   	    int year = calendar.get(Calendar.YEAR);
+		   	    Calendar now  = Calendar.getInstance();
+		   	    now.setTime(new Date());
+		   	    int age = now.get(Calendar.YEAR)-year;
+		   	    student.setAge(age);
+            }
 		   	student.setEmail(ExcelUtil.getStringFromExcelCell(row.getCell(5)));
 		    String sex = ExcelUtil.getStringFromExcelCell(row.getCell(6));
 		    if(sex.equals("女")){
@@ -482,7 +492,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 				continue;
 			}
 			student.setClazzId(clazz.getId());
-			studentRepository.save(student);
+			Student added = studentRepository.save(student);
+            bookshelfService.addBookshelfByStudent(added);
 		}  
 		return failMap;
 	}

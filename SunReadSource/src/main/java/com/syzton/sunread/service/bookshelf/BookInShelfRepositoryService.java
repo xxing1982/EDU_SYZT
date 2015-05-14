@@ -67,19 +67,40 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 			throw new NotFoundException("no bookshelf found with id :"+bookshelf.getId());
 		}
         
-		ArrayList<BookInShelf> bookArray = repository.findByBookShelf(bookshelf);
-		for (BookInShelf bookInShelf : bookArray) {
-			if(bookInShelf.getBookId() == bookId)
+        //If the Book has been added in student`s bookshelf
+//		ArrayList<BookInShelf> bookArray = repository.findByBookShelf(bookshelf);
+//		for (BookInShelf bookInShelf : bookArray) {
+//			if(bookInShelf.getBookId() == bookId){
+//				if(bookInShelf.getDeleted()){
+//					bookInShelf.setDeleted(false);
+//					return repository.save(bookInShelf);
+//				}
+//				else{
+//					throw new DuplicateException("Book with name: "+book.getName()+" is already in your bookshelf..");
+//				}
+//			}	
+//		}
+        
+        BookInShelf isInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
+        if(isInShelf == null){
+            BookInShelf bookInShelfModel = BookInShelf.getBuilder(book.getId(),book.getName()
+            		,book.getIsbn(),book.getPictureUrl(),book.getAuthor(),book.getPoint()
+            		,bookshelf,added.getBookAttribute(),added.getReadState())
+            		.description(added.getDescription())
+            		.build();
+            BookInShelf model = repository.save(bookInShelfModel);
+            return model;
+        }
+        else {
+			if(isInShelf.getDeleted()){
+				isInShelf.setDeleted(false);
+				return repository.save(isInShelf);
+			}
+			else{
 				throw new DuplicateException("Book with name: "+book.getName()+" is already in your bookshelf..");
+			}
 		}
         
-        BookInShelf bookInShelfModel = BookInShelf.getBuilder(book.getId(),book.getName()
-        		,book.getIsbn(),book.getPictureUrl(),book.getAuthor(),book.getPoint()
-        		,bookshelf,added.getBookAttribute(),added.getReadState())
-        		.description(added.getDescription())
-        		.build();
-        BookInShelf model = repository.save(bookInShelfModel);
-        return model;
 	}
 	
 	@Transactional(rollbackFor = {NotFoundException.class})
@@ -91,14 +112,21 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 		return deleted;
 	}
 	
+	
 	@Transactional(rollbackFor = {NotFoundException.class})
 	@Override
 	public BookInShelf deleteByBookshelfIdAndBookId(long bookshelfId,Long bookId){
 		// TODO Auto-generated method stub
 		Bookshelf bookshelf = bookshelfRepository.findOne(bookshelfId);
 		BookInShelf bookInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
-		bookInShelf.setDeleted(true);
-		repository.save(bookInShelf);
+		//To make sure no one is able to delete a book that has been verified
+		if(bookInShelf.getDeleted()&&!bookInShelf.getReadState()){
+			repository.delete(bookInShelf);;
+		}
+		else {
+			bookInShelf.setDeleted(true);
+			repository.save(bookInShelf);
+		}
 		return bookInShelf;
 	}
 	
@@ -210,16 +238,20 @@ public class BookInShelfRepositoryService implements BookInShelfService{
 
     	Bookshelf bookshelf = bookshelfRepository.findOne(studentId);
     	BookInShelf bookInShelf = repository.findOneByBookshelfAndBookId(bookshelf, bookId);
-        if (bookInShelf != null&&bookInShelf.updateReadState()) {
-			repository.saveAndFlush(bookInShelf);
+        if(bookInShelf == null)
+        	throw new NotFoundException("The book with name "+bookInShelf.getBookName()+"is not in the bookshelf");
+        if(bookInShelf.getDeleted())
+        	throw new NotFoundException("The book with name"+bookInShelf.getBookName()+"had been deleted");
+    	if (bookInShelf.updateReadState()) {
+    		repository.saveAndFlush(bookInShelf);
 			return true;
 		}
         else {
-    		throw new BookInShelfDuplicateVerifiedException("The book with id :"
-    	+bookId+"has been verified");
+    		throw new BookInShelfDuplicateVerifiedException("The book with id :"+bookId+"has been verified");
 		}
     }
     
+    //Alter Bookinshelf when book changed
     @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
 	public boolean updateByBookId(Long bookId){

@@ -67,7 +67,7 @@ public class MessageCenterController extends BaseController{
 	
 	@RequestMapping(value = "/from/{userId}/messages",method = RequestMethod.GET)
 	@ResponseBody
-	public PageResource<Message> findMessagesBySendUser(@PathVariable("userId") Long userId,
+	public PageResource<MessageDTO> findMessagesBySendUser(@PathVariable("userId") Long userId,
 												   @RequestParam("page") int page,
 												   @RequestParam("size") int size,
 												   @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
@@ -76,7 +76,7 @@ public class MessageCenterController extends BaseController{
 		sortBy = sortBy ==null ? "creationTime" : sortBy;
 		Pageable pageable = this.getPageable(page,size,sortBy,"desc") ;
 		
-		Page<Message> messagePage = messageService.findMessagesBySendUser(pageable,userId);
+		Page<MessageDTO> messagePage = messageService.findMessagesBySendUser(pageable,userId);
 		
 		LOGGER.debug("Found messages entry with information:{}",messagePage);
 		
@@ -85,7 +85,7 @@ public class MessageCenterController extends BaseController{
 	
 	@RequestMapping(value = "/to/{userId}/messages",method = RequestMethod.GET)
 	@ResponseBody
-	public PageResource<Message> findMessagesByReceiveUser(@PathVariable("userId")Long userId,
+	public PageResource<MessageDTO> findMessagesByReceiveUser(@PathVariable("userId")Long userId,
 												     @RequestParam("page") int page,
 												     @RequestParam("size") int size,
 												     @RequestParam(value = "sortBy" ,required = false) String sortBy) throws NotFoundException {
@@ -93,7 +93,7 @@ public class MessageCenterController extends BaseController{
 
 		Pageable pageable = this.getPageable(page,size,sortBy,"desc") ;
 		
-		Page<Message> messagePage = messageService.findMessagesByReceiveUser(pageable,userId);
+		Page<MessageDTO> messagePage = messageService.findMessagesByReceiveUser(pageable,userId);
 		
 		return new PageResource<>(messagePage,"page","size");
 	}

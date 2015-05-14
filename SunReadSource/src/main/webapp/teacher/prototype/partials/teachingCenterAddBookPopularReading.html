@@ -1,34 +1,26 @@
 <div class="popularSearch">
-<div class="row">
-    <div class="col-md-9 leftpart">
+<div class="leftpart">
 
         <div class="input-group popularChoice">
-
-<!--
             <label class="radio-inline">
-              <input type="radio" ng-click="search()" ng-model="status" name="inlineRadioOptions" id="inlineRadio1" value="0" checked>
-                <p class="popularText">全部</p>
-            </label>
--->
-            <label class="radio-inline">
-              <input type="radio" ng-click="searchWeekly()" ng-model="status" name="inlineRadioOptions" id="inlineRadio2" value="1" checked>
+              <input type="radio" ng-click="searchWeeklyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio2" value="1" checked>
                 <p class="popularText">周热门</p>
             </label>
             <label class="radio-inline">
-              <input type="radio" ng-click="searchMonthly()" ng-model="status" name="inlineRadioOptions" id="inlineRadio3" value="2">
+              <input type="radio" ng-click="searchMonthlyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio3" value="2">
                  <p class="popularText">月热门</p>
             </label>
             <label class="radio-inline">
-              <input type="radio" ng-click="searchYearly()" ng-model="status" name="inlineRadioOptions" id="inlineRadio1" value="3">
+              <input type="radio" ng-click="searchYearlyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio1" value="3">
                 <p class="popularText">年热门</p>
             </label>
 
         </div>
 
-	<div ng-repeat="terms in searchPageable.entities.content">
-        <div class="row bookList" ng-init="terms.text_overflow=true;">
+	<div class="row" ng-repeat="terms in searchPageable.entities.content">
+        <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
             <div class="col-md-3">
-                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="img-responsive"></a>
+                <a href="#teachingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
             </div>
             <div class="col-md-9">
                 <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
@@ -37,9 +29,9 @@
                     积分:{{terms.point}}&nbsp;&nbsp;等级:{{terms.extra.level}}&nbsp;&nbsp;财富：{{terms.coin}}</p></div>
                 <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
                 <div class="row fsize12">
-                    <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button">加入书架</a>&nbsp;&nbsp;
-                    <a href="#readingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-green">相关笔记</a>&nbsp;&nbsp;
-                    <a href="#readingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-green">相关评价</a>
+                  <a href="#teachingCenter/addBookToShelf" class="btn btn-sm btn-green" type="button">加入书架</a>&nbsp;&nbsp;
+                    <a href="#teachingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-green">相关笔记</a>&nbsp;&nbsp;
+                    <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-green">相关评价</a>
                 </div>
             </div>
         </div>
@@ -53,7 +45,7 @@
     </div>
 
       <!-- Footer and page numbers  -->
-    <div class="container-fluid">
+    <div class="container-fluid addBookPageNum myBlock">
     <div class="row paragraph">
        <div class="col-xs-1"></div>
         <div class="col-xs-7">
@@ -86,10 +78,11 @@
 	</div>
 
 
-  <!--right part -->
+   <!--right part -->
     <div class="rightpart">
-        <div class="row conditionBlock">
-           <div class="col-md-12">
+        <div class="row conditionBlock myBlock">
+            <div class="col-md-1"></div>
+           <div class="col-md-11">
                 <div class="row">
                     <h5>级别及类别</h5>
                 </div><!---->
@@ -118,34 +111,34 @@
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
-                <div class="row">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
+                <div class="row radioCondition">
                     <h5>测试类型</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.testType" name="testOptions" id="testOptions1" value="0" checked>
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.testType" name="testOptions" id="testOptions1" value="0" checked>
                     所有类型
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.testType" name="testOptions" id="testOptions2" value="1">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.testType" name="testOptions" id="testOptions2" value="1">
                     认证测试
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.testType" name="testOptions" id="testOptions3" value="2">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.testType" name="testOptions" id="testOptions3" value="2">
                     词汇训练
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.testType" name="testOptions" id="testOptions4" value="3">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.testType" name="testOptions" id="testOptions4" value="3">
                     思维训练
                   </label>
                 </div>
@@ -153,142 +146,142 @@
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
-                <div class="row">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
+                <div class="row radioCondition">
                     <h5>类型</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions1" value="0" checked>
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions1" value="0" checked>
                     小说及非小说
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions2" value="1">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions2" value="1">
                     小说
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions2" value="2">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.literature" name="typeOptions2" id="typeOptions2" value="2">
                     非小说
                   </label>
                 </div>
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
-                <div class="row">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
+                <div class="row radioCondition">
                     <h5>积分</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions1" value="0" checked>
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions1" value="0" checked>
                     全部积分
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="1">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="1">
                     0-5积分
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="2">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="2">
                     6-10积分
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="3">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="3">
                     10-20积分
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="4">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.pointRange" name="pointOptions" id="pointOptions2" value="4">
                     20以上积分
                   </label>
                 </div>
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
-                <div class="row">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
+                <div class="row radioCondition">
                     <h5>语言</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.language" name="languageOptions" id="languageOptions1" value="0" checked>
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.language" name="languageOptions" id="languageOptions1" value="0" checked>
                     全部语言
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.language" name="languageOptions" id="languageOptions2" value="1">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.language" name="languageOptions" id="languageOptions2" value="1">
                     中文书
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.language" name="languageOptions" id="languageOptions2" value="2">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.language" name="languageOptions" id="languageOptions2" value="2">
                     英文书
                   </label>
                 </div>
             </div>
         </div>
 
-        <div class="row conditionBlock">
-           <div class="col-md-2"></div>
-           <div class="col-md-10">
-                <div class="row">
+        <div class="row conditionBlock myBlock">
+           <div class="col-md-1"></div>
+           <div class="col-md-11">
+                <div class="row radioCondition">
                     <h5>配套资源</h5>
                 </div><!---->
 
                  <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions1" value="0" checked>
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions1" value="0" checked>
                     不限制
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="1">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="1">
                     电子书
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="2">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="2">
                     音频
                   </label>
                 </div>
                 <div class="row radio">
                   <label>
-                    <input type="radio" ng-click="search()" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="3">
+                    <input type="radio" ng-click="searchBooks()" ng-model="searchArguments.resource" name="resoucesOptions" id="resoucesOptions2" value="3">
                     视频
                   </label>
                 </div>
 
             </div>
         </div>
-        <div class="placeHolder"> 
+
+        <div class="placeHolder">
             <p>&nbsp;</p>
         </div>
 
         </div>
-    </div>
 
     </div>
     <!-- End right part -->

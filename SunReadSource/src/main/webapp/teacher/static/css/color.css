@@ -14,6 +14,9 @@ p, .paragraph,
     color: #666666;
 }
 
+.readDyn{
+	color: #6c82a0;	
+}
 
 /* Light blue for link and so on */
 a,

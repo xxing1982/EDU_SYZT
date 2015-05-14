@@ -85,7 +85,7 @@
 
 .popularChoice .popularText {
     margin-right: 30px;
-    color: darkslateblue;
+    color: rgb(47, 86, 130);
 }
 
 #myBookshelf-button {
@@ -169,14 +169,13 @@
     margin-left: 15px;
 }
 
-.input-group {
-}
+
 
 
 
 .bookList {
-    margin-bottom: 25px;
-    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     margin-left: 10px;
 }
 
@@ -240,3 +239,7 @@
 
 
 
+
+.searchHolder {
+    height: 201px;
+}

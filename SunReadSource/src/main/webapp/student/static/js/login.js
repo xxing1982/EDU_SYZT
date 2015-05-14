@@ -1,4 +1,11 @@
 $(document).ready(function(){
+	$("#password").focus();
+	$(document).keydown(function(event){
+		//press Enter
+		if(event.keyCode == 13){
+			$(".btn-login").click();
+		}
+	});
 	$(".btn-login").on("click", function(){
 		var username = $("#username").val();
 		var password = $("#password").val();

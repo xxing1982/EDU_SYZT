@@ -45,7 +45,7 @@ ctrls.controller('leftNavCtrl', ['$rootScope', '$scope', '$location',
 
 ctrls.controller('recommendNavCtrl', ['$rootScope', '$scope', '$location',
     function( $rootScope, $scope, $location) {
-        $rootScope.routeMap= {
+        $rootScope.routeMapAddBook= {
             quick: /\/teachingCenter\/addBook\/quick.*/,
             advanced: /\/teachingCenter\/addBook\/advanced.*/,
             popular: /\/teachingCenter\/addBook\/popular.*/,
@@ -53,7 +53,7 @@ ctrls.controller('recommendNavCtrl', ['$rootScope', '$scope', '$location',
         }
 
         // Update the nav bar active
-        $rootScope.isActive = function(routeRegexp) {
-            return routeRegexp.test( $location.path() );
+        $rootScope.isActiveAddBook = function(routeRegexp) {
+            return routeRegexp.test($location.path() );
         }
     }]);

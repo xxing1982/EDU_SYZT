@@ -57,7 +57,7 @@ public class BookInShelf extends AbstractEntity{
     private boolean isVerified;
     
     //a bookshelf can`t have the same books
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST},optional=false)
     @JoinColumn(name = "bookshelf")
     private Bookshelf bookshelf;
     
@@ -99,6 +99,10 @@ public class BookInShelf extends AbstractEntity{
         this.description = description;
     }
     
+    public boolean getDeleted() {
+        return deleted;
+    }
+    
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
@@ -130,6 +134,10 @@ public class BookInShelf extends AbstractEntity{
 
 	public boolean getBookAttribute() {
         return isMandatory;
+    }
+	
+	public void setBookAttribute(boolean bookAttribute) {
+        this.isMandatory =  bookAttribute;
     }
 
     public boolean getReadState() {

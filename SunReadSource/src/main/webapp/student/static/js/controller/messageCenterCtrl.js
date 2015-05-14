@@ -31,7 +31,7 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
     }];
 
     var page = 0;
-    var size = 10;
+    var size = 8;
     var recieve = 'to';
     var deliver = 'from';
     var recievedArguments = {
@@ -49,12 +49,12 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
     // selected_status will changed simultaneity
     $scope.selected_status = 1;
 
-    $scope.recievedMessages = GetMessages.get({source:recieve,id:$rootScope.id,page:page,size:size}
-        ,function(){
-          console.log($scope.recievedMessages);
-        })
+    // $scope.recievedMessages = GetMessages.get({source:recieve,id:$rootScope.id,page:page,size:size}
+    //     ,function(){
+    //       console.log($scope.recievedMessages);
+    //     })
 
-    var createRecievedPageable = function(){
+    $scope.createRecievedPageable = function(){
       $scope.recievedPageable = new Pageable();
 
       $scope.recievedPageable.size = size;
@@ -62,7 +62,7 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
 
       $scope.recievedPageable.arguments = recievedArguments;
       // Set the startPage and length of number page array
-      console.log(recievedArguments);
+      // console.log(recievedArguments);
 
       $scope.recievedPageable.pageNumbers.startPage = 1;
       $scope.recievedPageable.pageNumbers.content.length = 8;
@@ -75,7 +75,7 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
       $scope.recievedPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
       console.log($scope.recievedPageable);
   }
-  var createDeliveredPageable = function(){
+  $scope.createDeliveredPageable = function(){
     $scope.deliveredPageable = new Pageable();
 
     $scope.deliveredPageable.size = size;
@@ -83,7 +83,7 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
 
     $scope.deliveredPageable.arguments = deliveredArguments;
     // Set the startPage and length of number page array
-    console.log(deliveredArguments);
+    // console.log(deliveredArguments);
 
     $scope.deliveredPageable.pageNumbers.startPage = 1;
     $scope.deliveredPageable.pageNumbers.content.length = 8;
@@ -97,14 +97,14 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
     console.log($scope.deliveredPageable);
 }
 
-    createDeliveredPageable();
-    createRecievedPageable();
+$scope.createDeliveredPageable();
+$scope.createRecievedPageable();
 
     $scope.recieveUserId = $rootScope.id;
     $scope.student = Student.get({id:$rootScope.id},function(){
       // console.log($scope.student.campusId);
       var classmates = Hotreader.get({by:'campus',id:$scope.student.campusId,sortBy:"point",page:0,size:10},function(){
-        console.log(classmates.content);
+        // console.log(classmates.content);
         $scope.classmates = classmates.content;
         $scope.searchTextStudent = "";
         $scope.chooseStudent=function(student){
@@ -123,12 +123,15 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
       if($scope.recieveUserId != undefined && $scope.message != ""){
         console.log($scope.text);
         SendMessages.save({sendUserId:$rootScope.id,recieveUserId:$scope.recieveUserId},$scope.text,function(){
+          $scope.searchTextStudent = "";
           $rootScope.modal ={
               title: "发送成功",
               content:$scope.text.message
             };
           $('#alert-modal').modal();
-          location.reload();
+          $rootScope.modal.click = function(){
+              location.reload();
+              }
         },function(e){
           $rootScope.modal ={
               title: "",
@@ -154,7 +157,9 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
             content:$scope.text.message
           };
         $('#alert-modal').modal();
-        location.reload();
+        $rootScope.modal.click = function(){
+            location.reload();
+            }
       },function(e){
         $rootScope.modal ={
             title: "",

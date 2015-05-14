@@ -7,8 +7,8 @@
         <div class="row buttom-separator">
         <div class="col-md-10">
         <ul id="myTab" class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#receive" aria-controls="receive" role="tab" data-toggle="tab">收到的消息</a></li>
-            <li role="presentation"><a href="#send" aria-controls="send" role="tab" data-toggle="tab">发出的消息</a></li>
+            <li ng-click="createRecievedPageable()" role="presentation" class="active"><a href="#receive" aria-controls="receive" role="tab" data-toggle="tab">收到的消息</a></li>
+            <li ng-click="createDeliverdPageable()" role="presentation"><a href="#send" aria-controls="send" role="tab" data-toggle="tab">发出的消息</a></li>
         </ul>
         </div>
         <div class="col-md-2 text-right">
@@ -34,21 +34,21 @@
                         </div>
 
                         <!-- Col 1 -->
-                        <div class="col-md-2">
+<!--                         <div class="col-md-2">
                             <form role="form">
-                                <div class="radio">
+                                  <div class="radio">
                                     <label><input type="radio" name="optradio">发给校长</label>
-                                </div>
-                                <div class="radio">
+                                                                 </div>
+                                                                 <div class="radio">
                                     <label><input type="radio" name="optradio">发给老师</label>
-                                </div>
-                                <div class="radio">
+                                                                 </div>
+                                                                 <div class="radio">
                                   <label><input type="radio" name="optradio">发给同学</label>
-                                </div>
+                                                                 </div>
                              </form>
-                        </div>
+                        </div> -->
 
-                        <!-- Row 1 -->
+<!--                         Row 1
                         <div class="col-md-10">
                             <div class="row">
                             <div class="col-md-4 select-group">
@@ -66,13 +66,13 @@
                             </div>
                         </div>
 
-                        <!-- Row 2 -->
+                        Row 2
                         <div class="col-md-10">
                             <div class="row">
                             <div class="col-md-4 select-group">
                                 <div class="col-md-5 row select-label">老师：</div>
                                 <div class="col-md-9 row">
-                                  <!-- Single button -->
+                                  Single button
                                     <div class="btn-group">
                                       <input type="text" ng-model="searchTextStudent" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                       <ul class="dropdown-menu" role="menu">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Row  3 student-->
                         <div class="col-md-10">
@@ -125,21 +125,22 @@
         <!-- Tab panes -->
         <div class="tab-content">
 
+<!-- -----------------------------------------receive---------------------------------------- -->
             <div role="tabpanel" class="tab-pane fade in active" id="receive">
                  <!-- Message Row -->
                  <div class="paragraph buttom-separator row" ng-repeat="message in recievedPageable .entities.content">
                     <div class="col-md-6">
                         <div class="row">
                         <div class="col-md-1">
-                            <input type="checkbox"/>
+                            <!-- <input type="checkbox"/> -->
                         </div>
-                            <div class="col-md-10">{{message.message}}</div>
+                            <div class="col-md-10">{{message.message|messageFormatSize}}</div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-3 col-md-offset-2">发件人:{{message.sendUserId}}</div>
-                            <div class="col-md-5">{{message.creationTime|date:'yyyy-MM-dd hh:mm:ss'}}</div>
+                            <div class="col-md-4 col-md-offset-2">发件人:{{message.sendUsername}}</div>
+                            <div class="col-md-4">{{message.creationTime|date:'yyyy-MM-dd hh:mm:ss'}}</div>
                             <div class="col-md-1" ng-click="deleteMessage(message)"><a>删</a></div>
                         </div>
                     </div>
@@ -156,13 +157,13 @@
                     <div class="col-md-3">
                         <div class="row">
                             <div class="col-md-2"><input type="checkbox"/></div>
-                            <div class="col-md-5">全选</div>
-                            <div class="col-md-5">删除</div>
+<!--                             <div class="col-md-5">全选</div>
+                            <div class="col-md-5">删除</div> -->
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-xs-2">全部已读</div>
+                            <!-- <div class="col-xs-2">全部已读</div> -->
                             <div class="col-xs-7">
                                 <!-- Custom page number goes here -->
                                 <div class="row custom-page-number-group">
@@ -192,22 +193,22 @@
 
             </div>
 
-
+  <!-- ----------------------SEND------------------------------------------------------- -->
             <div role="tabpanel" class="tab-pane fade" id="send">
               <!-- Message Row -->
               <div class="paragraph buttom-separator row" ng-repeat="message in deliveredPageable .entities.content">
-                 <div class="col-md-6">
+                 <div class="col-md-7">
                      <div class="row">
                      <div class="col-md-1">
-                         <input type="checkbox"/>
+                         <!-- <input type="checkbox"/> -->
                      </div>
-                         <div class="col-md-10">{{message.message}}</div>
+                         <div class="col-md-10">{{message.message|messageFormatSize}}</div>
                      </div>
                  </div>
-                 <div class="col-md-6">
+                 <div class="col-md-5">
                      <div class="row">
-                         <div class="col-md-3 col-md-offset-2">发件人:{{message.sendUserId}}</div>
-                         <div class="col-md-5">{{message.creationTime | date:'yyyy-MM-dd hh:mm:ss'}}</div>
+                         <div class="col-md-4 col-md-offset-3">收件人:{{message.receiveUserName}}</div>
+                         <div class="col-md-3">{{message.creationTime | date:'yyyy-MM-dd hh:mm:ss'}}</div>
                          <div class="col-md-1" ng-click="deleteMessage(message)"><a>删</a></div>
                      </div>
                  </div>
@@ -224,13 +225,13 @@
                     <div class="col-md-3">
                         <div class="row">
                             <div class="col-md-2"><input type="checkbox"/></div>
-                            <div class="col-md-5">全选</div>
-                            <div class="col-md-5">删除</div>
+<!--                             <div class="col-md-5">全选</div>
+                            <div class="col-md-5">删除</div> -->
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-xs-2">全部已读</div>
+                            <!-- <div class="col-xs-2">全部已读</div> -->
                             <div class="col-xs-7">
                                 <!-- Custom page number goes here -->
                                 <div class="row custom-page-number-group">

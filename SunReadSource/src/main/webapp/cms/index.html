@@ -8,25 +8,13 @@
 	
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
-    <link href="../static/css/common.css" rel="stylesheet" type="text/css" />
-
-    <!-- style for controls like page numbers-->
-    <link href="../static/css/custom-ui.css" rel="stylesheet" type="text/css" />
     
-    <!-- style for all the bodies inside the xxx-page -->
-    <link href="../static/css/pagebody.css" rel="stylesheet" type="text/css" />
-    
-    <!-- Color manage -->
-    <link href="../static/css/color.css" rel="stylesheet" type="text/css" /> 
-    
-    <!-- Font manage -->
-    <link href="../static/css/fonts.css" rel="stylesheet" type="text/css" /> 
-    
-    <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/bookshelf.css" rel="stylesheet" type="text/css" /> 
-    
-    <!-- Dropzone upload plugins -->
-    <link href="../static/css/dropzone.css" rel="stylesheet" type="text/css" /> 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/color.css" rel="stylesheet" type="text/css" />
+    <link href="css/custom-ui.css" rel="stylesheet" type="text/css" />
+    <link href="css/fonts.css" rel="stylesheet" type="text/css" />
+    <link href="css/bookshelf.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -49,10 +37,10 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="#/">index</a></li>
+					<li><a href="#/">主页</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
-					<li><a href="#book">Book</a></li>
+					<li><a href="#book">书籍</a></li>
 					<li><a href="#objectivequestion">词汇和验证测试试题及选项</a></li>
 					<li><a href="#subjectivequestion">思维测试试题</a></li>
 					<li><a href="#region">区域</a></li>
@@ -64,10 +52,51 @@
 					<li><a href="#student">学生</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" data-ui-view>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" data-ui-view style="margin-top:20px">
 			</div>
 		</div>
 	</div>
+
+	<div id="alert-modal" class="modal fade bs-example-modal-sm" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" style="width:400px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="gridSystemModalLabel">{{modal.title}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							{{modal.content}}
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" ng-click="modal.click()" data-dismiss="modal">确定</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div id="confirm-modal" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" style="width:400px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="gridSystemModalLabel">{{confirm_modal.title}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							{{confirm_modal.content}}
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="confirm_modal.click()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -79,8 +108,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular-resource.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+
     <script src="js/config.js"></script>
 	<script src="js/controller/mainCtrl.js"></script>
+	
+	<!--lib-->
+    <script src="js/lib/bs-dropdown.js"></script>
+
+
+    
     <script src="js/controller/bookCtrl.js"></script>
     <script src="js/controller/userCtrl.js"></script>
     <script src="js/controller/objectiveQuestionCtrl.js"></script>

@@ -4,15 +4,15 @@
     border: 1px #D6DEE6 solid;
 }
 
-.advancedSearch .input-group-addon {
-    padding-right: 5%;
+.quickSearch .input-group-addon, .advancedSearch .input-group-addon {
+    padding-right: 3%;
 }
 
 .conditionBlock {
     padding-left: 15px;
     padding-bottom: 5px;
-    margin-right: 5px;
-    border-bottom: 1px #D6DEE6 solid;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
  .btn-catogary{
   color: darkslateblue;
@@ -72,18 +72,18 @@
 
 .rightpart {
     padding-left: 15px;
-    border-left: 1px #D6DEE6 solid;
     float: left;
     width: 24%;
 }
 
 .popularChoice {
-    margin: 15px 40px;
+    margin: 10px 40px;
+    margin-bottom: 0px;
 }
 
 .popularChoice .popularText {
     margin-right: 30px;
-    color: darkslateblue;
+    
 }
 
 #myBookshelf-button {
@@ -99,8 +99,8 @@
 }
 
 .bookDetailUp {
-    padding-top: 35px;
-    margin-bottom: 30px;
+     padding-top: 20px; 
+/*    margin-bottom: 23px;*/
 }
 
 
@@ -165,20 +165,21 @@
 }
 
 .input-group {
+    padding-bottom: 10px;
 }
 
 
 
 .bookList {
-    margin-bottom: 25px;
-    margin-top: 15px;
-    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-left: 0px;
 }
 
 .readingCenter-right-body .bookDetailBottom {
-    margin-left: 15px;
-    margin-right: 15px;
-    border-bottom: 1px #D6DEE6 solid;
+    /* margin-left: 15px; */
+    /* margin-right: 15px; */
+    /* border-bottom: 1px #D6DEE6 solid; */
 }
 
 .lackBookModal {
@@ -248,7 +249,7 @@
 
 .addBook-body .addBookFind {
     color: black;
-    border-bottom: 1px #D6DEE6 solid;
+    border-bottom: 1px #CCCCCC solid;
     list-style:none;
 }
 .find ul{
@@ -256,6 +257,86 @@
 }
 
 .addBookFindRight {
-    border-bottom: 1px #D6DEE6 solid;
+    border-bottom: 1px #CCCCCC solid;
     padding-bottom: 2px;    
+}
+
+.tip {
+    border-top: 1px #CCCCCC solid;
+    margin-top: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.addBookIMG {
+      height: 135px;
+      margin-top: 16px;
+}
+
+.searchHolder {
+    height: 201px;
+}
+
+/*******************quick search*******************/
+/*
+.quickSearch, .advancedSearch, .popularSearch, .recommendSearch
+{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+*/
+
+.quickSearch .search, .advancedSearch .search
+{
+    margin-top: 5px;
+    /* padding-left: 20px; */
+    /* padding-right: 3%; */
+    padding-bottom: 10px;
+}
+
+.quickSearch .search input, .advancedSearch .search input
+{
+    border: 1px #72BEE6 solid;
+}
+
+.quickSearch .search span, .advancedSearch .search span
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #72BEE6;
+    color: #FFFFFF;
+    cursor: pointer;
+    border: none;
+}
+
+.quickSearch .search span:hover, .advancedSearch .search span:hover
+{
+    background-color: #83CFF7;
+}
+
+.addBookPageNum {
+    padding-right: 0px;
+    height: 50px;
+    padding-top: 13px;
+    margin-right: -30px;
+    margin-left: -15px;
+}
+
+
+.conditionBlock .radioCondition {
+    margin-bottom: -10px;
+}
+
+.bookDetailTabPanes {
+    line-height: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.readingCenter-right-body {
+    border-radius: 5px;
+    border: 1px #E1E1E1 solid; 
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.21);
+    margin-top: 15px;
 }

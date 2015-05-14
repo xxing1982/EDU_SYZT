@@ -1,10 +1,11 @@
 //readingCenterAddBookAdvancedSearchCtrl.jsc
-ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$rootScope','$stateParams','Pageable',
-        'ConditionSearch','QuickSearch','Book','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,config) {
+ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$rootScope','$stateParams','Pageable','ConditionSearch','QuickSearch','Book','config', 'BookOperation',
+    function ($scope,$rootScope,$stateParams,Pageable,ConditionSearch,QuickSearch,Book, config, BookOperation) {
 
 
 //    $scope.searchContent="";
-
+    $scope.imageServer = config.IMAGESERVER;
+    $scope.selectBook = {};
     var pageSize = 4;
     var searchTerm='isbn';
             
@@ -83,7 +84,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
         $scope.searchPageable.arguments=$scope.searchArguments;
         // Set the startPage and length of number page array
-        console.log($scope.searchArguments);
+        //console.log($scope.searchArguments);
         
         $scope.searchPageable.pageNumbers.startPage = 1;
         $scope.searchPageable.pageNumbers.content.length = 8;
@@ -94,13 +95,13 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         $scope.searchPageable.build(ConditionSearch);
         
         $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
-        console.log($scope.searchPageable);
+        //console.log($scope.searchPageable);
     }
 
     $scope.createPageable();
 
     $scope.searchByName=function(searchContent){
-        console.log(searchContent);
+        //console.log(searchContent);
         $scope.createPageable();
 
     };
@@ -110,30 +111,40 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
 
 	};
 
-    $scope.addBooktoShelf = function(terms){
-        console.log(terms);
-        var bookId = terms.id;
-        var bookInShelf = {
-            bookAttribute: false,
-            readState: false
-            }
-        console.log(XMLHttpRequest.state);
-        try{
-             AddbookToShelf.save({bookshelfId:$rootScope.id,bookId:bookId},bookInShelf)
-             alert("添加成功");
-             //throw new Error("添加失败");
-        }
-        catch(e){
-
-            alert(e);
-        }
+    $scope.Update = function(terms){
+        $scope.selectBook = angular.copy(terms);
+        $("#updateBook").modal({backdrop: 'static', keyboard: false});
     };
+
+    $scope.DeleteBook = function(terms){
+        $rootScope.confirm_modal = {
+            title: "提示",
+            content: "确定删除吗",
+            click: function(){
+                BookOperation.deleteBook(terms.id, function(){
+                    location.reload();
+                })
+            }
+        };
+        $('#confirm-modal').modal('show');
+    }
+
+    $scope.submitForm = function(isValid, isDirty){
+        if (!isValid) {
+            return;
+        };
+        if (!isDirty) {
+            $("#updateBook").modal("hide");
+            return;
+        };
+        BookOperation.updateBook($scope.selectBook.id, $scope.selectBook, function(){
+            location.reload();
+        })
+    }
 
 if($stateParams.searchTerm!== ""){
      $scope.searchByName($stateParams.searchTerm);
      $scope.searchArguments.searchTerm = $stateParams.searchTerm;
 }
-
-$scope.imageServer = config.IMAGESERVER;
 
 }]);

@@ -18,18 +18,12 @@
 <div class="container-fluid addBook-body">
 
     <div class="row">
-<!--
-        <a ui-sref='.quick'><div class="col-md-2 select-tab myActive">快速查找</div></a>
-        <a ui-sref='.advanced'><div class="col-md-2 select-tab">全部的书</div></a>
-        <a ui-sref='.popular'><div class="col-md-2 select-tab">热门阅读</div></a>
-        <a ui-sref=".recommend"><div class="col-md-2 select-tab">热门推荐</div></a>
--->
         <ul class="col-md-9 addBookFind" ng-controller="recommendNavCtrl">
             <div class="row">
-            <a ui-sref='.quick'><li class="col-md-2 select-tab" ng-class="{myActive:isActive(routeMap.quick)}"><span>快速查找</span></li></a>
-            <a ui-sref='.advanced'><li class="col-md-2 select-tab" ng-class="{myActive:isActive(routeMap.advanced)}"><span>全部的书</span></li></a>
-            <a ui-sref='.popular'><li class="col-md-2 select-tab" ng-class="{myActive:isActive(routeMap.popular)}"><span>热门阅读</span></li></a>
-            <a ui-sref='.recommend'><li class="col-md-2 select-tab" ng-class="{myActive:isActive(routeMap.recommend)}"><span>热门推荐</span></li></a>
+            <a ui-sref='.quick'><li class="col-md-2 select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.quick)}"><span>快速查找</span></li></a>
+            <a ui-sref='.advanced'><li class="col-md-2 select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.advanced)}"><span>全部的书</span></li></a>
+            <a ui-sref='.popular'><li class="col-md-2 select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.popular)}"><span>热门阅读</span></li></a>
+            <a ui-sref='.recommend'><li class="col-md-2 select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.recommend)}"><span>热门推荐</span></li></a>
             </div>
         </ul>
         <div class="col-md-3 addBookFindRight">
@@ -65,14 +59,14 @@
                 </label>
             </div>
 
-                                <div class="row">
-                                        <div class="lackBookText"><p>ISBN号：</p></div>
-                                        <input type="text" ng-model="isbn" class="form-control lackBookInput" placeholder="请输入isbn号（10位或13位）" aria-describedby="sizing-addon2"
-                                            ng-minlength=10 ng-maxlength=13 ng-required>
-                                            <div style="margin-top: 15px;"><span style="color:rgba(229, 105, 105, 0.7);padding-top:15px" ng-show="!isbnValid()">
-                                            <span ng-show="!isbnValid()">ISBN 不合法</span>
-                                        </span></div>
-                                </div>
+                <div class="row">
+                        <div class="lackBookText"><p>ISBN号：</p></div>
+                        <input type="text" ng-model="isbn" class="form-control lackBookInput" placeholder="请输入isbn号（10位或13位）" aria-describedby="sizing-addon2"
+                            ng-minlength=10 ng-maxlength=13 ng-required>
+                            <div style="margin-top: 15px;"><span style="color:rgba(229, 105, 105, 0.7);padding-top:15px" ng-show="!isbnValid()">
+                            <span ng-show="!isbnValid()">ISBN 不合法</span>
+                        </span></div>
+                </div>
 
             <div class="row">
                 <div class="lackBookText"><p>作者姓名：</p></div>

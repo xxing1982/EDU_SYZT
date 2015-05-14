@@ -1,5 +1,6 @@
 package com.syzton.sunread.service.message;
 
+import com.syzton.sunread.dto.message.MessageDTO;
 import javassist.NotFoundException;
 
 import org.springframework.data.domain.Page;
@@ -13,9 +14,9 @@ public interface MessageCenterService {
 
 	public void sendMessageToClass(long sendUserId,long classId, String message);
 
-	public Page<Message> findMessagesBySendUser(Pageable pageable, Long userId);
+	public Page<MessageDTO> findMessagesBySendUser(Pageable pageable, Long userId);
 
-	public Page<Message> findMessagesByReceiveUser(Pageable pageable, Long userId);
+	public Page<MessageDTO> findMessagesByReceiveUser(Pageable pageable, Long userId);
 
 	public Message deleteById(Long id);
 	

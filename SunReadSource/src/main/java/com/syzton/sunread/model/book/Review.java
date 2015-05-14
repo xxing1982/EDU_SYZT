@@ -3,6 +3,7 @@ package com.syzton.sunread.model.book;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.book.ReviewDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.util.DateSerializer;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -14,20 +15,13 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "review")
-public class Review {
+public class Review extends AbstractEntity{
 
     private final static int CONTENT_MAX_LENGTH = 1000;
     private final static int TITLE_MAX_LENGTH = 200;
 
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @JsonSerialize(using = DateSerializer.class)
-    @Column(name = "creation_time", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime creationTime;
 
     @Column(length = TITLE_MAX_LENGTH,nullable = false)
     private String title;
@@ -50,11 +44,6 @@ public class Review {
     public Book getBook() {
         return book;
     }
-    @PrePersist
-    public void prePersist() {
-        DateTime now = DateTime.now();
-        creationTime = now;
-    }
     public String getContent() {
         return content;
     }
@@ -63,9 +52,6 @@ public class Review {
         return title;
     }
 
-    public long getId() {
-        return id;
-    }
 
     public int getRate() {
         return rate;
