@@ -263,6 +263,21 @@ public class UploadControl {
 		map.put(0, "parser Excel complete");
 		return map;
 	}
+	@RequestMapping(value = "/api/upload/excel/admin", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer,String> adminExcelUpload(@RequestParam MultipartFile myfile,
+												  HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = userService.batchSaveOrUpdateCMSAdminFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		map.put(0, "parser Excel complete");
+		return map;
+	}
 
 	@RequestMapping(value = "/api/upload/excel/teacher", method = RequestMethod.POST)
 	@ResponseBody

@@ -8,6 +8,7 @@ import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.model.organization.School;
+import com.syzton.sunread.model.security.Role;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
 import com.syzton.sunread.model.user.User.GenderType;
@@ -39,11 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.util.Assert.notNull;
 
@@ -96,7 +93,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
                                  PasswordEncoder passwordEncoder,
                                  CampusRepository campusRepository,
                                  EduGroupRepository eduGroupRepo,SchoolRepository schoolRepo,
-                                 BookshelfService bookshelfService) {
+                                 BookshelfService bookshelfService,
+                                 RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
         this.parentRepository = parentRepository;
@@ -109,6 +107,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         this.eduGroupRepo = eduGroupRepo;
         this.schoolRepo = schoolRepo;
         this.bookshelfService = bookshelfService;
+        this.roleRepository = roleRepository;
         
     }
 
@@ -492,6 +491,11 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 				continue;
 			}
 			student.setClazzId(clazz.getId());
+
+            Role role = roleRepository.findOne(3L);
+            List<Role> roles = new ArrayList<>();
+            roles.add(role);
+            student.setRoles(roles);
 			Student added = studentRepository.save(student);
             bookshelfService.addBookshelfByStudent(added);
 		}  
@@ -591,10 +595,84 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 				failMap.put(row.getRowNum()+1, "can't find clazz with name:" + className);
 				continue;
 			}
+
+            Role role = roleRepository.findOne(2L);
+            List<Role> roles = new ArrayList<>();
+            roles.add(role);
+            teacher.setRoles(roles);
 			teacher.setClassId(clazz.getId());
 			teacherRepository.save(teacher);
 		}  
 		return failMap;
 	}
+    @Override
+    public Map<Integer,String> batchSaveOrUpdateCMSAdminFromExcel(Sheet sheet) {
+        Map<Integer,String> failMap = new HashMap<Integer,String>();
 
+        for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {
+            Row row = sheet.getRow(i);
+            String userId = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+            if("".equals(userId)){
+                break;
+            }
+            User user = userRepository.findByUserId(userId);
+            if(user == null){
+                user = new Teacher();
+            }else{
+                failMap.put(i+1, "导入失败,Admin ID重复,数据库已经存在该Admin ID:"+userId);
+                continue;
+            }
+            user.setUserId(userId);
+
+            user.setUsername(ExcelUtil.getStringFromExcelCell(row.getCell(1)));
+            String password = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+            if("".equals(password)){
+                password = "123456";
+                failMap.put(i+1, "未发现密码,使用系统默认密码:"+123456);
+            }
+            password = passwordEncoder.encode(password);
+            user.setPassword(password);
+            user.setAddress(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
+
+            String birthday = ExcelUtil.getStringFromExcelCell(row.getCell(4));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date date;
+            try {
+                date = format.parse(birthday);
+            } catch (ParseException e) {
+                failMap.put(row.getRowNum()+1, "birthday date must yyyy-MM-dd,eg:1987-01-12."+e.getMessage());
+                e.printStackTrace();
+                continue;
+            }
+            user.setBirthday(date.getTime());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int year = calendar.get(Calendar.YEAR);
+            Calendar now  = Calendar.getInstance();
+            now.setTime(new Date());
+            int age = now.get(Calendar.YEAR)-year;
+            user.setAge(age);
+            user.setEmail(ExcelUtil.getStringFromExcelCell(row.getCell(5)));
+            String sex = ExcelUtil.getStringFromExcelCell(row.getCell(6));
+            if(sex.equals("女")){
+                user.setGender(GenderType.famale);
+            }else{
+                user.setGender(GenderType.male);
+            }
+            user.setNickname(ExcelUtil.getStringFromExcelCell(row.getCell(7)));
+            user.setPhoneNumber(ExcelUtil.getStringFromExcelCell(row.getCell(8)));
+            user.setPicture(ExcelUtil.getStringFromExcelCell(row.getCell(9)));
+            user.setQqId(ExcelUtil.getStringFromExcelCell(row.getCell(10)));
+            user.setWechatId(ExcelUtil.getStringFromExcelCell(row.getCell(11)));
+            user.setContactPhone(ExcelUtil.getStringFromExcelCell(row.getCell(12)));
+
+
+            Role role = roleRepository.findOne(5L);
+            List<Role> roles = new ArrayList<>();
+            roles.add(role);
+            user.setRoles(roles);
+            userRepository.save(user);
+        }
+        return failMap;
+    }
 }
