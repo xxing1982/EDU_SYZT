@@ -139,8 +139,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-4 col-md-offset-5">发件人:{{message.sendUsername}}</div>
-                            <div class="col-md-1">{{message.creationTime|date:'yyyy-MM-dd hh:mm:ss'}}</div>
+                            <div class="col-md-4 col-md-offset-2">发件人:{{message.sendUsername}}</div>
+                            <div class="col-md-4">{{message.creationTime|date:'yyyy-MM-dd hh:mm:ss'}}</div>
                             <div class="col-md-1" ng-click="deleteMessage(message)"><a>删</a></div>
                         </div>
                     </div>
@@ -207,8 +207,8 @@
                  </div>
                  <div class="col-md-5">
                      <div class="row">
-                         <div class="col-md-4 col-md-offset-5">收件人:{{message.receiveUserName}}</div>
-                         <div class="col-md-1">{{message.creationTime | date:'yyyy-MM-dd hh:mm:ss'}}</div>
+                         <div class="col-md-4 col-md-offset-3">收件人:{{message.receiveUserName}}</div>
+                         <div class="col-md-3">{{message.creationTime | date:'yyyy-MM-dd hh:mm:ss'}}</div>
                          <div class="col-md-1" ng-click="deleteMessage(message)"><a>删</a></div>
                      </div>
                  </div>

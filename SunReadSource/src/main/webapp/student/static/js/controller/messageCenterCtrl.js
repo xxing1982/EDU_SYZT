@@ -94,7 +94,7 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
     $scope.deliveredPageable.build(GetMessages);
 
     $scope.deliveredPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
-    console.log($scope.deliveredPageable.pageNumbers);
+    console.log($scope.deliveredPageable);
 }
 
 $scope.createDeliveredPageable();

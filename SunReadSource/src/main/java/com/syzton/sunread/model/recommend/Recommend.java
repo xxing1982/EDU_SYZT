@@ -19,9 +19,7 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.syzton.sunread.dto.recommend.RecommendDTO;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
-import com.syzton.sunread.model.bookshelf.BookInShelf.Builder;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.util.DateSerializer;

@@ -141,7 +141,8 @@ public class BookInShelfController {
         LOGGER.debug("Finding a book in shelf entry with id: {}", id);
 
         BookInShelf found = service.findByStudentIdAndBookId(id, bookId);
-
+        if(found.getDeleted())
+        	throw new com.syzton.sunread.exception.common.NotFoundException("The book with name "+found.getBookName()+"had been deleted.");
         return found.createDTO(found);
     }
  //Get a Book in bookshelf    

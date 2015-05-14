@@ -8,17 +8,22 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.controller.book.BookController;
+import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.recommend.RecommendDTO;
 import com.syzton.sunread.model.recommend.Recommend;
+import com.syzton.sunread.model.store.ExchangeHistory;
 import com.syzton.sunread.service.recommend.RecommendService;
 
 /**
@@ -52,6 +57,20 @@ public class RecommendController extends BaseController{
         return added;
     }
     
+//    @RequestMapping(value = "/teacher/{teacherId}/recommend", method = RequestMethod.GET)
+//    @ResponseBody
+//    public PageResource<RecommendDTO> getExchanges(@PathVariable("studentId") long studentId,
+//                                       @RequestParam("page") int page,
+//                                       @RequestParam("size") int size) {
+//
+//        Pageable pageable = this.getPageable(page,size);
+//
+//        Page<ExchangeHistory> exchangeHistoryPage = storeService.getExchangeHistory(pageable,studentId);
+//
+//        return new PageResource<>(exchangeHistoryPage,"page","size");
+//
+//    }
+//    
     
     
     

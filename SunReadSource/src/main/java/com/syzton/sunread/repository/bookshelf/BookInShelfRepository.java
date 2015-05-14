@@ -24,7 +24,7 @@ public interface BookInShelfRepository extends JpaRepository<BookInShelf,Long>,Q
 	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND b.deleted=0")
 	Page<BookInShelf> findByBookshelf(Bookshelf bookshelf,Pageable pageable);
 	
-	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND bookId=(:bookId) AND b.deleted=0")
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND bookId=(:bookId)")
 	BookInShelf findOneByBookshelfAndBookId(@Param("bookshelf")Bookshelf bookshelf,@Param("bookId")Long bookId);
 	
 	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookId=(:bookId) AND b.deleted=0")

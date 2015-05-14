@@ -2,6 +2,7 @@ package com.syzton.sunread.repository.recommend;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.recommend.Recommend;
 
 /**
@@ -10,5 +11,7 @@ import com.syzton.sunread.model.recommend.Recommend;
  * 
  */
 public interface RecommendRepository extends JpaRepository<Recommend, Long> {
-
+	
+	Recommend findByBookinshelf(BookInShelf bookInShelf);
+	
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.syzton.sunread.service.recommend;
 
 
@@ -72,21 +69,42 @@ public class RecommendRepositoryService implements RecommendService{
 	        		,bookshelf,recommendDTO.getBookAttribute(),recommendDTO.getReadState()).build();
 			recommend = Recommend.getBuilder(teacher, isInShelf).build();
 			bookInShelfRepository.save(isInShelf);
-			recommendRepository.save(recommend);
+			recommendRepository.save(recommend);		
+			RecommendDTO dto = RecommendDTO.getBuilder(book.getId(), book.getName(), teacherId, teacher.getUsername()
+					,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),0).build();
+			return dto;
+			
 		}
 		else {
-			if (isInShelf.getDeleted()) {
-				isInShelf.setDeleted(false);
+			Recommend isRecommended = recommendRepository.findByBookinshelf(isInShelf);
+			if(isRecommended == null){
+				if (isInShelf.getDeleted()) {
+					isInShelf.setDeleted(false);
+				}	
 				isInShelf.setBookAttribute(recommendDTO.getBookAttribute());
-				bookInShelfRepository.save(isInShelf);
+				bookInShelfRepository.flush();
+				recommend = Recommend.getBuilder(teacher, isInShelf).build();
+				recommendRepository.save(recommend);
+				RecommendDTO dto = RecommendDTO.getBuilder(book.getId(), book.getName(), teacherId, teacher.getUsername()
+						,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),1).build();
+				return dto;
 			}
-			recommend = Recommend.getBuilder(teacher, isInShelf).build();
-			recommendRepository.save(recommend);
+			else {
+				int recommendState = 3;
+				if (isInShelf.getDeleted()) 
+					isInShelf.setDeleted(false);	
+				if(!isInShelf.getBookAttribute()){
+					isInShelf.setBookAttribute(recommendDTO.getBookAttribute());
+					recommendState = 2;
+				}
+				bookInShelfRepository.flush();
+				RecommendDTO dto = RecommendDTO.getBuilder(book.getId(), book.getName(), teacherId, teacher.getUsername()
+						,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),recommendState).build();
+				return dto;
+			}
+			
 		}	
-		RecommendDTO dto = RecommendDTO.getBuilder(book.getId(), book.getName(), teacherId, teacher.getUsername()
-				,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState()).build();
-		
-		return dto;
+
 	}
 
 	/* (non-Javadoc)
