@@ -96,12 +96,12 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 			messageDTO.setReceiveUserId(message.getReceiveUserId());
 			User receiveUser = this.checkUser(message.getReceiveUserId());
 			messageDTO.setReceiveUserName(receiveUser.getUsername());
-
+			messageDTO.setCreationTime(message.getCreationTime().toDate());
 			messageDTOList.add(messageDTO);
 
 		}
 
-		Page<MessageDTO> messageDTOPage = new PageImpl<>(messageDTOList,pageable,messagePage.getTotalPages());
+		Page<MessageDTO> messageDTOPage = new PageImpl<>(messageDTOList,pageable,messagePage.getTotalElements());
 
 		return messageDTOPage;
 	}
@@ -128,7 +128,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 
 		}
 
-		Page<MessageDTO> messageDTOPage = new PageImpl<>(messageDTOList,pageable,messagePage.getTotalPages());
+		Page<MessageDTO> messageDTOPage = new PageImpl<>(messageDTOList,pageable,messagePage.getTotalElements());
 
 		return messageDTOPage;
 	}
