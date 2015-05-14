@@ -35,6 +35,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/teacher.html",
             controller: 'teacherCtrl'
         })
+         .state('admin',{
+             url: '/admin',
+             templateUrl: "partials/cmsAdmin.html",
+             controller: 'adminCtrl'
+         })
         .state('region',{
         	url: '/region',
             templateUrl: "partials/region.html",
@@ -71,4 +76,10 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
      		templateUrl: "partials/subjectivequestion.html",
      		controller: 'subjectiveQuestionCtrl'
      	});
+}]);
+routeApp.run(['$rootScope', function($rootScope){
+    if (sessionStorage.getItem("cmsId") == null) {
+        window.location.href="../../login.html";
+    };
+    $rootScope.id = sessionStorage.getItem("cmsId");
 }]);
