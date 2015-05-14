@@ -8,9 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.syzton.sunread.dto.recommend.RecommendDTO;
-import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.recommend.Recommend;
-import com.syzton.sunread.model.user.Teacher;
 
 /**
  * @author Morgan-Leon

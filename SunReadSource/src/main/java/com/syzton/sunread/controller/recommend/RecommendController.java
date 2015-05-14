@@ -22,8 +22,6 @@ import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.controller.book.BookController;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.recommend.RecommendDTO;
-import com.syzton.sunread.model.recommend.Recommend;
-import com.syzton.sunread.model.store.ExchangeHistory;
 import com.syzton.sunread.service.recommend.RecommendService;
 
 /**
