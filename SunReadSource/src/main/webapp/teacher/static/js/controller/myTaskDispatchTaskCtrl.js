@@ -58,6 +58,9 @@ ctrls.controller("myTaskDispatchTaskController",['$scope', '$rootScope', 'Teache
                         );
                     }
                 }
+                $rootScope.modal = {title: "发布任务", content: "任务发布成功！"};
+                $('#alert-modal').modal();
+                this.selected = [];
             };
             
             // The select all method

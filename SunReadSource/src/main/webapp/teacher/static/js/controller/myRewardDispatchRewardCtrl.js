@@ -54,6 +54,8 @@ ctrls.controller("myRewardDispatchRewardController", ['$scope', '$rootScope', 'T
             
             // Publish the selected entities
             $scope.hotreaderLoadable.publish = function(){
+                var saved = 0;
+                var targetSaved = this.selected.length;
                 for(var i = 0; i < this.selected.length; i++ ){
                     if (this.selected[i].num >= 0){
                         CoinHistory.save({ by: "students",
@@ -61,17 +63,28 @@ ctrls.controller("myRewardDispatchRewardController", ['$scope', '$rootScope', 'T
                                          { coinType: "IN", 
                                            coinFrom: "FROM_TEACHER", 
                                            num: this.selected[i].num,
-                                           reason: this.selected[i].reason }
+                                           reason: this.selected[i].reason },
+                                         function(){
+                                            if ( saved + 1 < targetSaved){
+                                                saved ++;
+                                            } else {
+                                                $rootScope.modal = {title: "发布奖励", content: "奖励发布成功！"};
+                                                $('#alert-modal').modal();
+                                                this.selected = [];
+                                            }
+                                         }
+                                    
                         );
                         this.selected[i].statistic.coin += this.selected[i].num;
                     }
                 }
+
             };
             
             // The select all method
             $scope.hotreaderLoadable.selectAll = function(){
                 if (!this.selectedAllValue) {
-                    this.selected = angular.copy(this.entities.content);
+                    angular.extend(this.selected, this.entities.content);
                 } else {
                     this.selected = [];
                 }
