@@ -55,7 +55,7 @@ public class RecommendController extends BaseController{
         return added;
     }
     
-    @RequestMapping(value = "/teacher/{teacherId}/recommend", method = RequestMethod.GET)
+    @RequestMapping(value = "/teacher/{teacherId}/recommends", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<RecommendDTO> getExchanges(@PathVariable("teacherId") long teacherId,
                                        @RequestParam("page") int page,

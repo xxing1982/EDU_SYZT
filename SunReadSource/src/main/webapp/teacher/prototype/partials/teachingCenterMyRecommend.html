@@ -17,28 +17,31 @@
 
 
 <!-- Items -->
-<div class="myBlock mt20 page-body" ng-repeat="order in orderLoadable.entities.content">
+<div class="myBlock mt20 page-body" ng-repeat="recommends in recommendsLoadable.entities.content">
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">红英小学</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">三年（2）班</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.username}}</p></div>
-            <div class="col-xs-2 col-xs-height col-middle">
-                <p class="row title" ng-show="!order.editable.editing">任务目标：{{order.task.targetBookNum}}本</p>
-                <p class="row title" ng-show="order.editable.editing">任务目标：<input type="number" class="custom-input" ng-model="order.editable.cached.targetBookNum" />本</p>
+            <div class="col-xs-3 col-xs-height" style="text-align: left;"><p class="row title">{{recommends.bookName}}</p></div>
+            <div class="col-xs-2 col-xs-height" style="text-align: left;"><p class="row title">{{recommends.campusName}}</p></div>
+            <div class="col-xs-2 col-xs-height" style="text-align: left;"><p class="row title">{{recommends.className}}</p></div>
+            <div class="col-xs-1 col-xs-height" style="text-align: left;"><p class="row title">{{recommends.studentName}}</p></div>
+            <div class="col-xs-1 col-xs-height" style="text-align: left;"><p class="row title">{{recommends.bookAttribute | isManditory}}</p></div>
+            <div class="col-xs-3 col-xs-height" style="text-align: left;"><p class="row title">推荐理由：{{recommends.description}}</p></div>
+            <!-- <div class="col-xs-2 col-xs-height col-middle">
+                <p class="row title" ng-show="!recommends.editable.editing">任务目标：{{recommends.task.targetBookNum}}本</p>
+                <p class="row title" ng-show="recommends.editable.editing">任务目标：<input type="number" class="custom-input" ng-model="recommends.editable.cached.targetBookNum" />本</p>
             </div>
             <div class="col-xs-2 col-xs-height col-middle">
-                <p class="row title" ng-show="!order.editable.editing">积分：{{order.task.targetPoint}}本</p>
-                <p class="row title" ng-show="order.editable.editing">积分：<input type="number" class="custom-input" ng-model="order.editable.cached.targetPoint" />本</p>
-            </div>
-            <div class="col-xs-2 col-xs-height col-middle">
+                <p class="row title" ng-show="!recommends.editable.editing">积分：{{recommends.task.targetPoint}}本</p>
+                <p class="row title" ng-show="recommends.editable.editing">积分：<input type="number" class="custom-input" ng-model="recommends.editable.cached.targetPoint" />本</p>
+            </div> -->
+            <!-- <div class="col-xs-2 col-xs-height col-middle">
                 <p class="text-right title">
-                    <a ng-show="!order.editable.editing" ng-click="order.editable.toggleEdit(false)">修改</a>
-                    <a ng-show="order.editable.editing" ng-click="order.editable.toggleEdit(false)">取消</a>
-                    <a ng-show="order.editable.editing" ng-click="toggleEditSave(order)">保存</a>
+                    <a ng-show="!recommends.editable.editing" ng-click="recommends.editable.toggleEdit(false)">修改</a>
+                    <a ng-show="recommends.editable.editing" ng-click="recommends.editable.toggleEdit(false)">取消</a>
+                    <a ng-show="recommends.editable.editing" ng-click="toggleEditSave(recommends)">保存</a>
                 </p>
-            </div>
+            </div> -->
         </div>
     </div>
     </div></div>
@@ -46,5 +49,5 @@
 
 <!-- Loadmore -->
 <div class="myBlock mt20 page-body">
-    <div class="load-more-bottom" ng-click="orderLoadable.get()">{{ orderLoadable.loadingState }}</div>
+    <div class="load-more-bottom" ng-click="recommendsLoadable.get()">{{ recommendsLoadable.loadingState }}</div>
 </div>

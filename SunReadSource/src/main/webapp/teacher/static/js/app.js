@@ -38,10 +38,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'partials/teachingCenterMyTaskDispatchTask.html',
             controller: "myTaskDispatchTaskController"
         })
-        //teachingCenter my task page
+        //teachingCenter my recommend page
         .state('teachingCenter.myRecommend',{
             url: '/myRecommend',
-            templateUrl: 'partials/teachingCenterMyRecommend.html'
+            templateUrl: 'partials/teachingCenterMyRecommend.html',
+            controller: 'myRecommendController'
         })
         //teaching center -> book details
         .state('teachingCenter.bookDetails',{

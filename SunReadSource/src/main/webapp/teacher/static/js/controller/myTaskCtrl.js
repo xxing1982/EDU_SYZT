@@ -1,13 +1,13 @@
 //myTaskCtrl.js
-ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order', 'Class', 'Loadable', 'Editable', 'Task', 
+ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order', 'Class', 'Loadable', 'Editable', 'Task',
 	function($scope, $rootScope, Teacher, Order, Class, Loadable, Editable, Task){
-		
-        // Get the teacher entity by rootScope id 
+
+        // Get the teacher entity by rootScope id
         $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
-            
+
             // Get the class by teacher classId
             $scope.class = Class.get({ id: $scope.teacher.classId });
-                
+
             // Get the orders pagable by teacher classId
             // The best practice of loadable
             // Create a pageable entity of actions
@@ -25,19 +25,19 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
 
             // The index of the entities
             var index = 0;
-            
+
             // Show the first page and append editable to every entity
             $scope.orderLoadable.get( function(){
-                        
+
                 // Make the editable object
                 while (index < $scope.orderLoadable.entities.content.length) {
-                    $scope.orderLoadable.entities.content[index].editable 
+                    $scope.orderLoadable.entities.content[index].editable
                         = new Editable($scope.orderLoadable.entities.content[index].task);
                     index ++;
                 }
-            
+
             });
-            
+
             // The toggleEdit save
             $scope.toggleEditSave = function(order){
 
@@ -50,8 +50,8 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
                 var toggleEditTransmit = function(cached){
 //                    console.log( cached );
 //                    console.log( order );
-                    Task.update({ teacherId: $scope.teacher.id, 
-                                  studentId: order.id, 
+                    Task.update({ teacherId: $scope.teacher.id,
+                                  studentId: order.id,
                                   targetBookNum: cached.targetBookNum,
                                   targetPoint: cached.targetPoint },{}
                     );
