@@ -59,8 +59,10 @@ public class StoreController extends BaseController{
     @RequestMapping(value = "/gifts", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<Gift> getGifts(@RequestParam("page") int page,
-                         @RequestParam("size") int size) {
-        Pageable pageable = this.getPageable(page,size);
+                         @RequestParam("size") int size,
+                         @RequestParam(value = "sortBy", required = false) String sortBy,
+                         @RequestParam(value = "direction", required = false) String direction) {
+        Pageable pageable = this.getPageable(page,size,sortBy,direction);
 
         Page<Gift> giftPage = storeService.getGifts(pageable);
 
@@ -72,9 +74,11 @@ public class StoreController extends BaseController{
     @ResponseBody
     public PageResource<ExchangeHistory> getExchanges(@PathVariable("studentId") long studentId,
                                        @RequestParam("page") int page,
-                                       @RequestParam("size") int size) {
+                                       @RequestParam("size") int size,
+                                       @RequestParam(value = "sortBy", required = false) String sortBy,
+                                       @RequestParam(value = "direction", required = false) String direction) {
 
-        Pageable pageable = this.getPageable(page,size);
+        Pageable pageable = this.getPageable(page,size,sortBy,direction);
 
         Page<ExchangeHistory> exchangeHistoryPage = storeService.getExchangeHistory(pageable,studentId);
 
