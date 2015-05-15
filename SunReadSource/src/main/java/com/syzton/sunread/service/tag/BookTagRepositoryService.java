@@ -1,14 +1,18 @@
 package com.syzton.sunread.service.tag;
 
 import java.util.List;
+
+import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.dto.tag.BookTagDTO;
 import com.syzton.sunread.exception.tag.BookTagNotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.tag.BookTag;
 import com.syzton.sunread.model.tag.Tag;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.tag.BookTagRepository;
 import com.syzton.sunread.repository.tag.TagRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,13 +61,22 @@ public class BookTagRepositoryService implements BookTagService {
         this.bookRepository = bookRepository;
     }
     
+    private SecurityContextUtil securityContextUtil;
+    
+    @Autowired
+    public void setSecurityContextUtil(SecurityContextUtil securityContextUtil) {
+        this.securityContextUtil = securityContextUtil;
+    }
+    
+    @Transactional
     @Override
     public BookTag add(BookTagDTO added) {
         LOGGER.debug("Adding a new booktag entry with information: {}", added);
         
         Tag tag = tagRepository.findOne(added.getTag_id());
         Book book = bookRepository.findOne(added.getBook_id());
-        BookTag bookTagModel = BookTag.getBuilder(tag, book)
+        User user = securityContextUtil.getUser();
+        BookTag bookTagModel = BookTag.getBuilder(tag, book, user)
                 .build();
         
         return bookTagRepository.save(bookTagModel);

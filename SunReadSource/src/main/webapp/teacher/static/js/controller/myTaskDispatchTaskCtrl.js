@@ -49,13 +49,26 @@ ctrls.controller("myTaskDispatchTaskController",['$scope', '$rootScope', 'Teache
             
             // Publish the selected entities
             $scope.hotreaderLoadable.publish = function(){
+                var saved = 0;
+                var targetSaved = this.selected.length;
                 for(var i = 0; i < this.selected.length; i++ ){
                     if (this.selected[i].targetBookNum &&  this.selected[i].targetPoint){
                         Task.update({ teacherId: $scope.teacher.id, 
                                       studentId: this.selected[i].id, 
                                       targetBookNum: this.selected[i].targetBookNum,
-                                      targetPoint: this.selected[i].targetPoint },{}
+                                      targetPoint: this.selected[i].targetPoint },{},
+                                      function(){
+                                        if ( saved + 1 < targetSaved){
+                                            saved ++;
+                                        } else {
+                                            $rootScope.modal = {title: "发布奖励", content: "奖励发布成功！"};
+                                            $('#alert-modal').modal();
+                                            this.selected = [];
+                                        }
+                                      }
                         );
+                    } else {
+                        saved ++;
                     }
                 }
                 $rootScope.modal = {title: "发布任务", content: "任务发布成功！"};
@@ -66,7 +79,7 @@ ctrls.controller("myTaskDispatchTaskController",['$scope', '$rootScope', 'Teache
             // The select all method
             $scope.hotreaderLoadable.selectAll = function(){
                 if (!this.selectedAllValue) {
-                    this.selected = angular.copy(this.entities.content);
+                    angular.extend(this.selected, this.entities.content);
                 } else {
                     this.selected = [];
                 }

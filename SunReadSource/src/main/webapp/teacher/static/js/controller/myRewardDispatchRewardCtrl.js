@@ -76,6 +76,8 @@ ctrls.controller("myRewardDispatchRewardController", ['$scope', '$rootScope', 'T
                                     
                         );
                         this.selected[i].statistic.coin += this.selected[i].num;
+                    } else {
+                        saved ++;
                     }
                 }
 

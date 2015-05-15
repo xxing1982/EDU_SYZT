@@ -34,9 +34,9 @@ public class BookTag extends AbstractEntity{
 
     }
 
-    public static Builder getBuilder(Tag tag, Book book) {
+    public static Builder getBuilder(Tag tag, Book book, User user) {
     	
-        return new Builder(tag, book);
+        return new Builder(tag, book, user);
     }
     
     public Long getTag_Id() {
@@ -54,10 +54,11 @@ public class BookTag extends AbstractEntity{
 
         private BookTag built;
 
-        public Builder(Tag tag, Book book) {
+        public Builder(Tag tag, Book book, User user) {
             built = new BookTag();
             built.tag = tag;
             built.book = book;
+            built.user = user;
         }
 
         public BookTag build() {
