@@ -3,8 +3,6 @@
  */
 package com.syzton.sunread.dto.recommend;
 
-import javassist.bytecode.stackmap.TypeData.ClassName;
-
 import javax.validation.constraints.NotNull;
 
 /**

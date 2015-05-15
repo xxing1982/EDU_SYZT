@@ -68,4 +68,6 @@ public interface UserService {
 
     
     public Map<Integer,String> batchSaveOrUpdateTeacherFromExcel(Sheet sheet);
+
+    public Map<Integer,String> batchSaveOrUpdateCMSAdminFromExcel(Sheet sheet);
 }

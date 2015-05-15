@@ -1,18 +1,14 @@
 package com.syzton.sunread.service.recommend;
 
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.syzton.sunread.dto.message.MessageDTO;
 import com.syzton.sunread.dto.recommend.RecommendDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
@@ -191,7 +187,7 @@ public class RecommendRepositoryService implements RecommendService{
 			RecommendDTO dto =  RecommendDTO.getBuilder(bookInShelf.getBookName(),campus.getName(),clazz.getName(),student.getUsername(),bookInShelf.getBookAttribute(),recommend.getDescription()).build();
 			recommendDTOs.add(dto);
 		}
-		Page<RecommendDTO> recommendDTOPage = new PageImpl<>(recommendDTOs,pageable,pageRecommends.getTotalPages());
+		Page<RecommendDTO> recommendDTOPage = new PageImpl<>(recommendDTOs,pageable,pageRecommends.getTotalElements());
 		return recommendDTOPage;
 	}
 }
