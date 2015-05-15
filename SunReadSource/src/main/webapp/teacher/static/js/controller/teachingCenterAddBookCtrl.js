@@ -194,4 +194,7 @@ if(!$scope.statuses_category.length > 0){
 			else
 				return true;
 		}
+        
+        
+        //
 }]);

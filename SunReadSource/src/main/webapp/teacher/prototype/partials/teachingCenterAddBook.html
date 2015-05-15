@@ -90,16 +90,113 @@
 
     </div>
     <div class="row modal-footer">
-            <div class="col-md-offset-2 col-md-3">
-                <button class="btn btn-blue" ng-disabled="!isbnValid()" ng-click="lackBookFeedback()" type="button">提交</button>
-            </div>
-
-            <div class="col-md-3">
-                <button class="btn btn-blue" ng-click="" type="button" data-dismiss="modal" aria-label="Close">取消</button>
-            </div>
+        <div class="col-md-12 text-center">
+            <button class="btn btn-blue" ng-disabled="!isbnValid()" ng-click="lackBookFeedback()" type="button">提交</button>
+            &nbsp;&nbsp;
+            <button class="btn btn-blue" ng-click="" type="button" data-dismiss="modal" aria-label="Close">取消</button>
+        </div>
     </div>
 
 
+    </div>
+    </div>
+</div>
+    
+<!-- Booktag Modal -->
+<div class="modal fade" id="booktag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content container-fluid" style="width:49%">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            <div class="modal-title">
+                <h4 id="myModalLabel">标记书籍</h4>
+            </div>
+
+            <div class="row text-center">
+                <h4><big> 十万个为什么</big></h4>
+                <h3></h3>
+            </div>
+
+            <div class="row-same-height">
+                <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">课标类型：</p></div>
+                <div class="col-xs-6 col-xs-height col-middle">
+                    <bs-dropdown data-menu-type="button"
+                        select-val="searchArguments.grade = selectedVal"
+                        preselected-item="searchArguments.grade"
+                        data-dropdown-data="statuses_grade">
+                    </bs-dropdown>
+                </div>
+                <div class="col-xs-3 col-xs-height col-middle"></div>
+            </div>
+            
+            <div class="row-same-height">
+                <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">科目：</p></div>
+                <div class="col-xs-6 col-xs-height col-middle">
+                    <bs-dropdown data-menu-type="button"
+                        select-val="searchArguments.grade = selectedVal"
+                        preselected-item="searchArguments.grade"
+                        data-dropdown-data="statuses_grade">
+                    </bs-dropdown>
+                </div>
+                <div class="col-xs-3 col-xs-height col-middle"></div>
+            </div>
+
+            <div class="row-same-height">
+                <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">年级：</p></div>
+                <div class="col-xs-6 col-xs-height col-middle">
+                    <bs-dropdown data-menu-type="button"
+                        select-val="searchArguments.grade = selectedVal"
+                        preselected-item="searchArguments.grade"
+                        data-dropdown-data="statuses_grade">
+                    </bs-dropdown>
+                </div>
+                <div class="col-xs-3 col-xs-height col-middle"></div>
+            </div>
+
+            <div class="row-same-height">
+                <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">章节：</p></div>
+                <div class="col-xs-6 col-xs-height col-middle">
+                    <bs-dropdown data-menu-type="button"
+                        select-val="searchArguments.grade = selectedVal"
+                        preselected-item="searchArguments.grade"
+                        data-dropdown-data="statuses_grade">
+                    </bs-dropdown>
+                </div>
+                <div class="col-xs-3 col-xs-height col-middle"></div>
+            </div>
+
+            <div class="row-same-height">
+                <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">教学主题：</p></div>
+                <div class="col-xs-6 col-xs-height col-middle">
+                    <bs-dropdown data-menu-type="button"
+                        select-val="searchArguments.grade = selectedVal"
+                        preselected-item="searchArguments.grade"
+                        data-dropdown-data="statuses_grade">
+                    </bs-dropdown>
+                </div>
+                <div class="col-xs-3 col-xs-height col-middle"></div>
+            </div>
+            
+            <div class="row-same-height">
+                <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">备注：</p></div>
+                <div class="col-xs-9 col-xs-height col-middle">
+                    <input type="text" class="custom-input form-control"></input>
+                </div>
+            </div>
+        
+            <!-- Place holer -->
+            <h4 class="row"></h4>
+        
+            <div class="row">
+                <div class="col-md-12 text-left">
+                    <button class="btn btn-fill-blue" type="button">发布标记</button>
+                </div>
+            </div>
+
+            <!-- Place holer -->
+            <p class="row"></p>
+        </div>
     </div>
     </div>
 </div>
