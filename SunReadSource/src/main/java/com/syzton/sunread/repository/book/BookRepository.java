@@ -2,6 +2,7 @@ package com.syzton.sunread.repository.book;
 
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.Category;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,5 +22,8 @@ public interface BookRepository extends JpaRepository<Book,Long>,QueryDslPredica
 
 
     Book findByIsbn(String isbn);
+    
+    @Query("select id from Book u where u.name like ('%' || :searchTerm || '%') ")
+    List<Long> findAllIdBySearchTerm(@Param("searchTerm") String searchTerm);
 
 }

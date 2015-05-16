@@ -1,6 +1,7 @@
 package com.syzton.sunread.service.note;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mysema.query.types.Predicate;
@@ -153,16 +154,17 @@ public class NoteRepositoryService implements NoteService {
     public Page<Note> findBySearchTerm(Pageable pageable, String searchTerm) {
     	
     	// Get a list of book
-    	List<Book> bookList = (List<Book>) bookRepository.findAll(quickSearchContains(searchTerm));
+    	List<Long> bookIdList = bookRepository.findAllIdBySearchTerm(searchTerm);
     	
-    	QNote qnote = QNote.note;
-    	
-    	BooleanExpression exp = qnote.book.id.eq(bookList.get(0).getId());
-    	for (int i = 1; i < bookList.size(); i++){
-    		exp = exp.or(qnote.book.id.eq(bookList.get(i).getId()));
+    	// Convert bookId list to book list
+    	List<Book> bookList = new ArrayList<Book>();
+     	for (Long bookId : bookIdList){
+    		Book book = new Book();
+    		book.setId((Long)bookId);
+    		bookList.add(book);
     	}
-    	
-        Page<Note> notePage = repository.findAll(exp, pageable);
+
+        Page<Note> notePage = repository.findAllByBookList(bookList, pageable);
         return notePage;
     }
 
