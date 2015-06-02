@@ -714,6 +714,11 @@ a:focus, input:focus
     color: #2F5682;
 }
 
+.col-xs-height a
+{
+    color: black;
+}
+
 .readingCenter-right-body .thinkingTest .tagHead,
 .readingCenter-right-body .thinkingTesting .tagHead,
 .readingCenter-right-body .otherAnswer .tagHead

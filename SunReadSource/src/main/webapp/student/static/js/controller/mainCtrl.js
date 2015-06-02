@@ -64,6 +64,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     //note
     Note.get({by: "users", id: $rootScope.id,  page: 0, size: 4, direction: "DESC", sortBy: "creationTime"},
       function(data){
+        $scope.notesNum = data.totalElements;
         $scope.notes = data.content;
         for(var i = 0; i < data.content.length; i++){
           $scope.notes[i].bookPictureUrl = $scope.notes[i].bookPictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + $scope.notes[i].bookPictureUrl;
@@ -89,13 +90,19 @@ ctrls.filter('formatImg', function(){
 
 ctrls.filter('formatSize4', function(){
   return function(input){
-    return input.substring(0, 4) + '...';
+    if(input.length > 4)
+      return input.substring(0, 4) + '...';
+    else
+      return input;
   }
 });
 
 ctrls.filter('formatSize6', function(){
   return function(input){
-    return input.substring(0, 6) + '...';
+    if(input.length > 6)
+      return input.substring(0, 6) + '...';
+    else
+      return input;
   }
 });
 

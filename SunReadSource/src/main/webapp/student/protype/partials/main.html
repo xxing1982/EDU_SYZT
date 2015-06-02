@@ -90,7 +90,7 @@
                             <div class="col-md-8"><img ng-src="{{item.pictureUrl}}" class="img-responsive"></div>
                             <div class="col-md-1"></div>
                         </div>
-                        <div><h4>{{item.name}}</h4></div>
+                        <div><h4><a href="#readingCenter/bookDetails/{{item.bookId}}">{{item.name}}</a></h4></div>
                         <div>时间：{{item.creationTime}}&nbsp;&nbsp;&nbsp;积分：{{item.point}}</div>
                         <div>成绩：{{userInfo.examScore}}  正确率：{{item.passCount/item.questionNum*100}}%</div>
                     </div>
@@ -98,7 +98,7 @@
             </div>
             <div class="row row-title">
                 <div class="col-md-2 row-title-name">我的笔记</div>
-                <div class="col-md-4 row-title-finish"></div>
+                <div class="col-md-4 row-title-finish">我的总笔记数：{{notesNum}}</div>
                 <div class="col-md-4"></div>
                 <div class="col-md-2 row-title-more"><a href="#readingCenter/myNote">更多></a></div>
             </div>
