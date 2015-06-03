@@ -1,5 +1,5 @@
-ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope', 'Teacher', 'Hotreader', 'Class', 'Task',
-	function($scope, $rootScope, Teacher, Hotreader, Class, Task){
+ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','Teacher','Class','GetBookshelvesByClass','AddRecommends',
+	function($scope, $rootScope,Teacher,Class,GetBookshelvesByClass,AddRecommends){
     // Initlizate the dropdown statues
     $scope.campusStatuses = [];
     $scope.campusSelected_status = 0;
@@ -27,39 +27,42 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope', '
         // Get the hotreaers pagable by teacher classId
         // The best practice of loadable
         // Create a pageable entity of actions
-        $scope.hotreaderLoadable = new Loadable();
+        $scope.bookshelfLoadable = new Loadable();
 
         // Set the parameters of loadable
-        $scope.hotreaderLoadable.size = 5;
-        $scope.hotreaderLoadable.page = 0;
+        $scope.bookshelfLoadable.size = 5;
+        $scope.bookshelfLoadable.page = 0;
 
         // Set the $resource arguments like {by: "books"}
-        $scope.hotreaderLoadable.arguments = { by: 'clazz', id: $scope.teacher.classId, sortBy: 'testPasses'};
+        $scope.bookshelfLoadable.arguments = {classId: $scope.teacher.classId};
 
         // Build the loadable object
-        $scope.hotreaderLoadable.build(Hotreader);
+        $scope.bookshelfLoadable.build(GetBookshelvesByClass);
 
         // Show the first page and append editable to every entity
-        $scope.hotreaderLoadable.get();
+        $scope.bookshelfLoadable.get();
+
+				console.log($scope.bookshelfLoadable);
 
         // Make the checklist model
-        $scope.hotreaderLoadable.selected = [];
+        $scope.bookshelfLoadable.selected = [];
 
         // Publish the selected entities
-        $scope.hotreaderLoadable.publish = function(){
+        $scope.bookshelfLoadable.publish = function(){
             for(var i = 0; i < this.selected.length; i++ ){
-                if (this.selected[i].targetBookNum &&  this.selected[i].targetPoint){
-                    Task.update({ teacherId: $scope.teacher.id,
-                                  studentId: this.selected[i].id,
-                                  targetBookNum: this.selected[i].targetBookNum,
-                                  targetPoint: this.selected[i].targetPoint },{}
-                    );
-                }
+                // if (this.selected[i].targetBookNum &&  this.selected[i].targetPoint){
+                //     Task.update({ teacherId: $scope.teacher.id,
+                //                   studentId: this.selected[i].id,
+                //                   targetBookNum: this.selected[i].targetBookNum,
+                //                   targetPoint: this.selected[i].targetPoint },{}
+                //     );
+	              // }
+								AddRecommends.save({});
             }
         };
 
         // The select all method
-        $scope.hotreaderLoadable.selectAll = function(){
+        $scope.bookshelfLoadable.selectAll = function(){
             if (!this.selectedAllValue) {
                 this.selected = angular.copy(this.entities.content);
             } else {

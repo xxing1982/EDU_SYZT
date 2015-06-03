@@ -153,6 +153,8 @@ public class ClazzRepositoryService implements ClazzService {
 		return studentRepository.findByClazzId(clazzId);
 	
 	}
+    
+    
  
 	@Override
 	public int getAveragePointsfromClass(Long clazzId) throws NotFoundException {
