@@ -1,16 +1,16 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
-                                             ,'examServices', 'classServices', 'questionServices','reviewServices','joinShelfServices','dictionariesService'
+                                             ,'examServices', 'classServices', 'questionServices','reviewServices','joinShelfServices','dictionariesService', 'fishServices'
                                              ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
                                              ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','popularSearchServices','oneBookInShelfServices'
                                              ,'sendMessageServices','getMessageServices','deleteMessagesServices','getGiftsServices','getGiftsExNumServices','exchangeGiftsServices'
                                              , 'campusServices', 'actionServices', 'pageableServices','loadableServices','hotclazzServices', 'hotreaderServices', 'dropzoneServices', 'ngSanitize', 'semesterServices']);
-ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader', 'config',
-  function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader, config) {
+ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader', 'Fish', 'config',
+  function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader, Fish, config) {
     //$rootScope.id = 2;
     //get userid
     $rootScope.id = sessionStorage.getItem("userId");
-
+    $scope.IMAGESERVER = config.IMAGESERVER;
 
     //student info``
     Student.get({id : $rootScope.id} ,function(data){
@@ -23,7 +23,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
         $scope.userInfo.class=classData.name;
         $scope.userInfo.school=classData.campusName;
       });
-
+      /*正在发生
       // Create a pageable entity of actions
       $scope.actionPageable = new Pageable();
 
@@ -35,7 +35,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
       // Show the page 1
       $scope.actionPageable.showPage(1);
-
+      */
       // Create a Hotreaders entitiy
       $scope.hotReaders={};
       Hotreader.get({by: 'campus', id : data.campusId, page: 0, size: 3 }, function(dataHot){
@@ -50,7 +50,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     Bookshelf.get({id : $rootScope.id}, function(data){
       $scope.bookshelf = data;
       $scope.bookshelf.finishStatus = 100 * data.readMust / (data.readMust + data.unreadMust);
-      })
+    });
 
     //testing
     PassExam.get($rootScope.id, function(data){
@@ -59,7 +59,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
         data.examDTOs[i].pictureUrl = data.examDTOs[i].pictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + data.examDTOs[i].pictureUrl;
       }
       $scope.exam = data;
-    })
+    });
 
     //note
     Note.get({by: "users", id: $rootScope.id,  page: 0, size: 4, direction: "DESC", sortBy: "creationTime"},
@@ -69,14 +69,23 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
         for(var i = 0; i < data.content.length; i++){
           $scope.notes[i].bookPictureUrl = $scope.notes[i].bookPictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + $scope.notes[i].bookPictureUrl;
         }
-      })
+    });
 
     //hot note
     Note.get({page:0, size: 3, sortBy: 'commentCount', direction: 'DESC'}, function(data){
       $scope.hotNotes = data.content;
-    })
+    });
 
+    $scope.changeFish = function(){
+      if ($scope.fishes == undefined || $scope.fishes == null) {
+        Fish.getFishes(function(data){
+          $scope.fishes = data;
+          $("#change-fish-modal").modal({backdrop: 'static', keyboard: false});
+        })
+      };
+      $("#change-fish-modal").modal({backdrop: 'static', keyboard: false});
 
+    }
 
   }]);
 ctrls.filter('formatImg', function(){
