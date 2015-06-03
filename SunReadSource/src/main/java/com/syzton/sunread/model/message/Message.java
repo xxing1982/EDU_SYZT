@@ -50,7 +50,7 @@ public class Message extends AbstractEntity{
 		return isRead;
 	}
 
-	public void read(Boolean isRead) {
+	public void read() {
 		this.isRead = true;
 	}
 

@@ -143,6 +143,15 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 		return deleted;
 	}
 
+	@Override
+	public void readMessage(Long id) {
+		Message message = messageRepository.findOne(id);
+		if(message != null && !message.getIsRead()){
+			message.read();
+			messageRepository.save(message);
+		}
+	}
+
 	@Transactional(readOnly = true,rollbackFor = {NotFoundException.class})
 	private Message findById(Long id){
 		

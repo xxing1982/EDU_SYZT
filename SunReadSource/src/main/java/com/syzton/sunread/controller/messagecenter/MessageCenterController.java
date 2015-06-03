@@ -111,6 +111,14 @@ public class MessageCenterController extends BaseController{
 		
 		return deleted;
 	}
+
+	@RequestMapping(value = "/messages/{id}/reads",method = RequestMethod.PUT)
+	@ResponseBody
+	public void readMsgById(@PathVariable("id") Long id) throws NotFoundException {
+
+		messageService.readMessage(id);
+
+	}
 	@RequestMapping(value = "/actions",method = RequestMethod.GET)
 	@ResponseBody
 	public PageResource<Action> findActions(@RequestParam("page") int page,@RequestParam("size") int size){
