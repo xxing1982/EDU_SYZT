@@ -55,6 +55,14 @@ public class FishController {
 
     }
 
+    @RequestMapping(value = "/students/{studentId}/fishes", method = RequestMethod.GET)
+    @ResponseBody
+    public Fish getCurrentFish(@PathVariable("studentId") long studentId) {
+
+       return fishService.findFishByStudentId(studentId);
+
+    }
+
     @RequestMapping(value = "/fishes/{fishId}", method = RequestMethod.GET)
     @ResponseBody
     public Fish getFish(@PathVariable("fishId") long fishId) {

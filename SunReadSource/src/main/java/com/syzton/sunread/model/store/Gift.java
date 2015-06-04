@@ -26,6 +26,8 @@ public class Gift extends AbstractEntity{
 
     private boolean exchangeable;
 
+    private long schoolId;
+
     @Enumerated(EnumType.STRING)
     private GiftType giftType;
 
@@ -85,5 +87,13 @@ public class Gift extends AbstractEntity{
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public long getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(long schoolId) {
+        this.schoolId = schoolId;
     }
 }

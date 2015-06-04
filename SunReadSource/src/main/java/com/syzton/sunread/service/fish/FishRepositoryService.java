@@ -169,6 +169,14 @@ public class FishRepositoryService implements FishService{
         studentFishRepository.save(studentFish);
     }
 
+    @Override
+    public Fish findFishByStudentId(long studentId) {
+
+        Fish currentStuFish =   studentFishRepository.findByStudentId(studentId).getFish();
+
+        return currentStuFish;
+    }
+
     private StudentFishDTO createStudentFishDTO(Clazz clazz, Student inClazzStudent,Fish fish) {
         StudentFishDTO studentFishDTO = new StudentFishDTO();
         studentFishDTO.setStudentId(inClazzStudent.getId());
