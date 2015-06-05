@@ -25,4 +25,6 @@ public interface FishService {
 
     public void saveOrUpdateStudentFish(long studentId, long fishId);
 
+    public Fish findFishByStudentId(long studentId);
+
 }

@@ -12,4 +12,5 @@ public interface MessageCenterRepository extends JpaRepository<Message,Long> {
 
 	Page<Message> findByReceiveUserId(Pageable pageable, long receiveUserId);
 
+
 }

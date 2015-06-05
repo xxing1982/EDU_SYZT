@@ -56,15 +56,15 @@ public class StoreController extends BaseController{
 
         storeService.changeExchangeStatus(exchangeId,userId, GiftStatus.DELIVERED);
     }
-    @RequestMapping(value = "/gifts", method = RequestMethod.GET)
+    @RequestMapping(value = "/schools/{schoolId}/gifts", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Gift> getGifts(@RequestParam("page") int page,
+    public PageResource<Gift> getGifts(@PathVariable("schoolId") long schoolId,@RequestParam("page") int page,
                          @RequestParam("size") int size,
                          @RequestParam(value = "sortBy", required = false) String sortBy,
                          @RequestParam(value = "direction", required = false) String direction) {
         Pageable pageable = this.getPageable(page,size,sortBy,direction);
 
-        Page<Gift> giftPage = storeService.getGifts(pageable);
+        Page<Gift> giftPage = storeService.getGifts(pageable,schoolId);
 
         return new PageResource<>(giftPage,"page","size");
 

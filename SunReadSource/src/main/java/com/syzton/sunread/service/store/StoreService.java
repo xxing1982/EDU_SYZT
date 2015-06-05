@@ -21,7 +21,7 @@ public interface StoreService {
 
     void changeExchangeStatus(long exchangeId,long userId,GiftStatus status);
 
-    Page<Gift> getGifts(Pageable pageable);
+    Page<Gift> getGifts(Pageable pageable,long schoolId);
 
     Page<ExchangeHistory> getExchangeHistory(Pageable pageable,long studentId);
 

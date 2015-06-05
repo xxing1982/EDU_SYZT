@@ -2,11 +2,13 @@ package com.syzton.sunread.service.store;
 
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.exception.store.InSufficientCoinsException;
+import com.syzton.sunread.model.organization.School;
 import com.syzton.sunread.model.store.ExchangeHistory;
 import com.syzton.sunread.model.store.Gift;
 import com.syzton.sunread.model.store.GiftStatus;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.repository.organization.SchoolRepository;
 import com.syzton.sunread.repository.store.ExchangeHistoryRepository;
 import com.syzton.sunread.repository.store.GiftRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
@@ -31,16 +33,24 @@ public class StoreRepositoryService implements StoreService {
 
     private UserRepository userRepository;
 
+    private SchoolRepository schoolRepository;
+
     @Autowired
-    public StoreRepositoryService(GiftRepository giftRepository, ExchangeHistoryRepository exchangeHistoryRepository, StudentRepository studentRepository, UserRepository userRepository) {
+    public StoreRepositoryService(GiftRepository giftRepository, ExchangeHistoryRepository exchangeHistoryRepository, StudentRepository studentRepository, UserRepository userRepository,SchoolRepository schoolRepository) {
         this.giftRepository = giftRepository;
         this.exchangeHistoryRepository = exchangeHistoryRepository;
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
+        this.schoolRepository = schoolRepository;
     }
 
     @Override
     public void addGift(Gift gift) {
+
+        School exists = schoolRepository.findOne(gift.getSchoolId());
+        if(exists == null){
+            throw new NotFoundException("school Id = "+ gift.getSchoolId()+" not found...");
+        }
 
         giftRepository.save(gift);
     }
@@ -109,9 +119,9 @@ public class StoreRepositoryService implements StoreService {
     }
 
     @Override
-    public Page<Gift> getGifts(Pageable pageable) {
+    public Page<Gift> getGifts(Pageable pageable,long schoolId) {
 
-        Page<Gift> giftPage = giftRepository.findAll(pageable);
+        Page<Gift> giftPage = giftRepository.findBySchoolId(pageable, schoolId);
 
         return giftPage;
     }

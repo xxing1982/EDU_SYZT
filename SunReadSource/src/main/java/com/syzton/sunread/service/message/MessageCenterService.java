@@ -19,5 +19,7 @@ public interface MessageCenterService {
 	public Page<MessageDTO> findMessagesByReceiveUser(Pageable pageable, Long userId);
 
 	public Message deleteById(Long id);
+
+	public void readMessage(Long id);
 	
 }
