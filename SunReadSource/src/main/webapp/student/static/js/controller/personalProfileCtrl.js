@@ -1,6 +1,8 @@
 //personalProfile.js
 
-ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', 'Student', 'Dropzone', 'config',  function ($rootScope, $scope, User, Student,Dropzone, config) {
+ctrls.controller("personalProfileController", 
+        ['$rootScope', '$scope', 'User', 'Student', 'Campus', 'Class', 'Dropzone', 'config', 
+        function ($rootScope, $scope, User, Student, Campus, Class, Dropzone, config) {
     
     // Invoke this with the entity object
     $scope.toggleEdit = function(editObj, save){
@@ -38,6 +40,16 @@ ctrls.controller("personalProfileController", ['$rootScope', '$scope', 'User', '
                                             school: $scope.student.school,
                                             class: $scope.student.class };
 
+        // Get the campus imformation
+        $scope.campus = Campus.get( {id: $scope.student.campusId }, function(){
+            $scope.basicInformation.content.school = $scope.campus.school;
+        });
+        
+        // Get the class imformation
+        $scope.class = Class.get( {id: $scope.student.clazzId }, function(){
+            $scope.basicInformation.content.class = $scope.class.name;
+        });
+        
         // Personal information
         $scope.personalInformation = new Object();
         $scope.personalInformation.content = { nickname: $scope.student.nickname,
