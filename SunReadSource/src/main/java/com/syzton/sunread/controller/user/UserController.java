@@ -223,8 +223,9 @@ public class UserController extends BaseController {
                                             @RequestParam("size") int size,
                                             @RequestParam(value = "sortBy", required = false) String sortBy,
                                             @RequestParam(value = "direction", required = false) String direction) {
-
-        Pageable pageable = this.getPageable(page,size,"statistic.testPasses","desc");
+    	
+    	sortBy = sortBy == null ? "statistic.point" : "statistic." + sortBy;
+        Pageable pageable = this.getPageable(page, size, sortBy, "desc");
         Page<Student> hotReaders = userService.hotReadersInCampus(campusId, pageable);
 
         return new PageResource<>(hotReaders,"page","size") ;

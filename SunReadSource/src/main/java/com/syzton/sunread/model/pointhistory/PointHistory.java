@@ -36,6 +36,12 @@ public class PointHistory extends AbstractEntity {
 	@Column
 	private int num;
     
+	@Column(name="form_id")
+	private Long fromId;
+	
+    
+	@Column(name="reason")
+	private String reason;
 	
     public PointHistory() {
 
@@ -73,7 +79,22 @@ public class PointHistory extends AbstractEntity {
 	public void setNum(int num) {
 		this.num = num;
 	}
+	
+    public Long getFromId() {
+		return fromId;
+	}
 
+	public void setFromId(Long fromId) {
+		this.fromId = fromId;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	@Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

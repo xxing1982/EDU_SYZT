@@ -11,12 +11,17 @@ import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.QBook;
+import com.syzton.sunread.model.pointhistory.PointHistory;
+import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
+import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
 import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.model.note.QNote;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.note.NoteRepository;
 import com.syzton.sunread.repository.user.UserRepository;
+import com.syzton.sunread.service.pointhistory.PointHistoryService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +66,14 @@ public class NoteRepositoryService implements NoteService {
     public void UserRepositoryService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
+    
+    private PointHistoryService pointHistoryService;
+    
+    @Autowired
+    public void PointHistoryService(PointHistoryService pointHistoryService) {
+        this.pointHistoryService = pointHistoryService;
+    }
+    
     private SecurityContextUtil securityContextUtil;
     
     @Autowired
@@ -72,7 +84,7 @@ public class NoteRepositoryService implements NoteService {
     @Override
     public Note add(NoteDTO added, Long bookId) {
         LOGGER.debug("Adding a new note entry with information: {}", added);
-
+        
         Book book = bookRepository.findOne(bookId);
         book.getStatistic().increaseNotes();
         bookRepository.save(book);
@@ -81,6 +93,13 @@ public class NoteRepositoryService implements NoteService {
         		.image(added.getImage())
                 .build();
         
+        // Add pointhistories entity
+        PointHistory pointHistory = new PointHistory();
+        pointHistory.setPointFrom(PointFrom.FROM_NOTE);
+        pointHistory.setPointType(PointType.IN);
+        pointHistory.setNum(5);
+        pointHistory.setStudent((Student)user);
+        pointHistoryService.add(pointHistory);
         return repository.save(noteModel);
     }
     
