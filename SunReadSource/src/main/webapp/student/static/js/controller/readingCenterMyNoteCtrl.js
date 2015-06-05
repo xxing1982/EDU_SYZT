@@ -19,8 +19,6 @@ ctrls.controller("readingCenterMyNoteController", ['$rootScope', '$scope', 'Note
     });
         
     $scope.showLightBox = function(url){
-        
-        // 
-    
+        $scope.showLightBox.url = $scope.imageServer + url;
     }
 } ]);
