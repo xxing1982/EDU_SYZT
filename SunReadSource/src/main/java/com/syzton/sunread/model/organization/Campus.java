@@ -10,7 +10,6 @@ import org.joda.time.DateTime;
 
 import com.syzton.sunread.dto.organization.CampusDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.model.region.Region;
 import com.syzton.sunread.model.region.SchoolDistrict;
 
 /**
@@ -44,7 +43,6 @@ public class Campus extends AbstractEntity{
     private Set<Clazz> clazz = new HashSet<Clazz>();
     
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH },optional = false)
-    @Basic(fetch = FetchType.LAZY)
     @JoinColumn(name = "edu_group")
     private EduGroup eduGroup;
     
@@ -131,11 +129,12 @@ public class Campus extends AbstractEntity{
     public static class Builder{
     	private Campus built;
     	
-    	public Builder(String name, String headmaster
+    	public Builder(String name, String headmaster,String wish
     		,EduGroup eduGroup, SchoolDistrict schoolDistrict){
     		built = new Campus();
     		built.name = name;
     		built.headmaster = headmaster;
+    		built.wish = wish;
     		built.eduGroup = eduGroup;
     		built.schoolDistrict = schoolDistrict;
   		
@@ -166,10 +165,10 @@ public class Campus extends AbstractEntity{
 	/**
 	 * @return
 	 */
-	public static Builder getBuilder(String name, String headmaster,
-			EduGroup eduGroup, SchoolDistrict schoolDistrict) {
+	public static Builder getBuilder(String name, String headmaster,String wish
+			,EduGroup eduGroup, SchoolDistrict schoolDistrict) {
 		// TODO Auto-generated method stub
-		return new Builder(name, headmaster, eduGroup, schoolDistrict);
+		return new Builder(name, headmaster,wish, eduGroup, schoolDistrict);
 	}
 
     public CampusDTO createDTO(Campus model) {
@@ -178,9 +177,12 @@ public class Campus extends AbstractEntity{
         dto.setName(model.getName());
         dto.setDescription(model.getDescription());
         dto.setHeadmaster(model.headmaster);
-        dto.setSchoolDistrict(model.schoolDistrict.getName());
+        dto.setWish(model.wish);
+        dto.setSchoolDistrictId(model.schoolDistrict.getId());
+        dto.setSchoolDistrictName(model.schoolDistrict.getName());
         dto.setClassNum(model.clazzNum());
-		dto.setWish(model.getWish());
+        dto.setEduGroupId(model.eduGroup.getId());
+		dto.setEduGroupName(model.eduGroup.getName());
         
         return dto;
     }

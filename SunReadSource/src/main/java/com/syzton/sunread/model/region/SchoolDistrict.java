@@ -137,7 +137,7 @@ public class SchoolDistrict extends AbstractEntity{
             built.region = region;
         }
 
-        public Builder Grade(Set<Campus> campus) {
+        public Builder Campus(Set<Campus> campus) {
             built.campus = campus;
             return this;
         }

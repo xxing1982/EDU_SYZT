@@ -1,13 +1,8 @@
-/**
- * 
- */
 package com.syzton.sunread.repository.organization;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.syzton.sunread.model.organization.Campus;
-import com.syzton.sunread.model.organization.EduGroup;
-import com.syzton.sunread.model.organization.School;
 
 /**
  * @author Morgan-Leon
@@ -18,6 +13,6 @@ public interface CampusRepository extends JpaRepository<Campus,Long> {
 
 	public Campus findByName(String name);
 	
-	public Campus findByNameAndSchool(String name,School school);
+//	public Campus findByNameAndSchool(String name,School school);
 
 }

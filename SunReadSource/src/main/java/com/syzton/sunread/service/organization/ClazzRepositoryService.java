@@ -9,20 +9,14 @@ import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.ClazzStatistic;
 import com.syzton.sunread.model.organization.ClazzSumStatistic;
-import com.syzton.sunread.model.organization.EduGroup;
-import com.syzton.sunread.model.organization.School;
-import com.syzton.sunread.model.region.Region;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.organization.EduGroupRepository;
-import com.syzton.sunread.repository.organization.SchoolRepository;
+import com.syzton.sunread.repository.region.SchoolDistrictRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
-import com.syzton.sunread.util.ExcelUtil;
-
 import javassist.NotFoundException;
 
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,10 +42,10 @@ public class ClazzRepositoryService implements ClazzService {
     
     private EduGroupRepository eduRepo;
     
-    private SchoolRepository schoolRepo;
+    private SchoolDistrictRepository schoolRepo;
 
     @Autowired
-    public ClazzRepositoryService(ClazzRepository repository,CampusRepository campusRepository,StudentRepository studentRepository,EduGroupRepository eduRepo,SchoolRepository schoolRepo) {
+    public ClazzRepositoryService(ClazzRepository repository,CampusRepository campusRepository,StudentRepository studentRepository,EduGroupRepository eduRepo,SchoolDistrictRepository schoolRepo) {
         this.repository = repository;
         this.campusRepository = campusRepository;
         this.studentRepository = studentRepository;
@@ -201,45 +195,45 @@ public class ClazzRepositoryService implements ClazzService {
     @Override
 	public Map<Integer,String> batchSaveOrUpdateClazzFromExcel(Sheet sheet) {
 		Map<Integer,String> failMap = new HashMap<Integer,String>();
-		
-		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
-			Row row = sheet.getRow(i); 
-			String className = ExcelUtil.getStringFromExcelCell(row.getCell(0));
-			if("".equals(className)){
-				break;
-			}
-			
-			String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(4));
-			String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(3));
-			EduGroup group = eduRepo.findByName(eduGroupName);
-			if(group == null){
-				failMap.put(i+1, "查询不到该教育集团:"+eduGroupName);
-				continue;
-			}
-			School school = schoolRepo.findByNameAndEduGroup(schoolName, group);
-			if(school == null){
-				failMap.put(i+1,  "查询不到该学校:"+schoolName);
-				continue;
-			}
-			String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(2));
-			Campus campus = campusRepository.findByNameAndSchool(campusName, school);
-			if(campus == null){
-				failMap.put(i+1,  "查询不到校区:"+campusName);
-				continue;
-			}
-			
-			Clazz clazz = repository.findByNameAndCampus(className, campus);
-			if(clazz == null){
-				clazz = new Clazz();
-				clazz.setName(className);
-				clazz.setCampus(campus);
-				ClazzStatistic statistic = new ClazzStatistic();
-				clazz.setClazzStatistic(statistic);
-			}
-			clazz.setGrade(ExcelUtil.getIntFromExcelCell(row.getCell(1)));
-			clazz.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(5)));
-			repository.save(clazz);
-		}
+//		
+//		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
+//			Row row = sheet.getRow(i); 
+//			String className = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+//			if("".equals(className)){
+//				break;
+//			}
+//			
+//			String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(4));
+//			String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(3));
+//			EduGroup group = eduRepo.findByName(eduGroupName);
+//			if(group == null){
+//				failMap.put(i+1, "查询不到该教育集团:"+eduGroupName);
+//				continue;
+//			}
+//			School school = schoolRepo.findByNameAndEduGroup(schoolName, group);
+//			if(school == null){
+//				failMap.put(i+1,  "查询不到该学校:"+schoolName);
+//				continue;
+//			}
+//			String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+//			Campus campus = campusRepository.findByNameAndSchool(campusName, school);
+//			if(campus == null){
+//				failMap.put(i+1,  "查询不到校区:"+campusName);
+//				continue;
+//			}
+//			
+//			Clazz clazz = repository.findByNameAndCampus(className, campus);
+//			if(clazz == null){
+//				clazz = new Clazz();
+//				clazz.setName(className);
+//				clazz.setCampus(campus);
+//				ClazzStatistic statistic = new ClazzStatistic();
+//				clazz.setClazzStatistic(statistic);
+//			}
+//			clazz.setGrade(ExcelUtil.getIntFromExcelCell(row.getCell(1)));
+//			clazz.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(5)));
+//			repository.save(clazz);
+//		}
 		return failMap;
 	}
 }
