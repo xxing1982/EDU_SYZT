@@ -2,6 +2,7 @@ package com.syzton.sunread.controller.bookshelf;
 
 
 import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,9 @@ public class BookshelfController extends BaseController{
     private UserService	userService;
 
     @Autowired
-    public BookshelfController(BookshelfService service) {
+    public BookshelfController(BookshelfService service,UserService userService) {
         this.service = service;
+        this.userService = userService;
     }
     
     @RequestMapping(value = "/student/{studentId}/bookshelf", method = RequestMethod.POST)
@@ -70,9 +72,12 @@ public class BookshelfController extends BaseController{
     @ResponseBody
     public Page<BookshelfDTO> findByClassId(@PathVariable("classId") Long classId,
             								@RequestParam("page") int page,
-            								@RequestParam("size") int size) throws NotFoundException {
+            								@RequestParam("size") int size,
+            								@RequestParam(value = "sortBy", required = false) String sortBy,
+            								@RequestParam(value = "direction", required = false) String direction) throws NotFoundException {
         LOGGER.debug("Finding bookshelf entry with id: {}", classId);
-        Pageable pageable = this.getPageable(page, size);
+        sortBy = sortBy == null ? "statistic.point" : sortBy;     
+        Pageable pageable = this.getPageable(page, size,sortBy,direction);
         Page<Student> students = userService.hotReadersInClazz(classId, pageable);
         ArrayList<BookshelfDTO> bookshelves = new ArrayList<BookshelfDTO>();
         for (int i = 0; i < students.getNumberOfElements(); i++) {

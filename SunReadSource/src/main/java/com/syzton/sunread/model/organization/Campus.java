@@ -176,7 +176,7 @@ public class Campus extends AbstractEntity{
         dto.setDescription(model.getDescription());
         dto.setHeadmaster(model.headmaster);
         dto.setRegionId(model.region.getId());
-//        dto.setAddress(model.region.generateAddress());
+        dto.setAddress(model.region.generateAddress());
         dto.setSchool(model.school.getName());
         dto.setClassNum(model.clazzNum());
 		dto.setWish(model.getWish());

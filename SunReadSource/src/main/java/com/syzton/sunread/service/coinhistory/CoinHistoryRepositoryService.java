@@ -2,15 +2,6 @@ package com.syzton.sunread.service.coinhistory;
 
 import java.util.List;
 
-import com.syzton.sunread.controller.util.SecurityContextUtil;
-import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.coinhistory.CoinHistory;
-import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
-import com.syzton.sunread.model.user.Student;
-import com.syzton.sunread.model.user.User;
-import com.syzton.sunread.model.user.UserStatistic;
-import com.syzton.sunread.repository.coinhistory.CoinHistoryRepository;
-import com.syzton.sunread.repository.user.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +9,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.syzton.sunread.controller.util.SecurityContextUtil;
+import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.coinhistory.CoinHistory;
+import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.model.user.UserStatistic;
+import com.syzton.sunread.repository.coinhistory.CoinHistoryRepository;
+import com.syzton.sunread.repository.organization.ClazzRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
 
 
 /**
@@ -29,7 +33,7 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoinHistoryRepositoryService.class);
     private CoinHistoryRepository repository;
-
+    
     @Autowired
     public CoinHistoryRepositoryService(CoinHistoryRepository repository) {
         this.repository = repository;
@@ -41,6 +45,13 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
     @Autowired
     public void StudentRepositoryService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
+    }
+    
+    private ClazzRepository clazzRepository;
+    
+    @Autowired
+    public void ClazzRepositoryService(ClazzRepository clazzRepository) {
+        this.clazzRepository = clazzRepository;
     }
     
     private SecurityContextUtil securityContextUtil;
@@ -56,7 +67,7 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         // Get the student entity
         Student student = studentRepository.findOne(add.getStudentId());
         
-        // Calculate the statistic
+        // Update student statistic
         UserStatistic statistic = student.getStatistic();
         if (add.getCoinType() == CoinType.IN) {
         	statistic.setCoin( statistic.getCoin() + add.getNum() );
@@ -65,7 +76,22 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         }
         studentRepository.save(student);
         
+        // Update clazz statistic
+        Clazz clazz = clazzRepository.findOne(student.getClazzId());
 
+        if (add.getCoinType() == CoinType.IN) {
+            statistic.setCoin(statistic.getCoin() + add.getNum());
+            clazz.getClazzStatistic().setTotalCoin(clazz.getClazzStatistic().getTotalCoin() + add.getNum());
+            clazz.getClazzStatistic().setAvgCoin();
+        } else {
+            statistic.setCoin(statistic.getCoin() - add.getNum());
+            clazz.getClazzStatistic().setTotalCoin(clazz.getClazzStatistic().getTotalCoin() - add.getNum());
+            clazz.getClazzStatistic().setAvgCoin();
+        }
+        clazzRepository.save(clazz);
+        
+        
+        // Update student coinhistory
         switch(add.getCoinFrom()){
         	case FROM_TEACHER: 
         		
@@ -76,19 +102,10 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
                 add.setFromId(teacher.getId());
                 break;
         	case FROM_BOOK: 
-        		
-                // Save the coinhistory entity
-//                add.setFromId(teacher.getId());
                 break;
         	case FROM_NOTE: 
-        		
-                // Save the coinhistory entity
-//                add.setFromId(teacher.getId());
                 break;
         	case FROM_VERIFY_TEST: 
-        		
-                // Save the coinhistory entity
-//                add.setFromId(teacher.getId());
                 break;                
         	default:
         		break; 

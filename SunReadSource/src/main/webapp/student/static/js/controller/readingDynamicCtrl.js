@@ -17,7 +17,7 @@ ctrls.controller("readingDynamicController", ['$scope', '$rootScope', 'NoteView'
 
 
         // Create a Hotreaders entitiy
-        $scope.hotReaders = Hotreader.get({by: 'campus', id: student.campusId, page: 0, size: 3 });
+        $scope.hotReaders = Hotreader.get({by: 'campus', id: student.campusId, page: 0, size: 3, sortBy: "point" });
     });
 
 

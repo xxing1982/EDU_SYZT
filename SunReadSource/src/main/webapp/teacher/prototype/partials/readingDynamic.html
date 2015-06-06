@@ -66,48 +66,6 @@
                 <div class="row title"/>
             </div>
 
-            <!-- Excellent clazzes -->
-            <div class="row buttom-separator">
-                <div class="col-md-12">
-                    <div class="title">
-                        <div class="row">
-                            <div class="col-md-10"><h4>优秀班级</h4></div>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <div class="col-md-12">
-                            <div class="row">
-
-                                <!-- Golden silver bronze clazzes -->
-                                <div class="col-md-4" ng-repeat="hotClazz in hotClazzs.content" ng-init="award=['golden', 'silver', 'bronze']">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <img ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive">
-                                        </div>
-                                        <div class="col-md-7" style="margin-top:-10px;">
-                                            <div class="row text-left">
-                                                <h5><big>{{hotClazz.name}}</big></h4>
-                                                    <p style="line-height:21px;">
-                                                        <small>
-                                                            班级人数：{{hotClazz.clazzStatistic.totalReads}}<br/>
-                                                            班级平均积分(学期)：{{hotClazz.clazzStatistic.avgPoints}}<br/>
-                                                            班级人均阅读量(学期)：{{hotClazz.clazzStatistic.avgReads}}
-                                                        </small>
-                                                    </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Place holder -->
-                <div class="row title"/>
-            </div>
-
             <!-- Excellent students -->
             <div class="row buttom-separator">
                 <div class="col-md-12">
@@ -133,7 +91,7 @@
                                         </div>
                                         <div class="col-xs-8 col-xs-offset-2">
                                             <div class="text-center"><h4>{{hotreader.username}}</h4></div>
-                                            <div class="text-center"><p>{{hotreader.statistic.testPasses}}本</p></div>
+                                            <div class="text-center"><p>{{hotreader.statistic.point}}积分</p></div>
                                         </div>
                                     </div>
                                 </div>
@@ -146,6 +104,49 @@
                 <!-- Place holder -->
                 <div class="row title"/>
             </div>
+
+            <!-- Excellent clazzes -->
+            <div class="row buttom-separator">
+                <div class="col-md-12">
+                    <div class="title">
+                        <div class="row">
+                            <div class="col-md-10"><h4>书香班级</h4></div>
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <div class="col-md-12">
+                            <div class="row">
+
+                                <!-- Golden silver bronze clazzes -->
+                                <div class="col-md-4" ng-repeat="hotClazz in hotClazzs.content" ng-init="award=['golden', 'silver', 'bronze']">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <img ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive">
+                                        </div>
+                                        <div class="col-md-7" style="margin-top:-10px;">
+                                            <div class="row text-left">
+                                                <h5><big>{{hotClazz.name}}</big></h4>
+                                                <p style="line-height:21px;">
+                                                    <small>
+                                                        班级人数：{{hotClazz.clazzStatistic.totalReads}}<br/>
+                                                        班级平均积分(学期)：{{hotClazz.clazzStatistic.avgPoints}}<br/>
+                                                        班级人均阅读量(学期)：{{hotClazz.clazzStatistic.avgReads}}
+                                                    </small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Place holder -->
+                <div class="row title"/>
+            </div>
+
 
 
         </div>

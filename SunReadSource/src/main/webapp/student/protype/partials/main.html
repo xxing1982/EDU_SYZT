@@ -121,7 +121,7 @@
             <div class="col-md-12 div-tag tag-margin-green tag-right">
                 <div class="row row-title">
                     <div class="col-md-8 row-title-name">阅读海洋</div>
-                    <div class="col-md-4 row-title-more"><a href="#" ng-click="changeFish()">更换角色></a></div>
+                    <div class="col-md-4 row-title-more"><a href="#" ng-click="changeFish_modal()">更换角色></a></div>
                 </div>
                 <div class="row row-content-right">
                     <div class="col-md-12"><img src="../static/img/app.jpg" class="img-responsive" /></div>
@@ -156,7 +156,7 @@
                         <div class="col-md-6"></div>
                         <div class="col-md-3" style="margin-top:-17%;"><img src="../static/img/readingDynamic/first.png" class="img-responsive img-circle"></div>
                     </div>
-                    <div><h3>{{hotReaders.first.username}} <span class="read-master-count">{{hotReaders.first.statistic.testPasses}}本</span></h3></div>
+                    <div><h3>{{hotReaders.first.username}} <span class="read-master-count">{{hotReaders.first.statistic.point}}分</span></h3></div>
                     <hr>
                     <div class="row" ng-repeat="hotreader in hotReaders.others" ng-init="award = ['second', 'third']">
                         <div class="col-md-1"></div>
@@ -164,7 +164,7 @@
                         <div class="col-md-5 read-master-name">
                             {{hotreader.username}}
                         </div>
-                        <div class="col-md-3 read-master-count">{{hotreader.statistic.testPasses}}本</div>
+                        <div class="col-md-3 read-master-count">{{hotreader.statistic.point}}分</div>
                     </div>
                 </div>
             </div>
@@ -185,23 +185,25 @@
     </div>
 </div>
 <div id="change-fish-modal" class="modal fade bs-example-modal-sm" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" style="width:800px;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="gridSystemModalLabel">更换角色</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-4" ng-repeat="item in fishes">
-                                <img class="img-responsive" ng-src="{{IMAGESERVER + item.fishPic}}">
-                            </div>
+    <div class="modal-dialog modal-sm" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">更换角色</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4" ng-repeat="item in fishes">
+                            <img class="img-responsive" ng-class="{true: 'active', false: 'inactive'}[item.isSelected]" ng-src="{{IMAGESERVER + item.fishPic}}" ng-click="changeFish(item)">
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="updateFish()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

@@ -2,6 +2,13 @@ package com.syzton.sunread.service.pointhistory;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.pointhistory.PointHistory;
@@ -12,13 +19,6 @@ import com.syzton.sunread.model.user.UserStatistic;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.pointhistory.PointHistoryRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
-import com.syzton.sunread.repository.user.UserRepository;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -46,32 +46,54 @@ public class PointHistoryRepositoryService implements PointHistoryService {
         this.studentRepository = studentRepository;
     }
 
+    private SecurityContextUtil securityContextUtil;
+    
+    @Autowired
+    public void setSecurityContextUtil(SecurityContextUtil securityContextUtil) {
+        this.securityContextUtil = securityContextUtil;
+    }
+    
     @Override
     public PointHistory add(PointHistory add) {
-        LOGGER.debug("Adding a new pointHistory entry with information: {}", add);
+   	 
+        // Get the student entity
         Student student = studentRepository.findOne(add.getStudentId());
-        UserStatistic statistic = student.getStatistic();
+        
+        // Update statistics
         Clazz clazz = clazzRepository.findOne(student.getClazzId());
-
-        clazzRepository.save(clazz);
+        UserStatistic statistic = student.getStatistic();
 
         if (add.getPointType() == PointType.IN) {
-        	statistic.setPoint( statistic.getPoint() + add.getNum() );
-            statistic.setCoin(statistic.getCoin() + add.getNum());
+            statistic.setPoint(statistic.getPoint() + add.getNum());
             clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() + add.getNum());
-            clazz.getClazzStatistic().setTotalCoin(clazz.getClazzStatistic().getTotalCoin() + add.getNum());
             clazz.getClazzStatistic().setAvgPoints();
-            clazz.getClazzStatistic().setAvgCoin();
         } else {
-//        	statistic.setPoint( statistic.getPoint() - add.getNum() );
-//            clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() - add.getNum());
-            statistic.setPoint( statistic.getCoin() - add.getNum() );
-            clazz.getClazzStatistic().setTotalCoin(clazz.getClazzStatistic().getTotalCoin() - add.getNum());
-            clazz.getClazzStatistic().setAvgCoin();
+            statistic.setPoint(statistic.getPoint() - add.getNum());
+            clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() - add.getNum());
+            clazz.getClazzStatistic().setAvgPoints();
         }
-
         clazzRepository.save(clazz);
-        studentRepository.save(student);
+        
+        
+        // Update student pointhistory
+        switch(add.getPointFrom()){
+        	case FROM_TEACHER: 
+        		
+        		// Get the teacher entity
+                User teacher = securityContextUtil.getUser();
+                
+                // Save the pointhistory entity
+                add.setFromId(teacher.getId());
+                break;
+        	case FROM_BOOK: 
+                break;
+        	case FROM_NOTE: 
+                break;
+        	case FROM_VERIFY_TEST: 
+                break;                
+        	default:
+        		break; 
+        }
         return repository.save(add);
     }
     

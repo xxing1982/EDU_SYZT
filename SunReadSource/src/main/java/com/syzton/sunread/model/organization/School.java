@@ -1,8 +1,9 @@
 package com.syzton.sunread.model.organization;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.syzton.sunread.dto.organization.SchoolDTO;
+import com.syzton.sunread.dto.region.SchoolDistrictDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -14,9 +15,9 @@ import java.util.Set;
 /**
  * Created by Morgan-Leon on 2015/3/16.
  */
-@Entity
-@Table(name="school")
-@JsonIgnoreProperties
+//@Entity
+//@Table(name="school")
+//@JsonIgnoreProperties
 public class School extends AbstractEntity{
 
 
@@ -134,8 +135,8 @@ public class School extends AbstractEntity{
 				
 	}
     
-    public SchoolDTO createDTO(School model) {
-        SchoolDTO dto = new SchoolDTO();
+    public SchoolDistrictDTO createDTO(School model) {
+        SchoolDistrictDTO dto = new SchoolDistrictDTO();
         dto.setId(model.id);
         dto.setName(model.getName());
         dto.setDescription(model.getDescription());

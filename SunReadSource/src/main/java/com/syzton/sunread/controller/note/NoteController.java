@@ -14,7 +14,10 @@ import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.note.Note;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.service.coinhistory.CoinHistoryService;
 import com.syzton.sunread.service.note.NoteService;
 
 import javax.validation.Valid;
@@ -42,7 +45,7 @@ public class NoteController extends BaseController {
         LOGGER.debug("Adding a new note entry with information: {}", dto);
 
         Note added = service.add(dto, bookId);
-
+        
         LOGGER.debug("Added a note entry with information: {}", added);
 
        return added.createDTO(added);

@@ -3,7 +3,7 @@ package com.syzton.sunread.service.organization;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.syzton.sunread.dto.organization.SchoolDTO;
+import com.syzton.sunread.dto.region.SchoolDistrictDTO;
 import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.model.organization.School;
 import com.syzton.sunread.repository.organization.EduGroupRepository;
@@ -39,7 +39,7 @@ public class SchoolRepositoryService implements SchoolService {
     }
 
     @Override
-    public School add(SchoolDTO add, Long eduId) {
+    public School add(SchoolDistrictDTO add, Long eduId) {
 
         LOGGER.debug("Adding a new school entry with information: {}", add);
         EduGroup eduGroup =  eduRepository.findOne(eduId);
@@ -63,7 +63,7 @@ public class SchoolRepositoryService implements SchoolService {
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public School update(SchoolDTO updated)throws  NotFoundException{
+    public School update(SchoolDistrictDTO updated)throws  NotFoundException{
         LOGGER.debug("Updating contact with information: {}", updated);
 
         School model = findById(updated.getId());

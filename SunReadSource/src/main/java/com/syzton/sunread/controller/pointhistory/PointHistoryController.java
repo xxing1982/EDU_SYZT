@@ -2,6 +2,8 @@ package com.syzton.sunread.controller.pointhistory;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +31,17 @@ public class PointHistoryController {
     }
 
 //
-//    @RequestMapping(value = "/api/pointhistories", method = RequestMethod.POST)
-//    @ResponseBody
-//    public PointHistory add(@Valid @RequestBody PointHistory add) {
-//        LOGGER.debug("Adding a new pointhistory entry with information: {}", add);
-//
-//        PointHistory added = service.add(add);
-//
-//        LOGGER.debug("Added a pointhistory entry with information: {}", added);
-//
-//       return added;
-//    }
+    @RequestMapping(value = "/api/pointhistories", method = RequestMethod.POST)
+    @ResponseBody
+    public PointHistory add(@Valid @RequestBody PointHistory add) {
+        LOGGER.debug("Adding a new pointhistory entry with information: {}", add);
+
+        PointHistory added = service.add(add);
+
+        LOGGER.debug("Added a pointhistory entry with information: {}", added);
+
+       return added;
+    }
 //
 //    @RequestMapping(value = "/api/pointhistories/{id}", method = RequestMethod.DELETE)
 //    @ResponseBody

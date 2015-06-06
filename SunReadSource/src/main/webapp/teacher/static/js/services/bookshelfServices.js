@@ -2,7 +2,7 @@ var bookshelfServices = angular.module('bookshelfServices', ['ngResource', "nour
 
 bookshelfServices.factory('GetBookshelvesByClass',['$resource', 'config',
 	function($resource, config){
-        return $resource(config.HOST + "class/{classId}/bookshelves?page=:page&size=:size",
+        return $resource(config.HOST + "class/:classId/bookshelves?page=:page&size=:size",
             {classId:'@classId', page:'@page',size:'@size'}, {}
         );
 	}]);
