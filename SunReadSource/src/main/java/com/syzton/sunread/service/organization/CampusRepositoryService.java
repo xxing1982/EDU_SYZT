@@ -67,8 +67,7 @@ public class CampusRepositoryService implements CampusService{
         region = regionRepository.findOne(regionId);
         school = schoolRepository.findOne(schoolId);
         if (region == null) {
-			throw new NotFoundException("no region found with name:"+ region.getProvince()
-					+region.getCity()+region.getDistrict());
+			throw new NotFoundException("no region found with id:"+ region.getId());
 		}
         if (school == null) {
 			throw new NotFoundException("no school found with name :"+school.getName());
@@ -175,11 +174,11 @@ public class CampusRepositoryService implements CampusService{
 			String province = ExcelUtil.getStringFromExcelCell(row.getCell(4));
 			String city = ExcelUtil.getStringFromExcelCell(row.getCell(5));
 			String district = ExcelUtil.getStringFromExcelCell(row.getCell(6));
-			Region region = regionRepository.findByProvinceAndCityAndDistrict(province, city, district);
-			if(region == null){
-				failMap.put(i+1, "Can't find area:"+province+"省"+city+"市"+district+"地区(县)");
-				continue;
-			}
+//			Region region = regionRepository.findByProvinceAndCityAndDistrict(province, city, district);
+//			if(region == null){
+//				failMap.put(i+1, "Can't find area:"+province+"省"+city+"市"+district+"地区(县)");
+//				continue;
+//			}
 			campus.setRegion(region);
 			String des = ExcelUtil.getStringFromExcelCell(row.getCell(7));
 			campus.setDescription(des);

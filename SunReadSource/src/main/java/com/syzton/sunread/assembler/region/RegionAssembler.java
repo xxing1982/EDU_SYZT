@@ -12,10 +12,14 @@ public class RegionAssembler {
 
 	public Region fromDTOtoModel(final RegionDTO DTO) {
 		Region region =  new Region();
-		region.setProvince(DTO.getProvince());
-		region.setCity(DTO.getCity());
-		region.setDistrict(DTO.getDistrict());
+		region.setAreaCode(DTO.getAreaCode());
+		region.setName(DTO.getName());
+		region.setRegionType(DTO.getRegionType());
 		region.setDescription(DTO.getDescription());
+
+		for (RegionDTO reg : DTO.getRegionDTOSet()){
+
+		}
 		return region;
 	}
 }
