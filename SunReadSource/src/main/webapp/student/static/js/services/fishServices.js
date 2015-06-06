@@ -9,5 +9,11 @@ fishServices.factory('Fish',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
+		api.getMyFish = function(studentId, callback){
+			$http.get(config.HOST + 'students/' + studentId + '/fishes')
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
 		return api;
 	}]);

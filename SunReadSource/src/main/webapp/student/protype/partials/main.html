@@ -194,7 +194,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-4" ng-repeat="item in fishes">
-                                <img class="img-responsive" ng-src="{{IMAGESERVER + item.fishPic}}">
+                                <img class="img-responsive" ng-class="{true: 'active', false: 'inactive'}[item.isSelected]" ng-src="{{IMAGESERVER + item.fishPic}}" ng-click="UpdateFish(item)">
                             </div>
                         </div>
                     </div>

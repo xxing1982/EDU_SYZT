@@ -132,4 +132,8 @@
     text-align: right;
 }
 
+img.active
+{
+    border: 3px red solid;
+}
 
