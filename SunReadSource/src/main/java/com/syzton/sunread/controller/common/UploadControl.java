@@ -32,8 +32,8 @@ import com.syzton.sunread.service.exam.SubjectiveQuestionService;
 import com.syzton.sunread.service.organization.CampusService;
 import com.syzton.sunread.service.organization.ClazzService;
 import com.syzton.sunread.service.organization.EduGroupService;
-import com.syzton.sunread.service.organization.SchoolService;
 import com.syzton.sunread.service.region.RegionService;
+import com.syzton.sunread.service.region.SchoolDistrictService;
 import com.syzton.sunread.service.user.UserService;
 import com.syzton.sunread.util.FtpUtil;
 
@@ -58,7 +58,7 @@ public class UploadControl {
 
 	private ClazzService clazzService;
 
-	private SchoolService schoolService;
+	private SchoolDistrictService schoolService;
 
 	private CampusService campusService;
 
@@ -69,7 +69,7 @@ public class UploadControl {
 			BookService bookService, SubjectiveQuestionService subjectQService,
 			ObjectiveQuestionService objectQService, UserService userService,
 			RegionService regionService, EduGroupService eduGroupService,
-			ClazzService clazzService, SchoolService schoolService,
+			ClazzService clazzService, SchoolDistrictService schoolService,
 			CampusService campusService) {
 		this.securityUtil = securityUtil;
 		this.bookService = bookService;

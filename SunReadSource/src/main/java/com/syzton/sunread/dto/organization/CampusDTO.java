@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.syzton.sunread.model.organization.Campus;
 
 /**
@@ -29,7 +30,13 @@ public class CampusDTO {
 
 	private String wish;
 	
-	private String schoolDistrict ;
+	private Long schoolDistrictId;
+	
+	private String schoolDistrictName ;
+	
+	private Long eduGroupId;
+	
+	private String eduGroupName;
 
 	public String getWish() {
 		return wish;
@@ -39,12 +46,36 @@ public class CampusDTO {
 		this.wish = wish;
 	}
 	
-	public String getSchoolDistrict() {
-		return schoolDistrict;
+	public Long getSchoolDistrictId() {
+		return schoolDistrictId;
 	}
 
-	public void setSchoolDistrict(String schoolDistrict) {
-		this.schoolDistrict = schoolDistrict;
+	public void setSchoolDistrictId(Long schoolDistrictId) {
+		this.schoolDistrictId = schoolDistrictId;
+	}
+
+	public String getSchoolDistrictName() {
+		return schoolDistrictName;
+	}
+
+	public void setSchoolDistrictName(String schoolDistrictName) {
+		this.schoolDistrictName = schoolDistrictName;
+	}
+
+	public Long getEduGroupId() {
+		return eduGroupId;
+	}
+
+	public void setEduGroupId(Long eduGroupId) {
+		this.eduGroupId = eduGroupId;
+	}
+
+	public String getEduGroupName() {
+		return eduGroupName;
+	}
+
+	public void setEduGroupName(String eduGroupName) {
+		this.eduGroupName = eduGroupName;
 	}
 
 	public Long getId() {

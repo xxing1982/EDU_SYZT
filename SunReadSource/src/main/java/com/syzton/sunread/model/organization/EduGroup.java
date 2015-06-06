@@ -37,7 +37,7 @@ public class EduGroup extends AbstractEntity{
 	//cascade = CascadeType.ALL,mappedBy = "note"
     @OneToMany(cascade = CascadeType.ALL, mappedBy="eduGroup")
     @Basic(fetch = FetchType.LAZY)
-    private Set<School> schools = new HashSet<School>();
+    private Set<Campus> campuses = new HashSet<Campus>();
 
 
     public EduGroup() {
@@ -81,12 +81,12 @@ public class EduGroup extends AbstractEntity{
         modificationTime = DateTime.now();
     }
 
-    public Set<School> getSchools() {
-        return schools;
+    public Set<Campus> getCampuss() {
+        return campuses;
     }
 
-    public void setSchools(Set<School> schools) {
-        this.schools = schools;
+    public void setCampuss(Set<Campus> campus) {
+        this.campuses = campus;
     }
     
 	public void update(String name) {
@@ -107,9 +107,9 @@ public class EduGroup extends AbstractEntity{
             built.name = name;
         }
 
-        public  Builder schools(Set<School> schools)
+        public  Builder campuses(Set<Campus> campuses)
         {
-            built.schools = schools;
+            built.campuses = campuses;
             return this;
         }
         
