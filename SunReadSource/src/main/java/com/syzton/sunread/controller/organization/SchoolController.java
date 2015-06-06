@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.dto.organization.SchoolDTO;
+import com.syzton.sunread.dto.region.SchoolDistrictDTO;
 import com.syzton.sunread.model.organization.School;
 import com.syzton.sunread.service.organization.SchoolService;
 
@@ -38,7 +38,7 @@ public class SchoolController {
 //Add a School 
     @RequestMapping(value = "/eduGroup/{edu_id}/school", method = RequestMethod.POST)
     @ResponseBody
-    public SchoolDTO add(@Valid @RequestBody SchoolDTO dto
+    public SchoolDistrictDTO add(@Valid @RequestBody SchoolDistrictDTO dto
     		,@PathVariable("edu_id")Long eduId) {
         LOGGER.debug("Adding a new edu group entry with information: {}", dto);
         
@@ -52,7 +52,7 @@ public class SchoolController {
 //Delete a School
     @RequestMapping(value = "/school/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public SchoolDTO deleteById(@Valid @PathVariable("id") Long id) throws NotFoundException {
+    public SchoolDistrictDTO deleteById(@Valid @PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a School entry with id: {}", id);
 
         School deleted = service.deleteById(id);
@@ -64,7 +64,7 @@ public class SchoolController {
 //Update a School    
     @RequestMapping(value = "/school/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public SchoolDTO update(@Valid @RequestBody SchoolDTO dto,@PathVariable("id") long id) throws NotFoundException {
+    public SchoolDistrictDTO update(@Valid @RequestBody SchoolDistrictDTO dto,@PathVariable("id") long id) throws NotFoundException {
         LOGGER.debug("Adding a new book to shelf entry with information: {}", dto);
         
         School updated = service.update(dto);
@@ -91,7 +91,7 @@ public class SchoolController {
 //Get a School    
     @RequestMapping(value = "/school/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public SchoolDTO findById(@PathVariable("id") Long id) throws NotFoundException {
+    public SchoolDistrictDTO findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding a edugroup entry with id: {}", id);
 
         School found = service.findById(id);

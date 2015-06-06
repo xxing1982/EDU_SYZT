@@ -25,15 +25,11 @@ public class CampusDTO {
 	@Length(max = Campus.MAX_LENGTH_HEADMASTER)
     private String headmaster;
 	
-	private Long regionId;
-	
-	private String address;
-	
-	private String school;
-	
 	private int classNum;
 
 	private String wish;
+	
+	private String schoolDistrict ;
 
 	public String getWish() {
 		return wish;
@@ -41,6 +37,14 @@ public class CampusDTO {
 
 	public void setWish(String wish) {
 		this.wish = wish;
+	}
+	
+	public String getSchoolDistrict() {
+		return schoolDistrict;
+	}
+
+	public void setSchoolDistrict(String schoolDistrict) {
+		this.schoolDistrict = schoolDistrict;
 	}
 
 	public Long getId() {
@@ -75,22 +79,6 @@ public class CampusDTO {
 		this.headmaster = headmaster;
 	}
 
-	public Long getRegionId() {
-		return regionId;
-	}
-
-	public Long setRegionId(Long region) {
-		return this.regionId = region;
-	}
-
-	public String getSchool() {
-		return school;
-	}
-
-	public void setSchool(String school) {
-		this.school = school;
-	}
-
 	public int getClassNum() {
 		return classNum;
 	}
@@ -99,13 +87,7 @@ public class CampusDTO {
 		this.classNum = classNum;
 	}
 
-	public String getAddress() {
-		return address;
-	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
 	
 	
 	

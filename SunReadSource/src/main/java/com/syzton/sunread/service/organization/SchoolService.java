@@ -2,7 +2,7 @@ package com.syzton.sunread.service.organization;
 
 import java.util.Map;
 
-import com.syzton.sunread.dto.organization.SchoolDTO;
+import com.syzton.sunread.dto.region.SchoolDistrictDTO;
 import com.syzton.sunread.model.organization.School;
 
 import javassist.NotFoundException;
@@ -16,11 +16,11 @@ import org.springframework.data.domain.Pageable;
  */
 public interface SchoolService {
 
-    public School add(SchoolDTO School,Long id);
+    public School add(SchoolDistrictDTO School,Long id);
 
     public School deleteById(Long id) throws NotFoundException;
 
-    public School update(SchoolDTO updated) throws NotFoundException;
+    public School update(SchoolDistrictDTO updated) throws NotFoundException;
 
     public School findById(Long id) throws NotFoundException;
 
