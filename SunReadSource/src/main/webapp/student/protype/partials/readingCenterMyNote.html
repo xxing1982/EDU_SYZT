@@ -21,8 +21,10 @@
 				        <div style="float:right;" class="show-more-note-content">
                             <a ng-click=" Note.text_overflow = !Note.text_overflow" ng-show="Note.text_overflow && Note.content.length > 84">更多</a>
                         </div>
-                        <div class="book-thumbnail">
-                            <div ng-style="{'background-image':'url('+imageServer+Note.image+')'}" ng-show="Note.image !== null"> </div>
+                        <div class="book-thumbnail" >
+                            <div ng-show="Note.image !== null">
+                                <div ng-style="{'background-image':'url('+imageServer+Note.image+')'}" ng-click="showLightBox(Note.image)" data-toggle="modal" data-target="#light-box-modal"> </div>
+                            </div>
                         </div>
 
 						<div class="msg-buttom" ng-click="noteView.ShowComments(Note)">
@@ -50,7 +52,26 @@
 		</div>
 	</div>
 	<div class="col-md-1"></div>
+    
+     <!-- Light box modal -->
+    <div class="modal fade" id="light-box-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    
+                <div class="container-fluid">
+                    <div ng-show="showLightBox.url" class="title">
+                        <img ng-src="{{showLightBox.url}}" class="img-thumbnail"/>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
 </div>
+
 <script>
 	SetReadingCenterRightHeight();
 </script>

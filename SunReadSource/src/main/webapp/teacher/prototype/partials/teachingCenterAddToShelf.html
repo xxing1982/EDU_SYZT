@@ -7,7 +7,7 @@
                 <h5 class="title"><big><a ng-href="#/teachingCenter/addBook" class="dark-gray-2">我要推荐</a></big><big> > </big><big>加入书架</big></h5>
             </div>
             <div class="col-xs-4 col-xs-height col-middle">
-                <button class="btn btn-fill-blue pull-right" type="button" ng-click="hotreaderLoadable.publish()">
+                <button class="btn btn-fill-blue pull-right" type="button" ng-click="bookshelfLoadable.publish()">
                     加入书架
                 </button>
             </div>
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="row-same-height">
             <div class="col-xs-1 col-xs-height" style="width:12%">
-                <h5 class="text-right"><input type="checkbox" ng-model="hotreaderLoadable.selectAllValue" ng-click="hotreaderLoadable.selectAll()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全选</h5>
+                <h5 class="text-right"><input type="checkbox" ng-model="bookshelfLoadable.selectAllValue" ng-click="bookshelfLoadable.selectAll()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全选</h5>
             </div>
             <div class="col-xs-1 col-xs-height">
                 <h5 class="text-right">学校：</h5>
@@ -62,15 +62,29 @@
 </div>
 
 <!-- Items -->
-<div class="myBlock mt20 page-body" ng-repeat="hotreader in hotreaderLoadable.entities.content">
+<div class="myBlock mt20 page-body" ng-repeat="hotreader in bookshelfLoadable.entities.content">
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><input checklist-model="hotreaderLoadable.selected" checklist-value="hotreader" type="checkbox" ng-model="checkboxModel.value1"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{hotreader.username}}</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">已认证图书数量：{{hotreader.statistic.testPasses}}</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">当前阅读积分：{{hotreader.statistic.point}}</p></div>
-            <div class="col-xs-3 col-xs-height col-middle"><p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p></div>
-            <div class="col-xs-3 col-xs-height col-middle"><p class="row title">目标阅读积分：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetPoint" /></p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><input checklist-model="bookshelfLoadable.selected" checklist-value="hotreader" type="checkbox" ng-model="checkboxModel.value1"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{hotreader.username}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">书架必读书数量：{{hotreader.unreadMust+hotreader.readMust}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">书架选读书数量：{{hotreader.unreadSelect+hotreader.unreadSelect}}</p></div>
+            <div class="col-xs-3 col-xs-height col-middle">
+              <!-- <p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p> -->
+               <div class="input-group ShelfByClassBookAttibute">
+                    <label class="radio-inline">
+                      <input type="radio" ng-model="status" name="inlineRadioOptions" id="inlineRadio2" value="1" checked>
+                        <p class="ShelfByClassBookAttibuteText">必读</p>
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" ng-model="status" name="inlineRadioOptions" id="inlineRadio3" value="2">
+                         <p class="ShelfByClassBookAttibuteText">选读</p>
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-3 col-xs-height col-middle">
+                <p class="row title">推荐理由：<input type="text" class="custom-input" ng-model="hotreader.description" /></p>
+            </div>
         </div>
     </div>
     </div></div>
@@ -79,5 +93,5 @@
 
 <!-- Loadmore -->
 <div class="myBlock mt20 page-body">
-    <div class="load-more-bottom" ng-click="hotreaderLoadable.get()">{{ hotreaderLoadable.loadingState }}</div>
+    <div class="load-more-bottom" ng-click="bookshelfLoadable.get()">{{ bookshelfLoadable.loadingState }}</div>
 </div>

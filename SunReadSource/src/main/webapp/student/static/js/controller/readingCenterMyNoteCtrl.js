@@ -7,7 +7,8 @@ ctrls.controller("readingCenterMyNoteController", ['$rootScope', '$scope', 'Note
 
         // Get the user id form rootScope
         $scope.arguments = { by: "users",
-                             id: $rootScope.id };
+                             id: $rootScope.id,
+                             sortBy: "creationTime" };
 
         // Initlizate the noteView entity
         $scope.noteView = new NoteView();
@@ -16,4 +17,8 @@ ctrls.controller("readingCenterMyNoteController", ['$rootScope', '$scope', 'Note
         // Get the image server
         $scope.imageServer = config.IMAGESERVER;
     });
+        
+    $scope.showLightBox = function(url){
+        $scope.showLightBox.url = $scope.imageServer + url;
+    }
 } ]);

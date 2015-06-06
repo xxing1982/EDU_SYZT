@@ -38,7 +38,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
       */
       // Create a Hotreaders entitiy
       $scope.hotReaders={};
-      Hotreader.get({by: 'campus', id : data.campusId, page: 0, size: 3 }, function(dataHot){
+      Hotreader.get({by: 'campus', id : data.campusId, page: 0, size: 3, sortBy: "point" }, function(dataHot){
         dataHot.content[0].picture = dataHot.content[0].picture == "" ? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + dataHot.content[0].picture;
         $scope.hotReaders.first = dataHot.content[0];
         //$scope.hotReaders.others = dataHot.content;
@@ -76,11 +76,12 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
       $scope.hotNotes = data.content;
     });
 
-    $scope.changeFish = function(){
+    $scope.changeFish_modal = function(){
       Fish.getFishes(function(data){
         $scope.fishes = data;
         $("#change-fish-modal").modal({backdrop: 'static', keyboard: false});
         Fish.getMyFish($rootScope.id, function(dataMy){
+          $scope.selectedFishId = dataMy.id;
           //$scope.myFishId = dataMy.id;
           for(var key in $scope.fishes){
             $scope.fishes[key].isSelected = false;
@@ -91,11 +92,18 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
       });
     }
 
-    $scope.UpdateFish = function(fish){
+    $scope.changeFish = function(fish){
       for(var key in $scope.fishes){
         $scope.fishes[key].isSelected = false;
       }
       fish.isSelected = true;
+      $scope.selectedFishId = fish.id;
+    }
+
+    $scope.updateFish = function(){
+      Fish.UpdateMyFish($rootScope.id, $scope.selectedFishId, function(){
+        $("#change-fish-modal").modal('hide');
+      })
     }
 
   }]);

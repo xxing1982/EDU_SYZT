@@ -15,5 +15,11 @@ fishServices.factory('Fish',['$resource', 'config', '$http',
 				callback(data);
 			});
 		}
+		api.UpdateMyFish = function(studentId, fishId, callback){
+			$http.put(config.HOST + 'students/' + studentId + '/fishes/' + fishId)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
 		return api;
 	}]);
