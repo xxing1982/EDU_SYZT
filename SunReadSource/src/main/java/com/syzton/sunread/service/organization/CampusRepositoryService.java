@@ -47,6 +47,7 @@ public class CampusRepositoryService implements CampusService{
     private EduGroupRepository eduGroupRepository;
 	private EduGroup eduGroup;
 	private SchoolDistrict schoolDistrict;
+	private Region region;
 	
  
     @Autowired
@@ -81,64 +82,32 @@ public class CampusRepositoryService implements CampusService{
 //    }
   @Override
   @Transactional(rollbackFor = {NotFoundException.class})
-  public Campus add(CampusDTO add) {
+  public Campus add(CampusDTO add,Long regionId) {
 	  
     LOGGER.debug("Adding a new campus entry with information: {}", add);
     
-//    region = regionRepository.findOne(regionId);
-//    school = schoolDistrictRepository.findOne(schoolId);
-//    if (region == null) {
-//		throw new NotFoundException("no region found with name:"+ region.getProvince()
-//				+region.getCity()+region.getDistrict());
-//	}
-//    if (school == null) {
-//		throw new NotFoundException("no school found with name :"+school.getName());
-//	}        
-    schoolDistrict = schoolDistrictRepository.findByName(add.getSchoolDistrictName());
-    if(schoolDistrict == null)
-		 throw new NotFoundException("no schoolDistrict found with name :"+add.getSchoolDistrictName());
+    region = regionRepository.findOne(regionId);
+    if (region == null) {
+		throw new NotFoundException("no region found with name:"+ region.getProvince()
+				+region.getCity()+region.getDistrict());
+	}
     
-    eduGroup = eduGroupRepository.findByName(add.getEduGroupName());
-    if(eduGroup == null)
-		 throw new NotFoundException("no edu Group found with name :"+add.getEduGroupName());  
-    Campus model = Campus.getBuilder(add.getName(),add.getHeadmaster(),add.getWish(),eduGroup,schoolDistrict)
+    if (add.getSchoolDistrictName() != null) {
+        schoolDistrict = schoolDistrictRepository.findByName(add.getSchoolDistrictName());
+        if(schoolDistrict == null)
+    		 throw new NotFoundException("no schoolDistrict found with name :"+add.getSchoolDistrictName());
+	}
+  
+    if(add.getEduGroupName() != null){
+    	eduGroup = eduGroupRepository.findByName(add.getEduGroupName());
+	  	if(eduGroup == null)
+			 throw new NotFoundException("no edu Group found with name :"+add.getEduGroupName());
+	  }
+    Campus model = Campus.getBuilder(add.getName(),add.getHeadmaster(),add.getWish(),region,eduGroup,schoolDistrict)
     		.description(add.getDescription()).wish(add.getWish()).build();
     
     return repository.save(model);
   }
-    
-  @Override
-  @Transactional(rollbackFor = {NotFoundException.class})
-  public Campus addBySchoolDistrict(CampusDTO add, Long schoolDistrictId) {
-//	  eduGroup = eduGroupRepository.findOne(add.getEduGroupId());
-	  schoolDistrict = schoolDistrictRepository.findOne(schoolDistrictId);
-	  if(schoolDistrict == null)
-		 throw new NotFoundException("no school found with name :"+schoolDistrict.getName());
-	  if(add.getEduGroupName() != null){
-		  eduGroup = eduGroupRepository.findByName(add.getEduGroupName());
-		  if(eduGroup == null)
-				 throw new NotFoundException("no edu Group found with name :"+add.getEduGroupName());
-	  }
-    Campus model = Campus.getBuilder(add.getName(),add.getHeadmaster(),add.getWish(),eduGroup,schoolDistrict)
-		.description(add.getDescription()).wish(add.getWish()).build();
-	  return model;
-}
-  
-  @Override
-  @Transactional(rollbackFor = {NotFoundException.class})
-  public Campus addByEduGroup(CampusDTO add,Long eduGroupId) {
-//	  eduGroup = eduGroupRepository.findOne(eduGroupId);
-//	  if(schoolDistrict == null)
-//		 throw new NotFoundException("no school found with name :"+schoolDistrict.getName());
-//	  if(add.getEduGroupName() != null){
-//		  eduGroup = eduGroupRepository.findByName(add.getEduGroupName());
-//		  if(eduGroup == null)
-//				 throw new NotFoundException("no edu Group found with name :"+add.getEduGroupName());
-//	  }
-//    Campus model = Campus.getBuilder(add.getName(),add.getHeadmaster(),add.getWish(),eduGroup,schoolDistrict)
-//		.description(add.getDescription()).wish(add.getWish()).build();
-	  return null;
-}
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override

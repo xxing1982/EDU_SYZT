@@ -53,9 +53,9 @@ public class SchoolDistrict extends AbstractEntity{
     @JoinColumn(name = "region")
     private Region region;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy ="school")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy ="schoolDistrict")
     @Basic(fetch = FetchType.LAZY)
-    private Set<Campus> campus = new HashSet<>();
+    private Set<Campus> campus = new HashSet<Campus>();
 
 
     public SchoolDistrict() {

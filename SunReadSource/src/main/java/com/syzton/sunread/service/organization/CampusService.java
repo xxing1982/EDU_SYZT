@@ -46,23 +46,11 @@ public interface CampusService {
 
 	/**
 	 * @param add
-	 * @param schoolDistrictId
+	 * @param regionId
 	 * @return
 	 */
-	Campus addBySchoolDistrict(CampusDTO add, Long schoolDistrictId);
+	Campus add(CampusDTO add, Long regionId);
 
-	/**
-	 * @param add
-	 * @param eduGroupId
-	 * @return
-	 */
-	Campus addByEduGroup(CampusDTO add, Long eduGroupId);
-
-	/**
-	 * @param add
-	 * @return
-	 */
-	Campus add(CampusDTO add);
     
     
 

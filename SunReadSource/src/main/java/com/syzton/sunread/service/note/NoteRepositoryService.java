@@ -31,7 +31,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.syzton.sunread.repository.book.predicates.BookPredicates.quickSearchContains;
 
 
 /**
