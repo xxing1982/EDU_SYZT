@@ -42,7 +42,7 @@ ctrls.controller("personalProfileController",
 
         // Get the campus imformation
         $scope.campus = Campus.get( {id: $scope.student.campusId }, function(){
-            $scope.basicInformation.content.school = $scope.campus.school;
+            $scope.basicInformation.content.campus = $scope.campus.school;
         });
         
         // Get the class imformation
@@ -87,44 +87,24 @@ ctrls.controller("personalProfileController",
         
         // Turn off the edit of security setting
         $scope.securitySetting.editable = false;
-        
-        // Hide the hint of password
-        $scope.securitySetting.tooShort = false;
-        $scope.securitySetting.different = false;
 
         // Invoke this to verify the password and save
         $scope.securitySetting.togglePasswordEdit = function(save){
-
-            // Clean the form
+            
+            // Toggle and save the password
+            $scope.toggleEdit(this, save); 
+            
             if (!save){
+                // Clean the form
                 this.content = new Object();
                 this.cached = new Object();
-            }
-            this.tooShort = false;
-            this.different = false;
-
-            // ToggleEdit the password when avaliable
-            if (save){
-                if (this.validatePassword()) { 
-                    delete this.cached.confirmPassword;
-                    $scope.toggleEdit(this, save); 
-                }
+                
             } else {
-                $scope.toggleEdit(this, save); 
+
+                // ToggleEdit the password when avaliable
+                delete this.cached.confirmPassword;
             }
         }
 
-        // Invoke this to verify the password and save
-        $scope.securitySetting.validatePassword = function(){
-            
-            // Check the length of password
-            this.tooShort = this.cached.password.length < 6;
-
-            // Password and confirmPassword not equal
-            this.different = this.cached.password !== this.cached.confirmPassword 
-                             && this.cached.confirmPassword !== undefined;
-            return !this.different && !this.tooShort;
-
-        }
     } );
 }]);
