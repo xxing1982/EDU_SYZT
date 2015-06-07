@@ -135,13 +135,18 @@
 
                 <!-- review -->
                 <div role="tabpanel" class="tab-pane fade" id="review">
-                    <div ng-repeat="item in review.source">
-                        <div><strong>{{item.title}}</strong></div>
-                        <div>评分：{{item.rate}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.studentName}} - {{item.creationTime}}</div>
-                        <div>{{item.content}}</div>
-                        <hr>
+                    <div class="row" style="margin-top:-20px;margin-bottom:-20px;">
+                        <div class="row" style="margin-top:0;" ng-repeat="item in review.source">
+                            <div class="container-fluid buttom-separator">
+                                <div class="title col-md-12" style="width:100%;" ng-init="Note.text_overflow=true;">
+                                    <h5><strong>{{ item.title }}</strong></h5>
+                                    <p><small>评分：{{item.rate}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.studentName}} - {{item.creationTime}}</small></p>
+                                    <p><small>{{item.content}}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom row" ng-click="showMoreReview(arguments)">{{ review.currentStete }}</div>
                     </div>
-                    <div class="bottom row" ng-click="showMoreReview()">{{review.currentStete}}</div>
                 </div>
 
                 <!-- note -->

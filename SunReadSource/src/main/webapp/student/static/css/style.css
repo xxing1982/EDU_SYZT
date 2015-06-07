@@ -418,6 +418,7 @@ a:focus, input:focus
     text-align: center;
     cursor: pointer;
     color: #6C82A0;
+    line-height: 14px;
 }
 
 .readingCenter-right-body .bottom:hover
