@@ -155,7 +155,7 @@ public class SchoolDistrict extends AbstractEntity{
         dto.setName(model.getName());
         dto.setDescription(model.getDescription());
         dto.setRegionId(model.region.getId());
-        dto.setAddress(model.region.generateAddress());
+     //   dto.setAddress(model.region.generateAddress());
         return dto;
     }
 
