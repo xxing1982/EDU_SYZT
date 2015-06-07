@@ -24,7 +24,7 @@ ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window',
         delete sessionStorage.access_token;
         delete sessionStorage.teacherId;
         delete sessionStorage.length;
-        window.location = '/login.html';
+        $window.location.href = '/login.html';
     }
 }]);
 

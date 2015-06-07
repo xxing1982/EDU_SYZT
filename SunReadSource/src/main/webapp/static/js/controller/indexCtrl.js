@@ -26,6 +26,6 @@ ctrls.controller('indexCtrl', ['$rootScope', '$scope', '$location', '$window', '
         delete sessionStorage.access_token;
         delete sessionStorage.userId;
         delete sessionStorage.length;
-        window.location = '/login.html';
+        $window.location.href = '/login.html';
     }
 }]);

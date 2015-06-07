@@ -291,6 +291,30 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         return studentRepository.save(student);
 
     }
+    
+    @Transactional
+    @Override
+    public Student addTasks(long teacherId, int targetBookNum, int targetPoint) {
+        Teacher teacher = teacherRepository.findOne(teacherId);
+        if(teacher==null){
+            throw new NotFoundException("teacher with id = "+teacherId+" not found..");
+        }
+
+        List<Student> students = studentRepository.findByClazzId(teacher.getClassId());
+        if(students == null){
+            throw new NotFoundException("students with classId =" + teacher.getClassId() +" not found..");
+        }
+
+        for (Student student: students){
+		    Task task = student.getTask();
+		    task.setTargetBookNum(targetBookNum);
+		    task.setTargetPoint(targetPoint);
+		    task.setTeacherId(teacherId);
+		    student.setTask(task);
+        }
+        
+        return null;
+    }
 
 
     /**

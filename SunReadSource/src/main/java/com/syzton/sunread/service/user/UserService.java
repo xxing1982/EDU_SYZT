@@ -50,7 +50,9 @@ public interface UserService {
     
     public User authenticate(String username, String password);
 
-    public Student  addTask(long teacherId,long studentId,int targetBookNum,int targetPoint);
+    public Student addTask(long teacherId,long studentId,int targetBookNum,int targetPoint);
+
+	public Student addTasks(long teacherId, int targetBookNum, int targetPoint);
     
     public Student saveStudent(Student student);
 
