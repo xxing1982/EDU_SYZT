@@ -124,4 +124,8 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
             }
         });
     }
+        
+    $scope.showLightBox = function(url){
+        $scope.showLightBox.url = $scope.imageServer + url;
+    }
 }]);

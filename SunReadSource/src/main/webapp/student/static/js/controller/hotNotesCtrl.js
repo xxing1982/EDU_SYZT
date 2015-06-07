@@ -22,4 +22,8 @@ ctrls.controller("hotNotesController", ['$scope', '$rootScope','NoteView', 'Stud
         // Get the image server
         $scope.imageServer = config.IMAGESERVER;
     });
+        
+    $scope.showLightBox = function(url){
+        $scope.showLightBox.url = $scope.imageServer + url;
+    }
 }]);
