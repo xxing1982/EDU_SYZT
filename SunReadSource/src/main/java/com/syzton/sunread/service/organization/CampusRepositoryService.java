@@ -88,8 +88,7 @@ public class CampusRepositoryService implements CampusService{
     
     region = regionRepository.findOne(regionId);
     if (region == null) {
-		throw new NotFoundException("no region found with name:"+ region.getProvince()
-				+region.getCity()+region.getDistrict());
+		throw new NotFoundException("no region found with name:"+ region.getId());
 	}
     
     if (add.getSchoolDistrictName() != null) {

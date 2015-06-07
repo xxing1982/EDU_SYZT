@@ -304,7 +304,7 @@ public class UploadControl {
 			throw new RuntimeException("File is empty");
 		} else {
 			Workbook wb = getWorkBookFromExcel(myfile);
-			map = regionService.batchSaveOrUpdateRegionFromExcel(wb.getSheetAt(0));
+//			map = regionService.batchSaveOrUpdateRegionFromExcel(wb.getSheetAt(0));
 			wb.close();
 		}
 		map.put(0, "parser Excel complete");

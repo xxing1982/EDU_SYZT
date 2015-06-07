@@ -44,10 +44,10 @@ public class RegionController {
 //Add a Region 
     @RequestMapping(value = "/region", method = RequestMethod.POST)
     @ResponseBody
-    public RegionDTO add(@Valid @RequestBody RegionDTO dto) {
-        LOGGER.debug("Adding a new region entry with information: {}", dto);
+    public Region add(@Valid @RequestBody Region region) {
+        LOGGER.debug("Adding a new region entry with information: {}", region);
         
-        RegionDTO added = service.add(dto);
+        Region added = service.add(region);
         LOGGER.debug("Added a region entry with information: {}", added);
               
        return added;
@@ -69,10 +69,10 @@ public class RegionController {
 //Update a region    
     @RequestMapping(value = "/region/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public RegionDTO update(@Valid @RequestBody RegionDTO dto,@PathVariable("id") long id) throws NotFoundException {
-        LOGGER.debug("Adding a new region entry with information: {}", dto);
+    public Region update(@Valid @RequestBody Region region,@PathVariable("id") long id) throws NotFoundException {
+        LOGGER.debug("Adding a new region entry with information: {}", region);
         
-        RegionDTO updated = service.update(dto);
+        Region updated = service.update(region);
         LOGGER.debug("Added a region with information: {}", updated);
               
        return updated;

@@ -42,21 +42,10 @@ public class RegionRepositoryService implements RegionService {
 
 	@Transactional(rollbackFor = { DuplicateException.class })
 	@Override
-	public RegionDTO add(RegionDTO added) {
+	public Region add(Region added) {
 		LOGGER.debug("Adding a new Region with information: {}", added);
 
-		Region exits = regionRepo.findOne(added.getId());
-		if (exits != null) {
-			throw new DuplicateException("Region with id: " + added.getId()
-					+ " is already exits..");
-		}
-
-		RegionAssembler assembler = new RegionAssembler();
-
-		Region model = assembler.fromDTOtoModel(added);
-		model = regionRepo.save(model);
-		added.setId(model.getId());
-		return added;
+		return regionRepo.save(added);
 	}
 
 	@Transactional(rollbackFor = { NotFoundException.class })
@@ -75,7 +64,7 @@ public class RegionRepositoryService implements RegionService {
 
 	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
-	public RegionDTO update(RegionDTO updated) {
+	public Region update(Region updated) {
 		LOGGER.debug("Updating contact with information: {}", updated);
 
 		Region model = findOne(updated.getId());
@@ -83,10 +72,7 @@ public class RegionRepositoryService implements RegionService {
 			throw new NotFoundException("No Region found with id: "
 					+ updated.getId());
 		LOGGER.debug("Found a note entry: {}", model);
-
-		RegionAssembler assembler = new RegionAssembler();
-		Region Region = assembler.fromDTOtoModel(updated);
-		updated.setId(Region.getId());
+		regionRepo.save(updated);
 		return updated;
 	}
 
@@ -113,29 +99,29 @@ public class RegionRepositoryService implements RegionService {
 		return eduPages;
 	}
 	
-	@Transactional
-	@Override
-	public Map<Integer, String> batchSaveOrUpdateRegionFromExcel(Sheet sheet) {
-		Map<Integer, String> failMap = new HashMap<Integer, String>();
-
-		for (int i = sheet.getFirstRowNum()+1; i < sheet
-				.getPhysicalNumberOfRows(); i++) {
-			Row row = sheet.getRow(i);
-
-			String province = ExcelUtil.getStringFromExcelCell(row.getCell(0));
-			String city = ExcelUtil.getStringFromExcelCell(row.getCell(1));
-			String district = ExcelUtil.getStringFromExcelCell(row.getCell(2));
-			Region region = regionRepo.findByProvinceAndCityAndDistrict(province, city, district);
-			if(region == null){
-				region = new Region();
-				region.setProvince(province);
-				region.setCity(city);
-				region.setDistrict(district);
-			}
-			region.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
-			regionRepo.save(region);
-		}
-		return failMap;
-	}
+//	@Transactional
+//	@Override
+//	public Map<Integer, String> batchSaveOrUpdateRegionFromExcel(Sheet sheet) {
+//		Map<Integer, String> failMap = new HashMap<Integer, String>();
+//
+//		for (int i = sheet.getFirstRowNum()+1; i < sheet
+//				.getPhysicalNumberOfRows(); i++) {
+//			Row row = sheet.getRow(i);
+//
+//			String province = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+//			String city = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+//			String district = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+//			Region region = regionRepo.findByProvinceAndCityAndDistrict(province, city, district);
+//			if(region == null){
+//				region = new Region();
+//				region.setProvince(province);
+//				region.setCity(city);
+//				region.setDistrict(district);
+//			}
+//			region.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
+//			regionRepo.save(region);
+//		}
+//		return failMap;
+//	}
 
 }

@@ -2,9 +2,13 @@ package com.syzton.sunread.dto.region;
 
 import javax.validation.constraints.NotNull;
 
+import com.syzton.sunread.model.region.RegionType;
 import org.hibernate.validator.constraints.Length;
 
 import com.syzton.sunread.model.region.Region;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Morgan-Leon
@@ -20,15 +24,13 @@ public class RegionDTO {
 	
 	@NotNull
     @Length(max = Region.MAX_LENGTH_AREA)
-    private String province;
+    private String name;
     
-	@NotNull
-    @Length(max = Region.MAX_LENGTH_AREA)
-    private String city;
+    private RegionType regionType;
+
+	private Set<RegionDTO> regionDTOSet = new HashSet<>();
 	
-	@NotNull
-    @Length(max = Region.MAX_LENGTH_AREA)
-    private String district;
+    private int areaCode;
     
 	public long getId() {
 		return id;
@@ -46,29 +48,35 @@ public class RegionDTO {
 		this.description = description;
 	}
 
-	public String getProvince() {
-		return province;
+	public String getName() {
+		return name;
 	}
 
-	public void setProvince(String province) {
-		this.province = province;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getCity() {
-		return city;
+	public RegionType getRegionType() {
+		return regionType;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setRegionType(RegionType regionType) {
+		this.regionType = regionType;
 	}
 
-	public String getDistrict() {
-		return district;
+	public int getAreaCode() {
+		return areaCode;
 	}
 
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
 	}
-	
-	
+
+	public Set<RegionDTO> getRegionDTOSet() {
+		return regionDTOSet;
+	}
+
+	public void setRegionDTOSet(Set<RegionDTO> regionDTOSet) {
+		this.regionDTOSet = regionDTOSet;
+	}
 }
