@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 
 import com.syzton.sunread.dto.organization.CampusDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.region.Region;
 import com.syzton.sunread.model.region.SchoolDistrict;
 
 /**
@@ -42,6 +43,10 @@ public class Campus extends AbstractEntity{
     @Basic(fetch = FetchType.LAZY)
     private Set<Clazz> clazz = new HashSet<Clazz>();
     
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
+    @JoinColumn(name = "region")
+    private Region region;
+    
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH },optional = false)
     @JoinColumn(name = "edu_group")
     private EduGroup eduGroup;
@@ -49,9 +54,18 @@ public class Campus extends AbstractEntity{
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
     @JoinColumn(name = "school_district")
     private SchoolDistrict schoolDistrict;
+    
 
 	private String wish;
-    
+	
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -130,11 +144,12 @@ public class Campus extends AbstractEntity{
     	private Campus built;
     	
     	public Builder(String name, String headmaster,String wish
-    		,EduGroup eduGroup, SchoolDistrict schoolDistrict){
+    		,Region region,EduGroup eduGroup, SchoolDistrict schoolDistrict){
     		built = new Campus();
     		built.name = name;
     		built.headmaster = headmaster;
     		built.wish = wish;
+    		built.region = region;
     		built.eduGroup = eduGroup;
     		built.schoolDistrict = schoolDistrict;
   		
@@ -166,9 +181,9 @@ public class Campus extends AbstractEntity{
 	 * @return
 	 */
 	public static Builder getBuilder(String name, String headmaster,String wish
-			,EduGroup eduGroup, SchoolDistrict schoolDistrict) {
+			,Region region ,EduGroup eduGroup, SchoolDistrict schoolDistrict) {
 		// TODO Auto-generated method stub
-		return new Builder(name, headmaster,wish, eduGroup, schoolDistrict);
+		return new Builder(name, headmaster,wish, region,eduGroup, schoolDistrict);
 	}
 
     public CampusDTO createDTO(Campus model) {
