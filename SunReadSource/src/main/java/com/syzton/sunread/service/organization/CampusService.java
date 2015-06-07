@@ -18,13 +18,13 @@ import com.syzton.sunread.model.organization.Campus;
  */
 public interface CampusService {
 
-	/**
-	 * @param add
-	 * @param region
-	 * @param school
-	 * @return
-	 */
-	Campus add(CampusDTO add, Long region, Long school);
+//	/**
+//	 * @param add
+//	 * @param region
+//	 * @param school
+//	 * @return
+//	 */
+//	Campus add(CampusDTO add, Long region, Long school);
 	
     public Campus deleteById(Long id) throws NotFoundException;
 
@@ -43,6 +43,14 @@ public interface CampusService {
 			throws com.syzton.sunread.exception.common.NotFoundException;
 
     public Map<Integer,String> batchSaveOrUpdateCampusFromExcel(Sheet sheet);
+
+	/**
+	 * @param add
+	 * @param regionId
+	 * @return
+	 */
+	Campus add(CampusDTO add, Long regionId);
+
     
     
 

@@ -1,7 +1,6 @@
 package com.syzton.sunread.model.user;
 
 import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.organization.Grade;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,6 +11,7 @@ import org.joda.time.DateTime;
 import com.syzton.sunread.dto.organization.CampusDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.region.Region;
+import com.syzton.sunread.model.region.SchoolDistrict;
 
 /**
  * @author Morgan-Leon
@@ -46,12 +47,25 @@ public class Campus extends AbstractEntity{
     @JoinColumn(name = "region")
     private Region region;
     
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH },optional = false)
+    @JoinColumn(name = "edu_group")
+    private EduGroup eduGroup;
+    
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
-    @JoinColumn(name = "school")
-    private School school;
+    @JoinColumn(name = "school_district")
+    private SchoolDistrict schoolDistrict;
+    
 
 	private String wish;
-    
+	
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -88,20 +102,20 @@ public class Campus extends AbstractEntity{
 		return this.clazz.size();
 	}
 
-	public Region getRegion() {
-		return region;
+    public EduGroup getEduGroup() {
+        return eduGroup;
+    }
+
+    public void setEduGroup(EduGroup eduGroup) {
+        this.eduGroup = eduGroup;
+    }
+    
+	public SchoolDistrict getSchoolDistrict() {
+		return schoolDistrict;
 	}
 
-	public void setRegion(Region region) {
-		this.region = region;
-	}
-
-	public School getSchool() {
-		return school;
-	}
-	
-	public void setSchool(School school){
-		this.school = school;
+	public void setSchoolDistrict(SchoolDistrict schoolDistrict) {
+		this.schoolDistrict = schoolDistrict;
 	}
 
 	public String getWish() {
@@ -129,13 +143,16 @@ public class Campus extends AbstractEntity{
     public static class Builder{
     	private Campus built;
     	
-    	public Builder(String name, String headmaster
-    			,Region region, School school){
+    	public Builder(String name, String headmaster,String wish
+    		,Region region,EduGroup eduGroup, SchoolDistrict schoolDistrict){
     		built = new Campus();
     		built.name = name;
     		built.headmaster = headmaster;
+    		built.wish = wish;
     		built.region = region;
-    		built.school = school;   		
+    		built.eduGroup = eduGroup;
+    		built.schoolDistrict = schoolDistrict;
+  		
     	}
     	
     	public Campus build() {
@@ -163,10 +180,10 @@ public class Campus extends AbstractEntity{
 	/**
 	 * @return
 	 */
-	public static Builder getBuilder(String name, String headmaster,
-			Region region, School school) {
+	public static Builder getBuilder(String name, String headmaster,String wish
+			,Region region ,EduGroup eduGroup, SchoolDistrict schoolDistrict) {
 		// TODO Auto-generated method stub
-		return new Builder(name, headmaster, region, school);
+		return new Builder(name, headmaster,wish, region,eduGroup, schoolDistrict);
 	}
 
     public CampusDTO createDTO(Campus model) {
@@ -175,11 +192,12 @@ public class Campus extends AbstractEntity{
         dto.setName(model.getName());
         dto.setDescription(model.getDescription());
         dto.setHeadmaster(model.headmaster);
-        dto.setRegionId(model.region.getId());
-        dto.setAddress(model.region.generateAddress());
-        dto.setSchool(model.school.getName());
+        dto.setWish(model.wish);
+        dto.setSchoolDistrictId(model.schoolDistrict.getId());
+        dto.setSchoolDistrictName(model.schoolDistrict.getName());
         dto.setClassNum(model.clazzNum());
-		dto.setWish(model.getWish());
+        dto.setEduGroupId(model.eduGroup.getId());
+		dto.setEduGroupName(model.eduGroup.getName());
         
         return dto;
     }

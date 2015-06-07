@@ -2,17 +2,19 @@ package com.syzton.sunread.service.store;
 
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.exception.store.InSufficientCoinsException;
-import com.syzton.sunread.model.organization.School;
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.store.ExchangeHistory;
 import com.syzton.sunread.model.store.Gift;
 import com.syzton.sunread.model.store.GiftStatus;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
-import com.syzton.sunread.repository.organization.SchoolRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
+import com.syzton.sunread.repository.region.SchoolDistrictRepository;
 import com.syzton.sunread.repository.store.ExchangeHistoryRepository;
 import com.syzton.sunread.repository.store.GiftRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,21 +35,24 @@ public class StoreRepositoryService implements StoreService {
 
     private UserRepository userRepository;
 
-    private SchoolRepository schoolRepository;
+    private SchoolDistrictRepository schoolRepository;
+    
+    private CampusRepository campusRepository;
 
     @Autowired
-    public StoreRepositoryService(GiftRepository giftRepository, ExchangeHistoryRepository exchangeHistoryRepository, StudentRepository studentRepository, UserRepository userRepository,SchoolRepository schoolRepository) {
+    public StoreRepositoryService(GiftRepository giftRepository, ExchangeHistoryRepository exchangeHistoryRepository, StudentRepository studentRepository, UserRepository userRepository,SchoolDistrictRepository schoolRepository,CampusRepository campusRepository) {
         this.giftRepository = giftRepository;
         this.exchangeHistoryRepository = exchangeHistoryRepository;
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
         this.schoolRepository = schoolRepository;
+        this.campusRepository = campusRepository;
     }
 
     @Override
     public void addGift(Gift gift) {
 
-        School exists = schoolRepository.findOne(gift.getSchoolId());
+        Campus exists = campusRepository.findOne(gift.getSchoolId());
         if(exists == null){
             throw new NotFoundException("school Id = "+ gift.getSchoolId()+" not found...");
         }

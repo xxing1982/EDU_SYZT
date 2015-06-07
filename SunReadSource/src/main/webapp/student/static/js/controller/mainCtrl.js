@@ -1,10 +1,10 @@
 //mainCtrl.js
 var ctrls = angular.module('nourControllers',['nourConfig', 'ngResource', 'userServices', 'noteServices', 'noteViewServices', 'noteTakeServices', 'paraServices', 'commentServices'
-                                             ,'examServices', 'classServices', 'questionServices','reviewServices','joinShelfServices','dictionariesService', 'fishServices'
-                                             ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
-                                             ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','popularSearchServices','oneBookInShelfServices'
-                                             ,'sendMessageServices','getMessageServices','deleteMessagesServices','getGiftsServices','getGiftsExNumServices','exchangeGiftsServices'
-                                             , 'campusServices', 'actionServices', 'pageableServices','loadableServices','hotclazzServices', 'hotreaderServices', 'dropzoneServices', 'ngSanitize', 'semesterServices']);
+ ,'examServices', 'classServices', 'questionServices','reviewServices','joinShelfServices','dictionariesService', 'fishServices'
+ ,'bookDetailServices','bookshelfServices','bookshelfViewServices','bookInShelfServices','addbookToShelfServices','dropBookFromShelfServices'
+ ,'lackFeedbackServices','conditionSearchServices','quickSearchServices','popularSearchServices','oneBookInShelfServices'
+ ,'sendMessageServices','getMessageServices','deleteMessagesServices','getGiftsServices','getGiftsExNumServices','exchangeGiftsServices'
+ , 'campusServices', 'actionServices', 'pageableServices','loadableServices','hotclazzServices', 'hotreaderServices', 'dropzoneServices', 'ngSanitize', 'semesterServices']);
 ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader', 'Fish', 'config',
   function ($rootScope, $scope, Student,Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader, Fish, config) {
     //$rootScope.id = 2;
@@ -38,7 +38,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
       */
       // Create a Hotreaders entitiy
       $scope.hotReaders={};
-      Hotreader.get({by: 'campus', id : data.campusId, page: 0, size: 3 }, function(dataHot){
+      Hotreader.get({by: 'campus', id : data.campusId, page: 0, size: 3, sortBy: "point" }, function(dataHot){
         dataHot.content[0].picture = dataHot.content[0].picture == "" ? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + dataHot.content[0].picture;
         $scope.hotReaders.first = dataHot.content[0];
         //$scope.hotReaders.others = dataHot.content;
@@ -69,22 +69,41 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
         for(var i = 0; i < data.content.length; i++){
           $scope.notes[i].bookPictureUrl = $scope.notes[i].bookPictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + $scope.notes[i].bookPictureUrl;
         }
-    });
+      });
 
     //hot note
     Note.get({page:0, size: 3, sortBy: 'commentCount', direction: 'DESC'}, function(data){
       $scope.hotNotes = data.content;
     });
 
-    $scope.changeFish = function(){
-      if ($scope.fishes == undefined || $scope.fishes == null) {
-        Fish.getFishes(function(data){
-          $scope.fishes = data;
-          $("#change-fish-modal").modal({backdrop: 'static', keyboard: false});
-        })
-      };
-      $("#change-fish-modal").modal({backdrop: 'static', keyboard: false});
+    $scope.changeFish_modal = function(){
+      Fish.getFishes(function(data){
+        $scope.fishes = data;
+        $("#change-fish-modal").modal({backdrop: 'static', keyboard: false});
+        Fish.getMyFish($rootScope.id, function(dataMy){
+          $scope.selectedFishId = dataMy.id;
+          //$scope.myFishId = dataMy.id;
+          for(var key in $scope.fishes){
+            $scope.fishes[key].isSelected = false;
+            if ($scope.fishes[key].id == dataMy.id)
+              $scope.fishes[key].isSelected = true;
+          }
+        })       
+      });
+    }
 
+    $scope.changeFish = function(fish){
+      for(var key in $scope.fishes){
+        $scope.fishes[key].isSelected = false;
+      }
+      fish.isSelected = true;
+      $scope.selectedFishId = fish.id;
+    }
+
+    $scope.updateFish = function(){
+      Fish.UpdateMyFish($rootScope.id, $scope.selectedFishId, function(){
+        $("#change-fish-modal").modal('hide');
+      })
     }
 
   }]);
@@ -126,11 +145,11 @@ ctrls.filter('messageFormatSize', function(){
 
 ctrls.filter('formatGender', function(){
  return function(input){
-      if (input == 'male') {
-        return "男生";
-      };
-      return "女生";
-  }
+  if (input == 'male') {
+    return "男生";
+  };
+  return "女生";
+}
 });
 
 ctrls.filter('formatParagraph', function(){

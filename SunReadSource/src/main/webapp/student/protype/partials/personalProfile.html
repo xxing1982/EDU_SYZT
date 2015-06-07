@@ -70,7 +70,7 @@
         </div>        
         </div>
         <!-- Place holder -->
-        <form class="row title"/>
+        <div class="row title"/>
         
         <!-- Personal information -->
         <div class="title row buttom-separator">
@@ -90,93 +90,112 @@
             </div>
         </div>
     
-        <form class="col-md-12" name="personalInformation">
+        <div class="col-md-12" >
         <div class="row">
             <div class="col-md-2 text-right">
                 <div class="row"><h4>昵称：</h4></div>
             </div>
-            <div class="col-md-9 text-left">
+            <form class="col-md-9 text-left" name="nickname">
                 <h4 ng-show="!personalInformation.editable">{{personalInformation.content.nickname}}</h4>
-                <input name="nickname"
+                <input name="input"
                        ng-show="personalInformation.editable" 
                        type="text" 
                        class="form-control dark-blue-2 theme-font" 
-                       ng-model="personalInformation.cached.nickname"
-                       required>
-            </div>
-            <div class="col-md-1 text-left"
-                 ng-show="personalInformation.editable">
-                <p class="personalInformation.nickname.$error.required" 
-                   ng-show="password.input.$error.required">
-                    <small>请填写</small>
-                </p>
-                <p class="title-link row password-span" 
-                   ng-show="personalInformation.nickname.$error.minlength">
-                    <small>密码太短</small>
-                </p>
-            </div>
-            
+                       ng-model="personalInformation.cached.nickname" />
+            </form>
         </div>
         <div class="row">
             <div class="col-md-2 text-right">
                 <div class="row"><h4>QQ：</h4></div>
             </div>
-            <div class="col-md-9 text-left">
+            <form class="col-md-9 text-left" name="qq">
                 <h4 ng-show="!personalInformation.editable">
                     {{personalInformation.content.qqId}}</h4>
-                <input name="qqId"
+                <input name="input"
                        ng-show="personalInformation.editable" 
                        type="text" 
                        class="form-control dark-blue-2 theme-font" 
-                       ng-model="personalInformation.cached.qqId">
+                       ng-model="personalInformation.cached.qqId"
+                       ng-pattern="/^[0-9]{4,}$/"
+                       />
+            </form>
+            <div class="col-md-1 text-left"
+                 ng-show="personalInformation.editable">
+                <p class="title-link row password-span" 
+                   ng-show="qq.input.$error.pattern">
+                    <small>无效</small>
+                </p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2 text-right">
                 <div class="row"><h4>微信：</h4></div>
             </div>
-            <div class="col-md-9 text-left">
+            <form class="col-md-9 text-left" name="wechatId">
                 <h4 ng-show="!personalInformation.editable">
                     {{personalInformation.content.wechatId}}</h4>
-                <input name="wechatId"
+                <input name="input"
                        ng-show="personalInformation.editable" 
                        type="text" 
                        class="form-control dark-blue-2 theme-font" 
-                       ng-model="personalInformation.cached.wechatId">
+                       ng-model="personalInformation.cached.wechatId"/>
+            </form>
+            <div class="col-md-1 text-left"
+                 ng-show="personalInformation.editable">
+                <p class="title-link row password-span" 
+                   ng-show="wechatId.input.$error.pattern">
+                    <small>无效</small>
+                </p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2 text-right">
                 <div class="row"><h4>邮箱：</h4></div>
             </div>
-            <div class="col-md-9 text-left">
+            <form class="col-md-9 text-left" name="email">
                 <h4 ng-show="!personalInformation.editable">
                     {{personalInformation.content.email}}</h4>
-                <input name="email"
+                <input name="input"
                        ng-show="personalInformation.editable" 
                        type="text" 
                        class="form-control dark-blue-2 theme-font" 
-                       ng-model="personalInformation.cached.email">
+                       ng-model="personalInformation.cached.email"
+                       ng-pattern="/^[\w.\-]+@(?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,3}$/"/>
+            </form>
+            <div class="col-md-1 text-left"
+                 ng-show="personalInformation.editable">
+                <p class="title-link row password-span" 
+                   ng-show="email.input.$error.pattern">
+                    <small>无效</small>
+                </p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2 text-right">
                 <div class="row"><h4>手机：</h4></div>
             </div>
-            <div class="col-md-9 text-left">
+            <form class="col-md-9 text-left" name="phoneNumber">
                 <h4 ng-show="!personalInformation.editable">
                     {{personalInformation.content.phoneNumber}}</h4>
-                <input name="phoneNumber"
+                <input name="input"
                        ng-show="personalInformation.editable" 
                        type="text" 
                        class="form-control dark-blue-2 theme-font" 
-                       ng-model="personalInformation.cached.phoneNumber">
+                       ng-model="personalInformation.cached.phoneNumber"
+                       ng-pattern="/^1[3|4|5|8]\d{9}$/"/>
+            </form>
+            <div class="col-md-1 text-left"
+                 ng-show="personalInformation.editable">
+                <p class="title-link row password-span" 
+                   ng-show="phoneNumber.input.$error.pattern">
+                    <small>无效</small>
+                </p>
             </div>
         </div>
             
         
         
-        </form>
+        </div>
         <!-- Place holder -->
         <div class="row title"/>
         
@@ -228,11 +247,10 @@
                        ng-show="( securitySetting.editable 
                                 && (securitySetting.cached.confirmPassword) 
                                 && (securitySetting.cached.confirmPassword == securitySetting.cached.password))">保存</a>
-                    <p class="title-link"  
-                       style="display:inline"
+                    <p class="title-link" style="display: inline;" 
                        ng-show="( securitySetting.editable 
-                                && ((!securitySetting.cached.confirmPassword) 
-                                || (securitySetting.cached.confirmPassword != securitySetting.cached.password)))">保存</p>
+                                && (!securitySetting.cached.confirmPassword) 
+                                || (securitySetting.cached.confirmPassword != securitySetting.cached.password))">保存</p>
                 </div></div>
             </div>    
         </div>
