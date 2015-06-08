@@ -20,7 +20,7 @@ ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window',
 
     // The logout method
     $rootScope.logout = function(){
-        $window.location.href = '/login.html';
+        delete $rootScope;
     }
 }]);
 

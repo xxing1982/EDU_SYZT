@@ -22,6 +22,6 @@ ctrls.controller('indexCtrl', ['$rootScope', '$scope', '$location', '$window','S
     
     // The logout method
     $scope.logout = function(){
-        $window.location.href = '/login.html';
+        delete $rootScope;
     }
 }]);
