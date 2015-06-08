@@ -102,7 +102,7 @@
 					<div class="col-md-6"></div>
 					<div class="col-md-3" style="margin-top:-17%;"><img src="../static/img/readingDynamic/first.png" class="img-responsive img-circle"></div>
 				</div>
-				<div class="tc"><h3>{{hotReaders.first.username}}&nbsp;&nbsp;<span style="font-size:20px">{{hotReaders.first.statistic.testPasses}}本</span></h3></div>
+				<div class="tc"><h3>{{hotReaders.first.username}}&nbsp;&nbsp;<span style="font-size:20px">{{hotReaders.first.statistic.point}}分</span></h3></div>
 				<hr>
 				<div class="row row-same-height mt8" ng-init="award = ['second', 'third']" ng-repeat="hotreader in hotReaders.others">
 					<div class="col-md-1 col-xs-height col-middle"></div>
@@ -110,7 +110,7 @@
 					<div class="col-md-5 col-xs-height col-middle">
 						{{hotreader.username}}
 					</div>
-					<div class="col-md-3 col-xs-height col-middle">{{hotreader.statistic.testPasses}}本</div>
+					<div class="col-md-3 col-xs-height col-middle">{{hotreader.statistic.point}}分</div>
 				</div>
 			</div>
 			<div class="foot"></div>

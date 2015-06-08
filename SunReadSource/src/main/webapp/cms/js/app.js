@@ -40,6 +40,21 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
              templateUrl: "partials/cmsAdmin.html",
              controller: 'adminCtrl'
          })
+         .state('sysAdmin',{
+             url: '/sysAdmin',
+             templateUrl: "partials/sysAdmin.html",
+             controller: 'sysAdminCtrl'
+         })
+         .state('schoolAdmin',{
+             url: '/schoolAdmin',
+             templateUrl: "partials/schoolAdmin.html",
+             controller: 'schoolAdminCtrl'
+         })
+         .state('schoolSuperAdmin',{
+             url: '/schoolSuperAdmin',
+             templateUrl: "partials/schoolSuperAdmin.html",
+             controller: 'schoolSuperAdminCtrl'
+         })
         .state('region',{
         	url: '/region',
             templateUrl: "partials/region.html",
