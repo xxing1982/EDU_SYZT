@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.syzton.sunread.model.organization.Campus;
 
 /**
@@ -25,15 +26,17 @@ public class CampusDTO {
 	@Length(max = Campus.MAX_LENGTH_HEADMASTER)
     private String headmaster;
 	
-	private Long regionId;
-	
-	private String address;
-	
-	private String school;
-	
 	private int classNum;
 
 	private String wish;
+	
+	private Long schoolDistrictId;
+	
+	private String schoolDistrictName ;
+	
+	private Long eduGroupId;
+	
+	private String eduGroupName;
 
 	public String getWish() {
 		return wish;
@@ -41,6 +44,38 @@ public class CampusDTO {
 
 	public void setWish(String wish) {
 		this.wish = wish;
+	}
+	
+	public Long getSchoolDistrictId() {
+		return schoolDistrictId;
+	}
+
+	public void setSchoolDistrictId(Long schoolDistrictId) {
+		this.schoolDistrictId = schoolDistrictId;
+	}
+
+	public String getSchoolDistrictName() {
+		return schoolDistrictName;
+	}
+
+	public void setSchoolDistrictName(String schoolDistrictName) {
+		this.schoolDistrictName = schoolDistrictName;
+	}
+
+	public Long getEduGroupId() {
+		return eduGroupId;
+	}
+
+	public void setEduGroupId(Long eduGroupId) {
+		this.eduGroupId = eduGroupId;
+	}
+
+	public String getEduGroupName() {
+		return eduGroupName;
+	}
+
+	public void setEduGroupName(String eduGroupName) {
+		this.eduGroupName = eduGroupName;
 	}
 
 	public Long getId() {
@@ -75,22 +110,6 @@ public class CampusDTO {
 		this.headmaster = headmaster;
 	}
 
-	public Long getRegionId() {
-		return regionId;
-	}
-
-	public Long setRegionId(Long region) {
-		return this.regionId = region;
-	}
-
-	public String getSchool() {
-		return school;
-	}
-
-	public void setSchool(String school) {
-		this.school = school;
-	}
-
 	public int getClassNum() {
 		return classNum;
 	}
@@ -99,13 +118,7 @@ public class CampusDTO {
 		this.classNum = classNum;
 	}
 
-	public String getAddress() {
-		return address;
-	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
 	
 	
 	

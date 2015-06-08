@@ -18,68 +18,6 @@ Loadable.prototype.arguments = {};
 Loadable.prototype.part = new Array();
 Loadable.prototype.all = new Array();
 
-// Loadable.prototype.build = function(part,all,size){
-//   this.part = part;
-//   this.all = all;
-//   this.size = size;
-// }
-//
-//
-// var initLoad = function(part,all,size){
-//   if(typeof(all)=== 'undefined')
-//     return 0;
-//   for(var i=0; i<all.length&&i<size;i++)
-//     part.push(all[i]);
-//   // console.log(part);
-//   return part.length;
-// }
-//
-// var setLoadingState = function(part,size){
-//   if(part.length<=size)
-//     return stateTexts.nomore;
-//   else if(part.length>size)
-//     return stateTexts.more;
-// };
-//
-// var loadingMore = function(part,all,size){
-//   var allNum = all.length;
-//   for(var i=0;i<size;i++){
-//     if(part.length<allNum)
-//       part.push(all[part.length]);
-//     else
-//       return false;
-//   }
-//   return true;
-// }
-
-// Loadable.prototype.initLoad = function(part,all,size){
-//   if(typeof(all)=== 'undefined')
-//     return 0;
-//   for(var i=0; i<all.length&&i<size;i++)
-//     part.push(all[i]);
-//   // console.log(part);
-//   return part.length;
-// }
-//
-// Loadable.prototype.setLoadingState = function(part,size){
-//   if(part.length<=size)
-//     return stateTexts.nomore;
-//   else if(part.length>size)
-//     return stateTexts.more;
-// };
-//
-// Loadable.prototype.loadingMore = function(part,all,size){
-//   var allNum = all.length;
-//   for(var i=0;i<size;i++){
-//     if(part.length<allNum)
-//       part.push(all[part.length]);
-//     else
-//       return false;
-//   }
-//   return true;
-// }
-
-
 // The build method to initlizate the loadable object
 Loadable.prototype.build = function(Entity){
 

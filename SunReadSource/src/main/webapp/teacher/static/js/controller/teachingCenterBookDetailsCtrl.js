@@ -1,5 +1,5 @@
-ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$sce','$stateParams', 'WeeklyHotSearch'
-    ,'BookDetail','AddReview','config',function($scope,$sce,$stateParams,WeeklyHotSearch,BookDetail,AddReview,config){
+ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$sce','$stateParams', '$rootScope', 'Teacher', 'NoteView','WeeklyHotSearch'
+    ,'BookDetail','AddReview','config',function($scope,$sce,$stateParams, $rootScope, Teacher, NoteView, WeeklyHotSearch,BookDetail,AddReview,config){
 	$scope.name = '书籍详情';
   $scope.imageServer = config.IMAGESERVER;
 
@@ -11,17 +11,15 @@ ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$sce','$stat
     var bookDetail = BookDetail.get({ id: $stateParams.bookId }, function(){
         console.log(bookDetail);
 
-        // $scope.student = Student.get({id: $rootScope.id}, function(){
-        //     // Initlizate the note entity
-        //     $scope.noteTake = new NoteTake(bookDetail);
-        //
-        //     // Make an instance of the NoteView
-        //     $scope.noteView = new NoteView();
-        //     $scope.arguments = {by: "books", id: bookDetail.id, sortBy: "commentCount" };
-        //
-        //     // Transmit arguments to note search engine
-        //     $scope.noteView.ShowMoreNotes($scope.arguments);
-        // });
+         $scope.teacher = Teacher.get({id: $rootScope.id}, function(){
+             
+             // Make an instance of the NoteView
+             $scope.noteView = new NoteView();
+             $scope.arguments = {by: "books", id: bookDetail.id, sortBy: "commentCount" };
+        
+             // Transmit arguments to note search engine
+             $scope.noteView.ShowMoreNotes($scope.arguments);
+         });
 
         // $scope.wordTest = function(){
         //     $rootScope.exam.id = 1;
@@ -111,5 +109,8 @@ ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$sce','$stat
                 $scope.review.currentStete = $scope.review.state.nomore;
             }
         });
+    }
+    $scope.showLightBox = function(url){
+        $scope.showLightBox.url = $scope.imageServer + url;
     }
 }]);

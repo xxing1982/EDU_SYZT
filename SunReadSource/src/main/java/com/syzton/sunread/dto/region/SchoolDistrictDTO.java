@@ -1,4 +1,4 @@
-package com.syzton.sunread.dto.organization;
+package com.syzton.sunread.dto.region;
 
 import javax.validation.constraints.NotNull;
 
@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.syzton.sunread.model.organization.EduGroup;
 
-public class SchoolDTO {
+public class SchoolDistrictDTO {
 	private Long id;
     
 	@Length(max = EduGroup.MAX_LENGTH_DESCRIPTION)
@@ -16,6 +16,10 @@ public class SchoolDTO {
 	@NotNull
 	@Length(max = EduGroup.MAX_LENGTH_NAME)
 	private String name;
+	
+	private Long regionId;
+	
+	private String address;
 	
 	public Long getId() {
 		return id;
@@ -39,6 +43,22 @@ public class SchoolDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Long getRegionId() {
+		return regionId;
+	}
+
+	public Long setRegionId(Long region) {
+		return this.regionId = region;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
     @Override

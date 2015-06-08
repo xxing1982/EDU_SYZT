@@ -17,15 +17,15 @@ import com.syzton.sunread.model.region.Region;
  */
 public interface RegionService {
 
-    public RegionDTO add(RegionDTO added);
+    public Region add(Region added);
     
     public Region deleteById(long id);
 
-    public RegionDTO update(RegionDTO updated);
+    public Region update(Region updated);
 
     public Region findOne(Long id) ;
 
     Page<Region> findAll(Pageable pageable);
     
-    public Map<Integer,String> batchSaveOrUpdateRegionFromExcel(Sheet sheet);
+//    public Map<Integer,String> batchSaveOrUpdateRegionFromExcel(Sheet sheet);
 }

@@ -7,7 +7,7 @@
                 <h5 class="title"><big>已发布的任务</big></h5>
             </div>
             <div class="col-xs-4 col-xs-height col-middle">
-                <a class="btn btn-fill-blue pull-right" type="button" ng-href="#/teachingCenter/myTask/dispatchTask">
+                <a class="btn btn-fill-blue pull-right" type="button" data-toggle="modal" data-target="#task-dispatch-modal">
                     创建任务
                 </a>
             </div>
@@ -47,4 +47,47 @@
 <!-- Loadmore -->
 <div class="myBlock mt20 page-body">
     <div class="load-more-bottom" ng-click="orderLoadable.get()">{{ orderLoadable.loadingState }}</div>
+</div>
+
+<!-- Task dispatch modal -->
+<div class="modal fade" id="task-dispatch-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content container-fluid" style="width:49%">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            <div class="modal-title">
+                <h4 id="myModalLabel">创建任务</h4>
+            </div>
+            
+            <div class="row-same-height">
+                <div class="col-xs-5 col-xs-height col-middle"><p class="row title text-right">目标阅读数量：</p></div>
+                <div class="col-xs-3 col-xs-height col-middle">
+                    <input type="number" min="1" class="custom-input" style="width:100%" ng-model="targetBookNum" />
+                </div>
+                <div class="col-xs-3 col-xs-height col-middle"><p class="row title">本</p></div>
+            </div> 
+            
+            <div class="row-same-height">
+                <div class="col-xs-5 col-xs-height col-middle"><p class="row title text-right">目标阅读积分：</p></div>
+                <div class="col-xs-3 col-xs-height col-middle">
+                    <input type="number" min="1" class="custom-input" style="width:100%" ng-model="targetPoint" />
+                </div>
+                <div class="col-xs-3 col-xs-height col-middle"></div>
+            </div>
+
+            <!-- Place holer -->
+            <h4 class="row"></h4>
+        
+            <div class="row">
+                <div class="col-md-12 text-left">
+                    <button class="btn btn-fill-blue" class="close" data-dismiss="modal" aria-label="Close" type="button" ng-click="publish()">发布任务</button>
+                </div>
+            </div>
+
+            <!-- Place holer -->
+            <p class="row"></p>
+        </div>
+    </div>
+    </div>
 </div>

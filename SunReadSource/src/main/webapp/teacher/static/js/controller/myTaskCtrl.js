@@ -1,6 +1,6 @@
 //myTaskCtrl.js
-ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order', 'Class', 'Loadable', 'Editable', 'Task',
-	function($scope, $rootScope, Teacher, Order, Class, Loadable, Editable, Task){
+ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order', 'Class', 'Loadable', 'Editable', 'Task', 'Tasks',
+	function($scope, $rootScope, Teacher, Order, Class, Loadable, Editable, Task, Tasks){
 
         // Get the teacher entity by rootScope id
         $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
@@ -13,30 +13,37 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
             // Create a pageable entity of actions
             $scope.orderLoadable = new Loadable();
 
-            // Set the parameters of loadable
-            $scope.orderLoadable.size = 5;
-            $scope.orderLoadable.page = 0;
+            // Initlizate the orderLoadable
+            $scope.initOrderLoadable = function(){
+            
+                // Set the parameters of loadable
+                $scope.orderLoadable.size = 5;
+                $scope.orderLoadable.page = 0;
 
-            // Set the $resource arguments like {by: "books"}
-            $scope.orderLoadable.arguments = { by: 'clazzs', id: $scope.teacher.classId, sortBy: "id" };
+                // Set the $resource arguments like {by: "books"}
+                $scope.orderLoadable.arguments = { by: 'clazzs', id: $scope.teacher.classId, sortBy: "id" };
 
-            // Build the loadable object
-            $scope.orderLoadable.build(Order);
+                // Build the loadable object
+                $scope.orderLoadable.build(Order);
 
-            // The index of the entities
-            var index = 0;
+                // The index of the entities
+                var index = 0;
 
-            // Show the first page and append editable to every entity
-            $scope.orderLoadable.get( function(){
+                // Show the first page and append editable to every entity
+                $scope.orderLoadable.get( function(){
 
-                // Make the editable object
-                while (index < $scope.orderLoadable.entities.content.length) {
-                    $scope.orderLoadable.entities.content[index].editable
-                        = new Editable($scope.orderLoadable.entities.content[index].task);
-                    index ++;
-                }
+                    // Make the editable object
+                    while (index < $scope.orderLoadable.entities.content.length) {
+                        $scope.orderLoadable.entities.content[index].editable
+                            = new Editable($scope.orderLoadable.entities.content[index].task);
+                        index ++;
+                    }
 
-            });
+                });
+            };
+            
+            $scope.initOrderLoadable();
+            
 
             // The toggleEdit save
             $scope.toggleEditSave = function(order){
@@ -58,6 +65,24 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
                 };
 
                 order.editable.toggleEdit(true, toggleEditValidation, toggleEditTransmit);
+            };
+            
+            // Publish the tasks by teacher id
+            $scope.publish = function(){
+                if ( $scope.targetBookNum && $scope.targetPoint ){
+                    Tasks.update({ teacherId: $scope.teacher.id, 
+                                   targetBookNum: $scope.targetBookNum,
+                                   targetPoint: $scope.targetPoint },{}, function(){
+                                        $rootScope.modal = {title: "发布奖励", content: "奖励发布成功！"};
+                                        $('#alert-modal').modal();
+                        
+                                        // Clear the targetBookNum targetPoint and orderloadable
+                                        $scope.targetBookNum = undefined;
+                                        $scope.targetPoint = undefined;   
+                                        $scope.initOrderLoadable();
+                                   });
+                    
+                }
             };
         });
 	}]);

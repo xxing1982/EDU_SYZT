@@ -13,3 +13,14 @@ taskServices.factory('Task', ['$resource', 'config',
             }
         );
 }]);
+
+taskServices.factory('Tasks', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "teachers/:teacherId/tasks",
+            {by:'@teacherId'}, {
+                update: { 
+                    method:'PUT'
+                }
+            }
+        );
+}]);

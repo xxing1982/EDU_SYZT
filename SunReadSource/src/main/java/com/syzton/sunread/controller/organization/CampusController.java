@@ -42,13 +42,13 @@ public class CampusController {
     }
     
 //Add a Campus 
-    @RequestMapping(value = "/region/{regionId}/school/{schoolId}/campus", method = RequestMethod.POST)
+    @RequestMapping(value = "/region/{regionId}/campus", method = RequestMethod.POST)
     @ResponseBody
     public CampusDTO add(@Valid @RequestBody CampusDTO dto
-    		,@PathVariable("regionId")Long regionId,@PathVariable("schoolId")Long schoolId) {
+    		,@PathVariable("regionId")Long regionId) {
         LOGGER.debug("Adding a new campus entry with information: {}", dto);
         
-        Campus added = service.add(dto, regionId,schoolId);
+        Campus added = service.add(dto,regionId);
         LOGGER.debug("Added a campus entry with information: {}", added);
               
        return added.createDTO(added);

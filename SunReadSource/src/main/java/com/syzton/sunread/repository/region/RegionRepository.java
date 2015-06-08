@@ -10,5 +10,4 @@ import com.syzton.sunread.model.region.Region;
  * 
  */
 public interface RegionRepository extends JpaRepository<Region, Long>{
-	public Region findByProvinceAndCityAndDistrict(String province,String city,String district);
 }

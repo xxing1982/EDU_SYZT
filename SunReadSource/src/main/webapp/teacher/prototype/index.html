@@ -44,7 +44,7 @@
 					aria-expanded="false">{{teacher.username}}<b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="#personalProfile">个人中心</a> </li>
-						<li><a href="#personalProfile" ng-click="logout()">注销</a> </li>
+						<li><a href="/login.html" ng-click="logout()">注销</a> </li>
 					</ul>
 				</li>
 				<li><a href="#/messageCenter" style="margin-right:100px">
@@ -119,6 +119,8 @@
 	<script src="../static/js/services/userService.js"></script>
 	<script src="../static/js/services/classService.js"></script>
 	<script src="../static/js/services/noteService.js"></script>
+	<script src="../static/js/services/noteViewService.js"></script>
+	<script src="../static/js/services/commentService.js"></script>
 	<script src="../static/js/services/actionService.js"></script>
 	<script src="../static/js/services/pageableService.js"></script>
 	<script src="../static/js/services/addBookService.js"></script>
@@ -142,7 +144,6 @@
 	<script src="../static/js/controller/mainCtrl.js"></script>
 	<script src="../static/js/controller/indexCtrl.js"></script>
 	<script src="../static/js/controller/myTaskCtrl.js"></script>
-	<script src="../static/js/controller/myTaskDispatchTaskCtrl.js"></script>
 	<script src="../static/js/controller/myRewardCtrl.js"></script>
 	<script src="../static/js/controller/myRewardDispatchRewardCtrl.js"></script>
 	<script src="../static/js/controller/personalProfileCtrl.js"></script>

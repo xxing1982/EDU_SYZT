@@ -152,6 +152,15 @@ public class UserController extends BaseController {
         Student student = userService.addTask(teacherId, studentId, targetBookNum, targetPoint);
         return student;
     }
+    
+    @RequestMapping(value = "teachers/{teacherId}/tasks", method = RequestMethod.PUT)
+    @ResponseBody
+    public Student addTasks(@PathVariable("teacherId") long teacherId,
+                            @RequestParam("targetBookNum") int targetBookNum,
+                            @RequestParam("targetPoint") int targetPoint) {
+        Student student = userService.addTasks(teacherId, targetBookNum, targetPoint);
+        return student;
+    }
 
     @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
     @ResponseBody

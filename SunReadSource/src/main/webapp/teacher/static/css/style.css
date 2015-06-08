@@ -222,3 +222,143 @@
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
 }
 /*-----------------------readingDynamic bottom---------------*/
+
+/*******************my note top*******************/
+.readingCenter-right-body .bottom
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: #6C82A0;
+    line-height: 14px;
+}
+
+.readingCenter-right-body .bottom:hover
+{
+    background-color: #FAFAFA;
+    color: #6C82A0;
+}
+
+.note-row
+{
+    border-bottom: 1px #D6DEE6 solid;
+}
+
+.book-row
+{
+    margin-top: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.book-row-left
+{
+    text-align: center;
+    font-size: 13px;
+    font-weight: 900;
+    margin-left: 10px;
+}
+
+.book-row-right {
+    padding-left: 15px;
+    padding-right: 0;
+    width: 79%;
+    float: left;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.book-row-right .book-thumbnail
+{
+    margin-top: 10px;
+    height: 55px;
+}
+
+.book-row-right .book-thumbnail div
+{
+    margin-right: 15px;
+    width:50px;
+    height:50px;
+    background-position: 50% 50%;
+    background-repeat:  no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+}
+
+.book-row-right .msg
+{
+    cursor: pointer;
+    float: right;
+    margin-top: -15px;
+    font-size: 13px;
+}
+
+.book-row-right .overflow-text {
+  height: 96px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.book-row-right .overflow-text-2 {
+  height: 108px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+.msg-buttom{
+    cursor: pointer;
+    position: absolute;
+    float: right;
+    bottom: 0;
+    right: 0;
+    height: 23px;
+}
+
+.msg-buttom img{
+    bottom: 0;
+    position: absolute;
+    height: 14px;
+    left: -19px;
+}
+
+.msg-row
+{
+    margin-left: 10px;
+    margin-bottom: 30px;
+    margin-right: 17px;
+}
+
+.msg-row .reply
+{
+    padding-right: 0;
+}
+
+.msg-row .reply .total
+{
+    margin-top: 10px;
+    background-color: #EAEEF2;
+    border-bottom: 1px #FFFFFF solid;
+}
+
+.msg-row .reply .block
+{
+    background-color: #EAEEF2;
+}
+
+.msg-row .reply .person
+{
+/*    padding-top: 10px;*/
+/*    color: #7C7C7C;*/
+}
+
+.msg-row .reply .content
+{
+/*
+    padding-top: 7px;
+    padding-bottom: 20px;
+*/
+}
+
+/*******************my note bottom*******************/

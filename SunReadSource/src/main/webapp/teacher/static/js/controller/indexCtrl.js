@@ -20,11 +20,7 @@ ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window',
 
     // The logout method
     $rootScope.logout = function(){
-        delete $rootScope
-        delete sessionStorage.access_token;
-        delete sessionStorage.teacherId;
-        delete sessionStorage.length;
-        window.location = '/login.html';
+        delete $rootScope;
     }
 }]);
 
