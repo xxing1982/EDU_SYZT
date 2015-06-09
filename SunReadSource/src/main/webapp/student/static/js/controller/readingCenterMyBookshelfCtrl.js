@@ -251,4 +251,13 @@ var findUnreadBooks = function(content,unreadBooks){
   }
 };
 
+ctrls.filter('formatBookAttribute', function(){
+  return function(input){
+    // console.log(input);
+    if (input)
+      return "必读";
+    else
+      return "选读";
+  }
+});
 //var booksCtrl = angular.module('nourControllers',['nourConfig', 'ngResource','bookInShelfService']);

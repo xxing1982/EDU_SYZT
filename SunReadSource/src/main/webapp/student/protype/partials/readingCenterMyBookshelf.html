@@ -43,7 +43,9 @@
 	              <!-- bookName row -->
 	              <div class="row"><h5>{{unreadBook.bookName | limitTo:8}}</h5></div>
 	              <!-- Details row -->
-	              <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;"><small>作者：{{unreadBook.author | limitTo:8 }} <br> 积分：{{unreadBook.point | limitTo:8 }}</small></p></div>
+	              <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;">
+									<small>作者：{{unreadBook.author | limitTo:8 }}
+										<br> 积分：{{unreadBook.point | limitTo:8 }} &nbsp;&nbsp; {{unreadBook.bookAttribute | formatBookAttribute}}</small></p></div>
 	              <!-- Tests row -->
 	              <div class="row dropdown">
 									<button type="button" class="btn btn-green dropdown-toggle" data-toggle="dropdown" aria-expanded="true">测试训练
@@ -86,10 +88,14 @@
 							</div>
 							<div class="col-md-6">
 	              <!-- bookName row -->
-	              <div class="row"><h5>{{readBook.bookName | limitTo:8}}</h5></div>
+	              <div class="row"><h5>{{readBook.bookName | limitTo:8}}
+									<!-- <small>&nbsp;&nbsp; {{readBook.bookAttribute | formatBookAttribute}}</small> -->
+								</h5></div>
 
 	              <!-- Details row -->
-	              <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;"><small>作者：{{readBook.author | limitTo:8 }} <br> 积分：{{readBook.point | limitTo:8 }}</small></p></div>
+	              <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;">
+									<small>作者：{{readBook.author | limitTo:8 }}
+										<br> 积分：{{readBook.point | limitTo:8 }} &nbsp;&nbsp; {{readBook.bookAttribute | formatBookAttribute}}</small></p></div>
 
 	              <!-- Tests row -->
 	              <div class="row dropdown">
