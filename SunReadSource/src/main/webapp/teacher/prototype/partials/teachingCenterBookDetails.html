@@ -12,7 +12,7 @@
     </div></div>
 </div>
 
-<div class="readingCenter-right-body">
+<div class="readingCenter-right-body page-body">
 
     <div class="bookDetailUp">
        <div class="col-md-12">
@@ -103,13 +103,13 @@
 
                 <!-- review -->
                 <div role="tabpanel" class="tab-pane fade" id="review">
-                    <div class="row" style="margin-top:-20px;margin-bottom:-20px;">
+                    <div class="" style="margin-top:-20px;margin-bottom:-40px;">
                         <div class="row" style="margin-top:0;" ng-repeat="item in review.source">
                             <div class="container-fluid buttom-separator">
                                 <div class="title col-md-12" style="width:100%;" ng-init="Note.text_overflow=true;">
                                     <h5><strong>{{ item.title }}</strong></h5>
                                     <p><small>评分：{{item.rate}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.studentName}} - {{item.creationTime}}</small></p>
-                                    <p><small>{{item.content}}</small></p>
+                                    <p>{{item.content}}</p>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
 
                 <!-- note -->
                 <div role="tabpanel" class="tab-pane fade" id="note">
-                    <div class="" style="margin-top:-20px;margin-bottom:-20px;">
+                    <div class="" style="margin-top:-20px;margin-bottom:-40px;">
                     <div class="note-row row" style="padding-right: 15px;" ng-repeat="Note in noteView.Notes.content">
                         <div class="container-fluid book-row" style="margin-top:0;">
                             <div class="title book-row-right" style="width:100%;" ng-init="Note.text_overflow=true;">

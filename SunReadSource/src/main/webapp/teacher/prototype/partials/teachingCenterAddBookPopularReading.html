@@ -1,21 +1,23 @@
 <div class="popularSearch">
+
+<div class="input-group popularChoice title">
+    <label class="radio-inline">
+      <input type="radio" ng-click="searchWeeklyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio2" value="1" checked>
+        <p class="popularText">周热门</p>
+    </label>
+    <label class="radio-inline">
+      <input type="radio" ng-click="searchMonthlyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio3" value="2">
+         <p class="popularText">月热门</p>
+    </label>
+    <label class="radio-inline">
+      <input type="radio" ng-click="searchYearlyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio1" value="3">
+        <p class="popularText">年热门</p>
+    </label>
+
+</div>
+    
 <div class="leftpart">
 
-        <div class="input-group popularChoice">
-            <label class="radio-inline">
-              <input type="radio" ng-click="searchWeeklyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio2" value="1" checked>
-                <p class="popularText">周热门</p>
-            </label>
-            <label class="radio-inline">
-              <input type="radio" ng-click="searchMonthlyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio3" value="2">
-                 <p class="popularText">月热门</p>
-            </label>
-            <label class="radio-inline">
-              <input type="radio" ng-click="searchYearlyH()" ng-model="statusH" name="inlineRadioOptions" id="inlineRadio1" value="3">
-                <p class="popularText">年热门</p>
-            </label>
-
-        </div>
 
 	<div class="row" ng-repeat="terms in searchPageable.entities.content">
         <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
@@ -51,7 +53,7 @@
 
       <!-- Footer and page numbers  -->
     <div class="container-fluid addBookPageNum myBlock">
-    <div class="row paragraph">
+    <div class="row">
        <div class="col-xs-1"></div>
         <div class="col-xs-7">
             <!-- Custom page number goes here -->

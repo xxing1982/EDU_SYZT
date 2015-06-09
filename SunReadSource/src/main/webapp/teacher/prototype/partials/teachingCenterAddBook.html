@@ -5,7 +5,7 @@
     <div class="row">
         <div class="row-same-height">
             <div class="col-xs-8 col-xs-height">
-                <h5 class="title"><big><a ng-href="#/teachingCenter/myRecommend" class="dark-gray-2">我的推荐></a></big><big>{{addBook}}</big></h5>
+                <h5 class="title"><big><a ng-href="#/teachingCenter/myRecommend" class="dark-gray-2">我的推荐</a></big><big> > {{addBook}}</big></h5>
             </div>
             <div class="col-xs-4 col-xs-height col-middle">
             </div>
@@ -15,25 +15,19 @@
 </div>
 
 
-<div class="container-fluid addBook-body">
+<div class="container-fluid addBook-body page-body">
 
-    <div class="row">
-        <ul class="col-md-9 addBookFind" ng-controller="recommendNavCtrl">
-            <div class="row">
-            <a ui-sref='.quick'><li class="col-md-2 select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.quick)}"><span>快速查找</span></li></a>
-            <a ui-sref='.advanced'><li class="col-md-2 select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.advanced)}"><span>全部的书</span></li></a>
-            <a ui-sref='.popular'><li class="col-md-2 select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.popular)}"><span>热门阅读</span></li></a>
-            <a ui-sref='.recommend'><li class="col-md-2 select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.recommend)}"><span>热门推荐</span></li></a>
-            </div>
+    <div class="row addBookFind">
+        <ul class="col-md-9 nav nav-tabs" ng-controller="recommendNavCtrl">
+            <li class="select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.quick)}"><a ui-sref='.quick'>快速查找</a></li>
+            <li class="select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.advanced)}"><a ui-sref='.advanced'>全部的书</a></li>
+            <li class="select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.popular)}"><a ui-sref='.popular'>热门阅读</a></li>
+            <li class="select-tab" ng-class="{myActive:isActiveAddBook(routeMapAddBook.recommend)}"><a ui-sref='.recommend'>热门推荐</a></li>
         </ul>
-        <div class="col-md-3 addBookFindRight">
-            <div class="col-md-6"></div>
-            <div class="col-md-6 lackFeadback">
-                <a id="lackFeadBack" data-toggle="modal" data-target="#supplementBook" type="button" style="color: black;">
-                    缺书反馈</a>
-            </div>
+        <div class="col-md-3 lackFeadback">
+            <a id="lackFeadBack" data-toggle="modal" data-target="#supplementBook" type="button" style="color: black;line-height:38px;">
+                缺书反馈</a>
         </div>
-
     </div>
 
 <!-- Modal -->

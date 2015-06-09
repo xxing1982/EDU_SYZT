@@ -1,12 +1,16 @@
 <!--AdvancedSearch-->
 <div class="advancedSearch">
+    
+    <div class="row">
+        <div class="col-md-9">
+            <div class="input-group search col-md-11 title">
+                <input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
+                <span class="input-group-addon search" ng-click="searchBooks()">搜索</span>
+            </div>
+        </div>
+    </div>
+
     <div class="leftpart">
-
-	<div class="input-group search col-md-11">
-		<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
-		<span class="input-group-addon search" ng-click="searchBooks()">搜索</span>
-	</div>
-
 	<div class="row" ng-repeat="terms in searchPageable.entities.content">
         <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
             <!-- Place holder -->
@@ -41,7 +45,7 @@
 
     <!-- Footer and page numbers  -->
     <div class="container-fluid addBookPageNum myBlock">
-    <div class="row paragraph">
+    <div class="row">
        <div class="col-xs-1"></div>
         <div class="col-xs-7">
             <!-- Custom page number goes here -->

@@ -55,21 +55,28 @@
 .nav-tabs>li>a{
     padding-left: 25px;
     padding-right: 25px;
+    background: none;
 }
 
-.nav-tabs>li.active>a:link {
+.nav-tabs>li.active>a:link{
     
     border: none;
     color: #55C9D2;
     border-bottom: 3px solid #55C9D2;
 }
-
-.nav-tabs>li.active>a:hover {
+.nav-tabs>.select-tab.myActive>a {
     color: #55C9D2;
 }
 
-.nav-tabs>li>a:link {
-    color: #4C4C4C
+.nav-tabs>li.active>a:hover {
+    color: #55C9D2;    
+    background: none;
+}
+
+.nav-tabs>li>a:link,
+.nav-tabs>li>a:visited {
+    color: #4C4C4C;   
+    background: none;
 }
 
 .nav-tabs>li>a:hover {
