@@ -1,7 +1,6 @@
 package com.syzton.sunread.service.tag;
 
 import java.util.List;
-import com.syzton.sunread.dto.tag.TagDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.tag.Tag;
 
@@ -16,7 +15,7 @@ public interface TagService {
      * @param added The information of the added tag entry.
      * @return  The added tag entry.
      */
-    public Tag add(TagDTO added);
+    public Tag add(Tag added);
 
     /**
      * Deletes a tag entry.
@@ -46,7 +45,7 @@ public interface TagService {
      * @return  The updated tag entry.
      * @throws NotFoundException    If no tag entry is found with the given id.
      */
-    public Tag update(TagDTO updated) throws NotFoundException;
+    public Tag update(Tag updated) throws NotFoundException;
 
 
 }

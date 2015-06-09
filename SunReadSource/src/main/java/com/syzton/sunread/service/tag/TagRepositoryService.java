@@ -1,7 +1,6 @@
 package com.syzton.sunread.service.tag;
 
 import java.util.List;
-import com.syzton.sunread.dto.tag.TagDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.repository.tag.TagRepository;
@@ -28,12 +27,9 @@ public class TagRepositoryService implements TagService {
     }
 
     @Override
-    public Tag add(TagDTO added) {
+    public Tag add(Tag added) {
         LOGGER.debug("Adding a new tag entry with information: {}", added);
-
-        Tag tagModel = Tag.getBuilder(added.getName(), added.getValue())
-                .build();
-        return repository.save(tagModel);
+        return repository.save(added);
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})
@@ -72,13 +68,13 @@ public class TagRepositoryService implements TagService {
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Tag update(TagDTO updated) throws NotFoundException {
+    public Tag update(Tag updated) throws NotFoundException {
         LOGGER.debug("Updating contact with information: {}", updated);
 
         Tag model = findById(updated.getId());
         LOGGER.debug("Found a tag entry: {}", model);
 
-        model.update(updated.getName(), updated.getValue());
+        model.update(updated.getType(), updated.getName());
 
         return model;
     }

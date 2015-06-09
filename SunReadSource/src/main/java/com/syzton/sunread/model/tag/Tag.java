@@ -1,5 +1,4 @@
 package com.syzton.sunread.model.tag;
-import com.syzton.sunread.dto.tag.TagDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 import javax.persistence.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -15,13 +14,16 @@ import java.util.Set;
 public class Tag extends AbstractEntity {
 
     public static final int MAX_LENGTH_NAME = 20;
-    public static final int MAX_LENGTH_VALUE = 20;
 
-    @Column(name="name",nullable = false,length = MAX_LENGTH_NAME)
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable=false)
+	private Type type;
+	
+	public enum Type{LESSON, SUBJECT, GRADE, CHAPTER, THEME}
+
+
+    @Column(name ="name",nullable = false,length = MAX_LENGTH_NAME)
     private String name;
-
-    @Column(name ="value",nullable = false,length = MAX_LENGTH_VALUE)
-    private String value;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "tag")
     @Basic(fetch = FetchType.LAZY)
@@ -32,53 +34,27 @@ public class Tag extends AbstractEntity {
 
     }
 
-    public static Builder getBuilder(String name,String value) {
-        return new Builder(name, value);
+    public Type getType() {
+        return type;
     }
-    
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
-
-    public String getValue() {
-        return value;
-    }
-
     
-//    public Set<BookTag> getBookTags() {
-//		return bookTags;
-//	}
-
-	public void update(String name, String value) {
+    public void setName(String name) {
         this.name = name;
-        this.value = value;
     }
-
     
-    public static class Builder {
-
-        private Tag built;
-
-        public Builder(String name, String value) {
-            built = new Tag();
-            built.name = name;
-            built.value = value;
-        }
-
-        public Tag build() {
-            return built;
-        }
+	public void update(Type type, String name) {
+        this.type = type;
+        this.name = name;
     }
 
-    public TagDTO createDTO(Tag model) {
-        TagDTO dto = new TagDTO();
-
-        dto.setId(model.getId());
-        dto.setName(model.getName());
-        dto.setValue(model.getValue());
-
-        return dto;
-    }
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
