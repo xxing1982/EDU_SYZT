@@ -5,7 +5,7 @@ package com.syzton.sunread.model.region;
  */
 public enum RegionType {
 
-    province,city,county
+    province,city,district
 
 
 }

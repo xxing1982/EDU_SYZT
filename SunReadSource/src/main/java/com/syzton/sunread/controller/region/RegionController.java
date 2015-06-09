@@ -44,10 +44,10 @@ public class RegionController {
 //Add a Region 
     @RequestMapping(value = "/region", method = RequestMethod.POST)
     @ResponseBody
-    public Region add(@Valid @RequestBody Region region) {
-        LOGGER.debug("Adding a new region entry with information: {}", region);
+    public Region add(@Valid @RequestBody RegionDTO regionDTO) {
+        LOGGER.debug("Adding a new region entry with information: {}", regionDTO);
         
-        Region added = service.add(region);
+        Region added = service.add(regionDTO);
         LOGGER.debug("Added a region entry with information: {}", added);
               
        return added;

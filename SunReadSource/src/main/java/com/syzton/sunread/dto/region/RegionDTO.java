@@ -2,13 +2,9 @@ package com.syzton.sunread.dto.region;
 
 import javax.validation.constraints.NotNull;
 
-import com.syzton.sunread.model.region.RegionType;
 import org.hibernate.validator.constraints.Length;
 
 import com.syzton.sunread.model.region.Region;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Morgan-Leon
@@ -19,18 +15,17 @@ public class RegionDTO {
 	
 	private long id;
 	
-    @Length(max = Region.MAX_LENGTH_DESCRIPTION)
-	private String description;
+	@NotNull
+    @Length(max = Region.MAX_LENGTH_AREA)
+    private String province;
+    
+	@NotNull
+    @Length(max = Region.MAX_LENGTH_AREA)
+    private String city;
 	
 	@NotNull
     @Length(max = Region.MAX_LENGTH_AREA)
-    private String name;
-    
-    private RegionType regionType;
-
-	private Set<RegionDTO> regionDTOSet = new HashSet<>();
-	
-    private int areaCode;
+    private String district;
     
 	public long getId() {
 		return id;
@@ -40,43 +35,29 @@ public class RegionDTO {
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getProvince() {
+		return province;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setProvince(String province) {
+		this.province = province;
 	}
 
-	public String getName() {
-		return name;
+	public String getCity() {
+		return city;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public RegionType getRegionType() {
-		return regionType;
+	public String getDistrict() {
+		return district;
 	}
 
-	public void setRegionType(RegionType regionType) {
-		this.regionType = regionType;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
-
-	public int getAreaCode() {
-		return areaCode;
-	}
-
-	public void setAreaCode(int areaCode) {
-		this.areaCode = areaCode;
-	}
-
-	public Set<RegionDTO> getRegionDTOSet() {
-		return regionDTOSet;
-	}
-
-	public void setRegionDTOSet(Set<RegionDTO> regionDTOSet) {
-		this.regionDTOSet = regionDTOSet;
-	}
+	
+	
 }

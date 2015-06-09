@@ -5,6 +5,10 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -31,18 +35,21 @@ public class Region extends AbstractEntity{
 	@Enumerated(EnumType.STRING)
 	private RegionType regionType;
 
-	private int areaCode;
+
+	@ManyToOne
+	@JoinColumn(name="parent_id")
+//	@JsonManagedReference
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	public Region parent;
 
 	@Column(name = "name", nullable = false, length = MAX_LENGTH_AREA)
 	private String name;
 
-    @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
-    private String description;
-
-	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE},fetch = FetchType.EAGER)
-	@JoinColumn(name = "parent_id")
+	@OneToMany(mappedBy = "parent")
 	@OrderColumn
-    private Set<Region> subRegion= new HashSet<Region>();
+//	@JsonBackReference
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+	private Set<Region> subRegion= new HashSet<>();
 
 	public RegionType getRegionType() {
 		return regionType;
@@ -50,14 +57,6 @@ public class Region extends AbstractEntity{
 
 	public void setRegionType(RegionType regionType) {
 		this.regionType = regionType;
-	}
-
-	public int getAreaCode() {
-		return areaCode;
-	}
-
-	public void setAreaCode(int areaCode) {
-		this.areaCode = areaCode;
 	}
 
 	public String getName() {
@@ -68,14 +67,6 @@ public class Region extends AbstractEntity{
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public Set<Region> getSubRegion() {
 		return subRegion;
 	}
@@ -83,4 +74,13 @@ public class Region extends AbstractEntity{
 	public void setSubRegion(Set<Region> subRegion) {
 		this.subRegion = subRegion;
 	}
+
+	public Region getParent() {
+		return parent;
+	}
+
+	public void setParent(Region parent) {
+		this.parent = parent;
+	}
+
 }

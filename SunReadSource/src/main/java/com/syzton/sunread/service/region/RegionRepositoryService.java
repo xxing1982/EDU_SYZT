@@ -3,6 +3,7 @@ package com.syzton.sunread.service.region;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.syzton.sunread.model.region.RegionType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
@@ -42,10 +43,29 @@ public class RegionRepositoryService implements RegionService {
 
 	@Transactional(rollbackFor = { DuplicateException.class })
 	@Override
-	public Region add(Region added) {
+	public Region add(RegionDTO added) {
 		LOGGER.debug("Adding a new Region with information: {}", added);
 
-		return regionRepo.save(added);
+		Region province = getRegion(added.getProvince(),RegionType.province,null);
+		Region city = getRegion(added.getCity(),RegionType.city,province);
+		city.setParent(province);
+		province.getSubRegion().add(city);
+
+		Region district = getRegion(added.getDistrict(),RegionType.district,city);
+		district.setParent(city);
+		city.getSubRegion().add(district);
+		return regionRepo.save(district);
+	}
+
+	private Region getRegion(String regionName,RegionType regionType,Region parent){
+		Region region = regionRepo.findByNameAndRegionTypeAndParent(regionName, regionType,parent);
+		if (region == null){
+			region = new Region();
+			region.setName(regionName);
+			region.setRegionType(regionType);
+			regionRepo.save(region);
+		}
+		return region;
 	}
 
 	@Transactional(rollbackFor = { NotFoundException.class })

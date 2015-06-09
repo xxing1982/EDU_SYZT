@@ -17,7 +17,7 @@ import com.syzton.sunread.model.region.Region;
  */
 public interface RegionService {
 
-    public Region add(Region added);
+    public Region add(RegionDTO added);
     
     public Region deleteById(long id);
 
