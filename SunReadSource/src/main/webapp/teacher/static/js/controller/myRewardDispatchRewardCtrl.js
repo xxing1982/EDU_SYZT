@@ -60,10 +60,10 @@ ctrls.controller("myRewardDispatchRewardController", ['$scope', '$rootScope', 'T
                     if (this.selected[i].num >= 0){
                         CoinHistory.save({ by: "students",
                                            id: this.selected[i].id },
-                                         { coinType: "IN", 
-                                           coinFrom: "FROM_TEACHER", 
-                                           num: this.selected[i].num,
-                                           reason: this.selected[i].reason },
+                                         { "coinType": "IN", 
+                                           "coinFrom": "FROM_TEACHER", 
+                                           "num": this.selected[i].num,
+                                           "reason": this.selected[i].reason },
                                          function(){
                                             if ( saved + 1 < targetSaved){
                                                 saved ++;

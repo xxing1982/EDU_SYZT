@@ -13,8 +13,10 @@
     <div class="leftpart">
 	<div class="row" ng-repeat="terms in searchPageable.entities.content">
         <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
+            
             <!-- Place holder -->
             <p class="col-md-12"></p>
+            
             <div class="col-md-3">
                 <a href="#teachingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
             </div>
@@ -31,6 +33,7 @@
                     <a data-toggle="modal" data-target="#booktag" class="btn btn-sm btn-blue">标记书籍</a>
                 </div>
             </div>
+            
             <!-- Place holder -->
             <p class="col-md-12"></p>
         </div>
@@ -103,7 +106,8 @@
                     </bs-dropdown>
                     </div>
                 </div>
-
+                <!-- Place holder -->
+                <p class="col-md-12"></p>
             </div>
         </div>
 

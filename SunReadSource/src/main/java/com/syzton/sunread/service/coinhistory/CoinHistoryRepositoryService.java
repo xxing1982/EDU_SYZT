@@ -79,16 +79,18 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         // Update clazz statistic
         Clazz clazz = clazzRepository.findOne(student.getClazzId());
 
-        if (add.getCoinType() == CoinType.IN) {
-            statistic.setCoin(statistic.getCoin() + add.getNum());
-            clazz.getClazzStatistic().setTotalCoin(clazz.getClazzStatistic().getTotalCoin() + add.getNum());
-            clazz.getClazzStatistic().setAvgCoin();
-        } else {
-            statistic.setCoin(statistic.getCoin() - add.getNum());
-            clazz.getClazzStatistic().setTotalCoin(clazz.getClazzStatistic().getTotalCoin() - add.getNum());
-            clazz.getClazzStatistic().setAvgCoin();
-        }
-        clazzRepository.save(clazz);
+        if (clazz != null) {
+	        if (add.getCoinType() == CoinType.IN) {
+	            statistic.setCoin(statistic.getCoin() + add.getNum());
+	            clazz.getClazzStatistic().setTotalCoin(clazz.getClazzStatistic().getTotalCoin() + add.getNum());
+	            clazz.getClazzStatistic().setAvgCoin();
+	        } else {
+	            statistic.setCoin(statistic.getCoin() - add.getNum());
+	            clazz.getClazzStatistic().setTotalCoin(clazz.getClazzStatistic().getTotalCoin() - add.getNum());
+	            clazz.getClazzStatistic().setAvgCoin();
+	        }
+	        clazzRepository.save(clazz);
+    	}
         
         
         // Update student coinhistory
