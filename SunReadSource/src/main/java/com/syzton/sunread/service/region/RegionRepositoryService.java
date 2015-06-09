@@ -70,7 +70,7 @@ public class RegionRepositoryService implements RegionService {
 
 	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
-	public Region deleteById(long id) {
+	public void deleteById(long id) {
 		LOGGER.debug("Deleting a Region with id: {}", id);
 
 		Region deleted = findOne(id);
@@ -79,7 +79,6 @@ public class RegionRepositoryService implements RegionService {
 
 		LOGGER.debug("Deleting Region entry: {}", deleted);
 		regionRepo.delete(deleted);
-		return deleted;
 	}
 
 	@Transactional(rollbackFor = { NotFoundException.class })

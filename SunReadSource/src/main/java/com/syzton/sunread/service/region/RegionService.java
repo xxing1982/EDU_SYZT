@@ -19,7 +19,7 @@ public interface RegionService {
 
     public Region add(RegionDTO added);
     
-    public Region deleteById(long id);
+    public void deleteById(long id);
 
     public Region update(Region updated);
 

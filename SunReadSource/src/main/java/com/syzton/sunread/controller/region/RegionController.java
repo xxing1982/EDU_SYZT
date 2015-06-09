@@ -57,13 +57,11 @@ public class RegionController {
 //Delete a region
     @RequestMapping(value = "/region/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Region deleteById(@Valid @PathVariable("id") Long id) {
+    public void deleteById(@Valid @PathVariable("id") Long id) {
         LOGGER.debug("Deleting a region entry with id: {}", id);
 
-        Region deleted = service.deleteById(id);
-        LOGGER.debug("Deleted region entry with information: {}", deleted);
+        service.deleteById(id);
 
-        return deleted;
     }
     
 //Update a region    

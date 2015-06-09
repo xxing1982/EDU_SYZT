@@ -45,7 +45,7 @@ public class Region extends AbstractEntity{
 	@Column(name = "name", nullable = false, length = MAX_LENGTH_AREA)
 	private String name;
 
-	@OneToMany(mappedBy = "parent")
+	@OneToMany(mappedBy = "parent",cascade = CascadeType.ALL)
 	@OrderColumn
 //	@JsonBackReference
 	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
