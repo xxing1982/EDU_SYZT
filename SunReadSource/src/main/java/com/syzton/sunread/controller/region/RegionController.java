@@ -42,7 +42,7 @@ public class RegionController {
     }
     
 //Add a Region 
-    @RequestMapping(value = "/region", method = RequestMethod.POST)
+    @RequestMapping(value = "/regions", method = RequestMethod.POST)
     @ResponseBody
     public Region add(@Valid @RequestBody RegionDTO regionDTO) {
         LOGGER.debug("Adding a new region entry with information: {}", regionDTO);
@@ -55,7 +55,7 @@ public class RegionController {
     
     
 //Delete a region
-    @RequestMapping(value = "/region/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/regions/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public void deleteById(@Valid @PathVariable("id") Long id) {
         LOGGER.debug("Deleting a region entry with id: {}", id);
@@ -65,34 +65,34 @@ public class RegionController {
     }
     
 //Update a region    
-    @RequestMapping(value = "/region/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/regions/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public Region update(@Valid @RequestBody Region region,@PathVariable("id") long id) throws NotFoundException {
         LOGGER.debug("Adding a new region entry with information: {}", region);
         
-        Region updated = service.update(region);
+        Region updated = service.update(region,id);
         LOGGER.debug("Added a region with information: {}", updated);
               
        return updated;
     } 
 
 //Get all Regions
-    @RequestMapping(value = "/regions", method = RequestMethod.GET)
+    @RequestMapping(value = "/regions/provinces", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Region> findAll(
+    public PageResource<Region> findProvince(
     						@RequestParam("page") int page,
                             @RequestParam("size") int size,
                             @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
         LOGGER.debug("Finding  regions entry " );
         sortBy = sortBy==null?"id": sortBy;
         Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
-        Page<Region> pageResult = service.findAll(pageable);
+        Page<Region> pageResult = service.findProvinces(pageable);
 
         return new PageResource<>(pageResult,"page","size");
     }
     
 //Get a Region    
-    @RequestMapping(value = "/region/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/regions/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Region findById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Finding a region entry with id: {}", id);

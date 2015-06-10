@@ -83,15 +83,13 @@ public class RegionRepositoryService implements RegionService {
 
 	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
-	public Region update(Region updated) {
+	public Region update(Region updated,long id) {
 		LOGGER.debug("Updating contact with information: {}", updated);
 
-		Region model = findOne(updated.getId());
-		if (model == null)
-			throw new NotFoundException("No Region found with id: "
-					+ updated.getId());
+		Region model = findOne(id);
+
 		LOGGER.debug("Found a note entry: {}", model);
-		regionRepo.save(updated);
+		regionRepo.save(model);
 		return updated;
 	}
 
@@ -109,13 +107,13 @@ public class RegionRepositoryService implements RegionService {
 	}
 
 	@Override
-	public Page<Region> findAll(Pageable pageable) {
+	public Page<Region> findProvinces(Pageable pageable) {
 		LOGGER.debug("Finding all Region entries");
-		Page<Region> eduPages = regionRepo.findAll(pageable);
-		if (eduPages == null) {
+		Page<Region> provinces = regionRepo.findByRegionType(pageable,RegionType.province);
+		if (provinces == null) {
 			throw new NotFoundException("No Region found");
 		}
-		return eduPages;
+		return provinces;
 	}
 	
 //	@Transactional

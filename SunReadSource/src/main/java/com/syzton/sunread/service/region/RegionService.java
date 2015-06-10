@@ -21,11 +21,11 @@ public interface RegionService {
     
     public void deleteById(long id);
 
-    public Region update(Region updated);
+    public Region update(Region updated,long id);
 
     public Region findOne(Long id) ;
 
-    Page<Region> findAll(Pageable pageable);
+    Page<Region> findProvinces(Pageable pageable);
     
 //    public Map<Integer,String> batchSaveOrUpdateRegionFromExcel(Sheet sheet);
 }
