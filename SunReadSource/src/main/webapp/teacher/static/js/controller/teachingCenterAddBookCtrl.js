@@ -199,11 +199,11 @@ if(!$scope.statuses_category.length > 0){
         
         
         // Bs dropdown statues
-        $scope.statuses = { LESSON: [{id: 0}],
-                            SUBJECT: [{id: 0}],
-                            GRADE: [{id: 0}],
-                            CHAPTER: [{id: 0}],
-                            THEME: [{id: 0}] };
+        $scope.statuses = { LESSON: [{id: 0, name: "不标记"}],
+                            SUBJECT: [{id: 0, name: "不标记"}],
+                            GRADE: [{id: 0, name: "不标记"}],
+                            CHAPTER: [{id: 0, name: "不标记"}],
+                            THEME: [{id: 0, name: "不标记"}] };
         $scope.selected_status = { LESSON: 0,
                                    SUBJECT: 0,
                                    GRADE: 0,
