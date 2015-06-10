@@ -85,6 +85,7 @@
 
 .nav-sidebar>li.myActive>a {
     border-bottom: 1px #ECECEC solid;
+    padding-left: 11px;
 }
 
 .nav-sidebar
