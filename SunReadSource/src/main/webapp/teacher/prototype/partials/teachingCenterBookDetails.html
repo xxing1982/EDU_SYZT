@@ -68,10 +68,10 @@
         </div>
 
 
-        <div class="bookDetailBottom">
+        <div class="container-fluid">
 
             <!-- Nav tabs -->
-            <div class="buttom-separator">
+            <div class="row buttom-separator">
             <ul id="myTab" class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#intro" aria-controls="intro" role="tab" data-toggle="tab">图书简介</a></li>
                 <li role="presentation"><a href="#catalog" aria-controls="catalog" role="tab" data-toggle="tab">目录</a></li>
@@ -84,7 +84,7 @@
             </div>
 
             <!-- Tab panes -->
-            <div class="tab-content container-fluid paragraph bookDetailTabPanes">
+            <div class="tab-content container-fluid paragraph" style="line-height:25px;">
 
                 <!-- introduction -->
                 <div role="tabpanel" class="tab-pane in active" id="intro">
@@ -96,20 +96,19 @@
                 <!-- catalog -->
                 <div role="tabpanel" class="tab-pane" id="catalog">
                     <div>
-                        <p ng-bind-html="to_trusted(bookDetails.catalogue)"></p>
-<!--                        <p>{{bookDetails.catalogue | formatParagraph }}</p>-->
+	                        <p ng-bind-html="bookDetails.catalogue | formatParagraph"></p>
                     </div>
                 </div>
 
                 <!-- review -->
                 <div role="tabpanel" class="tab-pane fade" id="review">
-                    <div class="row" style="margin-top:-20px;margin-bottom:-40px;">
+                    <div class="row" style="margin-top:-20px;margin-bottom:-20px;">
                         <div class="row" style="margin-top:0;" ng-repeat="item in review.source">
                             <div class="container-fluid buttom-separator">
                                 <div class="title col-md-12" style="width:100%;" ng-init="Note.text_overflow=true;">
                                     <h5><strong>{{ item.title }}</strong></h5>
                                     <p><small>评分：{{item.rate}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.studentName}} - {{item.creationTime}}</small></p>
-                                    <p>{{item.content}}</p>
+                                    <p><small>{{item.content}}</small></p>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +118,7 @@
 
                 <!-- note -->
                 <div role="tabpanel" class="tab-pane fade" id="note">
-                    <div class="" style="margin-top:-20px;margin-bottom:-40px;">
+                    <div class="row" style="margin-top:-20px;margin-bottom:-20px;">
                     <div class="note-row row" style="padding-right: 15px;" ng-repeat="Note in noteView.Notes.content">
                         <div class="container-fluid book-row" style="margin-top:0;">
                             <div class="title book-row-right" style="width:100%;" ng-init="Note.text_overflow=true;">
