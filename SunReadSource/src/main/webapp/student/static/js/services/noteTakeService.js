@@ -24,7 +24,11 @@ NoteTake.prototype.send = function(){
     var note = {title: this.title, content: this.content, image: this.image};
 
     // POST the note by the note service with book id
-    this.Note.save({by: "books", id: this.id}, note);
+    this.Note.save({by: "books", id: this.id}, note, function(){
+        this.title = undefined;
+        this.content = undefined;
+        this.image = undefined;
+    });
 };
 
 

@@ -36,7 +36,7 @@
 						<div ng-repeat="unreadBook in unreadBooks" class="col-md-4 bookshelf-book clear-padding">
 							<!--Img Col-->
 							<div class="col-md-6">
-								<a href="#readingCenter/bookDetails/{{unreadBook.bookId}}/"><div><img ng-src={{imageServer+unreadBook.pictureUrl}} class="bookshelfIMG img-responsive custom-shadow"></div></a>
+								<a href="#readingCenter/bookDetails/{{unreadBook.bookId}}/"><div ng-show="{{unreadBook.pictureUrl !== undefined}}"><img ng-src={{imageServer+unreadBook.pictureUrl}} class="bookshelfIMG img-responsive custom-shadow"></div></a>
 								<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
 							</div>
 							<div class="col-md-6">
@@ -83,7 +83,7 @@
 					<div class="row buttom-separator">
 						<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
 							<div class="col-md-6">
-								<a href="#readingCenter/bookDetails/{{readBook.bookId}}/default"><div><img ng-src={{imageServer+readBook.pictureUrl}} class="bookshelfIMG  img-responsive custom-shadow"></div></a>
+								<a href="#readingCenter/bookDetails/{{readBook.bookId}}/default"><div ng-show="{{readBook.pictureUrl !== undefined}}"><img ng-src={{imageServer+readBook.pictureUrl}} class="bookshelfIMG  img-responsive custom-shadow"></div></a>
 								<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div>
 							</div>
 							<div class="col-md-6">
@@ -154,7 +154,7 @@
                 <!-- Row 1 -->
                 <div class="row title">
                     <div class="col-md-2">
-                        <img ng-show="{{noteTake.pictureUrl!==undefined}}" ng-src="{{ imageServer + noteTake.pictureUrl }}" class="img-responsive custom-shadow">
+                        <img ng-src="{{ noteTake.pictureUrl ? imageServer + noteTake.pictureUrl : null }}" class="img-responsive custom-shadow">
                     </div>
                     <div class="col-md-10">
                         <h4>{{noteTake.name}}</h4>

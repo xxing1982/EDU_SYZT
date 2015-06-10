@@ -19,7 +19,7 @@
         <div class="bookDetailUp">
            <div class="col-md-12">
                <div class="col-md-3 bookDetailImg">
-                 <img ng-src={{imageServer+bookDetails.pictureUrl}} class="img-responsive custom-shadow">
+                 <img ng-src="{{bookDetails.pictureUrl!==undefined ? imageServer+bookDetails.pictureUrl : null}}" class="img-responsive custom-shadow">
                </div>
 
               <div class="col-md-9 bookDetailText">
@@ -238,7 +238,7 @@
                 <!-- Row 1 -->
                 <div class="row title">
                     <div class="col-md-2">
-                        <img ng-src={{imageServer+bookDetails.pictureUrl}} class="img-responsive custom-shadow">
+                        <img ng-src="{{ bookDetails.pictureUrl!==undefined ? imageServer+bookDetails.pictureUrl : null}}" class="img-responsive custom-shadow">
                     </div>
                     <div class="col-md-10">
                         <h4>{{noteTake.name}}</h4>

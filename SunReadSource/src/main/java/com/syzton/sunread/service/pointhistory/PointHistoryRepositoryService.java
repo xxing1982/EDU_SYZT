@@ -63,16 +63,18 @@ public class PointHistoryRepositoryService implements PointHistoryService {
         Clazz clazz = clazzRepository.findOne(student.getClazzId());
         UserStatistic statistic = student.getStatistic();
 
-        if (add.getPointType() == PointType.IN) {
-            statistic.setPoint(statistic.getPoint() + add.getNum());
-            clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() + add.getNum());
-            clazz.getClazzStatistic().setAvgPoints();
-        } else {
-            statistic.setPoint(statistic.getPoint() - add.getNum());
-            clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() - add.getNum());
-            clazz.getClazzStatistic().setAvgPoints();
+        if (clazz != null){
+	        if (add.getPointType() == PointType.IN) {
+	            statistic.setPoint(statistic.getPoint() + add.getNum());
+	            clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() + add.getNum());
+	            clazz.getClazzStatistic().setAvgPoints();
+	        } else {
+	            statistic.setPoint(statistic.getPoint() - add.getNum());
+	            clazz.getClazzStatistic().setTotalPoints(clazz.getClazzStatistic().getTotalPoints() - add.getNum());
+	            clazz.getClazzStatistic().setAvgPoints();
+	        }
+	        clazzRepository.save(clazz);
         }
-        clazzRepository.save(clazz);
         
         
         // Update student pointhistory
