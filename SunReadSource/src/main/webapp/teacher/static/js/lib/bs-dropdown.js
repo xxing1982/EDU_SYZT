@@ -45,6 +45,20 @@ ctrls.directive('bsDropdown', function ($compile) {
                 }
             };
             scope.selectVal(scope.bSelectedItem);
+            
+            scope.$watch("selectedItem", function( newValue, oldValue ) {
+                
+                // Update the bSelectedItem
+                for (var i = 0; i < scope.items.length; i++) {
+                    if (scope.items[i].id === scope.selectedItem) {
+                        scope.bSelectedItem = scope.items[i];
+                        break;
+                    }
+                }
+                
+                // Update the front end
+                scope.selectVal(scope.bSelectedItem);
+            });
         }
     };
 });

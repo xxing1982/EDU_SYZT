@@ -30,7 +30,7 @@
                     <a href="#teachingCenter/addBookToShelf" class="btn btn-sm btn-fill-blue" type="button">加入书架</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-blue">相关笔记</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-blue">相关评价</a>&nbsp;&nbsp;
-                    <a data-toggle="modal" data-target="#booktag" class="btn btn-sm btn-blue">标记书籍</a>
+                    <a data-toggle="modal" data-target="#booktag" ng-click="booktag.render(terms)" class="btn btn-sm btn-blue">标记书籍</a>
                 </div>
             </div>
             

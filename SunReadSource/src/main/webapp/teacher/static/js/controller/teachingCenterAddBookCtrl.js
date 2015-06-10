@@ -1,12 +1,14 @@
 ctrls.controller("teachingCenterAddBookController", [
-	 '$scope','$stateParams','config','LackFeedback'
+	 '$scope','$rootScope','$stateParams','config','LackFeedback'
 	,'QuickSearch','ConditionSearch','Dictionary'
 	,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch'
 	,'WeeklyRecommendSearch','MonthlyRecommendSearch','YearlyRecommendSearch'
-,function ($scope,$stateParams,config,LackFeedback
+    ,'Tag','Booktag'
+,function ($scope,$rootScope,$stateParams,config,LackFeedback
 	,QuickSearch,ConditionSearch,Dictionary
 	,WeeklyHotSearch,MonthlyHotSearch,YearlyHotSearch
-	,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch) {
+	,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch
+    ,Tag,Booktag) {
 
 		$scope.imageServer=config.IMAGESERVER; ;
 		$scope.statuses_grade = new Array();
@@ -196,5 +198,67 @@ if(!$scope.statuses_category.length > 0){
 		}
         
         
-        //
+        // Bs dropdown statues
+        $scope.statuses = { LESSON: [{id: 0}],
+                            SUBJECT: [{id: 0}],
+                            GRADE: [{id: 0}],
+                            CHAPTER: [{id: 0}],
+                            THEME: [{id: 0}] };
+        $scope.selected_status = { LESSON: 0,
+                                   SUBJECT: 0,
+                                   GRADE: 0,
+                                   CHAPTER: 0,
+                                   THEME: 0 };
+    
+        // The tag object
+        $scope.tags = Tag.get({}, function(){
+            var tags = $scope.tags;
+            for ( var i = 0; i < tags.length; i++ ){
+                $scope.statuses[tags[i].type].push( tags[i] ); 
+            }      
+        });
+        
+        // The booktag object
+        $scope.booktag = {};
+    
+        $scope.booktag.render = function(book){
+            $scope.booktag.name = book.name;
+            $scope.booktag.book_id = book.id;
+        };
+    
+        $scope.booktag.save = function(){
+            
+            // Calculate the count of target saved
+            var target_saved = 0;
+            for (var key in $scope.selected_status) {
+                if ($scope.selected_status[key] !== 0) {
+                    target_saved ++;
+                }
+            }
+            
+            // Save the changed booktag
+            var saved = 0;
+            for (var key in $scope.selected_status) {
+                if ( $scope.selected_status[key] != 0 ) {
+                    Booktag.save( { tag_id: $scope.selected_status[key],
+                                    book_id: $scope.booktag.book_id }, function(){
+                                        if ( saved + 1 === target_saved ){
+                                            
+                                            // Show the modal of success
+                                            $rootScope.modal = {title: "标记书籍", content: "标记书籍成功！"};
+                                            $('#alert-modal').modal();
+                                            
+                                            // Reset the selected_status
+                                            for (var key in $scope.selected_status) {
+                                               $scope.selected_status[key] = 0;    
+                                            }
+                                        } else {
+                                            saved ++;
+                                        }
+                        
+                                    });
+                }
+            }
+        };
+    
 }]);

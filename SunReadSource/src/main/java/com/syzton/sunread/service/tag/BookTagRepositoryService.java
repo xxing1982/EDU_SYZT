@@ -76,10 +76,14 @@ public class BookTagRepositoryService implements BookTagService {
         Tag tag = tagRepository.findOne(added.getTag_id());
         Book book = bookRepository.findOne(added.getBook_id());
         User user = securityContextUtil.getUser();
-        BookTag bookTagModel = BookTag.getBuilder(tag, book, user)
-                .build();
-        
-        return bookTagRepository.save(bookTagModel);
+        List<BookTag> booktags = findByTagAndBookAndUser( tag, book, user ); 
+        if ( booktags.size() == 0){
+	        BookTag bookTagModel = BookTag.getBuilder(tag, book, user)
+	                .build();
+	        return bookTagRepository.save(bookTagModel);
+        } else {
+        	return booktags.get(0);
+        }
     }
     
     @Transactional(rollbackFor = {BookTagNotFoundException.class})
@@ -136,4 +140,9 @@ public class BookTagRepositoryService implements BookTagService {
         Page<BookTag> bookTagPage = bookTagRepository.findByTag(tag,pageable);
         return bookTagPage;
     }
+
+	@Override
+	public List<BookTag> findByTagAndBookAndUser(Tag tag, Book book, User user) {
+		return bookTagRepository.findByTagAndBookAndUser(tag, book, user);
+	}
 }

@@ -108,17 +108,17 @@
             </div>
 
             <div class="row text-center">
-                <h4><big> 十万个为什么</big></h4>
+                <h4><big>{{ booktag.name }}</big></h4>
                 <h3></h3>
             </div>
 
             <div class="row-same-height">
                 <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">课标类型：</p></div>
                 <div class="col-xs-6 col-xs-height col-middle">
-                    <bs-dropdown data-menu-type="button"
-                        select-val="searchArguments.grade = selectedVal"
-                        preselected-item="searchArguments.grade"
-                        data-dropdown-data="statuses_grade">
+                    <bs-dropdown  ui-if="selected_status.LESSON" data-menu-type="button"
+                        select-val="selected_status.LESSON = selectedVal"
+                        preselected-item="selected_status.LESSON"
+                        data-dropdown-data="statuses.LESSON">
                     </bs-dropdown>
                 </div>
                 <div class="col-xs-3 col-xs-height col-middle"></div>
@@ -128,9 +128,9 @@
                 <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">科目：</p></div>
                 <div class="col-xs-6 col-xs-height col-middle">
                     <bs-dropdown data-menu-type="button"
-                        select-val="searchArguments.grade = selectedVal"
-                        preselected-item="searchArguments.grade"
-                        data-dropdown-data="statuses_grade">
+                        select-val="selected_status.SUBJECT = selectedVal"
+                        preselected-item="selected_status.SUBJECT"
+                        data-dropdown-data="statuses.SUBJECT">
                     </bs-dropdown>
                 </div>
                 <div class="col-xs-3 col-xs-height col-middle"></div>
@@ -140,9 +140,9 @@
                 <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">年级：</p></div>
                 <div class="col-xs-6 col-xs-height col-middle">
                     <bs-dropdown data-menu-type="button"
-                        select-val="searchArguments.grade = selectedVal"
-                        preselected-item="searchArguments.grade"
-                        data-dropdown-data="statuses_grade">
+                        select-val="selected_status.GRADE = selectedVal"
+                        preselected-item="selected_status.GRADE"
+                        data-dropdown-data="statuses.GRADE">
                     </bs-dropdown>
                 </div>
                 <div class="col-xs-3 col-xs-height col-middle"></div>
@@ -152,9 +152,9 @@
                 <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">章节：</p></div>
                 <div class="col-xs-6 col-xs-height col-middle">
                     <bs-dropdown data-menu-type="button"
-                        select-val="searchArguments.grade = selectedVal"
-                        preselected-item="searchArguments.grade"
-                        data-dropdown-data="statuses_grade">
+                        select-val="selected_status.CHAPTER = selectedVal"
+                        preselected-item="selected_status.CHAPTER"
+                        data-dropdown-data="statuses.CHAPTER">
                     </bs-dropdown>
                 </div>
                 <div class="col-xs-3 col-xs-height col-middle"></div>
@@ -164,27 +164,29 @@
                 <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">教学主题：</p></div>
                 <div class="col-xs-6 col-xs-height col-middle">
                     <bs-dropdown data-menu-type="button"
-                        select-val="searchArguments.grade = selectedVal"
-                        preselected-item="searchArguments.grade"
-                        data-dropdown-data="statuses_grade">
+                        select-val="selected_status.THEME = selectedVal"
+                        preselected-item="selected_status.THEME"
+                        data-dropdown-data="statuses.THEME">
                     </bs-dropdown>
                 </div>
                 <div class="col-xs-3 col-xs-height col-middle"></div>
             </div>
             
+<!--
             <div class="row-same-height">
                 <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">备注：</p></div>
                 <div class="col-xs-9 col-xs-height col-middle">
-                    <input type="text" class="custom-input form-control"></input>
+                    <input type="text" class="custom-input form-control" style="width:100%"></input>
                 </div>
             </div>
+-->
         
             <!-- Place holer -->
             <h4 class="row"></h4>
         
             <div class="row">
                 <div class="col-md-12 text-left">
-                    <button class="btn btn-fill-blue" type="button">发布标记</button>
+                    <button class="btn btn-fill-blue" type="button" data-dismiss="modal" aria-label="Close" ng-click="booktag.save()">发布标记</button>
                 </div>
             </div>
 

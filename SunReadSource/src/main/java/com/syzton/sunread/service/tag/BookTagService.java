@@ -1,11 +1,16 @@
 package com.syzton.sunread.service.tag;
 
 import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import com.syzton.sunread.dto.tag.BookTagDTO;
 import com.syzton.sunread.exception.tag.BookTagNotFoundException;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.tag.BookTag;
+import com.syzton.sunread.model.tag.Tag;
+import com.syzton.sunread.model.user.User;
 
 /**
  * @author chenty
@@ -50,7 +55,7 @@ public interface BookTagService {
      */
     public BookTag update(BookTagDTO updated) throws BookTagNotFoundException;
 
-	Page<BookTag> findByTagId(Pageable pageable, long tagId);
+	public Page<BookTag> findByTagId(Pageable pageable, long tagId);
 
-
+	public List<BookTag> findByTagAndBookAndUser(Tag tag, Book book, User user);
 }
