@@ -96,7 +96,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 			messageDTO.setReceiveUserId(message.getReceiveUserId());
 			User receiveUser = this.checkUser(message.getReceiveUserId());
 			messageDTO.setReceiveUserName(receiveUser.getUsername());
-			messageDTO.setCreationTime(message.getCreationTime().toDate());
+			messageDTO.setCreationTime(message.getCreationTime());
 			messageDTOList.add(messageDTO);
 
 		}
@@ -123,7 +123,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 			messageDTO.setSendUsername(sendUser.getUsername());
 			messageDTO.setReceiveUserId(message.getReceiveUserId());
 			messageDTO.setReceiveUserName(receiveUser.getUsername());
-			messageDTO.setCreationTime(message.getCreationTime().toDate());
+			messageDTO.setCreationTime(message.getCreationTime());
 			messageDTOList.add(messageDTO);
 
 		}

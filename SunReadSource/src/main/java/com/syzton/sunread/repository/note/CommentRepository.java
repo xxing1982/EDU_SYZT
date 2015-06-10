@@ -1,4 +1,5 @@
 package com.syzton.sunread.repository.note;
+import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.model.note.Comment;
 import com.syzton.sunread.model.note.Note;
 

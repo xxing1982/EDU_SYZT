@@ -1,37 +1,41 @@
 package com.syzton.sunread.dto.note;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.syzton.sunread.model.note.Comment;
-
+import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.User;
 
 /**
  * @author chenty
  *
  */
-public class CommentDTO {
 
-	private Long id;
+public class CommentDTO extends AbstractEntity {
+
+    public static final int MAX_LENGTH_CONTENT = 200000;
     
-    @NotEmpty
-    @Length(max = Comment.MAX_LENGTH_CONTENT)
-	private String content;
+    private String content;
+	
+	private User user;
+    
+    public CommentDTO() {
+
+    }
 
     public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+        return id;   
+    }
 
 	public String getContent() {
 		return content;
 	}
-
+	
 	public void setContent(String content) {
 		this.content = content;
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getUsername(){
+		return user.getUsername();
+	}	
 }

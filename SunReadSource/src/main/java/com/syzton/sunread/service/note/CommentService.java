@@ -1,8 +1,10 @@
 package com.syzton.sunread.service.note;
 
 import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Comment;
@@ -18,7 +20,7 @@ public interface CommentService {
      * @param added The information of the added comment entry.
      * @return  The added comment entry.
      */
-    public Comment add(CommentDTO added, Long noteId);
+    public Comment add(Comment added, Long noteId);
 
     /**
      * Deletes a comment entry.
@@ -48,7 +50,7 @@ public interface CommentService {
      * @return  The updated comment entry.
      * @throws NotFoundException    If no comment entry is found with the given id.
      */
-    public Comment update(CommentDTO updated) throws NotFoundException;
+    public Comment update(Comment updated) throws NotFoundException;
 
 	public Page<Comment> findByNoteId(Pageable pageable, long noteId);
 

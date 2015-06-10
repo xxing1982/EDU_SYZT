@@ -41,8 +41,8 @@ public class AbstractEntity {
         return creationTime;
     }
     
-    public void setCreationTime(String str) {
-        
+    public void setCreationTime(DateTime creationTime) {
+    	this.creationTime = creationTime;
     }
 
     @Override

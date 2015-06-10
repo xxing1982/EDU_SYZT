@@ -50,17 +50,17 @@ public class CommentRepositoryService implements CommentService {
     }
     
     @Override
-    public Comment add(CommentDTO added, Long noteId) {
+    public Comment add(Comment added, Long noteId) {
         LOGGER.debug("Adding a new comment entry with information: {}", added);
 
         Note note = noteRepository.findOne(noteId);
         note.setCommentCount( note.getCommentCount() + 1 );
         User user = securityContextUtil.getUser();
-        Comment commentModel = Comment.getBuilder(added.getContent(), note, user)
-                .build();
-
-        
-        return repository.save(commentModel);
+        Comment comment = new Comment();
+        comment.setContent(added.getContent());
+        comment.setNote(note);
+        comment.setUser(user);        
+        return repository.save(comment);
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})
@@ -100,13 +100,13 @@ public class CommentRepositoryService implements CommentService {
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Comment update(CommentDTO updated) throws NotFoundException {
+    public Comment update(Comment updated) throws NotFoundException {
         LOGGER.debug("Updating contact with information: {}", updated);
 
         Comment model = findById(updated.getId());
         LOGGER.debug("Found a comment entry: {}", model);
 
-        model.update(updated.getContent());
+        model.setContent(updated.getContent());
 
         return model;
     }

@@ -1,8 +1,11 @@
 package com.syzton.sunread.model.note;
-import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.user.User;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 /**
@@ -15,7 +18,7 @@ public class Comment extends AbstractEntity {
 
     public static final int MAX_LENGTH_CONTENT = 200000;
     
-    @Column(name="content",length = MAX_LENGTH_CONTENT)
+	@Column(name="content",length = MAX_LENGTH_CONTENT)
     private String content;
 
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
@@ -33,10 +36,6 @@ public class Comment extends AbstractEntity {
 
     }
 
-    public static Builder getBuilder(String content, Note note, User user) {
-        return new Builder(content, note, user);
-    }
-
     public Long getId() {
         return id;   
     }
@@ -45,39 +44,26 @@ public class Comment extends AbstractEntity {
 		return content;
 	}
 	
+	
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
 	public Note getNote() {
-		return note;
+		return this.note;
+	}
+
+	public void setNote(Note note) {
+		this.note = note;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getUsername(){
 		return user.getUsername();
 	}
 	
-    public void update(String content) {
-        this.content = content;
-    }
-    
-    public static class Builder {
-
-        private Comment built;
-
-        public Builder(String content, Note note, User user) {
-            built = new Comment();
-            built.content = content;
-            built.note = note;
-            built.user = user;
-        }
-
-        public Comment build() {
-            return built;
-        }
-    }
-
-    public CommentDTO createDTO(Comment model) {
-        CommentDTO dto = new CommentDTO();
-
-        dto.setId(model.getId());
-        dto.setContent(model.getContent());
-        return dto;
-    }
 }

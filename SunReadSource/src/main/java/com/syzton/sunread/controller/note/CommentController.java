@@ -39,35 +39,35 @@ public class CommentController extends BaseController {
     
     @RequestMapping(value = "/api/notes/{noteId}/comments", method = RequestMethod.POST)
     @ResponseBody
-    public CommentDTO add(@Valid @RequestBody CommentDTO dto, @PathVariable("noteId") Long noteId) {
-        LOGGER.debug("Adding a new comment entry with information: {}", dto);
+    public Comment add(@Valid @RequestBody Comment comment, @PathVariable("noteId") Long noteId) {
+        LOGGER.debug("Adding a new comment entry with information: {}", comment);
 
-        Comment added = service.add(dto, noteId);
+        Comment added = service.add(comment, noteId);
         LOGGER.debug("Added a comment entry with information: {}", added);
 
-       return added.createDTO(added);
+       return added;
     }
 
     @RequestMapping(value = "/api/comments/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public CommentDTO deleteById(@PathVariable("id") Long id) throws NotFoundException {
+    public Comment deleteById(@PathVariable("id") Long id) throws NotFoundException {
         LOGGER.debug("Deleting a comment entry with id: {}", id);
 
         Comment deleted = service.deleteById(id);
         LOGGER.debug("Deleted comment entry with information: {}", deleted);
 
-        return deleted.createDTO(deleted);
+        return deleted;
     }
     
     @RequestMapping(value = "/api/comments/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public CommentDTO update(@Valid @RequestBody CommentDTO dto, @PathVariable("id") Long commentId) throws NotFoundException {
-        LOGGER.debug("Updating a comment entry with information: {}", dto);
+    public Comment update(@Valid @RequestBody Comment comment, @PathVariable("id") Long commentId) throws NotFoundException {
+        LOGGER.debug("Updating a comment entry with information: {}", comment);
 
-        Comment updated = service.update(dto);
+        Comment updated = service.update(comment);
         LOGGER.debug("Updated the information of a comment entry to: {}", updated);
 
-        return updated.createDTO(updated);
+        return updated;
     }
 
     @RequestMapping(value = "/api/notes/{noteId}/comments", method = RequestMethod.GET)
