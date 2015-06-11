@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.syzton.sunread.dto.user.UserExtraDTO;
+import com.syzton.sunread.model.user.Admin;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.SystemAdmin;
 import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.model.user.User;
 
@@ -72,4 +74,32 @@ public interface UserService {
     public Map<Integer,String> batchSaveOrUpdateTeacherFromExcel(Sheet sheet);
 
     public Map<Integer,String> batchSaveOrUpdateCMSAdminFromExcel(Sheet sheet);
+    
+    public String updateSuperAdminPassword(String newPassword, String oldPassword);
+    
+    public String addSystemAdmin(String userId, String password);
+    
+    public String updateSystemAdmin(String userId, String oldPassword,
+			String newPassword);
+    public Page<SystemAdmin> getSystemAdmins(boolean isSuperAdmin,Pageable pageable);
+    
+    public String deleteSystemAdminId(Long id);
+    
+    public SystemAdmin findBySystemAdminId(Long id);
+    
+    public Admin findByAdminId(Long id);
+    
+    public String deleteAdminId(Long id);
+    
+    public String addSchoolSuperAdmin(String userId, String password,long campusId);
+    
+    public String updateSchoolSuperAdminPassword(String userId,String oldPassword,String newPassword);
+    
+    public String addSchoolAdmin(String userId, String password,long campusId);
+    
+    public String updateSchoolAdminPassword(String userId,String oldPassword,String newPassword);
+    
+    public Page<Admin> getSchoolAdmins(long campusId,boolean isSuperAdmin,Pageable pageable);
+	
+	public Page<Admin> getAllSchoolAdmins(long campusId,Pageable pageable);
 }

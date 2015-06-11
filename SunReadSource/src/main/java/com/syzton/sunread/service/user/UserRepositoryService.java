@@ -30,6 +30,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -63,7 +65,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     private RoleRepository roleRepository;
 
     private TeacherRepository teacherRepository;
-
+    
     private TeacherClazzRepository teacherClazzRepository;
 
     private SemesterRepository semesterRepository;
@@ -78,7 +80,9 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
     private BookshelfService bookshelfService;
     
+    private AdminRepository adminRepo;
     
+    private SystemAdminRepository systemAdminRepo;
 
 
     @Autowired
@@ -93,7 +97,9 @@ public class UserRepositoryService implements UserService,UserDetailsService{
                                  CampusRepository campusRepository,
                                  EduGroupRepository eduGroupRepo,SchoolDistrictRepository schoolRepo,
                                  BookshelfService bookshelfService,
-                                 RoleRepository roleRepository) {
+                                 RoleRepository roleRepository,
+                                 AdminRepository adminRepo,
+                                 SystemAdminRepository systemAdminRepo) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
         this.parentRepository = parentRepository;
@@ -107,7 +113,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         this.schoolRepo = schoolRepo;
         this.bookshelfService = bookshelfService;
         this.roleRepository = roleRepository;
-        
+        this.adminRepo = adminRepo;
+        this.systemAdminRepo = systemAdminRepo;
     }
 
     @Override
@@ -697,4 +704,316 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 //        }
         return failMap;
     }
+    
+  
+
+	private User getUser() {
+		LOGGER.debug("Getting principal from the security context");
+
+		User principal = null;
+		User user = null;
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+
+		if (authentication != null) {
+			Object currentPrincipal = authentication.getPrincipal();
+			if (currentPrincipal instanceof User) {
+				principal = (User) currentPrincipal;
+			}
+		}
+
+		if (principal != null) {
+			user = findByUserId(principal.getUserId());
+		}
+
+		return user;
+	}
+
+	public String updateSuperAdminPassword(String newPassword, String oldPassword) {
+		User user = this.getUser();
+		Role role = new Role();
+		role.setName("ROLE_SYSTEM_SUPER_ADMIN");
+		if (user == null
+				|| newPassword == null
+				|| "".equals(newPassword.trim())
+				|| !user.hasRole(role)
+				|| passwordEncoder.encode(oldPassword).equals(
+						user.getPassword())) {
+			return "旧密码输入错误";
+		}
+		user.setPassword(passwordEncoder.encode(newPassword));
+		userRepository.save(user);
+		return "success";
+	}
+
+	public String addSystemAdmin(String userId, String password) {
+		User currentUser = getUser();
+		Role superRole = new Role();
+		superRole.setName("ROLE_SYSTEM_SUPER_ADMIN");
+		if (!currentUser.hasRole(superRole)) {
+			return "只有超级管理员才有权限添加系统管理员";
+		}
+		User user = userRepository.findByUserId(userId);
+		if (user == null) {
+			SystemAdmin systemAdmin = new SystemAdmin();
+			systemAdmin.setUserId(userId);
+			systemAdmin.setUsername("系统管理员");
+			password = passwordEncoder.encode(password);
+			systemAdmin.setPassword(password);
+			systemAdmin.setAddress("");
+			systemAdmin.setBirthday((new Date()).getTime());
+			systemAdmin.setAge(1);
+			systemAdmin.setEmail("");
+			systemAdmin.setGender(GenderType.male);
+			systemAdmin.setNickname("");
+			systemAdmin.setPhoneNumber("");
+			systemAdmin.setPicture("");
+			systemAdmin.setQqId("");
+			systemAdmin.setWechatId("");
+			systemAdmin.setContactPhone("");
+
+			Role role = roleRepository.findByName("ROLE_SYSTEM_ADMIN");
+			if (role == null) {
+				Role systemRole = new Role();
+				systemRole.setName("ROLE_SYSTEM_ADMIN");
+				systemRole.setDesc("ROLE_SYSTEM_ADMIN");
+				role = roleRepository.save(systemRole);
+			}
+			systemAdmin.addRole(role);
+			systemAdmin.setSuperAdmin(false);
+			systemAdminRepo.save(systemAdmin);
+			return "success";
+		} else {
+			return "该管理员已经存在";
+		}
+	}
+
+	public String updateSystemAdmin(String userId, String oldPassword,
+			String newPassword) {
+		User currentUser = getUser();
+		Role superRole = new Role();
+		superRole.setName("ROLE_SYSTEM_SUPER_ADMIN");
+		User user = findByUserId(userId);
+		if (user == null) {
+			return "该用户不存在";
+		}
+		if (currentUser.hasRole(superRole)) {
+			user.setPassword(passwordEncoder.encode(newPassword));
+		} else if (userId.equals(currentUser.getUserId())) {
+			if (passwordEncoder.encode(oldPassword).equals(user.getPassword())) {
+				user.setPassword(newPassword);
+			} else {
+				return "输入密码错误";
+			}
+		} else {
+			return "只有超级管理员和管理员自己才有权限修改系统管理员密码";
+		}
+		userRepository.save(user);
+		return "success";
+	}
+	
+	public Page<SystemAdmin> getSystemAdmins(boolean isSuperAdmin,Pageable pageable){
+		return systemAdminRepo.findBySuperAdmin(isSuperAdmin, pageable);
+	}
+	
+	public Page<Admin> getSchoolAdmins(long campusId,boolean isSuperAdmin,Pageable pageable){
+		return adminRepo.findByCampusIdAndSuperAdmin(campusId, isSuperAdmin, pageable);
+	}
+	
+	public Page<Admin> getAllSchoolAdmins(long campusId,Pageable pageable){
+		return adminRepo.findByCampusId(campusId, pageable);
+	}
+	
+	 
+	
+    public String deleteSystemAdminId(Long id) {
+    	User currentUser = getUser();
+		Role superRole = new Role();
+		superRole.setName("ROLE_SYSTEM_SUPER_ADMIN");
+		if(currentUser.hasRole(superRole));
+        SystemAdmin admin = this.findBySystemAdminId(id);  
+        systemAdminRepo.delete(admin);
+        return "success";
+    }
+    
+   
+    public SystemAdmin findBySystemAdminId(Long id) {
+        SystemAdmin admin = systemAdminRepo.findOne(id);
+        if(admin == null)
+            throw new NotFoundException("Student id ="+id+" not found..");
+        return admin;
+    }
+    
+    public Admin findByAdminId(Long id) {
+        Admin admin = adminRepo.findOne(id);
+        if(admin == null)
+            throw new NotFoundException("Student id ="+id+" not found..");
+        return admin;
+    }
+    
+    public String deleteAdminId(Long id) {
+    	User currentUser = getUser();
+		Role superRole = new Role("ROLE_SYSTEM_SUPER_ADMIN");
+		Role systemRole = new Role("ROLE_SYSTEM_ADMIN");
+		Role schoolSuperRole = new Role("ROLE_SCHOOLE_SUPER_ADMIN");
+		Admin admin = this.findByAdminId(id);
+		if(admin == null){
+			return "该用户不存在";
+		}
+		if(!currentUser.hasRole(superRole)&&!currentUser.hasRole(systemRole)){
+			if(admin.hasRole(schoolSuperRole)){
+				return "不能删除同级别用户";
+			}
+			if(currentUser.hasRole(schoolSuperRole)){
+				long campusId = this.findByAdminId(currentUser.getId()).getCampusId();
+				if(admin.getCampusId() != campusId){
+					return "不能删除其他学校管理员";
+				}
+			}else{
+				return "无权限删除该管理员";
+			}
+		}
+        adminRepo.delete(admin);
+        return "success";
+    }
+	
+	public String addSchoolSuperAdmin(String userId, String password,long campusId) {
+		User currentUser = getUser();
+		Role superSystemRole = new Role("ROLE_SYSTEM_SUPER_ADMIN");
+		Role systemRole = new Role("ROLE_SYSTEM_ADMIN");
+		if(!currentUser.hasRole(superSystemRole)&&!currentUser.hasRole(systemRole)){
+			return "只有系统管理员和超级管理员有权限添加学校用户";
+		}
+		User user = this.findByUserId(userId);
+		Admin schoolSuperAdmin = this.findByAdminId(user.getId());
+		
+		if(schoolSuperAdmin!=null){
+			return "该用户已经存在";
+		}else{
+			schoolSuperAdmin = new Admin();
+			schoolSuperAdmin.setUserId(userId);
+			schoolSuperAdmin.setUsername("学校系统管理员");
+			password = passwordEncoder.encode(password);
+			schoolSuperAdmin.setPassword(password);
+			schoolSuperAdmin.setAddress("");
+			schoolSuperAdmin.setBirthday((new Date()).getTime());
+			schoolSuperAdmin.setAge(1);
+			schoolSuperAdmin.setEmail("");
+			schoolSuperAdmin.setGender(GenderType.male);
+			schoolSuperAdmin.setNickname("");
+			schoolSuperAdmin.setPhoneNumber("");
+			schoolSuperAdmin.setPicture("");
+			schoolSuperAdmin.setQqId("");
+			schoolSuperAdmin.setWechatId("");
+			schoolSuperAdmin.setContactPhone("");
+			schoolSuperAdmin.setCampusId(campusId);
+			schoolSuperAdmin.setSuperAdmin(true);
+			Role role = roleRepository.findByName("ROLE_SCHOOLE_SUPER_ADMIN");
+			schoolSuperAdmin.addRole(role);
+			adminRepo.save(schoolSuperAdmin);
+			return "success";
+		}
+	}
+	
+
+
+	public String updateSchoolSuperAdminPassword(String userId,String oldPassword,String newPassword) {
+			User currentUser = getUser();
+			Role superSystemRole = new Role("ROLE_SYSTEM_SUPER_ADMIN");
+			Role systemRole = new Role("ROLE_SYSTEM_ADMIN");
+			User user = findByUserId(userId);
+			if (user == null) {
+				return "该用户不存在";
+			}
+			if (currentUser.hasRole(systemRole)||currentUser.hasRole(superSystemRole)) {
+				user.setPassword(passwordEncoder.encode(newPassword));
+			} else if (userId.equals(currentUser.getUserId())) {
+				if (passwordEncoder.encode(oldPassword).equals(user.getPassword())) {
+					user.setPassword(newPassword);
+				} else {
+					return "输入密码错误";
+				}
+			} else {
+				return "只有超级管理员和管理员自己才有权限修改系统管理员密码";
+			}
+			userRepository.save(user);
+			return "修改成功";
+	}
+
+	
+	public String addSchoolAdmin(String userId, String password,long campusId) {
+		User currentUser = getUser();
+		Role superSystemRole = new Role("ROLE_SYSTEM_SUPER_ADMIN");
+		Role systemRole = new Role("ROLE_SYSTEM_ADMIN");
+		Role schoolSuperRole = new Role("ROLE_SCHOOLE_SUPER_ADMIN");
+		if(!currentUser.hasRole(superSystemRole)&&!currentUser.hasRole(systemRole)){
+			if(currentUser.hasRole(schoolSuperRole)){
+				Admin schoolSuperAdmin = this.findByAdminId(currentUser.getId());
+				campusId = schoolSuperAdmin.getCampusId();
+			}else{
+				return "只有系统管理员和超级管理员有权限添加学校管理员用户";
+			}
+		}
+		
+		User user = this.findByUserId(userId);
+		Admin schoolSuperAdmin = this.findByAdminId(user.getId());
+		
+		if(schoolSuperAdmin!=null){
+			return "该用户已经存在";
+		}else{
+			schoolSuperAdmin = new Admin();
+			schoolSuperAdmin.setUserId(userId);
+			schoolSuperAdmin.setUsername("学校系统管理员");
+			password = passwordEncoder.encode(password);
+			schoolSuperAdmin.setPassword(password);
+			schoolSuperAdmin.setAddress("");
+			schoolSuperAdmin.setBirthday((new Date()).getTime());
+			schoolSuperAdmin.setAge(1);
+			schoolSuperAdmin.setEmail("");
+			schoolSuperAdmin.setGender(GenderType.male);
+			schoolSuperAdmin.setNickname("");
+			schoolSuperAdmin.setPhoneNumber("");
+			schoolSuperAdmin.setPicture("");
+			schoolSuperAdmin.setQqId("");
+			schoolSuperAdmin.setWechatId("");
+			schoolSuperAdmin.setContactPhone("");
+			schoolSuperAdmin.setCampusId(campusId);
+			Role role = roleRepository.findByName("ROLE_SCHOOLE_ADMIN");
+			schoolSuperAdmin.addRole(role);
+			schoolSuperAdmin.setSuperAdmin(false);
+			adminRepo.save(schoolSuperAdmin);
+			return "success";
+		}
+	}
+	
+	public String updateSchoolAdminPassword(String userId,String oldPassword,String newPassword) {
+		User currentUser = getUser();
+		Role superSystemRole = new Role("ROLE_SYSTEM_SUPER_ADMIN");
+		Role systemRole = new Role("ROLE_SYSTEM_ADMIN");
+		Role schoolSuperRole = new Role("ROLE_SCHOOLE_SUPER_ADMIN");
+		User user = findByUserId(userId);
+		if (user == null) {
+			return "该用户不存在";
+		}
+		if (currentUser.hasRole(systemRole)||currentUser.hasRole(superSystemRole)) {
+			user.setPassword(passwordEncoder.encode(newPassword));
+		}else if(currentUser.hasRole(schoolSuperRole)){
+			Admin schoolSuperAdmin = this.findByAdminId(currentUser.getId());
+			Admin schoolAdmin = this.findByAdminId(user.getId());
+			if(schoolSuperAdmin.getCampusId()==schoolAdmin.getCampusId()){
+				user.setPassword(passwordEncoder.encode(newPassword));
+			}
+		}else if (userId.equals(currentUser.getUserId())) {
+			if (passwordEncoder.encode(oldPassword).equals(user.getPassword())) {
+				user.setPassword(newPassword);
+			} else {
+				return "输入密码错误";
+			}
+		} else {
+			return "只有超级管理员和管理员自己才有权限修改系统管理员密码";
+		}
+		userRepository.save(user);
+		return "success";
+	}
+	
 }
