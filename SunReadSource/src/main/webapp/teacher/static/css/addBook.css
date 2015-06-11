@@ -165,7 +165,7 @@
 }
 
 .input-group {
-/*     padding-bottom: 10px; */
+/* padding-bottom: 10px; */
 }
 
 
@@ -342,10 +342,10 @@
     margin-top: 15px;
 }
 
-.ShelfByClassBookAttibute {
-    margin-top: 16px;
+.ShelfByClassBookAttribute {
+    margin-top: 10px;
 }
 
-.ShelfByClassBookAttibuteText {
+.ShelfByClassBookAttributeText {
     margin-left: 20px;
 }
