@@ -64,10 +64,15 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','T
                 //                   targetPoint: this.selected[i].targetPoint },{}
                 //     );
 	              // }
-								if (this.selected[i].num >= 0){
-									AddRecommends.save({teacherId:$rootScope.id,studentId:this.selected[i].id},
-																			{"bookId":1,"bookAttribute":this.selected[i].isMandatory});
-								}
+							AddRecommends.save({teacherId:$rootScope.id,studentId:this.selected[i].id},
+																	{"bookId":1,"bookAttribute":this.selected[i].isMandatory}
+																	,function(date){
+																			$rootScope.modal = {title: "添加图书", content: "添加成功！"};
+																			$('#alert-modal').modal();
+																			this.selected = [];
+																			console.log(date);
+																	});
+
             }
         };
 
