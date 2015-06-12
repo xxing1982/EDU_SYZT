@@ -62,22 +62,27 @@
 </div>
 
 <!-- Items -->
-<div class="myBlock mt20 page-body" ng-repeat="hotreader in bookshelfLoadable.entities.content">
+<div class="myBlock mt20 page-body" ng-repeat="hotreader in bookshelfLoadable.entities.content | orderBy:['unreadSelect','unreadMust','id']">
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><input checklist-model="bookshelfLoadable.selected" checklist-value="hotreader" type="checkbox" ng-model="checkboxModel.value1"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{hotreader.username}}</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">书架必读书数量：{{hotreader.unreadMust+hotreader.readMust}}</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">书架选读书数量：{{hotreader.unreadSelect+hotreader.unreadSelect}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle">
+              <p class="row title">
+                <input checklist-model="bookshelfLoadable.selected" checklist-value="hotreader" type="checkbox" ng-click="selectLength()"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{hotreader.username}}
+              </p>
+            </div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">必读书数量：{{hotreader.unreadMust+hotreader.readMust}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">选读书数量：{{hotreader.unreadSelect+hotreader.unreadSelect}}</p></div>
             <div class="col-xs-3 col-xs-height col-middle">
               <!-- <p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p> -->
                <div class="input-group ShelfByClassBookAttribute">
                     <label class="radio-inline">
-                      <input type="radio" ng-model="bookAttribute_status" name="inlineRadioOptions" id="inlineRadio2" value="1" checked>
+                      <input type="radio" ng-click="selectBookAttribute()" ng-model="hotreader.isMandatory" name="inlineRadioOptions" id="inlineRadio1" value= 1 checked>
                         <p class="ShelfByClassBookAttributeText">必读</p>
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" ng-model="bookAttribute_status" name="inlineRadioOptions" id="inlineRadio3" value="2">
+                      <input type="radio" ng-click="selectBookAttribute()" ng-model="hotreader.isMandatory" name="inlineRadioOptions" id="inlineRadio2" value= 0>
                          <p class="ShelfByClassBookAttributeText">选读</p>
                     </label>
                 </div>

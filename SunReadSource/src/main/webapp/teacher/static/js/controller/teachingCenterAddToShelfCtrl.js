@@ -1,6 +1,13 @@
 ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','Teacher','Class','GetBookshelvesByClass','AddRecommends',
 	function($scope, $rootScope,Teacher,Class,GetBookshelvesByClass,AddRecommends){
-    // Initlizate the dropdown statues
+
+		// $scope.bookAttribute_status
+
+		$scope.selectBookAttribute = function(){
+			console.log ($scope.bookAttribute_status);
+		}
+
+		// Initlizate the dropdown statues
     $scope.campusStatuses = [];
     $scope.campusSelected_status = 0;
 
@@ -57,7 +64,10 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','T
                 //                   targetPoint: this.selected[i].targetPoint },{}
                 //     );
 	              // }
-								AddRecommends.save({});
+								if (this.selected[i].num >= 0){
+									AddRecommends.save({teacherId:$rootScope.id,studentId:this.selected[i].id},
+																			{"bookId":1,"bookAttribute":this.selected[i].isMandatory});
+								}
             }
         };
 
@@ -72,5 +82,11 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','T
         };
     });
 
+		$scope.selectLength = function(){
+			console.log($scope.bookshelfLoadable.selected.length);
+			console.log($scope.bookshelfLoadable.selected);
+			if($scope.bookshelfLoadable.selected.length>0)
+				$scope.bookshelfLoadable.selected[$scope.bookshelfLoadable.selected.length-1].isMandatory =true;
+		}
 
   }]);
