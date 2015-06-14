@@ -56,5 +56,9 @@ public interface ExamService {
 	
 	public int findPassVerifyExamPassRate(Long studentId, DateTime from,DateTime to);
 	
+	public int findFirstPassRate(Long studentId, DateTime from,DateTime to);
+	
+	public int findSecondPassRate(Long studentId, DateTime from,DateTime to);
+	
 	public Map<CapacityQuestionType, Integer> getStudentCapacityStatus(Long student,DateTime from,DateTime to);
 }

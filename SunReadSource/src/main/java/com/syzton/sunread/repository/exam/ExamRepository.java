@@ -14,11 +14,17 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
 	
 	List<Exam> findByStudentIdAndBookIdAndExamTypeOrderByCreationTimeDesc(Long studentId,Long bookId,ExamType type);
 	
+	List<Exam> findByStudentIdAndBookIdAndExamTypeAndIsPass(Long studentId,Long bookId,ExamType type,boolean isPass);
+	
 	List<Exam> findByStudentIdAndExamTypeAndIsPassOrderByCreationTimeDesc(Long id,ExamType examType,boolean isPass);
 	
 	List<Exam> findByStudentIdAndExamTypeAndIsPassAndCreationTimeBetweenOrderByCreationTimeDesc(Long id,ExamType examType,boolean isPass,DateTime from,DateTime to);
 	
 	List<Exam> findByStudentIdAndExamTypeOrderByCreationTimeDesc(Long id,ExamType examType);
+	
+	List<Exam> findByStudentIdAndFirstPassAndExamTypeAndCreationTimeBetween(Long studentId,boolean firstPass,ExamType type,DateTime from,DateTime to);
+	
+	List<Exam> findByStudentIdAndSecondPassAndExamTypeAndCreationTimeBetween(Long studentId,boolean firstPass,ExamType type,DateTime from,DateTime to);
 	
 	List<Exam> findByStudentIdOrderByCreationTimeDesc(Long studentId);
 

@@ -65,6 +65,28 @@ public class Exam extends AbstractEntity {
 	@Column(name = "question_num")
 	private int questionNum = 5;
 	
+	public boolean isFirstPass() {
+		return firstPass;
+	}
+
+	public void setFirstPass(boolean firstPass) {
+		this.firstPass = firstPass;
+	}
+
+	public boolean isSecondPass() {
+		return secondPass;
+	}
+
+	public void setSecondPass(boolean secondPass) {
+		this.secondPass = secondPass;
+	}
+
+	@Column(name = "isFirstPass")
+	private boolean firstPass;
+	
+	@Column(name = "isSecondPass")
+	private boolean secondPass;
+	
 
 
 	public enum ExamType {

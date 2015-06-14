@@ -452,6 +452,25 @@ public class ExamController {
 		return passRate;
 	}
 	
+	@RequestMapping(value = "/verifyexams/fistpassrate/{studentid}/{semester}", method = RequestMethod.GET)
+	@ResponseBody
+	public int getFirstPassExamsPassRate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId)
+			throws NotFoundException {
+		Semester semester = semesterService.findOne(semesterId);
+		int passRate = service.findFirstPassRate(studentId, semester.getStartTime(), semester.getEndTime());
+		return passRate;
+	}
+	
+	@RequestMapping(value = "/verifyexams/secondpassrate/{studentid}/{semester}", method = RequestMethod.GET)
+	@ResponseBody
+	public int getSecondPassExamsPassRate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId)
+			throws NotFoundException {
+		Semester semester = semesterService.findOne(semesterId);
+		int passRate = service.findSecondPassRate(studentId, semester.getStartTime(), semester.getEndTime());
+		return passRate;
+	}
+	
+	
 	@RequestMapping(value = "/capacityexam/everytypepassrate/{studentid}/{semester}", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<CapacityQuestionType,Integer> getCapacityQuestionPassrate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId){
