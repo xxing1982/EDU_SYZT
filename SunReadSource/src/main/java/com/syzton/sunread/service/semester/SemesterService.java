@@ -10,8 +10,6 @@ import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.model.semester.Semester;
 
 public interface SemesterService {
-	
-    public SemesterDTO add(SemesterDTO added);
     
     public Semester deleteById(long id);
 
@@ -33,4 +31,11 @@ public interface SemesterService {
 	 * @return
 	 */
 	ArrayList<Semester> findByStudentId(Long studentId);
+
+	/**
+	 * @param added
+	 * @param campusId
+	 * @return
+	 */
+	SemesterDTO add(SemesterDTO added, Long campusId);
 }

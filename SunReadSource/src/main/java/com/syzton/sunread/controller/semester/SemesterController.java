@@ -43,12 +43,12 @@ public class SemesterController {
     }
     
 //Add a Semester 
-    @RequestMapping(value = "/semester", method = RequestMethod.POST)
+    @RequestMapping(value = "/campus/{campusId}/semester", method = RequestMethod.POST)
     @ResponseBody
-    public SemesterDTO add(@Valid @RequestBody SemesterDTO dto) {
+    public SemesterDTO add(@Valid @RequestBody SemesterDTO dto,@PathVariable("campusId")Long campusId) {
         LOGGER.debug("Adding a new semester entry with information: {}", dto);
         
-        SemesterDTO added = service.add(dto);
+        SemesterDTO added = service.add(dto,campusId);
         LOGGER.debug("Added a semester entry with information: {}", added);
               
        return added;

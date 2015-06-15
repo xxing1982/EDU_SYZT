@@ -15,10 +15,12 @@ import com.syzton.sunread.assembler.semester.SemesterAssembler;
 import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.SemesterRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 
@@ -32,13 +34,15 @@ public class SemesterRepositoryService implements SemesterService{
     private static final Logger LOGGER = LoggerFactory.getLogger(SemesterRepositoryService.class);
 
     private SemesterRepository semesterRepo;
+    private CampusRepository campusRepository;
     private StudentRepository studentRepository;
     private ClazzRepository clazzRepository;
     
     @Autowired
-    public SemesterRepositoryService(SemesterRepository repository) {
+    public SemesterRepositoryService(SemesterRepository repository,CampusRepository campusRepository) {
 		// TODO Auto-generated constructor stub
     	this.semesterRepo = repository;
+    	this.campusRepository = campusRepository;
 	}
     
     @Autowired
@@ -53,17 +57,21 @@ public class SemesterRepositoryService implements SemesterService{
     
     @Transactional(rollbackFor = {DuplicateException.class})
 	@Override
-	public SemesterDTO add(SemesterDTO added) {
+	public SemesterDTO add(SemesterDTO added,Long campusId) {
         LOGGER.debug("Adding a new Semester with information: {}", added);
         
         Semester exits = semesterRepo.findOne(added.getId());        
         if(exits != null){
             throw new DuplicateException("Semester with id: "+added.getId()+" is already exits..");
         }
+        Campus campus = campusRepository.findOne(campusId);
+        if(campus == null)
+        	throw new NotFoundException("no campus found with id:"+ campusId);
         
         SemesterAssembler assembler = new SemesterAssembler();
         
         Semester model = assembler.fromDTOtoModel(added);
+        model.setCampus(campus);
         model = semesterRepo.save(model);
         added.setId(model.getId());
         return added;
