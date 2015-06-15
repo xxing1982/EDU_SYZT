@@ -1,5 +1,5 @@
-ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','Teacher','Class','GetBookshelvesByClass','AddRecommends',
-	function($scope, $rootScope,Teacher,Class,GetBookshelvesByClass,AddRecommends){
+ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$stateParams','Teacher','Class','GetBookshelvesByClass','AddRecommends',
+	function($scope, $rootScope,$stateParams,Teacher,Class,GetBookshelvesByClass,AddRecommends){
 
 		// $scope.bookAttribute_status
 
@@ -65,7 +65,7 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','T
                 //     );
 	              // }
 							AddRecommends.save({teacherId:$rootScope.id,studentId:this.selected[i].id},
-																	{"bookId":1,"bookAttribute":this.selected[i].isMandatory}
+																	{"bookId":$stateParams.bookId,"bookAttribute":this.selected[i].isMandatory}
 																	,function(date){
 																			$rootScope.modal = {title: "添加图书", content: "添加成功！"};
 																			$('#alert-modal').modal();

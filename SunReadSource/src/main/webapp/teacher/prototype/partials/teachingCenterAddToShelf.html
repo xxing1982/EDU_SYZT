@@ -78,11 +78,11 @@
               <!-- <p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p> -->
                <div class="input-group ShelfByClassBookAttribute">
                     <label class="radio-inline">
-                      <input type="radio" ng-click="selectBookAttribute()" ng-model="hotreader.isMandatory" name="inlineRadioOptions" id="inlineRadio1" value= 1 checked>
+                      <input type="radio" ng-click="selectBookAttribute()" ng-model="hotreader.isMandatory" name="{{hotreader.id}}" id="inlineRadio1" value= 1 checked>
                         <p class="ShelfByClassBookAttributeText">必读</p>
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" ng-click="selectBookAttribute()" ng-model="hotreader.isMandatory" name="inlineRadioOptions" id="inlineRadio2" value= 0>
+                      <input type="radio" ng-click="selectBookAttribute()" ng-model="hotreader.isMandatory" name="{{hotreader.id}}" id="inlineRadio2" value= 0>
                          <p class="ShelfByClassBookAttributeText">选读</p>
                     </label>
                 </div>

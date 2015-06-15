@@ -4,7 +4,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.syzton.sunread.model.organization.Campus;
 
 /**
@@ -30,6 +29,8 @@ public class CampusDTO {
 
 	private String wish;
 	
+	private int noteScore = Campus.DEFAULT_NOTE_SCORE;
+	
 	private Long schoolDistrictId;
 	
 	private String schoolDistrictName ;
@@ -37,6 +38,15 @@ public class CampusDTO {
 	private Long eduGroupId;
 	
 	private String eduGroupName;
+
+	
+	public int getNoteScore() {
+		return noteScore;
+	}
+
+	public void setNoteScore(int noteScore) {
+		this.noteScore = noteScore;
+	}
 
 	public String getWish() {
 		return wish;
