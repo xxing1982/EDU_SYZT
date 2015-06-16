@@ -70,10 +70,9 @@ public class SemesterRepositoryService implements SemesterService{
         
         SemesterAssembler assembler = new SemesterAssembler();
         
-        Semester model = assembler.fromDTOtoModel(added);
-        model.setCampus(campus);
-        model = semesterRepo.save(model);
-        added.setId(model.getId());
+        Semester model = assembler.fromDTOtoModel(added,campus);
+        semesterRepo.save(model);
+        added = model.createDTO();
         return added;
 	}
 
@@ -99,11 +98,10 @@ public class SemesterRepositoryService implements SemesterService{
         Semester model = findOne(updated.getId());
         if(model == null)
             throw new NotFoundException("No Semester found with id: " + updated.getId());
-        LOGGER.debug("Found a note entry: {}", model);
         
         SemesterAssembler assembler = new SemesterAssembler();     
-        Semester semester = assembler.fromDTOtoModel(updated);
-        updated.setId(semester.getId());
+        model = assembler.fromDTOtoModel(updated);
+        semesterRepo.save(model);
         return updated;
 	}
 
@@ -121,11 +119,13 @@ public class SemesterRepositoryService implements SemesterService{
 	}
 	
 	@Override
-	public Semester findByTime(DateTime time) {
+	public Semester findByTime(DateTime time,long campusId) {
         LOGGER.debug("Finding a Semester with id: {}", time);
 
-        Semester found = semesterRepo.findByTime(time);
+        Semester found = semesterRepo.findByTime(time,campusId);
         LOGGER.debug("Found semester entry: {}", found);
+        
+        
 
         if (found == null) {
             throw new NotFoundException("No Semester found with id: " + time);
@@ -154,7 +154,7 @@ public class SemesterRepositoryService implements SemesterService{
         int grade = clazz.getGrade();
         DateTime currentTime = DateTime.now();
         DateTime fromTime = currentTime.minusYears(grade);
-        ArrayList<Semester> semesters = (ArrayList<Semester>) semesterRepo.findByDuration(fromTime,currentTime);
+        ArrayList<Semester> semesters = (ArrayList<Semester>) semesterRepo.findByDuration(fromTime,currentTime,clazz.getCampus().getId());
          
         if (semesters == null) {
             throw new NotFoundException("No Semester found");

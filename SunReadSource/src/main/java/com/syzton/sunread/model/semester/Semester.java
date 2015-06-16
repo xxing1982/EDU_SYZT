@@ -12,6 +12,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.util.DateSerializer;
@@ -95,5 +96,16 @@ public class Semester extends AbstractEntity{
 		this.endTime = endTime;
 	}
     
+	public SemesterDTO createDTO() {
+		SemesterDTO dto = new SemesterDTO();
+		dto.setCampusId(campus.getId());
+		dto.setCampusName(campus.getName());
+		dto.setDescription(description);
+		dto.setSemester(semester);
+		dto.setStartTime(startTime.getMillis());
+		dto.setEndTime(endTime.getMillis());
+		return dto;
+			
+	}
 
 }

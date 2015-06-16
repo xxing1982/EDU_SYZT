@@ -19,12 +19,6 @@ public interface SemesterService {
 
     Page<Semester> findAll(Pageable pageable);
 
-	/**
-	 * @param time
-	 * @return
-	 */
-	public Semester findByTime(DateTime time);
-
 
 	/**
 	 * @param studentId
@@ -38,4 +32,11 @@ public interface SemesterService {
 	 * @return
 	 */
 	SemesterDTO add(SemesterDTO added, Long campusId);
+
+	/**
+	 * @param time
+	 * @param campusId
+	 * @return
+	 */
+	Semester findByTime(DateTime time, long campusId);
 }

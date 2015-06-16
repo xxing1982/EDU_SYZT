@@ -118,13 +118,13 @@ public class SemesterController {
     }
     
  //Get a Semester  by  time
-    @RequestMapping(value = "/time/{time}/semester", method = RequestMethod.GET)
+    @RequestMapping(value = "/campus/{campusId}/time/{time}/semester", method = RequestMethod.GET)
     @ResponseBody
-    public Semester findByTime(@PathVariable("time") Long time) throws NotFoundException {
+    public Semester findByTime(@PathVariable("time") Long time,@RequestParam("campusId") long campusId) throws NotFoundException {
         LOGGER.debug("Finding a semester entry with id: {}", time);
         DateTime timeDate = new DateTime(time);
 
-        Semester found = service.findByTime(timeDate);
+        Semester found = service.findByTime(timeDate,campusId);
         LOGGER.debug("Found semester entry with information: {}", found);
 
         return found;
