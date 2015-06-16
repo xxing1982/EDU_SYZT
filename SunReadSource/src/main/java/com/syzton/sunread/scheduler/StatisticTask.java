@@ -1,11 +1,13 @@
 package com.syzton.sunread.scheduler;
 
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.ClazzStatisticHistory;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.UserStatisticHistory;
 import com.syzton.sunread.repository.SemesterRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.organization.ClazzStatisticHistoryRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
@@ -28,34 +30,28 @@ public class StatisticTask {
     ClazzRepository clazzRepository;
     ClazzStatisticHistoryRepository clazzStatisticHistoryRepository;
     UserStatisticHistoryRepository statisticHistoryRepository;
+    CampusRepository campusRepository;
 
     @Autowired
-    public void setSemesterRepository(SemesterRepository semesterRepository) {
+    public StatisticTask(SemesterRepository semesterRepository, StudentRepository studentRepository, ClazzRepository clazzRepository, ClazzStatisticHistoryRepository clazzStatisticHistoryRepository, UserStatisticHistoryRepository statisticHistoryRepository, CampusRepository campusRepository) {
         this.semesterRepository = semesterRepository;
-    }
-    @Autowired
-    public void setStudentRepository(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
+        this.clazzRepository = clazzRepository;
+        this.clazzStatisticHistoryRepository = clazzStatisticHistoryRepository;
+        this.statisticHistoryRepository = statisticHistoryRepository;
+        this.campusRepository = campusRepository;
     }
 
-    @Autowired
-    public void setStatisticHistoryRepository(UserStatisticHistoryRepository statisticHistoryRepository) {
-        this.statisticHistoryRepository = statisticHistoryRepository;
-    }
-    @Autowired
-    public void setClazzRepository(ClazzRepository clazzRepository) {
-        this.clazzRepository = clazzRepository;
-    }
-    @Autowired
-    public void setClazzStatisticHistoryRepository(ClazzStatisticHistoryRepository clazzStatisticHistoryRepository) {
-        this.clazzStatisticHistoryRepository = clazzStatisticHistoryRepository;
-    }
+
 
     @Scheduled(cron = "0 0 1 1 * ?")
     public void executeStatistic(){
-        Semester semester = semesterRepository.findByTime(new DateTime());
-        backUpUserStatistic(semester.getId());
-        backUpClazzStatistic(semester.getId());
+        List<Campus> campuses = campusRepository.findAll();
+        for (Campus campus : campuses) {
+            Semester semester = semesterRepository.findByTimeAndCampusId(new DateTime(),campus.getId());
+            backUpUserStatistic(semester.getId());
+            backUpClazzStatistic(semester.getId());
+        }
     }
 
     private void backUpClazzStatistic(Long semesterId) {

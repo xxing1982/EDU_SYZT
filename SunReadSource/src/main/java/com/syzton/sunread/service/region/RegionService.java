@@ -27,5 +27,5 @@ public interface RegionService {
 
     Page<Region> findProvinces(Pageable pageable);
     
-//    public Map<Integer,String> batchSaveOrUpdateRegionFromExcel(Sheet sheet);
+    public Map<Integer,String> batchSaveOrUpdateRegionFromExcel(Sheet sheet);
 }

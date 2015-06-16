@@ -79,6 +79,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     private SchoolDistrictRepository schoolRepo;
 
     private BookshelfService bookshelfService;
+
     
     private AdminRepository adminRepo;
     
