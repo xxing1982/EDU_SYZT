@@ -17,7 +17,7 @@
 </div>
 
 <!-- Options -->
-<div class="mt20 page-body">
+<!-- <div class="mt20 page-body">
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
         <div class="row-same-height">
@@ -53,13 +53,47 @@
                     preselected-item="classSelected_status"
                     data-dropdown-data="classStatuses">
                 </bs-dropdown>
-            </div>
+            </div> -->
             <!-- Placeholder -->
-            <div class="col-xs-1 col-xs-height col-middle"></div>
+            <!-- <div class="col-xs-1 col-xs-height col-middle"></div>
         </div>
     </div>
     </div></div>
+</div> -->
+
+<!-- Add to Class -->
+<div class="myBlock mt20 page-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="row-same-height text-center">
+          <div class="col-xs-2 col-xs-height col-middle">
+            <p class="row title">
+                三年二班{{hotreader.username}}
+            </p>
+          </div>
+          <div class="col-xs-2 col-xs-height col-middle"><p class="row title">必读书数量：{{hotreader.unreadMust+hotreader.readMust}}</p></div>
+          <div class="col-xs-2 col-xs-height col-middle"><p class="row title">选读书数量：{{hotreader.unreadSelect+hotreader.unreadSelect}}</p></div>
+          <div class="col-xs-3 col-xs-height col-middle">
+            <!-- <p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p> -->
+             <div class="input-group ShelfByClassBookAttribute">
+                  <label class="radio-inline">
+                    <input type="radio" ng-click="selectBookAttribute()" ng-model="hotreader.isMandatory" name="{{hotreader.id}}" id="inlineRadio1" value= 1 checked>
+                      <p class="ShelfByClassBookAttributeText">必读</p>
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-click="selectBookAttribute()" ng-model="hotreader.isMandatory" name="{{hotreader.id}}" id="inlineRadio2" value= 0>
+                       <p class="ShelfByClassBookAttributeText">选读</p>
+                  </label>
+              </div>
+          </div>
+          <div class="col-xs-3 col-xs-height col-middle">
+              <p class="row title">推荐理由：<input type="text" class="custom-input" ng-model="hotreader.description" /></p>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 <!-- Items -->
 <div class="myBlock mt20 page-body" ng-repeat="hotreader in bookshelfLoadable.entities.content | orderBy:['unreadSelect','unreadMust','id']">

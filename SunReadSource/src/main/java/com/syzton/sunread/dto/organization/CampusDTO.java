@@ -25,6 +25,10 @@ public class CampusDTO {
 	@Length(max = Campus.MAX_LENGTH_HEADMASTER)
     private String headmaster;
 	
+	private long regionId;
+	
+	private String regionName;
+	
 	private int classNum;
 
 	private String wish;
@@ -38,8 +42,24 @@ public class CampusDTO {
 	private Long eduGroupId;
 	
 	private String eduGroupName;
-
 	
+	
+	public long getRegionId() {
+		return regionId;
+	}
+
+	public void setRegionId(long regionId) {
+		this.regionId = regionId;
+	}
+
+	public String getRegionName() {
+		return regionName;
+	}
+
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+
 	public int getNoteScore() {
 		return noteScore;
 	}

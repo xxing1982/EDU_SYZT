@@ -38,8 +38,7 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     private BookInShelfRepository repository;
     private BookshelfRepository bookshelfRepository;
     private BookRepository bookRepository;
-    private SemesterRepository semesterRepository;
-	private Book book;
+    private Book book;
 	private Bookshelf bookshelf;
 
     
@@ -49,7 +48,6 @@ public class BookInShelfRepositoryService implements BookInShelfService{
         this.repository = repository;
         this.bookRepository = bookRepository;
         this.bookshelfRepository = bookshelfRepository;
-        this.semesterRepository = semesterRepository;
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})

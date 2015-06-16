@@ -200,19 +200,19 @@ public class Campus extends AbstractEntity{
 		return new Builder(name, headmaster,wish, noteScore,region,eduGroup, schoolDistrict);
 	}
 
-    public CampusDTO createDTO(Campus model) {
+    public CampusDTO createDTO() {
         CampusDTO dto = new CampusDTO();
-        dto.setId(model.id);
-        dto.setName(model.getName());
-        dto.setDescription(model.getDescription());
-        dto.setHeadmaster(model.headmaster);
-        dto.setWish(model.wish);
-        dto.setSchoolDistrictId(model.schoolDistrict.getId());
-        dto.setSchoolDistrictName(model.schoolDistrict.getName());
-        dto.setClassNum(model.clazzNum());
-        dto.setEduGroupId(model.eduGroup.getId());
-		dto.setEduGroupName(model.eduGroup.getName());
-		dto.setNoteScore(model.getNoteScore());
+        dto.setId(id);
+        dto.setName(getName());
+        dto.setDescription(getDescription());
+        dto.setHeadmaster(headmaster);
+        dto.setWish(wish);
+        dto.setSchoolDistrictId(schoolDistrict.getId());
+        dto.setSchoolDistrictName(schoolDistrict.getName());
+        dto.setClassNum(clazzNum());
+        dto.setEduGroupId(eduGroup.getId());
+		dto.setEduGroupName(eduGroup.getName());
+		dto.setNoteScore(getNoteScore());
         
         return dto;
     }

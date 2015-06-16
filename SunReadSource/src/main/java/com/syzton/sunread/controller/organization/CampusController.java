@@ -51,7 +51,7 @@ public class CampusController {
         Campus added = service.add(dto,regionId);
         LOGGER.debug("Added a campus entry with information: {}", added);
               
-       return added.createDTO(added);
+       return added.createDTO();
     }
     
     
@@ -64,7 +64,7 @@ public class CampusController {
         Campus deleted = service.deleteById(id);
         LOGGER.debug("Deleted Campus entry with information: {}", deleted);
 
-        return deleted.createDTO(deleted);
+        return deleted.createDTO();
     }
     
 //Update a Campus    
@@ -76,7 +76,7 @@ public class CampusController {
         Campus updated = service.update(dto);
         LOGGER.debug("Added a to-do entry with information: {}", updated);
               
-       return updated.createDTO(updated);
+       return updated.createDTO();
     } 
 
 //Get all Campuss
@@ -103,7 +103,7 @@ public class CampusController {
         Campus found = service.findById(id);
         LOGGER.debug("Found edugroup entry with information: {}", found);
 
-        return found.createDTO(found);
+        return found.createDTO();
     }
     
  //Get a Campus by Name   
@@ -115,7 +115,7 @@ public class CampusController {
         Campus found = service.findByCompusName(campusName);
         LOGGER.debug("Found edugroup entry with information: {}", found);
 
-        return found.createDTO(found);
+        return found.createDTO();
     }
     
     

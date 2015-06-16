@@ -122,7 +122,7 @@ public class SemesterRepositoryService implements SemesterService{
 	public Semester findByTime(DateTime time,long campusId) {
         LOGGER.debug("Finding a Semester with id: {}", time);
 
-        Semester found = semesterRepo.findByTime(time,campusId);
+        Semester found = semesterRepo.findByTimeAndCampusId(time, campusId);
         LOGGER.debug("Found semester entry: {}", found);
         
         

@@ -25,10 +25,11 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
 
         // Get the class by teacher classId
         $scope.class = Class.get({ id: $scope.teacher.classId }, function(){
-            $scope.campusStatuses.push({ id: index, name: $scope.class.campusName});
-            $scope.gradeStatuses.push({ id: index, name: gradeName[$scope.class.grade - 1] + '年级'});
-            $scope.classStatuses.push({ id: index, name: $scope.class.name});
-        });
+            // $scope.campusStatuses.push({ id: index, name: $scope.class.campusName});
+            // $scope.gradeStatuses.push({ id: index, name: gradeName[$scope.class.grade - 1] + '年级'});
+            // $scope.classStatuses.push({ id: index, name: $scope.class.name});
+        		console.log($scope.class);
+				});
 
 
         // Get the hotreaers pagable by teacher classId
