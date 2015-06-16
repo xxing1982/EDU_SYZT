@@ -144,6 +144,19 @@ public class SemesterRepositoryService implements SemesterService{
     }
 	
 	@Override
+	public Page<Semester> findByCampus(long campusId,Pageable pageable) {
+        LOGGER.debug("Finding all semester entries");
+        Campus campus = campusRepository.findOne(campusId);
+        if(campus == null)
+        	throw new NotFoundException("no campus found with id:"+ campusId);
+        Page<Semester> semesters = semesterRepo.findByCampus(campus, pageable);
+        if (semesters == null) {
+            throw new NotFoundException("No Semester found");
+        }
+        return semesters;
+    }
+	
+	@Override
 	public ArrayList<Semester> findByStudentId(Long studentId){
         LOGGER.debug("Finding all semester entries");
         Student student = studentRepository.findOne(studentId);

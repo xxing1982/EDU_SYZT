@@ -39,4 +39,11 @@ public interface SemesterService {
 	 * @return
 	 */
 	Semester findByTime(DateTime time, long campusId);
+
+	/**
+	 * @param campusId
+	 * @param pageable
+	 * @return
+	 */
+	Page<Semester> findByCampus(long campusId, Pageable pageable);
 }

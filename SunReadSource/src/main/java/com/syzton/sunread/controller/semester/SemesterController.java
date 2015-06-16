@@ -105,6 +105,21 @@ public class SemesterController {
         return semesters;
     }    
     
+//Get Semesters  by  campus
+    @RequestMapping(value = "/campus/{campusId}/semesters", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Semester> findByTime(@RequestParam("campusId") long campusId,
+				    		   @RequestParam("page") int page,
+				    		   @RequestParam("size") int size,
+				    		   @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
+        LOGGER.debug("Finding a semester entry with id: {}", campusId);
+        sortBy = sortBy==null?"id": sortBy;
+        Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
+        Page<Semester> pageResult = service.findByCampus(campusId, pageable);
+
+        return new PageResource<>(pageResult,"page","size");
+    }
+    
 //Get a Semester    
     @RequestMapping(value = "/semester/{id}", method = RequestMethod.GET)
     @ResponseBody
