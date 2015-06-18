@@ -40,14 +40,16 @@ public class BookInShelfRepositoryService implements BookInShelfService{
     private BookRepository bookRepository;
     private Book book;
 	private Bookshelf bookshelf;
+//	private SemesterRepository semesterRepository;
 
     
     @Autowired
-    public BookInShelfRepositoryService(BookInShelfRepository repository,SemesterRepository semesterRepository
+    public BookInShelfRepositoryService(BookInShelfRepository repository
     		,BookshelfRepository bookshelfRepository,BookRepository bookRepository) {
         this.repository = repository;
         this.bookRepository = bookRepository;
         this.bookshelfRepository = bookshelfRepository;
+//        this.semesterRepository=semesterRepository;
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})
