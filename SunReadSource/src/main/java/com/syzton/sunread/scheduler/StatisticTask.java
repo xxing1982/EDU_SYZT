@@ -48,7 +48,7 @@ public class StatisticTask {
     public void executeStatistic(){
         List<Campus> campuses = campusRepository.findAll();
         for (Campus campus : campuses) {
-            Semester semester = semesterRepository.findByTimeAndCampusId(new DateTime(),campus.getId());
+            Semester semester = semesterRepository.findByTimeAndCampus(new DateTime(),campus);
             backUpUserStatistic(semester.getId());
             backUpClazzStatistic(semester.getId());
         }

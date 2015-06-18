@@ -121,8 +121,10 @@ public class SemesterRepositoryService implements SemesterService{
 	@Override
 	public Semester findByTime(DateTime time,long campusId) {
         LOGGER.debug("Finding a Semester with id: {}", time);
-
-        Semester found = semesterRepo.findByTimeAndCampusId(time, campusId);
+        Campus campus = campusRepository.findOne(campusId);
+        if(campus == null)
+        	throw new NotFoundException("no campus found with id:"+ campusId);
+        Semester found = semesterRepo.findByTimeAndCampus(time, campus);
         LOGGER.debug("Found semester entry: {}", found);
         
         
@@ -167,7 +169,9 @@ public class SemesterRepositoryService implements SemesterService{
         int grade = clazz.getGrade();
         DateTime currentTime = DateTime.now();
         DateTime fromTime = currentTime.minusYears(grade);
-        ArrayList<Semester> semesters = (ArrayList<Semester>) semesterRepo.findByDuration(fromTime,currentTime,clazz.getCampus().getId());
+//        Campus campus = campusRepository.findOne(clazz.getCampus().getId()
+        
+        ArrayList<Semester> semesters = (ArrayList<Semester>) semesterRepo.findByDuration(fromTime,currentTime,clazz.getCampus());
          
         if (semesters == null) {
             throw new NotFoundException("No Semester found");
