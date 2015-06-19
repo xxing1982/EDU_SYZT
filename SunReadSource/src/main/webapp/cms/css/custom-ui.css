@@ -205,3 +205,10 @@ textarea.form-control, textarea {
     color: #FFFFFF;
     background-color: #74c4ef;
 }
+
+.hideOverflow 
+{ 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

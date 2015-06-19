@@ -163,3 +163,10 @@ textarea.form-control, textarea {
     padding-right: 12px;
     padding-top: 6px;
 }
+
+.hideOverflow 
+{ 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
