@@ -21,11 +21,22 @@
 
 
     <!-- Place holder row copied from searchs -->
-    <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
-        <div class="col-md-10 searchHolder"> 
-            
-        </div>
-    </div>
+    <!--<div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
+        
+    </div>-->
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="placeHolder in searchPageable.placeHolders.content">
+                
+            </tr>
+        </tbody>
+    </table>
 
     <!-- Footer and page numbers  -->
     <div class="container-fluid">
