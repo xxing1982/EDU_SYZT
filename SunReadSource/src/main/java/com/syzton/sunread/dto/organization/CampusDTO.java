@@ -22,16 +22,19 @@ public class CampusDTO {
 	@Length(max = Campus.MAX_LENGTH_NAME)
 	private String name;
 	
+	@NotNull
 	@Length(max = Campus.MAX_LENGTH_HEADMASTER)
     private String headmaster;
+	
+	@NotNull
+	@Length(max = Campus.MAX_LENGTH_HEADMASTER)
+	private String wish;
 	
 	private long regionId;
 	
 	private String regionName;
 	
 	private int classNum;
-
-	private String wish;
 	
 	private int noteScore = Campus.DEFAULT_NOTE_SCORE;
 	
