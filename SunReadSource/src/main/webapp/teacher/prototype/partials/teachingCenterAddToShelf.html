@@ -6,11 +6,11 @@
             <div class="col-xs-8 col-xs-height">
                 <h5 class="title"><big><a ng-href="#/teachingCenter/addBook" class="dark-gray-2">我要推荐</a></big><big> > </big><big>加入书架</big></h5>
             </div>
-            <div class="col-xs-4 col-xs-height col-middle">
+            <!-- <div class="col-xs-4 col-xs-height col-middle">
                 <button class="btn btn-fill-blue pull-right" type="button" ng-click="bookshelfLoadable.publish()">
                     加入书架
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
     </div></div>
@@ -65,15 +65,17 @@
 <div class="myBlock mt20 page-body">
   <div class="container-fluid">
     <div class="row">
-      <div class="row-same-height text-center">
-          <div class="col-xs-2 col-xs-height col-middle">
-            <p class="row title">
-                三年二班{{hotreader.username}}
-            </p>
-          </div>
-          <div class="col-xs-2 col-xs-height col-middle"><p class="row title">必读书数量：{{hotreader.unreadMust+hotreader.readMust}}</p></div>
-          <div class="col-xs-2 col-xs-height col-middle"><p class="row title">选读书数量：{{hotreader.unreadSelect+hotreader.unreadSelect}}</p></div>
-          <div class="col-xs-3 col-xs-height col-middle">
+      <div class="row-same-height">
+
+          <div class="col-xs-2 col-xs-height col-middle width80"><p class="row title"> &nbsp;&nbsp;&nbsp;&nbsp;{{class.name}}</p></div>
+          <!-- <div class="col-xs-2 col-xs-height col-middle"><p class="row title"></p></div> -->
+
+          <div class="col-xs-2 col-xs-height col-middle width170"><p class="row title">
+              必读书数量：0{{hotreader.unreadMust+hotreader.readMust}}&nbsp;&nbsp;&nbsp;&nbsp;选读书数量：0{{hotreader.unreadSelect+hotreader.unreadSelect}}
+          </p></div>
+          <!-- <div class="col-xs-2 col-xs-height col-middle"><p class="row title">选读书数量：{{hotreader.unreadSelect+hotreader.unreadSelect}}</p></div> -->
+
+          <div class="col-xs-2 col-xs-height col-middle text-center">
             <!-- <p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p> -->
              <div class="input-group ShelfByClassBookAttribute">
                   <label class="radio-inline">
@@ -86,9 +88,17 @@
                   </label>
               </div>
           </div>
+
           <div class="col-xs-3 col-xs-height col-middle">
-              <p class="row title">推荐理由：<input type="text" class="custom-input" ng-model="hotreader.description" /></p>
+              <p class="row title">推荐理由：<input type="text" class="custom-input" ng-model="hotreader.description" value="非常精彩的一本书!"/></p>
           </div>
+
+          <div class="col-xs-1 col-xs-height col-middle">
+              <button class="btn btn-fill-blue pull-right" type="button" ng-click="bookshelfLoadable.publish()">
+                  对全班加书
+              </button>
+          </div>
+
       </div>
     </div>
   </div>
@@ -99,16 +109,17 @@
 <div class="myBlock mt20 page-body" ng-repeat="hotreader in bookshelfLoadable.entities.content | orderBy:['unreadSelect','unreadMust','id']">
     <div class="container-fluid"><div class="container-fluid">
     <div class="row">
-        <div class="row-same-height text-center">
-            <div class="col-xs-2 col-xs-height col-middle">
+        <div class="row-same-height">
+            <div class="col-xs-2 col-xs-height col-middle width80">
               <p class="row title">
-                <input checklist-model="bookshelfLoadable.selected" checklist-value="hotreader" type="checkbox" ng-click="selectLength()"/>
+                <!-- <input checklist-model="bookshelfLoadable.selected" checklist-value="hotreader" type="checkbox" ng-click="selectLength()"/> -->
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{hotreader.username}}
               </p>
             </div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">必读书数量：{{hotreader.unreadMust+hotreader.readMust}}</p></div>
-            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">选读书数量：{{hotreader.unreadSelect+hotreader.unreadSelect}}</p></div>
-            <div class="col-xs-3 col-xs-height col-middle">
+            <div class="col-xs-3 col-xs-height col-middle width170"><p class="row title">
+                必读书数量：{{hotreader.unreadMust+hotreader.readMust}}&nbsp;&nbsp;&nbsp;&nbsp;选读书数量：{{hotreader.unreadSelect+hotreader.unreadSelect}}
+            </p></div>
+            <div class="col-xs-2 col-xs-height col-middle text-center">
               <!-- <p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p> -->
                <div class="input-group ShelfByClassBookAttribute">
                     <label class="radio-inline">
@@ -123,6 +134,11 @@
             </div>
             <div class="col-xs-3 col-xs-height col-middle">
                 <p class="row title">推荐理由：<input type="text" class="custom-input" ng-model="hotreader.description" /></p>
+            </div>
+            <div class="col-xs-1 col-xs-height col-middle">
+                <button class="btn btn-fill-blue pull-right" type="button" ng-click="bookshelfLoadable.publish()">
+                    对{{hotreader.username}}加书
+                </button>
             </div>
         </div>
     </div>
