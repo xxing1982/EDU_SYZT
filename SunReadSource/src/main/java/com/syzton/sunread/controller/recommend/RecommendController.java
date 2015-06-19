@@ -3,6 +3,8 @@
  */
 package com.syzton.sunread.controller.recommend;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -54,6 +56,15 @@ public class RecommendController extends BaseController{
 
         return added;
     }
+    
+    @RequestMapping(value = "/teacher/{teacherId}/clazz/{clazzId}/recommends", method = RequestMethod.POST)
+    @ResponseBody
+    public ArrayList<RecommendDTO> addToClazz(@Valid @RequestBody RecommendDTO recommendDTO
+    			,@PathVariable("teacherId") long teacherId,@PathVariable("clazzId") long clazzId){
+    	
+    	return recommendService.addToClazz(recommendDTO, teacherId, clazzId);
+    }
+
     
     @RequestMapping(value = "/teacher/{teacherId}/recommends", method = RequestMethod.GET)
     @ResponseBody

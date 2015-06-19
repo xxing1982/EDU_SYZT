@@ -70,13 +70,13 @@ public class RecommendRepositoryService implements RecommendService{
 	public RecommendDTO add(RecommendDTO recommendDTO,Long teacherId, Long studentId) {
 		teacher = teacherRepositiry.findOne(teacherId);
 		if(teacher == null)
-			throw new NotFoundException("Not Found Teacher with id" + teacher.getId());
+			throw new NotFoundException("Not Found Teacher with id" + teacherId);
 		book = bookRepository.findOne(recommendDTO.getBookId());
 		if(book == null)
-			throw new NotFoundException("Not Found Book with id" + book.getId());
+			throw new NotFoundException("Not Found Book with id" + recommendDTO.getBookId());
 		bookshelf = bookshelfRepository.findOne(studentId);
 		if(bookshelf == null)
-			throw new NotFoundException("Not Found Bookshelf with id" + bookshelf.getId());
+			throw new NotFoundException("Not Found Bookshelf with id" + studentId);
 		BookInShelf isInShelf = bookInShelfRepository.findOneByBookshelfAndBookId(bookshelf, recommendDTO.getBookId());
 		Recommend recommend = new Recommend();
 		if (isInShelf == null) {
@@ -121,6 +121,31 @@ public class RecommendRepositoryService implements RecommendService{
 			
 		}	
 
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.syzton.sunread.service.recommend.RecommendService#addToClazz(com.syzton.sunread.dto.recommend.RecommendDTO, java.lang.Long, java.lang.Long)
+	 */
+	@Override
+	public ArrayList<RecommendDTO> addToClazz(RecommendDTO recommendDTO, Long teacherId,
+			Long clazzId) {
+		// TODO Auto-generated method stub
+		teacher = teacherRepositiry.findOne(teacherId);
+		if(teacher == null)
+			throw new NotFoundException("Not Found Teacher with id" + teacherId);
+		book = bookRepository.findOne(recommendDTO.getBookId());
+		if(book == null)
+			throw new NotFoundException("Not Found Book with id" + recommendDTO.getBookId());
+		Clazz clazz= clazzRepository.findOne(clazzId);
+		if(clazz == null)
+			throw new NotFoundException("Not Found Book with id" + clazzId);
+		List<Student> students = studentRepository.findByClazzId(clazzId);
+		ArrayList<RecommendDTO> dtos = new ArrayList<RecommendDTO>();
+		for (int i = 0; i < students.size(); i++) {
+			RecommendDTO dto = add(recommendDTO, teacherId, students.get(i).getId());
+			dtos.add(dto);
+		}
+		return dtos;
 	}
 
 	/* (non-Javadoc)
@@ -190,6 +215,8 @@ public class RecommendRepositoryService implements RecommendService{
 		Page<RecommendDTO> recommendDTOPage = new PageImpl<>(recommendDTOs,pageable,pageRecommends.getTotalElements());
 		return recommendDTOPage;
 	}
+
+
 }
 
 

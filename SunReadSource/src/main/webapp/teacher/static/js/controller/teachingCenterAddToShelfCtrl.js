@@ -1,5 +1,5 @@
-ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$stateParams','Teacher','Class','GetBookshelvesByClass','AddRecommends',
-	function($scope, $rootScope,$stateParams,Teacher,Class,GetBookshelvesByClass,AddRecommends){
+ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$stateParams','Teacher','Class','GetBookshelvesByClass','AddRecommends','AddRecommendsToClazz',
+	function($scope, $rootScope,$stateParams,Teacher,Class,GetBookshelvesByClass,AddRecommends,AddRecommendsToClazz){
 
 		// $scope.bookAttribute_status
 
@@ -17,6 +17,10 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
     $scope.classStatuses = [];
     $scope.classSelected_status = 0;
 
+		$scope.isMandatoryForClazz = true;
+
+		$scope.isMandatory = true;
+
     // Get the teacher entity by rootScope id
     $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
 
@@ -29,6 +33,16 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
             // $scope.gradeStatuses.push({ id: index, name: gradeName[$scope.class.grade - 1] + '年级'});
             // $scope.classStatuses.push({ id: index, name: $scope.class.name});
         		console.log($scope.class);
+						//Add books for a whole class
+						$scope.recommendToClazz = function(){
+							AddRecommendsToClazz.save({teacherId:$rootScope.id,clazzId:$scope.class.id},
+																		{"bookId":$stateParams.bookId,"bookAttribute":$scope.isMandatoryForClazz}
+																		,function(date){
+																				$rootScope.modal = {title: "添加图书", content: "添加成功！"};
+																				$('#alert-modal').modal();
+																				console.log(date);
+																		});
+						}
 				});
 
 
@@ -50,31 +64,24 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
         // Show the first page and append editable to every entity
         $scope.bookshelfLoadable.get();
 
+				for(var i=0;i<$scope.bookshelfLoadable.entities.content.length;i++){
+					$scope.bookshelfLoadable.entities.content[i].isMandatory = true;
+				}
+
 				console.log($scope.bookshelfLoadable);
 
         // Make the checklist model
-        $scope.bookshelfLoadable.selected = [];
+        // $scope.bookshelfLoadable.selected = [];
 
         // Publish the selected entities
-        $scope.bookshelfLoadable.publish = function(){
-            for(var i = 0; i < this.selected.length; i++ ){
-                // if (this.selected[i].targetBookNum &&  this.selected[i].targetPoint){
-                //     Task.update({ teacherId: $scope.teacher.id,
-                //                   studentId: this.selected[i].id,
-                //                   targetBookNum: this.selected[i].targetBookNum,
-                //                   targetPoint: this.selected[i].targetPoint },{}
-                //     );
-	              // }
-							AddRecommends.save({teacherId:$rootScope.id,studentId:this.selected[i].id},
-																	{"bookId":$stateParams.bookId,"bookAttribute":this.selected[i].isMandatory}
+        $scope.bookshelfLoadable.publish = function(para){
+							AddRecommends.save({teacherId:$rootScope.id,studentId:para.id},
+																	{"bookId":$stateParams.bookId,"bookAttribute":$scope.isMandatory}
 																	,function(date){
-																			$rootScope.modal = {title: "添加图书", content: "添加成功！"};
+																			$rootScope.modal = {title: "添加图书状态"+date.recommendState, content: date.recommendStateStr};
 																			$('#alert-modal').modal();
-																			this.selected = [];
 																			console.log(date);
 																	});
-
-            }
         };
 
         // The select all method
