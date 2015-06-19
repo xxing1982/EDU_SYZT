@@ -39,7 +39,8 @@ public class Campus extends AbstractEntity{
     
     @Column(name = "headmaster", nullable = false, length = MAX_LENGTH_HEADMASTER)
     private String headmaster;
-
+    
+    @Column(name = "wish", nullable = false, length = MAX_LENGTH_HEADMASTER)
 	private String wish;
 	
     @Column(name = "note_score")
@@ -213,6 +214,8 @@ public class Campus extends AbstractEntity{
         dto.setEduGroupId(eduGroup.getId());
 		dto.setEduGroupName(eduGroup.getName());
 		dto.setNoteScore(getNoteScore());
+		dto.setRegionId(region.getId());
+		dto.setRegionName(region.getName());
         
         return dto;
     }

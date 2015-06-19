@@ -34,10 +34,9 @@ public class EduGroup extends AbstractEntity{
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modificationTime;
 
-	//cascade = CascadeType.ALL,mappedBy = "note"
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="eduGroup")
-    @Basic(fetch = FetchType.LAZY)
-    private Set<Campus> campuses = new HashSet<Campus>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy="eduGroup")
+//    @Basic(fetch = FetchType.LAZY)
+//    private Set<Campus> campuses = new HashSet<Campus>();
 
 
     public EduGroup() {
@@ -81,13 +80,13 @@ public class EduGroup extends AbstractEntity{
         modificationTime = DateTime.now();
     }
 
-    public Set<Campus> getCampuss() {
-        return campuses;
-    }
-
-    public void setCampuss(Set<Campus> campus) {
-        this.campuses = campus;
-    }
+//    public Set<Campus> getCampuss() {
+//        return campuses;
+//    }
+//
+//    public void setCampuss(Set<Campus> campus) {
+//        this.campuses = campus;
+//    }
     
 	public void update(String name) {
 		// TODO Auto-generated method stub
@@ -107,12 +106,6 @@ public class EduGroup extends AbstractEntity{
             built.name = name;
         }
 
-        public  Builder campuses(Set<Campus> campuses)
-        {
-            built.campuses = campuses;
-            return this;
-        }
-        
 		public Builder description(String description) {
             built.description = description;
             return this;

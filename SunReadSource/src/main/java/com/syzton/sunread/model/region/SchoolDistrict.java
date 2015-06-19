@@ -53,9 +53,9 @@ public class SchoolDistrict extends AbstractEntity{
     @JoinColumn(name = "region")
     private Region region;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy ="schoolDistrict")
-    @Basic(fetch = FetchType.LAZY)
-    private Set<Campus> campus = new HashSet<Campus>();
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy ="schoolDistrict")
+//    @Basic(fetch = FetchType.LAZY)
+//    private Set<Campus> campus = new HashSet<Campus>();
 
 
     public SchoolDistrict() {
@@ -104,14 +104,14 @@ public class SchoolDistrict extends AbstractEntity{
 	public void setRegion(Region region) {
 		this.region = region;
 	}
-
-    public Set<Campus> getCampus() {
-        return campus;
-    }
-    
-    public void setGrades(Set<Campus> campus) {
-        this.campus = campus;
-    }
+//
+//    public Set<Campus> getCampus() {
+//        return campus;
+//    }
+//    
+//    public void setGrades(Set<Campus> campus) {
+//        this.campus = campus;
+//    }
 
 	public void update(String name) {
 		// TODO Auto-generated method stub
@@ -135,11 +135,6 @@ public class SchoolDistrict extends AbstractEntity{
             built = new SchoolDistrict();
             built.name = name;
             built.region = region;
-        }
-
-        public Builder Campus(Set<Campus> campus) {
-            built.campus = campus;
-            return this;
         }
 
 		public Builder description(String description) {
