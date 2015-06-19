@@ -10,8 +10,6 @@ import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.model.semester.Semester;
 
 public interface SemesterService {
-	
-    public SemesterDTO add(SemesterDTO added);
     
     public Semester deleteById(long id);
 
@@ -21,16 +19,31 @@ public interface SemesterService {
 
     Page<Semester> findAll(Pageable pageable);
 
-	/**
-	 * @param time
-	 * @return
-	 */
-	public Semester findByTime(DateTime time);
-
 
 	/**
 	 * @param studentId
 	 * @return
 	 */
 	ArrayList<Semester> findByStudentId(Long studentId);
+
+	/**
+	 * @param added
+	 * @param campusId
+	 * @return
+	 */
+	SemesterDTO add(SemesterDTO added, Long campusId);
+
+	/**
+	 * @param time
+	 * @param campusId
+	 * @return
+	 */
+	Semester findByTime(DateTime time, long campusId);
+
+	/**
+	 * @param campusId
+	 * @param pageable
+	 * @return
+	 */
+	Page<Semester> findByCampus(long campusId, Pageable pageable);
 }

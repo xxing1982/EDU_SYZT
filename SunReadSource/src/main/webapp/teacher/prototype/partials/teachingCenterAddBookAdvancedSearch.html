@@ -1,6 +1,6 @@
 <!--AdvancedSearch-->
 <div class="advancedSearch">
-    
+
     <div class="row">
         <div class="col-md-9">
             <div class="input-group search col-md-11 title">
@@ -13,10 +13,10 @@
     <div class="leftpart">
 	<div class="row" ng-repeat="terms in searchPageable.entities.content">
         <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
-            
+
             <!-- Place holder -->
             <p class="col-md-12"></p>
-            
+
             <div class="col-md-3">
                 <a href="#teachingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
             </div>
@@ -27,13 +27,13 @@
                     积分:{{terms.point}}&nbsp;&nbsp;等级:{{terms.extra.level}}&nbsp;&nbsp;财富：{{terms.coin}}</p></div>
                 <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
                 <div class="row fsize12">
-                    <a href="#teachingCenter/addBookToShelf" class="btn btn-sm btn-fill-blue" type="button">加入书架</a>&nbsp;&nbsp;
+                    <a href="#teachingCenter/addBookToShelf/{{terms.id}}/" class="btn btn-sm btn-fill-blue" type="button">加入书架</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-blue">相关笔记</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-blue">相关评价</a>&nbsp;&nbsp;
                     <a data-toggle="modal" data-target="#booktag" ng-click="booktag.render(terms)" class="btn btn-sm btn-blue">标记书籍</a>
                 </div>
             </div>
-            
+
             <!-- Place holder -->
             <p class="col-md-12"></p>
         </div>

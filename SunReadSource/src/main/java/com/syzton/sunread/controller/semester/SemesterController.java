@@ -43,12 +43,12 @@ public class SemesterController {
     }
     
 //Add a Semester 
-    @RequestMapping(value = "/semester", method = RequestMethod.POST)
+    @RequestMapping(value = "/campus/{campusId}/semester", method = RequestMethod.POST)
     @ResponseBody
-    public SemesterDTO add(@Valid @RequestBody SemesterDTO dto) {
+    public SemesterDTO add(@Valid @RequestBody SemesterDTO dto,@PathVariable("campusId")Long campusId) {
         LOGGER.debug("Adding a new semester entry with information: {}", dto);
         
-        SemesterDTO added = service.add(dto);
+        SemesterDTO added = service.add(dto,campusId);
         LOGGER.debug("Added a semester entry with information: {}", added);
               
        return added;
@@ -105,6 +105,21 @@ public class SemesterController {
         return semesters;
     }    
     
+//Get Semesters  by  campus
+    @RequestMapping(value = "/campus/{campusId}/semesters", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Semester> findByTime(@RequestParam("campusId") long campusId,
+				    		   @RequestParam("page") int page,
+				    		   @RequestParam("size") int size,
+				    		   @RequestParam(value = "sortBy",required = false) String sortBy) throws NotFoundException {
+        LOGGER.debug("Finding a semester entry with id: {}", campusId);
+        sortBy = sortBy==null?"id": sortBy;
+        Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
+        Page<Semester> pageResult = service.findByCampus(campusId, pageable);
+
+        return new PageResource<>(pageResult,"page","size");
+    }
+    
 //Get a Semester    
     @RequestMapping(value = "/semester/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -118,13 +133,13 @@ public class SemesterController {
     }
     
  //Get a Semester  by  time
-    @RequestMapping(value = "/time/{time}/semester", method = RequestMethod.GET)
+    @RequestMapping(value = "/campus/{campusId}/time/{time}/semester", method = RequestMethod.GET)
     @ResponseBody
-    public Semester findByTime(@PathVariable("time") Long time) throws NotFoundException {
+    public Semester findByTime(@PathVariable("time") Long time,@RequestParam("campusId") long campusId) throws NotFoundException {
         LOGGER.debug("Finding a semester entry with id: {}", time);
         DateTime timeDate = new DateTime(time);
 
-        Semester found = service.findByTime(timeDate);
+        Semester found = service.findByTime(timeDate,campusId);
         LOGGER.debug("Found semester entry with information: {}", found);
 
         return found;

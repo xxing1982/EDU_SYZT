@@ -116,29 +116,26 @@ public class RegionRepositoryService implements RegionService {
 		return provinces;
 	}
 	
-//	@Transactional
-//	@Override
-//	public Map<Integer, String> batchSaveOrUpdateRegionFromExcel(Sheet sheet) {
-//		Map<Integer, String> failMap = new HashMap<Integer, String>();
-//
-//		for (int i = sheet.getFirstRowNum()+1; i < sheet
-//				.getPhysicalNumberOfRows(); i++) {
-//			Row row = sheet.getRow(i);
-//
-//			String province = ExcelUtil.getStringFromExcelCell(row.getCell(0));
-//			String city = ExcelUtil.getStringFromExcelCell(row.getCell(1));
-//			String district = ExcelUtil.getStringFromExcelCell(row.getCell(2));
-//			Region region = regionRepo.findByProvinceAndCityAndDistrict(province, city, district);
-//			if(region == null){
-//				region = new Region();
-//				region.setProvince(province);
-//				region.setCity(city);
-//				region.setDistrict(district);
-//			}
-//			region.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
-//			regionRepo.save(region);
-//		}
-//		return failMap;
-//	}
+	@Transactional
+	@Override
+	public Map<Integer, String> batchSaveOrUpdateRegionFromExcel(Sheet sheet) {
+		Map<Integer, String> failMap = new HashMap<Integer, String>();
+
+		for (int i = sheet.getFirstRowNum()+1; i < sheet
+				.getPhysicalNumberOfRows(); i++) {
+			Row row = sheet.getRow(i);
+
+			String province = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			String city = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+			String district = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+
+			RegionDTO added = new RegionDTO();
+			added.setProvince(province);
+			added.setCity(city);
+			added.setDistrict(district);
+			this.add(added);
+		}
+		return failMap;
+	}
 
 }

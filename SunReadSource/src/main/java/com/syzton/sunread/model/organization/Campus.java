@@ -25,6 +25,7 @@ public class Campus extends AbstractEntity{
 	public static final int MAX_LENGTH_DESCRIPTION = 500;
     public static final int MAX_LENGTH_NAME = 100;
     public static final int MAX_LENGTH_HEADMASTER = 500;
+    public static final int DEFAULT_NOTE_SCORE = 5;
     
     @Column(name ="name", nullable = false, unique = true,length = MAX_LENGTH_NAME)
     private String name;
@@ -38,6 +39,11 @@ public class Campus extends AbstractEntity{
     
     @Column(name = "headmaster", nullable = false, length = MAX_LENGTH_HEADMASTER)
     private String headmaster;
+
+	private String wish;
+	
+    @Column(name = "note_score")
+    private int noteScore = DEFAULT_NOTE_SCORE;
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "campus")
     @Basic(fetch = FetchType.LAZY)
@@ -55,8 +61,6 @@ public class Campus extends AbstractEntity{
     @JoinColumn(name = "school_district")
     private SchoolDistrict schoolDistrict;
     
-
-	private String wish;
 	
 	public Region getRegion() {
 		return region;
@@ -126,6 +130,15 @@ public class Campus extends AbstractEntity{
 	public void setWish(String wish) {
 		this.wish = wish;
 	}
+	
+
+	public int getNoteScore() {
+		return noteScore;
+	}
+
+	public void setNoteScore(int noteScore) {
+		this.noteScore = noteScore;
+	}
 
 	@PrePersist
     public void prePersist() {
@@ -143,12 +156,13 @@ public class Campus extends AbstractEntity{
     public static class Builder{
     	private Campus built;
     	
-    	public Builder(String name, String headmaster,String wish
+    	public Builder(String name, String headmaster,String wish,int noteScore
     		,Region region,EduGroup eduGroup, SchoolDistrict schoolDistrict){
     		built = new Campus();
     		built.name = name;
     		built.headmaster = headmaster;
     		built.wish = wish;
+    		built.noteScore = noteScore;
     		built.region = region;
     		built.eduGroup = eduGroup;
     		built.schoolDistrict = schoolDistrict;
@@ -181,23 +195,24 @@ public class Campus extends AbstractEntity{
 	 * @return
 	 */
 	public static Builder getBuilder(String name, String headmaster,String wish
-			,Region region ,EduGroup eduGroup, SchoolDistrict schoolDistrict) {
+			,int noteScore,Region region ,EduGroup eduGroup, SchoolDistrict schoolDistrict) {
 		// TODO Auto-generated method stub
-		return new Builder(name, headmaster,wish, region,eduGroup, schoolDistrict);
+		return new Builder(name, headmaster,wish, noteScore,region,eduGroup, schoolDistrict);
 	}
 
-    public CampusDTO createDTO(Campus model) {
+    public CampusDTO createDTO() {
         CampusDTO dto = new CampusDTO();
-        dto.setId(model.id);
-        dto.setName(model.getName());
-        dto.setDescription(model.getDescription());
-        dto.setHeadmaster(model.headmaster);
-        dto.setWish(model.wish);
-        dto.setSchoolDistrictId(model.schoolDistrict.getId());
-        dto.setSchoolDistrictName(model.schoolDistrict.getName());
-        dto.setClassNum(model.clazzNum());
-        dto.setEduGroupId(model.eduGroup.getId());
-		dto.setEduGroupName(model.eduGroup.getName());
+        dto.setId(id);
+        dto.setName(getName());
+        dto.setDescription(getDescription());
+        dto.setHeadmaster(headmaster);
+        dto.setWish(wish);
+        dto.setSchoolDistrictId(schoolDistrict.getId());
+        dto.setSchoolDistrictName(schoolDistrict.getName());
+        dto.setClassNum(clazzNum());
+        dto.setEduGroupId(eduGroup.getId());
+		dto.setEduGroupName(eduGroup.getName());
+		dto.setNoteScore(getNoteScore());
         
         return dto;
     }

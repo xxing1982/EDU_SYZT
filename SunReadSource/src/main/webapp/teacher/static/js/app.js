@@ -71,7 +71,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'partials/teachingCenterAddBookPopularRecommend.html',
         })
         .state('teachingCenter.addBookToShelf', {
-            url: '/addBookToShelf',
+            url: '/addBookToShelf/:bookId/',
             templateUrl: 'partials/teachingCenterAddToShelf.html',
             controller: 'teachingCenterAddToShelfController'
         })

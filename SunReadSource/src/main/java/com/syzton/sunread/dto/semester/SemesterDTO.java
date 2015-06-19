@@ -14,6 +14,10 @@ public class SemesterDTO {
 	
 	private String description;
 	
+	private long campusId;
+	
+	private String campusName;
+	
 	@NotNull
 	private Long startTime;
 	
@@ -28,6 +32,22 @@ public class SemesterDTO {
 		this.id = id;
 	}
 	
+
+	public long getCampusId() {
+		return campusId;
+	}
+
+	public void setCampusId(long campusId) {
+		this.campusId = campusId;
+	}
+
+	public String getCampusName() {
+		return campusName;
+	}
+
+	public void setCampusName(String campusName) {
+		this.campusName = campusName;
+	}
 
 	public String getSemester() {
 		return semester;

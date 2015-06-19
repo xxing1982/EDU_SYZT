@@ -15,10 +15,12 @@ import com.syzton.sunread.assembler.semester.SemesterAssembler;
 import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.SemesterRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 
@@ -32,13 +34,15 @@ public class SemesterRepositoryService implements SemesterService{
     private static final Logger LOGGER = LoggerFactory.getLogger(SemesterRepositoryService.class);
 
     private SemesterRepository semesterRepo;
+    private CampusRepository campusRepository;
     private StudentRepository studentRepository;
     private ClazzRepository clazzRepository;
     
     @Autowired
-    public SemesterRepositoryService(SemesterRepository repository) {
+    public SemesterRepositoryService(SemesterRepository repository,CampusRepository campusRepository) {
 		// TODO Auto-generated constructor stub
     	this.semesterRepo = repository;
+    	this.campusRepository = campusRepository;
 	}
     
     @Autowired
@@ -53,19 +57,22 @@ public class SemesterRepositoryService implements SemesterService{
     
     @Transactional(rollbackFor = {DuplicateException.class})
 	@Override
-	public SemesterDTO add(SemesterDTO added) {
+	public SemesterDTO add(SemesterDTO added,Long campusId) {
         LOGGER.debug("Adding a new Semester with information: {}", added);
         
         Semester exits = semesterRepo.findOne(added.getId());        
         if(exits != null){
             throw new DuplicateException("Semester with id: "+added.getId()+" is already exits..");
         }
+        Campus campus = campusRepository.findOne(campusId);
+        if(campus == null)
+        	throw new NotFoundException("no campus found with id:"+ campusId);
         
         SemesterAssembler assembler = new SemesterAssembler();
         
-        Semester model = assembler.fromDTOtoModel(added);
-        model = semesterRepo.save(model);
-        added.setId(model.getId());
+        Semester model = assembler.fromDTOtoModel(added,campus);
+        semesterRepo.save(model);
+        added = model.createDTO();
         return added;
 	}
 
@@ -91,11 +98,10 @@ public class SemesterRepositoryService implements SemesterService{
         Semester model = findOne(updated.getId());
         if(model == null)
             throw new NotFoundException("No Semester found with id: " + updated.getId());
-        LOGGER.debug("Found a note entry: {}", model);
         
         SemesterAssembler assembler = new SemesterAssembler();     
-        Semester semester = assembler.fromDTOtoModel(updated);
-        updated.setId(semester.getId());
+        model = assembler.fromDTOtoModel(updated);
+        semesterRepo.save(model);
         return updated;
 	}
 
@@ -113,11 +119,15 @@ public class SemesterRepositoryService implements SemesterService{
 	}
 	
 	@Override
-	public Semester findByTime(DateTime time) {
+	public Semester findByTime(DateTime time,long campusId) {
         LOGGER.debug("Finding a Semester with id: {}", time);
-
-        Semester found = semesterRepo.findByTime(time);
+        Campus campus = campusRepository.findOne(campusId);
+        if(campus == null)
+        	throw new NotFoundException("no campus found with id:"+ campusId);
+        Semester found = semesterRepo.findByTimeAndCampus(time, campus);
         LOGGER.debug("Found semester entry: {}", found);
+        
+        
 
         if (found == null) {
             throw new NotFoundException("No Semester found with id: " + time);
@@ -136,6 +146,19 @@ public class SemesterRepositoryService implements SemesterService{
     }
 	
 	@Override
+	public Page<Semester> findByCampus(long campusId,Pageable pageable) {
+        LOGGER.debug("Finding all semester entries");
+        Campus campus = campusRepository.findOne(campusId);
+        if(campus == null)
+        	throw new NotFoundException("no campus found with id:"+ campusId);
+        Page<Semester> semesters = semesterRepo.findByCampus(campus, pageable);
+        if (semesters == null) {
+            throw new NotFoundException("No Semester found");
+        }
+        return semesters;
+    }
+	
+	@Override
 	public ArrayList<Semester> findByStudentId(Long studentId){
         LOGGER.debug("Finding all semester entries");
         Student student = studentRepository.findOne(studentId);
@@ -146,7 +169,9 @@ public class SemesterRepositoryService implements SemesterService{
         int grade = clazz.getGrade();
         DateTime currentTime = DateTime.now();
         DateTime fromTime = currentTime.minusYears(grade);
-        ArrayList<Semester> semesters = (ArrayList<Semester>) semesterRepo.findByDuration(fromTime,currentTime);
+//        Campus campus = campusRepository.findOne(clazz.getCampus().getId()
+        
+        ArrayList<Semester> semesters = (ArrayList<Semester>) semesterRepo.findByDuration(fromTime,currentTime,clazz.getCampus());
          
         if (semesters == null) {
             throw new NotFoundException("No Semester found");

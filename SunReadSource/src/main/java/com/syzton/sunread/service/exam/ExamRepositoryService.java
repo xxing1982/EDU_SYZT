@@ -235,11 +235,39 @@ public class ExamRepositoryService implements ExamService {
 		exam.setExamScore(score);
 		if (score >= 60) {
 			exam.setPass(true);
+			repository.save(exam);
+			List<Exam> exams = repository.findByStudentIdAndBookIdAndExamTypeAndIsPass(added.getStudentId(), added.getBook().getId(), added.getExamType(),true);
+			if(exams.size()==1){
+				exam.setFirstPass(true);
+			}else{
+				exam.setSecondPass(true);
+			}
+			
 		} else {
 			exam.setPass(false);
 		}
-
+		repository.save(exam);
 		return exam;
+	}
+	
+	public int findFirstPassRate(Long studentId, DateTime from,DateTime to){
+		List<Exam> firstPassExam = repository.findByStudentIdAndFirstPassAndExamTypeAndCreationTimeBetween(studentId, true, ExamType.VERIFY, from, to);
+		List<Exam> allPassExam = repository.findByStudentIdAndExamTypeAndIsPassAndCreationTimeBetweenOrderByCreationTimeDesc(studentId, ExamType.VERIFY, true, from, to);
+		if(allPassExam == null||allPassExam.size()==0||firstPassExam==null||firstPassExam.size()==0){
+			return 0;
+		}else{
+			return firstPassExam.size()*100/allPassExam.size();
+		}
+	}
+	
+	public int findSecondPassRate(Long studentId, DateTime from,DateTime to){
+		List<Exam> firstPassExam = repository.findByStudentIdAndSecondPassAndExamTypeAndCreationTimeBetween(studentId, true, ExamType.VERIFY, from, to);
+		List<Exam> allPassExam = repository.findByStudentIdAndExamTypeAndIsPassAndCreationTimeBetweenOrderByCreationTimeDesc(studentId, ExamType.VERIFY, true, from, to);
+		if(allPassExam == null||allPassExam.size()==0||firstPassExam==null||firstPassExam.size()==0){
+			return 0;
+		}else{
+			return firstPassExam.size()*100/allPassExam.size();
+		}
 	}
 
 	@Transactional(rollbackFor = { NotFoundException.class })

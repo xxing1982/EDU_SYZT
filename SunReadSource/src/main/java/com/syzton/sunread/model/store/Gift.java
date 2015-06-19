@@ -28,6 +28,9 @@ public class Gift extends AbstractEntity{
 
     private long schoolId;
 
+    private String adder;
+
+
     @Enumerated(EnumType.STRING)
     private GiftType giftType;
 
@@ -95,5 +98,13 @@ public class Gift extends AbstractEntity{
 
     public void setSchoolId(long schoolId) {
         this.schoolId = schoolId;
+    }
+
+    public String getAdder() {
+        return adder;
+    }
+
+    public void setAdder(String adder) {
+        this.adder = adder;
     }
 }

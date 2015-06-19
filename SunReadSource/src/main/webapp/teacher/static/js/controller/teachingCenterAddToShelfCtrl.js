@@ -1,6 +1,13 @@
-ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','Teacher','Class','GetBookshelvesByClass','AddRecommends',
-	function($scope, $rootScope,Teacher,Class,GetBookshelvesByClass,AddRecommends){
-    // Initlizate the dropdown statues
+ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$stateParams','Teacher','Class','GetBookshelvesByClass','AddRecommends',
+	function($scope, $rootScope,$stateParams,Teacher,Class,GetBookshelvesByClass,AddRecommends){
+
+		// $scope.bookAttribute_status
+
+		$scope.selectBookAttribute = function(){
+			console.log ($scope.bookAttribute_status);
+		}
+
+		// Initlizate the dropdown statues
     $scope.campusStatuses = [];
     $scope.campusSelected_status = 0;
 
@@ -18,10 +25,11 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','T
 
         // Get the class by teacher classId
         $scope.class = Class.get({ id: $scope.teacher.classId }, function(){
-            $scope.campusStatuses.push({ id: index, name: $scope.class.campusName});
-            $scope.gradeStatuses.push({ id: index, name: gradeName[$scope.class.grade - 1] + '年级'});
-            $scope.classStatuses.push({ id: index, name: $scope.class.name});
-        });
+            // $scope.campusStatuses.push({ id: index, name: $scope.class.campusName});
+            // $scope.gradeStatuses.push({ id: index, name: gradeName[$scope.class.grade - 1] + '年级'});
+            // $scope.classStatuses.push({ id: index, name: $scope.class.name});
+        		console.log($scope.class);
+				});
 
 
         // Get the hotreaers pagable by teacher classId
@@ -57,7 +65,15 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','T
                 //                   targetPoint: this.selected[i].targetPoint },{}
                 //     );
 	              // }
-								AddRecommends.save({});
+							AddRecommends.save({teacherId:$rootScope.id,studentId:this.selected[i].id},
+																	{"bookId":$stateParams.bookId,"bookAttribute":this.selected[i].isMandatory}
+																	,function(date){
+																			$rootScope.modal = {title: "添加图书", content: "添加成功！"};
+																			$('#alert-modal').modal();
+																			this.selected = [];
+																			console.log(date);
+																	});
+
             }
         };
 
@@ -72,5 +88,11 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','T
         };
     });
 
+		$scope.selectLength = function(){
+			console.log($scope.bookshelfLoadable.selected.length);
+			console.log($scope.bookshelfLoadable.selected);
+			if($scope.bookshelfLoadable.selected.length>0)
+				$scope.bookshelfLoadable.selected[$scope.bookshelfLoadable.selected.length-1].isMandatory =true;
+		}
 
   }]);

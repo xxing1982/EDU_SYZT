@@ -1,14 +1,20 @@
 package com.syzton.sunread.model.semester;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.syzton.sunread.dto.semester.SemesterDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.util.DateSerializer;
 
 /*
@@ -26,6 +32,10 @@ public class Semester extends AbstractEntity{
     @Column(name = "description", nullable = true, length = MAX_LENGTH_DESCRIPTION)
     private String description;
     
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST},fetch=FetchType.LAZY,optional=false)
+    @JoinColumn(name = "campus")
+    private Campus campus;
+    
     @JsonSerialize(using = DateSerializer.class)
     @Column(name ="start_time",nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -39,8 +49,7 @@ public class Semester extends AbstractEntity{
     public Semester() {
 
     }
-    
-    
+     
     public String getSemester() {
 		return semester;
 	}
@@ -48,6 +57,16 @@ public class Semester extends AbstractEntity{
 
 	public void setSemester(String semester) {
 		this.semester = semester;
+	}
+
+
+	public Campus getCampus() {
+		return campus;
+	}
+
+
+	public void setCampus(Campus campus) {
+		this.campus = campus;
 	}
 
 
@@ -77,5 +96,16 @@ public class Semester extends AbstractEntity{
 		this.endTime = endTime;
 	}
     
+	public SemesterDTO createDTO() {
+		SemesterDTO dto = new SemesterDTO();
+		dto.setCampusId(campus.getId());
+		dto.setCampusName(campus.getName());
+		dto.setDescription(description);
+		dto.setSemester(semester);
+		dto.setStartTime(startTime.getMillis());
+		dto.setEndTime(endTime.getMillis());
+		return dto;
+			
+	}
 
 }

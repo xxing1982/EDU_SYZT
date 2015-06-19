@@ -1,13 +1,8 @@
 package com.syzton.sunread.service.organization;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,17 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.syzton.sunread.dto.organization.CampusDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.organization.Campus;
-import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.model.region.Region;
 import com.syzton.sunread.model.region.SchoolDistrict;
-import com.syzton.sunread.model.user.Teacher;
-import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.organization.EduGroupRepository;
 import com.syzton.sunread.repository.region.RegionRepository;
 import com.syzton.sunread.repository.region.SchoolDistrictRepository;
-import com.syzton.sunread.util.ExcelUtil;
 
 /**
  * @author Morgan-Leon
@@ -102,7 +93,7 @@ public class CampusRepositoryService implements CampusService{
 	  	if(eduGroup == null)
 			 throw new NotFoundException("no edu Group found with name :"+add.getEduGroupName());
 	  }
-    Campus model = Campus.getBuilder(add.getName(),add.getHeadmaster(),add.getWish(),region,eduGroup,schoolDistrict)
+    Campus model = Campus.getBuilder(add.getName(),add.getHeadmaster(),add.getWish(),add.getNoteScore(),region,eduGroup,schoolDistrict)
     		.description(add.getDescription()).wish(add.getWish()).build();
     
     return repository.save(model);
