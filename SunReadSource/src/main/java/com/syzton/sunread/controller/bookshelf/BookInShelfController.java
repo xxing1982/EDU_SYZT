@@ -30,6 +30,7 @@ import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.service.book.BookService;
+import com.syzton.sunread.service.book.CategoryService;
 import com.syzton.sunread.service.bookshelf.BookInShelfService;
 import com.syzton.sunread.service.semester.SemesterService;
 
@@ -43,6 +44,7 @@ public class BookInShelfController {
     private BookInShelfService service;
     private SemesterService semesterService;
     private BookService bookService;
+    private CategoryService categoryService;
 	private ArrayList<DateTime> month;
 	private ArrayList<String> monthly;
 	private ArrayList<Integer> monthlyVerified;
@@ -63,6 +65,11 @@ public class BookInShelfController {
     @Autowired
     public void BookController(BookService bookService){
     	this.bookService = bookService;    	
+    }
+    
+    @Autowired
+    public void CategoryController(CategoryService categoryService){
+    	this.categoryService = categoryService;    	
     }
     
     //Add a Book to bookshelf    
@@ -213,7 +220,13 @@ public class BookInShelfController {
 				verifiedBook.wordCount = book.getWordCount();
 				verifiedBook.point = bookInShelf.getPoint();
 				verifiedBook.verifiedTime = bookInShelf.getVerifiedTime();
-				verifiedBook.category = book.getCategory() != null ?  book.getCategory().getName() : null;
+				Long categoryId = book.getExtra().getCategory();
+				try {
+					verifiedBook.category = categoryService.findById(categoryId).getName();
+				} catch (NotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				dto.semesterVerified.add(verifiedBook);
 			}
 		}

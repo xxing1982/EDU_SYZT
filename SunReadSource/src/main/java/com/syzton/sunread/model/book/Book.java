@@ -105,12 +105,6 @@ public class Book extends AbstractEntity{
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private Set<Review> reviews = new HashSet<>() ;
 
-	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
-    @Basic(fetch = FetchType.LAZY)
-    @JoinColumn(name="category_id")
-    private Category category;
-
-
 
 	public enum Status {
         valid,invalid
@@ -321,12 +315,4 @@ public class Book extends AbstractEntity{
     public void setCatalogue(String catalogue) {
         this.catalogue = catalogue;
     }
-    
-    public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
 }
