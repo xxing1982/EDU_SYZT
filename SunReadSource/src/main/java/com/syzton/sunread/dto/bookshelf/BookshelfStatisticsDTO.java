@@ -5,6 +5,14 @@ package com.syzton.sunread.dto.bookshelf;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.syzton.sunread.util.DateSerializer;
+
 /**
  * @author Morgan-Leon
  * @Date 2015年4月9日
@@ -12,78 +20,27 @@ import java.util.ArrayList;
  */
 public class BookshelfStatisticsDTO {
 	
-	private String username;
+	public class VerifiedBook {
+		public String bookName;
+		
+		public String author;
+		
+		public int wordCount; 
+		
+		public int point;
+		
+	    @JsonSerialize(using = DateSerializer.class)
+	    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+		public DateTime verifiedTime;
+	    
+		public String category;
+	}
+		
+	public int semesterReadNum;
+
+	public ArrayList<VerifiedBook> semesterVerified;
 	
-	private int semesterReadNum;
+	public int[] monthlyVerifiedNums;
 	
-	private ArrayList<String> monthly;
-	
-	private ArrayList<Integer> monthlyVerified;
-	
-	private ArrayList<Integer> monthlyPoints;
-	
-	private int semesterVerified;
-
-	private int semesterPoints;
-	
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public ArrayList<String> getMonthly() {
-		return monthly;
-	}
-
-	public void setMonthly(ArrayList<String> monthly) {
-		this.monthly = monthly;
-	}
-
-	public int getSemesterVerified() {
-		return semesterVerified;
-	}
-
-	public void setSemesterVerified(int semesterVerified) {
-		this.semesterVerified = semesterVerified;
-	}
-
-	public ArrayList<Integer> getMonthlyVerified() {
-		return monthlyVerified;
-	}
-
-	public void setMonthlyVerified(ArrayList<Integer> monthlyVerified) {
-		this.monthlyVerified = monthlyVerified;
-	}
-
-	public ArrayList<Integer> getMonthlyPoints() {
-		return monthlyPoints;
-	}
-
-	public void setMonthlyPoints(ArrayList<Integer> monthlyPoints) {
-		this.monthlyPoints = monthlyPoints;
-	}
-
-	public int getSemesterPoints() {
-		return semesterPoints;
-	}
-
-	public void setSemesterPoints(int semesterPoints) {
-		this.semesterPoints = semesterPoints;
-	}
-
-	public int getSemesterReadNum() {
-		return semesterReadNum;
-	}
-
-	public void setSemesterReadNum(int semesterReadNum) {
-		this.semesterReadNum = semesterReadNum;
-	}
-	
-	
-	
-	
-
+	public int[] monthlyPoints;
 }

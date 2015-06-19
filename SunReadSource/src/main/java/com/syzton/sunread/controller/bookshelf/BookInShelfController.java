@@ -23,10 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.dto.bookshelf.BookshelfStatisticsDTO;
+import com.syzton.sunread.dto.bookshelf.BookshelfStatisticsDTO.VerifiedBook;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.semester.Semester;
+import com.syzton.sunread.service.book.BookService;
 import com.syzton.sunread.service.bookshelf.BookInShelfService;
 import com.syzton.sunread.service.semester.SemesterService;
 
@@ -39,6 +42,7 @@ public class BookInShelfController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookshelfController.class);
     private BookInShelfService service;
     private SemesterService semesterService;
+    private BookService bookService;
 	private ArrayList<DateTime> month;
 	private ArrayList<String> monthly;
 	private ArrayList<Integer> monthlyVerified;
@@ -56,7 +60,12 @@ public class BookInShelfController {
     	this.semesterService = semesterService;    	
     }
     
-//Add a Book to bookshelf    
+    @Autowired
+    public void BookController(BookService bookService){
+    	this.bookService = bookService;    	
+    }
+    
+    //Add a Book to bookshelf    
     @RequestMapping(value = "/bookshelf/{id}/books/{bookId}/bookinshelf", method = RequestMethod.POST)
     @ResponseBody
     public BookInShelfDTO add(@Valid @RequestBody BookInShelfDTO dto
@@ -158,38 +167,56 @@ public class BookInShelfController {
         if ( founds.size() == 0 ) { throw new NotFoundException("Student with ID :"+studentId + " and semester with ID :"+semesterId); }
         
         LOGGER.debug("Found to-do entry with information: {}", founds);
-        return createBookshelfStatisticsDTO(founds,startTime,endTime);
+        return createBookshelfStatisticsDTO(founds, startTime, endTime);
     }
     
-    public BookshelfStatisticsDTO createBookshelfStatisticsDTO(ArrayList<BookInShelf> booksInShelf,DateTime startTime,DateTime endTime) {
-		BookshelfStatisticsDTO dto = new BookshelfStatisticsDTO();
-		String username = booksInShelf.get(0).getBookShelf().getUsername();
-		semesterPoints = 0;
-		int semesterVerified = booksInShelf.size();
-		startTime = startTime.dayOfMonth().withMinimumValue().toDateTime();
-		endTime = endTime.dayOfMonth().withMaximumValue().toDateTime();
+    public BookshelfStatisticsDTO createBookshelfStatisticsDTO(ArrayList<BookInShelf> booksInShelves, DateTime startTime, DateTime endTime) {
 		
-		month = new ArrayList<DateTime>();
-		monthly = new ArrayList<String>();
-		monthlyVerified = new ArrayList<Integer>();
-		monthlyPoints = new ArrayList<Integer>();
+    	// Initlizate the dto entity
+    	BookshelfStatisticsDTO dto = new BookshelfStatisticsDTO();
+    	int startMonth = startTime.getMonthOfYear();
+    	int endMonth = endTime.getMonthOfYear();
+    	dto.monthlyVerifiedNums = new int[endMonth - startMonth + 1];
+    	dto.monthlyPoints = new int[endMonth - startMonth + 1];
+    	dto.semesterVerified = new ArrayList<VerifiedBook>();
+    	dto.semesterReadNum = 0;
+    	
+    	// Initlizate monthlyVerifiedNums and monthlyPoints
+    	for ( int i = 0; i < endMonth - startMonth; i ++ ){
+    		dto.monthlyVerifiedNums[i] = 0;
+    		dto.monthlyPoints[i] = 0;
+    	}
 		
-		for (int i = 0; i < booksInShelf.size(); i++) {
-			month.add(startTime.plusMonths(i));
-			monthly.add(month.get(i).toString());
-			monthlyVerified.add(bookNumDuration(booksInShelf, month.get(i), month.get(i).dayOfMonth().withMaximumValue().toDateTime()));
-			monthlyPoints.add(bookPointsDuration(booksInShelf,month.get(i), month.get(i).dayOfMonth().withMaximumValue().toDateTime()));
-			semesterPoints+=monthlyPoints.get(i);
-		}
-		
-		dto.setSemesterReadNum(booksInShelf.size());
-		dto.setMonthly(monthly);
-		dto.setMonthlyVerified(monthlyVerified);
-		dto.setMonthlyPoints(monthlyPoints);
-		dto.setSemesterVerified(semesterVerified);
-		dto.setSemesterPoints(semesterPoints);
-		dto.setUsername(username);
+    	// Calculate the dto
+		for ( BookInShelf bookInShelf : booksInShelves ) {
+			
+			// Update semesterReadNum
+			dto.semesterReadNum ++;
+			
+			// Check if bookInShelf is verified
+			if ( bookInShelf.getReadState() == true ) {
 				
+				// The index in both arrays
+				int index = bookInShelf.getVerifiedTime().getMonthOfYear() - startMonth;
+				
+				// Update monthlyVerifiedNums
+				dto.monthlyVerifiedNums[index] ++;
+				
+				// Update monthlyPoints
+				dto.monthlyPoints[index] += bookInShelf.getPoint();		
+				
+				// Update the semesterVerified
+				VerifiedBook verifiedBook = dto.new VerifiedBook();
+				Book book = bookService.findById(bookInShelf.getBookId());
+				verifiedBook.bookName = bookInShelf.getBookName();
+				verifiedBook.author = book.getAuthor();
+				verifiedBook.wordCount = book.getWordCount();
+				verifiedBook.point = bookInShelf.getPoint();
+				verifiedBook.verifiedTime = bookInShelf.getVerifiedTime();
+				verifiedBook.category = book.getCategory() != null ?  book.getCategory().getName() : null;
+				dto.semesterVerified.add(verifiedBook);
+			}
+		}
 		return dto;
 	}
     
@@ -221,13 +248,3 @@ public class BookInShelfController {
     }
     
 }
-
-
-
-
-
-
-
-
-
-

@@ -3,11 +3,14 @@ package com.syzton.sunread.model.book;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.util.DateSerializer;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -102,10 +105,14 @@ public class Book extends AbstractEntity{
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private Set<Review> reviews = new HashSet<>() ;
 
+	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
+    @Basic(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id")
+    private Category category;
 
 
 
-    public enum Status {
+	public enum Status {
         valid,invalid
     }
 
@@ -314,4 +321,12 @@ public class Book extends AbstractEntity{
     public void setCatalogue(String catalogue) {
         this.catalogue = catalogue;
     }
+    
+    public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 }

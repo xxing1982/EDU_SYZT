@@ -42,7 +42,7 @@ ctrls.controller("personalProfileController",
 
         // Get the campus imformation
         $scope.campus = Campus.get( {id: $scope.student.campusId }, function(){
-            $scope.basicInformation.content.campus = $scope.campus.school;
+            $scope.basicInformation.content.campus = $scope.campus.name;
         });
         
         // Get the class imformation
