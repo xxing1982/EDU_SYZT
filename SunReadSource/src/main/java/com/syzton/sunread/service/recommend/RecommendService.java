@@ -32,7 +32,9 @@ public interface RecommendService {
 	 * @return
 	 */
 	RecommendDTO add(RecommendDTO recommendDTO, Long teacherId, Long bookInShelfId);
-
+	
+	ArrayList<RecommendDTO> addToClazz(RecommendDTO recommendDTO, Long teacherId, Long clazzId);
+	
 	/**
 	 * @param teacherId
 	 * @return
