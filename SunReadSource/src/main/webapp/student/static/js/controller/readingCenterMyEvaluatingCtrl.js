@@ -20,6 +20,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.status.current = $scope.status.verify;
 		//source
 		VerifyExam.getAllInfo($rootScope.id, function(data){
+			$scope.source.verifyExamsSource = data.examDTOs;
 			$scope.source.verifyExams = data.examDTOs;
 			$scope.verifyExams = $scope.source.verifyExams.slice(0, $scope.countVerifyExam);
 			$scope.status.verify = stateTexts.more;
@@ -27,6 +28,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		});
 
 		WordExam.getAllInfo($rootScope.id, function(data){
+			$scope.source.wordExamsSource = data.examDTOs;
 			$scope.source.wordExams = data.examDTOs;
 			$scope.wordExams = $scope.source.wordExams.slice(0, $scope.countWordExam);
 			$scope.status.word = stateTexts.more;
@@ -34,6 +36,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		});
 
 		ThinkExam.getAllInfo($rootScope.id, function(data){
+			$scope.source.thinkExamsSource = data.examDTOs;
 			$scope.source.thinkExams = data.examDTOs;//pictureUrl
 			$scope.thinkExams = $scope.source.thinkExams.slice(0, $scope.countThinkExam);
 			$scope.status.think = stateTexts.more;

@@ -137,3 +137,16 @@ img.active
     border: 3px red solid;
 }
 
+.btn-checked
+{
+    color: #fff;
+    background-color: #729e54;
+    border-color: #729e54;
+}
+
+.btn-unchecked
+{
+    color: #fff;
+    background-color: #86af7b;
+    border-color: #86af7b;
+}

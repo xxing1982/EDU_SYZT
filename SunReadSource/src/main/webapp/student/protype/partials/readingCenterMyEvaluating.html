@@ -57,7 +57,11 @@
 		</div>
 	</div>
 	<div class="col-md-2">
-		
+		<div class="row">
+			<div class="col-md-12" ng-class="{true: 'active', false: 'inactive'}[isActive]">
+				<button type="button" class="btn btn-default" >全部</button>
+			</div>
+		</div>
 	</div>
 	<div class="modal fade" id="exam-evaluation-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="color: #2F5682">
         <div class="modal-dialog">

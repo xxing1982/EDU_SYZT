@@ -76,19 +76,19 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
       $scope.hotNotes = data.content;
     });
 
+    Fish.getMyFish($rootScope.id, function(data){
+      $scope.selectedFish = data;
+    });
+
     $scope.changeFish_modal = function(){
       Fish.getFishes(function(data){
         $scope.fishes = data;
         $("#change-fish-modal").modal({backdrop: 'static', keyboard: false});
-        Fish.getMyFish($rootScope.id, function(dataMy){
-          $scope.selectedFishId = dataMy.id;
-          //$scope.myFishId = dataMy.id;
           for(var key in $scope.fishes){
             $scope.fishes[key].isSelected = false;
-            if ($scope.fishes[key].id == dataMy.id)
+            if ($scope.fishes[key].id == $scope.selectedFish.id)
               $scope.fishes[key].isSelected = true;
-          }
-        })       
+          }     
       });
     }
 
