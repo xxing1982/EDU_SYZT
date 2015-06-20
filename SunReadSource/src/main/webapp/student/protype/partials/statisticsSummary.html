@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div clas="row">
-                    <div class="text-center title"><h5>报告时间：{{ statistics.summaryHeader.startTime }}&nbsp;~&nbsp;{{ statistics.summaryHeader.endTime }}&nbsp;&nbsp;&nbsp;&nbsp;学校：{{ statistics.summaryHeader.campus }}&nbsp;&nbsp;&nbsp;&nbsp;班级：{{ statistics.summaryHeader.class }}&nbsp;&nbsp;&nbsp;&nbsp;姓名：张晓成</h5></div>
+                    <div class="text-center title"><h5>报告时间：{{ statistics.summaryHeader.startTime }}&nbsp;~&nbsp;{{ statistics.summaryHeader.endTime }}&nbsp;&nbsp;&nbsp;&nbsp;学校：{{ statistics.summaryHeader.campus }}&nbsp;&nbsp;&nbsp;&nbsp;班级：{{ statistics.summaryHeader.class }}&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{ statistics.summaryHeader.username }}</h5></div>
                 </div>
                 <div clas="row">
                     <div class="col-md-1"><div class="row">
@@ -66,17 +66,17 @@
             <div class="col-md-12 title">
                 <div clas="row">
                     <div class="col-md-4 col-md-offset-1"><div class="row">
-                        <div class="row"><h5>阅读等级：2级<h5></div>
-                        <div class="row"><h5>学期内阅读任务：45本<h5></div>
-                        <div class="row"><h5>阅读积分：90分<h5></div>
+                        <div class="row"><h5>阅读等级：{{ statistics.basicInformations.level }}级<h5></div>
+                        <div class="row"><h5>学期内阅读任务：{{ statistics.basicInformations.semesterReadNum }}本<h5></div>
+                        <div class="row"><h5>阅读积分：{{ statistics.basicInformations.point }}分<h5></div>
                     </div></div>
                     <div class="col-md-4"><div class="row">
-                        <div class="row"><h5>财富值：20金币<h5></div>
-                        <div class="row"><h5>学期内通过认证数量：45本<h5></div>
+                        <div class="row"><h5>财富值：{{ statistics.basicInformations.coin }}金币<h5></div>
+                        <div class="row"><h5>学期内通过认证数量：{{ statistics.basicInformations.semesterVerifiedNum }}本<h5></div>
                         <div class="row">
-                            <h5>平均认证正确率：80% 
+                            <h5>平均认证正确率：{{ statistics.basicInformations.semesterVerifiedRate }}% 
                                 <div class="orange-light fr average-width">&nbsp;
-                                    <div class="orange fl" style="width:79%;">&nbsp;
+                                    <div class="orange fl" ng-style="{width: {{statistics.basicInformations.semesterVerifiedRate}} + '%'}">&nbsp;
                                     </div>
                                 </div>
                             </h5>
@@ -104,23 +104,23 @@
                 </div>
             </div>            
                         
-            <!-- semester informations -->
+            <!-- semester reading -->
 
             <div class="col-md-12">
                 <div class="row summary-items theme-font orange">学期阅读数量</div>
             </div>
             
             <div class="col-md-12 title">
-                <div><h5>您本学期一共阅读了<span class="orange-text">45</span>本书，六月读了<span class="orange-text">9</span>本书，为本学期最多。</h5></div>
+                <div><h5>您本学期一共阅读了<span class="orange-text">{{ statistics.semesterReadings.semesterReadNum }}</span>本书，{{ statistics.semesterReadings.maxMonthlyVerifiedNumMonth }}月读了<span class="orange-text">{{ statistics.semesterReadings.maxMonthlyVerifiedNum }}</span>本书，为本学期最多。</h5></div>
                 <div><small>（年份/月）</small></div>
                 <div class="col-md-12">
-                    <div class="row" ng-repeat="n in [1,2,3,4,5,6,7,8,9]">
-                        <div class="col-md-1"><h5 class="row text-right">2014.&nbsp;12</h5></div>
+                    <div class="row" ng-repeat="VerifiedBook in statistics.semesterReadings.monthlyVerifiedNums track by $index">
+                        <div class="col-md-1"><h5 class="row text-right">{{ statistics.semesterReadings.year }}.&nbsp;{{ statistics.semesterReadings.startMonth + $index }}</h5></div>
                         <div class="col-md-10"><h5>
                             <div class="fr reading-count-width">&nbsp;
-                                <div class="orange fl" ng-style="{width: {{10*n}} + '%'}">&nbsp;
+                                <div class="orange fl" ng-style="{width: {{ VerifiedBook * 90 / statistics.semesterReadings.maxMonthlyVerifiedNum}} + '%'}">&nbsp;
                                 </div>
-                                <div class="fl">&nbsp;&nbsp;{{n}}
+                                <div class="fl">&nbsp;&nbsp;{{ VerifiedBook }}
                                 </div>
                             </div>
                         </h5></div>
@@ -135,7 +135,7 @@
             </div>
             
             <div class="col-md-12 title">
-                <div><h5>本学期一共获得了<span class="pink-text">666</span>积分，七月获得了<span class="pink-text">145</span>积分，为本学期最多。</h5></div>                
+                <div><h5>本学期一共获得了<span class="pink-text">{{ statistics.semesterPoints.totalPoint }}</span>积分，{{ statistics.semesterPoints.maxMonthlyPointMonth }}月获得了<span class="pink-text">{{ statistics.semesterPoints.maxMonthlyPoint }}</span>积分，为本学期最多。</h5></div>                
             </div>
             
             <!-- axis column -->
@@ -152,17 +152,17 @@
             <!-- histogram columns -->
             <div class="col-md-11">
                 <div class="row">
-                    <div class="histogram buttom-separator" style="width:16%;" ng-repeat="n in [20,80,90,10,30,40]">
-                        <div class="data"  ng-style="{height: {{n}} + '%'}">
-                            <div class="number"><h4>5</h4></div>
+                    <div class="histogram buttom-separator" style="width:16%;" ng-repeat="point in statistics.semesterPoints.monthlyPoints track by $index">
+                        <div class="data"  ng-style="{height: {{ 100 - point * 100 / statistics.semesterPoints.maxMonthlyPoint }} + '%'}">
+                            <div class="number"><h4>{{ point }}</h4></div>
                         </div>
-                        <div class="pink-2 data" ng-style="{height: {{100-n}} + '%'}" >
+                        <div class="pink-2 data" ng-style="{height: {{ point * 100 / statistics.semesterPoints.maxMonthlyPoint }} + '%'}" >
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="axis" style="width:16%;" ng-repeat="n in [1,2,3,4,5,6]">
-                        <h4 class="text-center">2014.12</h4>
+                    <div class="axis" style="width:16%;" ng-repeat="point in statistics.semesterPoints.monthlyPoints track by $index">
+                        <h4 class="text-center">{{ statistics.semesterPoints.year }}.{{ statistics.semesterPoints.startMonth + $index }}</h4>
                     </div>
                 </div>
             </div>
