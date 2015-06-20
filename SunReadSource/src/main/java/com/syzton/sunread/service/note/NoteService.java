@@ -1,8 +1,10 @@
 package com.syzton.sunread.service.note;
 
 import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Note;
@@ -12,6 +14,7 @@ import com.syzton.sunread.model.note.Note;
  *
  */
 public interface NoteService {
+
 
     /**
      * Adds a new note entry.
@@ -50,9 +53,12 @@ public interface NoteService {
      */
     public Note update(NoteDTO updated) throws NotFoundException;
 
+
 	public Page<Note> findByBookId(Pageable pageable, long bookId);
 
 	public Page<Note> findByUserId(Pageable pageable, long userId);
 
 	public Page<Note> findBySearchTerm(Pageable pageable, String searchTerm);
+
+	public List<Note> findByUserIdAndSemesterId(Long userId, Long semesterId);	
 }

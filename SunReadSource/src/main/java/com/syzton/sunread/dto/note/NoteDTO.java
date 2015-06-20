@@ -29,7 +29,17 @@ public class NoteDTO {
     
     private Long commentCount;
     
-    public Long getCommentCount() {
+    private int contentLength;
+    
+    public int getContentLength() {
+		return contentLength;
+	}
+
+	public void setContentLength(int contentLength) {
+		this.contentLength = contentLength;
+	}
+
+	public Long getCommentCount() {
 		return commentCount;
 	}
 

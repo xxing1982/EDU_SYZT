@@ -16,12 +16,16 @@ import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
 import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.model.note.QNote;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.note.NoteRepository;
 import com.syzton.sunread.repository.user.UserRepository;
 import com.syzton.sunread.service.pointhistory.PointHistoryService;
+import com.syzton.sunread.service.semester.SemesterService;
+import com.syzton.sunread.service.user.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +77,13 @@ public class NoteRepositoryService implements NoteService {
         this.pointHistoryService = pointHistoryService;
     }
     
+    private SemesterRepository semesterRepository;
+
+    @Autowired
+    public void SemesterService(SemesterRepository semesterRepository) {
+        this.semesterRepository = semesterRepository;
+    }
+    
     private SecurityContextUtil securityContextUtil;
     
     @Autowired
@@ -88,9 +99,13 @@ public class NoteRepositoryService implements NoteService {
         book.getStatistic().increaseNotes();
         bookRepository.save(book);
         User user = securityContextUtil.getUser();
-        Note noteModel = Note.getBuilder(added.getTitle(), added.getContent(), book, user)
-        		.image(added.getImage())
-                .build();
+        Note note = new Note();
+        note.setTitle(added.getTitle());
+        note.setContent(added.getContent());
+        note.setContentLenght(added.getContent().length());
+        note.setBook(book);
+        note.setUser(user);
+        note.setImage(added.getImage());
         
         // Add pointhistories entity
         PointHistory pointHistory = new PointHistory();
@@ -99,7 +114,7 @@ public class NoteRepositoryService implements NoteService {
         pointHistory.setNum(5);
         pointHistory.setStudent((Student)user);
         pointHistoryService.add(pointHistory);
-        return repository.save(noteModel);
+        return repository.save(note);
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})
@@ -144,7 +159,10 @@ public class NoteRepositoryService implements NoteService {
         Note model = findById(updated.getId());
         LOGGER.debug("Found a note entry: {}", model);
 
-        model.update(updated.getTitle(), updated.getContent(), updated.getImage());
+        model.setTitle(updated.getTitle());
+        model.setContent(updated.getContent());
+        model.setContentLenght(model.getContent().length());
+        model.setImage(updated.getImage());
 
         return model;
     }
@@ -186,4 +204,12 @@ public class NoteRepositoryService implements NoteService {
         return notePage;
     }
 
+    @Transactional
+    @Override 
+    public List<Note> findByUserIdAndSemesterId(Long userId, Long semesterId) {
+    	User user = userRepository.findOne(userId);
+    	Semester semester = semesterRepository.findOne(semesterId);
+    	List<Note> notes = repository.findByUserAndSemester(user, semester.getStartTime(), semester.getEndTime());
+        return notes;
+    }
 }

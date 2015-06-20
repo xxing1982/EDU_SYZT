@@ -1,5 +1,7 @@
 package com.syzton.sunread.controller.note;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,11 @@ import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.note.Note;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
 import com.syzton.sunread.service.note.NoteService;
+import com.syzton.sunread.service.semester.SemesterService;
 
 import javax.validation.Valid;
 
@@ -123,18 +127,17 @@ public class NoteController extends BaseController {
         return new PageResource<>(notePage, "page", "size");
     }
     
-//    @RequestMapping(value = "/api/notes/search", method = RequestMethod.GET)
-//    @ResponseBody
-//    public PageResource<Note> quickSearch(@RequestParam("page") int page,
-//										  @RequestParam("size") int size,
-//										  @RequestParam("sortBy") String sortBy,
-//										  @RequestParam("direction") String direction,
-//										  @RequestParam("searchTerm") String searchTerm) {
-//    	
-//    	Pageable pageable = getPageable(page, size, sortBy, direction);
-//		
-//        Page<Note> notePage = service.findBySearchTerm( pageable, searchTerm );
-//
-//        return new PageResource<>(notePage, "page", "size");
-//    }
+    @RequestMapping(value = "/api/semesters/{semesterId}/notes", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Note> findNotesByUserIdAndSemesterId( @RequestParam("userId") long userId,
+    											      @PathVariable("semesterId") long semesterId ) {
+    	
+
+        List<Note> notes = service.findByUserIdAndSemesterId(userId, semesterId);
+        for ( Note note : notes ) {
+        	note.setContent(null);
+        	note.setComments(null);
+        }
+        return notes;
+    }
 }

@@ -6,6 +6,6 @@ var noteServices = angular.module('noteServices', ['ngResource', "nourConfig"]);
 noteServices.factory('Note', ['$resource', 'config',
 	function($resource, config){
 		return $resource(config.HOST + ":by/:id/notes",
-            {by:'@by', id:'@id'}, {}
+            {by:'@by', id:'@id'}, {'query':  {method:'GET', isArray:true}}
         );
 }]);

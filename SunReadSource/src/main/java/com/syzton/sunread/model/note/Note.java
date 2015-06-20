@@ -1,10 +1,13 @@
 package com.syzton.sunread.model.note;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.user.User;
+
 import javax.persistence.*;
+
 import java.util.Set;
 
 
@@ -20,11 +23,10 @@ public class Note extends AbstractEntity{
     public static final int MAX_LENGTH_CONTENT = 200000;
     public static final int MAX_LENGTH_IMAGE = 10485760; // 10MiB
     
-
 	@Column(name="title",length = MAX_LENGTH_TITLE)
     private String title;
-    
-    @Column(name="content",length = MAX_LENGTH_CONTENT)
+   
+	@Column(name="content",length = MAX_LENGTH_CONTENT)
     private String content;
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "note")
@@ -33,6 +35,9 @@ public class Note extends AbstractEntity{
     
     @Column(name="comment_count")
     private Long commentCount = 0L;
+    
+    @Column(name="content_length")
+    private int contentLenght = 0;
     
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)
@@ -50,11 +55,7 @@ public class Note extends AbstractEntity{
     public Note() {
 
     }
-
-    public static Builder getBuilder(String title, String content, Book book, User user) {
-        return new Builder(title, content, book, user);
-    }
-
+    
     public Long getCommentCount() {
 		return commentCount;
 	}
@@ -86,35 +87,44 @@ public class Note extends AbstractEntity{
 	public String getBookPictureUrl() {
 		return book.getPictureUrl();
 	}
-    
-    public void update(String title, String content, String image) {
-        this.title = title;
-        this.content = content;
-        this.image = image;
-    }
+	
+	public int getContentLenght() {
+		return contentLenght;
+	}
 
-    
-    public static class Builder {
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-        private Note built;
 
-        public Builder(String title, String content, Book book, User user) {
-            built = new Note();
-            built.title = title;
-            built.content = content;
-            built.book = book;
-            built.user = user;
-        }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-        public Note build() {
-            return built;
-        }
 
-        public Builder image(String image){
-        	built.image = image;
-        	return this;
-        }
-    }
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
+
+	public void setContentLenght(int contentLenght) {
+		this.contentLenght = contentLenght;
+	}
+
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
     public NoteDTO createDTO(Note model) {
         NoteDTO dto = new NoteDTO();
@@ -122,13 +132,12 @@ public class Note extends AbstractEntity{
         dto.setId(model.getId());
         dto.setTitle(model.getTitle());
         dto.setContent(model.getContent());
+        dto.setContentLength(model.getContent().length());
         dto.setImage(model.getImage());
         dto.setCommentCount(model.getCommentCount());
 
         return dto;
     }
-
-    
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

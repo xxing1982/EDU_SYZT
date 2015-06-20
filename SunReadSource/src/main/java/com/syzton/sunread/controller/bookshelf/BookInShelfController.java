@@ -177,26 +177,26 @@ public class BookInShelfController {
     	DateTime endTime = semester.getEndTime(); 
     	
         ArrayList<BookInShelf> founds = service.findByStudentIdAndSemester(studentId, startTime,endTime);
-        if ( founds.size() == 0 ) { throw new NotFoundException("Student with ID :"+studentId + " and semester with ID :"+semesterId); }
-        
+       
         LOGGER.debug("Found to-do entry with information: {}", founds);
         return createBookshelfStatisticsDTO(founds, startTime, endTime);
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public BookshelfStatisticsDTO createBookshelfStatisticsDTO(ArrayList<BookInShelf> booksInShelves, DateTime startTime, DateTime endTime) {
-		
+    	
     	// Initlizate the dto entity
     	BookshelfStatisticsDTO dto = new BookshelfStatisticsDTO();
     	int startMonth = startTime.getMonthOfYear();
     	int endMonth = endTime.getMonthOfYear();
-    	dto.monthlyVerifiedNums = new int[endMonth - startMonth + 1];
-    	dto.monthlyPoints = new int[endMonth - startMonth + 1];
+    	int monthCount = endMonth - startMonth + ( startMonth < endMonth ? 0 : 12 ) + 1;
+    	dto.monthlyVerifiedNums = new int[monthCount];
+    	dto.monthlyPoints = new int[monthCount];
     	dto.semesterVerified = new ArrayList<VerifiedBook>();
     	dto.semesterReadNum = 0;
     	
     	// Initlizate monthlyVerifiedNums and monthlyPoints
-    	for ( int i = 0; i < endMonth - startMonth; i ++ ){
+    	for ( int i = 0; i < monthCount; i ++ ){
     		dto.monthlyVerifiedNums[i] = 0;
     		dto.monthlyPoints[i] = 0;
     	}
@@ -219,6 +219,7 @@ public class BookInShelfController {
 				
 				// The index in both arrays
 				int index = bookInShelf.getVerifiedTime().getMonthOfYear() - startMonth;
+				if ( index < 0 ) { index += 12; }
 				
 				// Update monthlyVerifiedNums
 				dto.monthlyVerifiedNums[index] ++;

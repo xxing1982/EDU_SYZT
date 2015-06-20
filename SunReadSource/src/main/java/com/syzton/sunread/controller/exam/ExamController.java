@@ -470,6 +470,15 @@ public class ExamController {
 		return passRate;
 	}
 	
+	@RequestMapping(value = "/verifyexams/passrate/{studentId}/{semesterId}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getPassRate(@PathVariable("studentId") Long studentId,@PathVariable("semesterId") Long semesterId)
+			throws NotFoundException {
+		int average = getAverageVerifyExamsPassRate(studentId, semesterId);
+		int firstpassrate = getFirstPassExamsPassRate(studentId, semesterId);
+		int secondpassrate = getSecondPassExamsPassRate(studentId, semesterId);
+		return "{\"average\":" + average +  ",\"firstpassrate\":" + firstpassrate + ",\"secondpassrate\":" + secondpassrate + "}";
+	}
 	
 	@RequestMapping(value = "/capacityexam/everytypepassrate/{studentid}/{semester}", method = RequestMethod.GET)
 	@ResponseBody
