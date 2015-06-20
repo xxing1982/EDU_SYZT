@@ -46,3 +46,14 @@ dropBookFromShelfService.factory('DropBookFromShelf',['$resource', 'config',
             {id:'@_id'},{}
         );
     }]);
+
+var bookshelfStatisticsService = angular.module('bookshelfStatisticsServices', ['ngResource', "nourConfig"]);
+
+bookshelfStatisticsService.factory('BookshelfStatistics',['$resource', 'config',
+	function($resource, config){
+		return $resource(
+            config.HOST+"student/:studentId/semester/:semesterId/bookshelfStatistics",
+            {studentId:'@_studentId', semesterId:'@_semesterId'},{}
+        );
+    }]);
+

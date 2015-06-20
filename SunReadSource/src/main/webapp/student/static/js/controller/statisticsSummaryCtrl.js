@@ -1,7 +1,20 @@
 //statisticsSummary.js
 
-ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', 'Student', 'Semester', 'Campus', 'Class',
-                                                  function ($scope, $rootScope, Student, Semester, Campus, Class) {
+ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', 'Student', 'Semester', 'Campus', 'Class', 'BookshelfStatistics',
+                                                  function ($scope, $rootScope, Student, Semester, Campus, Class, BookshelfStatistics) {
+                            
+    function findMaxAndIndex(arr){
+        var max = arr[0];
+        var index;
+        for (var i = 0; i < arr.length; i ++) {
+            if (max < arr[i]){
+                max = arr[i];
+                index = i;
+            }
+        }
+        return { max: max, index: index };    
+    }
+                                                      
                                                       
     // Initlizate the dropdown statues
     $scope.semestersStatuses = [];
@@ -11,7 +24,8 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', 'Stude
     $scope.statistics = { summaryHeader: {},
                           basicInformations : {},
                           readingQuality: {},
-                          semesterInformations: {},
+                          semesterReadings: {},
+                          semesterPoints: {},
                           readingCategory : {},
                           booksList: {},
                           notesList: {} };
@@ -25,8 +39,9 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', 'Stude
             // The method to update statistics by semester
             $scope.semesters.updateStatistics = function(){
                 
-                // Get current semester
+                // Get current semester user 
                 var semester = $scope.semesters[$scope.semestersSelected_status];
+                var student = $scope.student;
                 
                 // Update summaryHeader
                 var summaryHeader = $scope.statistics.summaryHeader;
@@ -37,6 +52,44 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', 'Stude
                 });
                 Class.get({id: $scope.student.clazzId}, function(clazz){
                     summaryHeader.class = clazz.name;
+                });
+                summaryHeader.username = student.username;
+                
+
+                var basicInformations = $scope.statistics.basicInformations;
+                var semesterReadings = $scope.statistics.semesterReadings;
+                var semesterPoints = $scope.statistics.semesterPoints;
+                
+                BookshelfStatistics.get({studentId: student.id, semesterId: semester.id}, function(bookshelfStatistics){
+                   
+                    // Update Basic informations
+                    basicInformations.level = student.statistic.level;
+                    basicInformations.coin = student.statistic.coin;
+                    basicInformations.semesterReadNum = bookshelfStatistics.semesterReadNum;
+                    basicInformations.semesterVerifiedNum = bookshelfStatistics.semesterVerified.length;
+                    basicInformations.point = student.statistic.point;
+                    basicInformations.semesterVerifiedRate = Math.floor(basicInformations.semesterVerifiedNum / basicInformations.semesterReadNum * 100);
+                
+                    // Update semester informations
+                    semesterReadings.semesterReadNum = bookshelfStatistics.semesterReadNum;
+                    semesterReadings.year = parseInt( summaryHeader.startTime.split("-")[0] );
+                    semesterReadings.startMonth = parseInt( summaryHeader.startTime.split("-")[1] );
+                    semesterReadings.monthlyVerifiedNums = bookshelfStatistics.monthlyVerifiedNums;
+                    var maxMonthlyVerifiedNumAndIndex = findMaxAndIndex( bookshelfStatistics.monthlyVerifiedNums );
+                    semesterReadings.maxMonthlyVerifiedNum = maxMonthlyVerifiedNumAndIndex.max;
+                    semesterReadings.maxMonthlyVerifiedNumMonth = maxMonthlyVerifiedNumAndIndex.index + semesterReadings.startMonth;
+                
+                    // Update semester points
+                    semesterPoints.year = parseInt( summaryHeader.startTime.split("-")[0] );
+                    semesterPoints.startMonth = parseInt( summaryHeader.startTime.split("-")[1] );
+                    semesterPoints.monthlyPoints = bookshelfStatistics.monthlyPoints;
+                    var maxMonthlyPointAndIndex = findMaxAndIndex( bookshelfStatistics.monthlyPoints );
+                    semesterPoints.maxMonthlyPoint = maxMonthlyPointAndIndex.max;
+                    semesterPoints.maxMonthlyPointMonth = maxMonthlyPointAndIndex.index + semesterPoints.startMonth;
+                    semesterPoints.totalPoint = eval( bookshelfStatistics.monthlyPoints.join("+") );
+                    
+                    // Update reading category
+//                    readingCategory.
                 });
                 
             };

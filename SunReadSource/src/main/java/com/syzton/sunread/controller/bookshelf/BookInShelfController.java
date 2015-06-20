@@ -1,5 +1,8 @@
 package com.syzton.sunread.controller.bookshelf;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javassist.NotFoundException;
 
@@ -27,10 +30,13 @@ import com.syzton.sunread.dto.bookshelf.BookshelfStatisticsDTO.VerifiedBook;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;
 import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.book.Dictionary;
+import com.syzton.sunread.model.book.DictionaryType;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.service.book.BookService;
 import com.syzton.sunread.service.book.CategoryService;
+import com.syzton.sunread.service.book.DictionaryService;
 import com.syzton.sunread.service.bookshelf.BookInShelfService;
 import com.syzton.sunread.service.semester.SemesterService;
 
@@ -44,7 +50,7 @@ public class BookInShelfController {
     private BookInShelfService service;
     private SemesterService semesterService;
     private BookService bookService;
-    private CategoryService categoryService;
+    private DictionaryService dictionaryService;
 	private ArrayList<DateTime> month;
 	private ArrayList<String> monthly;
 	private ArrayList<Integer> monthlyVerified;
@@ -68,8 +74,8 @@ public class BookInShelfController {
     }
     
     @Autowired
-    public void CategoryController(CategoryService categoryService){
-    	this.categoryService = categoryService;    	
+    public void DictionaryController(DictionaryService dictionaryService){
+    	this.dictionaryService = dictionaryService;    	
     }
     
     //Add a Book to bookshelf    
@@ -177,7 +183,8 @@ public class BookInShelfController {
         return createBookshelfStatisticsDTO(founds, startTime, endTime);
     }
     
-    public BookshelfStatisticsDTO createBookshelfStatisticsDTO(ArrayList<BookInShelf> booksInShelves, DateTime startTime, DateTime endTime) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public BookshelfStatisticsDTO createBookshelfStatisticsDTO(ArrayList<BookInShelf> booksInShelves, DateTime startTime, DateTime endTime) {
 		
     	// Initlizate the dto entity
     	BookshelfStatisticsDTO dto = new BookshelfStatisticsDTO();
@@ -193,6 +200,13 @@ public class BookInShelfController {
     		dto.monthlyVerifiedNums[i] = 0;
     		dto.monthlyPoints[i] = 0;
     	}
+		
+    	// Initlizate the categoriesMap
+    	List<Dictionary> categories =  dictionaryService.findByType(DictionaryType.CATEGORY);
+		Map categoriesMap = new HashMap<Integer, String>();
+		for ( Dictionary category : categories ){
+			categoriesMap.put( category.getValue(), category.getName() );					
+		}
 		
     	// Calculate the dto
 		for ( BookInShelf bookInShelf : booksInShelves ) {
@@ -220,13 +234,8 @@ public class BookInShelfController {
 				verifiedBook.wordCount = book.getWordCount();
 				verifiedBook.point = bookInShelf.getPoint();
 				verifiedBook.verifiedTime = bookInShelf.getVerifiedTime();
-				Long categoryId = book.getExtra().getCategory();
-				try {
-					verifiedBook.category = categoryService.findById(categoryId).getName();
-				} catch (NotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				int categoryId = book.getExtra().getCategory();
+				verifiedBook.category = (String) categoriesMap.get(categoryId);
 				dto.semesterVerified.add(verifiedBook);
 			}
 		}

@@ -22,7 +22,7 @@ public class BookExtra extends AbstractEntity{
 
     private int grade;
 
-    private Long category;
+    private int category;
 
     private int ageRange;
 
@@ -111,11 +111,11 @@ public class BookExtra extends AbstractEntity{
         this.grade = grade;
     }
 
-    public Long getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(Long category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
