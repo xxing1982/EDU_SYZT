@@ -14,6 +14,8 @@ public class UserStatisticHistory extends AbstractEntity implements Serializable
     private long studentId;
 
     private long semesterId;
+
+    private long campusId;
     //current point
     private int point;
     //current coin
@@ -24,6 +26,8 @@ public class UserStatisticHistory extends AbstractEntity implements Serializable
     private int readNum;
     //total testPassed
     private int testPasses;
+
+    private int testCounts;
 
     private int level ;
 
@@ -89,5 +93,22 @@ public class UserStatisticHistory extends AbstractEntity implements Serializable
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+
+    public long getCampusId() {
+        return campusId;
+    }
+
+    public void setCampusId(long campusId) {
+        this.campusId = campusId;
+    }
+
+    public int getTestCounts() {
+        return testCounts;
+    }
+
+    public void setTestCounts(int testCounts) {
+        this.testCounts = testCounts;
     }
 }

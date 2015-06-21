@@ -1,10 +1,6 @@
 package com.syzton.sunread.model.store;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.util.DateSerializer;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 
 import javax.persistence.*;
 
@@ -26,9 +22,10 @@ public class Gift extends AbstractEntity{
 
     private boolean exchangeable;
 
-    private long schoolId;
+    private long campusId;
 
-    private String adder;
+    private long userId;
+
 
 
     @Enumerated(EnumType.STRING)
@@ -92,19 +89,19 @@ public class Gift extends AbstractEntity{
         this.picture = picture;
     }
 
-    public long getSchoolId() {
-        return schoolId;
+    public long getCampusId() {
+        return campusId;
     }
 
-    public void setSchoolId(long schoolId) {
-        this.schoolId = schoolId;
+    public void setCampusId(long campusId) {
+        this.campusId = campusId;
     }
 
-    public String getAdder() {
-        return adder;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setAdder(String adder) {
-        this.adder = adder;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

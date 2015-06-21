@@ -21,6 +21,8 @@ public class UserStatistic extends AbstractEntity implements Serializable{
     private int readNum;
     //total testPassed
     private int testPasses;
+    // total tests
+    private int testCount;
 
     private int level ;
 
@@ -73,7 +75,16 @@ public class UserStatistic extends AbstractEntity implements Serializable{
         return testPasses;
     }
 
-    public void increaseTestPasses() {
+    public void increaseTestPasses()
+    {
         this.testPasses = ++this.testPasses;
+    }
+
+    public int getTestCount() {
+        return testCount;
+    }
+
+    public void increaseTestCounts() {
+        this.testCount = ++this.testCount;
     }
 }

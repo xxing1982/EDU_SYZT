@@ -21,6 +21,15 @@ public class ClazzStatisticHistory extends AbstractEntity{
 
     private int totalReads;
 
+    private long campusId;
+
+    public long getCampusId() {
+        return campusId;
+    }
+
+    public void setCampusId(long campusId) {
+        this.campusId = campusId;
+    }
 
     public long getClazzId() {
         return clazzId;

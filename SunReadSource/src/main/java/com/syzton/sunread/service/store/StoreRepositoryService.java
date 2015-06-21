@@ -52,9 +52,9 @@ public class StoreRepositoryService implements StoreService {
     @Override
     public void addGift(Gift gift) {
 
-        Campus exists = campusRepository.findOne(gift.getSchoolId());
+        Campus exists = campusRepository.findOne(gift.getCampusId());
         if(exists == null){
-            throw new NotFoundException("school Id = "+ gift.getSchoolId()+" not found...");
+            throw new NotFoundException("school Id = "+ gift.getCampusId()+" not found...");
         }
 
         giftRepository.save(gift);

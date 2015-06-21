@@ -254,9 +254,11 @@ public class ExamController {
 			return collatExamDto;
 		}
 		Exam examResult = service.handInVerifyPaper(exam);
+		Student student = userService.findByStudentId(studentId);
+		student.getStatistic().increaseTestPasses();
 		if (examResult.isPass()) {
 			testPassService.hotBookUpdate(bookId, studentId);
-			Student student = userService.findByStudentId(studentId);
+
 			Book book = bookService.findById(bookId);
 			CoinHistory coinHistory = new CoinHistory();
 			coinHistory.setCoinFrom(CoinFrom.FROM_VERIFY_TEST);
@@ -273,7 +275,6 @@ public class ExamController {
 			pointHistory.setStudent(student);
 			pointService.add(pointHistory);
 
-			student.getStatistic().setPoint(book.getPoint());
 			student.getStatistic().setCoin(
 					student.getStatistic().getCoin() + book.getCoin());
 			student.getStatistic().setPoint(
@@ -297,7 +298,7 @@ public class ExamController {
 				categoryCounts.add(categoryCount);
 			}
 
-			userService.saveStudent(student);
+
 			Clazz clazz = clazzRepository.findOne(student.getClazzId());
 			clazz.getClazzStatistic().increaseTotalReads();
 			clazz.getClazzStatistic().setTotalReadWords(clazz.getClazzStatistic().getTotalReadWords() + book.getWordCount());
@@ -329,6 +330,7 @@ public class ExamController {
 			shelfService.updateReadState(studentId, bookId);
 
 		}
+		userService.saveStudent(student);
 		LOGGER.debug("return a exam entry result with information: {}", exam);
 		collatExamDto.setCode("1");
 		collatExamDto.setExam(exam);
