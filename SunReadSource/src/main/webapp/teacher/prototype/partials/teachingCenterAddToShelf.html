@@ -79,11 +79,11 @@
             <!-- <p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p> -->
              <div class="input-group ShelfByClassBookAttribute">
                   <label class="radio-inline">
-                    <input type="radio" ng-click="selectBookAttribute()" ng-model="isMandatoryForClazz" name="{{hotreader.id}}" id="inlineRadio1" value= 1 checked>
+                    <input type="radio" ng-click="selectBookAttribute()" ng-model="isMandatoryForClazz" name="{{hotreader.id}}" id="inlineRadio1" value=true checked>
                       <p class="ShelfByClassBookAttributeText">必读</p>
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" ng-click="selectBookAttribute()" ng-model="isMandatoryForClazz" name="{{hotreader.id}}" id="inlineRadio2" value= 0>
+                    <input type="radio" ng-click="selectBookAttribute()" ng-model="isMandatoryForClazz" name="{{hotreader.id}}" id="inlineRadio2" value=false>
                        <p class="ShelfByClassBookAttributeText">选读</p>
                   </label>
               </div>
@@ -123,11 +123,11 @@
               <!-- <p class="row title">目标阅读数量：<input type="number" min="1" class="custom-input" ng-model="hotreader.targetBookNum" />　本</p> -->
                <div class="input-group ShelfByClassBookAttribute">
                     <label class="radio-inline">
-                      <input type="radio" ng-click="selectBookAttribute()" ng-model="isMandatory" name="{{hotreader.id}}" id="inlineRadio1" value= 1 checked>
+                      <input type="radio" ng-click="selectBookAttribute()" ng-model="isMandatory" name="{{hotreader.id}}" id="inlineRadio1" value=false checked>
                         <p class="ShelfByClassBookAttributeText">必读</p>
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" ng-click="selectBookAttribute()" ng-model="isMandatory" name="{{hotreader.id}}" id="inlineRadio2" value= 0>
+                      <input type="radio" ng-click="selectBookAttribute()" ng-model="isMandatory" name="{{hotreader.id}}" id="inlineRadio2" value=false>
                          <p class="ShelfByClassBookAttributeText">选读</p>
                     </label>
                 </div>

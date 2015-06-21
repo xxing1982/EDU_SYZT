@@ -4,7 +4,8 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
 		// $scope.bookAttribute_status
 
 		$scope.selectBookAttribute = function(){
-			console.log ($scope.bookAttribute_status);
+			console.log (	$scope.isMandatoryForClazz);
+			console.log (	$scope.isMandatoryForClazz);
 		}
 
 		// Initlizate the dropdown statues
@@ -37,11 +38,17 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
 						$scope.recommendToClazz = function(){
 							AddRecommendsToClazz.save({teacherId:$rootScope.id,clazzId:$scope.class.id},
 																		{"bookId":$stateParams.bookId,"bookAttribute":$scope.isMandatoryForClazz}
-																		,function(date){
-																				$rootScope.modal = {title: "添加图书", content: "添加成功！"};
-																				$('#alert-modal').modal();
-																				console.log(date);
-																		});
+																		,function(){
+																							$rootScope.modal = {title: "添加图书状态", content: "添加成功"};
+																							$('#alert-modal').modal();
+																							console.log();
+																		}
+																		,function(error){
+																			$rootScope.modal = {title: "添加图书状态", content:"添加失败"};
+																			$('#alert-modal').modal();
+																			console.log(error);
+																		}
+																		);
 						}
 				});
 

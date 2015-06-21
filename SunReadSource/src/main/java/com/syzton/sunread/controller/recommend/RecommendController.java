@@ -62,7 +62,8 @@ public class RecommendController extends BaseController{
     public ArrayList<RecommendDTO> addToClazz(@Valid @RequestBody RecommendDTO recommendDTO
     			,@PathVariable("teacherId") long teacherId,@PathVariable("clazzId") long clazzId){
     	
-    	return recommendService.addToClazz(recommendDTO, teacherId, clazzId);
+    	 recommendService.addToClazz(recommendDTO, teacherId, clazzId);
+    	 return null;
     }
 
     

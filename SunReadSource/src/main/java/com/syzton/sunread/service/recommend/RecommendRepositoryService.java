@@ -130,15 +130,15 @@ public class RecommendRepositoryService implements RecommendService{
 	public ArrayList<RecommendDTO> addToClazz(RecommendDTO recommendDTO, Long teacherId,
 			Long clazzId) {
 		// TODO Auto-generated method stub
-		teacher = teacherRepositiry.findOne(teacherId);
-		if(teacher == null)
-			throw new NotFoundException("Not Found Teacher with id" + teacherId);
-		book = bookRepository.findOne(recommendDTO.getBookId());
-		if(book == null)
-			throw new NotFoundException("Not Found Book with id" + recommendDTO.getBookId());
+//		teacher = teacherRepositiry.findOne(teacherId);
+//		if(teacher == null)
+//			throw new NotFoundException("Not Found Teacher with id" + teacherId);
+//		book = bookRepository.findOne(recommendDTO.getBookId());
+//		if(book == null)
+//			throw new NotFoundException("Not Found Book with id" + recommendDTO.getBookId());
 		Clazz clazz= clazzRepository.findOne(clazzId);
 		if(clazz == null)
-			throw new NotFoundException("Not Found Book with id" + clazzId);
+			throw new NotFoundException("Not Found CLASS with id" + clazzId);
 		List<Student> students = studentRepository.findByClazzId(clazzId);
 		ArrayList<RecommendDTO> dtos = new ArrayList<RecommendDTO>();
 		for (int i = 0; i < students.size(); i++) {

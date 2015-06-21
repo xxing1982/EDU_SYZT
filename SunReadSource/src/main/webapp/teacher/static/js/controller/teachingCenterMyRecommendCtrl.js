@@ -3,7 +3,7 @@ ctrls.controller("myRecommendController",['$scope', '$rootScope','Loadable', 'Ed
 
     console.log($rootScope.id);
     var page = 0;
-    var size = 1;
+    var size = 5;
     var arguments = {
       by: 'teacher',
       id: $rootScope.id
@@ -17,13 +17,14 @@ ctrls.controller("myRecommendController",['$scope', '$rootScope','Loadable', 'Ed
       $scope.recommendsLoadable.page = page;
 
       // Set the $resource arguments like {by: "books"}
-      $scope.recommendsLoadable.arguments = {by:'teacher',id:8} ;
+      $scope.recommendsLoadable.arguments = {by:'teacher',id:$rootScope.id} ;
 
       $scope.recommendsLoadable.build(GetRecommends);
       console.log($scope.recommendsLoadable);
+
     }
 
-    getRecommends();
+		getRecommends();
 }]);
 
 ctrls.filter('isManditory',function(){
