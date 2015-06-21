@@ -85,6 +85,8 @@ public interface UserService {
     
     public String deleteSystemAdminId(Long id);
     
+    public String addAdmin(String password);
+    
     public SystemAdmin findBySystemAdminId(Long id);
     
     public Admin findByAdminId(Long id);

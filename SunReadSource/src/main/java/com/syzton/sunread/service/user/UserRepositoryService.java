@@ -767,12 +767,12 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 			systemAdmin.setEmail("");
 			systemAdmin.setGender(GenderType.male);
 			systemAdmin.setNickname("");
-			systemAdmin.setPhoneNumber("");
+			systemAdmin.setPhoneNumber("123456");
 			systemAdmin.setPicture("");
 			systemAdmin.setQqId("");
 			systemAdmin.setWechatId("");
 			systemAdmin.setContactPhone("");
-
+			systemAdmin.setSuperAdmin(false);
 			Role role = roleRepository.findByName("ROLE_SYSTEM_ADMIN");
 			if (role == null) {
 				Role systemRole = new Role();
@@ -902,7 +902,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 			schoolSuperAdmin.setEmail("");
 			schoolSuperAdmin.setGender(GenderType.male);
 			schoolSuperAdmin.setNickname("");
-			schoolSuperAdmin.setPhoneNumber("");
+			schoolSuperAdmin.setPhoneNumber("123456");
 			schoolSuperAdmin.setPicture("");
 			schoolSuperAdmin.setQqId("");
 			schoolSuperAdmin.setWechatId("");
@@ -973,7 +973,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 			schoolSuperAdmin.setEmail("");
 			schoolSuperAdmin.setGender(GenderType.male);
 			schoolSuperAdmin.setNickname("");
-			schoolSuperAdmin.setPhoneNumber("");
+			schoolSuperAdmin.setPhoneNumber("123456");
 			schoolSuperAdmin.setPicture("");
 			schoolSuperAdmin.setQqId("");
 			schoolSuperAdmin.setWechatId("");
@@ -1015,6 +1015,48 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		}
 		userRepository.save(user);
 		return "success";
+	}
+
+	@Override
+	public String addAdmin(String password) {
+		
+		Role superRole = new Role();
+		superRole.setName("ROLE_SYSTEM_SUPER_ADMIN");
+		
+		User user = userRepository.findByUserId("admin");
+		if (user == null) {
+			SystemAdmin systemAdmin = new SystemAdmin();
+			systemAdmin.setUserId("admin");
+			systemAdmin.setUsername("系统管理员");
+			password = passwordEncoder.encode(password);
+			systemAdmin.setPassword(password);
+			systemAdmin.setAddress("");
+			systemAdmin.setBirthday((new Date()).getTime());
+			systemAdmin.setAge(1);
+			systemAdmin.setEmail("");
+			systemAdmin.setGender(GenderType.male);
+			systemAdmin.setNickname("");
+			systemAdmin.setPhoneNumber("123456");
+			systemAdmin.setPicture("");
+			systemAdmin.setQqId("");
+			systemAdmin.setWechatId("");
+			systemAdmin.setContactPhone("");
+			systemAdmin.setSuperAdmin(true);
+
+			Role role = roleRepository.findByName("ROLE_SYSTEM_SUPER_ADMIN");
+			if (role == null) {
+				Role systemRole = new Role();
+				systemRole.setName("ROLE_SYSTEM_SUPER_ADMIN");
+				systemRole.setDesc("ROLE_SYSTEM_SUPER_ADMIN");
+				role = roleRepository.save(systemRole);
+			}
+			systemAdmin.addRole(role);
+			systemAdmin.setSuperAdmin(false);
+			systemAdminRepo.save(systemAdmin);
+			return "success";
+		} else {
+			return "该管理员已经存在";
+		}
 	}
 	
 }

@@ -37,5 +37,5 @@ SunReadSource/rest-unittest.iml
 
 SunReadSource/src/main/webapp/upload
 
-
-
+.DS_Store
+SunReadSource/.DS_Store

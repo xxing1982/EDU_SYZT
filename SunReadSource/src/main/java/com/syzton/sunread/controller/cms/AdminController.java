@@ -27,6 +27,13 @@ public class AdminController extends BaseController {
         this.userService = userService;
     }
 	
+	@RequestMapping(value = "/admin", method = RequestMethod.POST)
+    @ResponseBody
+    public String addRootSystem(
+			@RequestParam("password") String password) {
+		return userService.addAdmin(password);
+    }
+	
 	@RequestMapping(value = "/systemadmin", method = RequestMethod.POST)
     @ResponseBody
     public String add(@RequestParam("userid") String userId,
