@@ -9,7 +9,6 @@ import com.syzton.sunread.model.store.GiftStatus;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.organization.CampusRepository;
-import com.syzton.sunread.repository.region.SchoolDistrictRepository;
 import com.syzton.sunread.repository.store.ExchangeHistoryRepository;
 import com.syzton.sunread.repository.store.GiftRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
@@ -34,18 +33,15 @@ public class StoreRepositoryService implements StoreService {
     private StudentRepository studentRepository;
 
     private UserRepository userRepository;
-
-    private SchoolDistrictRepository schoolRepository;
     
     private CampusRepository campusRepository;
 
     @Autowired
-    public StoreRepositoryService(GiftRepository giftRepository, ExchangeHistoryRepository exchangeHistoryRepository, StudentRepository studentRepository, UserRepository userRepository,SchoolDistrictRepository schoolRepository,CampusRepository campusRepository) {
+    public StoreRepositoryService(GiftRepository giftRepository, ExchangeHistoryRepository exchangeHistoryRepository, StudentRepository studentRepository, UserRepository userRepository,CampusRepository campusRepository) {
         this.giftRepository = giftRepository;
         this.exchangeHistoryRepository = exchangeHistoryRepository;
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
-        this.schoolRepository = schoolRepository;
         this.campusRepository = campusRepository;
     }
 
@@ -124,9 +120,9 @@ public class StoreRepositoryService implements StoreService {
     }
 
     @Override
-    public Page<Gift> getGifts(Pageable pageable,long schoolId) {
+    public Page<Gift> getGifts(Pageable pageable,long campusId) {
 
-        Page<Gift> giftPage = giftRepository.findBySchoolId(pageable, schoolId);
+        Page<Gift> giftPage = giftRepository.findByCampusIdId(pageable, campusId);
 
         return giftPage;
     }
