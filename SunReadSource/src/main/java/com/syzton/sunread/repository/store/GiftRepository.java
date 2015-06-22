@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GiftRepository extends JpaRepository<Gift,Long> {
 
-    Page<Gift> findBySchoolId(Pageable pageable ,Long schoolId);
+    Page<Gift> findByCampusId(Pageable pageable ,Long schoolId);
 }

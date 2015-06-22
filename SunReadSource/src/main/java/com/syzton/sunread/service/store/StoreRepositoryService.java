@@ -126,7 +126,7 @@ public class StoreRepositoryService implements StoreService {
     @Override
     public Page<Gift> getGifts(Pageable pageable,long schoolId) {
 
-        Page<Gift> giftPage = giftRepository.findBySchoolId(pageable, schoolId);
+        Page<Gift> giftPage = giftRepository.findByCampusId(pageable, schoolId);
 
         return giftPage;
     }
