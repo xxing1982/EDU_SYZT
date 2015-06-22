@@ -4,6 +4,7 @@ angular.module('nourConfig', [])
         IMAGESERVER: "http://images.sunreading.cn", 
         NOTEPIC: "/api/upload/notepic", 
         USERICON: "/api/upload/usericon", 
-        BOOKPIC: "/api/upload/bookpic"
+        BOOKPIC: "/api/upload/bookpic",
+        STARTDATA: "2015"
     }
 );

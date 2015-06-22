@@ -10,6 +10,7 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.countVerifyExam = 3;
 		$scope.countWordExam = 3;
 		$scope.countThinkExam = 3;
+		//loading years
 		var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
 		$scope.status = {
 			current : stateTexts.loading,
