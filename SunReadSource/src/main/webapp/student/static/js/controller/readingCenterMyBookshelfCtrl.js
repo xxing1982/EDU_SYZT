@@ -68,9 +68,9 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
                   //     continue;
                   // if($scope.selected_status=== 2&& content[i].bookAttribute)
                   //     continue;
-                  if($scope.button.radio=== 1&& !content[i].bookAttribute)
+                  if($scope.radio=== 1&& !content[i].bookAttribute)
                       continue;
-                  if($scope.button.radio=== 2&& content[i].bookAttribute)
+                  if($scope.radio=== 2&& content[i].bookAttribute)
                       continue;
                    unreadBooksALL.push(content[i]);
               }
