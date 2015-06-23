@@ -92,9 +92,18 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
      		controller: 'subjectiveQuestionCtrl'
      	});
 }]);
-routeApp.run(['$rootScope', function($rootScope){
+routeApp.run(['$rootScope', '$injector', function($rootScope, $injector){
     if (sessionStorage.getItem("cmsId") == null || sessionStorage.getItem("cmsId") == "") {
         window.location.href="../../login.html";
     };
     $rootScope.id = sessionStorage.getItem("cmsId");
+
+    $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
+//      if (sessionService.isLogged()) {
+        headersGetter()['Authorization'] = "Bearer " + sessionStorage.access_token;
+//      }
+      if (data) {
+        return angular.toJson(data);
+      }
+    };
 }]);

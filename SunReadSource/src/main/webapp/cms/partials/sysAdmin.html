@@ -27,16 +27,30 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
+                <th>用户ID</th>
+                <th>用户名称</th>
+                <th>
+                    <button id="login" class="btn btn-primary">添加</button>
+                </th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="placeHolder in searchPageable.placeHolders.content">
-                
+            <tr ng-repeat="placeHolder in searchPageable.entities.content">
+                <td>{{placeHolder.userId}}</td>
+                <td>{{placeHolder.username}}</td>
+                <td>
+                    <button class="btn btn-primary">修改</button>
+                    <button class="btn btn-primary">删除</button>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
+        <div class="col-md-10 searchHolder">
+            <p>&nbsp;{{ placeHolder.title }}</p>
+        </div>
+    </div>
 
     <!-- Footer and page numbers  -->
     <div class="container-fluid">

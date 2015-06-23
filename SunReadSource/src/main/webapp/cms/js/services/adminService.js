@@ -9,8 +9,8 @@ adminServices.factory('SystemAdmin',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
-		api.Add = function(callback){
-			$http.post(config.HOST + 'Systemadmin')
+		api.Add = function(data, callback){
+			$http.post(config.HOST + 'systemadmin?userid=' + data.userid + "&password=" + data.password)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});
@@ -28,6 +28,13 @@ adminServices.factory('SystemAdmin',['$resource', 'config', '$http',
 			});
 		};
 		return api;
+	}]);
+
+adminServices.factory('GetSystemAdmin', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "systemadmin?page=:page&size=:size&sortBy=id",
+			{page:'@_page', size:'@_size'}, {}
+			);
 	}]);
 
 adminServices.factory('SuperSchoolAdmin',['$resource', 'config', '$http',
