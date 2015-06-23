@@ -11,7 +11,7 @@ $(document).ready(function(){
 		$(this).attr("disabled", true).text("登录中...");
 		$.ajax({
 			type: 'POST',
-			url: '/oauth/token?grant_type=password&username=' + username + '&password=' + password,
+			url: '../oauth/token?grant_type=password&username=' + username + '&password=' + password,
 			beforeSend: function(request) {
 				request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 				request.setRequestHeader("Authorization", "Basic MzUzYjMwMmM0NDU3NGY1NjUwNDU2ODdlNTM0ZTdkNmE6Mjg2OTI0Njk3ZTYxNWE2NzJhNjQ2YTQ5MzU0NTY0NmM=");
