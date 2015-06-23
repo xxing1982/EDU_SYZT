@@ -32,7 +32,7 @@ $(document).ready(function(){
 					},
 					success: function(dataLogin){
 						for(var i = 0; i < dataLogin.roles.length; i++){
-							if (dataLogin.roles[i].id == 5) {
+							if (dataLogin.roles[i].id >= 6 && dataLogin.roles[i].id <= 9) {
 								sessionStorage.setItem("cmsId", dataLogin.id);
 								window.location.href="index.html";
 								return;
