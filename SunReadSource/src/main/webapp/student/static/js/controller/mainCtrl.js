@@ -88,7 +88,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
             $scope.fishes[key].isSelected = false;
             if ($scope.fishes[key].id == $scope.selectedFish.id)
               $scope.fishes[key].isSelected = true;
-          }     
+          }
       });
     }
 

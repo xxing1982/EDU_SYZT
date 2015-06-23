@@ -39,6 +39,8 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     var unreadBooksALL;
     var readBooksALL;
 
+    $scope.radio = 0;
+
     $scope.selectBookAttributes = function(){
           unreadBooksALL = new Array();
           readBooksALL = new Array();
@@ -51,16 +53,24 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
           for(var i = 0; i < content.length; i++){
               //console.log(content[i]);
               if(content[i].readState){
-                  if($scope.selected_status=== 1&& !content[i].bookAttribute)
+                  // if($scope.selected_status=== 1&& !content[i].bookAttribute)
+                  //     continue;
+                  // if($scope.selected_status=== 2&& content[i].bookAttribute)
+                  //     continue;
+                  if($scope.radio=== 1&& !content[i].bookAttribute)
                       continue;
-                  if($scope.selected_status=== 2&& content[i].bookAttribute)
+                  if($scope.radio=== 2&& content[i].bookAttribute)
                       continue;
                    readBooksALL.push(content[i]);
               }
               else{
-                  if($scope.selected_status=== 1&& !content[i].bookAttribute)
+                  // if($scope.selected_status=== 1&& !content[i].bookAttribute)
+                  //     continue;
+                  // if($scope.selected_status=== 2&& content[i].bookAttribute)
+                  //     continue;
+                  if($scope.button.radio=== 1&& !content[i].bookAttribute)
                       continue;
-                  if($scope.selected_status=== 2&& content[i].bookAttribute)
+                  if($scope.button.radio=== 2&& content[i].bookAttribute)
                       continue;
                    unreadBooksALL.push(content[i]);
               }

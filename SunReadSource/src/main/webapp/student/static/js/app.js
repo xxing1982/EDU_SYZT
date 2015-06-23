@@ -3,7 +3,7 @@
 //Main Angular script file for application
 
 //create a module with injected modules in brackets
-var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourControllers', 'nourConfig', 'userServices']);
+var routeApp = angular.module('routeApp',['ngResource', 'ui.router', 'nourControllers', 'nourConfig', 'userServices','mgcrea.ngStrap.button']);
 
 // router config
 routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider, $routeProvider,$httpProvider) {

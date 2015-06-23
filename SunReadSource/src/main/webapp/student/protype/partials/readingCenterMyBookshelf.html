@@ -15,9 +15,16 @@
                         <li role="presentation"><a href="#readBooksTab" aria-controls="readBooksTab" role="tab" data-toggle="tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-2 col-xs-offset-2">
-                    <!--<a class="btn btn-fill-green" href="#readingCenter/addBook">+ 我要选书</a>-->
-                </div>
+                <!-- <div class="col-xs-2 col-xs-offset-2">
+                    <a class="btn btn-fill-green" href="#readingCenter/addBook">+ 我要选书</a>
+
+                </div> -->
+								<div class="btn-group col-xs-4" ng-model="radio" ng-change = "selectBookAttributes()" bs-radio-group>
+									<label class="btn btn-default textColor"><input type="radio" class="btn btn-default" value="0"> 全部</label>
+									<label class="btn btn-default textColor"><input type="radio" class="btn btn-default" value="1"> 必读</label>
+									<label class="btn btn-default textColor"><input type="radio" class="btn btn-default" value="2"> 选读</label>
+								</div>
+
                 <div class="col-xs-2">
                     <bs-dropdown data-menu-type="button"
                         select-val="selected_status = selectedVal"
@@ -37,7 +44,7 @@
 							<!--Img Col-->
 							<div class="col-md-6">
 								<a href="#readingCenter/bookDetails/{{unreadBook.bookId}}/"><div ng-show="{{unreadBook.pictureUrl !== undefined}}"><img ng-src={{imageServer+unreadBook.pictureUrl}} class="bookshelfIMG img-responsive custom-shadow"></div></a>
-								<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div>
+								<!-- <div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div> -->
 							</div>
 							<div class="col-md-6">
 	              <!-- bookName row -->
@@ -84,7 +91,7 @@
 						<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
 							<div class="col-md-6">
 								<a href="#readingCenter/bookDetails/{{readBook.bookId}}/default"><div ng-show="{{readBook.pictureUrl !== undefined}}"><img ng-src={{imageServer+readBook.pictureUrl}} class="bookshelfIMG  img-responsive custom-shadow"></div></a>
-								<div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div>
+								<!-- <div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div> -->
 							</div>
 							<div class="col-md-6">
 	              <!-- bookName row -->
