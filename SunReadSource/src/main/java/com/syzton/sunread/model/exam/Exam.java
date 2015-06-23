@@ -81,11 +81,11 @@ public class Exam extends AbstractEntity {
 		this.secondPass = secondPass;
 	}
 
-	@Column(name = "isFirstPass")
-	private boolean firstPass;
+	@Column(name = "first_pass")
+	private boolean firstPass=false;
 	
-	@Column(name = "isSecondPass")
-	private boolean secondPass;
+	@Column(name = "second_pass")
+	private boolean secondPass=false;
 	
 
 

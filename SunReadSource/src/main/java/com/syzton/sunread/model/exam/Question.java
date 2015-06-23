@@ -8,7 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+
+import org.joda.time.DateTime;
+
 import com.syzton.sunread.model.common.AbstractEntity;
+import org.joda.time.format.DateTimeFormat;  
+import org.joda.time.format.DateTimeFormatter; 
 
 
 @Entity 
@@ -29,5 +34,14 @@ public abstract class Question extends AbstractEntity {
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
+	
+	public void setCreationTime(String creationTime) {
+    	DateTimeFormatter format = DateTimeFormat .forPattern("yyyy-MM-dd");  
+        //时间解析    
+        DateTime dateTime2 = DateTime.parse(creationTime, format); 
+    	this.creationTime = dateTime2;
+    }
+	
+	
 
 }

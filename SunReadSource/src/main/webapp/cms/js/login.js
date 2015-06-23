@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 				$.ajax({
 					type: 'GET',
-					url: '/api/user/fromtoken',
+					url: '../api/user/fromtoken',
 					beforeSend: function(request) {
 						request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 						request.setRequestHeader("Authorization", "bearer " + data.access_token);

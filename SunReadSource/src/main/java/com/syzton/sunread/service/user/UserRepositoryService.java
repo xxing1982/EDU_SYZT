@@ -1,4 +1,4 @@
-package com.syzton.sunread.service.user;
+ package com.syzton.sunread.service.user;
 
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.exception.common.AuthenticationException;

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
+import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
 
 public interface ObjectiveQuestionRepository extends JpaRepository<ObjectiveQuestion, Long>,JpaSpecificationExecutor<ObjectiveQuestion> {
@@ -18,4 +19,5 @@ public interface ObjectiveQuestionRepository extends JpaRepository<ObjectiveQues
 	
 	public ObjectiveQuestion findByTopicAndBookIdAndObjectiveType(String topic,Long bookId,QuestionType type);
 	 
+	public List<ObjectiveQuestion> findByTopicContaining(String str);
 }

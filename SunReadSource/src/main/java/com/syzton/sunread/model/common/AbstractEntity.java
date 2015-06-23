@@ -44,6 +44,8 @@ public class AbstractEntity {
     public void setCreationTime(DateTime creationTime) {
     	this.creationTime = creationTime;
     }
+    
+    
 
     @Override
     public boolean equals(Object obj) {
