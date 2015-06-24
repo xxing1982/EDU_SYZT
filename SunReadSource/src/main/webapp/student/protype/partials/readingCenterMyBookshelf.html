@@ -19,10 +19,10 @@
                     <a class="btn btn-fill-green" href="#readingCenter/addBook">+ 我要选书</a>
 
                 </div> -->
-								<div class="btn-group col-xs-4" ng-model="radio" ng-change = "selectBookAttributes()" bs-radio-group>
-									<label class="btn btn-default textColor"><input type="radio" class="btn btn-default" value="0"> 全部</label>
-									<label class="btn btn-default textColor"><input type="radio" class="btn btn-default" value="1"> 必读</label>
-									<label class="btn btn-default textColor"><input type="radio" class="btn btn-default" value="2"> 选读</label>
+								<div class="btn-group col-xs-4"  bs-radio-group>
+									<label class="btn btn-default textColor" ng-click="show()"><input type="radio" class="btn btn-default" value="0" id="0" ng-model="button.radio" ng-change = "selectBookAttributes()"> 全部</label>
+									<label class="btn btn-default textColor" ng-click="show()"><input type="radio" class="btn btn-default" value="1" id="1" ng-model="button.radio" ng-change = "selectBookAttributes()"> 必读</label>
+									<label class="btn btn-default textColor" ng-click="show()"><input type="radio" class="btn btn-default" value="2" id="2" ng-model="button.radio" ng-change = "selectBookAttributes()"> 选读</label>
 								</div>
 
                 <div class="col-xs-2">

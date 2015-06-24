@@ -35,7 +35,6 @@ import com.syzton.sunread.model.book.DictionaryType;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.service.book.BookService;
-import com.syzton.sunread.service.book.CategoryService;
 import com.syzton.sunread.service.book.DictionaryService;
 import com.syzton.sunread.service.bookshelf.BookInShelfService;
 import com.syzton.sunread.service.semester.SemesterService;
@@ -51,14 +50,7 @@ public class BookInShelfController {
     private SemesterService semesterService;
     private BookService bookService;
     private DictionaryService dictionaryService;
-	private ArrayList<DateTime> month;
-	private ArrayList<String> monthly;
-	private ArrayList<Integer> monthlyVerified;
-	private ArrayList<Integer> monthlyPoints;
-	private int semesterPoints;
-	
-    
-    @Autowired
+	@Autowired
     public BookInShelfController(BookInShelfService service){
     	this.service = service;    	
     }
@@ -87,7 +79,7 @@ public class BookInShelfController {
         
         BookInShelf added = service.add(dto,id, bookId);
         
-       return added.createDTO(added);
+       return added.createDTO();
     }
    
     
@@ -100,7 +92,7 @@ public class BookInShelfController {
         BookInShelf deleted = service.deleteById(id);
         LOGGER.debug("Deleted book in shelf entry with information: {}", deleted);
 
-        return deleted.createDTO(deleted);
+        return deleted.createDTO();
     }
     
 //Delete a book in shelf
@@ -115,7 +107,7 @@ public class BookInShelfController {
         
         LOGGER.debug("Deleted book in shelf entry with information: {}", deleted);
 
-        return deleted.createDTO(deleted);
+        return deleted.createDTO();
     }    
     
 //Update a book in shelf    
@@ -127,7 +119,7 @@ public class BookInShelfController {
         BookInShelf updated = service.update(dto,id);
         LOGGER.debug("Added a to-do entry with information: {}", updated);
               
-       return updated.createDTO(updated);
+       return updated.createDTO();
     }
    
 //Get all books in shelf
@@ -153,7 +145,7 @@ public class BookInShelfController {
         BookInShelf found = service.findById(id);
         LOGGER.debug("Found to-do entry with information: {}", found);
 
-        return found.createDTO(found);
+        return found.createDTO();
     }
     
  //Get a Book in bookshelf    
@@ -165,7 +157,7 @@ public class BookInShelfController {
         BookInShelf found = service.findByStudentIdAndBookId(id, bookId);
         if(found.getDeleted())
         	throw new com.syzton.sunread.exception.common.NotFoundException("The book with name "+found.getBookName()+"had been deleted.");
-        return found.createDTO(found);
+        return found.createDTO();
     }
  //Get a Book in bookshelf    
     @RequestMapping(value = "/student/{studentId}/semester/{semesterId}/bookshelfStatistics", method = RequestMethod.GET)

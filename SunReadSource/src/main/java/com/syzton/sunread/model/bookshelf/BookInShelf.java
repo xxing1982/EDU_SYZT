@@ -242,16 +242,16 @@ public class BookInShelf extends AbstractEntity{
 
     }
     
-    public BookInShelfDTO createDTO(BookInShelf model){
+    public BookInShelfDTO createDTO(){
     	BookInShelfDTO dto = new BookInShelfDTO();
-    	dto.setId(model.getId());
-    	dto.setCreateTime(model.getCreationTime().getMillis());
-    	dto.setDescription(model.getDescription());
-    	dto.setModificationTime(model.getModificationTime().getMillis());
-    	dto.setBookAttribute(model.getBookAttribute());
-    	dto.setReadState(model.getReadState());
-    	dto.setBookIsbn(model.getIsbn());
-    	dto.setBookshelf(model.getBookShelf().getId());
+    	dto.setId(id);
+    	dto.setCreateTime(creationTime.getMillis());
+    	dto.setDescription(description);
+    	dto.setModificationTime(modificationTime.getMillis());
+    	dto.setBookAttribute(isMandatory);
+    	dto.setReadState(isVerified);
+    	dto.setBookIsbn(isbn);
+    	dto.setBookshelf(bookshelf.getId());
     	return dto;
     }
     

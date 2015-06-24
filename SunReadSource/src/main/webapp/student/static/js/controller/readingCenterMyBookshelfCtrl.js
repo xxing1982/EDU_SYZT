@@ -39,7 +39,19 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     var unreadBooksALL;
     var readBooksALL;
 
-    $scope.radio = 0;
+    $scope.button = {
+      "toggle": true,
+      "checkbox": {
+        "left": false,
+        "middle": true,
+        "right": false
+      },
+      "radio": 0
+    };
+
+    $scope.show = function(){
+      console.log($scope.button.radio);
+    }
 
     $scope.selectBookAttributes = function(){
           unreadBooksALL = new Array();
@@ -57,9 +69,9 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
                   //     continue;
                   // if($scope.selected_status=== 2&& content[i].bookAttribute)
                   //     continue;
-                  if($scope.radio=== 1&& !content[i].bookAttribute)
+                  if($scope.button.radio=== 1&& !content[i].bookAttribute)
                       continue;
-                  if($scope.radio=== 2&& content[i].bookAttribute)
+                  if($scope.button.radio=== 2&& content[i].bookAttribute)
                       continue;
                    readBooksALL.push(content[i]);
               }
@@ -68,9 +80,9 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
                   //     continue;
                   // if($scope.selected_status=== 2&& content[i].bookAttribute)
                   //     continue;
-                  if($scope.radio=== 1&& !content[i].bookAttribute)
+                  if($scope.button.radio=== 1&& !content[i].bookAttribute)
                       continue;
-                  if($scope.radio=== 2&& content[i].bookAttribute)
+                  if($scope.button.radio=== 2&& content[i].bookAttribute)
                       continue;
                    unreadBooksALL.push(content[i]);
               }
