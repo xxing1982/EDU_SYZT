@@ -39,7 +39,7 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-sm-2" style="width:71px;">
+                    <div class="col-sm-2" style="width:71px;" ng-show="isInShelf">
                         <bottom id="takenote" class="btn btn-green row" href="#" role="button" data-toggle="modal" data-target="#book-takenote-model">做笔记</buttom>
                     </div>
                     <div class="col-sm-6 text-center" style="margin-top: 6px;">
@@ -47,13 +47,13 @@
                             <div class="col-xs-3">
                                 <div class="row">
                                     <p ng-show="verify">已认证</p>
-                                    <p ng-hide="verify"><a ng-click="verifyExam()" href="#readingCenter/multipleTesting">未认证</a></p>
+                                    <p ng-hide="verify" ><a ng-click="verifyExam()" href="#readingCenter/multipleTesting" ng-show="isInShelf">未认证</a></p>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-4" ng-show="isInShelf">
                                 <div class="row"><a ng-click="wordTest()" href="#readingCenter/multipleTesting"><p class="dark-blue-1 bookExercise">词汇训练</p></a></div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-4" ng-show="isInShelf">
                                 <div class="row"><a ng-click="thinkTest()" href="#readingCenter/testSubjective"><p class="dark-blue-1 bookExercise">思维训练</p></a></div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-2" style="width:20%;" ng-repeat="hot in hots.content">
-                      <img ng-src={{imageServer+hot.pictureUrl}} class="img-responsive img-center custom-shadow" >
+											<a href="#readingCenter/bookDetails/{{hot.id}}/"><img ng-src={{imageServer+hot.pictureUrl}} class="img-responsive img-center custom-shadow" ></a>
                       <div class="bookTital"><h5>{{hot.name}}</h5></div>
                     </div>
                 </div>
@@ -271,14 +271,14 @@
           </div>
         </div>
     </div>
-    
+
     <!-- Light box modal -->
     <div class="modal fade" id="light-box-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    
+
                 <div class="container-fluid">
                     <div ng-show="showLightBox.url" class="title">
                         <img ng-src="{{showLightBox.url}}" class="img-thumbnail"/>

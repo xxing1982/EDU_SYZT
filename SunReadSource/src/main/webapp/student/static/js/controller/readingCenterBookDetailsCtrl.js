@@ -57,6 +57,7 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         });
 
 
+        $scope.isInShelf = false;
 
         var thisBookinshelf = OneBookInShelf.get({id:$rootScope.id,bookId:$stateParams.bookId},function(){
             console.log(thisBookinshelf);
@@ -75,8 +76,23 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
                 $rootScope.exam.bookName = bookDetail.name;
                 $rootScope.exam.typeName = "我的书架 > 认证训练";
             }
+            $scope.isInShelf = true;
+        },function(){
+          $scope.isInShelf = false;
         });
 
+        // $scope.isInShelf = function(){
+        //       var isInShelf ;
+        //       OneBookInShelf.get({id:$rootScope.id,bookId:$stateParams.bookId},function(){
+        //         isInShelf = true;
+        //       });
+        //       console.log(isInShelf);
+        //       if(typeof(isInShelf) !== 'undefined')
+        //         return true;
+        //       else {
+        //         return false;
+        //       }
+        //     };
 
         // Image uploader
         $scope.dropzone = Dropzone(config.NOTEPIC, function(url){
@@ -124,7 +140,7 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
             }
         });
     }
-        
+
     $scope.showLightBox = function(url){
         $scope.showLightBox.url = $scope.imageServer + url;
     }
