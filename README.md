@@ -18,7 +18,7 @@
 * Server Access URL:   182.92.238.68
 * Port: 21
 * User Name:           syzt
-* Password:                 syzt2015
+* Password:           5G2kyBefbf
 * 
 * Path for books cover image：/pic/bookscover/
 * Path for user image： /pic/userImages/
