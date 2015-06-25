@@ -29,10 +29,10 @@ public class TaskController extends BaseController{
     public void delete(@PathVariable("id") Long id){
         taskService.deleteById(id);
     }
-//    @RequestMapping(value = "/tasks/{studentId}",method = RequestMethod.GET)
-//    @ResponseBody
-//    public Task findByStudentId(@PathVariable("studentId") Long studentId){
-//        return taskService.findByStudentId(studentId);
-//    }
+    @RequestMapping(value = "/tasks/students/{studentId}/semesters/{semesterId}",method = RequestMethod.GET)
+    @ResponseBody
+    public Task findByStudentId(@PathVariable("studentId") Long studentId,@PathVariable("semesterId") Long semesterId){
+        return taskService.findByStudentIdAndSemesterId(studentId,semesterId);
+    }
 
 }

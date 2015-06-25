@@ -38,9 +38,9 @@ public class Student extends User{
     @NotNull
     private long gradeId;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
-    @JoinColumn(name = "task_id")
-    private Task task = new Task();
+//    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
+//    @JoinColumn(name = "task_id")
+//    private Task task = new Task();
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER,optional = true)
     @JoinColumn(name = "user_statistic_id")
     private UserStatistic statistic = new UserStatistic();
@@ -102,13 +102,13 @@ public class Student extends User{
         this.coinHistorySet = coinHistorySet;
     }
 
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task)   {
-        this.task = task;
-    }
+//    public Task getTask() {
+//        return task;
+//    }
+//
+//    public void setTask(Task task)   {
+//        this.task = task;
+//    }
 
     public long getCampusId() {
         return campusId;

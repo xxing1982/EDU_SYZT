@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface TaskRepository extends JpaRepository<Task,Long> {
 
-//    Task findByStudent(Student student);
+    Task findByStudentIdAndSemesterId(Long studentId,Long semesterId);
 //
 //    Page<Task> findByTeacherId(long teacherId,Pageable pageable);
 }

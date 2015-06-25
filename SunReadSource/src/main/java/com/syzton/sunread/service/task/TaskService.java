@@ -18,7 +18,7 @@ public interface TaskService {
      * @param added The information of the added tag entry.
      * @return  The added tag entry.
      */
-//    public Task add(Task added);
+    public Task add(Task added);
 
     /**
      * Deletes a tag entry.
@@ -31,7 +31,7 @@ public interface TaskService {
      * Returns a list of tag entries.
      * @return
      */
-//    public Task findByStudentId(Long studentId);
+    public Task findByStudentIdAndSemesterId(Long studentId,Long semesterId);
 //
 //    public Page<Task> findByTeacherId(Long teacherId,Pageable pageable);
 

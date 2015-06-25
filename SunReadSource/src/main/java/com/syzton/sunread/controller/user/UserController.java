@@ -145,21 +145,20 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "teachers/{teacherId}/students/{studentId}/tasks", method = RequestMethod.PUT)
     @ResponseBody
-    public Student add(@PathVariable("teacherId") long teacherId,
+    public void add(@PathVariable("teacherId") long teacherId,
                        @PathVariable("studentId") long studentId,
                        @RequestParam("targetBookNum") int targetBookNum,
                        @RequestParam("targetPoint") int targetPoint) {
-        Student student = userService.addTask(teacherId, studentId, targetBookNum, targetPoint);
-        return student;
+        userService.addTask(teacherId, studentId, targetBookNum, targetPoint);
+
     }
     
     @RequestMapping(value = "teachers/{teacherId}/tasks", method = RequestMethod.PUT)
     @ResponseBody
-    public Student addTasks(@PathVariable("teacherId") long teacherId,
+    public void addTasks(@PathVariable("teacherId") long teacherId,
                             @RequestParam("targetBookNum") int targetBookNum,
                             @RequestParam("targetPoint") int targetPoint) {
-        Student student = userService.addTasks(teacherId, targetBookNum, targetPoint);
-        return student;
+        userService.addTasks(teacherId, targetBookNum, targetPoint);
     }
 
     @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)

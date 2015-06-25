@@ -28,33 +28,33 @@ public class TaskRepositoryService implements TaskService{
         this.studentRepository = studentRepository;
     }
 
-//    @Override
-//    public Task add(Task task) {
-//        Teacher teacher = teacherRepository.findOne(task.getTeacherId());
-//        if(teacher == null){
-//            throw new NotFoundException("teacher id = "+task.getTeacherId()+" not found...");
-//        }
-//        Student student = studentRepository.findOne(task.getStudentId());
-//        if(student == null){
-//            throw new NotFoundException("student id = "+task.getStudentId()+" not found...");
-//        }
-//        return taskRepository.save(task);
-//    }
+    @Override
+    public Task add(Task task) {
+        Teacher teacher = teacherRepository.findOne(task.getTeacherId());
+        if(teacher == null){
+            throw new NotFoundException("teacher id = "+task.getTeacherId()+" not found...");
+        }
+        Student student = studentRepository.findOne(task.getStudentId());
+        if(student == null){
+            throw new NotFoundException("student id = "+task.getStudentId()+" not found...");
+        }
+        return taskRepository.save(task);
+    }
 
     @Override
     public void deleteById(Long id) throws NotFoundException {
          taskRepository.delete(id);
     }
 
-//    @Override
-//    public Task findByStudentId(Long studentId) {
-//        Student student = studentRepository.findOne(studentId);
-//        if(student == null){
-//            throw new NotFoundException("student id = "+studentId+" not found...");
-//        }
-//        return taskRepository.findByStudent(student);
-//    }
-//
+    @Override
+    public Task findByStudentIdAndSemesterId(Long studentId,Long semesterId) {
+        Student student = studentRepository.findOne(studentId);
+        if(student == null){
+            throw new NotFoundException("student id = "+studentId+" not found...");
+        }
+        return taskRepository.findByStudentIdAndSemesterId(studentId,semesterId);
+    }
+
 //    @Override
 //    public Page<Task> findByTeacherId(Long teacherId,Pageable pageable) {
 //        Teacher teacher = teacherRepository.findOne(teacherId);

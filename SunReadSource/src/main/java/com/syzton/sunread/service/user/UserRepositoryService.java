@@ -8,6 +8,7 @@ import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.model.security.Role;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.*;
 import com.syzton.sunread.model.user.User.GenderType;
@@ -21,10 +22,12 @@ import com.syzton.sunread.service.bookshelf.BookInShelfService;
 import com.syzton.sunread.service.bookshelf.BookshelfService;
 import com.syzton.sunread.service.organization.EduGroupService;
 import com.syzton.sunread.service.region.SchoolDistrictService;
+import com.syzton.sunread.service.task.TaskService;
 import com.syzton.sunread.util.ExcelUtil;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +88,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     
     private SystemAdminRepository systemAdminRepo;
 
+    private TaskService taskService;
+
 
     @Autowired
     public UserRepositoryService(UserRepository userRepository,
@@ -100,6 +105,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
                                  BookshelfService bookshelfService,
                                  RoleRepository roleRepository,
                                  AdminRepository adminRepo,
+                                 TaskService taskService,
                                  SystemAdminRepository systemAdminRepo) {
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
@@ -116,6 +122,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         this.roleRepository = roleRepository;
         this.adminRepo = adminRepo;
         this.systemAdminRepo = systemAdminRepo;
+        this.taskService = taskService;
     }
 
     @Override
@@ -278,7 +285,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     }
     @Transactional
     @Override
-    public Student addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
+    public void addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
         Teacher teacher = teacherRepository.findOne(teacherId);
         if(teacher==null){
             throw new NotFoundException("teacher with id = "+teacherId+" not found..");
@@ -288,21 +295,25 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         if(student == null){
             throw new NotFoundException("student with id ="+studentId+" not found..");
         }
-
-        Task task = student.getTask();
-
+        Clazz clazz = clazzRepository.findOne(student.getClazzId());
+        Campus campus = clazz.getCampus();
+        Semester semester = semesterRepository.findByTimeAndCampus(new DateTime(),campus);
+        if(semester == null){
+            throw new NotFoundException("semester with id ="+campus.getId()+" not found..");
+        }
+        Task task = new Task();
+        task.setSemesterId(semester.getId());
         task.setTargetBookNum(targetBookNum);
         task.setTargetPoint(targetPoint);
         task.setTeacherId(teacherId);
-        student.setTask(task);
 
-        return studentRepository.save(student);
+        taskService.add(task);
 
     }
     
     @Transactional
     @Override
-    public Student addTasks(long teacherId, int targetBookNum, int targetPoint) {
+    public void addTasks(long teacherId, int targetBookNum, int targetPoint) {
         Teacher teacher = teacherRepository.findOne(teacherId);
         if(teacher==null){
             throw new NotFoundException("teacher with id = "+teacherId+" not found..");
@@ -314,14 +325,20 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         }
 
         for (Student student: students){
-		    Task task = student.getTask();
+            Clazz clazz = clazzRepository.findOne(student.getClazzId());
+            Campus campus = clazz.getCampus();
+            Semester semester = semesterRepository.findByTimeAndCampus(new DateTime(),campus);
+            if(semester == null){
+                throw new NotFoundException("semester with id ="+campus.getId()+" not found..");
+            }
+            Task task = new Task();
 		    task.setTargetBookNum(targetBookNum);
 		    task.setTargetPoint(targetPoint);
 		    task.setTeacherId(teacherId);
-		    student.setTask(task);
+            task.setStudentId(student.getId());
+            task.setSemesterId(semester.getId());
         }
         
-        return null;
     }
 
 
