@@ -1,7 +1,7 @@
 //statisticsSummary.js
 
-ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$resource', 'config', 'Student', 'Semester', 'Campus', 'Class', 'BookshelfStatistics', 'Note',
-                                                  function ($scope, $rootScope, $resource, config, Student, Semester, Campus, Class, BookshelfStatistics, Note) {
+ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$resource', 'config', 'Student', 'Semester', 'Campus', 'Class', 'BookshelfStatistics', 'Note', 'PointHistory', 'CoinHistory',
+                                                  function ($scope, $rootScope, $resource, config, Student, Semester, Campus, Class, BookshelfStatistics, Note, PointHistory, CoinHistory) {
     
     var Verifyexams = $resource( config.HOST + "verifyexams/:by/:studentId/:semesterId",
             {by:'@by', studentId:'@studentId', semesterId:'@semesterId'},{} );
@@ -129,11 +129,32 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                 BookshelfStatistics.get({studentId: student.id, semesterId: semester.id}, function(bookshelfStatistics){
                    
                     // Update Basic informations
-                    basicInformations.level = student.statistic.level;
-                    basicInformations.coin = student.statistic.coin;
+                    basicInformations.level = Math.ceil( ($scope.semesters.length - $scope.semestersSelected_status) / 2 );
+                    CoinHistory.get({by: "semesters", id: semester.id}, function(coinhistories){
+                        basicInformations.coin = 0;
+                        for (var i = 0; i < coinhistories.monthlyCoins.length; i++ ) {
+                            basicInformations.coin += coinhistories.monthlyCoins[i];
+                        }
+                    });
                     basicInformations.semesterReadNum = bookshelfStatistics.semesterReadNum;
                     basicInformations.semesterVerifiedNum = bookshelfStatistics.semesterVerified.length;
-                    basicInformations.point = student.statistic.point;
+                    PointHistory.get({by: "semesters", id: semester.id}, function(pointhistories){
+                        basicInformations.point = 0;
+                        for (var i = 0; i < pointhistories.monthlyPoints.length; i++ ) {
+                            basicInformations.point += pointhistories.monthlyPoints[i];
+                        }
+                        
+                        // Update semester points
+                        semesterPoints.year = parseInt( summaryHeader.startTime.split("-")[0] );
+                        semesterPoints.startMonth = parseInt( summaryHeader.startTime.split("-")[1] );
+                        semesterPoints.monthlyPoints = pointhistories.monthlyPoints;
+                        var maxMonthlyPointAndIndex = findMaxAndIndex( pointhistories.monthlyPoints );
+                        semesterPoints.maxMonthlyPoint = maxMonthlyPointAndIndex.max;
+                        semesterPoints.maxMonthlyPointMonth = maxMonthlyPointAndIndex.index + semesterPoints.startMonth;
+                        semesterPoints.totalPoint = eval( pointhistories.monthlyPoints.join("+") );
+                        semesterPoints.width = Math.floor( 90 / semesterPoints.monthlyPoints.length );
+
+                    });
                     basicInformations.semesterVerifiedRate = basicInformations.semesterReadNum !== 0 ? Math.floor(basicInformations.semesterVerifiedNum / basicInformations.semesterReadNum * 100) : 0;
                 
                     // Update semester informations
@@ -145,16 +166,6 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                     semesterReadings.maxMonthlyVerifiedNum = maxMonthlyVerifiedNumAndIndex.max;
                     semesterReadings.maxMonthlyVerifiedNumMonth = maxMonthlyVerifiedNumAndIndex.index + semesterReadings.startMonth;
                 
-                    // Update semester points
-                    semesterPoints.year = parseInt( summaryHeader.startTime.split("-")[0] );
-                    semesterPoints.startMonth = parseInt( summaryHeader.startTime.split("-")[1] );
-                    semesterPoints.monthlyPoints = bookshelfStatistics.monthlyPoints;
-                    var maxMonthlyPointAndIndex = findMaxAndIndex( bookshelfStatistics.monthlyPoints );
-                    semesterPoints.maxMonthlyPoint = maxMonthlyPointAndIndex.max;
-                    semesterPoints.maxMonthlyPointMonth = maxMonthlyPointAndIndex.index + semesterPoints.startMonth;
-                    semesterPoints.totalPoint = eval( bookshelfStatistics.monthlyPoints.join("+") );
-                    semesterPoints.width = Math.floor( 90 / semesterPoints.monthlyPoints.length );
-                    
                     // Update reading category
                     readingCategory.categories = {};
                     readingCategory.categoriesNum = 0;

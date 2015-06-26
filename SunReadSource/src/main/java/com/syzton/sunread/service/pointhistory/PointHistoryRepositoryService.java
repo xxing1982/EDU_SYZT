@@ -10,12 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.model.user.UserStatistic;
+import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.pointhistory.PointHistoryRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
@@ -51,6 +54,13 @@ public class PointHistoryRepositoryService implements PointHistoryService {
     @Autowired
     public void setSecurityContextUtil(SecurityContextUtil securityContextUtil) {
         this.securityContextUtil = securityContextUtil;
+    }
+    
+    private SemesterRepository semesterRepository;
+
+    @Autowired
+    public void SemesterRepositoryService(SemesterRepository semesterRepository) {
+        this.semesterRepository = semesterRepository;
     }
     
     @Override
@@ -151,5 +161,12 @@ public class PointHistoryRepositoryService implements PointHistoryService {
         LOGGER.debug("Finding all pointHistory entries by user id");
         Student student = studentRepository.findOne(studentId);
         return repository.findByStudent(student);
+	}
+
+	@Override
+	public List<PointHistory> findBySemesterId(long semesterId) {
+		Semester semester = semesterRepository.findOne(semesterId);
+		List<PointHistory> pointHistories = repository.findBySemester(semester.getStartTime(), semester.getEndTime());
+		return pointHistories;
 	}
 }

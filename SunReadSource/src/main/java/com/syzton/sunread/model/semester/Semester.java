@@ -59,12 +59,6 @@ public class Semester extends AbstractEntity{
 		this.semester = semester;
 	}
 
-
-	public Campus getCampus() {
-		return campus;
-	}
-
-
 	public void setCampus(Campus campus) {
 		this.campus = campus;
 	}

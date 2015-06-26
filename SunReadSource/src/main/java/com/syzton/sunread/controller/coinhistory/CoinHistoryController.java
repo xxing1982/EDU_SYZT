@@ -2,6 +2,7 @@ package com.syzton.sunread.controller.coinhistory;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.syzton.sunread.controller.BaseController;
+import com.syzton.sunread.controller.pointhistory.PointHistoryController.PointHistoriesDTO;
 import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
-import com.syzton.sunread.model.note.Comment;
+import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
+import com.syzton.sunread.service.semester.SemesterService;
 import com.syzton.sunread.service.user.UserService;
 
 import javax.validation.Valid;
@@ -42,8 +45,13 @@ public class CoinHistoryController extends BaseController {
         this.service = service;
         this.userService = userService;
     }
-
-	
+    
+    private SemesterService semesterService;
+    
+    @Autowired
+    public void SemesterServiceController(SemesterService semesterService){
+    	this.semesterService = semesterService;    	
+    }
     
     @RequestMapping(value = "/students/{studentId}/coinhistories", method = RequestMethod.POST)
     @ResponseBody
@@ -72,6 +80,18 @@ public class CoinHistoryController extends BaseController {
         
         return new PageResource<>(coinhistoryPage, "page", "size");
     }
+    
+    @RequestMapping(value = "/semesters/{semesterId}/coinhistories", method = RequestMethod.GET)
+    @ResponseBody
+    public CoinHistoriesDTO findCoinHistoriesBySemesterId( @PathVariable("semesterId") long semesterId ) {
+        Semester semester = semesterService.findOne(semesterId);
+        
+        List<CoinHistory> coinhistories = service.findBySemesterId(semesterId);
+        
+        return new CoinHistoriesDTO(coinhistories, semester.getStartTime(), semester.getEndTime());
+    }
+    
+    
 //
 //    @RequestMapping(value = "/api/coinhistories/{id}", method = RequestMethod.DELETE)
 //    @ResponseBody
@@ -94,4 +114,33 @@ public class CoinHistoryController extends BaseController {
 //
 //        return updated;
 //    }
+    
+
+	public class CoinHistoriesDTO {
+		
+		public int[] monthlyCoins;
+		
+		public CoinHistoriesDTO ( List<CoinHistory> coinhistories, DateTime startTime, DateTime endTime ){
+	    	
+			// Initlizate the dto entity
+			int startMonth = startTime.getMonthOfYear();
+	    	int endMonth = endTime.getMonthOfYear();
+	    	int monthCount = endMonth - startMonth + ( startMonth < endMonth ? 0 : 12 ) + 1;
+	    	this.monthlyCoins = new int[monthCount];
+	    	
+	    	// Initlizate monthlyCoins and monthlyCoins
+	    	for ( int i = 0; i < monthCount; i ++ ){
+	    		this.monthlyCoins[i] = 0;
+	    	}
+			for ( CoinHistory coinHistory : coinhistories ) {
+				
+				// The index in both arrays
+				int index = coinHistory.getCreationTime().getMonthOfYear() - startMonth;
+				if ( index < 0 ) { index += 12; }
+				
+				// Update monthlyVerifiedNums
+				this.monthlyCoins[index] ++;
+			}
+		}
+	}
 }

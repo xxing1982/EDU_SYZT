@@ -1,6 +1,9 @@
 package com.syzton.sunread.controller.semester;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javassist.NotFoundException;
 
@@ -97,10 +100,16 @@ public class SemesterController {
 //Get all Semesters By userId
     @RequestMapping(value = "/student/{studentId}/semesters", method = RequestMethod.GET)
     @ResponseBody
-    public ArrayList<Semester> findAll(@PathVariable("studentId")Long studentId) throws NotFoundException {
+    public List<Semester> findAll(@PathVariable("studentId")Long studentId) throws NotFoundException {
         LOGGER.debug("Finding  semesters entry " );
 
-        ArrayList<Semester> semesters = service.findByStudentId(studentId);
+        List<Semester> semesters = service.findByStudentId(studentId);
+        
+        Collections.sort(semesters, new Comparator<Semester>() {
+            public int compare(Semester o1, Semester o2) {
+                return o2.getStartTime().compareTo(o1.getStartTime());
+            }
+        });
 
         return semesters;
     }    

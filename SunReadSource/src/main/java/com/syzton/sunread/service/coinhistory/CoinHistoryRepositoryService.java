@@ -15,10 +15,11 @@ import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
+import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.model.user.UserStatistic;
+import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.coinhistory.CoinHistoryRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
@@ -48,10 +49,17 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
     }
     
     private ClazzRepository clazzRepository;
-    
+
     @Autowired
     public void ClazzRepositoryService(ClazzRepository clazzRepository) {
         this.clazzRepository = clazzRepository;
+    }
+
+    private SemesterRepository semesterRepository;
+
+    @Autowired
+    public void SemesterRepositoryService(SemesterRepository semesterRepository) {
+        this.semesterRepository = semesterRepository;
     }
     
     private SecurityContextUtil securityContextUtil;
@@ -167,4 +175,11 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         model.setCoinFrom(update.getCoinFrom());        
         return model;
     }
+
+	@Override
+	public List<CoinHistory> findBySemesterId(long semesterId) {
+		Semester semester = semesterRepository.findOne(semesterId);
+		List<CoinHistory> coinHistories = repository.findBySemester(semester.getStartTime(), semester.getEndTime());
+		return coinHistories;
+	}
 }

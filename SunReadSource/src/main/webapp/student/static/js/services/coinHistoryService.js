@@ -6,6 +6,7 @@ var coinHistoryServices = angular.module('coinHistoryServices', ['ngResource', "
 coinHistoryServices.factory('CoinHistory', ['$resource', 'config',
 	function($resource, config){
 		return $resource(config.HOST + ":by/:id/coinhistories",
-            {by:'@by', id:'@id'}, {}
+            { by:'@by', id:'@id' }, 
+            {}
         );
 }]);

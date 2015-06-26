@@ -6,7 +6,7 @@ var semesterServices = angular.module('semesterServices', ['ngResource', "nourCo
 semesterServices.factory('Semester', ['$resource', 'config',
 	function($resource, config){
 		return $resource(config.HOST + ":by/:id/semesters",
-            {by:'@by', id:'@id'}, 
+            { by:'@by', id:'@id' }, 
             { get: {method: 'get', isArray: true}
             }
         );

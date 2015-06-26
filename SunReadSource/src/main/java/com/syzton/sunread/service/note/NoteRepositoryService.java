@@ -11,6 +11,7 @@ import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.QBook;
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
@@ -22,6 +23,8 @@ import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.note.NoteRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
 import com.syzton.sunread.service.pointhistory.PointHistoryService;
 import com.syzton.sunread.service.semester.SemesterService;
@@ -70,6 +73,22 @@ public class NoteRepositoryService implements NoteService {
         this.userRepository = userRepository;
     }
     
+    /* Auto wire of student */
+    private StudentRepository studentRepository;
+
+    @Autowired
+    public void StudentRepositoryService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+    
+    /* Auto wire of campus */
+    private CampusRepository campusRepository;
+
+    @Autowired
+    public void CampusRepositoryService(CampusRepository campusRepository) {
+        this.campusRepository = campusRepository;
+    }
+    
     private PointHistoryService pointHistoryService;
     
     @Autowired
@@ -99,6 +118,8 @@ public class NoteRepositoryService implements NoteService {
         book.getStatistic().increaseNotes();
         bookRepository.save(book);
         User user = securityContextUtil.getUser();
+        Student student = studentRepository.findOne(user.getId());
+        Campus campus = campusRepository.findOne( student.getCampusId() );
         Note note = new Note();
         note.setTitle(added.getTitle());
         note.setContent(added.getContent());
@@ -111,7 +132,7 @@ public class NoteRepositoryService implements NoteService {
         PointHistory pointHistory = new PointHistory();
         pointHistory.setPointFrom(PointFrom.FROM_NOTE);
         pointHistory.setPointType(PointType.IN);
-        pointHistory.setNum(5);
+        pointHistory.setNum(campus.getNoteScore());
         pointHistory.setStudent((Student)user);
         pointHistoryService.add(pointHistory);
         return repository.save(note);

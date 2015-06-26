@@ -76,7 +76,7 @@
                         <div class="row">
                             <h5>平均认证正确率：{{ statistics.basicInformations.semesterVerifiedRate }}% 
                                 <div class="orange-light fr average-width">&nbsp;
-                                    <div class="orange fl" ng-style="{width: {{statistics.basicInformations.semesterVerifiedRate}} + '%'}">&nbsp;
+                                    <div class="orange fl" ng-style="{width: statistics.basicInformations.semesterVerifiedRate * 0.96 + '%'}">&nbsp;
                                     </div>
                                 </div>
                             </h5>
