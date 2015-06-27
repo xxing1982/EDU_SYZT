@@ -27,27 +27,31 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Stude
     $scope.gifts = new Array(0);
     var all = new Array(0);
 
+    var campusId;
+
     Student.get({id:$rootScope.id},function(data){
       $scope.userCoin = data.statistic.coin;
-      // console.log($scope.userCoin);
-      $scope.getAllGifts();
-      })
+      console.log(data);
+      campusId = data.campusId;
+      getAllGifts();
+      });
 
-    $scope.getAllGifts = function(){
-        $scope.gifts = new Array(0);
-        GetGifts.get({page:page,size:pageSize},function(data){
-        // console.log(data);
-        var content = data.content;
-        all = content;
-        if($scope.userCoin>=0){
-          if($scope.redeemState != 0){
-            all = new Array(0);
-            redeemStateFilter(all,content,$scope.userCoin);
+      var getAllGifts = function(){
+          $scope.gifts = new Array(0);
+          GetGifts.get({schoolId:campusId,page:page,size:pageSize},function(data){
+          console.log(data);
+          var content = data.content;
+          all = content;
+          if($scope.userCoin>=0){
+            if($scope.redeemState != 0){
+              all = new Array(0);
+              redeemStateFilter(all,content,$scope.userCoin);
+            }
+            $scope.loading = setLoadingState(all,size);
+            initLoad($scope.gifts,all,size);
           }
-          $scope.loading = setLoadingState(all,size);
-          initLoad($scope.gifts,all,size);
-        }
-      })};
+        })};
+
 
     // $scope.getAllGifts();
     $scope.giftsLoadingMore = function(){

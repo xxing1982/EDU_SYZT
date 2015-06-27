@@ -155,14 +155,31 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
 //DELETE A BOOK IN SHELF
     $scope.dropBookFromShelf = function(book){
         // console.log(book.id);
-        $scope.dropBook = DropBookFromShelf.remove({id:book.id},function(){
-          if(typeof($scope.dropBook) === "undefined"){
-              alert("删除失败");
-          }
-          else{
-              alert("移除成功");
-              $scope.selectBookAttributes();
-          }
+        $scope.dropBook = DropBookFromShelf.remove({id:book.id},function(data){
+          // if(typeof($scope.dropBook) === "undefined"){
+          //     alert("删除失败");
+          // }
+          // else{
+          //     alert("移除成功");
+          //     $scope.selectBookAttributes();
+          // }
+          $rootScope.modal ={
+              title: "移除成功",
+              content:"已将"+data.bookName+"移除书架"
+            };
+          $('#alert-modal').modal();
+          $rootScope.modal.click = function(){
+              location.reload();
+              }
+        },function(error){
+          $rootScope.modal ={
+            title: "",
+            content:"移除失败"
+          };
+          $('#alert-modal').modal();
+          $rootScope.modal.click = function(){
+              location.reload();
+              }
         });
 
     };

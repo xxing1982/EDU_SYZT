@@ -5,8 +5,8 @@ var getGiftsServices = angular.module('getGiftsServices', ['ngResource', "nourCo
 */
 getGiftsServices.factory('GetGifts', ['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "gifts?page=:page&size=:size",
-            {page:'@_page', size:'@_size'}, {}
+		return $resource(config.HOST + "/schools/:schoolId/gifts?page=:page&size=:size",
+            {schoolId:'@_schoolId',page:'@_page', size:'@_size'}, {}
         );
 }]);
 
