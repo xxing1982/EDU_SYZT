@@ -65,25 +65,25 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
           for(var i = 0; i < content.length; i++){
               //console.log(content[i]);
               if(content[i].readState){
-                  // if($scope.selected_status=== 1&& !content[i].bookAttribute)
-                  //     continue;
-                  // if($scope.selected_status=== 2&& content[i].bookAttribute)
-                  //     continue;
-                  if($scope.button.radio=== 1&& !content[i].bookAttribute)
+                  if($scope.selected_status=== 1&& !content[i].bookAttribute)
                       continue;
-                  if($scope.button.radio=== 2&& content[i].bookAttribute)
+                  if($scope.selected_status=== 2&& content[i].bookAttribute)
                       continue;
+                  // if($scope.button.radio=== 1&& !content[i].bookAttribute)
+                  //     continue;
+                  // if($scope.button.radio=== 2&& content[i].bookAttribute)
+                  //     continue;
                    readBooksALL.push(content[i]);
               }
               else{
-                  // if($scope.selected_status=== 1&& !content[i].bookAttribute)
-                  //     continue;
-                  // if($scope.selected_status=== 2&& content[i].bookAttribute)
-                  //     continue;
-                  if($scope.button.radio=== 1&& !content[i].bookAttribute)
+                  if($scope.selected_status=== 1&& !content[i].bookAttribute)
                       continue;
-                  if($scope.button.radio=== 2&& content[i].bookAttribute)
+                  if($scope.selected_status=== 2&& content[i].bookAttribute)
                       continue;
+                  // if($scope.button.radio=== 1&& !content[i].bookAttribute)
+                  //     continue;
+                  // if($scope.button.radio=== 2&& content[i].bookAttribute)
+                  //     continue;
                    unreadBooksALL.push(content[i]);
               }
           }
