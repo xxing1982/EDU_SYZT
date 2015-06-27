@@ -5,7 +5,9 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
 
 		$scope.selectBookAttribute = function(){
 			console.log (	$scope.isMandatoryForClazz);
-			console.log (	$scope.isMandatoryForClazz);
+			// console.log (	$scope.isMandatoryForClazz
+			// console.log($scope.isMandatory);
+
 		}
 
 		// Initlizate the dropdown statues
@@ -20,7 +22,7 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
 
 		$scope.isMandatoryForClazz = true;
 
-		$scope.isMandatory = true;
+		$scope.isMandatory = [];
 
     // Get the teacher entity by rootScope id
     $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
@@ -71,8 +73,14 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
         // Show the first page and append editable to every entity
         $scope.bookshelfLoadable.get();
 
+				// $scope.hotreader = {
+				// 	isMandatory:"true"
+				// }
+
+
 				for(var i=0;i<$scope.bookshelfLoadable.entities.content.length;i++){
-					$scope.bookshelfLoadable.entities.content[i].isMandatory = true;
+					// $scope.bookshelfLoadable.entities.content[i].isMandatory = true;
+					$scope.isMandatory[i] = true;
 				}
 
 				console.log($scope.bookshelfLoadable);
@@ -83,7 +91,7 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
         // Publish the selected entities
         $scope.bookshelfLoadable.publish = function(para){
 							AddRecommends.save({teacherId:$rootScope.id,studentId:para.id},
-																	{"bookId":$stateParams.bookId,"bookAttribute":$scope.isMandatory}
+																	{"bookId":$stateParams.bookId,"bookAttribute":para.isMandatory}
 																	,function(date){
 																			$rootScope.modal = {title: "添加图书状态"+date.recommendState, content: date.recommendStateStr};
 																			$('#alert-modal').modal();

@@ -40,4 +40,6 @@ ctrls.controller("readingCenterAddBookController", ['$scope', 'LackFeedback'
 			else
 				return true;
 		}
+
+		$("#quickSearchTab div")[0].click();
 }]);
