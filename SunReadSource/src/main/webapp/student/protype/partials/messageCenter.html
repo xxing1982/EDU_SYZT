@@ -94,7 +94,7 @@
                                   <!-- Single button -->
                                     <div class="btn-group">
                                       <input type="text" ng-model="searchTextStudent" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                      <ul class="dropdown-menu" role="menu">
+                                      <ul class="dropdown-menu" role="menu" >
                                         <li ><a href="#"></a></li>
                                         <li ng-repeat="mate in classmates | filter:searchTextStudent" ng-click="chooseStudent(mate)" ><a>{{mate.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{mate.email}}</a></li>
                                       </ul>

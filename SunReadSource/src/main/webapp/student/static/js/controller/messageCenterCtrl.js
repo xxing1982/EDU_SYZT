@@ -8,6 +8,7 @@ ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams
     // $scope.test = function(){alert("test")};
 
     // Initlizate the dropdown statues
+
     $scope.statuses = [{
         id: 1
     }, {
@@ -106,7 +107,7 @@ $scope.createRecievedPageable();
       var classmates = Hotreader.get({by:'campus',id:$scope.student.campusId,sortBy:"point",page:0,size:10},function(){
         // console.log(classmates.content);
         $scope.classmates = classmates.content;
-        $scope.searchTextStudent = "";
+        $scope.searchTextStudent ='';
         $scope.chooseStudent=function(student){
           console.log(student);
           $scope.searchTextStudent = student.username;
@@ -120,7 +121,7 @@ $scope.createRecievedPageable();
 
     $scope.sendMessage = function(){
       console.log($scope.recieveUserId);
-      if($scope.recieveUserId != undefined && $scope.message != ""){
+      if($scope.recieveUserId != undefined && $scope.message != ""&&$scope.searchTextStudent!=''){
         console.log($scope.text);
         SendMessages.save({sendUserId:$rootScope.id,recieveUserId:$scope.recieveUserId},$scope.text,function(){
           $scope.searchTextStudent = "";
