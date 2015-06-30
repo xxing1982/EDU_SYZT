@@ -9,7 +9,7 @@ ctrls.controller("myRecommendController",['$scope', '$rootScope','Loadable', 'Ed
       id: $rootScope.id
     }
 
-    var getRecommends = function(){
+    $scope.getRecommends = function(){
       $scope.recommendsLoadable = new Loadable();
 
       // Set the parameters of loadable
@@ -20,11 +20,14 @@ ctrls.controller("myRecommendController",['$scope', '$rootScope','Loadable', 'Ed
       $scope.recommendsLoadable.arguments = {by:'teacher',id:$rootScope.id} ;
 
       $scope.recommendsLoadable.build(GetRecommends);
+
+			$scope.recommendsLoadable.get();
+
       console.log($scope.recommendsLoadable);
 
     }
 
-		getRecommends();
+		$scope.getRecommends();
 }]);
 
 ctrls.filter('isManditory',function(){
