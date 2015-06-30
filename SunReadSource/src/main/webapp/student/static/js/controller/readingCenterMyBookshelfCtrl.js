@@ -39,21 +39,11 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     var unreadBooksALL;
     var readBooksALL;
 
-    $scope.button = {
-      "toggle": true,
-      "checkbox": {
-        "left": false,
-        "middle": true,
-        "right": false
-      },
-      "radio": 0
-    };
-
     $scope.show = function(){
       console.log($scope.button.radio);
     }
 
-    $scope.selectBookAttributes = function(){
+    $scope.selectBookAttributes = function(val){
           unreadBooksALL = new Array();
           readBooksALL = new Array();
         // console.log($scope.selected_status);
@@ -65,25 +55,33 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
           for(var i = 0; i < content.length; i++){
               //console.log(content[i]);
               if(content[i].readState){
-                  if($scope.selected_status=== 1&& !content[i].bookAttribute)
-                      continue;
-                  if($scope.selected_status=== 2&& content[i].bookAttribute)
-                      continue;
-                  // if($scope.button.radio=== 1&& !content[i].bookAttribute)
+                  // if($scope.selected_status=== 1&& !content[i].bookAttribute)
                   //     continue;
-                  // if($scope.button.radio=== 2&& content[i].bookAttribute)
+                  // if($scope.selected_status=== 2&& content[i].bookAttribute)
                   //     continue;
+                  // if($scope.buttonRadio=== 1&& !content[i].bookAttribute)
+                  //     continue;
+                  // if($scope.buttonRadio=== 2&& content[i].bookAttribute)
+                  //     continue;
+                  if(val=== '1'&& !content[i].bookAttribute)
+                      continue;
+                  if(val=== '2'&& content[i].bookAttribute)
+                      continue;
                    readBooksALL.push(content[i]);
               }
               else{
-                  if($scope.selected_status=== 1&& !content[i].bookAttribute)
-                      continue;
-                  if($scope.selected_status=== 2&& content[i].bookAttribute)
-                      continue;
-                  // if($scope.button.radio=== 1&& !content[i].bookAttribute)
+                  // if($scope.selected_status=== 1&& !content[i].bookAttribute)
                   //     continue;
-                  // if($scope.button.radio=== 2&& content[i].bookAttribute)
+                  // if($scope.selected_status=== 2&& content[i].bookAttribute)
                   //     continue;
+                  // if($scope.buttonRadio=== 1&& !content[i].bookAttribute)
+                  //     continue;
+                  // if($scope.buttonRadio=== 2&& content[i].bookAttribute)
+                  //     continue;
+                  if(val=== '1'&& !content[i].bookAttribute)
+                      continue;
+                  if(val=== '2'&& content[i].bookAttribute)
+                      continue;
                    unreadBooksALL.push(content[i]);
               }
           }
@@ -98,6 +96,8 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         });
     };
 
+    $scope.selectBookAttributes();
+    
     $scope.unreadBooksLoadingMore = function(){
       if($scope.unreadLoading === stateTexts.nomore)
         return;
@@ -300,3 +300,16 @@ ctrls.filter('formatBookAttribute', function(){
   }
 });
 //var booksCtrl = angular.module('nourControllers',['nourConfig', 'ngResource','bookInShelfService']);
+
+
+// var module=angular.module( "myApp", [] );
+// module.controller('Ctrl',function($scope){
+//   $scope.model={isChecked:'1'};
+//   $scope.onRadioClick=function(val){
+//     if(!checkIsOk(val)){
+//       $scope.model.isChecked="0";}
+//   };
+//   /* $scope.$watch('model.isChecked', function(val, oldVal) {
+//   if(!checkIsOk(val)){$scope.model.isChecked=oldVal;}});*/
+//   var checkIsOk=function(val){if(val=='1'){return false;}return true;};});
+//   angular.element(document).ready(function() {angular.bootstrap(document,['myApp']);});
