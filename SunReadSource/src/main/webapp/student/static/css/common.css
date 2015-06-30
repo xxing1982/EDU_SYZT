@@ -135,6 +135,7 @@
 img.active
 {
     border: 3px red solid;
+    margin: -3px;
 }
 
 .btn-checked
