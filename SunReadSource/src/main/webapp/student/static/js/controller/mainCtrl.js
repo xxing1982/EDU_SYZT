@@ -84,11 +84,11 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
       Fish.getFishes(function(data){
         $scope.fishes = data;
         $("#change-fish-modal").modal({backdrop: 'static', keyboard: false});
-          for(var key in $scope.fishes){
-            $scope.fishes[key].isSelected = false;
-            if ($scope.fishes[key].id == $scope.selectedFish.id)
-              $scope.fishes[key].isSelected = true;
-          }
+        for(var key in $scope.fishes){
+          $scope.fishes[key].isSelected = false;
+          if ($scope.fishes[key].id == $scope.selectedFish.id)
+            $scope.fishes[key].isSelected = true;
+        }
       });
     }
 
@@ -102,6 +102,9 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     $scope.updateFish = function(){
       Fish.UpdateMyFish($rootScope.id, $scope.selectedFishId, function(){
+        Fish.getMyFish($rootScope.id, function(data){
+          $scope.selectedFish = data;
+        });
         $("#change-fish-modal").modal('hide');
       })
     }

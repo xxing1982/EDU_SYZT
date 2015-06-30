@@ -1,7 +1,7 @@
 //readingCenterMultipleTestingCtrl.js
 
-ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scope', 'VerifyExam', 'WordExam', 'ThinkExam',
-	function ($rootScope, $scope, VerifyExam, WordExam, ThinkExam) {
+ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scope', 'VerifyExam', 'WordExam', 'ThinkExam', 'Review', 'AddReview',
+	function ($rootScope, $scope, VerifyExam, WordExam, ThinkExam, Review, AddReview) {
 		if ($rootScope.exam == undefined) {
 			window.location.href = '/student/protype/index.html#/readingCenter/myBookshelf';
 		};
@@ -84,29 +84,12 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 					return;
 				};
 				$scope.IsCilck = true;
-				testExam.submitExam($scope.myAnswer, function(examData){
-					var score=0;
-					if ($rootScope.exam.id == 0) {
-						score = examData.exam.examScore;
-					}
-					else{
-						score = examData.examScore;
-					}
-						//examData.exam.examScore;
-						if($rootScope.exam.id == 1){
-							$rootScope.exam.score = score;
-							$rootScope.exam.isVerify = false;
-							window.location.href="/student/protype/index.html#/readingCenter/success";
-						}
-						else if (examData.exam.pass) {
-							$rootScope.exam.score = score;
-							$rootScope.exam.isVerify = true;
-							window.location.href="/student/protype/index.html#/readingCenter/success";
-						}
-						else{
-							window.location.href="/student/protype/index.html#/readingCenter/failed";
-						}
-					});
+
+				if ($rootScope.exam.id == 0) {
+					$("#exam-evaluation-model").modal({backdrop: 'static', keyboard: false});
+				}else{
+					submitExam();
+				}				
 			}
 
 			$scope.Select = function(dataa, option){
@@ -135,6 +118,45 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 					break;
 				}
 			}
+
+
+		}
+
+		$scope.evaluate = function(){
+			var review = {};
+			review.studentId = $rootScope.id;
+			review.title = $scope.Evatitle;
+			review.content = $scope.Evacontent;
+			review.rate = $scope.rate;
+			AddReview.AddReview($rootScope.exam.bookId, review, function(data){
+				submitExam();
+			})
+		}
+
+		function submitExam(){
+			testExam.submitExam($scope.myAnswer, function(examData){
+				var score=0;
+				if ($rootScope.exam.id == 0) {
+					score = examData.exam.examScore;
+				}
+				else{
+					score = examData.examScore;
+				}
+				//examData.exam.examScore;
+				if($rootScope.exam.id == 1){
+					$rootScope.exam.score = score;
+					$rootScope.exam.isVerify = false;
+					window.location.href="/student/protype/index.html#/readingCenter/success";
+				}
+				else if (examData.exam.pass) {
+					$rootScope.exam.score = score;
+					$rootScope.exam.isVerify = true;
+					window.location.href="/student/protype/index.html#/readingCenter/success";
+				}
+				else{
+					window.location.href="/student/protype/index.html#/readingCenter/failed";
+				}
+			});
 		}
 
 	}]);

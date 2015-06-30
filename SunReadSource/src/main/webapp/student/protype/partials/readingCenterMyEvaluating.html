@@ -47,7 +47,7 @@
 			<div ng-show="isThinking">
 				<div class="content row  row-same-height" ng-repeat="item in thinkExams">
 					<!--<div class="width-1 col-xs-height col-middle col-full-height"><img ng-src="{{imageServer+item.pictureUrl}}" class="img-responsive"></div>-->
-					<div class="col-md-2 name col-xs-height col-middle col-full-height" title="{{item.name}}"><a href="#readingCenter/bookDetails/{{item.bookId}}/default">{{item.name | formatSize5}}</a></div>
+					<div class="col-md-3 name col-xs-height col-middle col-full-height" title="{{item.name}}"><a href="#readingCenter/bookDetails/{{item.bookId}}/default">{{item.name | formatSize5}}</a></div>
 					<div class="col-md-3 value tr count col-xs-height col-middle col-full-height">问答题目数：{{item.questionNum}}</div>
 					<div class="col-md-3 value tr col-xs-height col-middle col-full-height"><a ng-click="MyAnswer(item)" href="#readingCenter/myEvaluating/myAnswers">查看我的回答</a></div>
 					<div class="col-md-3 value tr col-xs-height col-middle col-full-height">测试时间：{{item.creationTime}}</div>
@@ -60,7 +60,7 @@
 		<div class="row">
 		<!-- ng-class="{true: 'active', false: 'inactive'}[isActive]"-->
 			<div class="col-md-12">
-				<button type="button" class="btn btn-default" >全部</button>
+				<!--<button type="button" class="btn btn-default" >全部</button>-->
 			</div>
 		</div>
 	</div>
