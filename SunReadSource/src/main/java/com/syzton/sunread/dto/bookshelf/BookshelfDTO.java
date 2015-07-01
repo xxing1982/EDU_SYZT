@@ -40,6 +40,10 @@ public class BookshelfDTO {
 //    
 //    private Collection<BookShelfOperation> bookShelfOperations;
     
+    public int getBookNumberInShelf() {
+		return getReadMust()+getUnreadMust()+getReadSelect()+getUnreadSelect();
+	}
+    
     public int getUnreadMust() {
 		return unreadMust;
 	}
