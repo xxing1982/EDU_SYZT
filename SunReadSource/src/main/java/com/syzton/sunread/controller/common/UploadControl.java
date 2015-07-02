@@ -63,6 +63,11 @@ public class UploadControl {
 	private CampusService campusService;
 
 	private String ftpPrefix = "/pic";
+	private final static String FTP_SERVER_IP = "182.92.238.68";
+	private final static int FTP_PORT = 21;
+	private final static String FTP_NAME = "syzt";
+	private final static String FTP_PASSWD = "5G2kyBefbf";
+
 
 	@Autowired
 	public UploadControl(SecurityContextUtil securityUtil,
@@ -107,8 +112,8 @@ public class UploadControl {
 			// realPath, prefix +
 			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
-				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
-						"syzt2015", "/");
+				FtpUtil ftpUtil = new FtpUtil(FTP_SERVER_IP,FTP_PORT, FTP_NAME,
+						FTP_PASSWD, "/");
 				ftpUtil.login();
 				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath
 						+ prefix + suffix);
@@ -144,8 +149,8 @@ public class UploadControl {
 			// realPath, prefix +
 			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
-				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
-						"syzt2015", "/");
+				FtpUtil ftpUtil = new FtpUtil(FTP_SERVER_IP,FTP_PORT, FTP_NAME,
+						FTP_PASSWD, "/");
 				ftpUtil.login();
 				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath
 						+ prefix + suffix);
@@ -181,8 +186,8 @@ public class UploadControl {
 			// realPath, prefix +
 			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
-				FtpUtil ftpUtil = new FtpUtil("182.92.238.68", 21, "syzt",
-						"syzt2015", "/");
+				FtpUtil ftpUtil = new FtpUtil(FTP_SERVER_IP,FTP_PORT, FTP_NAME,
+						FTP_PASSWD, "/");
 				ftpUtil.login();
 				ftpUtil.upload(myfile.getInputStream(), ftpPrefix + ftpPath
 						+ prefix + suffix);
