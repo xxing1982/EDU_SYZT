@@ -16,9 +16,9 @@ import com.syzton.sunread.model.semester.Semester;
 
 public interface SemesterRepository extends JpaRepository<Semester,Long>,QueryDslPredicateExecutor<Semester>{
 	
-	@Query("SELECT Distinct(s) FROM Semester s WHERE s.startTime>(:time) AND s.endTime<(:time) AND s.campus=(:campus)")
+	@Query("SELECT Distinct(s) FROM Semester s WHERE s.campus=(:campus) AND s.startTime<=(:time) AND s.endTime>(:time)")
 	Semester findByTimeAndCampus(@Param("time")DateTime time,@Param("campus")Campus campus);
-	@Query("SELECT Distinct(s) FROM Semester s WHERE s.campus=(:campus) AND s.startTime>(:startTime) AND s.startTime<(:endTime) ORDER BY s.startTime DESC ")
+	@Query("SELECT Distinct(s) FROM Semester s WHERE s.campus=(:campus) AND s.startTime>=(:startTime) AND s.startTime<(:endTime) ORDER BY s.startTime DESC ")
 	ArrayList<Semester> findByDuration(@Param("startTime")DateTime startTime,@Param("endTime")DateTime endTime,@Param("campus")Campus campus);
 	
 	Page<Semester> findByCampus(Campus campus, Pageable pageable);

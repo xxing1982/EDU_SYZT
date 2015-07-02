@@ -1,7 +1,7 @@
 //statisticsSummary.js
 
-ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$resource', 'config', 'Student', 'Semester', 'Campus', 'Class', 'BookshelfStatistics', 'Note', 'PointHistory', 'CoinHistory',
-                                                  function ($scope, $rootScope, $resource, config, Student, Semester, Campus, Class, BookshelfStatistics, Note, PointHistory, CoinHistory) {
+ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$resource', 'config', 'Student', 'Semester', 'Campus', 'Class', 'BookshelfStatistics', 'Note', 'PointHistory', 'CoinHistory', 'TaskStatistics',
+                                                  function ($scope, $rootScope, $resource, config, Student, Semester, Campus, Class, BookshelfStatistics, Note, PointHistory, CoinHistory, TaskStatistics) {
     
     var Verifyexams = $resource( config.HOST + "verifyexams/:by/:studentId/:semesterId",
             {by:'@by', studentId:'@studentId', semesterId:'@semesterId'},{} );
@@ -136,7 +136,10 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                             basicInformations.coin += coinhistories.monthlyCoins[i];
                         }
                     });
-                    basicInformations.semesterReadNum = bookshelfStatistics.semesterReadNum;
+                    TaskStatistics.get({studentId: student.id, semesterId: semester.id}, function(task){
+                        basicInformations.semesterReadNum = task.targetBookNum;
+                        basicInformations.semesterVerifiedRate = basicInformations.semesterReadNum !== 0 ? Math.floor(basicInformations.semesterVerifiedNum / basicInformations.semesterReadNum * 100) : 0;
+                    });
                     basicInformations.semesterVerifiedNum = bookshelfStatistics.semesterVerified.length;
                     PointHistory.get({by: "semesters", id: semester.id}, function(pointhistories){
                         basicInformations.point = 0;
@@ -155,8 +158,7 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                         semesterPoints.width = Math.floor( 90 / semesterPoints.monthlyPoints.length );
 
                     });
-                    basicInformations.semesterVerifiedRate = basicInformations.semesterReadNum !== 0 ? Math.floor(basicInformations.semesterVerifiedNum / basicInformations.semesterReadNum * 100) : 0;
-                
+
                     // Update semester informations
                     semesterReadings.semesterReadNum = bookshelfStatistics.semesterReadNum;
                     semesterReadings.year = parseInt( summaryHeader.startTime.split("-")[0] );

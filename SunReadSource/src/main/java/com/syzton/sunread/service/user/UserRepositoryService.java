@@ -297,7 +297,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         }
         Clazz clazz = clazzRepository.findOne(student.getClazzId());
         Campus campus = clazz.getCampus();
-        Semester semester = semesterRepository.findByTimeAndCampus(new DateTime(),campus);
+        Semester semester = semesterRepository.findByTimeAndCampus(DateTime.now(),campus);
         if(semester == null){
             throw new NotFoundException("semester with id ="+campus.getId()+" not found..");
         }
@@ -327,7 +327,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         for (Student student: students){
             Clazz clazz = clazzRepository.findOne(student.getClazzId());
             Campus campus = clazz.getCampus();
-            Semester semester = semesterRepository.findByTimeAndCampus(new DateTime(),campus);
+            Semester semester = semesterRepository.findByTimeAndCampus(DateTime.now(), campus);
             if(semester == null){
                 throw new NotFoundException("semester with id ="+campus.getId()+" not found..");
             }
@@ -337,6 +337,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		    task.setTeacherId(teacherId);
             task.setStudentId(student.getId());
             task.setSemesterId(semester.getId());
+            taskService.add(task);
         }
         
     }

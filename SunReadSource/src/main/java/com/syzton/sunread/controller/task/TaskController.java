@@ -32,7 +32,9 @@ public class TaskController extends BaseController{
     @RequestMapping(value = "/tasks/students/{studentId}/semesters/{semesterId}",method = RequestMethod.GET)
     @ResponseBody
     public Task findByStudentId(@PathVariable("studentId") Long studentId,@PathVariable("semesterId") Long semesterId){
-        return taskService.findByStudentIdAndSemesterId(studentId,semesterId);
+        Task task = taskService.findByStudentIdAndSemesterId(studentId,semesterId);
+        if (task == null) task = new Task();
+        return task;
     }
 
 }
