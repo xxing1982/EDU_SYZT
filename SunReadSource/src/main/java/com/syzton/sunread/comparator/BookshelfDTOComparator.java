@@ -33,18 +33,18 @@ public class BookshelfDTOComparator implements Comparator<BookshelfDTO>{
 		 * 3.如果已读书的数量一样多，按已读书中必读书的数量排序
 		 */
 		if(booksInS1>booksInS2)
-			return 1;
+			return -1;
 		else if(booksInS1 == booksInS2){
 			if (readBooksInS1 > readBooksInS2)
-				return 1;
+				return -1;
 			else if(readBooksInS1 == readBooksInS2){
 				if (s1.getReadMust()>s2.getReadMust()) 
-					return 1;
-				else 
 					return -1;
+				else 
+					return 1;
 			}
 			else	
-				return -1;
+				return 1;
 		}
 		else
 			return 0;

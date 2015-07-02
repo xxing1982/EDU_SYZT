@@ -2,6 +2,9 @@ package com.syzton.sunread.controller.bookshelf;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,9 +91,11 @@ public class BookshelfController extends BaseController{
         	BookshelfDTO bookshelfDTO = found.createDTO(found);
         	bookshelves.add(bookshelfDTO);
 		}
-        BookshelfDTOComparator c = new BookshelfDTOComparator();
-		bookshelves.sort(c);
-        
+//        BookshelfDTOComparator c = new BookshelfDTOComparator(); 
+//        bookshelves.sort(c);
+        bookshelves.sort(new BookshelfDTOComparator());
+//        Collections.sort(bookshelves,new BookshelfDTOComparator());
+	
 //        LOGGER.debug("Found bookshelf entry with information: {}", found);
         
         return new PageImpl<>(bookshelves,pageable,students.getTotalElements());
