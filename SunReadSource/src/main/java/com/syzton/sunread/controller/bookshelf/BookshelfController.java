@@ -93,8 +93,10 @@ public class BookshelfController extends BaseController{
 		}
 //        BookshelfDTOComparator c = new BookshelfDTOComparator(); 
 //        bookshelves.sort(c);
-        bookshelves.sort(new BookshelfDTOComparator());
-//        Collections.sort(bookshelves,new BookshelfDTOComparator());
+//        bookshelves.sort(new BookshelfDTOComparator());
+
+
+         Collections.sort(bookshelves,new BookshelfDTOComparator());
 	
 //        LOGGER.debug("Found bookshelf entry with information: {}", found);
         
