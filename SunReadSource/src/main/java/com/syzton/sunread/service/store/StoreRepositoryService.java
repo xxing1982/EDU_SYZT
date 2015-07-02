@@ -2,12 +2,14 @@ package com.syzton.sunread.service.store;
 
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.exception.store.InSufficientCoinsException;
+import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.store.ExchangeHistory;
 import com.syzton.sunread.model.store.Gift;
 import com.syzton.sunread.model.store.GiftStatus;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.repository.coinhistory.CoinHistoryRepository;
 import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.store.ExchangeHistoryRepository;
 import com.syzton.sunread.repository.store.GiftRepository;
@@ -36,13 +38,18 @@ public class StoreRepositoryService implements StoreService {
     
     private CampusRepository campusRepository;
 
+    private CoinHistoryRepository coinHistoryRepository;
+
     @Autowired
-    public StoreRepositoryService(GiftRepository giftRepository, ExchangeHistoryRepository exchangeHistoryRepository, StudentRepository studentRepository, UserRepository userRepository,CampusRepository campusRepository) {
+    public StoreRepositoryService(GiftRepository giftRepository, ExchangeHistoryRepository exchangeHistoryRepository,
+                                  StudentRepository studentRepository, UserRepository userRepository,
+                                  CampusRepository campusRepository,CoinHistoryRepository coinHistoryRepository) {
         this.giftRepository = giftRepository;
         this.exchangeHistoryRepository = exchangeHistoryRepository;
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
         this.campusRepository = campusRepository;
+        this.coinHistoryRepository = coinHistoryRepository;
     }
 
     @Override
@@ -90,6 +97,13 @@ public class StoreRepositoryService implements StoreService {
             exchangeHistory.setCount(count + exchangeHistory.getCount());
             exchangeHistoryRepository.save(exchangeHistory);
             student.getStatistic().setCoin(currentCoins - needCoins);
+
+            CoinHistory coinHistory = new CoinHistory();
+            coinHistory.setCoinType(CoinHistory.CoinType.OUT);
+            coinHistory.setNum(needCoins);
+            coinHistory.setReason("exchange gift =" + gift.getName());
+            coinHistory.setStudent(student);
+            coinHistoryRepository.save(coinHistory);
             studentRepository.save(student);
         }else {
             throw new InSufficientCoinsException("student current coin = "+ student.getStatistic().getCoin() +" insufficient. need coin ="+ needCoins);
