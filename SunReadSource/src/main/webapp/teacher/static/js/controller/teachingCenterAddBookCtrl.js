@@ -3,12 +3,12 @@ ctrls.controller("teachingCenterAddBookController", [
 	,'QuickSearch','ConditionSearch','Dictionary'
 	,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch'
 	,'WeeklyRecommendSearch','MonthlyRecommendSearch','YearlyRecommendSearch'
-    ,'Tag','Booktag'
+    ,'Tag','Booktag','LikeBook'
 ,function ($scope,$rootScope,$stateParams,config,LackFeedback
 	,QuickSearch,ConditionSearch,Dictionary
 	,WeeklyHotSearch,MonthlyHotSearch,YearlyHotSearch
 	,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch
-    ,Tag,Booktag) {
+    ,Tag,Booktag,LikeBook) {
 
 		$scope.imageServer=config.IMAGESERVER; ;
 		$scope.statuses_grade = new Array();
@@ -267,11 +267,16 @@ if(!$scope.statuses_category.length > 0){
 
 				$scope.isSelected = false;
 
-				$scope.isSelect = function(){
+				$scope.isSelect = function(para){
 					// if ($scope.isSelected) {
 					// 	$scope.isSelected = false;
 					// }
 						$scope.isSelected = true;
+						// console.log(para.terms);
+						$("#"+para.terms.id).addClass('heartRed');
+						$scope.likeBook = new LikeBook();
+						$scope.likeBook.$update({id:para.terms.id,userId:$rootScope.id});
 				}
+
 
 }]);
