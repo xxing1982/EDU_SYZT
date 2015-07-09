@@ -1,5 +1,5 @@
 <div class="recommendSearch">
-    
+
 <div class="input-group popularChoice title">
 
     <label class="radio-inline">
@@ -37,7 +37,11 @@
                     <a href="#teachingCenter/addBookToShelf" class="btn btn-sm btn-fill-blue" type="button">加入书架</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-blue">相关笔记</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-blue">相关评价</a>&nbsp;&nbsp;
-                    <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-blue">标记书籍</a>
+                    <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-blue">标记书籍</a>&nbsp;&nbsp;
+                    已有{{terms.statistic.recommends}}人推荐&nbsp;
+                    <!-- <a ng-click="isSelect(this)"><span id={{terms.id}} name="{{terms.id}}" class="glyphicon glyphicon-heart" ng-class="{'heartRed':isSelected}"  aria-hidden="true"></span></a> -->
+                    <a ng-click="isSelect(this)">
+                    <span id="{{terms.id}}" name="{{terms.id}}" class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
                 </div>
             </div>
             <!-- Place holder -->
