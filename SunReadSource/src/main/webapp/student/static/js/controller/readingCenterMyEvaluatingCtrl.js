@@ -7,10 +7,13 @@ ctrls.controller("readingCenterMyEvaluatingController", ['$scope', '$rootScope',
 		$scope.rate = 0;
 		$scope.imageServer = config.IMAGESERVER;
 		$scope.source = {};
-		$scope.countVerifyExam = 3;
-		$scope.countWordExam = 3;
-		$scope.countThinkExam = 3;
+		$scope.countVerifyExam = 6;
+		$scope.countWordExam = 6;
+		$scope.countThinkExam = 6;
+		
 		//loading years
+		
+
 		var stateTexts = { more : "加载更多",loading: "更多加载中...",nomore: "没有了"};
 		$scope.status = {
 			current : stateTexts.loading,

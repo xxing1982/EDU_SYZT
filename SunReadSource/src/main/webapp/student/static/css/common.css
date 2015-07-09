@@ -143,6 +143,7 @@ img.active
     color: #fff;
     background-color: #729e54;
     border-color: #729e54;
+    width: 100px;
 }
 
 .btn-unchecked

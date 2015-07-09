@@ -1,6 +1,11 @@
 ctrls.controller("sysAdminCtrl",['$scope', '$rootScope', 'SystemAdmin', 'Pageable', 'GetSystemAdmin', '$stateParams',
 	function($scope, $rootScope, SystemAdmin, Pageable, GetSystemAdmin, $stateParams){
-		
+		$scope.selectSchool = {
+			isEdit: false,
+			checkOne: function(item){
+
+			}
+		};
 
 		$scope.createPageable = function (){
 			$scope.searchPageable = new Pageable();
