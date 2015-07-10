@@ -77,7 +77,8 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Stude
     // $scope.isValid();
   }
   $scope.minusQuantity = function(){
-    $scope.quantity--;
+    if($scope.quantity>0)
+      $scope.quantity--;
     // $scope.isValid();1
   }
   $scope.isValid = function(){
