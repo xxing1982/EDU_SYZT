@@ -1,5 +1,5 @@
-ctrls.controller("readingCenterAddBookController", ['$scope', 'LackFeedback'
-,function ($scope, LackFeedback) {
+ctrls.controller("readingCenterAddBookController", ['$rootScope','$scope', 'LackFeedback'
+,function ($rootScope,$scope, LackFeedback) {
 	$scope.addBook = '我要选书';
 	$scope.language = 1;
 
@@ -17,9 +17,23 @@ ctrls.controller("readingCenterAddBookController", ['$scope', 'LackFeedback'
           publicationDate:$scope.publishDate
         }
         console.log($scope.lackBook);
-        var added =  LackFeedback.save($scope.lackBook);
-				if(added.isbn ==="")
-					alert("书已存在");
+        var added =  LackFeedback.save($scope.lackBook,function(data){
+					$rootScope.modal ={
+						title: "缺书反馈",
+						content:"添加成功"
+					};
+					$('#alert-modal').modal();
+					console.log(data);
+				},function(error){
+					$rootScope.modal ={
+						title: "缺书反馈",
+						content:"反馈失败"+error.statusText
+					};
+					$('#alert-modal').modal();
+					console.log(error);
+				});
+				// if(added.isbn ==="")
+				// 	alert("书已存在");
     }
 
 		$scope.isbnValid = function(){

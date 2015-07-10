@@ -1,6 +1,6 @@
 //readingCenterAddBookAdvancedSearchCtrl.jsc
 ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$rootScope','$stateParams','Pageable',
-        'ConditionSearch','QuickSearch','JoinShelf','config','Dictionary',,function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,JoinShelf,config,Dictionary) {
+        'ConditionSearch','QuickSearch','JoinShelf','config','Dictionary',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,JoinShelf,config,Dictionary) {
 
 
 //    $scope.searchContent="";
