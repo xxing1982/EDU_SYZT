@@ -1,6 +1,6 @@
 //readingCenterAddBookAdvancedSearchCtrl.jsc
 ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$rootScope','$stateParams','Pageable',
-        'ConditionSearch','QuickSearch','JoinShelf','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,JoinShelf,config) {
+        'ConditionSearch','QuickSearch','JoinShelf','config','Dictionary',,function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,QuickSearch,JoinShelf,config,Dictionary) {
 
 
 //    $scope.searchContent="";
@@ -20,60 +20,41 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
         pointRange:0,
         searchTerm:""
       }
+      $scope.statuses_grade = new Array();
+      $scope.statuses_category = new Array();
 
-//    $scope.searchContent = searchContent;
-    $scope.statuses_grade = [{
-        id: 0,
-        name:"全部年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 1,
-        name: "1年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 2,
-        name: "2年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 3,
-        name: "3年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 4,
-        name: "4年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 5,
-        name: "5年级",
-        callback: function(){$scope.search()}
-    }];
+    if(!$scope.statuses_grade.length > 0){
+      Dictionary.query({type:"GRADE"},function(data){
+        // console.log(grade);
+        var temp;
+        for(var i=0; i<data.length; i++){
+          temp = {
+            id:i,
+            name:data[i].name,
+            callback:function(){createPageable(ConditionSearch);}
+          }
+        //  console(typeof(temp));
+          $scope.statuses_grade.push(temp);
+        }
+      console.log($scope.statuses_grade);
+    })
+    }
 
-    $scope.statuses_category = [{
-        id: 0,
-        name:"全部类型",
-        callback: function(){$scope.search()}
-    }, {
-        id: 1,
-        name: "类型一",
-        callback: function(){$scope.search()}
-    }, {
-        id: 2,
-        name: "类型二",
-        callback: function(){$scope.search()}
-    }, {
-        id: 3,
-        name: "类型三",
-        callback: function(){$scope.search()}
-    }, {
-        id: 4,
-        name: "类型四",
-        callback: function(){$scope.search()}
-    }, {
-        id: 5,
-        name: "类型五",
-        callback: function(){$scope.search()}
-    }];
-    $scope.selected_status = 0;
+    if(!$scope.statuses_category.length > 0){
+    Dictionary.query({type:"CATEGORY"},function(data){
+      // console.log(grade);
+      var temp;
+      for(var i=0; i<data.length; i++){
+        temp = {
+          id:i,
+          name:data[i].name,
+          callback:function(){createPageable(ConditionSearch);}
+        }
+        $scope.statuses_category.push(temp);
+      }
+      console.log($scope.statuses_category);
+    })
+    }
 
     $scope.createPageable = function (){
         $scope.searchPageable = new Pageable();
@@ -98,6 +79,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
     }
 
     $scope.createPageable();
+
 
     $scope.searchByName=function(searchContent){
         console.log(searchContent);

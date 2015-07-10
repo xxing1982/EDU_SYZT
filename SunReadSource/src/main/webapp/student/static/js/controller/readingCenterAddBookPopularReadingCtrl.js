@@ -1,8 +1,8 @@
 //readingCenterAddBookPopularReadingCtrl.js
 
 ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$rootScope','$stateParams','Pageable','ConditionSearch','JoinShelf'
-        ,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch','config',function ($scope,$rootScope,$stateParams,Pageable,ConditionSearch,JoinShelf
-                                                         ,WeeklyHotSearch,MonthlyHotSearch,YearlyHotSearch,config) {
+        ,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch','config','Dictionary',function ($scope,$rootScope,$stateParams,Pageable,ConditionSearch,JoinShelf
+                                                         ,WeeklyHotSearch,MonthlyHotSearch,YearlyHotSearch,config,Dictionary) {
 	$scope.name='阅读中心->添加书籍->热门阅读';
 
     $scope.searchArguments = {
@@ -15,8 +15,44 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$roo
         language:0,
         resource:0,
         pointRange:0
-
     }
+
+
+        $scope.statuses_grade = new Array();
+        $scope.statuses_category = new Array();
+
+      if(!$scope.statuses_grade.length > 0){
+        Dictionary.query({type:"GRADE"},function(data){
+          // console.log(grade);
+          var temp;
+          for(var i=0; i<data.length; i++){
+            temp = {
+              id:i,
+              name:data[i].name,
+              callback:function(){createPageable(ConditionSearch);}
+            }
+          //  console(typeof(temp));
+            $scope.statuses_grade.push(temp);
+          }
+        console.log($scope.statuses_grade);
+      })
+      }
+
+      if(!$scope.statuses_category.length > 0){
+      Dictionary.query({type:"CATEGORY"},function(data){
+        // console.log(grade);
+        var temp;
+        for(var i=0; i<data.length; i++){
+          temp = {
+            id:i,
+            name:data[i].name,
+            callback:function(){createPageable(ConditionSearch);}
+          }
+          $scope.statuses_category.push(temp);
+        }
+        console.log($scope.statuses_category);
+      })
+      }
 
 
     $scope.createPageable = function (searchEntity){
@@ -56,59 +92,6 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$roo
         $scope.search = $scope.searchYearly;
     }
 
-
-    $scope.statuses_grade = [{
-        id: 0,
-        name:"全部年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 1,
-        name: "1年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 2,
-        name: "2年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 3,
-        name: "3年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 4,
-        name: "4年级",
-        callback: function(){$scope.search()}
-    }, {
-        id: 5,
-        name: "5年级",
-        callback: function(){$scope.search()}
-    }];
-
-    $scope.statuses_category = [{
-        id: 0,
-        name:"全部类型",
-        callback: function(){$scope.search()}
-    }, {
-        id: 1,
-        name: "类型一",
-        callback: function(){$scope.search()}
-    }, {
-        id: 2,
-        name: "类型二",
-        callback: function(){$scope.search()}
-    }, {
-        id: 3,
-        name: "类型三",
-        callback: function(){$scope.search()}
-    }, {
-        id: 4,
-        name: "类型四",
-        callback: function(){$scope.search()}
-    }, {
-        id: 5,
-        name: "类型五",
-        callback: function(){$scope.search()}
-    }];
-    $scope.selected_status = 0;
 
 
 	$scope.searchWeekly = function(){
