@@ -54,6 +54,9 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
 
     //testing
     PassExam.get($rootScope.id, function(data){
+      if (data.examDTOs.length > 4) {
+        data.examDTOs = data.examDTOs.slice(0, 4);
+      };
       //examDTOs[i].pictureUrl
       for(var i = 0; i < data.examDTOs.length; i++){
         data.examDTOs[i].pictureUrl = data.examDTOs[i].pictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + data.examDTOs[i].pictureUrl;
