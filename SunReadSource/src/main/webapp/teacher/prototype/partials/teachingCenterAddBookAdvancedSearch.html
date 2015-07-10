@@ -41,6 +41,11 @@
             <!-- Place holder -->
             <p class="col-md-12"></p>
         </div>
+
+        <!--No book -->
+        <div class="row bookList myBlock" ng-init="terms.text_overflow=true;" ng-hide="isSearchSuccess()">
+          <p>没要找到您所要的书</p>
+        </div>
     </div>
 
     <!-- Place holder row copied from searchs -->

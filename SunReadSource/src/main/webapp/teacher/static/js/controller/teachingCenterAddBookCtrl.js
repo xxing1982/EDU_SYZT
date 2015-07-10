@@ -112,6 +112,13 @@ if(!$scope.statuses_category.length > 0){
 
 	     $scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
 	     console.log($scope.searchPageable);
+
+			$scope.isSearchSuccess = function(){
+				if($scope.searchPageable.entities.content.length === 0)
+					return false;
+				else
+					return true;
+			}
 	 }
 
 	// Popular
@@ -178,8 +185,22 @@ if(!$scope.statuses_category.length > 0){
           language:$scope.language,
           publicationDate:$scope.publishDate
         }
-        console.log($scope.lackBook);
-        var added =  LackFeedback.save($scope.lackBook);
+        // console.log($scope.lackBook);
+				var added =  LackFeedback.save($scope.lackBook,function(data){
+					$rootScope.modal ={
+						title: "缺书反馈",
+						content:"添加成功"
+					};
+					$('#alert-modal').modal();
+					console.log(data);
+				},function(error){
+					$rootScope.modal ={
+						title: "缺书反馈",
+						content:"反馈失败"+error.statusText
+					};
+					$('#alert-modal').modal();
+					console.log(error);
+				});
     }
 
 		$scope.isbnValid = function(){

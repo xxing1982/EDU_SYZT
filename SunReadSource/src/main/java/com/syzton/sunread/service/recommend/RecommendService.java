@@ -47,5 +47,6 @@ public interface RecommendService {
 	 * @return
 	 */
 	Page<RecommendDTO> findByTeacher(Long teacherId, Pageable pageable);
-			
+
+//	ArrayList<RecommendDTO> findByBookinshelf();
 }

@@ -100,6 +100,8 @@ Pageable.prototype.showPage = function(page, callback){
             // Call the callback
             if (callback !== undefined) { callback(); }
 
+        },function(error){
+          alert(error);
         });
     }
 };
