@@ -1,8 +1,7 @@
-//readingCenterAddBookPopularReadingCtrl.js
+//readingCenterAddBookPopularRecommendCtrl.js
 
-ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$rootScope','$stateParams','Pageable','ConditionSearch','JoinShelf'
-        ,'WeeklyHotSearch','MonthlyHotSearch','YearlyHotSearch','config',function ($scope,$rootScope,$stateParams,Pageable,ConditionSearch,JoinShelf
-                                                         ,WeeklyHotSearch,MonthlyHotSearch,YearlyHotSearch,config) {
+ctrls.controller("readingCenterAddBookPopularRecommendController", ['$rootScope','$scope','$stateParams','Pageable', 'ConditionSearch','JoinShelf'
+        ,'WeeklyRecommendSearch','MonthlyRecommendSearch','YearlyRecommendSearch','config',function ($rootScope,$scope,$stateParams,Pageable,ConditionSearch,JoinShelf,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch,config) {
 	$scope.name='阅读中心->添加书籍->热门阅读';
 
     $scope.searchArguments = {
@@ -17,7 +16,6 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$roo
         pointRange:0
 
     }
-
 
     $scope.createPageable = function (searchEntity){
         $scope.searchPageable = new Pageable();
@@ -110,26 +108,21 @@ ctrls.controller("readingCenterAddBookPopularReadingController", ['$scope','$roo
     }];
     $scope.selected_status = 0;
 
+    $scope.searchWeekly = function(){
+        $scope.createPageable(WeeklyRecommendSearch);
+    };
 
-	$scope.searchWeekly = function(){
-         $scope.createPageable(WeeklyHotSearch);
-	};
+    $scope.searchMonthly = function(){
+        $scope.createPageable(MonthlyRecommendSearch);
+    };
+    $scope.searchYearly = function(){
+        $scope.createPageable(MonthlyRecommendSearch);
+    };
 
-  $scope.searchMonthly = function(){
-        $scope.createPageable(MonthlyHotSearch);
-	};
+    $scope.addBooktoShelf = function(terms){
+			var addBook = new JoinShelf();
+			addBook.joinShelf(terms);
+		} ;
 
-
-  $scope.searchYearly = function(){
-      $scope.createPageable(YearlyHotSearch);
-  };
-
-  $scope.addBooktoShelf = function(terms){
-    var addBook = new JoinShelf();
-    addBook.joinShelf(terms);
-  } ;
-
-
-    $scope.imageServer = config.IMAGESERVER;
-
+$scope.imageServer = config.IMAGESERVER;
 }]);
