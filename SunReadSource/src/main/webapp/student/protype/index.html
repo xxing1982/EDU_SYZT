@@ -112,8 +112,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modal.confirm()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modal.cancel()">取消</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
@@ -133,7 +133,7 @@
 	<!--bootstrap-->
 	<script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-	
+
 	<!--Nourriture scripts-->
 	<script src="../static/js/app.js"></script>
 	<script src="../static/js/config.js"></script>

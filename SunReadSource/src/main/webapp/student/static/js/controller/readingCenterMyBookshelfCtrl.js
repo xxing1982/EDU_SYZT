@@ -97,7 +97,7 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
     };
 
     $scope.selectBookAttributes();
-    
+
     $scope.unreadBooksLoadingMore = function(){
       if($scope.unreadLoading === stateTexts.nomore)
         return;
@@ -154,34 +154,33 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
 
 //DELETE A BOOK IN SHELF
     $scope.dropBookFromShelf = function(book){
-        // console.log(book.id);
-        $scope.dropBook = DropBookFromShelf.remove({id:book.id},function(data){
-          // if(typeof($scope.dropBook) === "undefined"){
-          //     alert("删除失败");
-          // }
-          // else{
-          //     alert("移除成功");
-          //     $scope.selectBookAttributes();
-          // }
-          $rootScope.modal ={
-              title: "移除成功",
-              content:"已将"+data.bookName+"移除书架"
+      $rootScope.modal ={
+          title: "移除图书",
+          content:"是否将"+book.bookName+"移除书架？"
+        };
+        $rootScope.modal.confirm = function(){
+          // console.log(book.id);
+          $scope.dropBook = DropBookFromShelf.remove({id:book.id},function(data){
+            $rootScope.modal ={
+                title: "移除成功",
+                content:"已将"+book.bookName+"移除书架"
+              };
+            $('#alert-modal').modal();
+            $rootScope.modal.click = function(){
+                location.reload();
+                }
+          },function(error){
+            $rootScope.modal ={
+              title: "",
+              content:"移除失败"
             };
-          $('#alert-modal').modal();
-          $rootScope.modal.click = function(){
+            $('#alert-modal').modal();
+            $rootScope.modal.click = function(){
               location.reload();
-              }
-        },function(error){
-          $rootScope.modal ={
-            title: "",
-            content:"移除失败"
-          };
-          $('#alert-modal').modal();
-          $rootScope.modal.click = function(){
-              location.reload();
-              }
-        });
-
+            }
+          });
+        };
+        $('#confirm-modal').modal();
     };
 
     $rootScope.exam = {};
