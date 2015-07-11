@@ -8,7 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.syzton.sunread.dto.recommend.RecommendDTO;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.recommend.Recommend;
+import com.syzton.sunread.model.user.Teacher;
 
 /**
  * @author Morgan-Leon
@@ -47,6 +49,12 @@ public interface RecommendService {
 	 * @return
 	 */
 	Page<RecommendDTO> findByTeacher(Long teacherId, Pageable pageable);
+
+	/**
+	 * @param pageable
+	 * @return
+	 */
+	ArrayList<Book> findRecommendBooks(long teacherId);
 
 //	ArrayList<RecommendDTO> findByBookinshelf();
 }

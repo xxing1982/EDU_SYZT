@@ -24,6 +24,7 @@ import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.controller.book.BookController;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.recommend.RecommendDTO;
+import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.service.recommend.RecommendService;
 
 /**
@@ -81,6 +82,14 @@ public class RecommendController extends BaseController{
 
         return new PageResource<>(recommendByTeacher,"page","size");
 
+    }
+    
+    @RequestMapping(value = "/teacher/{teacherId}/recommendBooks", method = RequestMethod.GET)
+    @ResponseBody
+    public ArrayList<Book> getRecomendBooks(@PathVariable("teacherId") long teacherId) {
+    	
+    	
+    	return recommendService.findRecommendBooks(teacherId);
     }
     
     

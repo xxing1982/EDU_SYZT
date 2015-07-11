@@ -30,4 +30,5 @@ public interface RecommendRepository extends JpaRepository<Recommend, Long>,Quer
 //	@Query("SELECT B.id, B.bookId,B.bookName FROM Recommend R , BookInShelf B where B.deleted = 0 group by B.bookName order by sum(B.bookshelf) desc;")
 //	ArrayList<RecommendDTO> recommendBooks();
 	
+	
 }

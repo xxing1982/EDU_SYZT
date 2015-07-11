@@ -215,6 +215,33 @@ public class RecommendRepositoryService implements RecommendService{
 		Page<RecommendDTO> recommendDTOPage = new PageImpl<>(recommendDTOs,pageable,pageRecommends.getTotalElements());
 		return recommendDTOPage;
 	}
+	
+    @Override
+    public ArrayList<Book> findRecommendBooks(long teacherId){
+        
+    	ArrayList<Book> recommendBooks = new ArrayList<Book>();
+//    	ArrayList<BookInShelf> bookInshelfs= new ArrayList<BookInShelf>();
+		teacher = teacherRepositiry.findOne(teacherId);
+		if(teacher == null)
+			throw new NotFoundException("Not Found Teacher with id" + teacherId);
+    	ArrayList<Recommend> recommends = recommendRepository.findByTeacher(teacher);
+
+    	int size = recommends.size();
+    	int i=size -1;
+    	if(size != 0){
+	    	for (i=size -1;i>0;i--) { 		
+	    		long temp = recommends.get(i).getBookinshelf().getBookId();
+	    		if (temp != recommends.get(i-1).getBookinshelf().getBookId()) {
+	    			book = bookRepository.findOne(recommends.get(i).getBookinshelf().getBookId());
+	    			recommendBooks.add(book);
+	    		} 		
+	
+			}
+    	}
+
+        return recommendBooks;
+    	
+    }
 
 
 }
