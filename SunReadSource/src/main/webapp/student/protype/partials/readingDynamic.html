@@ -1,14 +1,14 @@
 <div id="personalCenter-page" class="container">
     <div class="row">
-    
+
     <!-- The top image -->
-    <div class="page-body-top col-md-8 col-md-offset-2"> 
-        <img src="../static/img/readingDynamic.png" class="img-responsive"> 
+    <div class="page-body-top col-md-8 col-md-offset-2">
+        <img src="../static/img/readingDynamic.png" class="img-responsive">
     </div>
-    
+
     <!-- The page body top -->
     <div class="page-body personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
-        
+
         <!-- President saying -->
         <div class="row buttom-separator">
             <div class="col-md-12">
@@ -25,7 +25,7 @@
             <!-- Place holder -->
             <div class="row title"/>
         </div>
-        
+
         <!-- Latest activities -->
         <div class="row buttom-separator">
             <div class="col-md-12">
@@ -37,9 +37,9 @@
                 </div>
                 <div class="paragraph">
                     <div class="col-md-12">
-                        
+
                         <!-- Actions row -->
-                        <div class="row" 
+                        <div class="row"
                              ng-repeat="action in actionPageable.entities.content">
                             <div class="col-md-10">
                                 <h5 class="dark-blue-2">
@@ -50,14 +50,14 @@
                                 <p>{{ action.creationTime }}</p>
                             </div>
                         </div>
-                        
+
                         <!-- Place holder row copied from actions -->
                         <div class="row" ng-repeat="placeHolder in actionPageable.placeHolders.content">
                             <div class="col-md-10">
                                 <p>&nbsp;{{ placeHolder.title }}</p>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <!-- Place holder -->
             <div class="row title"/>
         </div>
-        
+
         <!-- Excellent students -->
         <div class="row buttom-separator">
             <div class="col-md-12">
@@ -90,7 +90,9 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-8 col-xs-offset-2">
-                                        <div class="text-center"><h4>{{hotreader.username}}</h4></div>
+                                        <a href="#/othersBookshelf/{{hotreader.id}}">
+                                          <div class="text-center"><h4>{{hotreader.username}}</h4></div>
+                                        </a>
                                         <div class="text-center"><p>{{hotreader.statistic.point}}积分</p></div>
                                     </div>
                                 </div>
@@ -104,7 +106,7 @@
             <!-- Place holder -->
             <div class="row title"/>
         </div>
-        
+
         <!-- Excellent clazzes -->
         <div class="row buttom-separator">
             <div class="col-md-12">
@@ -146,8 +148,8 @@
             <!-- Place holder -->
             <div class="row title"/>
         </div>
-        
-        
+
+
         <!-- Hot notes -->
         <div class="row buttom-separator">
             <div class="col-md-12">
@@ -184,7 +186,7 @@
             </div>
         </div>
 
-        
+
     </div>
     </div>
 </div>

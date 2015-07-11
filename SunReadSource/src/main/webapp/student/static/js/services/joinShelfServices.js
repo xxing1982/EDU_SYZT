@@ -7,6 +7,8 @@ angular.module('joinShelfServices',['addbookToShelfServices']).
     JoinShelf.prototype.joinShelf = function(terms){
       var bookId = terms.id;
       var bookName = terms.name;
+      if(typeof(bookName) ==='undefined')
+        bookName = terms.bookName;
       var bookInShelf = {
           bookAttribute: false,
           readState: false
