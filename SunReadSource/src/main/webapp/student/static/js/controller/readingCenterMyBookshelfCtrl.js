@@ -208,9 +208,11 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
 
 
     // Image uploader
-    $scope.dropzone = Dropzone(config.NOTEPIC, function(url){
-        $scope.noteTake.image = url;
-    });
+    $scope.loadDropzone = function(){
+        $scope.dropzone = Dropzone(config.NOTEPIC, function(url){
+            $scope.noteTake.image = url;
+        });
+    }
 
     $scope.takeNoteByBookinshelf = function(bookinshelf){
         var bookDetail = BookDetail.get({ id: bookinshelf.bookId }, function(){

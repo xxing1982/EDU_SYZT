@@ -26,11 +26,11 @@
             <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.username}}</p></div>
             <div class="col-xs-3 col-xs-height col-middle">
                 <p class="row title" ng-show="!order.editable.editing">任务目标：{{order.task.targetBookNum}}本</p>
-                <p class="row title" ng-show="order.editable.editing">任务目标：<input type="number" min="1" class="custom-input" ng-model="order.editable.cached.targetBookNum" />本</p>
+                <p class="row title" ng-show="order.editable.editing">任务目标：<input type="number" min="1" class="custom-input" style="width:60px" ng-model="order.editable.cached.targetBookNum" />本</p>
             </div>
             <div class="col-xs-3 col-xs-height col-middle">
                 <p class="row title" ng-show="!order.editable.editing">积分：{{order.task.targetPoint}}</p>
-                <p class="row title" ng-show="order.editable.editing">积分：<input type="number" min="1" class="custom-input" ng-model="order.editable.cached.targetPoint" /></p>
+                <p class="row title" ng-show="order.editable.editing">积分：<input type="number" min="1" class="custom-input" style="width:60px" ng-model="order.editable.cached.targetPoint" /></p>
             </div>
             <div class="col-xs-2 col-xs-height col-middle">
                 <p class="text-right title">

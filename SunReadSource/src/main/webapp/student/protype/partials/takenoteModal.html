@@ -1,0 +1,55 @@
+<div class="modal fade" id="book-takenote-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" name="note" ng-submit="noteTake.send()">
+            <div class="modal-body">
+                <div class="modal-body">
+
+                    <!-- Row 0 -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="modal-title" id="myModalLabel" >做笔记
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <!-- Row 1 -->
+                    <div class="row title">
+                        <div class="col-md-2">
+                            <img ng-src="{{ noteTake.pictureUrl ? imageServer + noteTake.pictureUrl : null }}" class="img-responsive custom-shadow">
+                        </div>
+                        <div class="col-md-10">
+                            <h4>{{noteTake.name}}</h4>
+                            <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：{{noteTake.author}}<br/>版权：{{noteTake.publisher}}<br/>分值：{{noteTake.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字数：{{noteTake.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：{{noteTake.pageCount}}</h5>
+
+                        </div>
+                    </div>
+
+                    <!-- Input form -->
+                    <div class="container-fluid">
+                        <div class="row input-textarea-group form-group has-feedback">
+                          <input name="title" class="form-control" placeholder="标题（必填）" ng-model="noteTake.title" required/>
+                          <span ng-show="note.title.$error.required" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                          <textarea name="content" class="form-control message-input" placeholder="正文（不少于20字不大于300字）" ng-model="noteTake.content" ng-maxlength="300" required/>
+                        </div>
+                      
+                      <h5 ng-show="noteTake.content === undefined || noteTake.content.length < 20" class="row text-right"><strong>字数过少</strong></h5>
+                      <h5 ng-show="noteTake.content.length <= 200 && noteTake.content.length >= 20" class="row text-right">还可以写{{ 200 - noteTake.content.length }}字</h5>
+                      <h5 ng-show="noteTake.content.length > 200" class="row text-right"><strong>字数过多</strong></h5>
+                    </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12"><div class="col-md-12">
+                      <div id="image-uploader" class="dropzone" style="width:100px"></div>
+                  </div></div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <div class="col-md-12">
+                  <a  class="btn-a" data-dismiss="modal">取消</a>
+                  <button type="submit" ng-disabled="note.title.$error.required || note.content.$error.required || noteTake.content.length < 20 || note.content.$error.maxlength" class="btn btn-green" data-dismiss="modal">提交笔记</button>
+              </div>
+          </div>
+      </form>
+    </div>
+</div>
