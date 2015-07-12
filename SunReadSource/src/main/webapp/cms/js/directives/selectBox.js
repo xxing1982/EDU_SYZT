@@ -9,10 +9,10 @@ myDirective.directive('chooseschool', ['Province', function(Province){
 
 	directive.controller = function($scope){
 		$scope.isDisabled = false;
-		//if ($scope.selectSchool.isEdit == false) {
-		//	$scope.isDisabled = true;
-		//	return;
-		//};
+		if ($scope.selectSchool.isEdit == false) {
+			$scope.isDisabled = true;
+			return;
+		};
 
 		Province.GetProvinces(function(data){
 			$scope.provinces = data.content;
@@ -21,10 +21,26 @@ myDirective.directive('chooseschool', ['Province', function(Province){
 		$scope.c_province = function(){
 			$scope.SelectedCity = "";
 			$scope.SelectedRegion = "";
+			$scope.SelectedSchool = "";
 		}
 
 		$scope.c_city = function(){
 			$scope.SelectedRegion = "";
+			$scope.SelectedSchool = "";
+		}
+
+		$scope.c_region = function(){
+			if ($scope.selectSchool.isShowSchool) {
+				return;
+			}
+			$scope.selectSchool.checkOne($scope.SelectedSchool);
+		}
+
+		$scope.c_school = function(){
+			if (!$scope.selectSchool.isShowSchool) {
+				return;
+			}
+			$scope.selectSchool.checkOne($scope.SelectedSchool);
 		}
 	}
 

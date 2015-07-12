@@ -12,8 +12,11 @@
 		</select>
 	</div>
 	<div class="col-md-2">
-		<select class="form-control" ng-model="SelectedRegion" ng-options="qy.name for qy in SelectedCity.subRegion" ng-disabled="isDisabled">
+		<select class="form-control" ng-model="SelectedRegion" ng-options="qy.name for qy in SelectedCity.subRegion" ng-disabled="isDisabled" ng-change="c_region()">
 			<option>请选择</option>
 		</select>
+	</div>
+	<div class="col-md-2">
+		<select class="form-control" ng-model="SelectedSchool"  ng-options="" ng-disabled="isDisabled" ng-show="selectSchool.isShowSchool"  ng-change="c_school()"></select>
 	</div>
 </div>

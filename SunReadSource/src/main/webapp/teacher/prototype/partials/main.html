@@ -51,9 +51,9 @@
 				<div class="col-md-8"><a href="#teachingCenter/myRecommend">更多></a></div>
 			</div>
 			<div class="body row">
-				<div class="col-md-3 index-image-padding">
-					<img class="img-responsive custom-shadow" src="http://images.sunreading.cn/bookscover/1429359205402jingweitianhai.jpg">
-					<div>精卫填海</div>
+				<div class="col-md-3 index-image-padding" ng-repeat="item in myRecommend">
+					<img class="img-responsive custom-shadow" ng-src="{{item.pictureUrl}}">
+					<div>{{item.name}}</div>
 				</div>
 			</div>
 			<div class="foot"></div>

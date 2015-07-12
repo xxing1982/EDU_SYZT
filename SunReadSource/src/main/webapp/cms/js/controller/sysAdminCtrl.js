@@ -1,9 +1,10 @@
 ctrls.controller("sysAdminCtrl",['$scope', '$rootScope', 'SystemAdmin', 'Pageable', 'GetSystemAdmin', '$stateParams',
 	function($scope, $rootScope, SystemAdmin, Pageable, GetSystemAdmin, $stateParams){
 		$scope.selectSchool = {
-			isEdit: false,
+			isEdit: true,
+			isShowSchool: false,
 			checkOne: function(item){
-
+				
 			}
 		};
 

@@ -6,8 +6,8 @@ var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
 	'ngSanitize','hotclazzServices', 'booktagServices', 'tagServices','likeServices']);
 
 
-ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader',
-	function($scope, $rootScope, config, Teacher, Class, Note, Action, Pageable, QuickSearch, Hotreader){
+ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader', 'MyRecommend',
+	function($scope, $rootScope, config, Teacher, Class, Note, Action, Pageable, QuickSearch, Hotreader, MyRecommend){
 		$scope.imageServer = config.IMAGESERVER;
 		Teacher.get({id: $rootScope.id}, function(teacher){
 			teacher.currentPicture = teacher.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + teacher.picture;
@@ -47,8 +47,19 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', 
 				$scope.hotReaders.first = hotData.content[0];
 				$scope.hotReaders.others = hotData.content.slice(1);
 			});
+
+			//MyRecommend
+			MyRecommend.get(teacher.id, function(myRecommend){
+				if (myRecommend.length > 4) {
+					myRecommend = myRecommend.slice(0, 4);
+				}
+				for(var i = 0; i < myRecommend.length; i++){
+					myRecommend[i].pictureUrl = myRecommend[i].pictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + myRecommend.pictureUrl;
+				}
+				$scope.myRecommend = myRecommend;
+			});
 		});
-	}]);
+}]);
 
 ctrls.filter('formatSize6', function(){
 	return function(input){
@@ -57,8 +68,8 @@ ctrls.filter('formatSize6', function(){
 });
 
 ctrls.filter('formatParagraph', function(){
-  return function(data) {
-   if (!data) return data;
-   return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
- 	};
+	return function(data) {
+		if (!data) return data;
+		return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
+	};
 });
