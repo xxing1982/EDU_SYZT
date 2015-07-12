@@ -8,7 +8,7 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                                                       
     function findMaxAndIndex(arr){
         var max = arr[0];
-        var index;
+        var index = 0;
         for (var i = 0; i < arr.length; i ++) {
             if (max < arr[i]){
                 max = arr[i];
