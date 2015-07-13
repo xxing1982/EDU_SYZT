@@ -156,6 +156,11 @@ public class StoreRepositoryService implements StoreService {
         if (exist == null){
             throw new NotFoundException("gift with id = "+giftId+" not found...");
         }
+        User addUser = userRepository.findOne(exist.getUserId());
+
+        exist.setUserName(addUser.getUsername());
+
+
         return exist;
     }
 
