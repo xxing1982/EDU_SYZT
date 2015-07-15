@@ -1,9 +1,12 @@
 package com.syzton.sunread.repository.user;
 
+import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.model.user.TeacherClazz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by jerry on 3/16/15.
@@ -11,6 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeacherClazzRepository extends JpaRepository<TeacherClazz,Long>{
 
-
+    public List<Clazz> findByTeacherId(long teacherId);
 	
 }

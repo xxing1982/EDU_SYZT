@@ -31,4 +31,6 @@ public interface BookService {
     Page<Book> searchByCondition(BookExtraDTO condition,Pageable pageable);
     
     public Map<Integer,String> batchSaveOrUpdateBookFromExcel(Sheet sheet);
+
+    Page<Book> searchByTags(long lesson,long subject,long grade,long chapter,long theme,Pageable pageable);
 }

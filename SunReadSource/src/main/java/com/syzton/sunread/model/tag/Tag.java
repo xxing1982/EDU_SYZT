@@ -18,9 +18,6 @@ public class Tag extends AbstractEntity {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable=false)
 	private Type type;
-	
-	public enum Type{LESSON, SUBJECT, GRADE, CHAPTER, THEME}
-
 
     @Column(name ="name",nullable = false,length = MAX_LENGTH_NAME)
     private String name;

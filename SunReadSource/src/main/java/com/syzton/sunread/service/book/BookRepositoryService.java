@@ -4,11 +4,7 @@ import java.awt.Point;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.syzton.sunread.assembler.book.BookAssembler;
 import com.syzton.sunread.dto.book.BookDTO;
@@ -20,11 +16,14 @@ import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.BookExtra;
 import com.syzton.sunread.model.book.Dictionary;
 import com.syzton.sunread.model.book.DictionaryType;
+import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
 import com.syzton.sunread.repository.book.DictionaryRepository;
+import com.syzton.sunread.repository.tag.BookTagRepository;
+import com.syzton.sunread.repository.tag.TagRepository;
 import com.syzton.sunread.util.ExcelUtil;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -55,14 +54,20 @@ public class BookRepositoryService implements BookService {
     
     private DictionaryRepository dictionaryRepo;
 
+    private BookTagRepository bookTagRepository;
+
+    private TagRepository tagRepository;
+
 
 
     @Autowired
-    public BookRepositoryService(BookRepository bookRepo,CategoryRepository categoryRepo,DictionaryRepository dictionaryRepo)
+    public BookRepositoryService(BookRepository bookRepo,TagRepository tagRepository,CategoryRepository categoryRepo,DictionaryRepository dictionaryRepo,BookTagRepository bookTagRepository)
     {
         this.bookRepo = bookRepo;
         this.categoryRepo = categoryRepo;
         this.dictionaryRepo = dictionaryRepo;
+        this.bookTagRepository = bookTagRepository;
+        this.tagRepository = tagRepository;
     }
 
 
@@ -271,8 +276,36 @@ public class BookRepositoryService implements BookService {
 		}  
 		return map;
 	}
-	
-	private int getValueFromDic(List<Dictionary> list,String key){
+
+    @Override
+    public Page<Book> searchByTags(long lesson, long subject, long grade, long chapter, long theme, Pageable pageable) {
+
+        if(lesson == 0 && grade == 0 && chapter == 0 && theme == 0 && subject == 0){
+          return  bookRepo.findAll(pageable);
+        } else{
+            Collection<Tag> tags = new ArrayList<>();
+            Tag lessonTag = tagRepository.findOne(lesson);
+            Tag subjectTag = tagRepository.findOne(subject);
+            Tag gradeTag = tagRepository.findOne(grade);
+            Tag chapterTag = tagRepository.findOne(chapter);
+            Tag themeTag = tagRepository.findOne(theme);
+            if(lessonTag!=null)
+                tags.add(lessonTag);
+            if(gradeTag!=null)
+                tags.add(gradeTag);
+            if(subjectTag!=null)
+                tags.add(subjectTag);
+            if(chapterTag!=null)
+                tags.add(chapterTag);
+            if(themeTag!=null)
+                tags.add(themeTag);
+
+            return bookTagRepository.findAllByTagList(tags,pageable);
+        }
+
+    }
+
+    private int getValueFromDic(List<Dictionary> list,String key){
 		for(int i=0;i<list.size();i++){
 			Dictionary dictionary = list.get(i);
 			String name = dictionary.getName();

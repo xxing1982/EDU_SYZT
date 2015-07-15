@@ -1,14 +1,8 @@
 package com.syzton.sunread.model.user;
 
-import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.repository.organization.ClazzRepository;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by jerry on 3/16/15.

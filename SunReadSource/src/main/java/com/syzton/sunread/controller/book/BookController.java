@@ -288,4 +288,28 @@ public class BookController extends BaseController {
 
     }
 
+    @RequestMapping(value = "/books/tags", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Book> tags(
+            @RequestParam(value = "lesson", required = false) String lesson,
+            @RequestParam(value = "subject", required = false) String subject,
+            @RequestParam(value = "grade", required = false) String grade,
+            @RequestParam(value = "chapter", required = false) String chapter,
+            @RequestParam(value = "theme", required = false) String theme,
+            @RequestParam(value = "sortBy", required = false) String sortBy,
+            @RequestParam(value = "direction", required = false) String direction,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size) {
+        long lessonId = lesson == null ? 0 : Long.parseLong(lesson);
+        long subjectId = subject == null ? 0 : Long.parseLong(subject);
+        long gradeId = grade == null ? 0 : Long.parseLong(grade);
+        long chapterId = chapter == null ? 0 : Long.parseLong(chapter);
+        long themeId = theme == null ? 0 : Long.parseLong(theme);
+
+        Pageable pageable = getPageable(page, size, sortBy, direction);
+        Page<Book> bookPage =  bookService.searchByTags(lessonId, subjectId, gradeId, chapterId, themeId, pageable);
+        return new PageResource<>(bookPage, "page", "size");
+    }
+
+
 }

@@ -3,6 +3,8 @@ package com.syzton.sunread.controller.tag;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.model.book.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,4 +78,5 @@ public class TagController {
 
         return updated;
     }
+
 }
