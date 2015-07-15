@@ -1,2 +1,92 @@
-<div class="myBlock mt30">resource</div>
-<div class="myBlock mt20">resource</div>
+<!-- Title -->
+<div class="myBlock mt30 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height">
+            <div class="col-xs-8 col-xs-height">
+                <h5 class="title"><big><a ng-href="#/teachingCenter/addBook" class="dark-gray-2">教学资源</a></big></h5>
+            </div>
+            <!-- <div class="col-xs-4 col-xs-height col-middle">
+                <button class="btn btn-fill-blue pull-right" type="button" ng-click="bookshelfLoadable.publish()">
+                    加入书架
+                </button>
+            </div> -->
+        </div>
+    </div>
+    </div></div>
+</div>
+
+<!-- Left Content -->
+<div class="leftpart">
+  <div class="row" ng-repeat="terms in searchPageable.entities.content">
+        <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
+
+            <!-- Place holder -->
+            <p class="col-md-12"></p>
+
+            <div class="col-md-3">
+                <a href="#teachingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
+            </div>
+            <div class="col-md-9">
+                <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
+            <div class="row fsize12"><p>评分：{{terms.evaluationNum}}&nbsp;&nbsp;已有<span class="red-text">{{terms.statistic.readNums}}</span>人阅读</p></div>
+                <div class="row fsize12"><p>作者：{{terms.author}}&nbsp;&nbsp;版权：{{terms.publisher}} &nbsp;&nbsp;
+                    积分:{{terms.point}}&nbsp;&nbsp;等级:{{terms.extra.level}}&nbsp;&nbsp;财富：{{terms.coin}}</p></div>
+                <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
+                <div class="row fsize12 textColor">
+                    <a href="#teachingCenter/addBookToShelf/{{terms.id}}/" class="btn btn-sm btn-fill-blue" type="button">推荐图书</a>&nbsp;&nbsp;
+                    <a href="#teachingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-blue">相关笔记</a>&nbsp;&nbsp;
+                    <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-blue">相关评价</a>&nbsp;&nbsp;
+                    <a data-toggle="modal" data-target="#booktag" ng-click="booktag.render(terms)" class="btn btn-sm btn-blue">标记书籍</a>&nbsp;&nbsp;
+                    已有{{terms.statistic.recommends}}人推荐&nbsp;
+                    <!-- <a ng-click="isSelect(this)"><span id={{terms.id}} name="{{terms.id}}" class="glyphicon glyphicon-heart" ng-class="{'heartRed':isSelected}"  aria-hidden="true"></span></a> -->
+                    <a ng-click="isSelect(this)">
+                    <span id="{{terms.id}}" name="{{terms.id}}" class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <p class="col-md-12"></p>
+        </div>
+
+        <!--No book -->
+        <div class="row bookList myBlock" ng-init="terms.text_overflow=true;" ng-hide="isSearchSuccess()">
+          <p>没要找到您所要的书</p>
+        </div>
+    </div>
+</div>
+
+<!--right part -->
+ <div class="rightpart">
+   <div class="row conditionBlock myBlock">
+       <div class="col-md-1"></div>
+      <div class="col-md-11">
+           <div class="row">
+               <h5>级别及类别</h5>
+           </div><!---->
+           <div class="row">
+              <div class="catogaryText"> <p>年级： </p></div>
+              <div class="catogaryBtn">
+               <bs-dropdown data-menu-type="button"
+                   select-val="searchArguments.grade = selectedVal"
+                   preselected-item="searchArguments.grade"
+                   data-dropdown-data="statuses_grade">
+               </bs-dropdown>
+               </div>
+           </div>
+
+            <div class="row">
+               <div class="catogaryText"> <p>类别： </p></div>
+              <div class="catogaryBtn">
+               <bs-dropdown data-menu-type="button"
+                   select-val="searchArguments.category = selectedVal"
+                   preselected-item="searchArguments.category"
+                   data-dropdown-data="statuses_category">
+               </bs-dropdown>
+               </div>
+           </div>
+           <!-- Place holder -->
+           <p class="col-md-12"></p>
+       </div>
+   </div>
+</div>
