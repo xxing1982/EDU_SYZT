@@ -192,14 +192,20 @@ if(!$scope.statuses_category.length > 0){
 						content:"添加成功"
 					};
 					$('#alert-modal').modal();
-					console.log(data);
+					$rootScope.modal.click = function(){
+							location.reload();
+						}
+					// console.log(data);
 				},function(error){
 					$rootScope.modal ={
 						title: "缺书反馈",
 						content:"反馈失败"+error.statusText
 					};
 					$('#alert-modal').modal();
-					console.log(error);
+					// console.log(error);
+					$rootScope.modal.click = function(){
+							location.reload();
+						}
 				});
     }
 

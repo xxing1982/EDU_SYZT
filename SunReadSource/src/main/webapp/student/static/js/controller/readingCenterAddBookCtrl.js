@@ -23,6 +23,9 @@ ctrls.controller("readingCenterAddBookController", ['$rootScope','$scope', 'Lack
 						content:"添加成功"
 					};
 					$('#alert-modal').modal();
+					$rootScope.modal.click = function(){
+						location.reload();
+					}
 					console.log(data);
 				},function(error){
 					$rootScope.modal ={
@@ -31,6 +34,9 @@ ctrls.controller("readingCenterAddBookController", ['$rootScope','$scope', 'Lack
 					};
 					$('#alert-modal').modal();
 					console.log(error);
+					$rootScope.modal.click = function(){
+						location.reload();
+					}
 				});
 				// if(added.isbn ==="")
 				// 	alert("书已存在");

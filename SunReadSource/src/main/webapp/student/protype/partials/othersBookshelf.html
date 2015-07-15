@@ -9,14 +9,14 @@
 
 		<div class="row readingCenter-right-body page-body container-fluid">
             <div class="row buttom-separator">
-                <div class="col-xs-6">
+                <div class="col-xs-7">
                     <ul id="bookReadStateTabs" class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#unreadBooksTab" aria-controls="unreadBooksTab" role="tab" data-toggle="tab">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</a></li>
                         <li role="presentation"><a href="#readBooksTab" aria-controls="readBooksTab" role="tab" data-toggle="tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</a></li>
                     </ul>
                 </div>
 
-								<div class="btn-group col-xs-4 col-xs-offset-2" data-toggle="buttons">
+								<div class="btn-group col-xs-4" data-toggle="buttons">
 							  <label class="btn btn-primary active"  ng-click = "selectBookAttributes('0')">
 							    <input type="radio" name="options" id="option1" autocomplete="off"  checked value="0"> 全部
 							  </label>
@@ -27,6 +27,11 @@
 							    <input type="radio" name="options" id="option3"  autocomplete="off" value="2"> 选读
 							  </label>
 							</div>
+
+              <div class="col-xs-1">
+                <!-- <span  class="icon-fanhui"></span> -->
+                <a href="javascript :;" onClick="javascript :history.back(-1);">返回</a>
+              </div>
 
                 <!-- <div class="col-xs-2">
                     <bs-dropdown data-menu-type="button"
