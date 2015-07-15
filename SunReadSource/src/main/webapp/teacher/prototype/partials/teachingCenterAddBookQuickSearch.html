@@ -18,33 +18,34 @@
 					</div>
 					<div class="col-md-6">
 					   <div class="row">
-							<div class="fsize12"><h4>{{hot.name}}</h4></div>
+							<a href="#teachingCenter/bookDetails/{{hot.id}}/"><div class="fsize12"><h4>{{hot.name}}</h4></div></a>
 							<div class="fsize12">评分：{{hot.evaluationNum}}</div>
 							<div class="fsize12">作者：{{hot.author}}</div>
 							<div class="fsize12">已有{{hot.statistic.readNums}}人阅读</div>
-
+							<a href="#teachingCenter/addBookToShelf/{{hot.id}}/" class="btn btn-sm btn-fill-blue" type="button">推荐图书</a>&nbsp;&nbsp;
+							<div>&nbsp;&nbsp;</div>
         		</div>
 				    </div>
             </div>
         </div>
     </div>
 
-    <div class="row myBlock page-body mt30">
+    <div class="row myBlock page-body mt20">
         <div class="col-md-12">
             <p><h6>热门推荐</h6></p>
         </div>
         <div class="col-md-12">
             <div class="col-md-4 clear-padding" ng-repeat="recommend in recommends.content">
 					<div class="col-md-6">
-                        <a href="#teachingCenter/bookDetails/{{recommend.id}}/"><img ng-src={{imageServer+recommend.pictureUrl}} class="img-responsive"></a>
+              <a href="#teachingCenter/bookDetails/{{recommend.id}}/"><img ng-src={{imageServer+recommend.pictureUrl}} class="img-responsive"></a>
 					</div>
 					<div class="col-md-6">
 					   <div class="row">
-						<div class="fsize12"><h4>{{recommend.name}}</h4></div>
+							<a href="#teachingCenter/bookDetails/{{recommend.id}}/"><div class="fsize12"><h4>{{recommend.name}}</h4></div></a>
 						<div class="fsize12">评分：{{recommend.evaluationNum}}</div>
 						<div class="fsize12">作者：{{recommend.author}}</div>
 						<div class="fsize12">已有{{recommend.statistic.recommends}}人推荐</div>
-
+						<a href="#teachingCenter/addBookToShelf/{{recommend.id}}/" class="btn btn-sm btn-fill-blue" type="button">推荐图书</a>&nbsp;&nbsp;
               </div>
 				    </div>
             </div>
