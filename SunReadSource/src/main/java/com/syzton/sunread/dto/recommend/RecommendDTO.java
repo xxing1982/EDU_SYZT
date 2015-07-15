@@ -169,8 +169,8 @@ public class RecommendDTO {
 	}
 	
 	public static Builder getBuilder(Long bookId,String bookName,Long teacherId,String teacherName
-				,Long studentId,String studentName,boolean bookAttribut,boolean readState,int recommendState) {		
-		return new Builder(bookId, bookName, teacherId, teacherName, studentId, studentName, bookAttribut, readState,recommendState);	
+				,Long studentId,String studentName,boolean bookAttribute,boolean readState,int recommendState) {		
+		return new Builder(bookId, bookName, teacherId, teacherName, studentId, studentName, bookAttribute, readState,recommendState);	
 	}
 	
 	public static  class Builder {
@@ -193,12 +193,12 @@ public class RecommendDTO {
 		public Builder(Long bookId,String bookName,Long teacherId,String teacherName
 				,Long studentId,String studentName,boolean bookAttribute,boolean readState,int recommendState){
 			built = new RecommendDTO();
-			built.bookId = bookId;
+			built.setBookId(bookId);
 			built.bookName = bookName;
 			built.teacherId = teacherId;
 			built.teacherName = teacherName;
-			built.studentName = studentName;
 			built.bookshelfId = studentId;
+			built.studentName = studentName;
 			built.setMandatory(bookAttribute);
 			built.setReadState(readState);
 			built.setRecommendState(recommendState);
