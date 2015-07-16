@@ -14,6 +14,7 @@ import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
+import com.syzton.sunread.model.exam.SpeedQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.exam.Exam.ExamType;
 
@@ -30,8 +31,6 @@ public interface ExamService {
 	
 	public List<ObjectiveQuestion> takeWordTest(Long bookId);
 	
-	public List<ObjectiveQuestion> takeSpeedTest();
-
 	public List<CapacityQuestion> takeCapacityTest(int level);
 
 	public List<SubjectiveQuestion> takeThinkTest(Long bookId);
@@ -61,4 +60,7 @@ public interface ExamService {
 	public int findSecondPassRate(Long studentId, DateTime from,DateTime to);
 	
 	public Map<CapacityQuestionType, Integer> getStudentCapacityStatus(Long student,DateTime from,DateTime to);
+
+	public List<SpeedQuestion> takeSpeedTest(long articleId);
+	
 }

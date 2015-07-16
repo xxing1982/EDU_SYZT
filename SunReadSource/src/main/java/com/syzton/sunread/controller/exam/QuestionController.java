@@ -26,6 +26,7 @@ import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
 import com.syzton.sunread.model.exam.Question;
+import com.syzton.sunread.model.exam.SpeedQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.service.exam.ObjectiveQuestionService;
 import com.syzton.sunread.service.exam.QuestionService;
@@ -66,6 +67,15 @@ public class QuestionController {
     public ObjectiveQuestion add(@Valid @RequestBody ObjectiveQuestion objectiveQuestion) {
         LOGGER.debug("Adding a new to-do entry with information: {}", objectiveQuestion);
         ObjectiveQuestion added = objectService.add(objectiveQuestion);
+        LOGGER.debug("Added a to-do entry with information: {}", added);
+       return added;
+    }
+    
+    @RequestMapping(value = "/speedquestion", method = RequestMethod.POST)
+    @ResponseBody
+    public SpeedQuestion add(@Valid @RequestBody SpeedQuestion speedQuestion) {
+        LOGGER.debug("Adding a new to-do entry with information: {}", speedQuestion);
+        SpeedQuestion added = objectService.addSpeedQuestion(speedQuestion);
         LOGGER.debug("Added a to-do entry with information: {}", added);
        return added;
     }
@@ -136,6 +146,13 @@ public class QuestionController {
         return deleted;
     }
     
+    @RequestMapping(value = "/speedquestion/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public SpeedQuestion deleteSpeedQuestionById(@PathVariable("id") Long id) throws NotFoundException  {
+        SpeedQuestion speedQuestion = objectService.deleteSpeedQuestionById(id);
+        return speedQuestion;
+    }
+    
     @RequestMapping(value = "/capacityquestion/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public CapacityQuestion deleteCaQuestionById(@PathVariable("id") Long id) throws NotFoundException  {
@@ -199,6 +216,21 @@ public class QuestionController {
                 page,size,new Sort(sortBy)
         );
         Page<CapacityQuestion> pageResult = objectService.findAllCapacityQuestion(pageable);
+
+        return new PageResource<>(pageResult,"page","size");
+    }
+    
+    @RequestMapping(value = "/speedquestions", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<SpeedQuestion> findAllSpeedQuestions(@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	LOGGER.debug("Finding objective question entry with id: {}" );
+        sortBy = sortBy==null?"id": sortBy;
+        Pageable pageable = new PageRequest(
+                page,size,new Sort(sortBy)
+        );
+        Page<SpeedQuestion> pageResult = objectService.findAllSpeedQuestion(pageable);
 
         return new PageResource<>(pageResult,"page","size");
     }
@@ -282,6 +314,17 @@ public class QuestionController {
         return found;
     }
     
+    @RequestMapping(value = "/speedquestion/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public SpeedQuestion findBySpeedId(@PathVariable("id") Long id) throws NotFoundException  {
+        LOGGER.debug("Finding to-do entry with id: {}", id);
+
+        SpeedQuestion found = objectService.findSpeedQuestionById(id);
+        LOGGER.debug("Found to-do entry with information: {}", found);
+
+        return found;
+    }
+    
     
     @RequestMapping(value = "/option/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -294,9 +337,9 @@ public class QuestionController {
         return found;
     }
 
-    @RequestMapping(value = "/question/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/question", method = RequestMethod.PUT)
     @ResponseBody
-    public Question update(@Valid @RequestBody Question  question, @PathVariable("id") Long todoId) throws QuestionNotFoundExcepiton {
+    public Question update(@Valid @RequestBody Question  question) throws QuestionNotFoundExcepiton {
         LOGGER.debug("Updating a to-do entry with information: {}", question);
 
         Question updated = service.update(question);
@@ -305,9 +348,9 @@ public class QuestionController {
         return updated;
     }
     
-    @RequestMapping(value = "/objectivequestion/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/objectivequestion", method = RequestMethod.PUT)
     @ResponseBody
-    public ObjectiveQuestion updateObjectiveQuestion(@Valid @RequestBody ObjectiveQuestion  question, @PathVariable("id") Long todoId) throws NotFoundException {
+    public ObjectiveQuestion updateObjectiveQuestion(@Valid @RequestBody ObjectiveQuestion  question) throws NotFoundException {
         LOGGER.debug("Updating a to-do entry with information: {}", question);
 
         ObjectiveQuestion updated = objectService.update(question);
@@ -316,9 +359,9 @@ public class QuestionController {
         return updated;
     }
     
-    @RequestMapping(value = "/capacityquestion/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/capacityquestion", method = RequestMethod.PUT)
     @ResponseBody
-    public CapacityQuestion updateCapacityQuestion(@Valid @RequestBody CapacityQuestion  question, @PathVariable("id") Long todoId) throws NotFoundException {
+    public CapacityQuestion updateCapacityQuestion(@Valid @RequestBody CapacityQuestion  question) throws NotFoundException {
         LOGGER.debug("Updating a to-do entry with information: {}", question);
 
         CapacityQuestion updated = objectService.updateCapacityQuestion(question);
@@ -327,9 +370,20 @@ public class QuestionController {
         return updated;
     }
     
-    @RequestMapping(value = "/option/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/speedquestion", method = RequestMethod.PUT)
     @ResponseBody
-    public Option update(@Valid @RequestBody Option  option, @PathVariable("id") Long todoId) throws NotFoundException {
+    public SpeedQuestion updateCapacityQuestion(@Valid @RequestBody SpeedQuestion  question) throws NotFoundException {
+        LOGGER.debug("Updating a to-do entry with information: {}", question);
+
+        SpeedQuestion updated = objectService.updateSpeedQuestion(question);
+        LOGGER.debug("Updated the information of a to-entry to: {}", updated);
+
+        return updated;
+    }
+    
+    @RequestMapping(value = "/option", method = RequestMethod.PUT)
+    @ResponseBody
+    public Option update(@Valid @RequestBody Option  option) throws NotFoundException {
         LOGGER.debug("Updating a to-do entry with information: {}", option);
 
         Option updated = objectService.updateOption(option);
@@ -338,9 +392,9 @@ public class QuestionController {
         return updated;
     }
     
-    @RequestMapping(value = "/subjectivequestion/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/subjectivequestion", method = RequestMethod.PUT)
     @ResponseBody
-    public SubjectiveQuestion update(@Valid @RequestBody SubjectiveQuestion  question, @PathVariable("id") Long todoId) throws NotFoundException {
+    public SubjectiveQuestion update(@Valid @RequestBody SubjectiveQuestion  question) throws NotFoundException {
         LOGGER.debug("Updating a to-do entry with information: {}", question);
 
         SubjectiveQuestion updated = subjectService.update(question);

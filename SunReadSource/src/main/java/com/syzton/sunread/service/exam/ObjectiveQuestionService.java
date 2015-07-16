@@ -14,6 +14,7 @@ import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
 import com.syzton.sunread.model.exam.Question;
+import com.syzton.sunread.model.exam.SpeedQuestion;
 
 public interface ObjectiveQuestionService {
 	
@@ -50,5 +51,16 @@ public interface ObjectiveQuestionService {
 	public CapacityQuestion updateCapacityQuestion(CapacityQuestion updated) throws NotFoundException;
 	
 	public Map<Integer,String> batchSaveOrUpdateObjectiveQuestionFromExcel(Sheet sheet);
+
+	SpeedQuestion addSpeedQuestion(SpeedQuestion added);
+
+	SpeedQuestion findSpeedQuestionById(Long id) throws NotFoundException;
+
+	SpeedQuestion deleteSpeedQuestionById(Long id) throws NotFoundException;
+
+	SpeedQuestion updateSpeedQuestion(SpeedQuestion updated)throws NotFoundException;
+
+	Page<SpeedQuestion> findAllSpeedQuestion(Pageable pageable)
+			throws NotFoundException;
 	
 }

@@ -64,7 +64,7 @@ public class ObjectiveQuestion extends Question {
 	
 	
 	public enum QuestionType {
-		VERIFY,WORD,CAPACITY
+		VERIFY,WORD,CAPACITY,SPEED
 	}
 
 	

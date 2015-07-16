@@ -47,12 +47,14 @@ import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
+import com.syzton.sunread.model.exam.SpeedQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion.SubjectiveQuestionType;
 import com.syzton.sunread.repository.exam.CapacityExamHistoryRepository;
 import com.syzton.sunread.repository.exam.CapacityQuestionRepository;
 import com.syzton.sunread.repository.exam.ExamRepository;
 import com.syzton.sunread.repository.exam.ObjectiveQuestionRepository;
+import com.syzton.sunread.repository.exam.SpeedQuestionRepository;
 import com.syzton.sunread.repository.exam.SubjectiveQuestionRepository;
 
 @Service
@@ -71,19 +73,20 @@ public class ExamRepositoryService implements ExamService {
 	
 	private CapacityExamHistoryRepository capacityExamRepo;
 	
- 
+	private SpeedQuestionRepository speedRepo;
 	
 	
 
 	@Autowired
 	public ExamRepositoryService(ExamRepository repository,
 			ObjectiveQuestionRepository objectQsRepo,SubjectiveQuestionRepository 
-			subjectQsRepo,CapacityQuestionRepository capacityQsRepo,CapacityExamHistoryRepository capacityExamRep) {
+			subjectQsRepo,CapacityQuestionRepository capacityQsRepo,CapacityExamHistoryRepository capacityExamRep,SpeedQuestionRepository speedRepo) {
 		this.repository = repository;
 		this.objectQsRepo = objectQsRepo;
 		this.subjectQsRepo = subjectQsRepo;
 		this.capacityQsRepo = capacityQsRepo;
 		this.capacityExamRepo = capacityExamRep;
+		this.speedRepo = speedRepo;
 	}
 	
 	@Transactional(rollbackFor = { NotFoundException.class })
@@ -354,6 +357,23 @@ public class ExamRepositoryService implements ExamService {
 		List<ObjectiveQuestion> list = allList.subList(from, from+Exam.EXAM_QUESTION);
 		return list;
 	}
+	
+	private List<SpeedQuestion> getRandomSpeedQuestions(
+			final Long articleId) {
+		 
+		List<SpeedQuestion> allList = speedRepo.findByArticleId(articleId);
+		long total = allList.size();
+		LOGGER.debug("###################################"+total);
+		int i = allList.size();
+		if(i<=Exam.EXAM_QUESTION){
+			return allList;
+		}
+		int from = new Random().nextInt(i-Exam.EXAM_QUESTION);
+		List<SpeedQuestion> list = allList.subList(from, from+Exam.EXAM_QUESTION);
+		return list;
+	}
+	
+	
 
 	private int getRandomPage(int total, int size) {
 		if (total <= size) {
@@ -441,11 +461,10 @@ public class ExamRepositoryService implements ExamService {
 	public List<ObjectiveQuestion> takeWordTest(Long bookId) {
 		return getRandomObjectiveQuestions(bookId,QuestionType.WORD);
 	}
-
+	
 	@Override
-	public List<ObjectiveQuestion> takeSpeedTest() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SpeedQuestion> takeSpeedTest(long articleId) {
+		return getRandomSpeedQuestions(articleId);
 	}
 
 	@Override
@@ -475,8 +494,27 @@ public class ExamRepositoryService implements ExamService {
 
 	@Override
 	public Exam handInSpeedTest(Exam added) {
-		// TODO Auto-generated method stub
-		return null;
+		Exam exam = added;
+		Set<Answer> answers = exam.getAnswers();
+		for (Answer answer : answers) {
+			ObjectiveAnswer objectAnswer = (ObjectiveAnswer) answer;
+			if (isAnswerCorrect(objectAnswer)) {
+				exam.setPassCount(exam.getPassCount() + 1);
+			} else {
+				exam.setFailCount(exam.getFailCount() + 1);
+			}
+
+		}
+		int score = exam.getPassCount() * 100
+				/ (exam.getPassCount() + exam.getFailCount());
+		exam.setExamScore(score);
+		if (score >= 60) {
+			exam.setPass(true);
+		} else {
+			exam.setPass(false);
+		}
+		exam = add(exam);
+		return exam;
 	}
 	
 	@Transactional
@@ -630,4 +668,6 @@ public class ExamRepositoryService implements ExamService {
 			}
 		}
 	}
+
+	
 }

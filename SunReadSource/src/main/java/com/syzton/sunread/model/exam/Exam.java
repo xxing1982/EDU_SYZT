@@ -42,6 +42,8 @@ public class Exam extends AbstractEntity {
 	@JoinColumn(name = "book_id")
 	private Book book;
 	
+	@Column(name="article_id" )
+	private long articleId = 0;
 	
 	@Column(name="student_id")
 	private Long studentId;
@@ -213,6 +215,14 @@ public class Exam extends AbstractEntity {
 
 	public int getQuestionNum() {
 		return this.questionNum;
+	}
+
+	public long getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(long articleId2) {
+		this.articleId = articleId2;
 	}
 
 	public void update(Set<Answer> answers) {

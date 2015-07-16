@@ -24,10 +24,12 @@ import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
+import com.syzton.sunread.model.exam.SpeedQuestion;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.exam.CapacityQuestionRepository;
 import com.syzton.sunread.repository.exam.ObjectiveQuestionRepository;
 import com.syzton.sunread.repository.exam.OptionRepository;
+import com.syzton.sunread.repository.exam.SpeedQuestionRepository;
 import com.syzton.sunread.service.book.BookRepositoryService;
 import com.syzton.sunread.util.ExcelUtil;
 
@@ -43,14 +45,19 @@ public class ObjectiveQuestionRepositoryService implements
 	
 	private CapacityQuestionRepository capacityRepository;
 	
+	private SpeedQuestionRepository speedRepository;
+	
 	private BookRepository bookRepository;
 
 	@Autowired
 	public ObjectiveQuestionRepositoryService(
-			ObjectiveQuestionRepository repository,OptionRepository optionRepository,CapacityQuestionRepository capacityRepository,BookRepository bookRepository) {
+			ObjectiveQuestionRepository repository,OptionRepository optionRepository,
+			CapacityQuestionRepository capacityRepository,SpeedQuestionRepository speedRepository,
+			BookRepository bookRepository) {
 		this.repository = repository;
 		this.optionRepository = optionRepository;
 		this.capacityRepository = capacityRepository;
+		this.speedRepository = speedRepository;
 		this.bookRepository = bookRepository;
 	}
 
@@ -202,6 +209,15 @@ public class ObjectiveQuestionRepositoryService implements
  
 	}
 	
+	@Transactional(readOnly = true, rollbackFor = { NotFoundException.class })
+	@Override
+	public Page<SpeedQuestion> findAllSpeedQuestion(Pageable pageable)
+			throws NotFoundException {
+		Page<SpeedQuestion> speedPages = speedRepository.findAll(pageable);
+		return speedPages;
+ 
+	}
+	
 	@Transactional
 	@Override
 	public CapacityQuestion addCapacityQuestion(CapacityQuestion added) {
@@ -248,6 +264,57 @@ public class ObjectiveQuestionRepositoryService implements
 		LOGGER.debug("Found a to-do entry: {}", model);
 		model.setLevel(updated.getLevel());
 		model.setQuestionType(updated.getQuestionType());
+		model.setCorrectAnswer(updated.getCorrectAnswer());
+		model.setOptions(updated.getOptions());
+		model.setObjectiveType(updated.getObjectiveType());
+		model.setTopic(updated.getTopic());
+		return model;
+	}
+	
+	@Transactional
+	@Override
+	public SpeedQuestion addSpeedQuestion(SpeedQuestion added) {
+		LOGGER.debug("Adding a new Objective question entry with information: {}", added);
+		return speedRepository.save(added);
+	}
+	
+	@Transactional(readOnly = true, rollbackFor = { NotFoundException.class })
+	@Override
+	public SpeedQuestion findSpeedQuestionById(Long id)
+			throws NotFoundException {
+		LOGGER.debug("Finding a to-do entry with id: {}", id);
+
+		SpeedQuestion found = speedRepository.findOne(id);
+		LOGGER.debug("Found to-do entry: {}", found);
+
+		if (found == null) {
+			throw new NotFoundException("No to-entry found with id: " + id);
+		}
+
+		return found;
+	}
+	
+	@Transactional(rollbackFor = { NotFoundException.class })
+	@Override
+	public SpeedQuestion deleteSpeedQuestionById(Long id)
+			throws NotFoundException {
+		LOGGER.debug("Deleting a to-do entry with id: {}", id);
+
+		SpeedQuestion deleted = speedRepository.findOne(id);
+		LOGGER.debug("Deleting to-do entry: {}", deleted);
+
+		speedRepository.delete(deleted);
+		return deleted;
+	}
+	
+	@Transactional(rollbackFor = { NotFoundException.class })
+	@Override
+	public SpeedQuestion updateSpeedQuestion(SpeedQuestion updated)
+			throws NotFoundException {
+		LOGGER.debug("Updating contact with information: {}", updated);
+
+		SpeedQuestion model = speedRepository.findOne(updated.getId());
+		LOGGER.debug("Found a to-do entry: {}", model);
 		model.setCorrectAnswer(updated.getCorrectAnswer());
 		model.setOptions(updated.getOptions());
 		model.setObjectiveType(updated.getObjectiveType());
