@@ -90,7 +90,8 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         //teachingCenter my task page
         .state('teachingCenter.myResource',{
             url: '/myResource',
-            templateUrl: 'partials/teachingCenterMyResource.html'
+            templateUrl: 'partials/teachingCenterMyResource.html',
+            controller:'myResourceController'
         })
         //teachingDynamic page
         .state('readingDynamic',{
