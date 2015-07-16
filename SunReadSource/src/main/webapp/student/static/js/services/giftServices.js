@@ -18,7 +18,7 @@ var getGiftsExNumServices = angular.module('getGiftsExNumServices', ['ngResource
 */
 getGiftsExNumServices.factory('GetGiftsExNum', ['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "students/:id/exchanges?page=:page&size=:size",
+		return $resource(config.HOST + "students/:id/exchanges?page=:page&size=:size&sortBy=creationTime&direction=desc",
             {id:'@_id', page:'@_page', size:'@_size'}, {}
         );
 }]);
