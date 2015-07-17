@@ -1,7 +1,8 @@
 package com.syzton.sunread.repository.book;
 
-import com.syzton.sunread.model.book.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.syzton.sunread.model.book.Category;
 
 /**
  * Created by jerry on 3/8/15.

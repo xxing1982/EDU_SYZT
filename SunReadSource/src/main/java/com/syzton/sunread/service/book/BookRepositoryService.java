@@ -1,10 +1,24 @@
 package com.syzton.sunread.service.book;
 
-import java.awt.Point;
-import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import static com.syzton.sunread.repository.book.predicates.BookPredicates.findByCondition;
+import static com.syzton.sunread.repository.book.predicates.BookPredicates.quickSearchContains;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.assembler.book.BookAssembler;
 import com.syzton.sunread.dto.book.BookDTO;
@@ -17,29 +31,12 @@ import com.syzton.sunread.model.book.BookExtra;
 import com.syzton.sunread.model.book.Dictionary;
 import com.syzton.sunread.model.book.DictionaryType;
 import com.syzton.sunread.model.tag.Tag;
-import com.syzton.sunread.model.user.Student;
-import com.syzton.sunread.model.user.User.GenderType;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.CategoryRepository;
 import com.syzton.sunread.repository.book.DictionaryRepository;
 import com.syzton.sunread.repository.tag.BookTagRepository;
 import com.syzton.sunread.repository.tag.TagRepository;
 import com.syzton.sunread.util.ExcelUtil;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import static com.syzton.sunread.repository.book.predicates.BookPredicates.findByCondition;
-import static com.syzton.sunread.repository.book.predicates.BookPredicates.quickSearchContains;
 
 /**
  */

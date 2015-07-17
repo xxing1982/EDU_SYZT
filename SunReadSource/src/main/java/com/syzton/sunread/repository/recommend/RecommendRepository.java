@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import com.syzton.sunread.dto.recommend.RecommendDTO;
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 import com.syzton.sunread.model.recommend.Recommend;
 import com.syzton.sunread.model.user.Teacher;

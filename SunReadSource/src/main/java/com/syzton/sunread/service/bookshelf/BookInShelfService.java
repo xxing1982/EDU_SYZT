@@ -3,11 +3,11 @@ package com.syzton.sunread.service.bookshelf;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javassist.NotFoundException;
+
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import javassist.NotFoundException;
 
 import com.syzton.sunread.dto.bookshelf.BookInShelfDTO;
 import com.syzton.sunread.exception.bookshelf.BookInShelfDuplicateVerifiedException;

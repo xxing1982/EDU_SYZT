@@ -1,11 +1,11 @@
 package com.syzton.sunread.service.store;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.syzton.sunread.model.store.ExchangeHistory;
 import com.syzton.sunread.model.store.Gift;
 import com.syzton.sunread.model.store.GiftStatus;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by jerry on 4/20/15.

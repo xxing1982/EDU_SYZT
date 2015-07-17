@@ -3,9 +3,6 @@
  */
 package com.syzton.sunread.model.region;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -24,7 +20,6 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.syzton.sunread.dto.region.SchoolDistrictDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.model.organization.Campus;
 
 /**
  * @author Morgan-Leon

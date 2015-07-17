@@ -1,12 +1,13 @@
 package com.syzton.sunread.repository.book;
 
-import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.book.Review;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.book.Review;
 
 /**
  * Created by jerry on 3/9/15.

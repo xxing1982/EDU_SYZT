@@ -4,19 +4,23 @@ package com.syzton.sunread.service.note;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysema.query.types.Predicate;
-import com.mysema.query.types.expr.BooleanExpression;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.dto.note.NoteDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.book.QBook;
+import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
-import com.syzton.sunread.model.note.Note;
-import com.syzton.sunread.model.note.QNote;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
@@ -27,16 +31,6 @@ import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
 import com.syzton.sunread.service.pointhistory.PointHistoryService;
-import com.syzton.sunread.service.semester.SemesterService;
-import com.syzton.sunread.service.user.UserService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 

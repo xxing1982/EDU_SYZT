@@ -1,10 +1,10 @@
 package com.syzton.sunread.model.message;
 
-import com.syzton.sunread.model.common.AbstractEntity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.syzton.sunread.model.common.AbstractEntity;
 
 @Entity
 @Table(name="action")

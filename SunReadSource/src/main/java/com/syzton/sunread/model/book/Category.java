@@ -1,11 +1,20 @@
 package com.syzton.sunread.model.book;
 
-import com.syzton.sunread.model.common.AbstractEntity;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * @author Jerry zhang

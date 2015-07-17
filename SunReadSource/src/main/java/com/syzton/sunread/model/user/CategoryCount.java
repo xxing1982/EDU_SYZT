@@ -1,10 +1,10 @@
 package com.syzton.sunread.model.user;
 
-import com.syzton.sunread.model.book.Dictionary;
-import com.syzton.sunread.model.common.AbstractEntity;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+
+import com.syzton.sunread.model.book.Dictionary;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * Created by jerry on 4/28/15.

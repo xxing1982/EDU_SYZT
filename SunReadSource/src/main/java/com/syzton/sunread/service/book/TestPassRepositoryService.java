@@ -1,5 +1,9 @@
 package com.syzton.sunread.service.book;
 
+import static com.syzton.sunread.repository.book.predicates.TestPassPredicates.countTPDuringMonthly;
+import static com.syzton.sunread.repository.book.predicates.TestPassPredicates.countTPDuringWeekly;
+import static com.syzton.sunread.repository.book.predicates.TestPassPredicates.countTPDuringYearly;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +15,6 @@ import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.TestPassRepository;
 import com.syzton.sunread.repository.user.UserRepository;
-
-import static com.syzton.sunread.repository.book.predicates.TestPassPredicates.countTPDuringMonthly;
-import static com.syzton.sunread.repository.book.predicates.TestPassPredicates.countTPDuringWeekly;
-import static com.syzton.sunread.repository.book.predicates.TestPassPredicates.countTPDuringYearly;
 
 @Service
 public class TestPassRepositoryService implements TestPassService {

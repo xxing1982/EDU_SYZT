@@ -1,9 +1,9 @@
 package com.syzton.sunread.repository.tag;
 
-import com.syzton.sunread.model.tag.Tag;
-
-import com.syzton.sunread.model.tag.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.syzton.sunread.model.tag.Tag;
+import com.syzton.sunread.model.tag.Type;
 
 /**
  * @author chenty

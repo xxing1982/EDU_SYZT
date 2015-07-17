@@ -2,6 +2,8 @@ package com.syzton.sunread.controller.coinhistory;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,21 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.controller.BaseController;
-import com.syzton.sunread.controller.pointhistory.PointHistoryController.PointHistoriesDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
-import com.syzton.sunread.model.coinhistory.CoinHistory;
-import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
 import com.syzton.sunread.service.semester.SemesterService;
 import com.syzton.sunread.service.user.UserService;
-
-import javax.validation.Valid;
 
 
 /**

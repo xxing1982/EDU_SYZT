@@ -1,11 +1,12 @@
 package com.syzton.sunread.dto.book;
 
-import com.syzton.sunread.dto.common.AbstractDTO;
-import com.syzton.sunread.model.book.Book;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.syzton.sunread.dto.common.AbstractDTO;
+import com.syzton.sunread.model.book.Book;
 
 /**
  * @author Jerry zhang

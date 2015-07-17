@@ -1,7 +1,8 @@
 package com.syzton.sunread.repository.task;
 
-import com.syzton.sunread.model.user.UserStatistic;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.syzton.sunread.model.user.UserStatistic;
 
 /**
  * Created by jerry on 4/14/15.

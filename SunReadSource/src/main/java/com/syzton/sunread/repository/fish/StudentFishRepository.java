@@ -1,7 +1,8 @@
 package com.syzton.sunread.repository.fish;
 
-import com.syzton.sunread.model.fish.StudentFish;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.syzton.sunread.model.fish.StudentFish;
 
 
 /**

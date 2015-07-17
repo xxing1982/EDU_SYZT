@@ -1,7 +1,5 @@
 package com.syzton.sunread.exception.common;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * An application-specific exception. When something not found,

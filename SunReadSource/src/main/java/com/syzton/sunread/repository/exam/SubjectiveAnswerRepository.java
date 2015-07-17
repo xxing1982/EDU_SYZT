@@ -4,10 +4,7 @@ package com.syzton.sunread.repository.exam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import com.syzton.sunread.model.exam.Answer;
-import com.syzton.sunread.model.exam.Exam;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveAnswer;
 

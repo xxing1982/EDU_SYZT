@@ -1,10 +1,9 @@
 package com.syzton.sunread.service.fish;
 
+import java.util.List;
+
 import com.syzton.sunread.dto.fish.StudentFishDTO;
 import com.syzton.sunread.model.fish.Fish;
-import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 /**
  * Created by jerry on 4/21/15.

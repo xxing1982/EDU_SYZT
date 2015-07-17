@@ -1,15 +1,15 @@
 package com.syzton.sunread.controller.task;
 
-import com.syzton.sunread.controller.BaseController;
-import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.model.task.Task;
-import com.syzton.sunread.model.user.Student;
-import com.syzton.sunread.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.syzton.sunread.controller.BaseController;
+import com.syzton.sunread.model.task.Task;
+import com.syzton.sunread.service.task.TaskService;
 
 /**
  * Created by jerry on 3/29/15.

@@ -1,31 +1,12 @@
  package com.syzton.sunread.service.user;
 
-import com.syzton.sunread.dto.user.UserExtraDTO;
-import com.syzton.sunread.exception.common.AuthenticationException;
-import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.bookshelf.BookInShelf;
-import com.syzton.sunread.model.organization.Campus;
-import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.organization.EduGroup;
-import com.syzton.sunread.model.security.Role;
-import com.syzton.sunread.model.semester.Semester;
-import com.syzton.sunread.model.task.Task;
-import com.syzton.sunread.model.user.*;
-import com.syzton.sunread.model.user.User.GenderType;
-import com.syzton.sunread.repository.SemesterRepository;
-import com.syzton.sunread.repository.organization.CampusRepository;
-import com.syzton.sunread.repository.organization.ClazzRepository;
-import com.syzton.sunread.repository.organization.EduGroupRepository;
-import com.syzton.sunread.repository.region.SchoolDistrictRepository;
-import com.syzton.sunread.repository.user.*;
-import com.syzton.sunread.service.bookshelf.BookInShelfService;
-import com.syzton.sunread.service.bookshelf.BookshelfService;
-import com.syzton.sunread.service.organization.EduGroupService;
-import com.syzton.sunread.service.region.SchoolDistrictService;
-import com.syzton.sunread.service.task.TaskService;
-import com.syzton.sunread.util.ExcelUtil;
+import static org.springframework.util.Assert.notNull;
 
-import org.apache.poi.ss.usermodel.Row;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.poi.ss.usermodel.Sheet;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -42,11 +23,36 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import static org.springframework.util.Assert.notNull;
+import com.syzton.sunread.dto.user.UserExtraDTO;
+import com.syzton.sunread.exception.common.AuthenticationException;
+import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.security.Role;
+import com.syzton.sunread.model.semester.Semester;
+import com.syzton.sunread.model.task.Task;
+import com.syzton.sunread.model.user.Admin;
+import com.syzton.sunread.model.user.Parent;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.SystemAdmin;
+import com.syzton.sunread.model.user.Teacher;
+import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.model.user.User.GenderType;
+import com.syzton.sunread.repository.SemesterRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
+import com.syzton.sunread.repository.organization.ClazzRepository;
+import com.syzton.sunread.repository.organization.EduGroupRepository;
+import com.syzton.sunread.repository.region.SchoolDistrictRepository;
+import com.syzton.sunread.repository.user.AdminRepository;
+import com.syzton.sunread.repository.user.ParentRepository;
+import com.syzton.sunread.repository.user.RoleRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
+import com.syzton.sunread.repository.user.SystemAdminRepository;
+import com.syzton.sunread.repository.user.TeacherClazzRepository;
+import com.syzton.sunread.repository.user.TeacherRepository;
+import com.syzton.sunread.repository.user.UserRepository;
+import com.syzton.sunread.service.bookshelf.BookshelfService;
+import com.syzton.sunread.service.task.TaskService;
 
 /**
  * Created by jerry on 3/16/15.

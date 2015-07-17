@@ -2,11 +2,8 @@ package com.syzton.sunread.model.exam;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.Entity;
-
-import org.apache.commons.collections.map.HashedMap;
 
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;

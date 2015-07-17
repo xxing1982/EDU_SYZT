@@ -1,5 +1,7 @@
 package com.syzton.sunread.security;
 
+import java.util.Collection;
+
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.annotation.Jsr250SecurityConfig;
 import org.springframework.security.access.annotation.Jsr250Voter;
@@ -7,8 +9,6 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.Assert;
-
-import java.util.Collection;
 
 
 public class HierarchicalJsr250Voter extends Jsr250Voter {

@@ -1,15 +1,16 @@
 package com.syzton.sunread.service.tag;
 
 import java.util.List;
-import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.tag.Tag;
-import com.syzton.sunread.model.tag.Type;
-import com.syzton.sunread.repository.tag.TagRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.tag.Tag;
+import com.syzton.sunread.repository.tag.TagRepository;
 
 
 /**

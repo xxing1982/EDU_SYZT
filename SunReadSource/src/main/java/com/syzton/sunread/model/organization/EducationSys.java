@@ -1,13 +1,14 @@
 package com.syzton.sunread.model.organization;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.util.DateSerializer;
+import javax.persistence.Column;
+import javax.persistence.PrePersist;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import javax.persistence.Column;
-import javax.persistence.PrePersist;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.util.DateSerializer;
 
 /**
  * Created by Morgan-Leon on 2015/3/16.

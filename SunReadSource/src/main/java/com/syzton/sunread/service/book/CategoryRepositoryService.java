@@ -1,11 +1,13 @@
 package com.syzton.sunread.service.book;
 
-import com.syzton.sunread.model.book.Category;
-import com.syzton.sunread.repository.book.CategoryRepository;
 import javassist.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.syzton.sunread.model.book.Category;
+import com.syzton.sunread.repository.book.CategoryRepository;
 
 /**
  * Created by jerry on 3/13/15.

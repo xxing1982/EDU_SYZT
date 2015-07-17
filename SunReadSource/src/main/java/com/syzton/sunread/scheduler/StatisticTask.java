@@ -1,5 +1,12 @@
 package com.syzton.sunread.scheduler;
 
+import java.util.List;
+
+import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.ClazzStatisticHistory;
@@ -12,12 +19,6 @@ import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.organization.ClazzStatisticHistoryRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserStatisticHistoryRepository;
-import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * Created by jerry on 4/16/15.

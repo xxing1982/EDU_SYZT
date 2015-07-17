@@ -1,5 +1,10 @@
 package com.syzton.sunread.service.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.EduGroup;
@@ -11,10 +16,6 @@ import com.syzton.sunread.repository.organization.EduGroupRepository;
 import com.syzton.sunread.repository.region.RegionRepository;
 import com.syzton.sunread.repository.region.SchoolDistrictRepository;
 import com.syzton.sunread.repository.user.AnalystRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by jerry on 6/13/15.

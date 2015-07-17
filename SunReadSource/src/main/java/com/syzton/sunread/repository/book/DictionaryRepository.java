@@ -1,11 +1,11 @@
 package com.syzton.sunread.repository.book;
 
-import com.syzton.sunread.model.book.Dictionary;
-import com.syzton.sunread.model.book.DictionaryType;
-import com.syzton.sunread.model.book.Recommendation;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.syzton.sunread.model.book.Dictionary;
+import com.syzton.sunread.model.book.DictionaryType;
 
 /**
  * Created by jerry on 3/8/15.

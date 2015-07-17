@@ -1,11 +1,9 @@
 package com.syzton.sunread.repository.user;
 
-import com.syzton.sunread.model.user.Student;
-import com.syzton.sunread.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.syzton.sunread.model.user.User;
 
 /**
  * Created by jerry on 3/16/15.

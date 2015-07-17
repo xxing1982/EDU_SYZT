@@ -1,19 +1,13 @@
 package com.syzton.sunread.repository.book;
 
-import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.book.Category;
+import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Collection;
-import java.util.List;
+import com.syzton.sunread.model.book.Book;
 
 /**
  * Created by jerry on 3/8/15.

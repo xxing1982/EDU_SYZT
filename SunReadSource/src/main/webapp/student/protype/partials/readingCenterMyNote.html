@@ -7,7 +7,7 @@
 			<div class="note-row"  ng-repeat="Note in noteView.Notes.content">
 				<div class="row book-row">
 					<div class="col-md-2 book-row-left">
-						<div><img ng-src="{{imageServer+Note.bookPictureUrl}}" class="img-responsive custom-shadow"/></div>
+                        <div><a href="#readingCenter/bookDetails/{{Note.bookId}}/"><img ng-src="{{imageServer+Note.bookPictureUrl}}" class="img-responsive custom-shadow"/></a></div>
 <!--
 						<div class="col-md-9 col-md-offset-5 mustRead" ng-show='showMust'>
 							<img src="../static/img/mustRead.png" class="img-responsive">

@@ -19,7 +19,6 @@ import com.syzton.sunread.model.security.OAuth2AuthenticationAccessToken;
 import com.syzton.sunread.model.security.OAuth2AuthenticationRefreshToken;
 import com.syzton.sunread.repository.security.OAuth2AccessTokenRepository;
 import com.syzton.sunread.repository.security.OAuth2RefreshTokenRepository;
-import com.syzton.sunread.service.user.UserRepositoryService;
 
 public class OAuth2RepositoryTokenStore implements TokenStore{
 	

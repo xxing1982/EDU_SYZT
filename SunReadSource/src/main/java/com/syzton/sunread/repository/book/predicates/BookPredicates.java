@@ -1,12 +1,10 @@
 package com.syzton.sunread.repository.book.predicates;
 
 import com.mysema.query.BooleanBuilder;
+import com.mysema.query.types.Predicate;
 import com.syzton.sunread.dto.book.BookExtraDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.QBook;
-
-import com.mysema.query.types.Predicate;
-import com.syzton.sunread.model.tag.QBookTag;
 
 /**
  */

@@ -1,8 +1,10 @@
 package com.syzton.sunread.model.store;
 
-import com.syzton.sunread.model.common.AbstractEntity;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-import javax.persistence.*;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * Created by jerry on 4/20/15.

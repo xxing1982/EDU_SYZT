@@ -7,10 +7,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
-import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.Exam;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.Exam.ExamType;
+import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 
 public class SubjectivePaperDTO {

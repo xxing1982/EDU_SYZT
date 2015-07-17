@@ -2,17 +2,15 @@ package com.syzton.sunread.repository.coinhistory;
 
 import java.util.ArrayList;
 
-import com.syzton.sunread.model.bookshelf.BookInShelf;
-import com.syzton.sunread.model.bookshelf.Bookshelf;
-import com.syzton.sunread.model.coinhistory.CoinHistory;
-import com.syzton.sunread.model.coinhistory.CoinHistory.CoinFrom;
-
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.syzton.sunread.model.coinhistory.CoinHistory;
+import com.syzton.sunread.model.coinhistory.CoinHistory.CoinFrom;
 
 /**
  * @author chenty

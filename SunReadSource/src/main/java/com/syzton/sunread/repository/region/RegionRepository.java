@@ -1,11 +1,11 @@
 package com.syzton.sunread.repository.region;
 
-import com.syzton.sunread.model.region.RegionType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.syzton.sunread.model.region.Region;
+import com.syzton.sunread.model.region.RegionType;
 
 /**
  * @author Morgan-Leon

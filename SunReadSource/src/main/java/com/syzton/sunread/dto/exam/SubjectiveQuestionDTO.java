@@ -1,9 +1,7 @@
 package com.syzton.sunread.dto.exam;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.Question;
-import com.syzton.sunread.model.exam.SubjectiveAnswer;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 
 @JsonTypeName("subjective")
