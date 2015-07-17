@@ -7,6 +7,7 @@ var NoteTake = function(bookDetails){
     this.id = bookDetails.id;
     this.name = bookDetails.name;
     this.author = bookDetails.author;
+    this.evaluationNum = bookDetails.evaluationNum;
     this.publisher = bookDetails.publisher;
     this.point = bookDetails.point;
     this.wordCount = bookDetails.wordCount;
