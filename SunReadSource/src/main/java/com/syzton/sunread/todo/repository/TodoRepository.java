@@ -1,7 +1,8 @@
 package com.syzton.sunread.todo.repository;
 
-import com.syzton.sunread.todo.model.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.syzton.sunread.todo.model.Todo;
 
 /**
  * @author Petri Kainulainen

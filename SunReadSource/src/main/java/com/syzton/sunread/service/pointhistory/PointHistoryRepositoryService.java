@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 import com.syzton.sunread.model.pointhistory.PointHistory.PointType;

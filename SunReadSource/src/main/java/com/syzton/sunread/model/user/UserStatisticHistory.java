@@ -1,9 +1,10 @@
 package com.syzton.sunread.model.user;
 
-import com.syzton.sunread.model.common.AbstractEntity;
+import java.io.Serializable;
 
 import javax.persistence.Entity;
-import java.io.Serializable;
+
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * Created by jerry on 3/30/15.

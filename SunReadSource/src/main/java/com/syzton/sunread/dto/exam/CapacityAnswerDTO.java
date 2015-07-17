@@ -3,7 +3,6 @@ package com.syzton.sunread.dto.exam;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
-import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
 
 public class CapacityAnswerDTO  {

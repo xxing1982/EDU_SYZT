@@ -1,7 +1,8 @@
 package com.syzton.sunread.todo.controller;
 
-import com.syzton.sunread.common.dto.ValidationErrorDTO;
-import com.syzton.sunread.todo.exception.TodoNotFoundException;
+import java.util.List;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.List;
-import java.util.Locale;
+import com.syzton.sunread.common.dto.ValidationErrorDTO;
+import com.syzton.sunread.todo.exception.TodoNotFoundException;
 
 /**
  * @author Petri Kainulainen

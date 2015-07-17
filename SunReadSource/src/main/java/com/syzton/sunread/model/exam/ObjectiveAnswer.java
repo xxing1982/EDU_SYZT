@@ -6,10 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import com.syzton.sunread.dto.exam.AnswerDTO;
-import com.syzton.sunread.dto.exam.ObjectiveAnswerDTO;
-import com.syzton.sunread.model.exam.SubjectiveAnswer.Builder;
-
 @Entity
 @DiscriminatorValue("objective")
 public class ObjectiveAnswer extends Answer {

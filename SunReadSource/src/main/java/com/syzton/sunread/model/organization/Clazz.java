@@ -1,16 +1,27 @@
 package com.syzton.sunread.model.organization;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syzton.sunread.dto.organization.CategoryCountDTO;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.model.user.CategoryCount;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Morgan-Leon on 2015/3/16.

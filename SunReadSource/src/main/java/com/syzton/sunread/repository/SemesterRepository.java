@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.semester.Semester;
 

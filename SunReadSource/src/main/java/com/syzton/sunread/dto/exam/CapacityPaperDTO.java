@@ -5,14 +5,11 @@ import java.util.Set;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.Exam;
-import com.syzton.sunread.model.exam.ObjectiveAnswer;
-import com.syzton.sunread.model.exam.ObjectiveQuestion;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.Exam.ExamType;
+import com.syzton.sunread.model.exam.Question;
 
 public class CapacityPaperDTO {
 	private Set<CapacityQuestion> questions;

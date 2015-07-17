@@ -1,10 +1,9 @@
 package com.syzton.sunread.service.message;
 
 
-import com.syzton.sunread.dto.message.MessageDTO;
-import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.user.Student;
-import com.syzton.sunread.repository.user.StudentRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +13,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.syzton.sunread.dto.message.MessageDTO;
+import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.message.Message;
+import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.message.MessageCenterRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class MessageCenterRepositoryService implements MessageCenterService {

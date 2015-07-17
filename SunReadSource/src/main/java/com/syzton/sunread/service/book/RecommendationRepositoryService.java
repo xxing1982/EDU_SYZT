@@ -1,5 +1,13 @@
 package com.syzton.sunread.service.book;
 
+import static com.syzton.sunread.repository.book.predicates.RecommendationPredicates.countRMDuringMonthly;
+import static com.syzton.sunread.repository.book.predicates.RecommendationPredicates.countRMDuringWeekly;
+import static com.syzton.sunread.repository.book.predicates.RecommendationPredicates.countRMDuringYearly;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.syzton.sunread.exception.common.DuplicateException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
@@ -8,13 +16,6 @@ import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.book.RecommendationRepository;
 import com.syzton.sunread.repository.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import static com.syzton.sunread.repository.book.predicates.RecommendationPredicates.countRMDuringMonthly;
-import static com.syzton.sunread.repository.book.predicates.RecommendationPredicates.countRMDuringWeekly;
-import static com.syzton.sunread.repository.book.predicates.RecommendationPredicates.countRMDuringYearly;
 
 /**
  * Created by jerry on 3/18/15.

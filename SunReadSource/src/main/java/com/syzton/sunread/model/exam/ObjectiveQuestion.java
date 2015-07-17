@@ -1,8 +1,6 @@
 package com.syzton.sunread.model.exam;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,14 +10,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.syzton.sunread.dto.exam.QuestionDTO;
-import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.exam.SubjectiveQuestion.Builder;
 
 @Entity
 @DiscriminatorValue("objective")

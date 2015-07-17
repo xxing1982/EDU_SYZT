@@ -1,32 +1,15 @@
 package com.syzton.sunread.dto.exam;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Version;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.joda.time.DateTime;
 
-import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.Exam;
-import com.syzton.sunread.model.exam.ObjectiveAnswer;
+import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Question;
-import com.syzton.sunread.model.exam.Exam.ExamType;
 
 public class SpeedPaperExamDTO {
 

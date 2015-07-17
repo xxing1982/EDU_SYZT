@@ -1,7 +1,6 @@
 package com.syzton.sunread.dto.exam;
 
 import java.util.List;
-import java.util.Set;
 
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 

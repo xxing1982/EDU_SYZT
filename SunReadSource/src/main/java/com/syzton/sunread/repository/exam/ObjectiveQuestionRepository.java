@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
 
 public interface ObjectiveQuestionRepository extends JpaRepository<ObjectiveQuestion, Long>,JpaSpecificationExecutor<ObjectiveQuestion> {

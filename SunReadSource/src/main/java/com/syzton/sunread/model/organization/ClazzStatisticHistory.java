@@ -1,9 +1,8 @@
 package com.syzton.sunread.model.organization;
 
-import com.syzton.sunread.model.common.AbstractEntity;
-
 import javax.persistence.Entity;
-import javax.persistence.PrePersist;
+
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * Created by jerry on 4/15/15.

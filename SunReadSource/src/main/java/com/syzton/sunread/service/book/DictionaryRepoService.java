@@ -1,12 +1,13 @@
 package com.syzton.sunread.service.book;
 
-import com.syzton.sunread.model.book.Dictionary;
-import com.syzton.sunread.model.book.DictionaryType;
-import com.syzton.sunread.repository.book.DictionaryRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.syzton.sunread.model.book.Dictionary;
+import com.syzton.sunread.model.book.DictionaryType;
+import com.syzton.sunread.repository.book.DictionaryRepository;
 
 /**
  * Created by jerry on 3/21/15.

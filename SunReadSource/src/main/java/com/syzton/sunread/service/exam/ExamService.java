@@ -13,10 +13,10 @@ import com.syzton.sunread.dto.exam.VerifyExamPassDTO;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.CapacityQuestion.CapacityQuestionType;
 import com.syzton.sunread.model.exam.Exam;
+import com.syzton.sunread.model.exam.Exam.ExamType;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.SpeedQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
-import com.syzton.sunread.model.exam.Exam.ExamType;
 
 public interface ExamService {
 	public Exam add(Exam added);

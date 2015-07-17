@@ -1,12 +1,11 @@
 package com.syzton.sunread.repository.user;
 
-import com.syzton.sunread.model.security.Role;
-import com.syzton.sunread.model.user.Admin;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.syzton.sunread.model.user.Admin;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin,Long>{

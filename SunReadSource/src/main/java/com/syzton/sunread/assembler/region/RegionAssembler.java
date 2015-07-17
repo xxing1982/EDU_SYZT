@@ -1,7 +1,5 @@
 package com.syzton.sunread.assembler.region;
 
-import com.syzton.sunread.dto.region.RegionDTO;
-import com.syzton.sunread.model.region.Region;
 
 /**
  * @author Morgan-Leon

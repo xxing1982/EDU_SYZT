@@ -1,16 +1,22 @@
 package com.syzton.sunread.controller.user;
 
-import com.syzton.sunread.controller.BaseController;
-import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.model.user.Analyst;
-import com.syzton.sunread.service.user.AnalystService;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.Valid;
+import com.syzton.sunread.controller.BaseController;
+import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.model.user.Analyst;
+import com.syzton.sunread.service.user.AnalystService;
 
 /**
  * Created by jerry on 6/14/15.

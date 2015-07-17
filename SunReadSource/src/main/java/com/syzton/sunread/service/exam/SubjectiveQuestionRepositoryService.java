@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
 import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.exam.ObjectiveQuestion;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion.SubjectiveQuestionType;
 import com.syzton.sunread.repository.book.BookRepository;

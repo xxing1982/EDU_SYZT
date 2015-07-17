@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.SpeedQuestion;
-import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
 
 public interface SpeedQuestionRepository extends JpaRepository<SpeedQuestion, Long> {
 	

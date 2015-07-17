@@ -5,8 +5,6 @@ import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.syzton.sunread.exception.exam.AnswerNotFoundException;
-import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.SubjectiveAnswer;
 
 public interface SubjectiveAnswerService{

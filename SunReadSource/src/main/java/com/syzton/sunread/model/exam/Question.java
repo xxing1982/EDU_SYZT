@@ -10,10 +10,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import com.syzton.sunread.model.common.AbstractEntity;
-import org.joda.time.format.DateTimeFormat;  
-import org.joda.time.format.DateTimeFormatter; 
 
 
 @Entity 

@@ -1,5 +1,13 @@
 package com.syzton.sunread.service.fish;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.syzton.sunread.dto.fish.StudentFishDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.fish.Fish;
@@ -10,14 +18,6 @@ import com.syzton.sunread.repository.fish.FishRepository;
 import com.syzton.sunread.repository.fish.StudentFishRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by jerry on 4/21/15.

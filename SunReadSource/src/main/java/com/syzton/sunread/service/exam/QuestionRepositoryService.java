@@ -1,7 +1,5 @@
 package com.syzton.sunread.service.exam;
 
-import java.util.List;
-
 import javassist.NotFoundException;
 
 import org.slf4j.Logger;
@@ -12,10 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.syzton.sunread.dto.exam.QuestionDTO;
 import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
-import com.syzton.sunread.model.exam.ObjectiveAnswer;
-import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.repository.exam.QuestionRepository;
 

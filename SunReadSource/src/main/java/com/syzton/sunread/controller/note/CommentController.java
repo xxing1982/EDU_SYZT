@@ -1,24 +1,25 @@
 package com.syzton.sunread.controller.note;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.controller.BaseController;
-import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.dto.note.CommentDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.note.Comment;
-import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.service.note.CommentService;
-
-import javax.validation.Valid;
 
 
 /**

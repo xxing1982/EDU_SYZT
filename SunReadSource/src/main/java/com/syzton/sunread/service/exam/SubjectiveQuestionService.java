@@ -8,8 +8,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 
 public interface SubjectiveQuestionService {

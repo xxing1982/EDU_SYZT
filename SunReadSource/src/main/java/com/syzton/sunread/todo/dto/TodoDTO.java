@@ -1,9 +1,10 @@
 package com.syzton.sunread.todo.dto;
 
-import com.syzton.sunread.todo.model.Todo;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.syzton.sunread.todo.model.Todo;
 
 /**
  * @author Petri Kainulainen

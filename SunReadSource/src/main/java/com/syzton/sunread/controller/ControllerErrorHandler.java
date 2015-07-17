@@ -1,11 +1,9 @@
 package com.syzton.sunread.controller;
 
-import com.syzton.sunread.exception.common.DatabaseException;
-import com.syzton.sunread.exception.common.DuplicateException;
-import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.common.dto.ValidationErrorDTO;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Locale;
 
-import com.syzton.sunread.exception.store.InSufficientCoinsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Locale;
+import com.syzton.sunread.common.dto.ValidationErrorDTO;
+import com.syzton.sunread.exception.common.DatabaseException;
+import com.syzton.sunread.exception.common.DuplicateException;
+import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.exception.store.InSufficientCoinsException;
 
 /**
  * @author Chenty

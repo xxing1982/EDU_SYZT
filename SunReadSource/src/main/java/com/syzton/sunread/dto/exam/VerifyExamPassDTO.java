@@ -1,17 +1,6 @@
 package com.syzton.sunread.dto.exam;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.joda.time.DateTime;
-
-import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.exam.Answer;
-import com.syzton.sunread.model.exam.Exam;
-import com.syzton.sunread.model.exam.Question;
-import com.syzton.sunread.model.exam.Exam.ExamType;
 
 public class VerifyExamPassDTO {
 

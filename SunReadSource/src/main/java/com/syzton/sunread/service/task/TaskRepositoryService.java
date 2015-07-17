@@ -1,5 +1,8 @@
 package com.syzton.sunread.service.task;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.Student;
@@ -7,10 +10,6 @@ import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.repository.task.TaskRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by jerry on 3/29/15.

@@ -5,8 +5,6 @@ package com.syzton.sunread.dto.bookshelf;
 
 import java.util.ArrayList;
 
-import javax.persistence.Column;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
