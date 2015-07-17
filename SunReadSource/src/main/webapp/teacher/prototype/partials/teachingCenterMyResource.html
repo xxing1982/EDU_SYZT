@@ -18,9 +18,9 @@
 
 <!-- Left Content -->
 <div class="leftpart">
-  <div class="row" ng-repeat="terms in searchPageable.entities.content">
+  <!-- Items -->
+  <div class="row" ng-repeat="terms in bookTagLoadable.entities.content">
         <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
-
             <!-- Place holder -->
             <p class="col-md-12"></p>
 
@@ -50,9 +50,14 @@
         </div>
 
         <!--No book -->
-        <div class="row bookList myBlock" ng-init="terms.text_overflow=true;" ng-hide="isSearchSuccess()">
+        <!-- <div class="row bookList myBlock" ng-init="terms.text_overflow=true;" ng-hide="isSearchSuccess()">
           <p>没要找到您所要的书</p>
-        </div>
+        </div> -->
+    </div>
+
+    <!-- Loadmore -->
+    <div class="myBlock mt20 page-body">
+        <div class="load-more-bottom" ng-click="bookTagLoadable.get()">{{ bookTagLoadable.loadingState }}</div>
     </div>
 </div>
 

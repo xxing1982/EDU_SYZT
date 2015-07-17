@@ -10,7 +10,7 @@ ctrls.controller("teachingCenterAddBookController", [
 	,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch
     ,Tag,Booktag,LikeBook) {
 
-		$scope.imageServer=config.IMAGESERVER; ;
+		$scope.imageServer=config.IMAGESERVER;
 		$scope.statuses_grade = new Array();
 		$scope.statuses_category = new Array();
 		$scope.selected_status = 0;
