@@ -17,9 +17,9 @@
 </div>
 
 <!-- Left Content -->
-<div class="leftpart">
+<div class="leftpart mt20">
   <!-- Items -->
-  <div class="row" ng-repeat="terms in bookTagLoadable.entities.content">
+  <div ng-repeat="terms in bookTagLoadable.entities.content">
         <div class="row bookList myBlock" ng-init="terms.text_overflow=true;">
             <!-- Place holder -->
             <p class="col-md-12"></p>
@@ -37,11 +37,10 @@
                     <a href="#teachingCenter/addBookToShelf/{{terms.id}}/" class="btn btn-sm btn-fill-blue" type="button">推荐图书</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/note" class="btn btn-sm btn-blue">相关笔记</a>&nbsp;&nbsp;
                     <a href="#teachingCenter/bookDetails/{{terms.id}}/review"  class="btn btn-sm btn-blue">相关评价</a>&nbsp;&nbsp;
-                    <a data-toggle="modal" data-target="#booktag" ng-click="booktag.render(terms)" class="btn btn-sm btn-blue">标记书籍</a>&nbsp;&nbsp;
+                    <!-- <a data-toggle="modal" data-target="#booktag" ng-click="booktag.render(terms)" class="btn btn-sm btn-blue">标记书籍</a>&nbsp;&nbsp;
                     已有{{terms.statistic.recommends}}人推荐&nbsp;
-                    <!-- <a ng-click="isSelect(this)"><span id={{terms.id}} name="{{terms.id}}" class="glyphicon glyphicon-heart" ng-class="{'heartRed':isSelected}"  aria-hidden="true"></span></a> -->
                     <a ng-click="isSelect(this)">
-                    <span id="{{terms.id}}" name="{{terms.id}}" class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+                    <span id="{{terms.id}}" name="{{terms.id}}" class="glyphicon glyphicon-heart" aria-hidden="true"></span></a> -->
                 </div>
             </div>
 
@@ -62,12 +61,12 @@
 </div>
 
 <!--right part -->
- <div class="rightpart">
+ <div class="rightpart mt20">
    <div class="row conditionBlock myBlock">
        <div class="col-md-1"></div>
       <div class="col-md-11">
            <div class="row">
-               <h5>级别及类别</h5>
+               <h5>筛选条件</h5>
            </div><!---->
            <div class="row">
               <div class="catogaryText"> <p>年级： </p></div>

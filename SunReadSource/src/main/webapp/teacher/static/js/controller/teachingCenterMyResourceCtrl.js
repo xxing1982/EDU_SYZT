@@ -3,7 +3,7 @@ ctrls.controller("myResourceController",['$scope', '$rootScope','$stateParams','
 
 		$scope.imageServer=config.IMAGESERVER;
 		var page = 0;
-		var size = 4;
+		var size = 3;
 		//Book Tag
 		$scope.searchArguments = {
 				lesson:0,
