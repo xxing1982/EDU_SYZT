@@ -13,17 +13,26 @@ adminServices.factory('SystemAdmin',['$resource', 'config', '$http',
 			$http.post(config.HOST + 'systemadmin?userid=' + userid + "&password=" + password)
 			.success(function(data, status, headers, config){
 				callback(data);
+			})
+			.error(function(data,header,config,status){
+				callback(data);
 			});
 		};
 		api.Update = function(userid, oldpassword, newpassword ,callback){
 			$http.put(config.HOST + 'systemadmin?userid=' + userid + "&oldpassword=" + oldpassword + "&newpassword=" + newpassword)
 			.success(function(data, status, headers, config){
 				callback(data);
+			})
+			.error(function(data,header,config,status){
+				callback(data);
 			});
 		};
 		api.Delete = function(data ,callback){
-			$http.delete(config.HOST + 'Systemadmin?id='+ data)
+			$http.delete(config.HOST + 'systemadmin?id='+ data)
 			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,header,config,status){
 				callback(data);
 			});
 		};

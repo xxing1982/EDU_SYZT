@@ -30,12 +30,12 @@
         <tbody>
             <tr ng-repeat="placeHolder in searchPageable.entities.content">
                 <td>{{placeHolder.id}}</td>
-                <td>{{placeHolder.username}}</td>
+                <td>{{placeHolder.userId}}</td>
                 <td>{{placeHolder.creationTime}}</td>
                 <td>{{placeHolder.enabled}}</td>
                 <td>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
-                    <button class="btn btn-primary">删除</button>
+                    <button class="btn btn-primary" ng-click="deleteSys(placeHolder)">删除</button>
                 </td>
             </tr>
         </tbody>
@@ -84,6 +84,7 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+        <form role="form" name="addForm" novalidate>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">添加</h4>
@@ -93,20 +94,21 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Username" ng-model="add.userid">
+                            <input type="text" class="form-control" placeholder="Username" ng-model="add.userid" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" placeholder="Password" ng-model="add.password">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="add.password" required>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="AddSys()">Add</button>
+                <button type="button" class="btn btn-primary" ng-click="AddSys()" ng-disabled="addForm.$invalid">Add</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -114,6 +116,7 @@
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+        <form role="form" name="myForm" novalidate>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">修改</h4>
@@ -123,26 +126,29 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Username" disabled="disabled" ng-model="edit.userid">
+                            <input type="text" class="form-control" placeholder="Username" disabled="disabled" ng-model="edit.userId">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">老密码</label>
+                        <label class="col-sm-2 control-label">旧密码</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" placeholder="Password" ng-model="edit.oldpassword">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="edit.oldpassword" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">新密码</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" placeholder="Password" ng-model="edit.newpassword">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="edit.newpassword" required>
                         </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="EditSys()">Add</button>
+                <button type="button" class="btn btn-primary" ng-click="EditSys()" ng-disabled="myForm.$invalid">Add</button>
+                <span>{{message}}</span>
             </div>
+        </form>
         </div>
     </div>
 </div>
