@@ -71,55 +71,55 @@
            <div class="row">
               <div class="filterText"> <p>课标类型： </p></div>
               <div class="catogaryBtn">
-               <bs-dropdown data-menu-type="button"
-                   select-val="searchArguments.lesson = selectedVal"
-                   preselected-item="searchArguments.lesson"
-                   data-dropdown-data="statuses_lesson">
-               </bs-dropdown>
+                <bs-dropdown  ui-if="selected_status.LESSON" data-menu-type="button"
+                    select-val="selected_status.LESSON = selectedVal"
+                    preselected-item="selected_status.LESSON"
+                    data-dropdown-data="statuses.LESSON">
+                </bs-dropdown>
                </div>
            </div>
 
             <div class="row">
                <div class="filterText"> <p>科目： </p></div>
               <div class="catogaryBtn">
-               <bs-dropdown data-menu-type="button"
-                   select-val="searchArguments.subject = selectedVal"
-                   preselected-item="searchArguments.subject"
-                   data-dropdown-data="statuses_subject">
-               </bs-dropdown>
+                <bs-dropdown data-menu-type="button"
+                    select-val="selected_status.SUBJECT = selectedVal"
+                    preselected-item="selected_status.SUBJECT"
+                    data-dropdown-data="statuses.SUBJECT">
+                </bs-dropdown>
                </div>
            </div>
 
            <div class="row">
               <div class="filterText"> <p>年级： </p></div>
              <div class="catogaryBtn">
-              <bs-dropdown data-menu-type="button"
-                  select-val="searchArguments.grade = selectedVal"
-                  preselected-item="searchArguments.grade"
-                  data-dropdown-data="statuses_grade">
-              </bs-dropdown>
+               <bs-dropdown data-menu-type="button"
+                   select-val="selected_status.GRADE = selectedVal"
+                   preselected-item="selected_status.GRADE"
+                   data-dropdown-data="statuses.GRADE">
+               </bs-dropdown>
               </div>
           </div>
 
           <div class="row">
              <div class="filterText"> <p>章节： </p></div>
             <div class="catogaryBtn">
-             <bs-dropdown data-menu-type="button"
-                 select-val="searchArguments.chapter = selectedVal"
-                 preselected-item="searchArguments.chapter"
-                 data-dropdown-data="statuses_chapter">
-             </bs-dropdown>
+              <bs-dropdown data-menu-type="button"
+                  select-val="selected_status.CHAPTER = selectedVal"
+                  preselected-item="selected_status.CHAPTER"
+                  data-dropdown-data="statuses.CHAPTER">
+              </bs-dropdown>
              </div>
          </div>
 
          <div class="row">
             <div class="filterText"> <p>教学主题： </p></div>
            <div class="catogaryBtn">
-            <bs-dropdown data-menu-type="button"
-                select-val="searchArguments.theme = selectedVal"
-                preselected-item="searchArguments.theme"
-                data-dropdown-data="statuses_theme">
-            </bs-dropdown>
+             <bs-dropdown data-menu-type="button"
+                 select-val="selected_status.THEME = selectedVal"
+                 preselected-item="selected_status.THEME"
+                 data-dropdown-data="statuses.THEME">
+             </bs-dropdown>
             </div>
         </div>
            <!-- Place holder -->
