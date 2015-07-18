@@ -36,9 +36,9 @@
 
 
 .catogaryText {
-    float:left;
-    margin-top: 8px;
-    width: 42px;
+     float:left; 
+     margin-top: 8px; 
+     width: 42px; 
 }
 
 
@@ -359,4 +359,8 @@
 
 .textColor {
     color: #2f5682;
+}
+
+.filterText {
+    margin-top: 8px;
 }
