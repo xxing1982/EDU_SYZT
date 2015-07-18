@@ -24,7 +24,7 @@ public class SpeedPaperExamDTO {
 	
 	private int time;
 	 
-	private Set<ObjectiveAnswerDTO> answers;
+	private Set<SpeedAnswerDTO> answers;
 
 	@Override
 	public String toString() {
@@ -37,7 +37,7 @@ public class SpeedPaperExamDTO {
 		set.addAll(questions);
 		exam.setQuestions(set);
 		Set<Answer> answerSet = new HashSet<Answer>();
-		for(ObjectiveAnswerDTO answer : answers){
+		for(SpeedAnswerDTO answer : answers){
 			answerSet.add(answer.FromOTD());
 		}
 		exam.setAnswers(answerSet);
@@ -77,12 +77,12 @@ public class SpeedPaperExamDTO {
 		this.examType = examType;
 	}
 
-	public Set<ObjectiveAnswerDTO> getAnswers() {
+	public Set<SpeedAnswerDTO> getAnswers() {
 		return answers;
 	}
 
 
-	public void setAnswers(Set<ObjectiveAnswerDTO> answers) {
+	public void setAnswers(Set<SpeedAnswerDTO> answers) {
 		this.answers = answers;
 	}
 
