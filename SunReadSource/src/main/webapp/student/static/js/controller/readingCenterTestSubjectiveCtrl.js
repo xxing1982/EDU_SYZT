@@ -2,12 +2,21 @@
 
 ctrls.controller("readingCenterTestSubjectiveController", ['$scope', '$rootScope', 'ThinkExam', function ($scope, $rootScope, ThinkExam) {
 	if ($rootScope.exam == undefined) {
-		window.location.href = '/protype/index.html#/readingCenter/myBookshelf';
+		window.location.href = '/student/protype/index.html#/readingCenter/myBookshelf';
 	};
 	$scope.bookName = $rootScope.exam.bookName;
 
 	ThinkExam.get($rootScope.exam.bookId, function(data){
 		ThinkExam.get($rootScope.exam.bookId, function(dataquestion){
+			if (dataquestion.length < 1) {
+				$rootScope.modal = {};
+				$rootScope.modal.title="提示";
+				$rootScope.modal.content="目前没有测试题！";
+				$rootScope.modal.click = function(){
+					location.reload();
+				}
+				$('#alert-modal').modal();
+			}
 			//get questions by type
 			
 			var map = {};

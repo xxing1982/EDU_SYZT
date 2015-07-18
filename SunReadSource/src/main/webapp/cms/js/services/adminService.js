@@ -9,14 +9,14 @@ adminServices.factory('SystemAdmin',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
-		api.Add = function(data, callback){
-			$http.post(config.HOST + 'systemadmin?userid=' + data.userid + "&password=" + data.password)
+		api.Add = function(userid, password, callback){
+			$http.post(config.HOST + 'systemadmin?userid=' + userid + "&password=" + password)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});
 		};
-		api.Update = function(data ,callback){
-			$http.put(config.HOST + 'Systemadmin', data)
+		api.Update = function(userid, oldpassword, newpassword ,callback){
+			$http.put(config.HOST + 'systemadmin?userid=' + userid + "&oldpassword=" + oldpassword + "&newpassword=" + newpassword)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});

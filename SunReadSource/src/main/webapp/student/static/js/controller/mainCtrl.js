@@ -50,6 +50,12 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student',"Bookshelf
     Bookshelf.get({id : $rootScope.id}, function(data){
       $scope.bookshelf = data;
       $scope.bookshelf.finishStatus = 100 * data.readMust / (data.readMust + data.unreadMust);
+      try{
+        $scope.bookshelf.finishStatus = $scope.bookshelf.finishStatus.toFixed();
+      }
+      catch(e){
+
+      }
     });
 
     //testing

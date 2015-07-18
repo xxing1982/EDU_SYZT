@@ -54,7 +54,7 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', 
 					myRecommend = myRecommend.slice(0, 4);
 				}
 				for(var i = 0; i < myRecommend.length; i++){
-					myRecommend[i].pictureUrl = myRecommend[i].pictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + myRecommend.pictureUrl;
+					myRecommend[i].pictureUrl = myRecommend[i].pictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + myRecommend[i].pictureUrl;
 				}
 				$scope.myRecommend = myRecommend;
 			});

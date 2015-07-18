@@ -23,16 +23,18 @@
                 <th>创建时间</th>
                 <th>状态</th>
                 <th>
-                    <button id="login" class="btn btn-primary">添加</button>
+                    <button id="login" class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加</button>
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="placeHolder in searchPageable.entities.content">
-                <td>{{placeHolder.userId}}</td>
+                <td>{{placeHolder.id}}</td>
                 <td>{{placeHolder.username}}</td>
+                <td>{{placeHolder.creationTime}}</td>
+                <td>{{placeHolder.enabled}}</td>
                 <td>
-                    <button class="btn btn-primary">修改</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
                     <button class="btn btn-primary">删除</button>
                 </td>
             </tr>
@@ -77,4 +79,70 @@
         </div>
     </div>
 
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Username" ng-model="add.userid">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="add.password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="AddSys()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Username" disabled="disabled" ng-model="edit.userid">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">老密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="edit.oldpassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">新密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="edit.newpassword">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="EditSys()">Add</button>
+            </div>
+        </div>
+    </div>
 </div>
