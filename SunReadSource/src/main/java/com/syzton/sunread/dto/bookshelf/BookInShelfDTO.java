@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
+
 import com.syzton.sunread.model.bookshelf.BookInShelf;
 
 public class BookInShelfDTO {

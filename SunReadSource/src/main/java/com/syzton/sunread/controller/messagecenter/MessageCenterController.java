@@ -1,26 +1,28 @@
 package com.syzton.sunread.controller.messagecenter;
 
-import com.syzton.sunread.controller.BaseController;
-import com.syzton.sunread.dto.message.MessageDTO;
-import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.message.Action;
-import com.syzton.sunread.repository.message.ActionRepository;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.dto.message.MessageDTO;
+import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.message.Action;
 import com.syzton.sunread.model.message.Message;
+import com.syzton.sunread.repository.message.ActionRepository;
 import com.syzton.sunread.service.message.MessageCenterService;
-
-import javax.validation.Valid;
 
 /**
  * 消息中心

@@ -1,12 +1,12 @@
 package com.syzton.sunread.repository.user;
 
-import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.user.Teacher;
-import com.syzton.sunread.model.user.TeacherClazz;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.user.TeacherClazz;
 
 /**
  * Created by jerry on 3/16/15.

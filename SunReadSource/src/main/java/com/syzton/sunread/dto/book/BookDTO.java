@@ -1,10 +1,9 @@
 package com.syzton.sunread.dto.book;
 
+import javax.validation.constraints.NotNull;
+
 import com.syzton.sunread.dto.common.AbstractDTO;
 import com.syzton.sunread.model.book.Binding;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by jerry on 3/8/15.

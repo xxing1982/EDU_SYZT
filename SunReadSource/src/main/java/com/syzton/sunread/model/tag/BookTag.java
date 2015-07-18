@@ -1,10 +1,18 @@
 package com.syzton.sunread.model.tag;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.syzton.sunread.dto.tag.BookTagDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.common.AbstractEntity;
 import com.syzton.sunread.model.user.User;
-import javax.persistence.*;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author chenty

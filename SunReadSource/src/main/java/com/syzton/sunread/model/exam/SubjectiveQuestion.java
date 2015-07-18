@@ -1,16 +1,10 @@
 package com.syzton.sunread.model.exam;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.syzton.sunread.model.book.Book;
 @Entity
 @DiscriminatorValue("subjective")
 public class SubjectiveQuestion extends Question {

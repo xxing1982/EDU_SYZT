@@ -1,15 +1,7 @@
 package com.syzton.sunread.repository.note;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-
-import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.bookshelf.BookInShelf;
-import com.syzton.sunread.model.bookshelf.Bookshelf;
-import com.syzton.sunread.model.note.Note;
-import com.syzton.sunread.model.user.User;
 
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
@@ -18,6 +10,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
+
+import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.note.Note;
+import com.syzton.sunread.model.user.User;
 
 /**
  * @author chenty

@@ -1,13 +1,12 @@
 package com.syzton.sunread.repository.user;
 
-import com.syzton.sunread.model.user.Student;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import com.syzton.sunread.model.user.Student;
 
 /**
  * Created by jerry on 3/22/15.

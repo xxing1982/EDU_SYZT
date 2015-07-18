@@ -1,8 +1,7 @@
 package com.syzton.sunread.controller.organization;
 
-import com.syzton.sunread.controller.BaseController;
-import com.syzton.sunread.dto.book.ReviewDTO;
-import com.syzton.sunread.model.organization.ClazzSumStatistic;
+import java.util.List;
+
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
@@ -22,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import com.syzton.sunread.service.organization.ClazzService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(value="/api")

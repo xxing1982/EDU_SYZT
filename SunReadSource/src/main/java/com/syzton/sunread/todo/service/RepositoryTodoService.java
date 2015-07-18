@@ -1,16 +1,17 @@
 package com.syzton.sunread.todo.service;
 
-import com.syzton.sunread.todo.dto.TodoDTO;
-import com.syzton.sunread.todo.exception.TodoNotFoundException;
-import com.syzton.sunread.todo.model.Todo;
-import com.syzton.sunread.todo.repository.TodoRepository;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.syzton.sunread.todo.dto.TodoDTO;
+import com.syzton.sunread.todo.exception.TodoNotFoundException;
+import com.syzton.sunread.todo.model.Todo;
+import com.syzton.sunread.todo.repository.TodoRepository;
 
 /**
  * @author Petri Kainulainen

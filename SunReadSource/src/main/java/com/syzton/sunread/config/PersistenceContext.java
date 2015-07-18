@@ -1,6 +1,10 @@
 package com.syzton.sunread.config;
 
-import com.jolbox.bonecp.BoneCPDataSource;
+import java.util.Properties;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -10,9 +14,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-import java.util.Properties;
+import com.jolbox.bonecp.BoneCPDataSource;
 
 /**
  * @author Petri Kainulainen

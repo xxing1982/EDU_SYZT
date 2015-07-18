@@ -3,19 +3,20 @@ package com.syzton.sunread.model.region;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.model.organization.Campus;
-import com.syzton.sunread.util.DateSerializer;
 
 /**
  * @author Morgan-Leon

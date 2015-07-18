@@ -2,7 +2,6 @@ package com.syzton.sunread.repository.exam;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.syzton.sunread.model.exam.Article;

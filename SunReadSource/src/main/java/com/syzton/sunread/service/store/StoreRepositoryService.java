@@ -1,5 +1,11 @@
 package com.syzton.sunread.service.store;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.exception.store.InSufficientCoinsException;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
@@ -15,12 +21,6 @@ import com.syzton.sunread.repository.store.ExchangeHistoryRepository;
 import com.syzton.sunread.repository.store.GiftRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by jerry on 4/20/15.

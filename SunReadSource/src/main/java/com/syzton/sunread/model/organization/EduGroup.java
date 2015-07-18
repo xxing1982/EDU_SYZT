@@ -1,16 +1,17 @@
 package com.syzton.sunread.model.organization;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.syzton.sunread.dto.organization.EduGroupDTO;
-import com.syzton.sunread.model.common.AbstractEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import javax.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.syzton.sunread.dto.organization.EduGroupDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * Created by Morgan-Leon on 2015/3/16.

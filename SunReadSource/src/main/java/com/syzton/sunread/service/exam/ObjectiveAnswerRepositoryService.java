@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
-import com.syzton.sunread.model.exam.SubjectiveAnswer;
 import com.syzton.sunread.repository.exam.ObjectiveAnswerRepository;
 
 @Service

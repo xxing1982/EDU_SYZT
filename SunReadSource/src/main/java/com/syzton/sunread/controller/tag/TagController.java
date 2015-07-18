@@ -1,21 +1,22 @@
 package com.syzton.sunread.controller.tag;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.syzton.sunread.dto.common.PageResource;
-import com.syzton.sunread.model.book.Book;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.tag.Tag;
 import com.syzton.sunread.service.tag.TagService;
-
-
-import javax.validation.Valid;
 
 
 /**

@@ -1,8 +1,10 @@
 package com.syzton.sunread.model.user;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * Created by jerry on 3/16/15.

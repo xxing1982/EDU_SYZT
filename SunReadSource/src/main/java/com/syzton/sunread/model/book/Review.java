@@ -1,14 +1,17 @@
 package com.syzton.sunread.model.book;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.syzton.sunread.dto.book.ReviewDTO;
-import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.util.DateSerializer;
-import org.hibernate.annotations.Type;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.joda.time.DateTime;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.syzton.sunread.dto.book.ReviewDTO;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * Created by jerry on 3/8/15.

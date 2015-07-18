@@ -1,8 +1,8 @@
 package com.syzton.sunread.model.book;
 
-import com.syzton.sunread.model.common.AbstractEntity;
-
 import javax.persistence.Entity;
+
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * Created by jerry on 3/30/15.

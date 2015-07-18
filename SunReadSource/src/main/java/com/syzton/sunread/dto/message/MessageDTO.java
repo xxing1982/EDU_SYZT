@@ -4,8 +4,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.syzton.sunread.model.common.AbstractEntity;
 
-import java.util.Date;
-
 /**
  * Created by jerry on 4/7/15.
  */

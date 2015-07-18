@@ -1,17 +1,13 @@
 package com.syzton.sunread.model.exam;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.syzton.sunread.dto.exam.OptionDTO;
 import com.syzton.sunread.model.common.AbstractEntity;
 

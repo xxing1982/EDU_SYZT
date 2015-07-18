@@ -16,21 +16,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.syzton.sunread.dto.exam.QuestionDTO;
-import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
-import com.syzton.sunread.model.exam.Option;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
+import com.syzton.sunread.model.exam.Option;
 import com.syzton.sunread.model.exam.SpeedQuestion;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.exam.CapacityQuestionRepository;
 import com.syzton.sunread.repository.exam.ObjectiveQuestionRepository;
 import com.syzton.sunread.repository.exam.OptionRepository;
 import com.syzton.sunread.repository.exam.SpeedQuestionRepository;
-import com.syzton.sunread.service.book.BookRepositoryService;
 import com.syzton.sunread.util.ExcelUtil;
 
 @Service

@@ -1,13 +1,13 @@
 package com.syzton.sunread.dto.exam;
 
 import com.syzton.sunread.model.exam.Answer;
-import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveAnswer;
+import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
+import com.syzton.sunread.model.exam.SpeedQuestion;
 
-public class CapacityAnswerDTO  {
-
-	protected CapacityQuestion question;
+public class SpeedAnswerDTO {
+	protected SpeedQuestion question;
 	
 	protected Long studentId;
 	
@@ -29,11 +29,11 @@ public class CapacityAnswerDTO  {
 		this.studentId = studentId;
 	}
 
-	public CapacityQuestion getQuestion() {
+	public SpeedQuestion getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(CapacityQuestion question) {
+	public void setQuestion(SpeedQuestion question) {
 		this.question = question;
 	}
 	

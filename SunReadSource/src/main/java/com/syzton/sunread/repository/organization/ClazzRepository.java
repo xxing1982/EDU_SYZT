@@ -1,16 +1,16 @@
 package com.syzton.sunread.repository.organization;
 
-import com.syzton.sunread.model.organization.Campus;
-import com.syzton.sunread.model.organization.Clazz;
+import java.util.List;
 
-import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.organization.ClazzSumStatistic;
 
 /**
  * Created by Morgan-Leon on 2015/3/16.

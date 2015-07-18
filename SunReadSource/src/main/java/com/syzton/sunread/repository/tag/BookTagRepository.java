@@ -3,17 +3,16 @@ package com.syzton.sunread.repository.tag;
 import java.util.Collection;
 import java.util.List;
 
-import com.syzton.sunread.model.book.Book;
-import com.syzton.sunread.model.note.Note;
-import com.syzton.sunread.model.tag.BookTag;
-import com.syzton.sunread.model.tag.Tag;
-import com.syzton.sunread.model.user.User;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.tag.BookTag;
+import com.syzton.sunread.model.tag.Tag;
+import com.syzton.sunread.model.user.User;
 
 /**
  * @author chenty

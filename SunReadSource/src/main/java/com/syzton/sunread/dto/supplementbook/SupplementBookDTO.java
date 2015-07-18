@@ -2,8 +2,6 @@ package com.syzton.sunread.dto.supplementbook;
 
 import java.util.Date;
 
-import org.joda.time.DateTime;
-
 /*
  * @Data 2015/03/13
  * @Author Morgan-Leon

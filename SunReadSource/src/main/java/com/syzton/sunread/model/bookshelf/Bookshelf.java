@@ -1,7 +1,18 @@
 package com.syzton.sunread.model.bookshelf;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
@@ -12,8 +23,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.syzton.sunread.dto.bookshelf.BookshelfDTO;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.util.DateSerializer;
-
-import javax.persistence.*;
 
 /**
  * @author Morgan-Leon

@@ -1,9 +1,10 @@
 package com.syzton.sunread.model.book;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.syzton.sunread.model.common.AbstractEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import com.syzton.sunread.model.common.AbstractEntity;
 
 /**
  * Created by jerry on 3/8/15.

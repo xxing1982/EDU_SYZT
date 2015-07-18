@@ -1,10 +1,10 @@
 package com.syzton.sunread.todo.service;
 
+import java.util.List;
+
 import com.syzton.sunread.todo.dto.TodoDTO;
 import com.syzton.sunread.todo.exception.TodoNotFoundException;
 import com.syzton.sunread.todo.model.Todo;
-
-import java.util.List;
 
 /**
  * @author Petri Kainulainen

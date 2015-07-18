@@ -1,7 +1,5 @@
 package com.syzton.sunread.service.exam;
 
-import java.util.List;
-
 import javassist.NotFoundException;
 
 import org.slf4j.Logger;
@@ -12,18 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
-import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.SubjectiveAnswer;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.user.Student;
-import com.syzton.sunread.repository.exam.AnswerRepository;
 import com.syzton.sunread.repository.exam.SubjectiveAnswerRepository;
 import com.syzton.sunread.repository.exam.SubjectiveQuestionRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
-import com.syzton.sunread.repository.user.UserRepository;
-import com.syzton.sunread.service.user.UserService;
 
 @Service
 public class SubjectiveAnswerRepositoryService implements SubjectiveAnswerService {

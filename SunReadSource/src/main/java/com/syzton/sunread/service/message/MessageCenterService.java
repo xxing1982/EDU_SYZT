@@ -1,11 +1,9 @@
 package com.syzton.sunread.service.message;
 
-import com.syzton.sunread.dto.message.MessageDTO;
-import javassist.NotFoundException;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.syzton.sunread.dto.message.MessageDTO;
 import com.syzton.sunread.model.message.Message;
 
 public interface MessageCenterService {

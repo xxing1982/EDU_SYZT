@@ -1,10 +1,10 @@
 package com.syzton.sunread.repository.book.predicates;
 
-import com.mysema.query.types.Predicate;
-import com.syzton.sunread.model.book.QRecommendation;
-import com.syzton.sunread.model.book.QTestPass;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+
+import com.mysema.query.types.Predicate;
+import com.syzton.sunread.model.book.QTestPass;
 
 /**
  */

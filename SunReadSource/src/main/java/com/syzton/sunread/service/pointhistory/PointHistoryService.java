@@ -1,6 +1,7 @@
 package com.syzton.sunread.service.pointhistory;
 
 import java.util.List;
+
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.pointhistory.PointHistory;
 

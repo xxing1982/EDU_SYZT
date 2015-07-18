@@ -7,8 +7,8 @@ import org.joda.time.DateTime;
 
 import com.syzton.sunread.model.exam.Answer;
 import com.syzton.sunread.model.exam.Exam;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.Exam.ExamType;
+import com.syzton.sunread.model.exam.Question;
 
 public class ExamDTO {
 	

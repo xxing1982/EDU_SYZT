@@ -19,10 +19,8 @@ import javax.persistence.Version;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
-import com.syzton.sunread.dto.exam.ExamDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.common.AbstractEntity;
-import com.syzton.sunread.model.user.Student;
 
 @Entity
 @Table(name = "exam")

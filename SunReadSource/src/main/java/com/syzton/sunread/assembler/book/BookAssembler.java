@@ -1,10 +1,11 @@
 package com.syzton.sunread.assembler.book;
 
+import org.joda.time.DateTime;
+
 import com.syzton.sunread.dto.book.BookDTO;
 import com.syzton.sunread.dto.book.BookExtraDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.book.BookExtra;
-import org.joda.time.DateTime;
 
 /**
  * Created by jerry on 3/16/15.

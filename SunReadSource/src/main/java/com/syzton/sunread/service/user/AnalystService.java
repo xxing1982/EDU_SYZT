@@ -1,8 +1,9 @@
 package com.syzton.sunread.service.user;
 
-import com.syzton.sunread.model.user.Analyst;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.syzton.sunread.model.user.Analyst;
 
 /**
  * Created by jerry on 6/13/15.

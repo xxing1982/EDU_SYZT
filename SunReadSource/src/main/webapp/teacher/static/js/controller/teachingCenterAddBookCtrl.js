@@ -10,7 +10,7 @@ ctrls.controller("teachingCenterAddBookController", [
 	,WeeklyRecommendSearch,MonthlyRecommendSearch,YearlyRecommendSearch
     ,Tag,Booktag,LikeBook) {
 
-		$scope.imageServer=config.IMAGESERVER; ;
+		$scope.imageServer=config.IMAGESERVER;
 		$scope.statuses_grade = new Array();
 		$scope.statuses_category = new Array();
 		$scope.selected_status = 0;
@@ -300,7 +300,7 @@ if(!$scope.statuses_category.length > 0){
 					// }
 						$scope.isSelected = true;
 						// console.log(para.terms);
-						$("#"+para.terms.id).addClass('heartRed');
+						// $("#"+para.terms.id).addClass('heartRed');
 						$scope.likeBook = new LikeBook();
 						$scope.likeBook.$update({id:para.terms.id,userId:$rootScope.id});
 				}

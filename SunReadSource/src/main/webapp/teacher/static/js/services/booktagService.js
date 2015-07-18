@@ -11,8 +11,8 @@ booktagServices.factory('Booktag',['$resource', 'config',
 //Get book By tag
 booktagServices.factory('GetBooksByTag',['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "books/tags?page=:page&size=:size&sortBy=:sortBy&lesson=:lesson&grade=:grade&subject=:subject&chapter=:chapter&theme=:theme",
-            {page:'@_page', size:'@_size',sortBy:'@_sortBy',lesson:'@_lesson',grade:'@_grade'
-						,subject:'@_subject',chapter:'@_chapter',theme:'@_theme'}, {}
+		return $resource(config.HOST + "books/tags?page=:page&size=:size&" +
+													"lesson=:LESSON&grade=:GRADE&subject=:SUBJECT&chapter=:CHAPTER&theme=:THEME",
+            {page:'@_page', size:'@_size',sortBy:'@_sortBy'}, {}
         );
 	}]);

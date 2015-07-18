@@ -1,7 +1,5 @@
 package com.syzton.sunread.service.exam;
 
-import java.util.List;
-
 import javassist.NotFoundException;
 
 import org.slf4j.Logger;
@@ -12,15 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.syzton.sunread.dto.exam.AnswerDTO;
 import com.syzton.sunread.exception.exam.AnswerNotFoundException;
 import com.syzton.sunread.model.exam.Answer;
-import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.repository.exam.AnswerRepository;
-import com.syzton.sunread.repository.exam.ObjectiveAnswerRepository;
-import com.syzton.sunread.repository.exam.SubjectiveAnswerRepository;
-import com.syzton.sunread.todo.dto.TodoDTO;
-import com.syzton.sunread.todo.model.Todo;
 @Service
 public class AnswerRepositoryService implements AnswerService {
 

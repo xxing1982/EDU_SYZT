@@ -1,29 +1,15 @@
  package com.syzton.sunread.service.user;
 
-import com.syzton.sunread.dto.user.UserExtraDTO;
-import com.syzton.sunread.exception.common.AuthenticationException;
-import com.syzton.sunread.exception.common.NotFoundException;
-import com.syzton.sunread.model.bookshelf.BookInShelf;
-import com.syzton.sunread.model.organization.Campus;
-import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.organization.EduGroup;
-import com.syzton.sunread.model.security.Role;
-import com.syzton.sunread.model.semester.Semester;
-import com.syzton.sunread.model.task.Task;
-import com.syzton.sunread.model.user.*;
-import com.syzton.sunread.model.user.User.GenderType;
-import com.syzton.sunread.repository.SemesterRepository;
-import com.syzton.sunread.repository.organization.CampusRepository;
-import com.syzton.sunread.repository.organization.ClazzRepository;
-import com.syzton.sunread.repository.organization.EduGroupRepository;
-import com.syzton.sunread.repository.region.SchoolDistrictRepository;
-import com.syzton.sunread.repository.user.*;
-import com.syzton.sunread.service.bookshelf.BookInShelfService;
-import com.syzton.sunread.service.bookshelf.BookshelfService;
-import com.syzton.sunread.service.organization.EduGroupService;
-import com.syzton.sunread.service.region.SchoolDistrictService;
-import com.syzton.sunread.service.task.TaskService;
-import com.syzton.sunread.util.ExcelUtil;
+import static org.springframework.util.Assert.notNull;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -42,11 +28,38 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import static org.springframework.util.Assert.notNull;
+import com.syzton.sunread.dto.user.UserExtraDTO;
+import com.syzton.sunread.exception.common.AuthenticationException;
+import com.syzton.sunread.exception.common.NotFoundException;
+import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.security.Role;
+import com.syzton.sunread.model.semester.Semester;
+import com.syzton.sunread.model.task.Task;
+import com.syzton.sunread.model.user.Admin;
+import com.syzton.sunread.model.user.Parent;
+import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.SystemAdmin;
+import com.syzton.sunread.model.user.Teacher;
+import com.syzton.sunread.model.user.User;
+import com.syzton.sunread.model.user.User.GenderType;
+import com.syzton.sunread.model.user.UserStatistic;
+import com.syzton.sunread.repository.SemesterRepository;
+import com.syzton.sunread.repository.organization.CampusRepository;
+import com.syzton.sunread.repository.organization.ClazzRepository;
+import com.syzton.sunread.repository.organization.EduGroupRepository;
+import com.syzton.sunread.repository.region.SchoolDistrictRepository;
+import com.syzton.sunread.repository.user.AdminRepository;
+import com.syzton.sunread.repository.user.ParentRepository;
+import com.syzton.sunread.repository.user.RoleRepository;
+import com.syzton.sunread.repository.user.StudentRepository;
+import com.syzton.sunread.repository.user.SystemAdminRepository;
+import com.syzton.sunread.repository.user.TeacherClazzRepository;
+import com.syzton.sunread.repository.user.TeacherRepository;
+import com.syzton.sunread.repository.user.UserRepository;
+import com.syzton.sunread.service.bookshelf.BookshelfService;
+import com.syzton.sunread.service.task.TaskService;
+import com.syzton.sunread.util.ExcelUtil;
 
 /**
  * Created by jerry on 3/16/15.
@@ -443,110 +456,101 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 	public Map<Integer,String> batchSaveOrUpdateStudentFromExcel(Sheet sheet) {
 		Map<Integer,String> failMap = new HashMap<Integer,String>();
 		
-//		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
-//			Row row = sheet.getRow(i);  
-//			String userId = ExcelUtil.getStringFromExcelCell(row.getCell(0));
-//			if("".equals(userId)){
-//				failMap.put(i+1, "学号不能为空");
-//				break;
-//			}
-//			Student student = studentRepository.findByUserId(userId);
-//			if(student == null){
-//				student = new Student();
-//				student.setUserId(userId);
-//			}else{
-//				failMap.put(i+1, "导入失败,学号重复,数据库已经存在该学号学生:"+userId);
-//				continue;
-//			}
-//		   
-//		    student.setUsername(ExcelUtil.getStringFromExcelCell(row.getCell(1)));
-//		   	String password = ExcelUtil.getStringFromExcelCell(row.getCell(2));
-//		   	if("".equals(password)){
-//		   		password = "123456";
-//		   	}
-//		   	password = passwordEncoder.encode(password);
-//		   	student.setPassword(password);
-//		   	student.setAddress(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
-//		   	String birthday = ExcelUtil.getStringFromExcelCell(row.getCell(4));
-//            if (birthday!=null && !birthday.equals("")) {
-//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//                Date date;
-//                try {
-//                    date = format.parse(birthday);
-//                } catch (ParseException e) {
-//                    failMap.put(row.getRowNum() + 1, "birthday date must yyyy-MM-dd,eg:1987-01-12." + e.getMessage());
-//                    e.printStackTrace();
-//                    continue;
-//                }
-//
-//		    	student.setBirthday(date.getTime());
-//		    	Calendar calendar = Calendar.getInstance();
-//		   	    calendar.setTime(date);
-//		   	    int year = calendar.get(Calendar.YEAR);
-//		   	    Calendar now  = Calendar.getInstance();
-//		   	    now.setTime(new Date());
-//		   	    int age = now.get(Calendar.YEAR)-year;
-//		   	    student.setAge(age);
-//            }
-//		   	student.setEmail(ExcelUtil.getStringFromExcelCell(row.getCell(5)));
-//		    String sex = ExcelUtil.getStringFromExcelCell(row.getCell(6));
-//		    if(sex.equals("女")){
-//		    	student.setGender(GenderType.famale);
-//		    }else{
-//		    	student.setGender(GenderType.male);
-//		    }
-//		    student.setNickname(ExcelUtil.getStringFromExcelCell(row.getCell(7)));
-//		    student.setPhoneNumber(ExcelUtil.getStringFromExcelCell(row.getCell(8)));
-//		    student.setPicture(ExcelUtil.getStringFromExcelCell(row.getCell(9)));
-//		    student.setQqId(ExcelUtil.getStringFromExcelCell(row.getCell(10)));
-//		    student.setWechatId(ExcelUtil.getStringFromExcelCell(row.getCell(11)));
-//		    student.setContactPhone(ExcelUtil.getStringFromExcelCell(row.getCell(12)));
-//		    student.setIdentity(ExcelUtil.getStringFromExcelCell(row.getCell(14)));
-//		    UserStatistic statistic = student.getStatistic();
-//			if(statistic == null){
-//				statistic = new UserStatistic();
-//				student.setStatistic(statistic);
-//			}
-//			statistic.setCoin(ExcelUtil.getIntFromExcelCell(row.getCell(15)));
-//			statistic.setPoint(ExcelUtil.getIntFromExcelCell(row.getCell(16)));
-//			statistic.setLevel(ExcelUtil.getIntFromExcelCell(row.getCell(17)));
-//			String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(18));
-//			String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
-//			String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
-//			
-//			
-//			EduGroup group = eduGroupRepo.findByName(eduGroupName);
-//			if(group == null){
-//				failMap.put(i+1, "查询不到该教育集团:"+eduGroupName);
-//				continue;
-//			}
-//			School school = schoolRepo.findByNameAndEduGroup(schoolName, group);
-//			if(school == null){
-//				failMap.put(i+1,  "查询不到该学校:"+schoolName);
-//				continue;
-//			}
-//			Campus campus = campusRepository.findByNameAndSchool(campusName, school);
-//			if(campus == null){
-//				failMap.put(i+1,  "查询不到该校区:"+campusName);
-//				continue; 
-//			}
-//			
-//			student.setCampusId(campus.getId());
-//			String className = ExcelUtil.getStringFromExcelCell(row.getCell(13));
-//			Clazz clazz = clazzRepository.findByNameAndCampus(className,campus);
-//			if(clazz == null){
-//				failMap.put(row.getRowNum()+1, "can't find clazz with name:" + className);
-//				continue;
-//			}
-//			student.setClazzId(clazz.getId());
-//
-//            Role role = roleRepository.findOne(3L);
-//            List<Role> roles = new ArrayList<>();
-//            roles.add(role);
-//            student.setRoles(roles);
-//			Student added = studentRepository.save(student);
-//            bookshelfService.addBookshelfByStudent(added);
-//		}  
+ 		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
+ 			Row row = sheet.getRow(i);  
+ 			String userId = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+ 			if("".equals(userId)){
+ 				failMap.put(i+1, "学号不能为空");
+ 				break;
+ 			}
+ 			Student student = studentRepository.findByUserId(userId);
+ 			if(student == null){
+ 				student = new Student();
+ 				student.setUserId(userId);
+ 			}else{
+ 				failMap.put(i+1, "导入失败,学号重复,数据库已经存在该学号学生:"+userId);
+ 				continue;
+ 			}
+ 		   
+ 		    student.setUsername(ExcelUtil.getStringFromExcelCell(row.getCell(1)));
+ 		   	String password = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+ 		   	if("".equals(password)){
+ 		   		password = "123456";
+ 		   	}
+ 		   	password = passwordEncoder.encode(password);
+ 		   	student.setPassword(password);
+ 		   	student.setAddress(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
+ 		   	String birthday = ExcelUtil.getStringFromExcelCell(row.getCell(4));
+             if (birthday!=null && !birthday.equals("")) {
+                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                 Date date;
+                 try {
+                     date = format.parse(birthday);
+                 } catch (ParseException e) {
+                     failMap.put(row.getRowNum() + 1, "birthday date must yyyy-MM-dd,eg:1987-01-12." + e.getMessage());
+                     e.printStackTrace();
+                     continue;
+                 }
+ 
+ 		    	student.setBirthday(date.getTime());
+ 		    	Calendar calendar = Calendar.getInstance();
+ 		   	    calendar.setTime(date);
+ 		   	    int year = calendar.get(Calendar.YEAR);
+ 		   	    Calendar now  = Calendar.getInstance();
+ 		   	    now.setTime(new Date());
+ 		   	    int age = now.get(Calendar.YEAR)-year;
+ 		   	    student.setAge(age);
+             }
+ 		   	student.setEmail(ExcelUtil.getStringFromExcelCell(row.getCell(5)));
+ 		    String sex = ExcelUtil.getStringFromExcelCell(row.getCell(6));
+ 		    if(sex.equals("女")){
+ 		    	student.setGender(GenderType.famale);
+ 		    }else{
+ 		    	student.setGender(GenderType.male);
+ 		    }
+ 		    student.setNickname(ExcelUtil.getStringFromExcelCell(row.getCell(7)));
+ 		    student.setPhoneNumber(ExcelUtil.getStringFromExcelCell(row.getCell(8)));
+ 		    student.setPicture(ExcelUtil.getStringFromExcelCell(row.getCell(9)));
+ 		    student.setQqId(ExcelUtil.getStringFromExcelCell(row.getCell(10)));
+ 		    student.setWechatId(ExcelUtil.getStringFromExcelCell(row.getCell(11)));
+ 		    student.setContactPhone(ExcelUtil.getStringFromExcelCell(row.getCell(12)));
+ 		    student.setIdentity(ExcelUtil.getStringFromExcelCell(row.getCell(14)));
+ 		    UserStatistic statistic = student.getStatistic();
+ 			if(statistic == null){
+ 				statistic = new UserStatistic();
+ 				student.setStatistic(statistic);
+ 			}
+ 			statistic.setCoin(ExcelUtil.getIntFromExcelCell(row.getCell(15)));
+ 			statistic.setPoint(ExcelUtil.getIntFromExcelCell(row.getCell(16)));
+ 			statistic.setLevel(ExcelUtil.getIntFromExcelCell(row.getCell(17)));
+ 			String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(18));
+ 			String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
+ 			String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
+ 			
+ 			
+ 			
+ 			Campus campus = campusRepository.findByName(campusName);
+ 			if(campus == null){
+ 				failMap.put(i+1,  "查询不到该校区:"+campusName);
+ 				continue; 
+ 			}
+ 			
+ 			student.setCampusId(campus.getId());
+ 			String className = ExcelUtil.getStringFromExcelCell(row.getCell(13));
+ 			Clazz clazz = clazzRepository.findByNameAndCampus(className,campus);
+ 			if(clazz == null){
+ 				failMap.put(row.getRowNum()+1, "can't find clazz with name:" + className);
+ 				continue;
+ 			}
+ 			student.setClazzId(clazz.getId());
+ 
+             Role role = roleRepository.findOne(3L);
+             List<Role> roles = new ArrayList<Role>();
+             roles.add(role);
+             student.setRoles(roles);
+  	 		 Student added = studentRepository.save(student);
+             bookshelfService.addBookshelfByStudent(added);
+ 		}  
 		return failMap;
 	}
 

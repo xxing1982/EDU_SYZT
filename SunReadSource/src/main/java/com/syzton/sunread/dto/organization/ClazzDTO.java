@@ -1,14 +1,14 @@
 package com.syzton.sunread.dto.organization;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 
 import com.syzton.sunread.model.organization.Clazz;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class ClazzDTO {
 	private Long id;
