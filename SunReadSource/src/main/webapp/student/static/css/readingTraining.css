@@ -1,0 +1,187 @@
+.center {
+    text-align: center;
+}
+
+.vcenter {
+    vertical-align: middle;
+}
+
+.reading-training-body {
+    border-radius: 5px;
+    border: 1px #547498 solid;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    padding-top: 15px;
+    min-height: 520px;
+}
+
+.reading-training-body .title {
+    font-size: 18px;
+    margin-left: 35px;
+    margin-top: 7px;
+}
+
+.reading-training-body .separator {
+    border-bottom: 1px #D6DEE6 solid;
+    margin-top: 20px;
+}
+
+.reading-training-body .desc {
+    margin-top: 120px;
+    margin-bottom: 130px;
+}
+
+.btn-green-solid {
+    border: 1px #B6D023 solid;
+    background-color: #B6D023;
+    color: #FFFFFF;
+    font-size: 17px;
+
+}
+
+#testing-statistics .type {
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px solid #D6DEE6;
+}
+
+#training-rank td {
+    border: 1px solid #FFF;
+    background-color: #EAEEF2;
+}
+
+#training-rank th {
+    text-align: center;
+}
+
+#training-rank table {
+    border-radius: 2px;
+}
+
+.reading-training-body .catogaryText {
+    float: left;
+    margin-top: 8px;
+    width: 150px;
+    margin-right: 5px;
+}
+
+.reading-training-body .catogaryTextLevel {
+    float: left;
+    margin-top: 8px;
+    width: 50px;
+    margin-right: 5px;
+}
+
+.reading-training-body .catogaryTextLine {
+    float: left;
+    margin-top: 8px;
+    width: 70px;
+    margin-right: 5px;
+}
+
+#readingTrainingPaper {
+    padding: 0 20px;
+}
+
+#readingTrainingPaper p {
+    word-wrap: break-word;
+    word-break: break-all;
+    font-size: 20px;
+    text-indent: 2em
+}
+
+#readingTrainingPaper .body {
+    overflow: auto;
+    margin-bottom: 50px;
+}
+
+#readingTrainingPaper .bottom {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 30px;
+}
+
+#readingTrainingQuestion .total {
+    color: #BEBEBE;
+    font-size: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#readingTrainingQuestion .question {
+    margin-top: 10px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 700;
+}
+
+#readingTrainingQuestion .option {
+    padding: 5px;
+    margin: 10px 15px;
+    cursor: pointer;
+}
+
+#readingTrainingQuestion .option.active {
+    border: 1px #778BA6 solid;
+    background-color: #BEBEBE;
+    margin: 9px 14px;
+}
+
+#readingTrainingQuestion .opContent {
+    padding-top: 10px;
+}
+
+#readingTrainingQuestion .btn-next {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#readingTrainingQuestion .showResult {
+    padding-left: 15px;
+    padding-top: 30px;
+}
+
+#readingTrainingQuestion .isPass {
+    height: 200px;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 700;
+    padding-top: 50px;
+}
+
+#train-select {
+
+}
+
+#train-select .body {
+
+}
+
+#train-select .item{
+    border-bottom: 1px solid #ddd;
+    padding:10px;
+}
+
+#train-select .item p {
+    font-size:17px;
+    line-height: 25px;
+    /*border-right:1px solid #ddd;*/
+}
+
+#train-select .item.active{
+    background-color: #BEBEBE;
+}
+
+#train-select .item:hover{
+    cursor: pointer;
+}
+
+
+
+
+.bottom-button{
+    position:absolute;
+    bottom:0;
+    margin-bottom:20px
+}

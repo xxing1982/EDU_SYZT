@@ -1,0 +1,74 @@
+<div class="row" style="min-height: 566px;margin-top:30px">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="reading-training-body row" ng-hide="state.main=='grade'">
+            <p class="title">速度训练</p>
+
+            <div class="separator"></div>
+            <div ng-hide="showArticle">
+                <div class="row">
+                    <div class="col-md-12" style="margin-top: 20px">
+                        <div class="col-md-3 col-md-offset-1">
+                            <div class="catogaryTextLine"><p>行数选择: </p></div>
+                            <div class="catogaryBtn">
+                                <bs-dropdown data-menu-type="button"
+                                             select-val="line_selection_status = selectedVal"
+                                             preselected-item="line_selection_status"
+                                             data-dropdown-data="line_selections">
+                                </bs-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="catogaryText"><p>每分钟显示字数选择： </p></div>
+                            <div class="catogaryBtn">
+                                <bs-dropdown data-menu-type="button"
+                                             select-val="word_selection_status = selectedVal"
+                                             preselected-item="word_selection_status"
+                                             data-dropdown-data="word_selections">
+                                </bs-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="catogaryTextLevel"><p>等级： </p></div>
+                            <div class="catogaryBtn">
+                                <bs-dropdown data-menu-type="button"
+                                             select-val="level_selection_status = selectedVal"
+                                             preselected-item="level_selection_status"
+                                             data-dropdown-data="level_selections">
+                                </bs-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+                <div class="row">
+                    <div class="col-md-12 center" id="train-select" style="margin-top:30px">
+                        <div class="col-md-10 col-md-offset-1 body">
+                            <div class="col-md-3 item" ng-repeat="article in articles_test | limitTo:articleLimit"
+                                 ng-click="selectArticleItem($index,article)" ng-style="setDivBorder($index)"
+                                 ng-class="{active:$index==selectedIndex}"><p ng-style="setPBorder($index)">
+                                {{article.topic}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-show="showArticle">
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 center bottom-button">
+                    <div class="btn btn-green-solid" ng-hide="showArticle" ng-click="startTraining()">开始</div>
+                    <div class="btn btn-green-solid" ng-show="showArticle" ng-click="stopTraining()">结束训练</div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
