@@ -300,7 +300,7 @@ if(!$scope.statuses_category.length > 0){
 					// }
 						$scope.isSelected = true;
 						// console.log(para.terms);
-						$("#"+para.terms.id).addClass('heartRed');
+						// $("#"+para.terms.id).addClass('heartRed');
 						$scope.likeBook = new LikeBook();
 						$scope.likeBook.$update({id:para.terms.id,userId:$rootScope.id});
 				}
