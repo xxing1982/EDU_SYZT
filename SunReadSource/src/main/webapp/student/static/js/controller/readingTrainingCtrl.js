@@ -19,33 +19,40 @@ ctrls.controller("readingTrainingTestingController", ['$scope', 'SpeedTesting', 
         stop: 0
     };
 
-    var date = new Date();
-    $scope.beginReading = function () {
+    $scope.comment = "再接再励";
+    $scope.wordsPerMin = 0;
 
-        $scope.state.sub = 'paper';
+    $scope.beginReading = function () {
         SpeedTesting.getArticleWithQuestion(function (data) {
             $scope.article = data.article;
             $scope.questions = data.questions;
-            readingTime.start = date.getTime();
+            readingTime.start = new Date().getTime();
+            $scope.state.sub = 'paper';
         })
     };
 
     $scope.endReading = function () {
         $scope.state.sub = 'question';
-        readingTime.stop = date.getTime();
+        readingTime.stop = new Date().getTime();
         $scope.questions.current = $scope.questions[$scope.current];
-    };
 
-    $scope.finishTesting = function () {
-        $scope.state.main = 'grade'
+        var tm = parseInt((readingTime.stop - readingTime.start) / 1000);
 
+        if (tm < 1) {
+            tm = 1
+        }
+        $scope.myAnswer.time = tm;
+
+        $scope.wordsPerMin = parseInt($scope.article.content.length / tm) * 60
     };
 
     $scope.myAnswer = {
-        "studentId": parseInt($rootScope.id),
+        "articleId": 0,
+        "studentId": $rootScope.id,
         "examType": "SPEED",
-        "time": 1,
-        "answers": []
+        "time": 0,
+        "answers": [],
+        "questions": []
     };
 
     $scope.nextQuestion = function () {
@@ -67,8 +74,6 @@ ctrls.controller("readingTrainingTestingController", ['$scope', 'SpeedTesting', 
             $scope.current++;
             $scope.questions.current = $scope.questions[$scope.current];
         }
-
-
     };
 
     $scope.submitSpeedTest = function () {
@@ -79,9 +84,13 @@ ctrls.controller("readingTrainingTestingController", ['$scope', 'SpeedTesting', 
             $('#alert-modal').modal();
             return;
         }
-        
+
+        $scope.myAnswer.articleId = $scope.article.id;
+
         SpeedTesting.submitSpeedTesting($scope.myAnswer, function (data) {
-            console.log(data);
+            $scope.grade = data;
+            $scope.state.main = 'grade';
+            console.log(data)
         })
     };
 
@@ -91,6 +100,7 @@ ctrls.controller("readingTrainingTestingController", ['$scope', 'SpeedTesting', 
         answer.option = data;
         answer.question = $scope.questions[$scope.current];
         $scope.myAnswer.answers[$scope.current] = answer;
+        $scope.myAnswer.questions[$scope.current] = $scope.questions[$scope.current];
 
         $scope.isActiveA = false;
         $scope.isActiveB = false;
@@ -332,7 +342,6 @@ ctrls.controller("readingTrainingTrainingController", ['$scope', 'SpeedTraining'
         };
 
         $scope.startTraining = function () {
-            alert('hello');
             if ($scope.selectedIndex == -1 || $scope.selectedArticle == null) {
                 return;
             }
@@ -352,20 +361,30 @@ ctrls.controller("readingTrainingTrainingController", ['$scope', 'SpeedTraining'
 
         };
 
+        $scope.stopReading = function () {
+            if (angular.isDefined(stop)) {
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        };
 
-        $scope.linesToShow = "";
         function startReading() {
+            var i = 0;
+
+            var tempArticle = $scope.article;
 
             if (angular.isDefined(stop)) return;
 
+            var intr = parseInt(60 / (filter.word / config.wordPerLine) * filter.line);
+
             stop = $interval(function () {
-                if ($scope.blood_1 > 0 && $scope.blood_2 > 0) {
-                    $scope.blood_1 = $scope.blood_1 - 3;
-                    $scope.blood_2 = $scope.blood_2 - 4;
+                if (filter.line * config.wordPerLine * i < $scope.article.length) {
+                    $scope.lines_to_show = tempArticle.substring(i, i * filter.line * config.wordPerLine);
+                    i++;
                 } else {
                     $scope.stopReading();
                 }
-            }, 100);
+            }, intr * 1000);
         }
 
 
@@ -408,11 +427,15 @@ ctrls.controller("readingTrainingTrainingController", ['$scope', 'SpeedTraining'
     }]);
 
 
-ctrls.controller("readingTrainingStatisticsController", ['$scope', function ($scope) {
+ctrls.controller("readingTrainingStatisticsController", ['$scope', "$rootScope", 'SpeedList', function ($scope, $rootScope, SpeedList) {
+
+    $scope.personalStatArray = [];
+
 
     function drawLineChart() {
+
         var data = {
-            labels: ["1.1", "2.2", "3.3", "4.4", "5.5", "6.6", "7.7"],
+            labels: [],
             datasets: [
                 {
                     label: "My Second dataset",
@@ -422,10 +445,18 @@ ctrls.controller("readingTrainingStatisticsController", ['$scope', function ($sc
                     pointStrokeColor: "rgba(34,172,56,1)",
                     pointHighlightFill: "rgba(34,172,56,1)",
                     pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: [40, 50, 40, 30, 50, 27, 40]
+                    data: []
                 }
             ]
         };
+
+        function initData() {
+            for (var i = 0; i < $scope.personalStatArray.length; i++) {
+                data.labels.push($scope.personalStatArray[i].creationTime);
+                data.datasets[0].data.push($scope.personalStatArray[i].speed);
+            }
+        }
+
 
         var options = {
 
@@ -476,14 +507,23 @@ ctrls.controller("readingTrainingStatisticsController", ['$scope', function ($sc
 
         };
 
+        initData();
+
         var ctx = document.getElementById("LineChart").getContext("2d");
 
         var myLineChart = new Chart(ctx).Line(data, options);
 
     }
 
-    drawLineChart();
+    $scope.config = {
+        countryNum: 10,
+        schoolNum: 10,
+        personNum: 10
+    };
 
+
+    $scope.schoolList = [];
+    $scope.countryList = [];
 
     $scope.switch = {
         state: 'stat'
@@ -491,15 +531,26 @@ ctrls.controller("readingTrainingStatisticsController", ['$scope', function ($sc
 
     $scope.showStat = function () {
         $scope.switch.state = 'stat';
-
+        SpeedList.getPersonalSpeedList($rootScope.id, $scope.config.personNum, function (data) {
+            $scope.personalStatArray = data;
+            drawLineChart();
+        })
     };
 
     $scope.showSchoolRank = function () {
-        $scope.switch.state = 'rank'
+        $scope.switch.state = 'rank';
+        SpeedList.getSpeedListFromSchool($rootScope.id, $scope.config.schoolNum, function (data) {
+            $scope.schoolList = data;
+        })
     };
 
     $scope.showCountryRank = function () {
-        $scope.switch.state = 'country'
-    }
+        $scope.switch.state = 'country';
+        SpeedList.getSpeedList($scope.config.countryNum, function (data) {
+            $scope.countryList = data;
+        })
+    };
+
+    $scope.showStat();
 
 }]);

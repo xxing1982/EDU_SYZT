@@ -67,9 +67,10 @@ trainingService.factory('SpeedList', ['$http', 'config', function ($http, config
     };
 
     api.getPersonalSpeedList = function (userid, num, callback) {
-        $http.get(config.HOST + 'speedschoollist/' + userid + '/' + num)
+        $http.get(config.HOST + 'speedpersonlist/' + userid + '/' + num)
             .success(function (data) {
                 callback(data)
             })
-    }
+    };
+    return api;
 }]);

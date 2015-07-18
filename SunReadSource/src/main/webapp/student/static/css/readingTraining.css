@@ -58,6 +58,19 @@
     border-radius: 2px;
 }
 
+#training-country-rank td {
+    border: 1px solid #FFF;
+    background-color: #EAEEF2;
+}
+
+#training-country-rank th {
+    text-align: center;
+}
+
+#training-country-rank table {
+    border-radius: 2px;
+}
+
 .reading-training-body .catogaryText {
     float: left;
     margin-top: 8px;
@@ -158,30 +171,62 @@
 
 }
 
-#train-select .item{
+#train-select .item {
     border-bottom: 1px solid #ddd;
-    padding:10px;
+    padding: 10px;
 }
 
 #train-select .item p {
-    font-size:17px;
+    font-size: 17px;
     line-height: 25px;
     /*border-right:1px solid #ddd;*/
 }
 
-#train-select .item.active{
+#train-select .item.active {
     background-color: #BEBEBE;
 }
 
-#train-select .item:hover{
+#train-select .item:hover {
     cursor: pointer;
 }
 
+.bottom-button {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px
+}
 
+#readingTraining .grade-head {
+    font-size: 18px;
+    margin: 20px 20px;
+}
 
+#readingTraining .grade-body {
+    position: relative;
+}
 
-.bottom-button{
-    position:absolute;
-    bottom:0;
-    margin-bottom:20px
+#readingTraining .grade-body div {
+    position: absolute;
+    left: 385px;
+    margin-top: 70px;
+    font-size: 22px;
+    text-align: center;
+    z-index: 1;
+}
+
+#readingTraining .grade-body img {
+    position: absolute;
+    left: 280px;
+}
+
+#readingTraining .grade-body div p {
+    color: white;
+}
+
+.fs_70 {
+    font-size: 70px;
+}
+
+.fs_30 {
+    font-size: 30px;
 }

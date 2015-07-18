@@ -6,7 +6,7 @@
             <div class="separator"></div>
 
             <!--首页-->
-            <div id="readingTrainingStart" ng-show="state.sub=='start'" ng-hide="state.sub!='start'">
+            <div id="readingTrainingStart" ng-show="state.sub=='start'">
                 <h3 class="center desc">速度测试功能相关描述</h3>
 
                 <div class="col-md-12 center">
@@ -15,7 +15,7 @@
             </div>
 
             <!-- 文章页面-->
-            <div id="readingTrainingPaper" ng-show="state.sub=='paper'" ng-hide="state.sub!='paper'">
+            <div id="readingTrainingPaper" ng-show="state.sub=='paper'">
                 <div class="col-md-12 center"><h2>{{article.topic}}</h2></div>
                 <div class="col-md-12 body"><p>{{article.content}}</p></div>
                 <div class="col-md-11 bottom center">
@@ -28,7 +28,7 @@
             </div>
 
             <!-- 选择题页面 -->
-            <div id="readingTrainingQuestion" ng-show="state.sub=='question'" ng-hide="state.sub!='question'">
+            <div id="readingTrainingQuestion" ng-show="state.sub=='question'">
                 <div class="col-md-12 center"><h2><strong>{{article.topic}}</strong></h2></div>
                 <div class="col-md-12">
                     <div class="head">{{current_question.topic}}</div>
@@ -71,11 +71,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!--  成绩页面 -->
+        <div class="reading-training-body" ng-show="state.main=='grade'">
+            <div id="readingTraining">
+                <div class="col-md-12 grade-head">
+                    您好，测试结果是：
+                </div>
+                <div class="col-md-12 grade-body">
+                    <div>
+                        <p>正确率</p>
+                        <p><span class="fs_70">{{grade.examScore}}</span><span>分</span></p>
+                        <p>阅读速度:每分钟{{wordsPerMin}}字</p>
+                        <p class="fs_30">{{comment}}</p>
+                    </div>
 
-            <!--  成绩页面 -->
-            <div class="reading-training-body" ng-show="state.main=='grade'">
-                <div id="readingTraining">
-                    显示成绩
+                    <img src="../static/img/score-bg.jpg" height="400" width="400">
                 </div>
             </div>
         </div>
