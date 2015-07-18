@@ -25,6 +25,8 @@
 	<!-- Dropzone upload plugins -->
 	<link href="../static/css/dropzone.css" rel="stylesheet" type="text/css" />
 
+    <link href="../static/css/readingTraining.css" rel="stylesheet" type="text/css" />
+
 
 </head>
 <body>
@@ -47,10 +49,8 @@
 					<!--<a href="#readingSea">阅读海洋</a>-->
 					<a style="color: black; cursor: default">阅读海洋</a>
 				</li>
-				<li ng-class="{myActive:isActive(routeMap.readingTraining)}">
-					<!--<a href="#readingTraining">阅读训练</a>-->
-					<a style="color: black; cursor: default">阅读训练</a>
-				</li>
+				<li ng-class="{myActive:isActive(routeMap.readingTraining)}"><a href="#/readingTraining">阅读训练</a></li>
+
 				<li ng-class="{myActive:isActive(routeMap.prizeCenter)}"><a href="#giftCenter">奖品中心</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right hidden-sm">
@@ -208,6 +208,7 @@
 	<script type="text/javascript" src="../static/js/services/pointHistoryService.js"></script>
 	<script type="text/javascript" src="../static/js/services/coinHistoryService.js"></script>
 	<script type="text/javascript" src="../static/js/services/taskServices.js"></script>
+    <script type="text/javascript" src="../static/js/services/trainingService.js"></script>
 
 	<!--ERROR-->
 	<script type="text/javascript" src="../static/js/services/errorServices.js"></script>

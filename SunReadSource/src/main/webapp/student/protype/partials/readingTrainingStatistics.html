@@ -1,0 +1,63 @@
+<div class="row" style="min-height: 566px;margin-top:30px">
+    <div class="col-md-10 col-md-offset-1">
+        <div id="testing-statistics" class="reading-training-body">
+            <div class="type row">
+                <div class="col-md-2 select-tab" ng-class="{myActive:switch.state=='stat'}" ng-click="showStat()">阅读速度统计</div>
+                <div class="col-md-2 select-tab" ng-class="{myActive:switch.state=='rank'}" ng-click="showSchoolRank()">本校阅读排名</div>
+                <div class="col-md-2 select-tab" ng-class="{myActive:switch.state=='country'}" ng-click="showCountryRank()">全国阅读排名</div>
+            </div>
+            <div id="training-stat" ng-show="switch.state=='stat'" style="padding-top: 30px">
+                <div class="col-md-12 center">
+                    <canvas id="LineChart" width="700" height="400"></canvas>
+                </div>
+            </div>
+
+            <div id="training-rank" class="col-md-12" ng-show="switch.state=='rank'">
+                <table class="table center">
+                    <thead>
+                    <tr>
+                        <th>名次</th>
+                        <th>姓名</th>
+                        <th>班级</th>
+                        <th>阅读速度</th>
+                        <th>分数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in schoolList">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.userName}}</td>
+                        <td>{{item.class}}</td>
+                        <td>{{item.speed}}</td>
+                        <td>{{item.score}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="training-country-rank" class="col-md-12" ng-show="switch.state=='country'">
+                <table class="table center">
+                    <thead>
+                    <tr>
+                        <th>名次</th>
+                        <th>姓名</th>
+                        <th>班级</th>
+                        <th>阅读速度</th>
+                        <th>分数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in countryList">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.userName}}</td>
+                        <td>{{item.class}}</td>
+                        <td>{{item.speed}}</td>
+                        <td>{{item.score}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

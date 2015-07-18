@@ -11,6 +11,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
     $urlRouterProvider
     .when('/readingCenter', '/readingCenter/myBookshelf')
     .when('/readingCenter/addBook', '/readingCenter/addBook/quick')
+        .when('/readingTraining','/readingTraining/testing')
     .otherwise('/');
     // $httpProvider.responseInterceptors.push('SecurityHttpInterceptor');
 
@@ -149,12 +150,33 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/readingSea.html",
             controller: "readingSeaController"
         })
-        //reading training
+
+        //----->reading training
         .state('readingTraining', {
             url: '/readingTraining',
-            templateUrl: "partials/readingTraining.html",
-            controller: "readingTrainingController"
+            templateUrl: "partials/readingTraining.html"
         })
+        // reading training testing
+        .state('readingTraining.testing',{
+            url:'/testing',
+            templateUrl:"partials/readingTrainingTesting.html",
+            controller:"readingTrainingTestingController"
+        })
+
+        // reading training training
+        .state('readingTraining.training',{
+            url:'/training',
+            templateUrl:"partials/readingTrainingTraining.html",
+            controller:"readingTrainingTrainingController"
+        })
+
+        // reading training statistics
+        .state('readingTraining.statistics',{
+            url:'/stat',
+            templateUrl:"partials/readingTrainingStatistics.html",
+            controller:"readingTrainingStatisticsController"
+        })
+
         //prize center
         .state('prizeCenter', {
             url: '/prizeCenter',

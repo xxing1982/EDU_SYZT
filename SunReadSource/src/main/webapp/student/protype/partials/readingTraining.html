@@ -1,9 +1,17 @@
-<div>
-	<hr>
-	<hr>
-	<hr>
-	<hr>
-	<hr>
-	<hr>
-	{{readingTraining}}
+<div id="readingCenter-page">
+    <div class="sidebar">
+        <ul class="nav-sidebar nav">
+            <li><a ui-sref='.testing'><img src="../static/img/readingCenter/myBookshelf.png"></img><span>速读测试</span></a></li>
+            <li><a ui-sref='.training'><img src="../static/img/readingCenter/myNote.png"></img><span>速读训练</span></a></li>
+            <li><a ui-sref='.statistics'><img src="../static/img/readingCenter/myEvaluating.png"></img><span>统计排名</span></a></li>
+
+        </ul>
+    </div>
+    <div class="container readingCenter-right-top">
+            <div ui-view></div>
+    </div>
 </div>
+
+<script>
+    ReadingTrainingLeftNav();
+</script>

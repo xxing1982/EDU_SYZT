@@ -113,3 +113,21 @@ function SetOption(){
 	});
 }
 
+
+function ReadingTrainingLeftNav(){
+    $(".nav-sidebar li").on("click", function(){
+        $(".nav-sidebar li").removeClass("myActive");
+        $(this).addClass("myActive");
+    });
+
+    var urlStr = window.location.href;
+    if (urlStr.match("readingTraining/training")) {
+        $(".nav-sidebar li").eq(1).addClass("myActive");
+    }
+    else if (urlStr.match("readingTraining/stat")) {
+        $(".nav-sidebar li").eq(2).addClass("myActive");
+    }
+    else{
+        $(".nav-sidebar li").eq(0).addClass("myActive");
+    }
+}

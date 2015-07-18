@@ -1,0 +1,94 @@
+<div class="row" style="min-height: 566px;margin-top:30px">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="reading-training-body" ng-hide="state.main=='grade'">
+            <div class="title">速度测试</div>
+
+            <div class="separator"></div>
+
+            <!--首页-->
+            <div id="readingTrainingStart" ng-show="state.sub=='start'">
+                <h3 class="center desc">速度测试功能相关描述</h3>
+
+                <div class="col-md-12 center">
+                    <div class="btn btn-green-solid" ng-click="beginReading()"><span class="fs_16">开始记录时间</span></div>
+                </div>
+            </div>
+
+            <!-- 文章页面-->
+            <div id="readingTrainingPaper" ng-show="state.sub=='paper'">
+                <div class="col-md-12 center"><h2>{{article.topic}}</h2></div>
+                <div class="col-md-12 body"><p>{{article.content}}</p></div>
+                <div class="col-md-11 bottom center">
+                    <div class="btn btn-green-solid" ng-click="endReading()">
+                        <span class="fs_16">我读完了，开始做题</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- 选择题页面 -->
+            <div id="readingTrainingQuestion" ng-show="state.sub=='question'">
+                <div class="col-md-12 center"><h2><strong>{{article.topic}}</strong></h2></div>
+                <div class="col-md-12">
+                    <div class="head">{{current_question.topic}}</div>
+                    <div class="body">
+                        <div class="total">一共{{questions.length}}题，现在是第{{current + 1}}题</div>
+                        <div class="question">{{current + 1}}.{{questions.current.topic}}</div>
+                        <div class="row option" ng-class="{true: 'active', false: ''}[isActiveA]"
+                             ng-click="Select(questions.current.options[0], 'A')">
+                            <div class="col-md-1"><img src="../static/img/rank/Arank.png" class="img-circle"></div>
+                            <div class="col-md-10 opContent">{{questions.current.options[0].content}}</div>
+                        </div>
+                        <div class="row option" ng-class="{true: 'active', false: ''}[isActiveB]"
+                             ng-click="Select(questions.current.options[1], 'B')">
+                            <div class="col-md-1"><img src="../static/img/rank/Brank.png" class="img-circle"></div>
+                            <div class="col-md-10 opContent">{{questions.current.options[1].content}}</div>
+                        </div>
+                        <div class="row option" ng-class="{true: 'active', false: ''}[isActiveC]"
+                             ng-click="Select(questions.current.options[2], 'C')">
+                            <div class="col-md-1"><img src="../static/img/rank/Crank.png" class="img-circle"></div>
+                            <div class="col-md-10 opContent">{{questions.current.options[2].content}}</div>
+                        </div>
+                        <div class="row option" ng-class="{true: 'active', false: ''}[isActiveD]"
+                             ng-click="Select(questions.current.options[3], 'D')">
+                            <div class="col-md-1"><img src="../static/img/rank/Drank.png" class="img-circle"></div>
+                            <div class="col-md-10 opContent">{{questions.current.options[3].content}}</div>
+                        </div>
+                        <div class="btn-next">
+                            <button class="btn btn-green-solid" ng-click="nextQuestion()"
+                                    ng-hide="questions.length-1==current">
+                                下一题
+                            </button>
+                            <button class="btn btn-green-solid" ng-click="submitSpeedTest()"
+                                    ng-show="questions.length-1==current">
+                                提交
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12 center" ng-show="questions.length==question_index">
+                        <div class="btn btn-green-solid" ng-click="finishTesting()"><span class="fs_16">结束</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  成绩页面 -->
+        <div class="reading-training-body" ng-show="state.main=='grade'">
+            <div id="readingTraining">
+                <div class="col-md-12 grade-head">
+                    您好，测试结果是：
+                </div>
+                <div class="col-md-12 grade-body">
+                    <div>
+                        <p>正确率</p>
+                        <p><span class="fs_70">{{grade.examScore}}</span><span>分</span></p>
+                        <p>阅读速度:每分钟{{wordsPerMin}}字</p>
+                        <p class="fs_30">{{comment}}</p>
+                    </div>
+
+                    <img src="../static/img/score-bg.jpg" height="400" width="400">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
