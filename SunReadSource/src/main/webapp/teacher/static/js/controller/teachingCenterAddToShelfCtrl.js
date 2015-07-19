@@ -26,12 +26,11 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
 
     // Get the teacher entity by rootScope id
     $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
-
         var gradeName = ['一', '二', '三', '四', '五', '六'];
         var index = 0;
 
         // Get the class by teacher classId
-        $scope.class = Class.get({ id: $scope.teacher.classId }, function(){
+        $scope.class = Class.get({ id: $scope.teacher.currentClassId }, function(){
             // $scope.campusStatuses.push({ id: index, name: $scope.class.campusName});
             // $scope.gradeStatuses.push({ id: index, name: gradeName[$scope.class.grade - 1] + '年级'});
             // $scope.classStatuses.push({ id: index, name: $scope.class.name});
@@ -65,7 +64,7 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
         $scope.bookshelfLoadable.page = 0;
 
         // Set the $resource arguments like {by: "books"}
-        $scope.bookshelfLoadable.arguments = {classId: $scope.teacher.classId};
+        $scope.bookshelfLoadable.arguments = {classId: $scope.teacher.currentClassId};
 
         // Build the loadable object
         $scope.bookshelfLoadable.build(GetBookshelvesByClass);

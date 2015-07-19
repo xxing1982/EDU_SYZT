@@ -8,6 +8,21 @@ public class SpeedTestRecordDTO {
 	private int time;
 	private long schoolId;
 	private long id;
+
+	private String schoolName;
+
+	private String userName;
+
+	private String clazzName;
+
+	public String getClazzName() {
+		return clazzName;
+	}
+
+	public void setClazzName(String clazzName) {
+		this.clazzName = clazzName;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -31,9 +46,6 @@ public class SpeedTestRecordDTO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-	private String schoolName;
-	private String userName;
 
 	public long getSchoolId() {
 		return schoolId;

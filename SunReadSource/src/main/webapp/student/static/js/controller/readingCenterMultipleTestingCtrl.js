@@ -103,11 +103,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 				};
 				$scope.IsCilck = true;
 
-				if ($rootScope.exam.id == 0) {
-					$("#exam-evaluation-model").modal({backdrop: 'static', keyboard: false});
-				}else{
-					submitExam();
-				}				
+				submitExam();
 			}
 
 			$scope.Select = function(dataa, option){
@@ -147,7 +143,7 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			review.content = $scope.Evacontent;
 			review.rate = $scope.rate;
 			AddReview.AddReview($rootScope.exam.bookId, review, function(data){
-				submitExam();
+				window.location.href="/student/protype/index.html#/readingCenter/success";
 			})
 		}
 
@@ -169,7 +165,8 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 				else if (examData.exam.pass) {
 					$rootScope.exam.score = score;
 					$rootScope.exam.isVerify = true;
-					window.location.href="/student/protype/index.html#/readingCenter/success";
+					$("#exam-evaluation-model").modal({backdrop: 'static', keyboard: false});
+					//window.location.href="/student/protype/index.html#/readingCenter/success";
 				}
 				else{
 					window.location.href="/student/protype/index.html#/readingCenter/failed";

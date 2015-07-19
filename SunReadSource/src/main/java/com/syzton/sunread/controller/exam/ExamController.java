@@ -58,6 +58,7 @@ import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.CategoryCount;
 import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.book.DictionaryRepository;
 import com.syzton.sunread.repository.exam.SpeedTestRecordRepository;
 import com.syzton.sunread.repository.organization.ClazzRepository;
@@ -427,8 +428,12 @@ public class ExamController {
 		List<SpeedTestRecordDTO> dtos = new ArrayList<SpeedTestRecordDTO>();
 		
 		String schoolName = campusService.findById(schoolId).getName();
+		
 		for(int i=0;i<srs.size();i++){
 			SpeedTestRecord sr = srs.get(i);
+			long userId = sr.getUserId();
+			Student user = userService.findByStudentId(userId);
+			Clazz clazz = clazzRepository.findOne(user.getClazzId());
 			SpeedTestRecordDTO dto = new SpeedTestRecordDTO();
 			dto.setArticleId(sr.getArticleId());
 			dto.setId(sr.getId());
@@ -438,9 +443,9 @@ public class ExamController {
 			dto.setScore(sr.getScore());
 			dto.setSpeed(sr.getSpeed());
 			dto.setTime(sr.getTime());
-			long userId = sr.getUserId();
+			dto.setClazzName(clazz.getName());
 			dto.setUserId(userId);
-			dto.setUserName(userService.findByStudentId(userId).getUsername());
+			dto.setUserName(user.getUsername());
 			dtos.add(dto);
 		}
 		return dtos;

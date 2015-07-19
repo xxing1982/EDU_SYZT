@@ -1,6 +1,7 @@
 <div class="row" style="margin-top:30px">
 	<!--<input type="text" ng-disabled="!province.isEdit">-->
-	<div class="col-md-1">选择学校:</div>
+	<div class="col-md-1" ng-show="selectSchool.isShowSchool">选择学校:</div>
+	<div class="col-md-1" ng-hide="selectSchool.isShowSchool">选择区域:</div>
 	<div class="col-md-2">
 		<select class="form-control" ng-model="SelectedProvince" ng-options="s.name for s in provinces" ng-disabled="isDisabled" ng-change="c_province()">
 			<option>请选择</option>

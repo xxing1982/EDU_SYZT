@@ -13,7 +13,7 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', 
 			teacher.currentPicture = teacher.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + teacher.picture;
 			$scope.teacher = teacher;
 			// Create a classes entitiy
-			Class.get({id: $scope.teacher.classId}, function(classData){
+			Class.get({id: $scope.teacher.currentClassId}, function(classData){
 				$scope.teacher.class=classData.name;
 				$scope.teacher.school=classData.campusName;
 			});
