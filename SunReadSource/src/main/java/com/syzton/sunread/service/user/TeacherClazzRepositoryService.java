@@ -40,7 +40,7 @@
 
      @Override
      public void save(Long teacherId,Long clazzId) throws NotFoundException {
-         checkTeacher(teacherId);
+         getTeacher(teacherId);
          Clazz clazz = clazzService.findById(clazzId);
          if(clazz == null){
              throw new NotFoundException("clazz id = "+clazzId+" not found..");
@@ -57,11 +57,25 @@
          teacherClazzRepository.save(teacherClazz);
      }
 
+     @Override
+     public Teacher updateCurrentClazz(Long teacherId, Long clazzId) throws NotFoundException{
+         Teacher teacher = getTeacher(teacherId);
 
-     private void checkTeacher(Long teacherId) throws javassist.NotFoundException {
+         Clazz clazz = clazzService.findById(clazzId);
+         if(clazz == null){
+             throw new NotFoundException("clazz id = "+clazzId+" not found..");
+         }
+
+         teacher.setCurrentClassId(clazzId);
+         return teacher;
+     }
+
+
+     private Teacher getTeacher(Long teacherId) throws javassist.NotFoundException {
          Teacher teacher = userService.findByTeacherId(teacherId);
          if(teacher == null){
              throw new javassist.NotFoundException("teacher with id =" + teacherId +" not found...");
          }
+         return teacher;
      }
  }

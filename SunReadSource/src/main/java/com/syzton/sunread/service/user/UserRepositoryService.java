@@ -148,7 +148,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         return user;
 
     }
-    
+
 //    @Transactional
 //    @Override
 //    public User addUser(User user) {
@@ -411,7 +411,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 
     @Override
     public Teacher findByTeacherId(Long id) {
-        return teacherRepository.findOne(id);
+       // return teacherRepository.findOne(id);
+        return this.getTeacher(id);
     }
 
     @Override

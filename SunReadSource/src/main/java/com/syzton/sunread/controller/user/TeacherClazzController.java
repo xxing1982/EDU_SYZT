@@ -59,4 +59,11 @@ public class TeacherClazzController {
 
     }
 
+    @RequestMapping(value = "/teachers/{teacherId}/clazzs/{clazzId}", method = RequestMethod.PUT)
+    @ResponseBody
+    public Teacher updateTeachercCurrentClass(@PathVariable("teacherId") Long teacherId,@PathVariable("clazzId") Long clazzId) throws NotFoundException{
+        Teacher teacher = teacherClazzService.updateCurrentClazz(teacherId, clazzId);
+        return teacher;
+    }
+
 }

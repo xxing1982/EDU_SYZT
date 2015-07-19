@@ -1,7 +1,7 @@
 package com.syzton.sunread.service.user;
 
 import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.user.TeacherClazz;
+import com.syzton.sunread.model.user.Teacher;
 import javassist.NotFoundException;
 
 import java.util.List;
@@ -14,6 +14,8 @@ public interface TeacherClazzService {
     List<Clazz> findByTeacherId(long teacherId);
 
     void save(Long teacherId,Long clazzId) throws NotFoundException;
+
+    Teacher updateCurrentClazz(Long teacherId,Long clazzId) throws NotFoundException;
 
 
 

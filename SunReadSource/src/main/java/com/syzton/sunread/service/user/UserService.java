@@ -103,4 +103,6 @@ public interface UserService {
     public Page<Admin> getSchoolAdmins(long campusId,boolean isSuperAdmin,Pageable pageable);
 	
 	public Page<Admin> getAllSchoolAdmins(long campusId,Pageable pageable);
+
+
 }
