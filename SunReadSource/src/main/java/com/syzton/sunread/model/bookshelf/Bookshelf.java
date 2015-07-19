@@ -1,6 +1,8 @@
 package com.syzton.sunread.model.bookshelf;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -57,7 +59,7 @@ public class Bookshelf {
 
     @OneToMany( cascade = {CascadeType.ALL},mappedBy = "bookshelf")
     @Basic(fetch = FetchType.LAZY)
-    private Set<BookInShelf> booksInShelf = new HashSet<BookInShelf>();
+    private List<BookInShelf> booksInShelf = new ArrayList<BookInShelf>();
     
 //    @OneToMany( cascade = CascadeType.ALL, mappedBy = "bookshelf")
 //    @Basic(fetch = FetchType.EAGER)
@@ -98,10 +100,10 @@ public class Bookshelf {
         return modificationTime;
     }
 
-    public Set<BookInShelf> getBooksInShelf(){    	
+    public List<BookInShelf> getBooksInShelf(){    	
     	return booksInShelf;
     }
-	public void setBookInShelf(Set<BookInShelf> bookSet) {
+	public void setBookInShelf(ArrayList<BookInShelf> bookSet) {
 		// TODO Auto-generated method stub
 		this.booksInShelf = bookSet;
 	}

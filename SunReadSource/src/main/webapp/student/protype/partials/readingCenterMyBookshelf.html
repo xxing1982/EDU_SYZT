@@ -64,7 +64,7 @@
 	              <div class="row hideOverflow" style="overflow: scroll;"><h5>{{unreadBook.bookName}}</h5></div>
 	              <!-- Details row -->
 	              <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;">
-									<small>作者：{{unreadBook.author | limitTo:8 }}
+									<small>作者：{{unreadBook.author | limitTo:6 }}
 										<br> 积分：{{unreadBook.point | limitTo:8 }} &nbsp;&nbsp; {{unreadBook.bookAttribute | formatBookAttribute}}</small></p></div>
 	              <!-- Tests row -->
 	              <div class="row dropdown">
@@ -114,7 +114,7 @@
 
 	              <!-- Details row -->
 	              <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;">
-									<small>作者：{{readBook.author | limitTo:8 }}
+									<small>作者：{{readBook.author | limitTo:6 }}
 										<br> 积分：{{readBook.point | limitTo:8 }} &nbsp;&nbsp; {{readBook.bookAttribute | formatBookAttribute}}</small></p></div>
 
 	              <!-- Tests row -->

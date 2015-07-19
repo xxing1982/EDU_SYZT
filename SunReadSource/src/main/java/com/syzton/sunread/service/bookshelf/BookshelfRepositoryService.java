@@ -2,7 +2,9 @@ package com.syzton.sunread.service.bookshelf;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,18 +86,37 @@ public class BookshelfRepositoryService implements BookshelfService {
         
         LOGGER.debug("Found book entry: {}", found);
 
-        if (found == null) {
-            throw new NotFoundException("No bookshelf found with id: " + id);
-        }
-        else {
-        	ArrayList<BookInShelf> bookArray = bookInShelfRepository.findByBookShelf(found);
-			Set<BookInShelf> bookSet = new HashSet<BookInShelf>();
-			for (BookInShelf bookInShelf : bookArray) {
-				bookSet.add(bookInShelf);
+//        if (found == null) {
+//            throw new NotFoundException("No bookshelf found with id: " + id);
+//        }
+//        else {
+//        	ArrayList<BookInShelf> bookArray = bookInShelfRepository.findByBookShelf(found);
+//			Set<BookInShelf> bookSet = new HashSet<BookInShelf>();
+//			for (BookInShelf bookInShelf : bookArray) {
+//				bookSet.add(bookInShelf);
+//			}
+//			found.setBookInShelf(bookSet);
+//		}
+        ArrayList<BookInShelf> delList = new ArrayList<BookInShelf>();
+        for (BookInShelf bookInShelf : found.getBooksInShelf()) {
+			if (bookInShelf.getDeleted()) {
+				delList.add(bookInShelf);
 			}
-			found.setBookInShelf(bookSet);
 		}
-
+        
+        found.getBooksInShelf().removeAll(delList);
+        ArrayList<BookInShelf> revList = new ArrayList<BookInShelf>();
+        
+        List<BookInShelf> bookInShelfs = found.getBooksInShelf();
+        
+        int lastIndex = bookInShelfs.size() - 1;
+        
+        for (int i = 0; i < lastIndex; i++) {
+			revList.add(bookInShelfs.get(lastIndex -i));
+		}
+        
+        found.setBookInShelf(revList);
+        
         return found; 
 	}
 

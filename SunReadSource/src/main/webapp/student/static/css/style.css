@@ -386,7 +386,8 @@ a:focus, input:focus
 .bookshelf-book
 {
     margin-top: 30px;
-    float: left;
+    /* float: left; */
+    /* width: 245px; */
 }
 
 .mustRead

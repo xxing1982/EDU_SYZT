@@ -1,6 +1,8 @@
 package com.syzton.sunread.dto.bookshelf;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -36,7 +38,7 @@ public class BookshelfDTO {
     
     private int readSelect;
    
-    private Set<BookInShelf> booksInShelf = new HashSet<BookInShelf> () ;
+    private List<BookInShelf> booksInShelf = new ArrayList<BookInShelf> () ;
 //    
 //    private Collection<BookShelfOperation> bookShelfOperations;
     
@@ -121,11 +123,11 @@ public class BookshelfDTO {
 		this.studentId = owner;
 	}
     
-    public Set<BookInShelf> getBooksInShelf() {
+    public List<BookInShelf> getBooksInShelf() {
         return booksInShelf;
     }
 
-    public void setBooksInShelf(Set<BookInShelf> booksInShelf) {
+    public void setBooksInShelf(List<BookInShelf> booksInShelf) {
         this.booksInShelf = booksInShelf;
     }
 //   
