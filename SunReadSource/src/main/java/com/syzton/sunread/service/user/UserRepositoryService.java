@@ -136,6 +136,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         this.adminRepo = adminRepo;
         this.systemAdminRepo = systemAdminRepo;
         this.taskService = taskService;
+        this.teacherClazzRepository = teacherClazzRepository;
     }
 
     @Override
@@ -299,10 +300,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     @Transactional
     @Override
     public void addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
-        Teacher teacher = teacherRepository.findOne(teacherId);
-        if(teacher==null){
-            throw new NotFoundException("teacher with id = "+teacherId+" not found..");
-        }
+        Teacher teacher  = getTeacher(teacherId);
 
         Student student = studentRepository.findOne(studentId);
         if(student == null){
@@ -323,18 +321,27 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         taskService.add(task);
 
     }
-    
-    @Transactional
-    @Override
-    public void addTasks(long teacherId, int targetBookNum, int targetPoint) {
+
+    private Teacher getTeacher(long teacherId) {
         Teacher teacher = teacherRepository.findOne(teacherId);
         if(teacher==null){
             throw new NotFoundException("teacher with id = "+teacherId+" not found..");
         }
 
-        List<Student> students = studentRepository.findByClazzId(teacher.getClassId());
+        List<Clazz> clazzs = teacherClazzRepository.findByTeacherId(teacherId);
+        teacher.setCurrentClassId(clazzs.get(0).getId());
+
+        return  teacher;
+    }
+
+    @Transactional
+    @Override
+    public void addTasks(long teacherId, int targetBookNum, int targetPoint) {
+        Teacher teacher = getTeacher(teacherId);
+
+        List<Student> students = studentRepository.findByClazzId(teacher.getCurrentClassId());
         if(students == null){
-            throw new NotFoundException("students with classId =" + teacher.getClassId() +" not found..");
+            throw new NotFoundException("students with classId =" + teacher.getCurrentClassId() +" not found..");
         }
 
         for (Student student: students){

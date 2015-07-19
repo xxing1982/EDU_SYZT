@@ -34,7 +34,7 @@ public class CoinHistory extends AbstractEntity {
 	@Column(nullable=false)
 	private CoinFrom coinFrom;
 	
-	public enum CoinFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER,FROM_VERIFY_TEST}
+	public enum CoinFrom{FROM_NOTE, FROM_BOOK, FROM_TEACHER,FROM_VERIFY_TEST,FROM_GIFT}
 	
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
     @Basic(fetch = FetchType.LAZY)

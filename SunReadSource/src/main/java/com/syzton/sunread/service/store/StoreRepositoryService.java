@@ -103,6 +103,8 @@ public class StoreRepositoryService implements StoreService {
             coinHistory.setNum(needCoins);
             coinHistory.setReason("exchange gift =" + gift.getName());
             coinHistory.setStudent(student);
+            coinHistory.setCoinFrom(CoinHistory.CoinFrom.FROM_GIFT);
+            coinHistory.setCoinType(CoinHistory.CoinType.OUT);
             coinHistoryRepository.save(coinHistory);
             studentRepository.save(student);
         }else {

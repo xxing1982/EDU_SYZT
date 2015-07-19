@@ -3,6 +3,7 @@ package com.syzton.sunread.model.user;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -29,7 +30,8 @@ public class Teacher extends User{
 
     private String graduateSchool;
 
-    private long classId;
+    @Transient
+    private long currentClassId;
 
     private long campusId;
 
@@ -110,12 +112,12 @@ public class Teacher extends User{
         this.graduateSchool = graduateSchool;
     }
 
-    public long getClassId() {
-        return classId;
+    public long getCurrentClassId() {
+        return currentClassId;
     }
 
-    public void setClassId(long classId) {
-        this.classId = classId;
+    public void setCurrentClassId(long currentClassId) {
+        this.currentClassId = currentClassId;
     }
 }
 
