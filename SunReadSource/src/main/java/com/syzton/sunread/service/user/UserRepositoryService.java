@@ -659,7 +659,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
             List<Role> roles = new ArrayList<>();
             roles.add(role);
             teacher.setRoles(roles);
-			teacher.setClassId(clazz.getId());
+			//teacher.setClassId(clazz.getId());
 			teacherRepository.save(teacher);
 		}  
 		return failMap;
