@@ -1,14 +1,14 @@
 //myRewardCtrl.js
-ctrls.controller("myRewardController", ['$scope', '$rootScope', 'Teacher', 'Class', 'CoinHistory', 'Loadable', 'Editable', 
+ctrls.controller("myRewardController", ['$scope', '$rootScope', 'Teacher', 'Class', 'CoinHistory', 'Loadable', 'Editable',
 	function($scope, $rootScope, Teacher, Class, CoinHistory, Loadable, Editable){
-        
-        // Get the teacher entity by rootScope id 
+
+        // Get the teacher entity by rootScope id
         $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
-            
+
             // Get the class by teacher classId
-            $scope.class = Class.get({ id: $scope.teacher.classId });
-                
-                
+            $scope.class = Class.get({ id: $scope.teacher.currentClassId });
+
+
             // Get the coinhistory pagable by teacherid
             // The best practice of loadable
             // Create a pageable entity of actions
@@ -26,7 +26,7 @@ ctrls.controller("myRewardController", ['$scope', '$rootScope', 'Teacher', 'Clas
 
             // The index of the entities
             var index = 0;
-            
+
             // Show the first page and append editable to every entity
             $scope.coinhistoryLoadable.get();
 

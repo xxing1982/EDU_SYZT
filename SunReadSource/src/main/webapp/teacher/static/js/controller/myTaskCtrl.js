@@ -6,7 +6,7 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
         $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
 
             // Get the class by teacher classId
-            $scope.class = Class.get({ id: $scope.teacher.classId });
+            $scope.class = Class.get({ id: $scope.teacher.currentClassId });
 
             // Get the orders pagable by teacher classId
             // The best practice of loadable
@@ -15,13 +15,13 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
 
             // Initlizate the orderLoadable
             $scope.initOrderLoadable = function(){
-            
+
                 // Set the parameters of loadable
                 $scope.orderLoadable.size = 5;
                 $scope.orderLoadable.page = 0;
 
                 // Set the $resource arguments like {by: "books"}
-                $scope.orderLoadable.arguments = { by: 'clazzs', id: $scope.teacher.classId, sortBy: "id" };
+                $scope.orderLoadable.arguments = { by: 'clazzs', id: $scope.teacher.currentClassId, sortBy: "id" };
 
                 // Build the loadable object
                 $scope.orderLoadable.build(Order);
@@ -41,9 +41,9 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
 
                 });
             };
-            
+
             $scope.initOrderLoadable();
-            
+
 
             // The toggleEdit save
             $scope.toggleEditSave = function(order){
@@ -66,22 +66,22 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
 
                 order.editable.toggleEdit(true, toggleEditValidation, toggleEditTransmit);
             };
-            
+
             // Publish the tasks by teacher id
             $scope.publish = function(){
                 if ( $scope.targetBookNum && $scope.targetPoint ){
-                    Tasks.update({ teacherId: $scope.teacher.id, 
+                    Tasks.update({ teacherId: $scope.teacher.id,
                                    targetBookNum: $scope.targetBookNum,
                                    targetPoint: $scope.targetPoint },{}, function(){
                                         $rootScope.modal = {title: "发布奖励", content: "奖励发布成功！"};
                                         $('#alert-modal').modal();
-                        
+
                                         // Clear the targetBookNum targetPoint and orderloadable
                                         $scope.targetBookNum = undefined;
-                                        $scope.targetPoint = undefined;   
+                                        $scope.targetPoint = undefined;
                                         $scope.initOrderLoadable();
                                    });
-                    
+
                 }
             };
         });
