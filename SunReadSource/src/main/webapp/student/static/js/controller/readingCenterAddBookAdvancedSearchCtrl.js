@@ -22,6 +22,7 @@ ctrls.controller("readingCenterAddBookAdvancedSearchController", ['$scope','$roo
       }
       $scope.statuses_grade = new Array();
       $scope.statuses_category = new Array();
+      // $scope.selected_status = 0;
 
     if(!$scope.statuses_grade.length > 0){
       Dictionary.query({type:"GRADE"},function(data){

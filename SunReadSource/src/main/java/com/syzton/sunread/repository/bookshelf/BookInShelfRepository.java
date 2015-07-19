@@ -18,7 +18,7 @@ import com.syzton.sunread.model.bookshelf.Bookshelf;
  * @Author Morgan-Leon
  */
 public interface BookInShelfRepository extends JpaRepository<BookInShelf,Long>,QueryDslPredicateExecutor<BookInShelf>{
-	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND b.deleted=0 ORDER BY b.id DESC")
+	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND b.deleted=0 ORDER BY b.modificationTime DESC")
 	ArrayList<BookInShelf> findByBookShelf(@Param("bookshelf")Bookshelf bookshelf);
 	
 	@Query("SELECT Distinct(b) FROM BookInShelf b WHERE bookshelf=(:bookshelf) AND b.deleted=0")
