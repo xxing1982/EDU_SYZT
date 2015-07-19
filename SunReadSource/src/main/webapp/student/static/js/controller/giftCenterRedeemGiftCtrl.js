@@ -33,10 +33,10 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Stude
       $scope.userCoin = data.statistic.coin;
       console.log(data);
       campusId = data.campusId;
-      getAllGifts();
+      $scope.getAllGifts();
       });
 
-      var getAllGifts = function(){
+      $scope.getAllGifts = function(){
           $scope.gifts = new Array(0);
           GetGifts.get({schoolId:campusId,page:page,size:pageSize},function(data){
           console.log(data);
@@ -54,6 +54,7 @@ ctrls.controller("giftCenterRedeemGiftController", ['$rootScope','$scope','Stude
 
 
     // $scope.getAllGifts();
+
     $scope.giftsLoadingMore = function(){
       if($scope.loading === stateTexts.nomore)
         return;
