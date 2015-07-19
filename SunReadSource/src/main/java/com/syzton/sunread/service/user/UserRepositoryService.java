@@ -531,8 +531,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
  			statistic.setPoint(ExcelUtil.getIntFromExcelCell(row.getCell(16)));
  			statistic.setLevel(ExcelUtil.getIntFromExcelCell(row.getCell(17)));
  			String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(18));
- 			String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
- 			String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
+ 			//String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
+ 			//String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
  			
  			
  			
@@ -565,70 +565,70 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 	public Map<Integer,String> batchSaveOrUpdateTeacherFromExcel(Sheet sheet) {
 		Map<Integer,String> failMap = new HashMap<Integer,String>();
 		
-//		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
-//			Row row = sheet.getRow(i);  
-//			String userId = ExcelUtil.getStringFromExcelCell(row.getCell(0));
-//			if("".equals(userId)){
-//				break;
-//			}
-//			Teacher teacher = teacherRepository.findByUserId(userId);
-//			if(teacher == null){
-//				teacher = new Teacher();
-//			}else{
-//				failMap.put(i+1, "导入失败,教师ID重复,数据库已经存在该教师ID:"+userId);
-//				continue;
-//			}
-//			teacher.setUserId(userId);
-//		   
-//		    teacher.setUsername(ExcelUtil.getStringFromExcelCell(row.getCell(1)));
-//		   	String password = ExcelUtil.getStringFromExcelCell(row.getCell(2));
-//		   	if("".equals(password)){
-//		   		password = "123456";
-//		   		failMap.put(i+1, "未发现密码,使用系统默认密码:"+123456);
-//		   	}
-//		   	password = passwordEncoder.encode(password);
-//		   	teacher.setPassword(password);
-//		   	teacher.setAddress(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
-//		  
-//		   	String birthday = ExcelUtil.getStringFromExcelCell(row.getCell(4));
-//		   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//		   	Date date;
-//			try {
-//				date = format.parse(birthday);
-//			} catch (ParseException e) {
-//				failMap.put(row.getRowNum()+1, "birthday date must yyyy-MM-dd,eg:1987-01-12."+e.getMessage());
-//				e.printStackTrace();
-//				continue;
-//			}
-//		   	teacher.setBirthday(date.getTime());
-//		   	Calendar calendar = Calendar.getInstance();
-//		   	calendar.setTime(date);
-//		   	int year = calendar.get(Calendar.YEAR);
-//		   	Calendar now  = Calendar.getInstance();
-//		   	now.setTime(new Date());
-//		   	int age = now.get(Calendar.YEAR)-year;
-//		   	teacher.setAge(age);
-//		   	teacher.setEmail(ExcelUtil.getStringFromExcelCell(row.getCell(5)));
-//		    String sex = ExcelUtil.getStringFromExcelCell(row.getCell(6));
-//		    if(sex.equals("女")){
-//		    	teacher.setGender(GenderType.famale);
-//		    }else{
-//		    	teacher.setGender(GenderType.male);
-//		    }
-//		    teacher.setNickname(ExcelUtil.getStringFromExcelCell(row.getCell(7)));
-//		    teacher.setPhoneNumber(ExcelUtil.getStringFromExcelCell(row.getCell(8)));
-//		    teacher.setPicture(ExcelUtil.getStringFromExcelCell(row.getCell(9)));
-//		    teacher.setQqId(ExcelUtil.getStringFromExcelCell(row.getCell(10)));
-//		    teacher.setWechatId(ExcelUtil.getStringFromExcelCell(row.getCell(11)));
-//		    teacher.setContactPhone(ExcelUtil.getStringFromExcelCell(row.getCell(12)));
-//		    teacher.setGraduateSchool(ExcelUtil.getStringFromExcelCell(row.getCell(14)));
-//		    teacher.setRank(ExcelUtil.getIntFromExcelCell(row.getCell(15)));
-//		 	teacher.setExperience(ExcelUtil.getIntFromExcelCell(row.getCell(16)));
-//			teacher.setTeaching(ExcelUtil.getStringFromExcelCell(row.getCell(17)));
-//		 	String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(18));
-//			String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
-//			String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
-//			
+		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
+			Row row = sheet.getRow(i);  
+			String userId = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			if("".equals(userId)){
+				break;
+			}
+			Teacher teacher = teacherRepository.findByUserId(userId);
+			if(teacher == null){
+				teacher = new Teacher();
+			}else{
+				failMap.put(i+1, "导入失败,教师ID重复,数据库已经存在该教师ID:"+userId);
+				continue;
+			}
+			teacher.setUserId(userId);
+		   
+		    teacher.setUsername(ExcelUtil.getStringFromExcelCell(row.getCell(1)));
+		   	String password = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+		   	if("".equals(password)){
+		   		password = "123456";
+		   		failMap.put(i+1, "未发现密码,使用系统默认密码:"+123456);
+		   	}
+		   	password = passwordEncoder.encode(password);
+		   	teacher.setPassword(password);
+		   	teacher.setAddress(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
+		  
+		   	String birthday = ExcelUtil.getStringFromExcelCell(row.getCell(4));
+		   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		   	Date date;
+			try {
+				date = format.parse(birthday);
+			} catch (ParseException e) {
+				failMap.put(row.getRowNum()+1, "birthday date must yyyy-MM-dd,eg:1987-01-12."+e.getMessage());
+				e.printStackTrace();
+				continue;
+			}
+		   	teacher.setBirthday(date.getTime());
+		   	Calendar calendar = Calendar.getInstance();
+		   	calendar.setTime(date);
+		   	int year = calendar.get(Calendar.YEAR);
+		   	Calendar now  = Calendar.getInstance();
+		   	now.setTime(new Date());
+		   	int age = now.get(Calendar.YEAR)-year;
+		   	teacher.setAge(age);
+		   	teacher.setEmail(ExcelUtil.getStringFromExcelCell(row.getCell(5)));
+		    String sex = ExcelUtil.getStringFromExcelCell(row.getCell(6));
+		    if(sex.equals("女")){
+		    	teacher.setGender(GenderType.famale);
+		    }else{
+		    	teacher.setGender(GenderType.male);
+		    }
+		    teacher.setNickname(ExcelUtil.getStringFromExcelCell(row.getCell(7)));
+		    teacher.setPhoneNumber(ExcelUtil.getStringFromExcelCell(row.getCell(8)));
+		    teacher.setPicture(ExcelUtil.getStringFromExcelCell(row.getCell(9)));
+		    teacher.setQqId(ExcelUtil.getStringFromExcelCell(row.getCell(10)));
+		    teacher.setWechatId(ExcelUtil.getStringFromExcelCell(row.getCell(11)));
+		    teacher.setContactPhone(ExcelUtil.getStringFromExcelCell(row.getCell(12)));
+		    teacher.setGraduateSchool(ExcelUtil.getStringFromExcelCell(row.getCell(14)));
+		    teacher.setRank(ExcelUtil.getIntFromExcelCell(row.getCell(15)));
+		 	teacher.setExperience(ExcelUtil.getIntFromExcelCell(row.getCell(16)));
+			teacher.setTeaching(ExcelUtil.getStringFromExcelCell(row.getCell(17)));
+		 	String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(18));
+			//String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
+			//String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
+			
 //			
 //			EduGroup group = eduGroupRepo.findByName(eduGroupName);
 //			if(group == null){
@@ -640,28 +640,28 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 //				failMap.put(i+1,  "查询不到该学校:"+schoolName);
 //				continue;
 //			}
-//			Campus campus = campusRepository.findByNameAndSchool(campusName, school);
-//			if(campus == null){
-//				failMap.put(i+1,  "查询不到该校区:"+campusName);
-//				continue; 
-//			}
+			Campus campus = campusRepository.findByName(campusName);
+			if(campus == null){
+				failMap.put(i+1,  "查询不到该校区:"+campusName);
+				continue; 
+			}
 //			
 //			
-//			teacher.setCampusId(campus.getId());
-//			String className = ExcelUtil.getStringFromExcelCell(row.getCell(13));
-//			Clazz clazz = clazzRepository.findByNameAndCampus(className,campus);
-//			if(clazz == null){
-//				failMap.put(row.getRowNum()+1, "can't find clazz with name:" + className);
-//				continue;
-//			}
+			teacher.setCampusId(campus.getId());
+			String className = ExcelUtil.getStringFromExcelCell(row.getCell(13));
+			Clazz clazz = clazzRepository.findByNameAndCampus(className,campus);
+			if(clazz == null){
+				failMap.put(row.getRowNum()+1, "can't find clazz with name:" + className);
+				continue;
+			}
 //
-//            Role role = roleRepository.findOne(2L);
-//            List<Role> roles = new ArrayList<>();
-//            roles.add(role);
-//            teacher.setRoles(roles);
-//			teacher.setClassId(clazz.getId());
-//			teacherRepository.save(teacher);
-//		}  
+            Role role = roleRepository.findOne(2L);
+            List<Role> roles = new ArrayList<>();
+            roles.add(role);
+            teacher.setRoles(roles);
+			teacher.setClassId(clazz.getId());
+			teacherRepository.save(teacher);
+		}  
 		return failMap;
 	}
     @Override

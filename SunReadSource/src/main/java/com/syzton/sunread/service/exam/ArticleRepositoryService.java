@@ -48,7 +48,7 @@ public class ArticleRepositoryService implements ArticleService {
 		int i = articles.size();
 		Random random = new Random();
 		if(i>0){
-			int z=random.nextInt(i-1);
+			int z=random.nextInt(i);
 			return articles.get(z);
 		}
 		return null;

@@ -57,11 +57,12 @@ public class ArticleController {
 	public SpeedDTO getRandomTestArticleWithQuestion() throws NotFoundException {
 
 		Article article = service.getRandomTestArticle();
-		
-		List<SpeedQuestion> questions = examService.takeSpeedTest(article.getId());
 		SpeedDTO dto = new SpeedDTO();
-		dto.setArticle(article);
-		dto.setQuestions(questions);
+		if(article!=null){
+			List<SpeedQuestion> questions = examService.takeSpeedTest(article.getId());
+			dto.setArticle(article);
+			dto.setQuestions(questions);
+		}
 		return dto;
 	}
 	
