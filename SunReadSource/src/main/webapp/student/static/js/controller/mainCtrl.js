@@ -12,6 +12,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student', "Bookshel
         $rootScope.id = sessionStorage.getItem("userId");
         $scope.IMAGESERVER = config.IMAGESERVER;
 
+
         //student info``
         Student.get({id: $rootScope.id}, function (data) {
             $scope.picture = {};
@@ -171,5 +172,13 @@ ctrls.filter('formatParagraph', function () {
     return function (data) {
         if (!data) return data;
         return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
+    };
+});
+
+ctrls.filter('formatPictrueUrl', function () {
+    return function (data) {
+        var url = data.slice(27);
+        if (url.search('/') === 0) return data;
+        return url;
     };
 });

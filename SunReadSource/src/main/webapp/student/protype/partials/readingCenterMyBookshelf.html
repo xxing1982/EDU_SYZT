@@ -56,7 +56,7 @@
 						<div ng-repeat="unreadBook in unreadBooks" class="col-md-4 bookshelf-book clear-padding">
 							<!--Img Col-->
 							<div class="col-md-6">
-								<a href="#readingCenter/bookDetails/{{unreadBook.bookId}}/"><div ng-show="{{unreadBook.pictureUrl !== undefined}}"><img ng-src={{imageServer+unreadBook.pictureUrl}} class="bookshelfIMG img-responsive custom-shadow"></div></a>
+								<a href="#readingCenter/bookDetails/{{unreadBook.bookId}}/"><div ng-show="{{unreadBook.pictureUrl !== undefined}}"><img ng-src= "{{imageServer+unreadBook.pictureUrl | formatPictrueUrl}}" class="bookshelfIMG img-responsive custom-shadow"></div></a>
 								<!-- <div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div> -->
 							</div>
 							<div class="col-md-6">
