@@ -90,7 +90,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="col-md-2" style="width:20%;" ng-repeat="hot in hots.content">
-                                              <a href="#readingCenter/bookDetails/{{hot.id}}/"><img ng-src={{imageServer+hot.pictureUrl}} class="img-responsive img-center custom-shadow" ></a>
+                                              <a href="#readingCenter/bookDetails/{{hot.id}}/"><img ng-src='{{imageServer+hot.pictureUrl | formatPictrueUrl}}' class="img-responsive img-center custom-shadow" ></a>
                         <div class="bookTital"><h5>{{hot.name}}</h5></div>
                       </div>
                   </div>
