@@ -103,7 +103,7 @@
 					<div class="row buttom-separator">
 						<div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
 							<div class="col-md-6">
-								<a href="#readingCenter/bookDetails/{{readBook.bookId}}/default"><div ng-show="{{readBook.pictureUrl !== undefined}}"><img ng-src={{imageServer+readBook.pictureUrl}} class="bookshelfIMG  img-responsive custom-shadow"></div></a>
+								<a href="#readingCenter/bookDetails/{{readBook.bookId}}/default"><div ng-show="{{readBook.pictureUrl !== undefined}}"><img ng-src="{{imageServer+readBook.pictureUrl | formatPictrueUrl}}" class="bookshelfIMG  img-responsive custom-shadow"></div></a>
 								<!-- <div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div> -->
 							</div>
 							<div class="col-md-6">
