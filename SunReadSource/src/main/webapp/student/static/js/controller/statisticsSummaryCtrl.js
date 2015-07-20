@@ -181,7 +181,7 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                         if ( category === undefined ) {
                             readingCategory.categories[ name ] = 1;
                         } else {  
-                            category ++;                            
+                            readingCategory.categories[ name ] ++;                            
                         }
                     }
                     
