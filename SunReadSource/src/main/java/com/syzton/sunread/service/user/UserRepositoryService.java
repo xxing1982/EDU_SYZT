@@ -987,8 +987,10 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		}
 		
 		User user = this.findByUserId(userId);
-		Admin schoolSuperAdmin = this.findByAdminId(user.getId());
-		
+		Admin schoolSuperAdmin = null;
+		if(user != null){
+			schoolSuperAdmin = this.findByAdminId(user.getId());
+		}
 		if(schoolSuperAdmin!=null){
 			return "该用户已经存在";
 		}else{
