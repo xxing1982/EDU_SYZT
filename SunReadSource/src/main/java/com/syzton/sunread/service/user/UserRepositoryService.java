@@ -915,9 +915,12 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		if(!currentUser.hasRole(superSystemRole)&&!currentUser.hasRole(systemRole)){
 			return "只有系统管理员和超级管理员有权限添加学校用户";
 		}
-		User user = this.findByUserId(userId);
-		Admin schoolSuperAdmin = this.findByAdminId(user.getId());
 		
+		Admin schoolSuperAdmin = null;
+		User user = this.findByUserId(userId);
+		if(user!=null){
+			schoolSuperAdmin = this.findByAdminId(user.getId());
+		}
 		if(schoolSuperAdmin!=null){
 			return "该用户已经存在";
 		}else{
