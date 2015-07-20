@@ -116,7 +116,7 @@
                 <div><small>（年份/月）</small></div>
                 <div class="col-md-12">
                     <div class="row" ng-repeat="VerifiedBook in statistics.semesterReadings.monthlyVerifiedNums track by $index">
-                        <div class="col-md-1"><h5 class="row text-right">{{ statistics.semesterReadings.year }}.&nbsp;{{ (statistics.semesterReadings.startMonth - 1 + $index) % 12 + 1}}</h5></div>
+                        <div class="col-md-1"><h5 class="row text-right">{{ Math.floor( statistics.semesterReadings.year + (statistics.semesterReadings.startMonth - 1 + $index) / 12 ) }}.&nbsp;{{ (statistics.semesterReadings.startMonth - 1 + $index) % 12 + 1}}</h5></div>
                         <div class="col-md-10"><h5>
                             <div class="fr reading-count-width">&nbsp;
                                 <div class="orange fl" ng-style="{width: statistics.semesterReadings.maxMonthlyVerifiedNum === 0 ? 0 : VerifiedBook * 90 / statistics.semesterReadings.maxMonthlyVerifiedNum + '%'}">&nbsp;
@@ -164,7 +164,7 @@
                 </div>
                 <div class="row">
                     <div class="axis" ng-style="{ width: statistics.semesterPoints.width + '%'}" ng-repeat="point in statistics.semesterPoints.monthlyPoints track by $index">
-                        <h4 class="text-center">{{ statistics.semesterPoints.year }}.{{ (statistics.semesterPoints.startMonth - 1 + $index) % 12 + 1}}</h4>
+                        <h4 class="text-center">{{ Math.floor( statistics.semesterReadings.year + (statistics.semesterReadings.startMonth - 1 + $index) / 12 ) }}.{{ (statistics.semesterPoints.startMonth - 1 + $index) % 12 + 1}}</h4>
                     </div>
                 </div>
             </div>

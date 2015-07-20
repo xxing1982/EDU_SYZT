@@ -160,6 +160,7 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                     });
 
                     // Update semester informations
+                    $scope.Math = window.Math;
                     semesterReadings.semesterReadNum = bookshelfStatistics.semesterReadNum;
                     semesterReadings.year = parseInt( summaryHeader.startTime.split("-")[0] );
                     semesterReadings.startMonth = parseInt( summaryHeader.startTime.split("-")[1] );

@@ -18,7 +18,7 @@ import com.syzton.sunread.model.user.Student;
 public interface PointHistoryRepository extends JpaRepository<PointHistory,Long> {
 	List<PointHistory> findByStudent(Student student);
 	
-	@Query("SELECT Distinct(b) FROM PointHistory b WHERE b.creationTime between (:startTime) AND (:endTime)")
+	@Query("SELECT Distinct(b) FROM PointHistory b WHERE b.creationTime >=:startTime AND b.creationTime<=:endTime")
 	ArrayList<PointHistory> findBySemester(@Param("startTime")DateTime startTime, @Param("endTime")DateTime endTime);
 
 }

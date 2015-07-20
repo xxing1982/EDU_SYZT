@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.model.pointhistory.PointHistory;
+import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.service.pointhistory.PointHistoryService;
 import com.syzton.sunread.service.semester.SemesterService;
@@ -123,7 +124,7 @@ public class PointHistoryController {
 				if ( index < 0 ) { index += 12; }
 				
 				// Update monthlyVerifiedNums
-				this.monthlyPoints[index] ++;
+				this.monthlyPoints[index] += pointHistory.getPointType() == PointType.IN ? pointHistory.getNum() : - pointHistory.getNum() ;
 			}
 		}
 	}
