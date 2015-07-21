@@ -12,11 +12,11 @@ ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$sce','$stat
         console.log(bookDetail);
 
          $scope.teacher = Teacher.get({id: $rootScope.id}, function(){
-             
+
              // Make an instance of the NoteView
              $scope.noteView = new NoteView();
              $scope.arguments = {by: "books", id: bookDetail.id, sortBy: "commentCount" };
-        
+
              // Transmit arguments to note search engine
              $scope.noteView.ShowMoreNotes($scope.arguments);
          });
@@ -89,6 +89,29 @@ ctrls.controller("teachingCenterBookDetailsController", ['$scope', '$sce','$stat
         }
     });
     $scope.bookDetails = bookDetail;
+
+    /* Goto or open the action defined $stateParams.action
+   example:
+        /bookDetails/1/takenote
+        /bookDetails/1/intro
+        /bookDetails/1/catalog
+        /bookDetails/1/review
+        /bookDetails/1/note
+        /bookDetails/1/recommand
+        /bookDetails/1/multimedia
+*/
+$(function() {
+    switch($stateParams.action){
+        case "takenote":
+            $('#takenote').click();
+            break;
+        default:
+            if ($stateParams.action !== undefined){
+                $('ul.nav a[href="#' + $stateParams.action + '"]').tab('show');
+            }
+   }
+});
+
 
     $scope.hots=WeeklyHotSearch.get({page:0,size:5,level:0,testType:0,literature:0,category:0
                                         ,grade:0,language:0,resource:0,pointRange:0});
