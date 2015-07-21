@@ -204,14 +204,14 @@ public class RecommendDTO {
 			built.setRecommendState(recommendState);
 			switch (recommendState) {
 			case 0:
-				built.setRecommendStateStr(built.getBookName() +" added successfully to the student "+built.getStudentName() );
+				built.setRecommendStateStr(built.getBookName() +"已向"+built.getStudentName()+"添加成功");
 				break;
 			case 1:
-				built.setRecommendStateStr(built.getBookName() +" recommended successfully to the student "+built.getStudentName() );
+				built.setRecommendStateStr(built.getBookName() +"已向"+built.getStudentName() +"推荐成功");
 			case 2:
-				built.setRecommendStateStr(built.getBookName() +" recommended failed because the book had been recommended to the student "+built.getStudentName()+"But changed the book attribute" );
+				built.setRecommendStateStr(built.getBookName() +"属性更改成功 "+built.getStudentName());
 			case 3:
-				built.setRecommendStateStr(built.getBookName() +" recommended failed because the book had been recommended to the student "+built.getStudentName() );
+				built.setRecommendStateStr(built.getBookName() +"此书已在书架中 "+built.getStudentName() );
 			default:
 				break;
 			}
