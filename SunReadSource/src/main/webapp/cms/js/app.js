@@ -60,6 +60,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/region.html",
             controller: 'regionCtrl'
         })
+        .state('gift',{
+            url: '/gift',
+            templateUrl: "partials/gift.html",
+            controller: 'giftCtrl'
+        })
          .state('edugroup',{
         	url: '/edugroup',
             templateUrl: "partials/edugroup.html",
@@ -94,7 +99,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
 }]);
 routeApp.run(['$rootScope', '$injector', function($rootScope, $injector){
     if (sessionStorage.getItem("cmsId") == null || sessionStorage.getItem("cmsId") == "") {
-        window.location.href="../../login.html";
+        window.location.href="../login.html";
     };
     $rootScope.id = sessionStorage.getItem("cmsId");
 

@@ -18,7 +18,7 @@ adminServices.factory('SystemAdmin',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
-		api.Update = function(userid, oldpassword, newpassword ,callback){
+		api.Update = function(userid, oldpassword, newpassword, callback){
 			$http.put(config.HOST + 'systemadmin?userid=' + userid + "&oldpassword=" + oldpassword + "&newpassword=" + newpassword)
 			.success(function(data, status, headers, config){
 				callback(data);
@@ -27,7 +27,7 @@ adminServices.factory('SystemAdmin',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
-		api.Delete = function(data ,callback){
+		api.Delete = function(data, callback){
 			$http.delete(config.HOST + 'systemadmin?id='+ data)
 			.success(function(data, status, headers, config){
 				callback(data);
@@ -50,58 +50,90 @@ adminServices.factory('SuperSchoolAdmin',['$resource', 'config', '$http',
 	function($resource, config, $http){
 		var api = {};
 		api.Get = function(callback){
-			$http.get(config.HOST + 'superschooladmins')
+			$http.get(config.HOST + 'superschooladmin')
 			.success(function(data, status, headers, config){
 				callback(data);
 			});
 		};
-		api.Add = function(callback){
-			$http.post(config.HOST + 'superschooladmin')
+		api.Add = function(campusid, userid, password, callback){
+			$http.post(config.HOST + 'superschooladmin?campusid=' + campusid + '&userid=' + userid + "&password=" + password)
 			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,header,config,status){
 				callback(data);
 			});
 		};
-		api.Update = function(data ,callback){
-			$http.put(config.HOST + 'superschooladmin', data)
+		api.Update = function(userid, oldpassword, newpassword, callback){
+			$http.put(config.HOST + 'superschooladmin?userid=' + userid + "&oldpassword=" + oldpassword + "&newpassword=" + newpassword)
 			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,header,config,status){
 				callback(data);
 			});
 		};
-		api.Delete = function(data ,callback){
+		api.Delete = function(data, callback){
 			$http.delete(config.HOST + 'superschooladmin?id='+ data)
 			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,header,config,status){
 				callback(data);
 			});
 		};
 		return api;
 	}]);
 
+adminServices.factory('GetSuperSchoolAdmin', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "superschooladmins?campusid=:campusid&page=:page&size=:size&sortBy=id",
+			{campusid:'@_campusid', page:'@_page', size:'@_size'}, {}
+			);
+	}]);
+
 adminServices.factory('SchoolAdmin',['$resource', 'config', '$http',
 	function($resource, config, $http){
 		var api = {};
 		api.Get = function(callback){
-			$http.get(config.HOST + 'schooladmins')
+			$http.get(config.HOST + 'schooladmin')
 			.success(function(data, status, headers, config){
 				callback(data);
 			});
 		};
-		api.Add = function(callback){
-			$http.post(config.HOST + 'schooladmin')
+		api.Add = function(campusid, userid, password, callback){
+			$http.post(config.HOST + 'schooladmin?campusid=' + campusid + '&userid=' + userid + "&password=" + password)
 			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,header,config,status){
 				callback(data);
 			});
 		};
-		api.Update = function(data ,callback){
-			$http.put(config.HOST + 'schooladmin', data)
+		api.Update = function(userid, oldpassword, newpassword, callback){
+			$http.put(config.HOST + 'schooladmin?userid=' + userid + "&oldpassword=" + oldpassword + "&newpassword=" + newpassword)
 			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,header,config,status){
 				callback(data);
 			});
 		};
-		api.Delete = function(data ,callback){
+		api.Delete = function(data, callback){
 			$http.delete(config.HOST + 'schooladmin?id='+ data)
 			.success(function(data, status, headers, config){
+				callback(data);
+			})
+			.error(function(data,header,config,status){
 				callback(data);
 			});
 		};
 		return api;
+	}]);
+
+adminServices.factory('GetSchoolAdmin', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "schooladmins?campusid=:campusid&page=:page&size=:size&sortBy=id",
+			{campusid:'@_campusid', page:'@_page', size:'@_size'}, {}
+			);
 	}]);

@@ -14,8 +14,17 @@ myDirective.directive('chooseschool', ['Province', function(Province){
 			return;
 		};
 
-		Province.GetProvinces(function(data){
+		/*Province.GetProvinces(function(data){
 			$scope.provinces = data.content;
+		});*/
+
+		Province.GetSchools(function(data){
+			$scope.schools = data.content;
+
+			$scope.chooseSchool = function(school){
+				$scope.searchTextSschol = school.name;
+				$scope.selectSchool.checkOne(school);
+			}
 		});
 
 		$scope.c_province = function(){
