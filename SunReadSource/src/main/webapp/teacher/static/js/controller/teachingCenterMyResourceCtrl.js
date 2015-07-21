@@ -6,11 +6,11 @@ ctrls.controller("myResourceController",['$scope', '$rootScope','$stateParams','
 		var size = 3;
 
 		// Bs dropdown statues
-		$scope.statuses = { LESSON: [{id: 0, name: "无限制"}],
-												SUBJECT: [{id: 0, name: "无限制"}],
-												GRADE: [{id: 0, name: "无限制"}],
-												CHAPTER: [{id: 0, name: "无限制"}],
-												THEME: [{id: 0, name: "无限制"}] };
+		$scope.statuses = { LESSON: [{id: 0, name: "无限制",callback:function(){createLoadable(GetBooksByTag);}}],
+												SUBJECT: [{id: 0, name: "无限制",callback:function(){createLoadable(GetBooksByTag);}}],
+												GRADE: [{id: 0, name: "无限制",callback:function(){createLoadable(GetBooksByTag);}}],
+												CHAPTER: [{id: 0, name: "无限制",callback:function(){createLoadable(GetBooksByTag);}}],
+												THEME: [{id: 0, name: "无限制",callback:function(){createLoadable(GetBooksByTag);}}] };
 		$scope.selected_status = { LESSON: 0,
 															SUBJECT: 0,
 															GRADE: 0,

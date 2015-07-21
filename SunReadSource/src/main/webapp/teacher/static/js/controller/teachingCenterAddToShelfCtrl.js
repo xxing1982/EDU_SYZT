@@ -1,5 +1,5 @@
-ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$stateParams','Teacher','Class','GetBookshelvesByClass','AddRecommends','AddRecommendsToClazz',
-	function($scope, $rootScope,$stateParams,Teacher,Class,GetBookshelvesByClass,AddRecommends,AddRecommendsToClazz){
+ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$stateParams','Teacher','Class','GetBookshelvesByClass','AddRecommends','AddRecommendsToClazz','BookDetail',
+	function($scope, $rootScope,$stateParams,Teacher,Class,GetBookshelvesByClass,AddRecommends,AddRecommendsToClazz,BookDetail){
 
 		// $scope.bookAttribute_status
 
@@ -23,6 +23,9 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
 		$scope.isMandatoryForClazz = true;
 
 		$scope.isMandatory = [];
+
+
+		$scope.book = BookDetail.get({id:$stateParams.bookId});
 
     // Get the teacher entity by rootScope id
     $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
