@@ -299,9 +299,11 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     }
     @Transactional
     @Override
-    public void addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
+    public Task addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
         Teacher teacher  = getTeacher(teacherId);
-
+        if(teacher == null){
+            throw new NotFoundException("teacher with id ="+teacherId+" not found..");
+        }
         Student student = studentRepository.findOne(studentId);
         if(student == null){
             throw new NotFoundException("student with id ="+studentId+" not found..");
@@ -317,9 +319,10 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         task.setTargetBookNum(targetBookNum);
         task.setTargetPoint(targetPoint);
         task.setTeacherId(teacherId);
+        task.setStudentId(studentId);
 
         taskService.add(task);
-
+        return task;
     }
 
     private Teacher getTeacher(long teacherId) {

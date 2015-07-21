@@ -39,6 +39,7 @@ import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.user.UserDTO;
 import com.syzton.sunread.dto.user.UserExtraDTO;
+import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.Teacher;
@@ -145,12 +146,11 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "teachers/{teacherId}/students/{studentId}/tasks", method = RequestMethod.PUT)
     @ResponseBody
-    public void add(@PathVariable("teacherId") long teacherId,
+    public Task addTask(@PathVariable("teacherId") long teacherId,
                        @PathVariable("studentId") long studentId,
                        @RequestParam("targetBookNum") int targetBookNum,
                        @RequestParam("targetPoint") int targetPoint) {
-        userService.addTask(teacherId, studentId, targetBookNum, targetPoint);
-
+        return userService.addTask(teacherId, studentId, targetBookNum, targetPoint);
     }
     
     @RequestMapping(value = "teachers/{teacherId}/tasks", method = RequestMethod.PUT)
