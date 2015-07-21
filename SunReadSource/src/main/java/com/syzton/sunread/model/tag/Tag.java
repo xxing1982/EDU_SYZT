@@ -42,6 +42,14 @@ public class Tag extends AbstractEntity {
 
     }
 
+    public Set<BookTag> getBookTags() {
+        return bookTags;
+    }
+
+    public void setBookTags(Set<BookTag> bookTags) {
+        this.bookTags = bookTags;
+    }
+
     public Type getType() {
         return type;
     }
