@@ -1,4 +1,5 @@
-ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window', 'Teacher', function( $rootScope, $scope, $location, $window, Teacher) {
+ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window', 'Teacher', 'ShowAllClass',
+function( $rootScope, $scope, $location, $window, Teacher, ShowAllClass) {
 
     // Route map regexp
     $rootScope.routeMap = {
@@ -21,6 +22,19 @@ ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window',
     // The logout method
     $rootScope.logout = function(){
         delete $rootScope;
+    }
+
+    $rootScope.ShowClasses = function(){
+        ShowAllClass.Gets($rootScope.id, function(data){
+            $rootScope.Classes = data;
+        })
+    }
+    $rootScope.UpdateClass = function(item){
+        ShowAllClass.Change($rootScope.id, item.id, function(data){
+            $rootScope.currentClassId = data.currentClassId;
+            $("#changeClassModal").modal('hide');
+            location.reload();
+        })
     }
 }]);
 
@@ -53,3 +67,5 @@ ctrls.controller('recommendNavCtrl', ['$rootScope', '$scope', '$location',
             return routeRegexp.test($location.path() );
         }
     }]);
+
+
