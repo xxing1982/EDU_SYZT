@@ -28,6 +28,12 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
         return "#" + ( Math.floor( ( colorList[ index ] - subtration ) / divider ) ).toString(16).toUpperCase();
     }          
     
+    // Get the context of the canvas element we want to select
+    var pie_ctx = document.getElementById("myPieChart").getContext("2d");
+
+    // For a pie chart
+    var myPieChart;
+                                                      
     function drawPie(pie_data){
         var pie_options = options = {
             //Boolean - Whether we should show a stroke on each segment
@@ -58,12 +64,12 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
             legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
 
         };
-
-        // Get the context of the canvas element we want to select
-        var pie_ctx = document.getElementById("myPieChart").getContext("2d");
-
-        // For a pie chart
-        var myPieChart = new Chart(pie_ctx).Pie(pie_data, pie_options);
+        
+        if ( myPieChart ) { 
+            myPieChart.clear();
+            myPieChart.destroy();
+        }
+        myPieChart = new Chart(pie_ctx).Pie(pie_data, pie_options);                   
     }
                                        
                                                       
@@ -170,38 +176,43 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                     semesterReadings.maxMonthlyVerifiedNumMonth = maxMonthlyVerifiedNumAndIndex.index + semesterReadings.startMonth;
                 
                     // Update reading category
-                    readingCategory.categories = {};
-                    readingCategory.categoriesNum = 0;
-                    readingCategory.maxCategoryNum = 0;
-                    readingCategory.maxCategoryName;
-                    readingCategory.CategoriesSum = 0;
-                    for ( var i = 0; i < bookshelfStatistics.semesterVerified.length; i ++ ) {
-                        var name = bookshelfStatistics.semesterVerified[i].category;
-                        var category = readingCategory.categories[ name ];
-                        if ( category === undefined ) {
-                            readingCategory.categories[ name ] = 1;
-                        } else {  
-                            readingCategory.categories[ name ] ++;                            
+                    if (semesterReadings.maxMonthlyVerifiedNum !== 0) {
+                        $('#myPieChart').show();
+                        readingCategory.categories = {};
+                        readingCategory.categoriesNum = 0;
+                        readingCategory.maxCategoryNum = 0;
+                        readingCategory.maxCategoryName;
+                        readingCategory.CategoriesSum = 0;
+                        for ( var i = 0; i < bookshelfStatistics.semesterVerified.length; i ++ ) {
+                            var name = bookshelfStatistics.semesterVerified[i].category;
+                            var category = readingCategory.categories[ name ];
+                            if ( category === undefined ) {
+                                readingCategory.categories[ name ] = 1;
+                            } else {  
+                                readingCategory.categories[ name ] ++;                            
+                            }
                         }
-                    }
-                    
-                    var pie_data = [];
-                    for ( var name in readingCategory.categories ) {
-                        var category = readingCategory.categories[ name ];
-                        if ( readingCategory.maxCategoryNum < category ) {
-                            readingCategory.maxCategoryNum = category;
-                            readingCategory.maxCategoryName = name;
+
+                        var pie_data = [];
+                        for ( var name in readingCategory.categories ) {
+                            var category = readingCategory.categories[ name ];
+                            if ( readingCategory.maxCategoryNum < category ) {
+                                readingCategory.maxCategoryNum = category;
+                                readingCategory.maxCategoryName = name;
+                            }
+                            readingCategory.categoriesNum ++;
+                            readingCategory.CategoriesSum += category;
+                            var color = generateRamdomColor();
+                            pie_data.push({ value: category,
+                                            color: color,
+                                            highlight: color,
+                                            label: name });
                         }
-                        readingCategory.categoriesNum ++;
-                        readingCategory.CategoriesSum += category;
-                        var color = generateRamdomColor();
-                        pie_data.push({ value: category,
-                                        color: color,
-                                        highlight: color,
-                                        label: name });
+                        readingCategory.maxCategoryRate = Math.floor( readingCategory.maxCategoryNum * 100 / readingCategory.CategoriesSum );
+                        drawPie(pie_data);
+                    } else {
+                        $('#myPieChart').hide();
                     }
-                    readingCategory.maxCategoryRate = Math.floor( readingCategory.maxCategoryNum * 100 / readingCategory.CategoriesSum );
-                    drawPie(pie_data);
                     
                     // Update books list
                     booksList.semesterVerified = bookshelfStatistics.semesterVerified;
