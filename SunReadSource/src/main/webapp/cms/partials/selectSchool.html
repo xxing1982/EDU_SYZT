@@ -1,6 +1,6 @@
 <div class="row" style="margin-top:30px">
 	<!--<input type="text" ng-disabled="!province.isEdit">-->
-	<div class="col-md-1" ng-show="selectSchool.isShowSchool">选择学校:</div>
+	<!--<div class="col-md-1" ng-show="selectSchool.isShowSchool">选择学校:</div>
 	<div class="col-md-1" ng-hide="selectSchool.isShowSchool">选择区域:</div>
 	<div class="col-md-2">
 		<select class="form-control" ng-model="SelectedProvince" ng-options="s.name for s in provinces" ng-disabled="isDisabled" ng-change="c_province()">
@@ -19,5 +19,17 @@
 	</div>
 	<div class="col-md-2">
 		<select class="form-control" ng-model="SelectedSchool"  ng-options="" ng-disabled="isDisabled" ng-show="selectSchool.isShowSchool"  ng-change="c_school()"></select>
+	</div>-->
+
+
+	<div class="col-md-1">选择学校:</div>
+	<div class="col-md-3">
+		<div class="btn-group">
+			<input type="text" ng-model="searchTextSschol" ng-disabled="isDisabled" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			<ul class="dropdown-menu" role="menu" ng-disabled="isDisabled" >
+				<li ><a href="#"></a></li>
+				<li ng-repeat="school in schools | filter:searchTextSschol" ng-click="chooseSchool(school)" ><a>{{school.name}}&nbsp;&nbsp;所属：{{school.region.name}}</a></li>
+			</ul>
+		</div>
 	</div>
 </div>
