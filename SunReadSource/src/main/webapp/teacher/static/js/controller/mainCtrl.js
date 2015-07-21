@@ -6,8 +6,8 @@ var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
 	'ngSanitize','hotclazzServices', 'booktagServices', 'tagServices','likeServices']);
 
 
-ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader', 'MyRecommend',
-	function($scope, $rootScope, config, Teacher, Class, Note, Action, Pageable, QuickSearch, Hotreader, MyRecommend){
+ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader', 'MyRecommend', 'TagCategory',
+	function($scope, $rootScope, config, Teacher, Class, Note, Action, Pageable, QuickSearch, Hotreader, MyRecommend, TagCategory){
 		$scope.imageServer = config.IMAGESERVER;
 		Teacher.get({id: $rootScope.id}, function(teacher){
 			teacher.currentPicture = teacher.picture === ""? "../static/img/myBookshelf/addPhoto.png" : config.IMAGESERVER + teacher.picture;
@@ -57,6 +57,30 @@ ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', 
 					myRecommend[i].pictureUrl = myRecommend[i].pictureUrl === ""? "../static/img/book.jpg" : config.IMAGESERVER + myRecommend[i].pictureUrl;
 				}
 				$scope.myRecommend = myRecommend;
+			});
+
+			//Tag
+			TagCategory.get({}, function(myTag){
+				$scope.Category = {};
+				$scope.Category.chinese = 0;
+				$scope.Category.math = 0;
+				$scope.Category.english = 0;
+				$scope.Category.science = 0;
+				$scope.Category.other = 0;
+
+				for(var i = 0; i < myTag.length; i++){
+					if(myTag[i].subject == "语文"){
+						$scope.Category.chinese += myTag[i].count;
+					}else if(myTag[i].subject == "数学"){
+						$scope.Category.math += myTag[i].count;
+					}else if(myTag[i].subject == "英语"){
+						$scope.Category.english += myTag[i].count;
+					}else if(myTag[i].subject == "科学"){
+						$scope.Category.science += myTag[i].count;
+					}else {
+						$scope.Category.other += myTag[i].count;
+					}
+				}
 			});
 		});
 }]);
