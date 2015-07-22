@@ -77,12 +77,6 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         
         // Update student statistic
         UserStatistic statistic = student.getStatistic();
-        if (add.getCoinType() == CoinType.IN) {
-        	statistic.setCoin( statistic.getCoin() + add.getNum() );
-        } else {
-        	statistic.setCoin( statistic.getCoin() - add.getNum() );
-        }
-        studentRepository.save(student);
         
         // Update clazz statistic
         Clazz clazz = clazzRepository.findOne(student.getClazzId());
