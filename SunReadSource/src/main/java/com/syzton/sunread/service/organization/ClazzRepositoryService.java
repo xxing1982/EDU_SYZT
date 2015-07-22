@@ -236,4 +236,11 @@ public class ClazzRepositoryService implements ClazzService {
 //		}
 		return failMap;
 	}
+
+	@Override
+	public Clazz findByClazzNameAndCampus(String clazzName, Campus campus)
+			throws NotFoundException {
+		Clazz clazz = repository.findByNameAndCampus(clazzName, campus);
+		return clazz;
+	}
 }

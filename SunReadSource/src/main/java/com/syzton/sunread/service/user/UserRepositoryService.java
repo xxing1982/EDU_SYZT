@@ -634,20 +634,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		 	teacher.setExperience(ExcelUtil.getIntFromExcelCell(row.getCell(16)));
 			teacher.setTeaching(ExcelUtil.getStringFromExcelCell(row.getCell(17)));
 		 	String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(18));
-			//String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
-			//String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
 			
-//			
-//			EduGroup group = eduGroupRepo.findByName(eduGroupName);
-//			if(group == null){
-//				failMap.put(i+1, "查询不到该教育集团:"+eduGroupName);
-//				continue;
-//			}
-//			School school = schoolRepo.findByNameAndEduGroup(schoolName, group);
-//			if(school == null){
-//				failMap.put(i+1,  "查询不到该学校:"+schoolName);
-//				continue;
-//			}
 			Campus campus = campusRepository.findByName(campusName);
 			if(campus == null){
 				failMap.put(i+1,  "查询不到该校区:"+campusName);
@@ -672,6 +659,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		}  
 		return failMap;
 	}
+	
     @Override
     public Map<Integer,String> batchSaveOrUpdateCMSAdminFromExcel(Sheet sheet) {
         Map<Integer,String> failMap = new HashMap<Integer,String>();

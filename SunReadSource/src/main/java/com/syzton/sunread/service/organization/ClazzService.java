@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.syzton.sunread.dto.organization.ClazzDTO;
+import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import com.syzton.sunread.model.user.Student;
@@ -47,6 +48,13 @@ public interface ClazzService {
 	 * @throws NotFoundException
 	 */
 	Clazz findByClazzName(String clazzName) throws NotFoundException;
+	
+	/**
+	 * @param clazzName
+	 * @return
+	 * @throws NotFoundException
+	 */
+	Clazz findByClazzNameAndCampus(String clazzName,Campus campus) throws NotFoundException;
 	
     public Map<Integer,String> batchSaveOrUpdateClazzFromExcel(Sheet sheet);
 
