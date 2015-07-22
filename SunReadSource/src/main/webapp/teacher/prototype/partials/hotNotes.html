@@ -1,0 +1,81 @@
+<div id="hotNote-page" class="container">
+<div class="row">
+    
+    <!-- The page body top -->
+    <div class="page-body personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
+        <div class="">
+        <div class="">
+        <div class="input-group search col-md-9">
+            <input type="text" class="form-control" placeholder="请输入书名" ng-model="searchTerm" ng-change="search(searchTerm)">
+            <span class="input-group-addon" ng-click="search(searchTerm)">搜索</span>
+        </div>
+
+        <div class="note-row row"  ng-repeat="Note in noteView.Notes.content">
+            <div class="row book-row">
+                <div class="col-md-2 book-row-left">
+                    <div><a href="#readingCenter/bookDetails/{{Note.bookId}}/"><img ng-src="{{imageServer+Note.bookPictureUrl | formatPictrueUrl}}" class="img-responsive custom-shadow"/></a></div>
+<!--
+                    <div class="col-md-9 col-md-offset-5 mustRead" ng-show='showMust'>
+                        <img src="../static/img/mustRead.png" class="img-responsive">
+                    </div>
+-->
+                    <h5>{{ Note.bookname }}</h5>
+                </div>
+                <div class="book-row-right" ng-init="Note.text_overflow=true;">
+                    <div ng-class="{'overflow-text' : Note.text_overflow}"><h5><strong>{{ Note.title }}</strong></h5>
+                        <p><small>{{ Note.creationTime }}</small><br/>{{ Note.content }}</p></div>
+                    <div style="float:right;" class="show-more-note-content">
+                        <a ng-click=" Note.text_overflow = !Note.text_overflow" ng-show="Note.text_overflow && Note.content.length > 84">更多</a>
+                    </div>
+                    <div class="book-thumbnail" >
+                        <div ng-show="Note.image !== null">
+                            <div ng-style="{'background-image':'url('+imageServer+Note.image+')'}" ng-click="showLightBox(Note.image)" data-toggle="modal" data-target="#light-box-modal"> </div>
+                        </div>
+                    </div>
+
+                    <div class="msg-buttom" ng-click="noteView.ShowComments(Note)">
+                        <div><h5>{{ Note.commentCount }}</h5></div>
+                        <img src="../static/img/myNote/comment.png"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row msg-row" ng-show="Note.showComments">
+                <div class="col-md-10"><input class="form-control" placeholder="输入回复" ng-model="Note.newCommentContent"></div>
+                <input class="btn btn-green col-md-2" ng-click="noteView.addComment(Note, teacher.username)" type="button" value="发表评论">
+                <div class="clearfix"></div>
+                <div class="col-md-12 reply">
+                    <div class="col-md-12 total"><h5>共{{ Note.commentCount }}条评论</h5></div>
+                    <div class="col-md-12 block" ng-repeat="Comment in Note.Comments.content">
+                        <div class="person"><h5>{{Comment.username}}&nbsp;&nbsp;&nbsp;{{Comment.creationTime}}</h5></div>
+                        <div class="content"><p>{{Comment.content}}</p></div>
+                    </div>
+                    <div class="bottom col-md-12 block" style="margin-top:1px;" ng-show="Note.showShowMoreComment" ng-click="noteView.ShowMoreComments(Note)">{{ Note.loadingState }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}</div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Light box modal -->
+    <div class="modal fade" id="light-box-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    
+                <div class="container-fluid">
+                    <div ng-show="showLightBox.url" class="title">
+                        <img ng-src="{{showLightBox.url}}" class="img-thumbnail"/>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+</script>

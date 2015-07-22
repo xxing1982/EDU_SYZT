@@ -1,155 +1,188 @@
 <div id="personalCenter-page" class="container">
     <div class="row">
 
-        <!-- The top image -->
-        <div class="page-body-top col-md-8 col-md-offset-2">
-            <img src="../static/img/readingDynamic.png">
+    <!-- The page body top -->
+    <div class="page-body personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
+
+        <!-- President saying -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title"><h4>校长寄语</h4></div>
+                <div class="paragraph ">
+                    <div class="col-md-12">
+                        <p style="line-height: 24px;" ng-bind-html="campus.headmaster | formatParagraph">
+                        </p>
+<!--                        <p class="text-right">  ——校长王长贵</p>-->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
         </div>
 
-        <!-- The page body top -->
-        <div class="page-body readingDyn col-md-8 col-md-offset-2">
-
-            <!-- President saying -->
-            <div class="row buttom-separator">
-                <div class="col-md-12">
-                    <div class="title"><h4>校长寄语</h4></div>
-                    <div class="paragraph ">
-                        <div class="col-md-12">
-                            <p style="line-height: 24px;" class="readDyn" ng-bind-html="campus.headmaster | formatParagraph">
-                            </p>
-                            <!--                        <p class="text-right">  ——校长王长贵</p>-->
-                        </div>
+        <!-- Latest activities -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>最新活动</h4></div>
+                        <div class="col-md-2 text-right"><a class="title-link" href="#/readingDynamic/actions">更多></a></div>
                     </div>
                 </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
 
-                <!-- Place holder -->
-                <div class="row title"/>
-            </div>
-
-            <!-- Latest activities -->
-            <div class="row buttom-separator">
-                <div class="col-md-12">
-                    <div class="title">
-                        <div class="row">
-                            <div class="col-md-10"><h4>最新活动</h4></div>
-                            <div class="col-md-2 text-right"><a class="title-link" href="#/readingDynamic/actions">更多></a></div>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <div class="col-md-12">
-
-                            <!-- Actions row -->
-                            <div class="row"
-                                 ng-repeat="action in actionPageable.entities.content">
-                                <div class="col-md-10">
-                                    <h5 class="dark-blue-2">
-                                        {{ action.title }}
-                                    </h5>
-                                </div>
-                                <div class="col-md-2 text-right">
-                                    <p>{{ action.creationTime }}</p>
-                                </div>
+                        <!-- Actions row -->
+                        <div class="row"
+                             ng-repeat="action in actionPageable.entities.content">
+                            <div class="col-md-10">
+                                <h5 class="dark-blue-2">
+                                    {{ action.title }}
+                                </h5>
                             </div>
-
-                            <!-- Place holder row copied from actions -->
-                            <div class="row" ng-repeat="placeHolder in actionPageable.placeHolders.content">
-                                <div class="col-md-10">
-                                    <p>&nbsp;{{ placeHolder.title }}</p>
-                                </div>
+                            <div class="col-md-2 text-right">
+                                <p>{{ action.creationTime }}</p>
                             </div>
-
                         </div>
+
+                        <!-- Place holder row copied from actions -->
+                        <div class="row" ng-repeat="placeHolder in actionPageable.placeHolders.content">
+                            <div class="col-md-10">
+                                <p>&nbsp;{{ placeHolder.title }}</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-                <!-- Place holder -->
-                <div class="row title"/>
             </div>
 
-            <!-- Excellent students -->
-            <div class="row buttom-separator">
-                <div class="col-md-12">
-                    <div class="title">
-                        <div class="row">
-                            <div class="col-md-10"><h4>阅读达人</h4></div>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <div class="col-md-12">
-                            <div class="row">
+            <!-- Place holder -->
+            <div class="row title"/>
+        </div>
 
-                                <!-- Rank of students -->
-                                <div class="col-md-4" ng-repeat="hotreader in hotReaders.content" ng-init="award = ['first', 'second', 'third']">
-                                    <div class="row">
-                                        <div class="col-xs-6 col-xs-offset-3">
-                                            <div class="row">
-                                                <div >
-                                                    <img style="width:125px;height:125px" ng-src="{{hotreader.picture === '' ? '../static/img/myBookshelf/addPhoto.png' : imageServer + hotreader.picture}}" class="img-responsive img-circle" src="../static/img/picture.jpg">
-                                                    <img class="student-rank" ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive img-circle">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-xs-offset-2">
-                                            <div class="text-center"><h4>{{hotreader.username}}</h4></div>
-                                            <div class="text-center"><p>{{hotreader.statistic.point}}积分</p></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+        <!-- Excellent students -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>阅读达人</h4></div>
                     </div>
                 </div>
-
-                <!-- Place holder -->
-                <div class="row title"/>
-            </div>
-
-            <!-- Excellent clazzes -->
-            <div class="row buttom-separator">
-                <div class="col-md-12">
-                    <div class="title">
+                <div class="paragraph">
+                    <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-10"><h4>书香班级</h4></div>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <div class="col-md-12">
-                            <div class="row">
 
-                                <!-- Golden silver bronze clazzes -->
-                                <div class="col-md-4" ng-repeat="hotClazz in hotClazzs.content" ng-init="award=['golden', 'silver', 'bronze']">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <img ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive">
-                                        </div>
-                                        <div class="col-md-7" style="margin-top:-10px;">
-                                            <div class="row text-left">
-                                                <h5><big>{{hotClazz.name}}</big></h4>
-                                                <p style="line-height:21px;">
-                                                    <small>
-                                                        班级人数：{{hotClazz.clazzStatistic.totalReads}}<br/>
-                                                        班级平均积分(学期)：{{hotClazz.clazzStatistic.avgPoints}}<br/>
-                                                        班级人均阅读量(学期)：{{hotClazz.clazzStatistic.avgReads}}
-                                                    </small>
-                                                </p>
+                            <!-- Rank of students -->
+                            <div class="col-md-4" ng-repeat="hotreader in hotReaders.content" ng-init="award = ['first', 'second', 'third']">
+                                <div class="row">
+                                    <div class="col-xs-6 col-xs-offset-3">
+                                        <div class="row">
+                                            <div >
+                                                <img style="width:125px;height:125px" ng-src="{{hotreader.picture === '' ? '../static/img/myBookshelf/addPhoto.png' : imageServer + hotreader.picture}}" class="img-responsive img-circle" src="../static/img/picture.jpg">
+                                                <img class="student-rank" ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive img-circle">
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-xs-8 col-xs-offset-2">
+                                        <a href="#/othersBookshelf/{{hotreader.id}}">
+                                          <div class="text-center"><h4>{{hotreader.username}}</h4></div>
+                                        </a>
+                                        <div class="text-center"><p>{{hotreader.statistic.point}}积分</p></div>
+                                    </div>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
-
-                <!-- Place holder -->
-                <div class="row title"/>
             </div>
 
-
-
+            <!-- Place holder -->
+            <div class="row title"/>
         </div>
+
+        <!-- Excellent clazzes -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>书香班级</h4></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <!-- Golden silver bronze clazzes -->
+                            <div class="col-md-4" ng-repeat="hotClazz in hotClazzs.content" ng-init="award=['golden', 'silver', 'bronze']">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <img ng-src="../static/img/readingDynamic/{{award[$index]}}.png" class="img-responsive">
+                                    </div>
+                                    <div class="col-md-7" style="margin-top:-10px;">
+                                        <div class="row text-left">
+                                            <h5><big>{{hotClazz.name}}</big></h4>
+                                            <p style="line-height:21px;">
+                                                <small>
+                                                    班级人数：{{hotClazz.clazzStatistic.totalReads}}<br/>
+                                                    班级平均积分(学期)：{{hotClazz.clazzStatistic.avgPoints}}<br/>
+                                                    班级人均阅读量(学期)：{{hotClazz.clazzStatistic.avgReads}}
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Place holder -->
+            <div class="row title"/>
+        </div>
+
+
+        <!-- Hot notes -->
+        <div class="row buttom-separator">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>热门笔记</h4></div>
+                        <div class="col-md-2 text-right"><a href="#/hotNotes" class="title-link">全部热门笔记></a></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <!-- Rank of notes -->
+                            <div class="col-md-4" ng-repeat="note in noteView.Notes.content">
+                                <div class="row">
+                                    <div class="col-xs-8 col-xs-offset-2">
+                                        <div class="row">
+                                            <img ng-src="{{imageServer+note.bookPictureUrl | formatPictrueUrl}}" class="img-responsive custom-shadow" src="../static/img/picture.jpg">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-8 col-xs-offset-2">
+                                        <div class="row text-center">
+                                            <h5>{{note.bookname}}</h4>
+                                            <p style="line-height:20px;"><small>{{note.title | limitTo:13}}</br>{{note.username}}&nbsp;&nbsp;评论：{{note.commentCount}}条</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     </div>
 </div>
 <script>
