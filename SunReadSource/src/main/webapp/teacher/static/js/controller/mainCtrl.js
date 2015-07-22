@@ -3,7 +3,7 @@ var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
 	'userServices', 'classServices', 'noteServices', 'noteViewServices', 'commentServices', 'actionServices', 'pageableServices', 'quickSearchServices','bookshelfServices',
 	'lackFeedbackServices','popularSearchServices','conditionSearchServices','dictionariesService','bookDetailServices','reviewServices','recommendServices',
 	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices', 'coinHistoryServices','campusServices',
-	'ngSanitize','hotclazzServices', 'booktagServices', 'tagServices','likeServices']);
+	'ngSanitize','hotclazzServices', 'booktagServices', 'tagServices','likeServices','messageServices']);
 
 
 ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader', 'MyRecommend', 'TagCategory',
