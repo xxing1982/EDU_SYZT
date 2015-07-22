@@ -97,3 +97,11 @@ ctrls.filter('formatParagraph', function(){
 		return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
 	};
 });
+
+ctrls.filter('formatPictrueUrl', function () {
+    return function (data) {
+        var url = data.slice(27);
+        if (url.search('/') === 0) return data;
+        return url;
+    };
+});
