@@ -3,6 +3,11 @@
 */
 var NoteTake = function(bookDetails){
     
+    // Destroy the old noteTake
+    if (this.dropzone) {
+        this.dropzone.destory();
+    }
+    
     // Initlizate the properties of details
     this.id = bookDetails.id;
     this.name = bookDetails.name;
@@ -13,6 +18,12 @@ var NoteTake = function(bookDetails){
     this.wordCount = bookDetails.wordCount;
     this.pageCount = bookDetails.pageCount;
     this.pictureUrl = bookDetails.pictureUrl;
+    
+    // Image uploader
+    var noteTake = this;
+    this.dropzone = this.Dropzone(this.config.NOTEPIC, function(url){
+        noteTake.image = url;
+    });
 };
 
 // The states of noteTake
@@ -38,6 +49,7 @@ NoteTake.prototype.send = function(){
         noteTake.content = undefined;
         noteTake.image = undefined;
         noteTake.state = noteTake.states.idle;
+        noteTake.dropzone.removeAllFiles();
         
         // Dismiss the modal
         $('#book-takenote-model').modal('hide');
@@ -48,22 +60,24 @@ NoteTake.prototype.send = function(){
         $('#alert-modal').modal();
     });
 }
-    
+
 
 
 /*
     Create the module for noteTakeServices
 */
 angular.module('noteTakeServices', ['noteServices']).
-    factory('NoteTake', ['Note', '$rootScope', function(Note, $rootScope){
+    factory('NoteTake', ['Note', '$rootScope','Dropzone', 'config', function(Note, $rootScope, Dropzone, config){
         
         // Dependency injection
         NoteTake.prototype.Note = Note;
         NoteTake.prototype.$rootScope = $rootScope;
+        NoteTake.prototype.Dropzone = Dropzone;
+        NoteTake.prototype.config = config;
         
         // Initlizate the noteTake
         NoteTake.prototype.state = NoteTake.prototype.states.idle;
-    
+        
         // Return the NoteTake object with
         // the reference to Note
         return NoteTake;
