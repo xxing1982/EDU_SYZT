@@ -47,7 +47,7 @@
           <div class="modal-footer">
               <div class="col-md-12">
                   <a  class="btn-a" data-dismiss="modal">取消</a>
-                  <button type="submit" ng-disabled="note.title.$error.required || note.content.$error.required || noteTake.content.length < 20 || note.content.$error.maxlength" class="btn btn-green" ng-click="noteTake.send()">{{ noteTake.state }}</button>
+                  <button type="submit" ng-disabled="note.title.$error.required || note.content.$error.required || noteTake.content.length < 20 || note.content.$error.maxlength" class="btn btn-green">{{ noteTake.state }}</button>
               </div>
           </div>
       </form>
