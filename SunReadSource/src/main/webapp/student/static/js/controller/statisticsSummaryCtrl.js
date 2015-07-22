@@ -145,6 +145,9 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                     TaskStatistics.get({studentId: student.id, semesterId: semester.id}, function(task){
                         basicInformations.semesterReadNum = task.targetBookNum;
                         basicInformations.semesterVerifiedRate = basicInformations.semesterReadNum !== 0 ? Math.floor(basicInformations.semesterVerifiedNum / basicInformations.semesterReadNum * 100) : 0;
+                        if (basicInformations.semesterVerifiedRate > 100) {
+                            basicInformations.semesterVerifiedRate = 100;
+                        }
                     });
                     basicInformations.semesterVerifiedNum = bookshelfStatistics.semesterVerified.length;
                     PointHistory.get({by: "semesters", id: semester.id}, function(pointhistories){
