@@ -28,6 +28,11 @@ ctrls.controller("myRecommendController",['$scope', '$rootScope','Loadable', 'Ed
     }
 
 		$scope.getRecommends();
+
+		$scope.showReason=function(reason){
+				$rootScope.modal = {title: "奖励原因", content: reason};
+				$('#alert-modal').modal();
+		}
 }]);
 
 ctrls.filter('isManditory',function(){

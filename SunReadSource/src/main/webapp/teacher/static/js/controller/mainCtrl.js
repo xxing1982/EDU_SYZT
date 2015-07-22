@@ -91,6 +91,16 @@ ctrls.filter('formatSize6', function(){
 	}
 });
 
+ctrls.filter('formatSize10', function(){
+	return function(input){
+		if(input == undefined || input == "")
+			return input;
+		else
+			return input.substring(0, 10) + '...';
+		}
+});
+
+
 ctrls.filter('formatParagraph', function(){
 	return function(data) {
 		if (!data) return data;
