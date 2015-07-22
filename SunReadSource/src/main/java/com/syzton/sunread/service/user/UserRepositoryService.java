@@ -335,9 +335,6 @@ public class UserRepositoryService implements UserService,UserDetailsService{
             throw new NotFoundException("teacher with id = "+teacherId+" not found..");
         }
 
-        List<Clazz> clazzs = teacherClazzRepository.findByTeacherId(teacherId);
-        teacher.setCurrentClassId(clazzs.get(0).getId());
-
         return  teacher;
     }
 
