@@ -52,7 +52,7 @@
 			</div>
 			<div class="body row">
 				<div class="col-md-3 index-image-padding" ng-repeat="item in myRecommend">
-					<img class="img-responsive custom-shadow" ng-src="{{item.pictureUrl}}">
+					<img class="img-responsive custom-shadow" ng-src="{{item.pictureUrl | formatPictrueUrl}}">
 					<div>{{item.name}}</div>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 			</div>
 			<div class="body row">
 				<div class="col-md-3 index-image-padding" ng-repeat="recommend in recommends">
-					<img class="img-responsive custom-shadow" ng-src="{{imageServer + recommend.pictureUrl}}">
+					<img class="img-responsive custom-shadow" ng-src="{{imageServer+recommend.pictureUrl | formatPictrueUrl}}">
 					<div>{{recommend.name}}</div>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 			<div class="head row">
 				<div class="col-md-8">正在发生</div>
 				<div class="col-md-4">
-					
+
 				</div>
 			</div>
 			<div class="body row">
@@ -119,7 +119,7 @@
 			<div class="head row">
 				<div class="col-md-8">热门笔记</div>
 				<div class="col-md-4">
-					
+
 				</div>
 			</div>
 			<div class="body row">
