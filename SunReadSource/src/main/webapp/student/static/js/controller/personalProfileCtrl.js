@@ -16,7 +16,8 @@ ctrls.controller("personalProfileController",
 
             // Update the user entity
             User.update({id: $rootScope.id}, editObj.cached);
-        } else {
+        }
+        else {
 
             // Create cached entity
             editObj.cached = new Object();
@@ -27,9 +28,9 @@ ctrls.controller("personalProfileController",
             }
         }
         editObj.editable = !editObj.editable ;
-    }
+    };
     
-    // All information base on the student id in roootScope
+    // All information base on the student id in rootScope
     $scope.student = Student.get( {id: $rootScope.id}, function(){
         
         // Basic information

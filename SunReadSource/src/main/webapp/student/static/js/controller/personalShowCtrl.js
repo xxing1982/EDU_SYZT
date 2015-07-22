@@ -5,5 +5,6 @@ ctrls.controller("personalShowController", ['$scope', 'User', function ($scope, 
     //userinfo
     //test function to get data list
     $scope.userInfo = User.query(function(){});
+    console.log($scope.userInfo)
    
 }]);

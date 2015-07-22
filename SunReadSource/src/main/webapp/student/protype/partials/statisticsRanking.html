@@ -33,7 +33,7 @@
                 <tbody>
                   <tr ng-repeat="hotreader in hotreaderLoadable.entities.content">
                     <td>{{$index + 1}}</td>
-                    <td>{{hotreader.username}}</td>
+                      <td ng-click="openPersonalShow(hotreader,$index+1)">{{hotreader.username}}</td>
                     <td>{{hotreader.statistic.point}}</td>
                     <td>{{hotreader.statistic.coin}}</td>
                     <td>{{hotreader.statistic.level}}</td>

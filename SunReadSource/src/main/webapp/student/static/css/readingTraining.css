@@ -94,6 +94,7 @@
 
 #readingTrainingPaper {
     padding: 0 20px;
+    margin-bottom: 40px;
 }
 
 #readingTrainingPaper p {
@@ -207,7 +208,7 @@
 
 #readingTraining .grade-body div {
     position: absolute;
-    left: 385px;
+    left: 370px;
     margin-top: 70px;
     font-size: 22px;
     text-align: center;
@@ -221,6 +222,10 @@
 
 #readingTraining .grade-body div p {
     color: white;
+}
+
+#article-body{
+    margin-top:50px;
 }
 
 .fs_70 {

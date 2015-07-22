@@ -14,7 +14,7 @@ ctrls.controller("hotNotesController", ['$scope', '$rootScope','NoteView', 'Stud
             // Transmit arguments to search engine
             $scope.arguments = { sortBy: 'commentCount', searchTerm: searchTerm };
             $scope.noteView.ShowMoreNotes( $scope.arguments );
-        }
+        };
 
         // List all the Notes
         $scope.search();

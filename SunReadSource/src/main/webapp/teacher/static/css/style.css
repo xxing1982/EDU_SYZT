@@ -363,3 +363,8 @@
 }
 
 /*******************my note bottom*******************/
+
+
+.my-reword-reason:hover{
+    cursor: pointer;
+}

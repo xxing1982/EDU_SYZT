@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-md-12 center" id="train-select" style="margin-top:30px">
                         <div class="col-md-10 col-md-offset-1 body">
-                            <div class="col-md-3 item" ng-repeat="article in articles_test | limitTo:articleLimit"
+                            <div class="col-md-3 item" ng-repeat="article in articles | limitTo:articleLimit"
                                  ng-click="selectArticleItem($index,article)" ng-style="setDivBorder($index)"
                                  ng-class="{active:$index==selectedIndex}"><p ng-style="setPBorder($index)">
                                 {{article.topic}}</p>
@@ -56,15 +56,17 @@
                 </div>
             </div>
 
-            <div class="row" ng-show="showArticle">
-
+            <div id="article-body" ng-show="showArticle">
+                <div class="col-md-12 center" ng-repeat="item in lines_to_show">
+                    <p class="fs_30">{{item.content}}</p>
+                </div>
             </div>
 
 
             <div class="row">
                 <div class="col-md-12 center bottom-button">
                     <div class="btn btn-green-solid" ng-hide="showArticle" ng-click="startTraining()">开始</div>
-                    <div class="btn btn-green-solid" ng-show="showArticle" ng-click="stopTraining()">结束训练</div>
+                    <div class="btn btn-green-solid" ng-show="showArticle" ng-click="stopReading()">结束训练</div>
                 </div>
             </div>
 

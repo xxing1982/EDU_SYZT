@@ -124,307 +124,199 @@ ctrls.controller("readingTrainingTestingController", ['$scope', 'SpeedTesting', 
 
 }]);
 
-ctrls.controller("readingTrainingTrainingController", ['$scope', 'SpeedTraining', '$interval',
-    function ($scope, SpeedTraining, $interval) {
+ctrls.controller("readingTrainingTrainingController",
+    ['$scope', 'SpeedTraining', '$interval', "$rootScope",
+        function ($scope, SpeedTraining, $interval, $rootScope) {
+
+            var stop;
+
+            $scope.line_selections = [];
+            $scope.word_selections = [];
+            $scope.level_selections = [];
+
+            $scope.line_selection_status = 0;
+            $scope.word_selection_status = 0;
+            $scope.level_selection_status = 0;
+
+            $scope.articles = [];
+            $scope.loading = false;
+
+            $scope.showArticle = false;
+
+            $scope.selectIndex = -1;
+            $scope.selectedArticle = {};
+            $scope.article = '';
+
+            $scope.lines_to_show = [];
 
 
-        $scope.line_selections = [];
-        $scope.word_selections = [];
-        $scope.level_selections = [];
+            var config = {
+                level: 10,
+                word: 10,
+                line: 10,
+                wordPerLine: 20
+            };
 
-        $scope.line_selection_status = 0;
-        $scope.word_selection_status = 0;
-        $scope.level_selection_status = 0;
+            $scope.articleLimit = 20;
 
-        $scope.articles = [];
-        $scope.loading = false;
-
-        $scope.showArticle = false;
-
-        $scope.selectIndex = -1;
-        $scope.selectedArticle = {};
-        $scope.article = '';
+            var filter = {
+                line: '1',
+                word: '100'
+            };
 
 
-        var config = {
-            level: 5,
-            word: 5,
-            line: 5,
-            wordPerLine: 20
-        };
-
-        $scope.articleLimit = 20;
-
-        var filter = {
-            line: '1',
-            word: '100'
-        };
-
-        $scope.articles_test = [
-            {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }, {
-                id: 1,
-                topic: "<<老人与海>>"
-            }];
-
-
-        $scope.setPBorder = function (index) {
-            if (index % 4 == 3) {
-                return {border: 'none'}
-            }
-        };
-
-
-        $scope.setDivBorder = function (index) {
-            if (index >= $scope.articleLimit - 4) {
-                return {'border-bottom': 'none'}
-            }
-        };
-
-        $scope.updateLines = function () {
-            filter.line = $scope.line_selections[$scope.line_selection_status].id + 1;
-            console.log(filter.line);
-        };
-
-        $scope.updateWords = function () {
-            filter.word = ($scope.word_selections[$scope.word_selection_status].id + 1) * 100;
-            console.log(filter.word)
-        };
-
-        $scope.updateLevel = function () {
-            SpeedTraining.getTrainArticle(function (data) {
-                $scope.articles = data;
-            })
-        };
-
-        $scope.selectArticleItem = function (index, article) {
-            $scope.selectedIndex = index;
-            $scope.selectedArticle = article;
-            console.log(index);
-            console.log(article.id);
-        };
-
-        $scope.startTraining = function () {
-            if ($scope.selectedIndex == -1 || $scope.selectedArticle == null) {
-                return;
-            }
-            $scope.loading = true;
-            $scope.showAction = true;
-            SpeedTraining.getArticleByID($scope.selectedArticle.id, function (data) {
-                $scope.loading = false;
-                $scope.article = data.content;
-                $scope.topic = data.topic;
-                $scope.showArticle = true;
-                $scope.article_line_array = data.content;
-
-                startReading();
-
-            })
-
-
-        };
-
-        $scope.stopReading = function () {
-            if (angular.isDefined(stop)) {
-                $interval.cancel(stop);
-                stop = undefined;
-            }
-        };
-
-        function startReading() {
-            var i = 0;
-
-            var tempArticle = $scope.article;
-
-            if (angular.isDefined(stop)) return;
-
-            var intr = parseInt(60 / (filter.word / config.wordPerLine) * filter.line);
-
-            stop = $interval(function () {
-                if (filter.line * config.wordPerLine * i < $scope.article.length) {
-                    $scope.lines_to_show = tempArticle.substring(i, i * filter.line * config.wordPerLine);
-                    i++;
-                } else {
-                    $scope.stopReading();
+            $scope.setPBorder = function (index) {
+                if (index % 4 == 3) {
+                    return {border: 'none'}
                 }
-            }, intr * 1000);
-        }
+            };
 
 
-        initSelections();
-        function initSelections() {
+            $scope.setDivBorder = function (index) {
+                if (index >= $scope.articleLimit - 4) {
+                    return {'border-bottom': 'none'}
+                }
+            };
 
-            // 行数
-            for (var i = 0; i < config.line; i++) {
-                $scope.line_selections.push({
-                    id: i,
-                    name: (i + 1) + '  行  ',
-                    callback: $scope.updateLines
-                });
+            function updateLines() {
+                filter.line = $scope.line_selections[$scope.line_selection_status].id + 1;
             }
 
-            //每分钟显示字数
-            for (i = 0; i < config.word; i++) {
-                $scope.word_selections.push({
-                    id: i,
-                    name: (i + 1) * 100 + ' 字 ',
-                    callback: $scope.updateWords
+            function updateWords() {
+                filter.word = ($scope.word_selections[$scope.word_selection_status].id + 1) * 100;
+            }
+
+            function updateLevel() {
+                if ($scope.level_selection_status == 0) {
+                    SpeedTraining.getTrainArticle(function (data) {
+                        $scope.articles = data;
+                    })
+                }
+                else {
+                    SpeedTraining.getTrainArticleByLevel($scope.level_selection_status, function (data) {
+                        $scope.articles = data;
+                    })
+                }
+            }
+
+            $scope.selectArticleItem = function (index, article) {
+                $scope.selectedIndex = index;
+                $scope.selectedArticle = article;
+                console.log(index);
+                console.log(article.id);
+            };
+
+            $scope.startTraining = function () {
+
+                if ($scope.selectedIndex == -1 || $scope.selectedArticle == null) {
+                    $rootScope.modal = {};
+                    $rootScope.modal.title = "提示";
+                    $rootScope.modal.content = "请选择一项";
+                    $('#alert-modal').modal();
+                    return;
+                }
+
+                $scope.loading = true;
+                $scope.showAction = true;
+                SpeedTraining.getArticleByID($scope.selectedArticle.id, function (data) {
+                    $scope.loading = false;
+                    $scope.article = data.content;
+                    $scope.topic = data.topic;
+                    $scope.showArticle = true;
+                    $scope.article_line_array = data.content;
+
+                    startReading();
                 })
+            };
+
+
+            $scope.stopReading = function () {
+                if (angular.isDefined(stop)) {
+                    $interval.cancel(stop);
+                    stop = undefined;
+
+                    $rootScope.modal = {};
+                    $rootScope.modal.title = "提示";
+                    $rootScope.modal.content = "训练已经结束，点击\"确定\"返回";
+                    $('#alert-modal').modal();
+
+                    $rootScope.modal.click = function () {
+                        $scope.lines_to_show = [];
+                        $scope.showArticle = false;
+                    };
+                }
+            };
+
+            function startReading() {
+
+                var i = 1;
+
+                if (angular.isDefined(stop)) return;
+
+                var intr = parseInt(60 / (filter.word / config.wordPerLine) * filter.line);
+
+                var temp = $scope.article.substring(0, filter.line * config.wordPerLine);
+
+                for (var j = 0; j < filter.line; j++) {
+                    $scope.lines_to_show.push({content: temp.substring(j * config.wordPerLine, (j + 1) * config.wordPerLine)});
+                }
+
+                stop = $interval(function () {
+                    $scope.lines_to_show = [];
+                    if (filter.line * config.wordPerLine * i < $scope.article.length) {
+                        var temp = $scope.article.substring(i * filter.line * config.wordPerLine, (i + 1) * filter.line * config.wordPerLine);
+                        for (var j = 0; j < filter.line; j++) {
+                            $scope.lines_to_show.push({content: temp.substring(j * config.wordPerLine, (j + 1) * config.wordPerLine)});
+                        }
+                        i++;
+                    } else {
+                        $scope.stopReading();
+                    }
+                }, intr * 1000);
             }
 
-            //级数
-            $scope.level_selections.push({
-                id: 0,
-                name: '所有等级',
-                callback: $scope.updateLevel
-            });
+            $scope.allArticles = [];
 
-            for (i = 0; i < config.level; i++) {
+
+            initSelections();
+            function initSelections() {
+
+                // 行数
+                for (var i = 0; i < config.line; i++) {
+                    $scope.line_selections.push({
+                        id: i,
+                        name: (i + 1) + '  行  ',
+                        callback: updateLines
+                    });
+                }
+
+                //每分钟显示字数
+                for (i = 0; i < config.word; i++) {
+                    $scope.word_selections.push({
+                        id: i,
+                        name: (i + 1) * 100 + ' 字 ',
+                        callback: updateWords
+                    })
+                }
+
+                //级数
                 $scope.level_selections.push({
-                    id: i,
-                    name: '等级  ' + (i + 1),
-                    callback: $scope.updateLevel
+                    id: 0,
+                    name: '所有等级',
+                    callback: updateLevel
                 });
+
+                for (i = 1; i < config.level; i++) {
+                    $scope.level_selections.push({
+                        id: i,
+                        name: '等级  ' + i,
+                        callback: updateLevel
+                    });
+                }
             }
-        }
-    }]);
+
+            updateLevel();
+        }]);
 
 
 ctrls.controller("readingTrainingStatisticsController", ['$scope', "$rootScope", 'SpeedList', function ($scope, $rootScope, SpeedList) {
@@ -516,8 +408,8 @@ ctrls.controller("readingTrainingStatisticsController", ['$scope', "$rootScope",
     }
 
     $scope.config = {
-        countryNum: 10,
-        schoolNum: 10,
+        countryNum: 100,
+        schoolNum: 100,
         personNum: 10
     };
 
@@ -539,7 +431,7 @@ ctrls.controller("readingTrainingStatisticsController", ['$scope', "$rootScope",
 
     $scope.showSchoolRank = function () {
         $scope.switch.state = 'rank';
-        SpeedList.getSpeedListFromSchool($rootScope.id, $scope.config.schoolNum, function (data) {
+        SpeedList.getSpeedListFromSchool($rootScope.student.campusId, $scope.config.schoolNum, function (data) {
             $scope.schoolList = data;
         })
     };
@@ -554,3 +446,4 @@ ctrls.controller("readingTrainingStatisticsController", ['$scope', "$rootScope",
     $scope.showStat();
 
 }]);
+
