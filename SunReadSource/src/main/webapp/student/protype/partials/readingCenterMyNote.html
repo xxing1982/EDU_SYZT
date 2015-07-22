@@ -7,7 +7,7 @@
 			<div class="note-row"  ng-repeat="Note in noteView.Notes.content">
 				<div class="row book-row">
 					<div class="col-md-2 book-row-left">
-                        <div><a href="#readingCenter/bookDetails/{{Note.bookId}}/"><img ng-src="{{imageServer+Note.bookPictureUrl}}" class="img-responsive custom-shadow"/></a></div>
+                        <div><a href="#readingCenter/bookDetails/{{Note.bookId}}/"><img ng-src="{{imageServer+Note.bookPictureUrl | formatPictrueUrl}}" class="img-responsive custom-shadow"/></a></div>
 <!--
 						<div class="col-md-9 col-md-offset-5 mustRead" ng-show='showMust'>
 							<img src="../static/img/mustRead.png" class="img-responsive">
@@ -47,19 +47,19 @@
 					</div>
 				</div>
 			</div>
-            
+
 			<div class="bottom" ng-click="noteView.ShowMoreNotes(arguments)">{{ noteView.Notes.loadingState }}</div>
 		</div>
 	</div>
 	<div class="col-md-1"></div>
-    
+
     <!-- Light box modal -->
     <div class="modal fade" id="light-box-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    
+
                 <div class="container-fluid">
                     <div ng-show="showLightBox.url" class="title">
                         <img ng-src="{{showLightBox.url}}" class="img-thumbnail"/>

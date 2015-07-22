@@ -9,5 +9,11 @@ provinceServices.factory('Province',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
+		api.GetSchools = function(callback){
+			$http.get(config.HOST + 'campuss?page=0&size=10000&sortBy=name')
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		};
 		return api;
 	}]);

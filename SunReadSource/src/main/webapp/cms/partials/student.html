@@ -1,23 +1,57 @@
 <!--AdvancedSearch-->
+<div>
+    <h1>学生</h1>
+</div>
 <div class="advancedSearch">
-<div class="row">
-    <div class="col-md-9 leftpart">
+    <div class="row">
+        <div class="col-md-9 leftpart">
+            <div class="input-group search">
+                <form action="/api/upload/excel/student" method="POST" enctype="multipart/form-data">  
 
-	<div class="input-group search">
-		<input type="text" class="form-control" placeholder="请输入学生名" ng-model="searchArguments.searchTerm">
-		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
-		<span class="input-group-addon" ng-click="addNewSubjectQuestion()">添加</span>
-	</div>
-	
-	<div class="input-group search">
-	<form action="/api/upload/excel/student" method="POST" enctype="multipart/form-data">  
-    
-    	Excel: <input type="file" name="myfile"/><br/>  
-   
-    	<input type="submit" value="Excel导入学生" /> 
-		</form>
-	</div>
-	
+                    Excel: <input type="file" name="myfile"/><br/>  
+
+                    <input type="submit" value="Excel导入学生" /> 
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <chooseschool></chooseschool>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>学校</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年级</th>
+                <th>班级</th>
+                <th>财富值</th>
+                <th>积分</th>
+                <th>等级</th>
+                <th>
+                    <button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal" disabled="disabled">添加</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="placeHolder in searchPageable.entities.content">
+                <td>{{placeHolder.campusId}}</td>
+                <td>{{placeHolder.userId}}</td>
+                <td>{{placeHolder.username}}</td>
+                <td>{{placeHolder.gender}}</td>
+                <td>{{placeHolder.gradeId}}</td>
+                <td>{{placeHolder.clazzId}}</td>
+                <td>{{placeHolder.statistic.coin}}</td>
+                <td>{{placeHolder.statistic.point}}</td>
+                <td>{{placeHolder.statistic.level}}</td>
+                <td>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
+                    <button class="btn btn-primary" ng-click="deleteSys(placeHolder)">删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <!-- Place holder row copied from searchs -->
     <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
@@ -28,33 +62,34 @@
 
     <!-- Footer and page numbers  -->
     <div class="container-fluid">
-    <div class="row paragraph">
-       <div class="col-xs-1"></div>
-        <div class="col-xs-7">
+        <div class="row paragraph">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-7">
             <!-- Custom page number goes here -->
-            <div class="row custom-page-number-group">
-                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page - 1)"></a></div></div>
-                <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
-                    <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}"
+                <div class="row custom-page-number-group">
+                    <div class="col-xs-2">
+                        <div class="row"><a ng-click="searchPageable.showPage(searchPageable.page - 1)"></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
+                        <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}"
                     ng-click="searchPageable.showPage(pageNumber)">{{pageNumber}}</a>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <a ng-click="searchPageable.showPage(searchPageable.page + 1)"></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page + 1)"></a></div></div>
             </div>
-        </div>
-        <div class="col-xs-3">
-            <!-- Custom goto page number goes here -->
-<!--            <div class="custom-page-number-group"><a>ȥ��</a><input type="text" class="custom-page-number-input" />ҳ</div>-->
+            <div class="col-xs-3">            
                 <div class="custom-page-number-group">
                     <a ng-click="searchPageable.showPage(goto)">上一页</a>
                     <input type="number" class="custom-page-number-input" ng-model="goto"/>
                     <a ng-click="searchPageable.showPage(goto)">下一页</a>
                 </div>
+            </div>
         </div>
-
     </div>
- </div><!--end page -->
-
-</div><!--left part-->
-</div><!--row-->
 
 </div>

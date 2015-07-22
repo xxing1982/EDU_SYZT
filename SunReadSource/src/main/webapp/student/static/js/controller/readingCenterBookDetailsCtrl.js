@@ -1,5 +1,5 @@
 ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', '$stateParams', 'para','WeeklyHotSearch','OneBookInShelf'
-    ,'BookDetail' , 'Student', 'NoteView', 'NoteTake', 'Dropzone', 'config', 'AddReview', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, Student, NoteView, NoteTake, Dropzone, config, AddReview){
+    ,'BookDetail' , 'Student', 'NoteView', 'NoteTake', 'config', 'AddReview', function($rootScope,$scope, $stateParams, para,WeeklyHotSearch,OneBookInShelf,BookDetail, Student, NoteView, NoteTake, config, AddReview){
 	$scope.name = '书籍详情';
 
 
@@ -93,11 +93,6 @@ ctrls.controller("readingCenterBookDetailsController", ['$scope', '$rootScope', 
         //         return false;
         //       }
         //     };
-
-        // Image uploader
-        $scope.dropzone = Dropzone(config.NOTEPIC, function(url){
-            $scope.noteTake.image = url;
-        });
 
         //get review
         $scope.review = {};

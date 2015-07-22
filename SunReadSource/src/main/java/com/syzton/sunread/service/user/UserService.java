@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.syzton.sunread.dto.user.UserExtraDTO;
+import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.Admin;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
@@ -51,7 +52,7 @@ public interface UserService {
     
     public User authenticate(String username, String password);
 
-    public void addTask(long teacherId,long studentId,int targetBookNum,int targetPoint);
+    public Task addTask(long teacherId,long studentId,int targetBookNum,int targetPoint);
 
 	public void addTasks(long teacherId, int targetBookNum, int targetPoint);
     

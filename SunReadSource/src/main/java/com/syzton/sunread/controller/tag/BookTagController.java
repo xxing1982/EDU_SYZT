@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.syzton.sunread.dto.tag.TagStatisticsDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +91,15 @@ public class BookTagController extends BaseController {
 
         return new PageResource<>(bookTagPage, "page", "size");
     }
-    
+    @RequestMapping(value = "/api/tags/statistics", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TagStatisticsDTO> statistics() {
+
+
+        return service.statistics();
+
+    }
+
     private List<BookTagDTO> createDTOs(List<BookTag> models) {
         List<BookTagDTO> dtos = new ArrayList<BookTagDTO>();
 

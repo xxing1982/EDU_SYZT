@@ -47,7 +47,7 @@
             <div class="row row-content">
                 <div class="col-md-6">
                     <div class="book-read-unread row">
-                        <div class="col-md-3"></div>                            
+                        <div class="col-md-3"></div>
                         <div class="col-md-4">
                             <img src="../static/img/readstatus/unread.png" class="img-responsive">
                         </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-md-6" style="border-left:1px #EAEAEA solid">
                     <div class="book-read-readed row">
-                        <div class="col-md-3"></div>                            
+                        <div class="col-md-3"></div>
                         <div class="col-md-4">
                             <img src="../static/img/readstatus/read.png" class="img-responsive">
                         </div>
@@ -87,7 +87,7 @@
                     <div class="book-bottom-text">
                         <div class="row">
                             <div class="col-md-1"></div>
-                            <div class="col-md-8"><img ng-src="{{item.pictureUrl}}" class="img-responsive"></div>
+                            <div class="col-md-8"><img ng-src="{{item.pictureUrl | formatPictrueUrl}}" class="img-responsive"></div>
                             <div class="col-md-1"></div>
                         </div>
                         <div><h4><a href="#readingCenter/bookDetails/{{item.bookId}}/">{{item.name}}</a></h4></div>
@@ -107,7 +107,7 @@
                     <div class="book-bottom-text">
                         <div class="row">
                             <div class="col-md-1"></div>
-                            <div class="col-md-8"><img ng-src="{{item.bookPictureUrl}}" class="img-responsive"></div>
+                            <div class="col-md-8"><img ng-src="{{item.bookPictureUrl | formatPictrueUrl}}" class="img-responsive"></div>
                             <div class="col-md-1"></div>
                         </div>
                         <div><h4>{{item.book}}</h4></div>

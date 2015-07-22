@@ -2,18 +2,24 @@ package com.syzton.sunread.model.task;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.syzton.sunread.model.common.AbstractEntity;
+import com.syzton.sunread.model.user.Student;
 
 /**
  * Created by jerry on 3/28/15.
  */
 @Entity
 public class Task extends AbstractEntity implements Serializable{
-
+	
     private long studentId;
-
+	
     private long teacherId;
 
     private long semesterId;
@@ -54,11 +60,11 @@ public class Task extends AbstractEntity implements Serializable{
         this.semesterId = semesterId;
     }
 
-    public long getStudentId() {
-        return studentId;
+    public Long getStudentId() {
+        return this.studentId;
     }
 
-    public void setStudentId(long studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 }

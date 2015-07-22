@@ -2,6 +2,7 @@ package com.syzton.sunread.service.tag;
 
 import java.util.List;
 
+import com.syzton.sunread.dto.tag.TagStatisticsDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,4 +146,9 @@ public class BookTagRepositoryService implements BookTagService {
 	public List<BookTag> findByTagAndBookAndUser(Tag tag, Book book, User user) {
 		return bookTagRepository.findByTagAndBookAndUser(tag, book, user);
 	}
+
+    @Override
+    public List<TagStatisticsDTO> statistics() {
+        return bookTagRepository.tagStatistics();
+    }
 }

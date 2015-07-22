@@ -37,7 +37,9 @@ public class TaskRepositoryService implements TaskService{
         if(student == null){
             throw new NotFoundException("student id = "+task.getStudentId()+" not found...");
         }
-        return taskRepository.save(task);
+        student.setTask(task);
+        studentRepository.save(student);
+        return task;
     }
 
     @Override

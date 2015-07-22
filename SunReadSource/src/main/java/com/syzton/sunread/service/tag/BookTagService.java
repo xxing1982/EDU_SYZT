@@ -2,6 +2,7 @@ package com.syzton.sunread.service.tag;
 
 import java.util.List;
 
+import com.syzton.sunread.dto.tag.TagStatisticsDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -58,4 +59,6 @@ public interface BookTagService {
 	public Page<BookTag> findByTagId(Pageable pageable, long tagId);
 
 	public List<BookTag> findByTagAndBookAndUser(Tag tag, Book book, User user);
+
+    public List<TagStatisticsDTO> statistics();
 }
