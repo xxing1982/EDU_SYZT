@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-md-7 col-md-offset-2">
             <div class="row">
-                <div class="col-md-3"><img ng-src="{{userInfo.portrait | formatImg}}" class="img-responsive img-circle border-shadow"></div>
-                <div class="col-md-9 theme-font">
+                <div class="col-md-4"><img ng-src="{{picture.current | formatImg}}" class="img-responsive img-circle border-shadow" style="height: 200px;width: 200px"></div>
+                <div class="col-md-8 theme-font">
                     <div class="col-md-12 index-head-info-text">
-                        <h2><strong>{{userInfo.name}}</strong></h2>
+                        <h2><strong>{{userInfo.username}}</strong></h2>
                     </div>
                     <div class="col-md-12 index-head-info-text">
                         {{userInfo.gender | formatGender}}
@@ -47,25 +47,25 @@
             <div>
                 <div class="col-xs-3">
                     <img src="../static/img/personalShow/reading.png" class="img-responsive icon"/>
-                    <h5 class="row text-center green-text">阅读：4444</h5>
+                    <h5 class="row text-center green-text">阅读：{{userInfo.statistic.readNum}}</h5>
                 </div>
                 <div class="col-xs-3">
                     <img src="../static/img/personalShow/coins.png" class="img-responsive icon"/>
-                    <h5 class="row text-center yellow-text">财富：4444</h5>
+                    <h5 class="row text-center yellow-text">财富：{{userInfo.statistic.coin}}</h5>
                 </div>
                 <div class="col-xs-3">
                     <img src="../static/img/personalShow/notes.png" class="img-responsive icon"/>
-                    <h5 class="row text-center purple-text">笔记：4444</h5>
+                    <h5 class="row text-center purple-text">笔记：{{userInfo.statistic.notes}}</h5>
                 </div>
                 <div class="col-xs-3">
                     <img src="../static/img/personalShow/level.png" class="img-responsive icon"/>
-                    <h5 class="row text-center red-text">等级：4444</h5>
+                    <h5 class="row text-center red-text">等级：{{userInfo.statistic.level}}</h5>
                 </div>
             </div>
         </div>
         <div class="col-md-5">
             <!-- Get points -->
-            <div class="title"><h4>获得积分：180</h4></div>
+            <div class="title"><h4>获得积分：{{userInfo.statistic.point}}</h4></div>
             <div class="green-processbar-light fr processbar">&nbsp;
                 <div class="green-processbar fl processbar" ng-style="{width: {{97}} + '%'}">&nbsp;
                 </div>
@@ -75,7 +75,7 @@
             <div class="row title"></div>
             
             <!-- Mission completeness -->
-            <div class="title"><h4>任务完成度：90%</h4></div>
+            <div class="title"><h4>任务完成度：{{userInfo.statistic.testPasses}}/{{userInfo.statistic.testCount}}</h4></div>
             <div class="blue-processbar-light fr processbar">&nbsp;
                 <div class="blue-processbar fl processbar" ng-style="{width: {{50}} + '%'}">&nbsp;
                 </div>
@@ -101,7 +101,7 @@
                 <div class="title">
                     <div class="row">
                         <div class="col-md-10"><h4>他的书架</h4></div>
-                        <div class="col-md-2 text-right"><a class="title-link">更多></a></div>
+                        <div class="col-md-2 text-right"><a class="title-link" href="#/othersBookshelf/{{userInfo.id}}">更多></a></div>
                     </div>
                 </div>
                 <div class="paragraph">
@@ -109,16 +109,16 @@
                         <div class="row">
 
                             <!-- Rank of notes -->
-                            <div class="col-md-3" ng-repeat="n in [1, 2, 3, 4]">
+                            <div class="col-md-3" ng-repeat="book in bookToShow">
                                 <div class="row">
                                     <div class="col-xs-8 col-xs-offset-2">
                                         <div class="row">
-                                            <img ng-src="../static/img/picture.jpg" class="img-responsive custom-shadow" src="../static/img/picture.jpg">
+                                            <img ng-src="{{imageServer+book.pictureUrl | formatPictrueUrl}}" class="img-responsive custom-shadow" src="../static/img/picture.jpg">
                                         </div>
                                     </div>
                                     <div class="col-xs-8 col-xs-offset-2">
                                         <div class="row text-center paragraph">
-                                            <p>查理日记<small><br/>作者：张一凡</small></p>
+                                            <p>{{book.bookName}}<small><br/>作者：{{book.author}}</small></p>
                                         </div>
                                     </div>
                                 </div>

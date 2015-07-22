@@ -221,7 +221,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         })
         //personal show
         .state('personalShow', {
-            url: '/personalShow',
+            url: '/personalShow/:studentId',
             templateUrl: "partials/personalShow.html",
             controller: "personalShowController"
         })
