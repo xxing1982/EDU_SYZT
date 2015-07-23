@@ -97,6 +97,20 @@ public class CoinHistoryController extends BaseController {
         return new PageResource<>(coinhistoryPage, "page", "size");
     }
     
+    @RequestMapping(value = "/class/{classId}/coinhistories", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<CoinHistory> findCoinHistoriesByClassId( @PathVariable("classId") long classId,
+													    	     @RequestParam("page") int page,
+														         @RequestParam("size") int size,
+														         @RequestParam("sortBy") String sortBy,
+														         @RequestParam("direction") String direction) {
+		Pageable pageable = getPageable(page, size, sortBy, direction);
+		
+        Page<CoinHistory> coinhistoryPage = service.findByClassId(pageable, classId);
+        
+        return new PageResource<>(coinhistoryPage, "page", "size");
+    }
+    
     @RequestMapping(value = "/semesters/{semesterId}/coinhistories", method = RequestMethod.GET)
     @ResponseBody
     public CoinHistoriesDTO findCoinHistoriesBySemesterId( @PathVariable("semesterId") long semesterId ) {
