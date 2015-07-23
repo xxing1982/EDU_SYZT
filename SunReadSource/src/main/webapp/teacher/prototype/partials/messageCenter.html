@@ -1,0 +1,272 @@
+<div id="messageCenter-page" class="container">
+    <div class="row">
+	<div class="page-body page-body-top messageCenter-body readingCenter-right-body col-md-8 col-md-offset-2">
+        <div class="title"><h4>消息中心</h4></div>
+
+        <!-- Nav tabs -->
+        <div class="row buttom-separator">
+        <div class="col-md-10">
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li ng-click="createRecievedPageable()" role="presentation" class="active"><a href="#receive" aria-controls="receive" role="tab" data-toggle="tab">收到的消息</a></li>
+            <li ng-click="createDeliverdPageable()" role="presentation"><a href="#send" aria-controls="send" role="tab" data-toggle="tab">发出的消息</a></li>
+        </ul>
+        </div>
+        <div class="col-md-2 text-right">
+            <button id="send-message" class="btn btn-green" data-toggle="modal" data-target="#myModal" ng-click="" type="button">
+                发信息
+            </button>
+        </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                <div class="modal-body">
+                    <div class="row">
+
+                        <!-- Row 0 -->
+                        <div class="col-md-12">
+                            <h4 class="modal-title" id="myModalLabel">发送信息
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </h4>
+                        </div>
+
+                        <!-- Col 1 -->
+<!--                         <div class="col-md-2">
+                            <form role="form">
+                                  <div class="radio">
+                                    <label><input type="radio" name="optradio">发给校长</label>
+                                                                 </div>
+                                                                 <div class="radio">
+                                    <label><input type="radio" name="optradio">发给老师</label>
+                                                                 </div>
+                                                                 <div class="radio">
+                                  <label><input type="radio" name="optradio">发给同学</label>
+                                                                 </div>
+                             </form>
+                        </div> -->
+
+<!--                         Row 1
+                        <div class="col-md-10">
+                            <div class="row">
+                            <div class="col-md-4 select-group">
+                                <div class="col-md-5 row select-label">校长：</div>
+                                <div class="col-md-9 row">
+                                  <bs-dropdown data-menu-type="button"
+                                      select-val="selected_status = selectedVal"
+                                      preselected-item="selected_status"
+                                      data-dropdown-data="statuses"
+                                      callback="alert">
+                                  </bs-dropdown>
+
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        Row 2
+                        <div class="col-md-10">
+                            <div class="row">
+                            <div class="col-md-4 select-group">
+                                <div class="col-md-5 row select-label">老师：</div>
+                                <div class="col-md-9 row">
+                                  Single button
+                                    <div class="btn-group">
+                                      <input type="text" ng-model="searchTextStudent" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                      <ul class="dropdown-menu" role="menu">
+                                        <li ><a href="#"></a></li>
+                                        <li ng-repeat="mate in classmates | filter:searchTextStudent" ng-click="chooseStudent(mate)" ><a>{{mate.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{mate.email}}</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Row  3 student-->
+                        <div class="col-md-10">
+                            <div class="row">
+                            <div class="col-md-4 select-group">
+                                <div class="col-md-5 row select-label">同学：</div>
+                                <div class="col-md-9 row">
+                                  <!-- Single button -->
+                                    <div class="btn-group">
+                                      <input type="text" ng-model="searchTextStudent" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                      <ul class="dropdown-menu" role="menu" >
+                                        <li ><a href="#"></a></li>
+                                        <li ng-repeat="mate in classmates | filter:searchTextStudent" ng-click="chooseStudent(mate)" ><a>{{mate.username}}&nbsp;&nbsp;&nbsp;&nbsp;{{mate.email}}</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input form -->
+                    <div >
+                        <h4 class="modal-title" id="myModalLabel">消息内容</h4>
+                        <div><textarea ng-model="text.message" class="form-control message-input" placeholder="请输入内容(限200字以内)" /></div>
+                    </div>
+              </div>
+              </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <button class="btn btn-green" ng-click="sendMessage()" type="button">发送信息</button>
+                        </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+            <!-- -----------------------------------------receive---------------------------------------- -->
+            <div role="tabpanel" class="tab-pane fade in active" id="receive">
+                 <!-- Message Row -->
+                 <div class="paragraph buttom-separator row" ng-repeat="message in recievedPageable.entities.content">
+                    <div class="col-md-6">
+                        <div class="row">
+                        <div class="col-md-1">
+                            <!-- <input type="checkbox"/> -->
+                        </div>
+                            <div class="col-md-10 hideOverflow">{{message.message|messageFormatSize}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5 col-md-offset-1">发件人：{{message.sendUsername}}</div>
+                            <div class="col-md-4">{{message.creationTime|date:'yyyy-MM-dd'}}</div>
+                            <div class="col-md-1" ng-click="deleteMessage(message)"><a>删</a></div>
+                        </div>
+                    </div>
+                </div>
+                <!--  Place holder row-->
+                <div class="row messagePlaceHolder" ng-repeat="placeHolder in recievedPageable.placeHolders.content">
+                    <div class="col-md-10">
+                        <div class="title">&nbsp;{{ placeHolder.title }}</div>
+                    </div>
+                </div>
+
+                <!-- Footer and page numbers  -->
+                <div class="row paragraph">
+                    <div class="col-md-3">
+                        <div class="row">
+<!--                            <div class="col-md-2"><input type="checkbox"/></div>-->
+<!--                             <div class="col-md-5">全选</div>
+                            <div class="col-md-5">删除</div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <!-- <div class="col-xs-2">全部已读</div> -->
+                            <div class="col-xs-7">
+                                <!-- Custom page number goes here -->
+                                <div class="row custom-page-number-group">
+                                    <div class="col-xs-2"><div class="row"><a ng-click="recievedPageable.showPage(recievedPageable.page - 1)">上一页</a></div></div>
+                                    <div class="col-xs-1 custom-page-number-container" ng-repeat="pageNumber in recievedPageable.pageNumbers.content">
+                                        <a class="custom-page-number"
+                                            ng-class="{'custom-page-number-current': pageNumber === recievedPageable.page}"
+                                            ng-click="recievedPageable.showPage(pageNumber)">
+                                            {{pageNumber}}
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-2"><div class="row"><a ng-click="recievedPageable.showPage(recievedPageable.page + 1)">下一页</a></div></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <!-- Custom goto page number goes here -->
+                                <div class="custom-page-number-group">
+                                  <a ng-click="recievedPageable.showPage(pageNumber)">去第</a>
+                                  <input type="number" class="custom-page-number-input" ng-model="pageNumber" min='1'/>
+                                  <a ng-click="recievedPageable.showPage(pageNumber)">页</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- ----------------------SEND------------------------------------------------------- -->
+            <div role="tabpanel" class="tab-pane fade" id="send">
+              <!-- Message Row -->
+              <div class="paragraph buttom-separator row" ng-repeat="message in deliveredPageable.entities.content">
+                 <div class="col-md-6">
+                     <div class="row">
+                     <div class="col-md-1">
+                         <!-- <input type="checkbox"/> -->
+                     </div>
+                         <div class="col-md-10">{{message.message|messageFormatSize}}</div>
+                     </div>
+                 </div>
+                 <div class="col-md-6">
+                     <div class="row">
+                         <div class="col-md-5 col-md-offset-1">收件人：{{message.receiveUserName}}</div>
+                         <div class="col-md-4">{{message.creationTime | date:'yyyy-MM-dd'}}</div>
+                         <div class="col-md-1" ng-click="deleteMessage(message)"><a>删</a></div>
+                     </div>
+                 </div>
+             </div>
+             <!--  Place holder row-->
+             <div class="row messagePlaceHolder" ng-repeat="placeHolder in deliveredPageable.placeHolders.content">
+                 <div class="col-md-10">
+                     <p>&nbsp;{{ placeHolder.title }}</p>
+                 </div>
+             </div>
+
+                <!-- Footer and page numbers  -->
+                <div class="row paragraph">
+                    <div class="col-md-3">
+                        <div class="row">
+<!--                            <div class="col-md-2"><input type="checkbox"/></div>-->
+<!--                             <div class="col-md-5">全选</div>
+                            <div class="col-md-5">删除</div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <!-- <div class="col-xs-2">全部已读</div> -->
+                            <div class="col-xs-7">
+                                <!-- Custom page number goes here -->
+                                <div class="row custom-page-number-group">
+                                    <div class="col-xs-2"><div class="row"><a ng-click="deliveredPageable.showPage(deliveredPageable.page - 1)">上一页</a></div></div>
+                                    <div class="col-xs-1 custom-page-number-container" ng-repeat="pageNumber in deliveredPageable.pageNumbers.content">
+                                        <a class="custom-page-number"
+                                            ng-class="{'custom-page-number-current': pageNumber === deliveredPageable.page}"
+                                            ng-click="deliveredPageable.showPage(pageNumber)">
+                                            {{pageNumber}}
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-2"><div class="row"><a ng-click="deliveredPageable.showPage(deliveredPageable.page + 1)">下一页</a></div></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <!-- Custom goto page number goes here -->
+                                <div class="custom-page-number-group">
+                                  <a ng-click="deliveredPageable.showPage(pageNumber)">去第</a>
+                                  <input type="number" class="custom-page-number-input" ng-model="pageNumber" min='1'/>
+                                  <a ng-click="deliveredPageable.showPage(pageNumber)">页</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        <!--End   -->
+        </div>
+
+
+	</div>
+    </div>
+</div>
+<script>
+    $('#myTab a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+</script>
