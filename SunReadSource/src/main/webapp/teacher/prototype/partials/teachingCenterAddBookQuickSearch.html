@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="col-md-4 clear-padding" ng-repeat="hot in hots.content">
 					<div class="col-md-6">
-                        <a href="#teachingCenter/bookDetails/{{hot.id}}/"><img ng-src={{imageServer+hot.pictureUrl}} class="img-responsive"></a>
+                        <a href="#teachingCenter/bookDetails/{{hot.id}}/"><img ng-src='{{imageServer+hot.pictureUrl | formatPictrueUrl}}' class="img-responsive"></a>
 					</div>
 					<div class="col-md-6">
 					   <div class="row">
@@ -37,7 +37,7 @@
         <div class="col-md-12">
             <div class="col-md-4 clear-padding" ng-repeat="recommend in recommends.content">
 					<div class="col-md-6">
-              <a href="#teachingCenter/bookDetails/{{recommend.id}}/"><img ng-src={{imageServer+recommend.pictureUrl}} class="img-responsive"></a>
+              <a href="#teachingCenter/bookDetails/{{recommend.id}}/"><img ng-src='{{imageServer+recommend.pictureUrl | formatPictrueUrl}}' class="img-responsive"></a>
 					</div>
 					<div class="col-md-6">
 					   <div class="row">

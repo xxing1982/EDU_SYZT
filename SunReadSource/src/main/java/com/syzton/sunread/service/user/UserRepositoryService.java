@@ -58,6 +58,7 @@ import com.syzton.sunread.repository.user.TeacherClazzRepository;
 import com.syzton.sunread.repository.user.TeacherRepository;
 import com.syzton.sunread.repository.user.UserRepository;
 import com.syzton.sunread.service.bookshelf.BookshelfService;
+import com.syzton.sunread.service.task.TaskRepositoryService;
 import com.syzton.sunread.service.task.TaskService;
 import com.syzton.sunread.util.ExcelUtil;
 
@@ -299,9 +300,11 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     }
     @Transactional
     @Override
-    public void addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
+    public Task addTask(long teacherId,long studentId,  int targetBookNum, int targetPoint) {
         Teacher teacher  = getTeacher(teacherId);
-
+        if(teacher == null){
+            throw new NotFoundException("teacher with id ="+teacherId+" not found..");
+        }
         Student student = studentRepository.findOne(studentId);
         if(student == null){
             throw new NotFoundException("student with id ="+studentId+" not found..");
@@ -312,14 +315,18 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         if(semester == null){
             throw new NotFoundException("semester with id ="+campus.getId()+" not found..");
         }
-        Task task = new Task();
+        Task task = taskService.findByStudentIdAndSemesterId(studentId, semester.getId());
+        if (task == null) {
+        	task = new Task();
+        }
         task.setSemesterId(semester.getId());
         task.setTargetBookNum(targetBookNum);
         task.setTargetPoint(targetPoint);
         task.setTeacherId(teacherId);
+        task.setStudentId(studentId);
 
         taskService.add(task);
-
+        return task;
     }
 
     private Teacher getTeacher(long teacherId) {
@@ -327,9 +334,6 @@ public class UserRepositoryService implements UserService,UserDetailsService{
         if(teacher==null){
             throw new NotFoundException("teacher with id = "+teacherId+" not found..");
         }
-
-        List<Clazz> clazzs = teacherClazzRepository.findByTeacherId(teacherId);
-        teacher.setCurrentClassId(clazzs.get(0).getId());
 
         return  teacher;
     }
@@ -351,7 +355,10 @@ public class UserRepositoryService implements UserService,UserDetailsService{
             if(semester == null){
                 throw new NotFoundException("semester with id ="+campus.getId()+" not found..");
             }
-            Task task = new Task();
+            Task task = taskService.findByStudentIdAndSemesterId(student.getId(), semester.getId());
+            if (task == null) {
+            	task = new Task();
+            }
 		    task.setTargetBookNum(targetBookNum);
 		    task.setTargetPoint(targetPoint);
 		    task.setTeacherId(teacherId);

@@ -363,3 +363,21 @@
 }
 
 /*******************my note bottom*******************/
+
+
+<<<<<<< HEAD
+.my-reword-reason:hover{
+    cursor: pointer;
+}
+=======
+/*******************reading dynamic top****************/
+
+.student-rank {
+    bottom: -10%;
+    right: -10%;
+    position: absolute;
+    width: 46%;
+}
+
+/*******************reading dynamic buttom****************/
+>>>>>>> 50c216f2ad5552254ca2c6492b674f8d5cc138a9

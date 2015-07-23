@@ -156,13 +156,13 @@
 	</div>
 
     <!-- Take note modal -->
-    <div ng-include src="'./partials/takenoteModal.html'" onload="loadDropzone()"></div>
+    <div ng-include src="'./partials/takenoteModal.html'"></div>
 </div>
 <script>
 	SetReadingCenterRightHeight();
 	SetBookList();
 	$('#bookReadStateTabs').click(function (e) {
-		e.preventDefault()
+		e.preventDefault();
 		$(this).tab('show')
 	});
 </script>

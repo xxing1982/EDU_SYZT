@@ -1,7 +1,7 @@
 //readingCenterMyBookshelfCtrl.js
 
 ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','BookshelfView',
-    'Bookshelf','BookInShelf','DropBookFromShelf', 'NoteTake', 'BookDetail', 'Dropzone', 'config', function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf,NoteTake, BookDetail, Dropzone, config) {
+    'Bookshelf','BookInShelf','DropBookFromShelf', 'NoteTake', 'BookDetail', 'config', function($rootScope, $scope,BookshelfView,Bookshelf,BookInShelf,DropBookFromShelf,NoteTake, BookDetail, config) {
 	$scope.name='阅读中心->我的书架';
 
     var size = 9;
@@ -206,22 +206,15 @@ ctrls.controller("readingCenterMyBookshelfController", ['$rootScope', '$scope','
         $rootScope.exam.typeName = "我的书架 > 词汇训练";
     }
 
-
-    // Image uploader
-    $scope.loadDropzone = function(){
-        $scope.dropzone = Dropzone(config.NOTEPIC, function(url){
-            $scope.noteTake.image = url;
-        });
-    }
-
     $scope.takeNoteByBookinshelf = function(bookinshelf){
         var bookDetail = BookDetail.get({ id: bookinshelf.bookId }, function(){
             // console.log(bookDetail);
 
             // Initlizate the note entity
+            if ($scope.noteTake) {
+                $scope.noteTake.dropzone.destroy();
+            } 
             $scope.noteTake = new NoteTake(bookDetail);
-
-
 
             // Get the image server
             $scope.imageServer = config.IMAGESERVER;

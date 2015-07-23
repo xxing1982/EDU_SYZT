@@ -23,6 +23,7 @@ import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
+import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
 import com.syzton.sunread.service.semester.SemesterService;
 import com.syzton.sunread.service.user.UserService;
@@ -41,11 +42,14 @@ public class CoinHistoryController extends BaseController {
     private CoinHistoryService service;
 
 	private UserService userService;
+	
+	private StudentRepository studentRepository;
 
     @Autowired
-    public CoinHistoryController(CoinHistoryService service, UserService userService) {
+    public CoinHistoryController(CoinHistoryService service, UserService userService, StudentRepository studentRepository) {
         this.service = service;
         this.userService = userService;
+        this.studentRepository = studentRepository;
     }
     
     private SemesterService semesterService;
@@ -67,6 +71,16 @@ public class CoinHistoryController extends BaseController {
         LOGGER.debug("Added a coinhistory entry with information: {}", added);
 
        return added;
+    }
+    
+    @RequestMapping(value = "/clazz/{clazzId}/coinhistories", method = RequestMethod.POST)
+    @ResponseBody
+    public CoinHistory addByClazz(@Valid @RequestBody CoinHistory coinHistory, @PathVariable("clazzId") long clazzId) {
+    	List<Student> students = studentRepository.findByClazzId(clazzId);
+    	for (Student student : students){
+    		add(coinHistory, student.getId());
+    	}
+    	return coinHistory;
     }
     
     @RequestMapping(value = "/teachers/{teacherId}/coinhistories", method = RequestMethod.GET)

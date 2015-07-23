@@ -31,4 +31,9 @@ ctrls.controller("myRewardController", ['$scope', '$rootScope', 'Teacher', 'Clas
             $scope.coinhistoryLoadable.get();
 
         });
+
+        $scope.showRewordReason=function(reason){
+            $rootScope.modal = {title: "奖励原因", content: reason};
+            $('#alert-modal').modal();
+        }
 	}]);

@@ -17,7 +17,7 @@
     <div class="bookDetailUp">
        <div class="col-md-12">
            <div class="col-md-3 bookDetailImg">
-             <img ng-src={{imageServer+bookDetails.pictureUrl}} class="img-responsive custom-shadow">
+             <img ng-src='{{imageServer+bookDetails.pictureUrl | formatPictrueUrl}}' class="img-responsive custom-shadow">
            </div>
 
           <div class="col-md-9 bookDetailText">
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-2" style="width:20%;" ng-repeat="hot in hots.content">
-                      <img ng-src={{imageServer+hot.pictureUrl}} class="img-responsive img-center custom-shadow" >
+                      <img ng-src='{{imageServer+hot.pictureUrl | formatPictrueUrl}}' class="img-responsive img-center custom-shadow" >
                       <div class="bookTital"><h5>{{hot.name}}</h5></div>
                     </div>
                 </div>
@@ -203,7 +203,7 @@
                 <!-- Row 1 -->
                 <div class="row title">
                     <div class="col-md-2">
-                        <img ng-src={{imageServer+bookDetails.pictureUrl}} class="img-responsive custom-shadow">
+                        <img ng-src='{{imageServer+bookDetails.pictureUrl | formatPictrueUrl}}' class="img-responsive custom-shadow">
                     </div>
                     <div class="col-md-10">
                         <h4>{{noteTake.name}}</h4>
@@ -236,14 +236,14 @@
           </div>
         </div>
     </div>
-        
+
     <!-- Light box modal -->
     <div class="modal fade" id="light-box-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    
+
                 <div class="container-fluid">
                     <div ng-show="showLightBox.url" class="title">
                         <img ng-src="{{showLightBox.url}}" class="img-thumbnail"/>

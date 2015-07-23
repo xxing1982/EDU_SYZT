@@ -93,14 +93,27 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'partials/teachingCenterMyResource.html',
             controller:'myResourceController'
         })
-        //teachingDynamic page
+        //reading dynamic
         .state('readingDynamic',{
             url: '/readingDynamic',
             templateUrl: 'partials/readingDynamic.html',
-            controller:'readingDynamicController'
+            controller: 'readingDynamicController'
         })
+        //reading dynamic -> note notes
+        .state('hotNotes',{
+            url: '/hotNotes',
+            templateUrl: 'partials/hotNotes.html',
+            controller: 'hotNotesController'
+        })
+        //reading dynamic -> actions
         .state('actions',{
             url: '/readingDynamic/actions',
+            templateUrl: 'partials/readingDynamicActions.html',
+            controller: 'readingDynamicActionsController'
+        })
+        //reading dynamic -> actions with parameters
+        .state('actionsParams',{
+            url: '/readingDynamic/actions/{page:int}/{index:int}',
             templateUrl: 'partials/readingDynamicActions.html',
             controller: 'readingDynamicActionsController'
         })
@@ -114,6 +127,12 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/personalProfile',
             templateUrl: 'partials/personalProfile.html',
             controller: "personalProfileController"
+        })
+        //message center
+        .state('messageCenter', {
+            url: '/messageCenter',
+            templateUrl: "partials/messageCenter.html",
+            controller: "messageCenterController"
         })
 }]);
 

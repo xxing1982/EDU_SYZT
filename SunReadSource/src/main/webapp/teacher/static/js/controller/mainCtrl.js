@@ -3,7 +3,7 @@ var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource',
 	'userServices', 'classServices', 'noteServices', 'noteViewServices', 'commentServices', 'actionServices', 'pageableServices', 'quickSearchServices','bookshelfServices',
 	'lackFeedbackServices','popularSearchServices','conditionSearchServices','dictionariesService','bookDetailServices','reviewServices','recommendServices',
 	'hotreaderServices', 'orderServices', 'loadableServices', 'editableServices', 'taskServices', 'checklist-model', 'dropzoneServices', 'coinHistoryServices','campusServices',
-	'ngSanitize','hotclazzServices', 'booktagServices', 'tagServices','likeServices']);
+	'ngSanitize','hotclazzServices', 'booktagServices', 'tagServices','likeServices','messageServices']);
 
 
 ctrls.controller("mainController",['$scope', '$rootScope', 'config', 'Teacher', "Class", "Note", 'Action', 'Pageable', 'QuickSearch', 'Hotreader', 'MyRecommend', 'TagCategory',
@@ -91,9 +91,36 @@ ctrls.filter('formatSize6', function(){
 	}
 });
 
+ctrls.filter('formatSize10', function(){
+	return function(input){
+		if(input == undefined || input == "")
+			return input;
+		else
+			return input.substring(0, 10) + '...';
+		}
+});
+
+
 ctrls.filter('formatParagraph', function(){
 	return function(data) {
 		if (!data) return data;
 		return data.replace(/[^\S\n]/g, '&nbsp;').replace(/\n/g, '<br/>');
 	};
+});
+
+ctrls.filter('formatPictrueUrl', function () {
+    return function (data) {
+        var url = data.slice(27);
+        if (url.search('/') === 0) return data;
+        return url;
+    };
+});
+
+ctrls.filter('messageFormatSize', function () {
+    return function (input) {
+        if (input.length > 70)
+            return input.substring(0, 70) + '...';
+        else
+            return input;
+    }
 });

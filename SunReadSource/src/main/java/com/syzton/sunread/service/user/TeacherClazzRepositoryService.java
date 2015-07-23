@@ -67,6 +67,7 @@
          }
 
          teacher.setCurrentClassId(clazzId);
+         userService.addTeacher(teacher);
          return teacher;
      }
 

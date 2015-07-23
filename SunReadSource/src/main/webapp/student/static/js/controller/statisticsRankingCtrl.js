@@ -22,5 +22,10 @@ ctrls.controller("statisticsRankingController", ['$scope', '$rootScope', 'Studen
         // Show the first page
         $scope.hotreaderLoadable.get();
     });
+
+    $scope.openPersonalShow = function(hotreader,rank){
+        console.log(hotreader);
+        console.log(rank);
+    }
     
 }]);

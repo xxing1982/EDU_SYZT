@@ -1,15 +1,10 @@
 <div id="hotNote-page" class="container">
 <div class="row">
     
-    <!-- The top image -->
-    <div class="page-body-top col-md-8 col-md-offset-2"> 
-        <img src="../static/img/readingDynamic/hotnotes.png" class="img-responsive"> 
-    </div>
-    
     <!-- The page body top -->
     <div class="page-body personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
-        <div class="row">
-        <div class="quickSearch row">
+        <div class="">
+        <div class="">
         <div class="input-group search col-md-9">
             <input type="text" class="form-control" placeholder="请输入书名" ng-model="searchTerm" ng-change="search(searchTerm)">
             <span class="input-group-addon" ng-click="search(searchTerm)">搜索</span>
@@ -46,7 +41,7 @@
             </div>
             <div class="row msg-row" ng-show="Note.showComments">
                 <div class="col-md-10"><input class="form-control" placeholder="输入回复" ng-model="Note.newCommentContent"></div>
-                <input class="btn btn-green col-md-2" ng-click="noteView.addComment(Note, student.username)" type="button" value="发表评论">
+                <input class="btn btn-green col-md-2" ng-click="noteView.addComment(Note, teacher.username)" type="button" value="发表评论">
                 <div class="clearfix"></div>
                 <div class="col-md-12 reply">
                     <div class="col-md-12 total"><h5>共{{ Note.commentCount }}条评论</h5></div>

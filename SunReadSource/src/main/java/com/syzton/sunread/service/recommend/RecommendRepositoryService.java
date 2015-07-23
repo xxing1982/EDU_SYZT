@@ -83,11 +83,11 @@ public class RecommendRepositoryService implements RecommendService{
 			isInShelf = BookInShelf.getBuilder(book.getId(),book.getName()
 	        		,book.getIsbn(),book.getPictureUrl(),book.getAuthor(),book.getPoint()
 	        		,bookshelf,recommendDTO.getBookAttribute(),recommendDTO.getReadState()).build();
-			recommend = Recommend.getBuilder(teacher, isInShelf).build();
+			recommend = Recommend.getBuilder(teacher, isInShelf).description(recommendDTO.getDescription()).build();
 			bookInShelfRepository.save(isInShelf);
 			recommendRepository.save(recommend);		
 			RecommendDTO dto = RecommendDTO.getBuilder(book.getId(), book.getName(), teacherId, teacher.getUsername()
-					,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),0).build();
+					,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),0,recommend.getDescription()).build();
 			return dto;
 			
 		}
@@ -102,7 +102,7 @@ public class RecommendRepositoryService implements RecommendService{
 				recommend = Recommend.getBuilder(teacher, isInShelf).build();
 				recommendRepository.save(recommend);
 				RecommendDTO dto = RecommendDTO.getBuilder(book.getId(), book.getName(), teacherId, teacher.getUsername()
-						,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),1).build();
+						,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),1,recommend.getDescription()).build();
 				return dto;
 			}
 			else {
@@ -115,7 +115,7 @@ public class RecommendRepositoryService implements RecommendService{
 				}
 				bookInShelfRepository.flush();
 				RecommendDTO dto = RecommendDTO.getBuilder(book.getId(), book.getName(), teacherId, teacher.getUsername()
-						,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),recommendState).build();
+						,studentId, bookshelf.getUsername(),isInShelf.getBookAttribute(),isInShelf.getReadState(),recommendState,recommend.getDescription()).build();
 				return dto;
 			}
 			

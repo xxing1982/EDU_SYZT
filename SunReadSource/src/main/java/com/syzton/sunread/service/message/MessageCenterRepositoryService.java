@@ -89,6 +89,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 		List<MessageDTO> messageDTOList = new ArrayList<>();
 		for (Message message : messagePage.getContent()){
 			MessageDTO messageDTO = new MessageDTO();
+			messageDTO.setId(message.getId());
 			messageDTO.setIsRead(message.getIsRead());
 			messageDTO.setMessage(message.getMessage());
 			messageDTO.setSendUserId(message.getSendUserId());
@@ -116,6 +117,7 @@ public class MessageCenterRepositoryService implements MessageCenterService {
 		List<MessageDTO> messageDTOList = new ArrayList<>();
 		for (Message message : messagePage.getContent()){
 			MessageDTO messageDTO = new MessageDTO();
+			messageDTO.setId(message.getId());
 			messageDTO.setIsRead(message.getIsRead());
 			messageDTO.setMessage(message.getMessage());
 			messageDTO.setSendUserId(message.getSendUserId());

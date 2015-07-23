@@ -33,10 +33,15 @@ ctrls.controller("myTaskController",['$scope', '$rootScope', 'Teacher', 'Order',
                 $scope.orderLoadable.get( function(){
 
                     // Make the editable object
-                    while (index < $scope.orderLoadable.entities.content.length) {
-                        $scope.orderLoadable.entities.content[index].editable
-                            = new Editable($scope.orderLoadable.entities.content[index].task);
-                        index ++;
+                    var orders = $scope.orderLoadable.entities.content;
+                    while (index < orders.length) {
+                        var order = orders[index];
+                        if (order.task !== null){
+                            order.editable = new Editable(order.task);
+                            index ++;
+                        } else {
+                            orders.splice(index, 1);
+                        }
                     }
 
                 });

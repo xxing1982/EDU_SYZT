@@ -24,7 +24,7 @@
             <!-- Place holder -->
             <p class="col-md-12"></p>
             <div class="col-md-3">
-                <a href="#teachingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="addBookIMG img-responsive"></a>
+                <a href="#teachingCenter/bookDetails/{{terms.id}}/"><img ng-src='{{imageServer+terms.pictureUrl | formatPictrueUrl}}' class="addBookIMG img-responsive"></a>
             </div>
             <div class="col-md-9">
                 <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
@@ -75,7 +75,7 @@
 <!--            <div class="custom-page-number-group"><a>去第</a><input type="text" class="custom-page-number-input" />页</div>-->
                 <div class="custom-page-number-group">
                     <a ng-click="searchPageable.showPage(goto)">去第</a>
-                    <input type="number" class="custom-page-number-input" ng-model="goto"/>
+                    <input type="number" class="custom-page-number-input" ng-model="goto" min="1"/>
                     <a ng-click="searchPageable.showPage(goto)">页</a>
                 </div>
         </div>
