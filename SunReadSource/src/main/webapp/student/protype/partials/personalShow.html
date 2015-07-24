@@ -24,25 +24,25 @@
         </div>
     </div>
     <div class="row">
-    <div class="page-body page-body-top personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">  
+    <div class="page-body page-body-top personalProfile-body readingCenter-right-body col-md-8 col-md-offset-2">
         <div class="row title"></div>
         <div class="row buttom-separator">
         <div class="col-md-12">
         <div class="col-md-12">
         <div class="col-md-7">
-            
+
             <!--Ranking display -->
             <div class="ranking-container">
                 <img src="../static/img/personalShow/ranking.png" class="img-responsive"/>
                 <div class="ranking">
-                    排名：20/30
+                    排名：{{rank}}/{{total}}
                 </div>
             </div>
-            
+
             <!-- Place holder x2 -->
             <div class="row title"></div>
             <div class="row title"></div>
-            
+
             <!-- Bottom icons -->
             <div>
                 <div class="col-xs-3">
@@ -70,20 +70,20 @@
                 <div class="green-processbar fl processbar" ng-style="{width: {{97}} + '%'}">&nbsp;
                 </div>
             </div>
-            
+
             <!-- Place holder -->
             <div class="row title"></div>
-            
+
             <!-- Mission completeness -->
-            <div class="title"><h4>任务完成度：{{userInfo.statistic.testPasses}}/{{userInfo.statistic.testCount}}</h4></div>
+            <div class="title"><h4>任务完成度：{{userInfo.statistic.testCount}}/{{userInfo.statistic.testPasses}}</h4></div>
             <div class="blue-processbar-light fr processbar">&nbsp;
-                <div class="blue-processbar fl processbar" ng-style="{width: {{50}} + '%'}">&nbsp;
+                <div class="blue-processbar fl processbar" ng-style="{'width':completePercentage +'%'}">&nbsp;
                 </div>
             </div>
-            
+
             <!-- Place holder -->
             <div class="row title"></div>
-            
+
             <!-- Fish -->
             <div class="title">
                 <div class="fish">
@@ -94,7 +94,7 @@
         </div>
         </div>
         </div>
-        
+
         <!-- My notes -->
         <div class="row">
             <div class="col-md-12">
