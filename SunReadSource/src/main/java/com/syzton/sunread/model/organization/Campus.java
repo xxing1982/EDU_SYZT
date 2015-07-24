@@ -15,6 +15,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.syzton.sunread.dto.organization.ClazzDTO;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -226,7 +227,15 @@ public class Campus extends AbstractEntity{
 		dto.setNoteScore(getNoteScore());
 		dto.setRegionId(region.getId());
 		dto.setRegionName(region.getName());
-        
+		Set<ClazzDTO> clazzDTOSet = new HashSet<>();
+		for(Clazz cz : clazz){
+			ClazzDTO clazzDTO = new ClazzDTO();
+			clazzDTO.setId(cz.getId());
+			clazzDTO.setName(cz.getName());
+			clazzDTO.setGrade(cz.getGrade());
+			clazzDTOSet.add(clazzDTO);
+		}
+        dto.setClazzDTOSet(clazzDTOSet);
         return dto;
     }
     

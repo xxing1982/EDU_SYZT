@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 
+import com.syzton.sunread.exception.common.UpLoadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +98,13 @@ public class ControllerErrorHandler {
         LOGGER.debug(ex.getMessage());
         return ex.getMessage();
     }
-
+    @ExceptionHandler(UpLoadException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public String handleUploadException(Exception ex) {
+        LOGGER.debug(ex.getMessage());
+        return ex.getMessage();
+    }
     @ExceptionHandler(SQLException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody

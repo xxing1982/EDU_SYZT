@@ -335,9 +335,6 @@ public class UserRepositoryService implements UserService,UserDetailsService{
             throw new NotFoundException("teacher with id = "+teacherId+" not found..");
         }
 
-        List<Clazz> clazzs = teacherClazzRepository.findByTeacherId(teacherId);
-        teacher.setCurrentClassId(clazzs.get(0).getId());
-
         return  teacher;
     }
 
@@ -473,7 +470,15 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 	@Override
 	public Map<Integer,String> batchSaveOrUpdateStudentFromExcel(Sheet sheet) {
 		Map<Integer,String> failMap = new HashMap<Integer,String>();
-		
+		User currentUser = getUser();
+		if(currentUser == null||this.isAdmin(currentUser)){
+			failMap.put(1, "非法用户");
+		}
+		long schoolCampus = -1;
+		if(this.isSchoolAdmin(currentUser)){
+			Admin admin = adminRepo.findOne(currentUser.getId());
+			schoolCampus = admin.getCampusId();
+		}
  		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
  			Row row = sheet.getRow(i);  
  			String userId = ExcelUtil.getStringFromExcelCell(row.getCell(0));
@@ -545,15 +550,19 @@ public class UserRepositoryService implements UserService,UserDetailsService{
  			//String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
  			//String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
  			
- 			
- 			
- 			Campus campus = campusRepository.findByName(campusName);
- 			if(campus == null){
- 				failMap.put(i+1,  "查询不到该校区:"+campusName);
- 				continue; 
+ 			Campus campus = null;
+ 			if(schoolCampus == -1){
+ 				campus = campusRepository.findByName(campusName);
+ 				if(campus == null){
+ 					failMap.put(i+1,  "查询不到该校区:"+campusName);
+ 					continue; 
+ 				}
+ 				student.setCampusId(campus.getId());
+ 			}else{
+ 				student.setCampusId(schoolCampus);
+ 				campus = campusRepository.findOne(schoolCampus);
  			}
  			
- 			student.setCampusId(campus.getId());
  			String className = ExcelUtil.getStringFromExcelCell(row.getCell(13));
  			Clazz clazz = clazzRepository.findByNameAndCampus(className,campus);
  			if(clazz == null){
@@ -575,7 +584,15 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 	@Override
 	public Map<Integer,String> batchSaveOrUpdateTeacherFromExcel(Sheet sheet) {
 		Map<Integer,String> failMap = new HashMap<Integer,String>();
-		
+		User currentUser = getUser();
+		if(currentUser == null||this.isAdmin(currentUser)){
+			failMap.put(1, "非法用户");
+		}
+		long schoolCampus = -1;
+		if(this.isSchoolAdmin(currentUser)){
+			Admin admin = adminRepo.findOne(currentUser.getId());
+			schoolCampus = admin.getCampusId();
+		}
 		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
 			Row row = sheet.getRow(i);  
 			String userId = ExcelUtil.getStringFromExcelCell(row.getCell(0));
@@ -632,40 +649,22 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		    teacher.setQqId(ExcelUtil.getStringFromExcelCell(row.getCell(10)));
 		    teacher.setWechatId(ExcelUtil.getStringFromExcelCell(row.getCell(11)));
 		    teacher.setContactPhone(ExcelUtil.getStringFromExcelCell(row.getCell(12)));
-		    teacher.setGraduateSchool(ExcelUtil.getStringFromExcelCell(row.getCell(14)));
-		    teacher.setRank(ExcelUtil.getIntFromExcelCell(row.getCell(15)));
-		 	teacher.setExperience(ExcelUtil.getIntFromExcelCell(row.getCell(16)));
-			teacher.setTeaching(ExcelUtil.getStringFromExcelCell(row.getCell(17)));
-		 	String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(18));
-			//String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(19));
-			//String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(20));
-			
-//			
-//			EduGroup group = eduGroupRepo.findByName(eduGroupName);
-//			if(group == null){
-//				failMap.put(i+1, "查询不到该教育集团:"+eduGroupName);
-//				continue;
-//			}
-//			School school = schoolRepo.findByNameAndEduGroup(schoolName, group);
-//			if(school == null){
-//				failMap.put(i+1,  "查询不到该学校:"+schoolName);
-//				continue;
-//			}
-			Campus campus = campusRepository.findByName(campusName);
-			if(campus == null){
-				failMap.put(i+1,  "查询不到该校区:"+campusName);
-				continue; 
+		    teacher.setGraduateSchool(ExcelUtil.getStringFromExcelCell(row.getCell(13)));
+		    teacher.setRank(ExcelUtil.getIntFromExcelCell(row.getCell(14)));
+		 	teacher.setExperience(ExcelUtil.getIntFromExcelCell(row.getCell(15)));
+			teacher.setTeaching(ExcelUtil.getStringFromExcelCell(row.getCell(16)));
+			if(schoolCampus == -1){
+				String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(17));			
+				Campus campus = campusRepository.findByName(campusName);
+				if(campus == null){
+					failMap.put(i+1,  "查询不到该校区:"+campusName);
+					continue; 
+				}
+				teacher.setCampusId(campus.getId());
+			}else{
+				teacher.setCampusId(schoolCampus);
 			}
-//			
-//			
-			teacher.setCampusId(campus.getId());
-			String className = ExcelUtil.getStringFromExcelCell(row.getCell(13));
-			Clazz clazz = clazzRepository.findByNameAndCampus(className,campus);
-			if(clazz == null){
-				failMap.put(row.getRowNum()+1, "can't find clazz with name:" + className);
-				continue;
-			}
-//
+
             Role role = roleRepository.findOne(2L);
             List<Role> roles = new ArrayList<>();
             roles.add(role);
@@ -675,6 +674,7 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		}  
 		return failMap;
 	}
+	
     @Override
     public Map<Integer,String> batchSaveOrUpdateCMSAdminFromExcel(Sheet sheet) {
         Map<Integer,String> failMap = new HashMap<Integer,String>();
@@ -785,6 +785,33 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		user.setPassword(passwordEncoder.encode(newPassword));
 		userRepository.save(user);
 		return "success";
+	}
+	
+	public boolean isPlatformAdmin(User user){
+		Role superRole = new Role("ROLE_SYSTEM_SUPER_ADMIN");
+		Role systemRole = new Role("ROLE_SYSTEM_ADMIN");
+		if(user.hasRole(superRole)||user.hasRole(systemRole)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean isSchoolAdmin(User user){
+		Role schoolRole = new Role ("ROLE_SCHOOLE_ADMIN");
+		Role schoolSuperRole = new Role("ROLE_SCHOOLE_SUPER_ADMIN");
+		if(user.hasRole(schoolRole)||user.hasRole(schoolSuperRole)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean isAdmin(User user){
+		if(isSchoolAdmin(user)||isPlatformAdmin(user)){
+			return true;
+		}
+		return false;
 	}
 
 	public String addSystemAdmin(String userId, String password) {

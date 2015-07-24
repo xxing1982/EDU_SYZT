@@ -1,7 +1,9 @@
 package com.syzton.sunread.service.region;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -125,14 +127,49 @@ public class RegionRepositoryService implements RegionService {
 			Row row = sheet.getRow(i);
 
 			String province = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			Region provinceRegion = regionRepo.findByNameAndRegionTypeAndParent(province, RegionType.province, null);
+			if(provinceRegion == null){
+				provinceRegion = new Region();
+				provinceRegion.setName(province);
+				provinceRegion.setParent(null);
+				provinceRegion.setRegionType(RegionType.province);
+				provinceRegion = regionRepo.save(provinceRegion);
+			}
 			String city = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+			Region cityRegion = regionRepo.findByNameAndRegionTypeAndParent(city, RegionType.city, provinceRegion);
+			if(cityRegion == null){
+				cityRegion = new Region();
+				cityRegion.setName(city);
+				cityRegion.setParent(provinceRegion);
+				cityRegion.setRegionType(RegionType.city);
+				cityRegion = regionRepo.save(cityRegion);
+				Set<Region> regions = provinceRegion.getSubRegion();
+				if(regions == null){
+					regions = new HashSet<Region>();
+				}
+				regions.add(cityRegion);
+				provinceRegion.setSubRegion(regions);
+				regionRepo.save(provinceRegion);
+			}
+			
 			String district = ExcelUtil.getStringFromExcelCell(row.getCell(2));
-
-			RegionDTO added = new RegionDTO();
-			added.setProvince(province);
-			added.setCity(city);
-			added.setDistrict(district);
-			this.add(added);
+			Region districtRegion = regionRepo.findByNameAndRegionTypeAndParent(district, RegionType.district, cityRegion);
+			if(districtRegion == null){
+				districtRegion = new Region();
+				districtRegion.setName(district);
+				districtRegion.setParent(cityRegion);
+				districtRegion.setRegionType(RegionType.district);
+				cityRegion = regionRepo.save(districtRegion);
+				Set<Region> regions = cityRegion.getSubRegion();
+				if(regions == null){
+					regions = new HashSet<Region>();
+				}
+				regions.add(districtRegion);
+				cityRegion.setSubRegion(regions);
+				regionRepo.save(cityRegion);
+			}
+			
+		
 		}
 		return failMap;
 	}

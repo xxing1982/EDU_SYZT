@@ -156,6 +156,13 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
     public Page<CoinHistory> findByTeacherId(Pageable pageable, Long teacherId) throws NotFoundException {
         Page<CoinHistory> coinhistoryPage = repository.findByFromIdAndCoinFrom(teacherId, CoinHistory.CoinFrom.FROM_TEACHER, pageable);
         return coinhistoryPage;
+    }    
+    
+    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
+    @Override
+    public Page<CoinHistory> findByClassId(Pageable pageable, Long classId) throws NotFoundException {
+        Page<CoinHistory> coinhistoryPage = repository.findByClassIdAndCoinFrom(classId, CoinHistory.CoinFrom.FROM_TEACHER, pageable);
+        return coinhistoryPage;
     }
     
     @Transactional(rollbackFor = {NotFoundException.class})

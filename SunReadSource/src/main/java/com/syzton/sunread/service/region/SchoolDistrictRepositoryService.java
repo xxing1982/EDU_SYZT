@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javassist.NotFoundException;
 
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.syzton.sunread.dto.region.SchoolDistrictDTO;
+import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.model.region.Region;
+import com.syzton.sunread.model.region.RegionType;
 import com.syzton.sunread.model.region.SchoolDistrict;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.region.RegionRepository;
 import com.syzton.sunread.repository.region.SchoolDistrictRepository;
+import com.syzton.sunread.repository.user.UserRepository;
+import com.syzton.sunread.util.ExcelUtil;
+import com.syzton.sunread.util.UserUtil;
 
 /**
  * Created by Morgan-Leon on 2015/3/16.
@@ -29,11 +37,13 @@ public class SchoolDistrictRepositoryService implements SchoolDistrictService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SchoolDistrictRepositoryService.class);
     private SchoolDistrictRepository repository;
     private RegionRepository regionRepository;
+    private UserRepository userRepo;
     
     @Autowired
-    public SchoolDistrictRepositoryService(SchoolDistrictRepository repository,RegionRepository regionRepository) {
+    public SchoolDistrictRepositoryService(SchoolDistrictRepository repository,RegionRepository regionRepository,UserRepository userRepo) {
         this.repository = repository;
         this.regionRepository = regionRepository;
+        this.userRepo = userRepo;
     }
 
     @Override
@@ -98,32 +108,49 @@ public class SchoolDistrictRepositoryService implements SchoolDistrictService {
     @Override
     public Map<Integer,String> batchSaveOrUpdateSchoolFromExcel(Sheet sheet){
     	Map<Integer,String> failMap = new HashMap<Integer,String>();
+		String userId = UserUtil.getUser();
 		
-//		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
-//			Row row = sheet.getRow(i);  
-//			String name = ExcelUtil.getStringFromExcelCell(row.getCell(0));
-//			String eduName = ExcelUtil.getStringFromExcelCell(row.getCell(1));
-//			if("".equals(name)){
-//				break;
-//			}
-//			if("".equals(eduName)){
-//				failMap.put(row.getRowNum()+1, "学校和教育集团不能为空！");
-//				continue;
-//			}
-//			EduGroup group = eduRepository.findByName(eduName);
-//			if(group == null){
-//				failMap.put(row.getRowNum()+1, "无效的教育集团，数据库中未能发现该教育集团记录！");
-//				continue;
-//			}
-//			School school = repository.findByNameAndEduGroup(name, group);
-//			if(school == null){
-//				school = new School();
-//				school.setName(name);
-//				school.setEduGroup(group);
-//			}
-//			school.setDescription(ExcelUtil.getStringFromExcelCell(row.getCell(2)));
-//			repository.save(school);
-//		}
+		User user = userRepo.findByUserId(userId);
+		if(!UserUtil.isPlatformAdmin(user)){
+			failMap.put(0, "非法用户");
+			return failMap;
+		}
+		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
+			Row row = sheet.getRow(i); 
+			String schoolDistrictName = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			if("".equals(schoolDistrictName)){
+				failMap.put(i+1, "校区名不能为空");
+				continue;
+			}
+			SchoolDistrict schoolDistrict = repository.findByName(schoolDistrictName);
+			if(schoolDistrict == null){
+				schoolDistrict = new SchoolDistrict();
+				schoolDistrict.setName(schoolDistrictName);
+			}
+			
+			String area = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+			RegionType type = RegionType.province;
+			if("省".equals(area)){
+				type = RegionType.province;
+			}else if("市".equals(area)){
+				type = RegionType.city;
+			}else if("县".equals(area)||"区".equals(area)){
+				type = RegionType.district;
+			}
+			
+			String areaName = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+			Region region = regionRepository.findByNameAndRegionType(areaName, type);
+			if(region == null){
+				if("".equals(schoolDistrictName)){
+					failMap.put(i+1, "region不存在:"+areaName);
+					continue;
+				}
+			}
+			schoolDistrict.setRegion(region);
+			String desc = ExcelUtil.getStringFromExcelCell(row.getCell(3));
+			schoolDistrict.setDescription(desc);
+			repository.save(schoolDistrict);
+		}
 		return failMap;
     }
 }

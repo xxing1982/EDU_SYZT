@@ -15,6 +15,8 @@ import com.syzton.sunread.model.region.RegionType;
 public interface RegionRepository extends JpaRepository<Region, Long>{
 
     Region findByNameAndRegionTypeAndParent(String name,RegionType regionType,Region parent);
+    
+    Region findByNameAndRegionType(String name,RegionType regionType);
 
     Page<Region> findByRegionType(Pageable pageable,RegionType regionType);
 }

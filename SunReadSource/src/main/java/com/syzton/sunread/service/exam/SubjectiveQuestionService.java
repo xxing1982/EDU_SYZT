@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.syzton.sunread.dto.exam.SubjectQuestionWithBookName;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 
 public interface SubjectiveQuestionService {

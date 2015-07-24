@@ -1,6 +1,9 @@
 package com.syzton.sunread.controller.exam;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
@@ -20,14 +23,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.syzton.sunread.dto.common.PageImpl;
 import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.dto.exam.ObjectQuestionWithName;
+import com.syzton.sunread.dto.exam.SubjectQuestionWithBookName;
 import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
+import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.exam.Article;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
 import com.syzton.sunread.model.exam.Question;
 import com.syzton.sunread.model.exam.SpeedQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
+import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
+import com.syzton.sunread.service.book.BookService;
+import com.syzton.sunread.service.exam.ArticleService;
 import com.syzton.sunread.service.exam.ObjectiveQuestionService;
 import com.syzton.sunread.service.exam.QuestionService;
 import com.syzton.sunread.service.exam.SubjectiveQuestionService;
@@ -42,12 +53,18 @@ public class QuestionController {
     private ObjectiveQuestionService objectService;
     
     private SubjectiveQuestionService subjectService;
-     
+    
+    private BookService bookService;
+    
+    private ArticleService articleService;
+    
     @Autowired
-    public QuestionController(QuestionService service,ObjectiveQuestionService objectService,SubjectiveQuestionService subjectService) {
+    public QuestionController(QuestionService service,ObjectiveQuestionService objectService,SubjectiveQuestionService subjectService,BookService bookService,ArticleService articleService) {
         this.service = service;
         this.objectService = objectService;
         this.subjectService = subjectService;
+        this.bookService = bookService;
+        this.articleService = articleService;
     }
 
     @RequestMapping(value = "/question", method = RequestMethod.POST)
@@ -265,6 +282,68 @@ public class QuestionController {
          return new PageResource<>(pageResult,"page","size");
     }
     
+    @RequestMapping(value = "/objectivequestionswithbookname", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<ObjectQuestionWithName> findAllObjectiveQuestionsWithName(@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	LOGGER.debug("Finding objective question entry with id: {}" );
+        sortBy = sortBy==null?"id": sortBy;
+        Pageable pageable = new PageRequest(
+                page,size,new Sort(sortBy)
+        );
+        Page<ObjectiveQuestion> pageResult = objectService.findAll(pageable);
+        PageImpl<ObjectQuestionWithName> pages = new PageImpl<ObjectQuestionWithName>(pageResult);
+        List<ObjectQuestionWithName> list = new ArrayList<ObjectQuestionWithName>();
+        List<ObjectiveQuestion> pageList = pageResult.getContent();
+        for(int i=0;i<pageList.size();i++){
+         ObjectiveQuestion oq = pageList.get(i);
+         ObjectQuestionWithName withBookName = new ObjectQuestionWithName(oq);
+         if(withBookName.getObjectiveType().equals(QuestionType.SPEED)){
+        	 SpeedQuestion sq = objectService.findSpeedQuestionById(withBookName.getId());
+        	 Article article = articleService.getArticle(sq.getArticleId());
+        	 if(article!=null)
+        	 withBookName.setBookName(article.getTopic());
+         }else{
+        	 Book book = bookService.findById(oq.getBookId());
+           	 if(book !=null)
+           	 withBookName.setBookName(book.getName());
+         }
+       	
+       	 list.add(withBookName);
+       	 
+        }
+                pages.setContent(list);
+        return new PageResource<>(pages,"page","size");
+    }
+    
+    @RequestMapping(value = "/subjectivequestionswithbookname", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<SubjectQuestionWithBookName> findSubjectiveQuestionsWithBook(@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	 LOGGER.debug("Finding objective question entry with id: {}" );
+         sortBy = sortBy==null?"id": sortBy;
+         Pageable pageable = new PageRequest(
+                 page,size,new Sort(sortBy)
+         );
+         
+         Page<SubjectiveQuestion> pageResult = subjectService.findAll(pageable);
+         PageImpl<SubjectQuestionWithBookName> pages = new PageImpl<SubjectQuestionWithBookName>(pageResult);
+         List<SubjectQuestionWithBookName> list = new ArrayList<SubjectQuestionWithBookName>();
+         List<SubjectiveQuestion> pageList = pageResult.getContent();
+         for(int i=0;i<pageList.size();i++){
+        	 SubjectiveQuestion subjectiveQuestion = pageList.get(i);
+        	 SubjectQuestionWithBookName withBookName = new SubjectQuestionWithBookName(subjectiveQuestion);
+        	 Book book = bookService.findById(subjectiveQuestion.getBookId());
+        	 if(book !=null)
+        	 withBookName.setBookName(book.getName());
+        	 list.add(withBookName);
+        	 
+         }
+         pages.setContent(list);
+         return new PageResource<>(pages,"page","size");
+    }
    
 
 

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.syzton.sunread.exception.common.UpLoadException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -100,12 +101,6 @@ public class UploadControl {
 			throw new RuntimeException("File is empty");
 		} else {
 
-			String realPath = request.getSession().getServletContext()
-					.getRealPath("/upload/note");
-			// FileUtils.copyInputStreamToFile(myfile.getInputStream(), new
-			// File(
-			// realPath, prefix +
-			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil(FTP_SERVER_IP,FTP_PORT, FTP_NAME,
 						FTP_PASSWD, "/");
@@ -114,7 +109,7 @@ public class UploadControl {
 						+ prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
-				return "upload file to image sever error";
+				throw new UpLoadException("upload note img error");
 			}
 		}
 
@@ -137,12 +132,6 @@ public class UploadControl {
 			throw new RuntimeException("File is empty");
 		} else {
 
-			String realPath = request.getSession().getServletContext()
-					.getRealPath("/upload/note");
-			// FileUtils.copyInputStreamToFile(myfile.getInputStream(), new
-			// File(
-			// realPath, prefix +
-			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil(FTP_SERVER_IP,FTP_PORT, FTP_NAME,
 						FTP_PASSWD, "/");
@@ -151,7 +140,7 @@ public class UploadControl {
 						+ prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
-				return "upload file to image sever error";
+				throw new UpLoadException("upload user img error");
 			}
 		}
 
@@ -173,13 +162,6 @@ public class UploadControl {
 		if (myfile.isEmpty()) {
 			throw new RuntimeException("File is empty");
 		} else {
-
-			String realPath = request.getSession().getServletContext()
-					.getRealPath("/upload/note");
-			// FileUtils.copyInputStreamToFile(myfile.getInputStream(), new
-			// File(
-			// realPath, prefix +
-			// myfile.getOriginalFilename()).hashCode()+suffix);
 			try {
 				FtpUtil ftpUtil = new FtpUtil(FTP_SERVER_IP,FTP_PORT, FTP_NAME,
 						FTP_PASSWD, "/");
@@ -188,7 +170,7 @@ public class UploadControl {
 						+ prefix + suffix);
 			} catch (Exception e) {
 				LOGGER.debug(e.getMessage());
-				return "upload file to image sever error";
+				throw new UpLoadException("upload book cover img error");
 			}
 		}
 
@@ -304,7 +286,7 @@ public class UploadControl {
 			throw new RuntimeException("File is empty");
 		} else {
 			Workbook wb = getWorkBookFromExcel(myfile);
-//			map = regionService.batchSaveOrUpdateRegionFromExcel(wb.getSheetAt(0));
+			map = regionService.batchSaveOrUpdateRegionFromExcel(wb.getSheetAt(0));
 			wb.close();
 		}
 		map.put(0, "parser Excel complete");

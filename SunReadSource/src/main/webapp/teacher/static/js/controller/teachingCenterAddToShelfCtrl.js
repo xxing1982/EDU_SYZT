@@ -39,9 +39,9 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
             // $scope.classStatuses.push({ id: index, name: $scope.class.name});
         		console.log($scope.class);
 						//Add books for a whole class
-						$scope.recommendToClazz = function(){
+						$scope.recommendToClazz = function(para){
 							AddRecommendsToClazz.save({teacherId:$rootScope.id,clazzId:$scope.class.id},
-																		{"bookId":$stateParams.bookId,"bookAttribute":$scope.isMandatoryForClazz}
+																		{"bookId":$stateParams.bookId,"bookAttribute":$scope.isMandatoryForClazz,'description':para.description}
 																		,function(){
 																							$rootScope.modal = {title: "添加图书状态", content: "添加成功"};
 																							$('#alert-modal').modal();
@@ -93,7 +93,7 @@ ctrls.controller("teachingCenterAddToShelfController",['$scope', '$rootScope','$
         // Publish the selected entities
         $scope.bookshelfLoadable.publish = function(para){
 							AddRecommends.save({teacherId:$rootScope.id,studentId:para.id},
-																	{"bookId":$stateParams.bookId,"bookAttribute":para.isMandatory}
+																	{"bookId":$stateParams.bookId,"bookAttribute":para.isMandatory,'description':para.description}
 																	,function(date){
 																			$rootScope.modal = {title: "添加图书状态"+date.recommendState, content: date.recommendStateStr};
 																			$('#alert-modal').modal();

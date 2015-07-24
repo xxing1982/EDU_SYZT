@@ -333,7 +333,9 @@ public class ObjectiveQuestionRepositoryService implements
 			if("词汇测试".equals(type)||"验证测试".equals(type)){
 				currentQuestion = updateOrSaveQuestionFromRow(failMap,row);
 			}else if("选项".equals(type)){
-				updateOrSavOptionFromRow(failMap,row,currentQuestion);
+				updateOrSaveOptionFromRow(failMap,row,currentQuestion);
+			}else if("速度测试".equals(type)){
+				currentQuestion = updateOrSaveSpeedQuestionFromRow(failMap,row);
 			}
 		}
 		return failMap;
@@ -373,8 +375,31 @@ public class ObjectiveQuestionRepositoryService implements
 		return repository.save(question);
 	}
 	
-	private void updateOrSavOptionFromRow(Map<Integer,String>map,Row row,ObjectiveQuestion currentQuestion){
-		LOGGER.debug("#############################option:"+row.getRowNum());
+	private SpeedQuestion updateOrSaveSpeedQuestionFromRow(Map<Integer,String> map,Row row){
+		String type = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+		String topic = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+		long articleId = ExcelUtil.getLongFromExcelCell(row.getCell(2));
+		if(topic.length()>500){
+			map.put(row.getRowNum(), "Question content is too long, the lenth limit 0-500");
+			return null;
+		}
+		
+		QuestionType questionType = QuestionType.SPEED;
+		
+		SpeedQuestion question = speedRepository.findByTopicAndArticleId(topic, articleId);
+		 
+		if(question == null){
+			question = new SpeedQuestion();
+		}
+		
+		question.setTopic(topic);
+		question.setObjectiveType(questionType);
+		question.setBookId(0L);
+		question.setArticleId(articleId);
+		return repository.save(question);
+	}
+	
+	private void updateOrSaveOptionFromRow(Map<Integer,String>map,Row row,ObjectiveQuestion currentQuestion){
 		if(currentQuestion == null){
 			map.put(row.getRowNum(), "Insert Error:Can't connect this option with question");
 			return;

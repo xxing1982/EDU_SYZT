@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.Length;
 
 import com.syzton.sunread.model.organization.Campus;
 
+import java.util.Set;
+
 /**
  * @author Morgan-Leon
  * @Date 2015年4月6日
@@ -45,6 +47,8 @@ public class CampusDTO {
 	private Long eduGroupId;
 	
 	private String eduGroupName;
+
+	private Set<ClazzDTO> clazzDTOSet;
 	
 	
 	public long getRegionId() {
@@ -152,8 +156,11 @@ public class CampusDTO {
 	}
 
 
-	
-	
-	
-	
+	public Set<ClazzDTO> getClazzDTOSet() {
+		return clazzDTOSet;
+	}
+
+	public void setClazzDTOSet(Set<ClazzDTO> clazzDTOSet) {
+		this.clazzDTOSet = clazzDTOSet;
+	}
 }

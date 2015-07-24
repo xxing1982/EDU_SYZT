@@ -3,6 +3,7 @@ package com.syzton.sunread.service.organization;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +18,16 @@ import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.model.region.Region;
+import com.syzton.sunread.model.region.RegionType;
 import com.syzton.sunread.model.region.SchoolDistrict;
+import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.organization.EduGroupRepository;
 import com.syzton.sunread.repository.region.RegionRepository;
 import com.syzton.sunread.repository.region.SchoolDistrictRepository;
+import com.syzton.sunread.repository.user.UserRepository;
+import com.syzton.sunread.util.ExcelUtil;
+import com.syzton.sunread.util.UserUtil;
 
 /**
  * @author Morgan-Leon
@@ -36,6 +42,7 @@ public class CampusRepositoryService implements CampusService{
     private RegionRepository regionRepository;
     private SchoolDistrictRepository schoolDistrictRepository;
     private EduGroupRepository eduGroupRepository;
+    private UserRepository userRepo;
 	private EduGroup eduGroup;
 	private SchoolDistrict schoolDistrict;
 	private Region region;
@@ -43,11 +50,12 @@ public class CampusRepositoryService implements CampusService{
  
     @Autowired
     public CampusRepositoryService(CampusRepository repository,RegionRepository regionRepository
-    		,SchoolDistrictRepository schoolDistrictRepository,EduGroupRepository eduGroupRepository) {
+    		,SchoolDistrictRepository schoolDistrictRepository,EduGroupRepository eduGroupRepository,UserRepository userRepo) {
         this.repository = repository;
         this.regionRepository = regionRepository;
         this.schoolDistrictRepository = schoolDistrictRepository;
         this.eduGroupRepository = eduGroupRepository;
+        this.userRepo = userRepo;
     }
 
 //    @Override
@@ -163,49 +171,72 @@ public class CampusRepositoryService implements CampusService{
     @Override
 	public Map<Integer,String> batchSaveOrUpdateCampusFromExcel(Sheet sheet) {
 		Map<Integer,String> failMap = new HashMap<Integer,String>();
+		String userId = UserUtil.getUser();
 		
-//		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
-//			Row row = sheet.getRow(i); 
-//			String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(0));
-//			if("".equals(campusName)){
-//				break;
-//			}
-//			
-//			String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(1));
-//			String schoolName = ExcelUtil.getStringFromExcelCell(row.getCell(2));
-//			EduGroup group = eduGroupRepository.findByName(eduGroupName);
-//			if(group == null){
-//				failMap.put(i+1, "查询不到该教育集团:"+eduGroupName);
-//				continue;
-//			}
-//			School school = schoolDistrictRepository.findByNameAndEduGroup(schoolName, group);
-//			if(school == null){
-//				failMap.put(i+1,  "查询不到该学校:"+schoolName);
-//				continue;
-//			}
-//			Campus campus = repository.findByNameAndSchool(campusName, school);
-//			if(campus == null){
-//				campus = new Campus();
-//				campus.setSchool(school);
-//				campus.setName(campusName);
-//			}
-//			
-//			campus.setHeadmaster(ExcelUtil.getStringFromExcelCell(row.getCell(3)));
-//			String province = ExcelUtil.getStringFromExcelCell(row.getCell(4));
-//			String city = ExcelUtil.getStringFromExcelCell(row.getCell(5));
-//			String district = ExcelUtil.getStringFromExcelCell(row.getCell(6));
-//			Region region = regionRepository.findByProvinceAndCityAndDistrict(province, city, district);
-//			if(region == null){
-//				failMap.put(i+1, "Can't find area:"+province+"省"+city+"市"+district+"地区(县)");
-//				continue;
-//			}
-//			campus.setRegion(region);
-//			String des = ExcelUtil.getStringFromExcelCell(row.getCell(7));
-//			campus.setDescription(des);
-//			String wish = ExcelUtil.getStringFromExcelCell(row.getCell(8));
-//			campus.setWish(wish);
-//			repository.save(campus);
-//		}
+		User user = userRepo.findByUserId(userId);
+		if(!UserUtil.isPlatformAdmin(user)){
+			failMap.put(0, "非法用户");
+			return failMap;
+		}
+		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
+			Row row = sheet.getRow(i); 
+			String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			if("".equals(campusName)){
+				break;
+			}
+			
+			String eduGroupName = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+		
+			EduGroup group = eduGroupRepository.findByName(eduGroupName);
+			if(group == null){
+				failMap.put(i+1, "查询不到该教育集团:"+eduGroupName);
+				continue;
+			}
+			
+			Campus campus = repository.findByName(campusName);
+			if(campus == null){
+				campus = new Campus();
+				campus.setName(campusName);
+			}
+			
+			campus.setHeadmaster(ExcelUtil.getStringFromExcelCell(row.getCell(2)));
+			String province = ExcelUtil.getStringFromExcelCell(row.getCell(3));
+			String city = ExcelUtil.getStringFromExcelCell(row.getCell(4));
+			String district = ExcelUtil.getStringFromExcelCell(row.getCell(5));
+			Region smallRegion = null;
+			Region provinceRegion = regionRepository.findByNameAndRegionTypeAndParent(province, RegionType.province, null);
+			
+			
+			if(provinceRegion == null){
+				failMap.put(i+1, "Can't find area:"+province);
+				continue;
+			}
+			smallRegion = provinceRegion;
+			Region cityRegion = regionRepository.findByNameAndRegionTypeAndParent(city, RegionType.city, provinceRegion);
+			
+			if(cityRegion!=null){
+				smallRegion = cityRegion;
+			}
+			
+			Region districtRegion = regionRepository.findByNameAndRegionTypeAndParent(district, RegionType.district, cityRegion);
+			
+			if(districtRegion!=null){
+				smallRegion = districtRegion;
+			}
+			
+			
+			campus.setRegion(smallRegion);
+			String des = ExcelUtil.getStringFromExcelCell(row.getCell(6));
+			campus.setDescription(des);
+			String wish = ExcelUtil.getStringFromExcelCell(row.getCell(7));
+			campus.setWish(wish);
+			int noteScore = ExcelUtil.getIntFromExcelCell(row.getCell(8));
+			campus.setNoteScore(noteScore);
+			String name = ExcelUtil.getStringFromExcelCell(row.getCell(9));
+			SchoolDistrict sd = schoolDistrictRepository.findByName(name);
+			campus.setSchoolDistrict(sd);
+			repository.save(campus);
+		}
 		return failMap;
 	}
     

@@ -1,6 +1,10 @@
 package com.syzton.sunread.util;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.syzton.sunread.model.user.User;
 
 public class ExcelUtil {
 
@@ -43,4 +47,15 @@ public class ExcelUtil {
 		}
 		return ret;
 	}
+
+	public static long getLongFromExcelCell(Cell cell) {
+		long ret = 0;
+		try{
+			ret = (long)Double.parseDouble(cell.toString());
+		}catch(Exception e){
+		}
+		return ret;
+	}
+	
+	
 }

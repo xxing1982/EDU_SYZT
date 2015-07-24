@@ -1,80 +1,171 @@
 <!--AdvancedSearch-->
 <div class="advancedSearch">
-<div class="row">
-    <div class="col-md-9 leftpart">
+    <div class="row">
+        <div class="col-md-9 leftpart">
+            <div class="input-group search">
+                <form action="/api/upload/excel/objectquestion" method="POST" enctype="multipart/form-data">
 
-	<div class="input-group search">
-		<input type="text" class="form-control" placeholder="请输入试题内容" ng-model="searchArguments.searchTerm">
-		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
-		<span class="input-group-addon" ng-click="addNewBook()">添加</span>
-	</div>
-	
-	<div class="input-group search">
-	<form action="/api/upload/excel/objectquestion" method="POST" enctype="multipart/form-data">  
-    
-    	Excel: <input type="file" name="myfile"/><br/>  
-   
-    	<input type="submit" value="Excel导入词汇和认证测试" /> 
-		</form>
-	</div>
-	<div ng-repeat="terms in searchPageable.entities.content">
-        <div class="row bookList" ng-init="terms.text_overflow=true;">
-            <div class="col-md-3">
-                <a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="img-responsive"></a>
-            </div>
-            <div class="col-md-9">
-                <div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>
-            <div class="row fsize12"><p> {{terms.evaluationNum}}&nbsp;&nbsp; <span class="red-text">{{terms.statistic.readNums}}</span> </p></div>
-                <div class="row fsize12"><p>{{terms.author}}&nbsp;&nbsp;{{terms.publisher}} &nbsp;&nbsp;
-                   :{{terms.point}}&nbsp;&nbsp;:{{terms.extra.level}}&nbsp;&nbsp;{{terms.coin}}</p></div>
-                <div class="row fsize12" ng-class="{'overflow-text' : terms.text_overflow}"><p>{{terms.description}}<br /></p></div>
-                <div class="row fsize12">
-                    <a class="btn btn-sm btn-green" ng-click="addBooktoShelf(terms)" type="button"> </a>&nbsp;&nbsp;
-                    <a href="#" class="btn btn-sm btn-green"> </a>&nbsp;&nbsp;
-                    <a href="#" class="btn btn-sm btn-green"></a>&nbsp;&nbsp;
-                </div>
+                    Excel: <input type="file" name="myfile"/><br/>  
+
+                    <input type="submit" value="Excel导入Admin" />
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Place holder row copied from searchs -->
+
+    <div class="input-group search col-md-8">
+
+        <input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
+        <span class="input-group-addon" ng-click="searchByName()">搜索</span>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>序列号</th>
+                <th>ISBN</th>
+                <th>书名</th>
+                <th>题目</th>
+                <th>题型</th>
+                <th>分数</th>
+                <th>导入时间</th>
+                <th>
+                    <!--<button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加</button>-->
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="placeHolder in searchPageable.entities.content">
+                <td>{{placeHolder.id}}</td>
+                <td></td>
+                <td></td>
+                <td>{{placeHolder.topic}}</td>
+                <td>{{placeHolder.objectiveType}}</td>
+                <td></td>
+                <td>{{placeHolder.creationTime}}</td>
+                <td>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#showOptionModal" ng-click="ShowOption(placeHolder)">查看选项</button>
+                    <!--<button class="btn btn-primary" ng-click="deleteSys(placeHolder)">删除</button>-->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
     <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
-        <div class="col-md-10 searchHolder"> 
+        <div class="col-md-10 searchHolder">
             <p>&nbsp;{{ placeHolder.title }}</p>
         </div>
     </div>
 
     <!-- Footer and page numbers  -->
     <div class="container-fluid">
-    <div class="row paragraph">
-       <div class="col-xs-1"></div>
-        <div class="col-xs-7">
-            <!-- Custom page number goes here -->
-            <div class="row custom-page-number-group">
-                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page - 1)"></a></div></div>
-                <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
-                    <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}"
-                    ng-click="searchPageable.showPage(pageNumber)">{{pageNumber}}</a>
+        <div class="row paragraph">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-7">
+                <!-- Custom page number goes here -->
+                <div class="row custom-page-number-group">
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <a ng-click="searchPageable.showPage(searchPageable.page - 1)"></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
+                        <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}" ng-click="searchPageable.showPage(pageNumber)">{{pageNumber}}</a>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <a ng-click="searchPageable.showPage(searchPageable.page + 1)"></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page + 1)"></a></div></div>
+            </div>
+            <div class="col-xs-3">
+                <div class="custom-page-number-group">
+                    <a ng-click="searchPageable.showPage(goto)">上一页</a>
+                    <input type="number" class="custom-page-number-input" ng-model="goto"/>
+                    <a ng-click="searchPageable.showPage(goto)">下一页</a>
+                </div>
             </div>
         </div>
-        <div class="col-xs-3">
-            <!-- Custom goto page number goes here -->
-<!--            <div class="custom-page-number-group"><a>ȥ��</a><input type="text" class="custom-page-number-input" />ҳ</div>-->
-                <div class="custom-page-number-group">
-                    <a ng-click="searchPageable.showPage(goto)"></a>
-                    <input type="number" class="custom-page-number-input" ng-model="goto"/>
-                    <a ng-click="searchPageable.showPage(goto)"></a>
-                </div>
-        </div>
-
     </div>
- </div><!--end page -->
 
-</div><!--left part-->
+</div>
 
+<div class="modal fade" id="showOptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form role="form" name="addForm" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">查看选项</h4>
+            </div>
+            <div class="modal-body">
+                <div ng-repeat="item in selectQuestion">
+                    {{item.tag}}、{{item.content}}
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#editOptionModal" ng-click="updateOption(item)">修改</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-primary" ng-click="AddSys()" ng-disabled="addForm.$invalid">Add</button>-->
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-</div><!--row-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form role="form" name="myForm" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="edit.topic">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="EditSys()" ng-disabled="myForm.$invalid">Edit</button>
+                <span>{{message}}</span>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="editOptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form role="form" name="myForm" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="editOption.content">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="EditOption()" ng-disabled="myForm.$invalid">Edit</button>
+                <span>{{message}}</span>
+            </div>
+        </form>
+        </div>
+    </div>
 </div>

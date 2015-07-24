@@ -30,7 +30,7 @@ public class Teacher extends User{
 
     private String graduateSchool;
 
-    @Transient
+
     private long currentClassId;
 
     private long campusId;

@@ -91,8 +91,8 @@
                             <div class="col-md-1"></div>
                         </div>
                         <div><h4><a href="#readingCenter/bookDetails/{{item.bookId}}/">{{item.name}}</a></h4></div>
-                        <div>时间：{{item.creationTime}}&nbsp;&nbsp;&nbsp;积分：{{item.point}}</div>
-                        <div>成绩：{{userInfo.examScore}}  正确率：{{item.passCount/item.questionNum*100}}%</div>
+                        <div>时间:{{item.creationTime}}&nbsp;&nbsp;&nbsp;积分:{{item.point}}</div>
+                        <div>成绩:{{userInfo.examScore}}  正确率:{{item.passCount/item.questionNum*100}}%</div>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,8 @@
                 <div class="row row-content-right">
                     <div class="col-md-12"><img ng-src="{{IMAGESERVER + selectedFish.fishPic}}" class="img-responsive" style="margin: auto" /></div>
                     <div class="col-md-12 enter-game">
-                    	<input class="btn btn-default" type="button" data-toggle="modal" data-target="#begin-game" value="进入游戏" />
+                    	<input class="btn btn-default" type="button" value="进入游戏" />
+                        <input class="btn btn-default" type="button" data-toggle="modal" data-target="#begin-game" value="游戏规则" />
                     </div>
                 </div>
             </div>

@@ -128,6 +128,12 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'partials/personalProfile.html',
             controller: "personalProfileController"
         })
+        //message center
+        .state('messageCenter', {
+            url: '/messageCenter',
+            templateUrl: "partials/messageCenter.html",
+            controller: "messageCenterController"
+        })
 }]);
 
 routeApp.run(['$rootScope', function($rootScope){
