@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.syzton.sunread.dto.exam.SubjectQuestionWithBookName;
 import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
@@ -158,4 +159,6 @@ public class SubjectiveQuestionRepositoryService implements SubjectiveQuestionSe
 		
 		return failMap;
 	}
+
+	
 }

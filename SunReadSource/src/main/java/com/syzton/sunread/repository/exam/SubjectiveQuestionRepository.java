@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.syzton.sunread.dto.exam.SubjectQuestionWithBookName;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion.SubjectiveQuestionType;
 
