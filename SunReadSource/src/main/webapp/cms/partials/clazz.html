@@ -1,61 +1,154 @@
 <!--AdvancedSearch-->
+<div>
+    <h1>学校管理员</h1>
+</div>
 <div class="advancedSearch">
-<div class="row">
-    <div class="col-md-9 leftpart">
-
-	<div class="input-group search">
-		<input type="text" class="form-control" placeholder="请输入班级" ng-model="searchArguments.searchTerm">
-		<span class="input-group-addon" ng-click="searchByName(searchContent)">搜索</span>
-		<span class="input-group-addon" ng-click="addNewSubjectQuestion()">添加</span>
-	</div>
-	
-	<div class="input-group search">
-	<!--<form action="/api/upload/excel/clazz" method="POST" enctype="multipart/form-data">  -->
-    <form enctype="multipart/form-data">  
-    
-    	Excel: <input type="file" name="myfile" onChange="GetURL()" /><br/>  
+    <div class="row">
+        <div class="col-md-9 leftpart">
+            <div class="input-group search">
+                <form enctype="multipart/form-data">
+                    Excel: <input type="file" name="myfile" onChange="GetURL()" /><br/>  
    
-    	<input type="submit" onClick="PostData('/api/upload/excel/clazz')" value="Excel导入班级" /> 
-		</form>
-	</div>
-	
+                    <input type="submit" onClick="PostData('/api/upload/excel/clazz')" value="Excel导入班级" /> 
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <!-- Place holder row copied from searchs -->
+
+    <chooseschool></chooseschool>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>序列号</th>
+                <th>名称</th>
+                <th>创建时间</th>
+                <th>
+                    <button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal" disabled="disabled">添加</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="placeHolder in searchPageable.entities.content">
+                <td>{{placeHolder.id}}</td>
+                <td>{{placeHolder.name}}</td>
+                <td>{{placeHolder.creationTime}}</td>
+                <td>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
+                    <button class="btn btn-primary" ng-click="deleteSys(placeHolder)">删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
     <div class="row" ng-repeat="placeHolder in searchPageable.placeHolders.content">
-        <div class="col-md-10 searchHolder"> 
+        <div class="col-md-10 searchHolder">
             <p>&nbsp;{{ placeHolder.title }}</p>
         </div>
     </div>
 
     <!-- Footer and page numbers  -->
     <div class="container-fluid">
-    <div class="row paragraph">
-       <div class="col-xs-1"></div>
-        <div class="col-xs-7">
-            <!-- Custom page number goes here -->
-            <div class="row custom-page-number-group">
-                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page - 1)"></a></div></div>
-                <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
-                    <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}"
-                    ng-click="searchPageable.showPage(pageNumber)">{{pageNumber}}</a>
+        <div class="row paragraph">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-7">
+                <!-- Custom page number goes here -->
+                <div class="row custom-page-number-group">
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <a ng-click="searchPageable.showPage(searchPageable.page - 1)"></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 custom-page-number-container" ng-model="page" ng-repeat="pageNumber in searchPageable.pageNumbers.content">
+                        <a class="custom-page-number" ng-class="{'custom-page-number-current': pageNumber === searchPageable.page}" ng-click="searchPageable.showPage(pageNumber)">{{pageNumber}}</a>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <a ng-click="searchPageable.showPage(searchPageable.page + 1)"></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-2"><div class="row"><a ng-click="searchPageable.showPage(searchPageable.page + 1)"></a></div></div>
             </div>
-        </div>
-        <div class="col-xs-3">
-            <!-- Custom goto page number goes here -->
-<!--            <div class="custom-page-number-group"><a>ȥ��</a><input type="text" class="custom-page-number-input" />ҳ</div>-->
+            <div class="col-xs-3">
                 <div class="custom-page-number-group">
                     <a ng-click="searchPageable.showPage(goto)">上一页</a>
                     <input type="number" class="custom-page-number-input" ng-model="goto"/>
                     <a ng-click="searchPageable.showPage(goto)">下一页</a>
                 </div>
+            </div>
         </div>
-
     </div>
- </div><!--end page -->
 
-</div><!--left part-->
-</div><!--row-->
+</div>
 
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form role="form" name="addForm" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Username" ng-model="add.userid" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="add.password" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="AddSys()" ng-disabled="addForm.$invalid">Add</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form role="form" name="myForm" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Username" disabled="disabled" ng-model="edit.userId">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">旧密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="edit.oldpassword" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">新密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" placeholder="Password" ng-model="edit.newpassword" required>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="EditSys()" ng-disabled="myForm.$invalid">Edit</button>
+                <span>{{message}}</span>
+            </div>
+        </form>
+        </div>
+    </div>
 </div>

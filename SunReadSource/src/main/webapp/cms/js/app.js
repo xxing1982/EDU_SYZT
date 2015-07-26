@@ -83,7 +83,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         .state('clazz',{
         	url: '/clazz',
             templateUrl: "partials/clazz.html",
-            controller: 'clazzCtrl'
+            controller: 'ClassCtrl'
         })
      	// relation with book question page
      	.state('objectivequestion', {
