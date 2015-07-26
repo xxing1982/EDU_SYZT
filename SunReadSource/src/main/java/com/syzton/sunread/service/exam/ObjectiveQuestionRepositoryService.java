@@ -1,5 +1,6 @@
 package com.syzton.sunread.service.exam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -417,14 +418,17 @@ public class ObjectiveQuestionRepositoryService implements
 					break;
 				}
 			}
+		}else{
+			options = new ArrayList<Option>();
 		}
 		
 		option.setContent(content);
-		currentQuestion.getOptions().add(option);
+		options.add(option);
 		boolean isCorrectAnswer = ExcelUtil.getBoolFromExcelCell(row.getCell(3));
 		if(isCorrectAnswer){
 			currentQuestion.setCorrectAnswer(option);
 		}
+		currentQuestion.setOptions(options);
 		repository.save(currentQuestion);
 	}
 	 
