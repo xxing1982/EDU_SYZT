@@ -10,11 +10,11 @@
 	</div>
 	
 	<div class="input-group search">
-	<form action="/api/upload/excel/region" method="POST" enctype="multipart/form-data">  
+	<form enctype="multipart/form-data" id="form1">
     
-    	Excel: <input type="file" name="myfile"/><br/>  
+    	Excel: <input type="file" id="myfile" name="myfile" onChange="GetURL()" /><br/>  
    
-    	<input type="submit" value="Excel导入地区" /> 
+    	<input type="submit" onClick="PostData('/api/upload/excel/region')" value="Excel导入地区" /> 
 		</form>
 	</div>
 	

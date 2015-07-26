@@ -10,11 +10,10 @@
 	</div>
 	
 	<div class="input-group search">
-	<form action="/api/upload/excel/teacher" method="POST" enctype="multipart/form-data">  
-    
-    	Excel: <input type="file" name="myfile"/><br/>  
+	<form enctype="multipart/form-data" id="form1">
+                    Excel: <input type="file" id="myfile" name="myfile" onChange="GetURL()" /><br/>
    
-    	<input type="submit" value="Excel导入教师" /> 
+    	<input type="submit" onClick="PostData('/api/upload/excel/teacher')" value="Excel导入教师" /> 
 		</form>
 	</div>
 	
