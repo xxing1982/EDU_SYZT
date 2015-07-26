@@ -6,8 +6,8 @@
     <div class="row">
         <div class="col-md-9 leftpart">
             <div class="input-group search">
-                <form enctype="multipart/form-data">
-                    Excel: <input type="file" name="myfile" onChange="GetURL()" /><br/>  
+                <form enctype="multipart/form-data" id="form1">
+                    Excel: <input type="file" id="myfile" name="myfile" onChange="GetURL()" /><br/>  
    
                     <input type="submit" onClick="PostData('/api/upload/excel/clazz')" value="Excel导入班级" /> 
                 </form>

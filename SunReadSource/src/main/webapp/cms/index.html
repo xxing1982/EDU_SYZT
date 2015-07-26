@@ -160,19 +160,36 @@
     }
 
     //$("form[enctype='multipart/form-data'] input[type='submit']").die().live('click', function(url){
+    	
     function PostData(url){
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: {myfile: sessionStorage.getItem("filepath")},
-            beforeSend: function(request) {
-                request.setRequestHeader("Content-Type", "multipart/form-data");
-                request.setRequestHeader("Authorization", "bearer " + sessionStorage.access_token);
-            },
-            success: function(dataLogin){
-                alert('success');
-            }
-        });
+    	var xhr = new XMLHttpRequest();
+						var fd = new FormData();
+						// 关联表单数据,可以是自定义参数
+						var fileName = "myfile";
+							
+
+						fd.append(fileName,
+								$("#myfile")[0].files[0]);
+
+
+						
+						xhr.open("POST", url);
+						//xhr.setRequestHeader("Content-Type", "multipart/form-data;boundary=AaB03x");
+						xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.access_token);
+						xhr.send(fd);
+    	
+        // $.ajax({
+            // type: 'post',
+            // url: url,
+            // data: "myfile"+"="+ sessionStorage.getItem("filepath"),
+            // beforeSend: function(request) {
+                // request.setRequestHeader("Content-Type", "multipart/form-data;boundary=AaB03x");
+                // request.setRequestHeader("Authorization", "bearer " + sessionStorage.access_token);
+            // },
+            // success: function(dataLogin){
+                // alert('success');
+            // }
+        // });
     }
     </script>
 </body>
