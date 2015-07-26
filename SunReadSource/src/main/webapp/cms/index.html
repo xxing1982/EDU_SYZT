@@ -151,5 +151,27 @@
     
 	<script src="../student/static/js/lib/tokenInjector.js"></script>
     <script src="js/index.js"></script>
+
+    <script type="text/javascript">
+    	function GetURL(){
+        sessionStorage.setItem("filepath", $("form[enctype='multipart/form-data'] input[type='file']").val());
+    }
+
+    //$("form[enctype='multipart/form-data'] input[type='submit']").die().live('click', function(url){
+    function PostData(url){
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: {myfile: sessionStorage.getItem("filepath")},
+            beforeSend: function(request) {
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                request.setRequestHeader("Authorization", "bearer " + sessionStorage.access_token);
+            },
+            success: function(dataLogin){
+                alert('success');
+            }
+        });
+    }
+    </script>
 </body>
 </html>

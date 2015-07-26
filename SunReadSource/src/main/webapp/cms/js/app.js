@@ -77,8 +77,8 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         })
         .state('campus',{
         	url: '/campus',
-            templateUrl: "partials/campus.html",
-            controller: 'campusCtrl'
+            templateUrl: "partials/campus.html"
+            //controller: 'campusCtrl'
         })
         .state('clazz',{
         	url: '/clazz',
@@ -111,4 +111,12 @@ routeApp.run(['$rootScope', '$injector', function($rootScope, $injector){
         return angular.toJson(data);
       }
     };
+
+    /*
+    $("form[enctype='multipart/form-data'] input[type='file']").die().live('onchange', function(){
+        $rootScope.uploadpath = this.val();
+        this.replaceWith('<input type="file" name="myfile"/>');
+    });
+    */
+    
 }]);
