@@ -42,16 +42,17 @@ ctrls.controller("readingCenterAddBookController", ['$rootScope','$scope', 'Lack
 				// 	alert("书已存在");
     }
 
+		$scope.isbn = '';
+
 		$scope.isbnValid = function(){
-			var validIsbn = $scope.isbn;
-			if(typeof(validIsbn) ==='undefined')
-				return false;
-			if(validIsbn.length ===10 || validIsbn.length === 13){
+			if($scope.isbn ==='')
 				return true;
-			}
-			else{
+			if(typeof($scope.isbn) ==='undefined')
 				return false;
-			}
+			if($scope.isbn.length ===10 || $scope.isbn.length === 13)
+				return true;
+
+			return false;
 		};
 
 		$scope.isRequired = function(model){

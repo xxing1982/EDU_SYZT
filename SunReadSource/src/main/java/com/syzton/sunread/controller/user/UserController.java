@@ -205,6 +205,7 @@ public class UserController extends BaseController {
     public Teacher findByTeacherId(@PathVariable("teacherId") Long teacherId) {
         return userService.findByTeacherId(teacherId);
     }
+    
     @RequestMapping(value = "/campuses/{campusId}/teachers", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<Teacher> findTeacherByCampusId(@PathVariable("campusId") Long campusId,

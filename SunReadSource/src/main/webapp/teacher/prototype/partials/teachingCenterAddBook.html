@@ -57,7 +57,8 @@
                         <div class="lackBookText"><p>ISBN号：</p></div>
                         <input type="text" ng-model="isbn" class="form-control lackBookInput" placeholder="请输入isbn号（10位或13位）" aria-describedby="sizing-addon2"
                             ng-minlength=10 ng-maxlength=13 ng-required>
-                            <div style="margin-top: 15px;"><span style="color:rgba(229, 105, 105, 0.7);padding-top:15px" ng-show="!isbnValid()">
+                            <div style="margin-top: 15px;">
+                              <span style="color:rgba(229, 105, 105, 0.7);padding-top:15px">
                             <span ng-show="!isbnValid()">ISBN 不合法</span>
                         </span></div>
                 </div>
@@ -95,7 +96,7 @@
     </div>
     </div>
 </div>
-    
+
 <!-- Booktag Modal -->
 <div class="modal fade" id="booktag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -123,7 +124,7 @@
                 </div>
                 <div class="col-xs-3 col-xs-height col-middle"></div>
             </div>
-            
+
             <div class="row-same-height">
                 <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">科目：</p></div>
                 <div class="col-xs-6 col-xs-height col-middle">
@@ -171,7 +172,7 @@
                 </div>
                 <div class="col-xs-3 col-xs-height col-middle"></div>
             </div>
-            
+
 <!--
             <div class="row-same-height">
                 <div class="col-xs-3 col-xs-height col-middle"><p class="row title text-right">备注：</p></div>
@@ -180,10 +181,10 @@
                 </div>
             </div>
 -->
-        
+
             <!-- Place holer -->
             <h4 class="row"></h4>
-        
+
             <div class="row">
                 <div class="col-md-12 text-left">
                     <button class="btn btn-fill-blue" type="button" data-dismiss="modal" aria-label="Close" ng-click="booktag.save()">发布标记</button>
