@@ -3,7 +3,7 @@ var ctrls = angular.module('nourControllers', ['nourConfig', 'ngResource', 'user
     , 'examServices', 'classServices', 'questionServices', 'reviewServices', 'joinShelfServices', 'dictionariesService', 'fishServices'
     , 'bookDetailServices', 'bookshelfServices', 'bookshelfViewServices', 'bookInShelfServices', 'addbookToShelfServices', 'dropBookFromShelfServices', 'bookshelfStatisticsServices'
     , 'lackFeedbackServices', 'conditionSearchServices', 'quickSearchServices', 'popularSearchServices', 'oneBookInShelfServices'
-    , 'messageServices', 'getGiftsServices', 'getGiftsExNumServices', 'exchangeGiftsServices'
+    , 'messageServices', 'getGiftsServices', 'getGiftsExNumServices', 'exchangeGiftsServices','teacherServices'
     , 'campusServices', 'actionServices', 'pageableServices', 'loadableServices', 'hotclazzServices', 'hotreaderServices', 'dropzoneServices', 'ngSanitize', 'semesterServices', 'pointHistoryServices', 'coinHistoryServices', 'taskServices', 'trainingService']);
 ctrls.controller("mainController", ['$rootScope', '$scope', 'Student', "Bookshelf", "Note", "Class", "PassExam", 'Action', 'Pageable', 'Hotclazz', 'Hotreader', 'Fish', 'config',
     function ($rootScope, $scope, Student, Bookshelf, Note, Class, PassExam, Action, Pageable, Hotclazz, Hotreader, Fish, config) {

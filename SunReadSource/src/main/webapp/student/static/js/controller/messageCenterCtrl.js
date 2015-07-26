@@ -1,9 +1,9 @@
 //messageCenter.js
 
 ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams','Pageable'
-                                        ,'Student','Hotreader','SendMessages','GetMessages','DeleteMessages'
+                                        ,'Student','Hotreader','SendMessages','GetMessages','DeleteMessages','TeachersFromCampus'
                                       ,function ($rootScope,$scope,$stateParams,Pageable
-                                        ,Student,Hotreader,SendMessages,GetMessages,DeleteMessages) {
+                                        ,Student,Hotreader,SendMessages,GetMessages,DeleteMessages,TeachersFromCampus) {
 
     // $scope.test = function(){alert("test")};
 
