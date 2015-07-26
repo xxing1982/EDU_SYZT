@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.syzton.sunread.exception.common.UpLoadException;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -30,6 +31,7 @@ import com.syzton.sunread.service.organization.ClazzService;
 import com.syzton.sunread.service.organization.EduGroupService;
 import com.syzton.sunread.service.region.RegionService;
 import com.syzton.sunread.service.region.SchoolDistrictService;
+import com.syzton.sunread.service.user.TeacherClazzService;
 import com.syzton.sunread.service.user.UserService;
 import com.syzton.sunread.util.FtpUtil;
 
@@ -57,6 +59,8 @@ public class UploadControl {
 	private SchoolDistrictService schoolService;
 
 	private CampusService campusService;
+	
+	private TeacherClazzService tcService;
 
 	private String ftpPrefix = "/pic";
 	private final static String FTP_SERVER_IP = "182.92.238.68";
@@ -71,7 +75,7 @@ public class UploadControl {
 			ObjectiveQuestionService objectQService, UserService userService,
 			RegionService regionService, EduGroupService eduGroupService,
 			ClazzService clazzService, SchoolDistrictService schoolService,
-			CampusService campusService) {
+			CampusService campusService,TeacherClazzService tcService) {
 		this.securityUtil = securityUtil;
 		this.bookService = bookService;
 		this.subjectQService = subjectQService;
@@ -82,7 +86,7 @@ public class UploadControl {
 		this.clazzService = clazzService;
 		this.schoolService = schoolService;
 		this.campusService = campusService;
-
+		this.tcService = tcService;
 	}
 
 	@RequestMapping(value = "/api/upload/notepic", method = RequestMethod.POST)
@@ -245,21 +249,21 @@ public class UploadControl {
 		map.put(0, "parser Excel complete");
 		return map;
 	}
-	@RequestMapping(value = "/api/upload/excel/admin", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<Integer,String> adminExcelUpload(@RequestParam MultipartFile myfile,
-												  HttpServletRequest request) throws Exception {
-		Map<Integer,String> map = new HashMap<Integer,String>();
-		if (myfile.isEmpty()) {
-			throw new RuntimeException("File is empty");
-		} else {
-			Workbook wb = getWorkBookFromExcel(myfile);
-			map = userService.batchSaveOrUpdateCMSAdminFromExcel(wb.getSheetAt(0));
-			wb.close();
-		}
-		map.put(0, "parser Excel complete");
-		return map;
-	}
+	//@RequestMapping(value = "/api/upload/excel/admin", method = RequestMethod.POST)
+	//@ResponseBody
+	//public Map<Integer,String> adminExcelUpload(@RequestParam MultipartFile myfile,
+	//											  HttpServletRequest request) throws Exception {
+	//	Map<Integer,String> map = new HashMap<Integer,String>();
+	//	if (myfile.isEmpty()) {
+	//		throw new RuntimeException("File is empty");
+	//	} else {
+	//		Workbook wb = getWorkBookFromExcel(myfile);
+	//		map = userService.batchSaveOrUpdateCMSAdminFromExcel(wb.getSheetAt(0));
+	//		wb.close();
+	//	}
+	//	map.put(0, "parser Excel complete");
+	//	return map;
+	//}
 
 	@RequestMapping(value = "/api/upload/excel/teacher", method = RequestMethod.POST)
 	@ResponseBody
@@ -271,6 +275,22 @@ public class UploadControl {
 		} else {
 			Workbook wb = getWorkBookFromExcel(myfile);
 			map = userService.batchSaveOrUpdateTeacherFromExcel(wb.getSheetAt(0));
+			wb.close();
+		}
+		map.put(0, "parser Excel complete");
+		return map;
+	}
+	
+	@RequestMapping(value = "/api/upload/excel/teacherclazz", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer,String> tcRelationExcelUpload(@RequestParam MultipartFile myfile,
+			HttpServletRequest request) throws Exception {
+		Map<Integer,String> map = new HashMap<Integer,String>();
+		if (myfile.isEmpty()) {
+			throw new RuntimeException("File is empty");
+		} else {
+			Workbook wb = getWorkBookFromExcel(myfile);
+			map = tcService.batchSaveOrUpdateTeacherFromExcel(wb.getSheetAt(0));
 			wb.close();
 		}
 		map.put(0, "parser Excel complete");

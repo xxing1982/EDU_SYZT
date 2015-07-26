@@ -11,6 +11,7 @@ import com.syzton.sunread.repository.user.*;
 import com.syzton.sunread.service.organization.CampusRepositoryService;
 import com.syzton.sunread.service.organization.ClazzService;
 import com.syzton.sunread.util.ExcelUtil;
+import com.syzton.sunread.util.UserUtil;
 
 import javassist.NotFoundException;
 
@@ -42,12 +43,18 @@ import java.util.Map;
      private UserService userService;
      
      private CampusRepository campusRepo;
+     
+     private UserRepository userRepo;
+     
+     private AdminRepository adminRepo;
      @Autowired
-     public TeacherClazzRepositoryService(TeacherClazzRepository teacherClazzRepository, ClazzService clazzService, UserService userService,CampusRepository campusRepo) {
+     public TeacherClazzRepositoryService(TeacherClazzRepository teacherClazzRepository, ClazzService clazzService, UserService userService,CampusRepository campusRepo,UserRepository userRepo,AdminRepository adminRepo) {
          this.teacherClazzRepository = teacherClazzRepository;
          this.clazzService = clazzService;
          this.userService = userService;
          this.campusRepo = campusRepo;
+         this.userRepo = userRepo;
+         this.adminRepo = adminRepo;
      }
 
 
@@ -103,15 +110,23 @@ import java.util.Map;
      @Override
  	public Map<Integer,String> batchSaveOrUpdateTeacherFromExcel(Sheet sheet) {
  		Map<Integer,String> failMap = new HashMap<Integer,String>();
- 		
+ 		String currentUserId = UserUtil.getUser();
+		User user = userRepo.findByUserId(currentUserId);
+		if(user==null||!UserUtil.isAdmin(user)){
+			failMap.put(1, "非法用户");
+		}
+		long schoolCampusId = -1;
+		if(UserUtil.isSchoolAdmin(user)){
+			schoolCampusId = adminRepo.findByUserId(currentUserId).getCampusId();
+		}
  		for (int i = sheet.getFirstRowNum()+1; i < sheet.getPhysicalNumberOfRows(); i++) {  
  			Row row = sheet.getRow(i);  
  			String userId = ExcelUtil.getStringFromExcelCell(row.getCell(0));
  			if("".equals(userId)){
  				break;
  			}
- 			User user = userService.findByUserId(userId);
- 			if(user == null){
+ 			User u = userService.findByUserId(userId);
+ 			if(u == null){
  				failMap.put(i+1, "教师不存在:"+userId);
  				continue;
  			}
@@ -121,9 +136,19 @@ import java.util.Map;
  				failMap.put(i+1, "教师不存在:"+userId);
  				continue;
  			}
- 			String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(1));
- 			String clazzName = ExcelUtil.getStringFromExcelCell(row.getCell(2));
- 			Campus campus = campusRepo.findByName(campusName);
+ 			String clazzName = ExcelUtil.getStringFromExcelCell(row.getCell(1));
+ 			Campus campus;
+			if(schoolCampusId==-1){
+				String campusName = ExcelUtil.getStringFromExcelCell(row.getCell(2));
+				campus = campusRepo.findByName(campusName);
+				if(campus == null){
+					failMap.put(i+1,  "查询不到校区:"+campusName);
+					continue;
+				}
+			}else{
+				campus = campusRepo.findOne(schoolCampusId);
+			}
+
  			Clazz clazz = null;
  			try {
 				clazz = clazzService.findByClazzNameAndCampus(clazzName, campus);
