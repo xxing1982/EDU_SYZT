@@ -84,7 +84,7 @@
                             </div>
                             </div>
                         </div> -->
-                        
+
                         <!-- Row  2 teacher-->
                         <div class="col-md-10">
                             <div class="row">
@@ -154,7 +154,7 @@
                         <div class="col-md-1">
                             <!-- <input type="checkbox"/> -->
                         </div>
-                            <div class="col-md-10 hideOverflow">{{message.message|messageFormatSize}}</div>
+                            <div class="col-md-10 hideOverflow" ng-click="show(message.message)">{{message.message|messageFormatSize}}</div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -222,7 +222,7 @@
                      <div class="col-md-1">
                          <!-- <input type="checkbox"/> -->
                      </div>
-                         <div class="col-md-10">{{message.message|messageFormatSize}}</div>
+                         <div class="col-md-10" ng-click="show(message.message)">{{message.message|messageFormatSize}}</div>
                      </div>
                  </div>
                  <div class="col-md-6">

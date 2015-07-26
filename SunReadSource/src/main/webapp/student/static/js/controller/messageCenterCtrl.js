@@ -109,6 +109,7 @@ $scope.createRecievedPageable();
         //Initialization
         $scope.searchTextTeacher = '';
         $scope.chooseTeachers=function(teacher){
+          $scope.searchTextStudent ='';
           console.log(teacher);
           $scope.searchTextTeacher = teacher.username;
           $scope.recieveUserId = teacher.id;
@@ -122,6 +123,7 @@ $scope.createRecievedPageable();
         $scope.classmates = classmates.content;
         $scope.searchTextStudent ='';
         $scope.chooseStudent=function(student){
+          $scope.searchTextTeacher = '';
           console.log(student);
           $scope.searchTextStudent = student.username;
           $scope.recieveUserId = student.id;
@@ -134,13 +136,23 @@ $scope.createRecievedPageable();
       message:""
     };
 
+    //recieve user cant be none
+    // no one = false;
+    //at least one = true;
+    var isHaveRecievedUser = function(){
+      if($scope.searchTextStudent ==='' && $scope.searchTextTeacher === '')
+        return false;
+      else return true;
+     }
+
     $scope.sendMessage = function(){
       console.log($scope.recieveUserId);
-      if($scope.recieveUserId != undefined && $scope.message != ""&&$scope.searchTextStudent!=''){
+      if($scope.recieveUserId != undefined && $scope.message != ""&&isHaveRecievedUser){
         console.log($scope.text);
         SendMessages.save({sendUserId:$rootScope.id,recieveUserId:$scope.recieveUserId},$scope.text,function(){
           //empty string after the message sended
           $scope.searchTextStudent = "";
+          $scope.searchTextTeacher = '';
           $rootScope.modal ={
               title: "发送成功",
               content:$scope.text.message
@@ -185,4 +197,18 @@ $scope.createRecievedPageable();
         $('#alert-modal').modal();
     });
   };
+
+  $scope.show=function(content){
+    $rootScope.modal = {title: "消息", content: content};
+    $('#alert-modal').modal();
+}
 }]);
+
+ctrls.filter('messageFormatSize', function () {
+    return function (input) {
+        if (input.length > 70)
+            return input.substring(0, 70) + '...';
+        else
+            return input;
+    }
+});
