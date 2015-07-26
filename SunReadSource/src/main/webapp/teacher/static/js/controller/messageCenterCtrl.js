@@ -1,8 +1,8 @@
 //messageCenter.js
 ctrls.controller("messageCenterController", ['$rootScope','$scope','$stateParams'
-                                        ,'Teacher','Hotreader','SendMessages','GetMessages','DeleteMessages'
+                                        ,'Teacher','Hotreader','SendMessages','GetMessages','DeleteMessages','TeachersFromCampus'
                                       ,function ($rootScope,$scope,$stateParams
-                                        ,Teacher,Hotreader,SendMessages,GetMessages,DeleteMessages) {
+                                        ,Teacher,Hotreader,SendMessages,GetMessages,DeleteMessages,TeachersFromCampus) {
 
     // $scope.test = function(){alert("test")};
 
@@ -78,8 +78,21 @@ $scope.createRecievedPageable();
 
     $scope.recieveUserId = $rootScope.id;
     $scope.teacher = Teacher.get({id:$rootScope.id},function(){
-      console.log($scope.teacher);
-      var classmates = Hotreader.get({by:'campus',id:$scope.teacher.campusId,sortBy:"point",page:0,size:10},function(){
+      //list for teachers
+      var myTeachers = TeachersFromCampus.get({campusId:$scope.teacher.campusId,page:0,size:100},function(){
+        $scope.myTeachers = myTeachers.content;
+        //Initialization
+        $scope.searchTextTeacher = '';
+        $scope.chooseTeachers=function(teacher){
+          console.log(teacher);
+          $scope.searchTextTeacher = teacher.username;
+          $scope.recieveUserId = teacher.id;
+        };
+
+      });
+      // console.log($scope.student.campusId);
+      //list for students
+      var classmates = Hotreader.get({by:'campus',id:$scope.teacher.campusId,sortBy:"point",page:0,size:100},function(){
         // console.log(classmates.content);
         $scope.classmates = classmates.content;
         $scope.searchTextStudent ='';
@@ -89,6 +102,7 @@ $scope.createRecievedPageable();
           $scope.recieveUserId = student.id;
         };
       });
+
     });
     $scope.text = {
       message:""

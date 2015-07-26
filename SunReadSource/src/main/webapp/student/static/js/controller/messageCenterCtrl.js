@@ -103,8 +103,21 @@ $scope.createRecievedPageable();
 
     $scope.recieveUserId = $rootScope.id;
     $scope.student = Student.get({id:$rootScope.id},function(){
+      //list for teachers
+      var myTeachers = TeachersFromCampus.get({campusId:$scope.student.campusId,page:0,size:100},function(){
+        $scope.myTeachers = myTeachers.content;
+        //Initialization
+        $scope.searchTextTeacher = '';
+        $scope.chooseTeachers=function(teacher){
+          console.log(teacher);
+          $scope.searchTextTeacher = teacher.username;
+          $scope.recieveUserId = teacher.id;
+        };
+
+      });
       // console.log($scope.student.campusId);
-      var classmates = Hotreader.get({by:'campus',id:$scope.student.campusId,sortBy:"point",page:0,size:10},function(){
+      //list for students
+      var classmates = Hotreader.get({by:'campus',id:$scope.student.campusId,sortBy:"point",page:0,size:100},function(){
         // console.log(classmates.content);
         $scope.classmates = classmates.content;
         $scope.searchTextStudent ='';
@@ -114,6 +127,8 @@ $scope.createRecievedPageable();
           $scope.recieveUserId = student.id;
         };
       });
+
+
     });
     $scope.text = {
       message:""
@@ -124,6 +139,7 @@ $scope.createRecievedPageable();
       if($scope.recieveUserId != undefined && $scope.message != ""&&$scope.searchTextStudent!=''){
         console.log($scope.text);
         SendMessages.save({sendUserId:$rootScope.id,recieveUserId:$scope.recieveUserId},$scope.text,function(){
+          //empty string after the message sended
           $scope.searchTextStudent = "";
           $rootScope.modal ={
               title: "发送成功",
