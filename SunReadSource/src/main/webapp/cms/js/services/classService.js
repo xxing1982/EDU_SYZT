@@ -21,6 +21,12 @@ adminServices.factory('Clazzs',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
+		api.UpdateGread = function(classid, callback){
+			$http.put(config.HOST + 'clazzs/'+ classid + '/upgrade')
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		};
 		return api;
 	}]);
 

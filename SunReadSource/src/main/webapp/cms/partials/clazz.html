@@ -31,10 +31,11 @@
         <tbody>
             <tr ng-repeat="placeHolder in searchPageable.entities.content">
                 <td>{{placeHolder.id}}</td>
-                <td>{{placeHolder.name}}</td>
+                <td>{{placeHolder.grade}}年{{placeHolder.name}}</td>
                 <td>{{placeHolder.creationTime}}</td>
                 <td>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
+                    <!--<button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>-->
+                    <button class="btn btn-primary" ng-click="updateGrade(placeHolder)">升年级</button>
                     <button class="btn btn-primary" ng-click="deleteSys(placeHolder)">删除</button>
                 </td>
             </tr>

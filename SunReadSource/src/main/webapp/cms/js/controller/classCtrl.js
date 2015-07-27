@@ -13,6 +13,19 @@ ctrls.controller("ClassCtrl",['$scope', '$rootScope', 'Clazzs', 'Pageable', 'Get
 			}
 		};
 
+		//update grade
+		$scope.updateGrade = function(item){
+			$rootScope.confirm_modal = {};
+			$rootScope.confirm_modal.title="提示";
+			$rootScope.confirm_modal.content="确定给这个班升年级吗？";
+			$rootScope.confirm_modal.click = function(){
+				Clazzs.UpdateGread(item.id, function(){
+					$('#confirm-modal').modal('hide');
+				})
+			}
+			$('#confirm-modal').modal();
+		}
+
 		//add
 		$scope.add = {};
 		$scope.AddSys = function(){
@@ -45,14 +58,14 @@ ctrls.controller("ClassCtrl",['$scope', '$rootScope', 'Clazzs', 'Pageable', 'Get
 		//delete
 		$scope.deleteSys = function(item){
 			$rootScope.confirm_modal = {};
-				$rootScope.confirm_modal.title="提示";
-				$rootScope.confirm_modal.content="确定删除吗？";
-				$rootScope.confirm_modal.click = function(){
-					Clazzs.Delete(item.id, function(){
-						location.reload();
-					})
-				}
-				$('#confirm-modal').modal();
+			$rootScope.confirm_modal.title="提示";
+			$rootScope.confirm_modal.content="确定删除吗？";
+			$rootScope.confirm_modal.click = function(){
+				Clazzs.Delete(item.id, function(){
+					location.reload();
+				})
+			}
+			$('#confirm-modal').modal();
 		}
 
 
