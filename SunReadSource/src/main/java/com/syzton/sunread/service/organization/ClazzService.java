@@ -58,4 +58,6 @@ public interface ClazzService {
 	
     public Map<Integer,String> batchSaveOrUpdateClazzFromExcel(Sheet sheet);
 
+    Clazz clazzUpgrade(long clazzId) throws NotFoundException;
+
 }

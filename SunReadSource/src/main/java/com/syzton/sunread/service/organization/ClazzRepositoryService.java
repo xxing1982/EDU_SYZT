@@ -254,7 +254,18 @@ public class ClazzRepositoryService implements ClazzService {
 		return failMap;
 	}
 
-	@Override
+    @Override
+    public Clazz clazzUpgrade(long clazzId) throws NotFoundException{
+
+        Clazz found =  this.findById(clazzId);
+
+        int currentGrade = found.getGrade();
+        currentGrade++;
+        found.setGrade(currentGrade);
+        return repository.save(found);
+    }
+
+    @Override
 	public Clazz findByClazzNameAndCampus(String clazzName, Campus campus)
 			throws NotFoundException {
 		Clazz clazz = repository.findByNameAndCampus(clazzName, campus);

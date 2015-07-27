@@ -159,6 +159,12 @@ public class ClazzController extends BaseController{
         return service.findByGrade(id);
 
     }
+    @RequestMapping(value = "/clazzs/{clazzId}/upgrade", method = RequestMethod.PUT)
+    @ResponseBody
+    public Clazz gradeUpgrade(@PathVariable("clazzId") long clazzId) throws NotFoundException {
+        return service.clazzUpgrade(clazzId);
+
+    }
 
 
 }
