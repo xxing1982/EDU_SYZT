@@ -136,7 +136,7 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                    
                     // Update Basic informations
                     basicInformations.level = Math.ceil( ($scope.semesters.length - $scope.semestersSelected_status) / 2 );
-                    CoinHistory.get({by: "semesters", id: semester.id}, function(coinhistories){
+                    CoinHistory.get({semesterId: semester.id, studentId: student.id}, function(coinhistories){
                         basicInformations.coin = 0;
                         for (var i = 0; i < coinhistories.monthlyCoins.length; i++ ) {
                             basicInformations.coin += coinhistories.monthlyCoins[i];
@@ -150,7 +150,7 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                         }
                     });
                     basicInformations.semesterVerifiedNum = bookshelfStatistics.semesterVerified.length;
-                    PointHistory.get({by: "semesters", id: semester.id}, function(pointhistories){
+                    PointHistory.get({semesterId: semester.id, studentId: student.id}, function(pointhistories){
                         basicInformations.point = 0;
                         for (var i = 0; i < pointhistories.monthlyPoints.length; i++ ) {
                             basicInformations.point += pointhistories.monthlyPoints[i];

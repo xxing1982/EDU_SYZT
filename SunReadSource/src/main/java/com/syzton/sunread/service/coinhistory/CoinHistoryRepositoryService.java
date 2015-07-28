@@ -177,10 +177,12 @@ public class CoinHistoryRepositoryService implements CoinHistoryService {
         return model;
     }
 
+    @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
-	public List<CoinHistory> findBySemesterId(long semesterId) {
+	public List<CoinHistory> findBySemesterIdAndStudentId(long semesterId, long studentId) {
 		Semester semester = semesterRepository.findOne(semesterId);
-		List<CoinHistory> coinHistories = repository.findBySemester(semester.getStartTime(), semester.getEndTime());
+		Student student = studentRepository.findOne(studentId);
+		List<CoinHistory> coinHistories = repository.findBySemesterAndStudent(semester.getStartTime(), semester.getEndTime(), student);
 		return coinHistories;
 	}
 }

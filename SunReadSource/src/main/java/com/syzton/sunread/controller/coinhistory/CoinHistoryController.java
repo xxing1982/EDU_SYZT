@@ -111,12 +111,13 @@ public class CoinHistoryController extends BaseController {
         return new PageResource<>(coinhistoryPage, "page", "size");
     }
     
-    @RequestMapping(value = "/semesters/{semesterId}/coinhistories", method = RequestMethod.GET)
+    @RequestMapping(value = "/coinhistories", method = RequestMethod.GET)
     @ResponseBody
-    public CoinHistoriesDTO findCoinHistoriesBySemesterId( @PathVariable("semesterId") long semesterId ) {
+    public CoinHistoriesDTO findCoinHistories( @RequestParam("semesterId") long semesterId, 
+			 								   @RequestParam("studentId") long studentId ) {
         Semester semester = semesterService.findOne(semesterId);
         
-        List<CoinHistory> coinhistories = service.findBySemesterId(semesterId);
+        List<CoinHistory> coinhistories = service.findBySemesterIdAndStudentId(semesterId, studentId);
         
         return new CoinHistoriesDTO(coinhistories, semester.getStartTime(), semester.getEndTime());
     }

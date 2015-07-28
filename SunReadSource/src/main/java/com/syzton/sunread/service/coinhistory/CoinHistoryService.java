@@ -62,6 +62,6 @@ public interface CoinHistoryService {
 	
 	public Page<CoinHistory> findByClassId(Pageable pageable, Long classId) throws NotFoundException;
 
-	public List<CoinHistory> findBySemesterId(long semesterId);
+	public List<CoinHistory> findBySemesterIdAndStudentId(long semesterId, long studentId);
 
 }

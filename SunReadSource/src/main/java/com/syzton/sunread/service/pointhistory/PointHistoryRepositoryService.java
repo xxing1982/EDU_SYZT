@@ -154,18 +154,12 @@ public class PointHistoryRepositoryService implements PointHistoryService {
         return model;
     }
 
-    @Transactional(readOnly = true, rollbackFor = {NotFoundException.class})
-	@Override
-	public List<PointHistory> findByStudentId(Long studentId) {
-        LOGGER.debug("Finding all pointHistory entries by user id");
-        Student student = studentRepository.findOne(studentId);
-        return repository.findByStudent(student);
-	}
-
-	@Override
-	public List<PointHistory> findBySemesterId(long semesterId) {
+    @Transactional(rollbackFor = {NotFoundException.class})
+    @Override
+	public List<PointHistory> findBySemesterIdAndStudentId(long semesterId, long studentId) {
 		Semester semester = semesterRepository.findOne(semesterId);
-		List<PointHistory> pointHistories = repository.findBySemester(semester.getStartTime(), semester.getEndTime());
+		Student student = studentRepository.findOne(studentId);
+		List<PointHistory> pointHistories = repository.findBySemesterAndStudent(semester.getStartTime(), semester.getEndTime(), student);
 		return pointHistories;
 	}
 }

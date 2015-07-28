@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.model.pointhistory.PointHistory;
@@ -57,12 +58,13 @@ public class PointHistoryController {
        return added;
     }
     
-    @RequestMapping(value = "/api/semesters/{semesterId}/pointhistories", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/pointhistories", method = RequestMethod.GET)
     @ResponseBody
-    public PointHistoriesDTO findPointHistoriesBySemesterId( @PathVariable("semesterId") long semesterId ) {
+    public PointHistoriesDTO findPointHistories( @RequestParam("semesterId") long semesterId, 
+    		 									 @RequestParam("studentId") long studentId ) {
 
         Semester semester = semesterService.findOne(semesterId);
-        List<PointHistory> pointhistories = service.findBySemesterId(semesterId);
+        List<PointHistory> pointhistories = service.findBySemesterIdAndStudentId(semesterId, studentId);
         
         return new PointHistoriesDTO(pointhistories, semester.getStartTime(), semester.getEndTime());
     }
@@ -79,16 +81,6 @@ public class PointHistoryController {
 //        return deleted;
 //    }
 //    
-    @RequestMapping(value = "/api/users/{userId}/pointhistories", method = RequestMethod.GET)
-    @ResponseBody
-    public List<PointHistory> findPointHistoriesByStudentId( @PathVariable("studentId") long studentId ) {
-        LOGGER.debug("Finding all pointhistory entries by userId.");
-
-        List<PointHistory> models = service.findByStudentId(studentId);
-        LOGGER.debug("Found {} pointhistory entries.", models.size());
-
-        return models;
-    }
 //    
 //    @RequestMapping(value = "/api/pointhistories/{id}", method = RequestMethod.PUT)
 //    @ResponseBody
