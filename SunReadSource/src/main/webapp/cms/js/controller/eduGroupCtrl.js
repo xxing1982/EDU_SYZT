@@ -1,11 +1,12 @@
-ctrls.controller("eduGroupCtrl",['$scope', '$rootScope', 'SchoolAdmin', 'Pageable', 'GetEduGroup', '$stateParams',
-	function($scope, $rootScope, SchoolAdmin, Pageable, GetEduGroup, $stateParams){
+ctrls.controller("eduGroupCtrl",['$scope', '$rootScope', 'EduGropu', 'Pageable', 'GetEduGroup', '$stateParams',
+	function($scope, $rootScope, EduGropu, Pageable, GetEduGroup, $stateParams){
 		
 		//add
 		$scope.add = {};
 		$scope.AddSys = function(){
-			Province.Add($scope.add, function(){
+			EduGropu.Add($scope.add, function(){
 				$("#addModal").modal('hide');
+				location.reload();
 			})
 		}
 
@@ -13,12 +14,27 @@ ctrls.controller("eduGroupCtrl",['$scope', '$rootScope', 'SchoolAdmin', 'Pageabl
 		$scope.edit = {};
 		$scope.updateSys = function(item){
 			$scope.message = "";
-			$scope.edit = angular.copy(item);
+			var temp = angular.copy(item);
+			$scope.edit.id = temp.id;
+			$scope.edit.name = temp.name;
 		}
 		$scope.EditSys = function(){
-			Province.UpdateRegion($scope.edit, function(){
+			EduGropu.Update($scope.edit, function(){
 				$("#editModal").modal('hide');
+				location.reload();
 			})
+		}
+
+		$scope.deleteSys = function(item){
+			$rootScope.confirm_modal = {};
+			$rootScope.confirm_modal.title="提示";
+			$rootScope.confirm_modal.content="确定删除吗？";
+			$rootScope.confirm_modal.click = function(){
+				EduGropu.Delete(item.id, function(){
+					location.reload();
+				})
+			}
+			$('#confirm-modal').modal();
 		}
 
 		$scope.createPageable = function (){

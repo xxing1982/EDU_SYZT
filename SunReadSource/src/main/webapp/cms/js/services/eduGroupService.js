@@ -1,40 +1,25 @@
 var adminServices = angular.module('eduGropuServices', ['ngResource', 'nourConfig']);
 
-adminServices.factory('SystemAdmin',['$resource', 'config', '$http',
+adminServices.factory('EduGropu',['$resource', 'config', '$http',
 	function($resource, config, $http){
 		var api = {};
-		api.Get = function(callback){
-			$http.get(config.HOST + 'SystemAdmin')
+		api.Add = function(data, callback){
+			$http.post(config.HOST + 'eduGroup/', data)
 			.success(function(data, status, headers, config){
-				callback(data);
-			});
+				callback(data);s
+			})
 		};
-		api.Add = function(userid, password, callback){
-			$http.post(config.HOST + 'systemadmin?userid=' + userid + "&password=" + password)
+		api.Update = function(data, callback){
+			$http.put(config.HOST + 'eduGroup/' + data.id, data)
 			.success(function(data, status, headers, config){
 				callback(data);
 			})
-			.error(function(data,header,config,status){
-				callback(data);
-			});
-		};
-		api.Update = function(userid, oldpassword, newpassword, callback){
-			$http.put(config.HOST + 'systemadmin?userid=' + userid + "&oldpassword=" + oldpassword + "&newpassword=" + newpassword)
-			.success(function(data, status, headers, config){
-				callback(data);
-			})
-			.error(function(data,header,config,status){
-				callback(data);
-			});
 		};
 		api.Delete = function(data, callback){
-			$http.delete(config.HOST + 'systemadmin?id='+ data)
+			$http.delete(config.HOST + 'eduGroup/'+ data)
 			.success(function(data, status, headers, config){
 				callback(data);
 			})
-			.error(function(data,header,config,status){
-				callback(data);
-			});
 		};
 		return api;
 	}]);

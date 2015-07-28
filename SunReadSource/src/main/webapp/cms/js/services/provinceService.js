@@ -27,5 +27,11 @@ provinceServices.factory('Province',['$resource', 'config', '$http',
 				callback(data);
 			});
 		}
+		api.Delete = function(id, callback){
+			$http.delete(config.HOST + 'regions/' + id)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
 		return api;
 	}]);
