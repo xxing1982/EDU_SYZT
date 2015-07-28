@@ -68,7 +68,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
          .state('edugroup',{
         	url: '/edugroup',
             templateUrl: "partials/edugroup.html",
-            controller: 'edugroupCtrl'
+            controller: 'eduGroupCtrl'
         })
         .state('school',{
         	url: '/school',

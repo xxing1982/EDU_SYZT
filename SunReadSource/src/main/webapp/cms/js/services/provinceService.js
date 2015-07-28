@@ -15,5 +15,17 @@ provinceServices.factory('Province',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
+		api.UpdateRegion = function(data, callback){
+			$http.put(config.HOST + 'regions/' + data.id, data)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
+		api.Add = function(data, callback){
+			$http.post(config.HOST + 'regions/', data)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
 		return api;
 	}]);
