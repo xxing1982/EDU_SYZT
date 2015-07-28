@@ -90,6 +90,10 @@ public class RegionRepositoryService implements RegionService {
 		Region model = findOne(id);
 
 		LOGGER.debug("Found a note entry: {}", model);
+		model.setParent(updated.getParent());
+		model.setRegionType(updated.getRegionType());
+		model.setSubRegion(updated.getSubRegion());
+		model.setName(updated.getName());
 		regionRepo.save(model);
 		return updated;
 	}
