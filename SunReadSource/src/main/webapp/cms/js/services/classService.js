@@ -9,8 +9,8 @@ adminServices.factory('Clazzs',['$resource', 'config', '$http',
 				callback(data);
 			});
 		};
-		api.Update = function(id, data,callback){
-			$http.put(config.HOST + 'clazz/'+ id, data)
+		api.Update = function(data,callback){
+			$http.put(config.HOST + 'clazz/'+ data.id, data)
 			.success(function(data, status, headers, config){
 				callback(data);
 			});

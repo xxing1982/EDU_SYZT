@@ -33,7 +33,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         .state('teacher',{
         	url: '/teacher',
             templateUrl: "partials/teacher.html",
-            controller: 'teacherCtrl'
+            controller: 'TeacherCtrl'
         })
          .state('admin',{
              url: '/admin',

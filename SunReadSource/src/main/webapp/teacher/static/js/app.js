@@ -11,6 +11,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
     $urlRouterProvider
     .when('/teachingCenter', '/teachingCenter/myTask')
     .when('/teachingCenter/addBook', '/teachingCenter/addBook/quick')
+    .when('/statistics', '/statistics/students')
     .otherwise('/');
     // $httpProvider.responseInterceptors.push('SecurityHttpInterceptor');
 
@@ -117,11 +118,6 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'partials/readingDynamicActions.html',
             controller: 'readingDynamicActionsController'
         })
-        //statisticsSummary page
-        .state('statisticsSummary',{
-            url: '/statisticsSummary',
-            templateUrl: 'partials/statisticsSummary.html'
-        })
         //personalProfile page
         .state('personalProfile',{
             url: '/personalProfile',
@@ -133,6 +129,21 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/messageCenter',
             templateUrl: "partials/messageCenter.html",
             controller: "messageCenterController"
+        })
+        //statistics page
+        .state('statistics',{
+            url: '/statistics',
+            templateUrl: 'partials/statistics.html',
+            controller: "statisticsController",
+            controllerAs: "parentCtrl",
+        })
+        //students statistics page
+        .state('statistics.students',{
+            url: '/students',
+            parent: 'statistics',
+            templateUrl: 'partials/statistics/students.html',
+            controller: "statisticsStudentsController",
+            controllerAs: "ctrl",
         })
 }]);
 

@@ -39,10 +39,6 @@ public class EduGroupRepositoryService implements EduGroupService {
 
         LOGGER.debug("Adding a new edu group entry with information: {}", add);
         
-        EduGroup exits = repository.findOne(add.getId());        
-        if(exits != null){
-            throw new DuplicateException("EduGroup with name: "+add.getName()+" is already exits..");
-        }
         
         EduGroup model = EduGroup.getBuilder(add.getName())
         		.description(add.getDescription()).build();   

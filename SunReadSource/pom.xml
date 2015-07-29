@@ -173,6 +173,9 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.5.v20120716</version>
+                <configuration>
+					<scanIntervalSeconds>1</scanIntervalSeconds>
+				</configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -370,10 +373,10 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
-		<dependency>  
-    		<groupId>org.springframework.security.oauth</groupId>  
-    		<artifactId>spring-security-oauth2</artifactId>  
-    		<version>2.0.3.RELEASE</version>  
+		<dependency>
+    		<groupId>org.springframework.security.oauth</groupId>
+    		<artifactId>spring-security-oauth2</artifactId>
+    		<version>2.0.3.RELEASE</version>
 		</dependency>
 		<!-- end spring security -->
 
@@ -429,7 +432,7 @@
             <artifactId>bonecp</artifactId>
             <version>${bonecp.version}</version>
         </dependency>
-        
+
         <!-- Servlet API 3.0 -->
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -464,19 +467,19 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
-        
-        <!-- apache poi --> 
-        <dependency> 
-            <groupId>org.apache.poi</groupId> 
-            <artifactId>poi</artifactId> 
-            <version>3.11</version> 
-        </dependency> 
-        <dependency> 
-            <groupId>org.apache.poi</groupId> 
-            <artifactId>poi-ooxml</artifactId> 
-            <version>3.11</version> 
-        </dependency> 
-        
+
+        <!-- apache poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.11</version>
+        </dependency>
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -558,10 +561,10 @@
             <version>2.1</version>
         </dependency>
         <!-- Required by ftp util -->
-        <dependency>  
-        	<groupId>commons-net</groupId>  
-        	<artifactId>commons-net</artifactId>  
-        	<version>3.2</version>  
+        <dependency>
+        	<groupId>commons-net</groupId>
+        	<artifactId>commons-net</artifactId>
+        	<version>3.2</version>
     	</dependency>
         <!-- Quartz framework -->
         <dependency>

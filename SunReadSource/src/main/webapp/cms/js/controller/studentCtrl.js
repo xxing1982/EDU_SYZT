@@ -1,5 +1,5 @@
-ctrls.controller("studentCtrl",['$scope', '$rootScope','Pageable', 'GetStudent', '$stateParams',
-	function($scope, $rootScope, Pageable, GetStudent, $stateParams){
+ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', 'GetStudent', '$stateParams',
+	function($scope, $rootScope, Students, Pageable, GetStudent, $stateParams){
 		$scope.selectSchool = {
 			isEdit: true,
 			isShowSchool: true,
@@ -12,6 +12,18 @@ ctrls.controller("studentCtrl",['$scope', '$rootScope','Pageable', 'GetStudent',
 				$scope.createPageable();
 			}
 		};
+
+		$scope.deleteSys = function(item){
+			$rootScope.confirm_modal = {};
+			$rootScope.confirm_modal.title="提示";
+			$rootScope.confirm_modal.content="确定删除吗？";
+			$rootScope.confirm_modal.click = function(){
+				Students.Delete(item.id, function(){
+					location.reload();
+				})
+			}
+			$('#confirm-modal').modal();
+		}
 
 
 		$scope.createPageable = function (){

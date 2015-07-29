@@ -1,0 +1,77 @@
+<!-- Header bar -->
+<div class="myBlock mt30 page-body">
+    <div class="container-fluid"><div class="container-fluid">
+        <div class="row">
+            <div class="row-same-height">
+                <div class="col-xs-8 col-xs-height">
+                    <h5 class="title"><big><a ng-href="#/teachingCenter/addBook" class="dark-gray-2">学生统计</a></big></h5>
+                </div>
+            </div>
+        </div>
+    </div></div>
+</div>
+
+<!-- Items -->
+<div class="myBlock mt20 page-body" ng-repeat="order in orderLoadable.entities.content">
+    <div class="container-fluid"><div class="container-fluid">
+    <div class="row">
+        <div class="row-same-height text-center">
+            <div class="col-xs-3 col-xs-height col-middle"><p class="row title">{{class.campusName}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{class.name}}</p></div>
+            <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.username}}</p></div>
+            <div class="col-xs-3 col-xs-height col-middle">
+                <p class="row title" ng-show="!order.editable.editing">任务目标：{{order.task.targetBookNum}}本</p>
+                <p class="row title" ng-show="order.editable.editing">任务目标：<input type="number" min="1" class="custom-input" style="width:60px" ng-model="order.editable.cached.targetBookNum" />本</p>
+            </div>
+            <div class="col-xs-3 col-xs-height col-middle">
+                <p class="row title" ng-show="!order.editable.editing">积分：{{order.task.targetPoint}}</p>
+                <p class="row title" ng-show="order.editable.editing">积分：<input type="number" min="1" class="custom-input" style="width:60px" ng-model="order.editable.cached.targetPoint" /></p>
+            </div>
+            <div class="col-xs-2 col-xs-height col-middle">
+                <p class="text-right title">
+                    <a ng-show="!order.editable.editing" ng-click="order.editable.toggleEdit(false)">修改</a>
+                    <a ng-show="order.editable.editing" ng-click="order.editable.toggleEdit(false)">取消</a>
+                    <a ng-show="order.editable.editing" ng-click="toggleEditSave(order)">保存</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    </div></div>
+</div>
+
+<!--right part -->
+<div class="rightpart mt20">
+
+    <!-- 选择地区 -->
+    <div class="row conditionBlock myBlock">
+        <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <div class="row">
+                    <h4 style="color: rgba(150, 150, 150, 0.6);">选择地区</h4>
+                </div><!---->
+                <div class="row">
+                    <div class="col-xs-3 text-right"> <p class="row">省：</p></div>
+                    <div class="col-xs-9">
+                        <bs-dropdown ui-if="selected_status.LESSON" data-menu-type="button"
+                                     select-val="selected_status.LESSON = selectedVal"
+                                     preselected-item="selected_status.LESSON"
+                                     data-dropdown-data="statuses.LESSON">
+                        </bs-dropdown>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="filterText"> <p>市： </p></div>
+                    <div class="catogaryBtn">
+                        <bs-dropdown ui-if="selected_status.LESSON" data-menu-type="button"
+                                     select-val="selected_status.LESSON = selectedVal"
+                                     preselected-item="selected_status.LESSON"
+                                     data-dropdown-data="statuses.LESSON">
+                        </bs-dropdown>
+                    </div>
+                </div>
+
+            <!-- Place holder -->
+            <p class="col-md-12"></p>
+        </div>
+    </div>  
+</div>

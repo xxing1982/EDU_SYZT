@@ -1,5 +1,5 @@
-ctrls.controller("ClassCtrl",['$scope', '$rootScope', 'Clazzs', 'Pageable', 'GetClazzs', '$stateParams',
-	function($scope, $rootScope, Clazzs, Pageable, GetClazzs, $stateParams){
+ctrls.controller("TeacherCtrl",['$scope', '$rootScope', 'Teachers', 'Pageable', 'GetTeachers', '$stateParams',
+	function($scope, $rootScope, Teachers, Pageable, GetTeachers, $stateParams){
 		$scope.selectSchool = {
 			isEdit: true,
 			isShowSchool: true,
@@ -19,21 +19,11 @@ ctrls.controller("ClassCtrl",['$scope', '$rootScope', 'Clazzs', 'Pageable', 'Get
 			$rootScope.confirm_modal.title="提示";
 			$rootScope.confirm_modal.content="确定给这个班升年级吗？";
 			$rootScope.confirm_modal.click = function(){
-				Clazzs.UpdateGread(item.id, function(){
+				Teachers.UpdateGread(item.id, function(){
 					$('#confirm-modal').modal('hide');
 				})
 			}
 			$('#confirm-modal').modal();
-		}
-
-		//add
-		$scope.add = {};
-		$scope.AddSys = function(){
-			$scope.add.grade = $scope.selectGrade;
-			Clazzs.Add($scope.campusidSelected, $scope.add, function(){
-				$("#addModal").modal('hide');
-				location.reload();
-			})
 		}
 
 		//update
@@ -48,7 +38,7 @@ ctrls.controller("ClassCtrl",['$scope', '$rootScope', 'Clazzs', 'Pageable', 'Get
 		$scope.EditSys = function(){
 			$scope.message = "";
 
-			Clazzs.Update($scope.edit, function(){
+			Teachers.Update($scope.edit, function(){
 				$("#editModal").modal('hide');
 				location.reload();
 			})
@@ -60,7 +50,7 @@ ctrls.controller("ClassCtrl",['$scope', '$rootScope', 'Clazzs', 'Pageable', 'Get
 			$rootScope.confirm_modal.title="提示";
 			$rootScope.confirm_modal.content="确定删除吗？";
 			$rootScope.confirm_modal.click = function(){
-				Clazzs.Delete(item.id, function(){
+				Teachers.Delete(item.id, function(){
 					location.reload();
 				})
 			}
@@ -81,7 +71,7 @@ ctrls.controller("ClassCtrl",['$scope', '$rootScope', 'Clazzs', 'Pageable', 'Get
         	$scope.searchPageable.placeHolders.placeHoldersElement = {title: ""};
 
         	// Build the pageable object
-        	$scope.searchPageable.build(GetClazzs);
+        	$scope.searchPageable.build(GetTeachers);
         	$scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
 		}
 	}]);
