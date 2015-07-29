@@ -1,0 +1,13 @@
+<div>
+    <div class="sidebar myBlock">
+        <ul class="nav-sidebar nav" ng-controller="leftNavCtrl">
+            <li ng-class="{myActive:isActiveLeft(staticsticRouteMap.students)}"><a ui-sref='.students'><img src="../static/img/myTask.png"></img><span>学生统计</span></a></li>
+            <li ng-class="{myActive:isActiveLeft(staticsticRouteMap.classes)}"><a ui-sref='.classes'><img src="../static/img/myTask.png"></img><span>班级比较</span></a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" ui-view></div>
+        </div>
+    </div>
+</div>

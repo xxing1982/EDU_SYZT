@@ -6,7 +6,7 @@ function( $rootScope, $scope, $location, $window, Teacher, ShowAllClass) {
         index: /^\/$/,
         teachingCenter: /\/teachingCenter.*/,
         readingDynamic: /\/readingDynamic.*/,
-        statisticsSummary: /\/statisticsSummary.*/,
+        statistics: /\/statistics.*/,
     }
 
     // Get the information of teacher
