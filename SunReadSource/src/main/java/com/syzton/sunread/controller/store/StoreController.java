@@ -48,7 +48,7 @@ public class StoreController extends BaseController{
 
         storeService.deleteGift(giftId);
     }
-    @RequestMapping(value = "/gifts/{giftId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/gifts", method = RequestMethod.PUT)
     @ResponseBody
     public void updateGift(@RequestBody Gift gift) {
 
