@@ -27,7 +27,7 @@
                 <td>{{placeHolder.coin}}</td>
                 <td>{{placeHolder.creationTime}}</td>
                 <td>
-                    <!--<button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>-->
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
                     <button class="btn btn-primary" ng-click="deleteSys(placeHolder)">删除</button>
                 </td>
             </tr>
@@ -66,7 +66,7 @@
             <div class="col-xs-3">            
                 <div class="custom-page-number-group">
                     <a ng-click="searchPageable.showPage(goto)">上一页</a>
-                    <input type="number" class="custom-page-number-input" ng-model="goto"/>
+                    <input type="number" class="custom-page-number-input" ng-model="goto" min="1"/>
                     <a ng-click="searchPageable.showPage(goto)">下一页</a>
                 </div>
             </div>
@@ -126,6 +126,34 @@
                 <button type="button" class="btn btn-primary" ng-click="AddSys()" ng-disabled="addForm.$invalid">Add</button>
             </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form role="form" name="myForm" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="name" ng-model="edit.name">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="EditSys()" ng-disabled="myForm.$invalid">Edit</button>
+                <span>{{message}}</span>
+            </div>
+        </form>
         </div>
     </div>
 </div>

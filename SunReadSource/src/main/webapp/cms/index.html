@@ -170,20 +170,22 @@
     	
     function PostData(url){
     	var xhr = new XMLHttpRequest();
-						var fd = new FormData();
-						// 关联表单数据,可以是自定义参数
-						var fileName = "myfile";
+		var fd = new FormData();
+		// 关联表单数据,可以是自定义参数
+		var fileName = "myfile";
 							
 
-						fd.append(fileName,
-								$("#myfile")[0].files[0]);
+		fd.append(fileName,
+		$("#myfile")[0].files[0]);
 
 
-						
-						xhr.open("POST", url);
-						//xhr.setRequestHeader("Content-Type", "multipart/form-data;boundary=AaB03x");
-						xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.access_token);
-						xhr.send(fd);
+		xhr.open("POST", url);
+		//xhr.setRequestHeader("Content-Type", "multipart/form-data;boundary=AaB03x");
+		xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.access_token);
+		xhr.onreadystatechange=function(){
+			alert('已成功');
+		}
+		xhr.send(fd);
     	
         // $.ajax({
             // type: 'post',

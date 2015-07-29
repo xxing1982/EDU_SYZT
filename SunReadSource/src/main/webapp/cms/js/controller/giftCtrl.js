@@ -1,5 +1,5 @@
-ctrls.controller("giftCtrl",['$scope', '$rootScope','Pageable', 'GetGifts', 'Gift', '$stateParams', 'Dropzone', 'config', 'User',
-	function($scope, $rootScope, Pageable, GetGifts, Gift, $stateParams, Dropzone, config, User){
+ctrls.controller("giftCtrl",['$scope', '$rootScope','Pageable', 'GetGifts', 'UpdateGift', 'Gift', '$stateParams', 'Dropzone', 'config', 'User',
+	function($scope, $rootScope, Pageable, GetGifts, UpdateGift, Gift, $stateParams, Dropzone, config, User){
 		$scope.selectSchool = {
 			isEdit: true,
 			isShowSchool: true,
@@ -28,9 +28,24 @@ ctrls.controller("giftCtrl",['$scope', '$rootScope','Pageable', 'GetGifts', 'Gif
     			$scope.add.$save(function(){
 					$scope.add = new Gift();
 					$("#addModal").modal('hide');
+					location.reload();
 				});
   			});
 			
+		}
+
+		//update
+		$scope.edit = new Gift();
+		$scope.updateSys = function(item){
+			$scope.message = "";
+			var temp = angular.copy(item);
+			$scope.edit.id = temp.id;
+			$scope.edit.name = temp.name;
+		}
+		$scope.EditSys = function(){
+			UpdateGift.Update($scope.edit, function(){
+				location.reload();
+			})
 		}
 
 		//delete
