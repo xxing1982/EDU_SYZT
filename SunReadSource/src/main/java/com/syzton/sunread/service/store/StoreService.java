@@ -15,6 +15,8 @@ public interface StoreService {
 
     void addGift(Gift gift);
 
+    void updateGift(Gift gift);
+
     void deleteGift(long giftId);
 
     void exchangeGift(long studentId,long giftId,int count);

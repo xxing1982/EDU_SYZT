@@ -64,6 +64,13 @@ public class StoreRepositoryService implements StoreService {
     }
 
     @Override
+    public void updateGift(Gift gift) {
+        Gift  exist = getGift(gift.getId());
+        exist.setName(gift.getName());
+        giftRepository.save(gift);
+    }
+
+    @Override
     public void deleteGift(long giftId) {
 
         getGift(giftId);
