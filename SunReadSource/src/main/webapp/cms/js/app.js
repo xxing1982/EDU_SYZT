@@ -99,7 +99,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
 }]);
 routeApp.run(['$rootScope', '$injector', function($rootScope, $injector){
     if (sessionStorage.getItem("cmsId") == null || sessionStorage.getItem("cmsId") == "") {
-        window.location.href="../login.html";
+        window.location.href="cms/login.html";
     };
     $rootScope.id = sessionStorage.getItem("cmsId");
 
