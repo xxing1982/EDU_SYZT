@@ -62,15 +62,16 @@ $(document).ready(function(){
                                 url: 'cms/index.html'                        
                             },
                             ROLE_SCHOOLE_DISTRICT : {
-                                idKey: 'teacherId',
+                                idKey: 'userId',
                                 url: 'teacher/prototype/index.html'                
                             },
                             ROLE_GROUP : {
-                                idKey: 'teacherId',
+                                idKey: 'userId',
                                 url: 'teacher/prototype/index.html'           
                             }
                         }
-                        var roleForward = roleForwardMap[dataLogin.roles[0].name];
+                        var role = dataLogin.roles[0],
+                            roleForward = roleForwardMap[role.name];
                         sessionStorage.setItem(roleForward.idKey, dataLogin.id);
                         window.location.href = roleForward.url;
 					}

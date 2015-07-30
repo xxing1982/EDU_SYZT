@@ -1,5 +1,5 @@
-ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window', 'Teacher', 'ShowAllClass',
-function( $rootScope, $scope, $location, $window, Teacher, ShowAllClass) {
+ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window', 'Teacher', 'User', 'ShowAllClass',
+function( $rootScope, $scope, $location, $window, Teacher, User, ShowAllClass) {
 
     // Route map regexp
     $rootScope.routeMap = {
@@ -10,9 +10,9 @@ function( $rootScope, $scope, $location, $window, Teacher, ShowAllClass) {
     }
 
     // Get the information of teacher
-    Teacher.get({id: $rootScope.id}, function(data){
+    eval($rootScope.type).get({id: $rootScope.id}, function(data){
         $rootScope.teacher = data
-    });
+    }); 
 
     // Update the nav bar active
     $rootScope.isActive = function(routeRegexp) {
@@ -21,7 +21,7 @@ function( $rootScope, $scope, $location, $window, Teacher, ShowAllClass) {
 
     // The logout method
     $rootScope.logout = function(){
-        delete $rootScope;
+        sessionStorage.clear();
     }
 
     $rootScope.ShowClasses = function(){

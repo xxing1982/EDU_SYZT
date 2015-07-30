@@ -22,6 +22,6 @@ ctrls.controller('indexCtrl', ['$rootScope', '$scope', '$location', '$window','S
     
     // The logout method
     $scope.logout = function(){
-        delete $rootScope;
+        sessionStorage.clear();
     }
 }]);

@@ -148,8 +148,21 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
 }]);
 
 routeApp.run(['$rootScope', function($rootScope){
-    if (sessionStorage.getItem("teacherId") == null || sessionStorage.getItem("teacherId") == "") {
+
+    // Id cache id from sessionStorage
+    var teacherId = sessionStorage.getItem("teacherId"),
+        userId = sessionStorage.getItem("userId");
+    
+    if ( teacherId || userId ) {
+                
+        // Login successfully 
+        $rootScope.type = teacherId ? 'Teacher' : 'User';
+        $rootScope.id = teacherId ? teacherId : userId;
+        
+    } else {
+        
+        // Not login so login first
         window.location.href="../../login.html";
-    };
-    $rootScope.id = sessionStorage.getItem("teacherId");
+    }
+    
 }]);
