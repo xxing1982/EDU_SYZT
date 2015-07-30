@@ -230,7 +230,25 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             url: '/othersBookshelf/:studentId',
             templateUrl: "partials/othersBookshelf.html",
             controller: "othersBookshelfController"
-        });
+        })
+        //other's note
+        .state('othersNote', {
+            url: '/othersNote/:studentId',
+            templateUrl: "partials/readingCenterMyNote.html",
+            controller: "othersNoteController"
+        })
+        .state('othersExam', {
+            url: '/othersExam/:studentId',
+            templateUrl: "partials/readingCenterMyEvaluating.html",
+            controller: "othersExamController"
+        })
+        .state('othersStat',{
+            url: '/othersStat/:studentId',
+            templateUrl: "partials/statisticsSummary.html",
+            controller: "othersStatController"
+        })
+
+    ;
 
 
 

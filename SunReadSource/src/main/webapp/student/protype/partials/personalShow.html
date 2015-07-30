@@ -6,7 +6,8 @@
                 <div class="col-md-4"><img ng-src="{{picture.current | formatImg}}" class="img-responsive img-circle border-shadow" style="height: 200px;width: 200px"></div>
                 <div class="col-md-8 theme-font">
                     <div class="col-md-12 index-head-info-text">
-                        <h2><strong>{{userInfo.username}}</strong></h2>
+                        <span class="fs_30" style="margin-right: 50px"><strong>{{userInfo.username}}</strong></span>
+                        <a href="#/othersStat/{{userInfo.id}}" class="btn btn-green-solid"> 阅读轨迹</a>
                     </div>
                     <div class="col-md-12 index-head-info-text">
                         {{userInfo.gender | formatGender}}
@@ -86,10 +87,12 @@
 
             <!-- Fish -->
             <div class="title">
-                <div class="fish">
-                    <img class="containter" src="../static/img/personalShow/fish.png" ng-init="n = 74" ng-style="{width: {{n}} + '%', height: {{n}} + '%', margin: {{(100-n)/2}} + '%'}"/>
+                <div class="fish" style="margin-top:50px">
+                    <div class="col-md-12"><img ng-src="{{imageServer + selectedFish.fishPic}}" class="img-responsive" style="margin: auto" /></div>
                 </div>
             </div>
+
+
         </div>
         </div>
         </div>
@@ -118,7 +121,7 @@
                                     </div>
                                     <div class="col-xs-8 col-xs-offset-2">
                                         <div class="row text-center paragraph">
-                                            <p>{{book.bookName}}<small><br/>作者：{{book.author}}</small></p>
+                                            <p>{{book.bookName | formatSize4}}<small><br/>作者：{{book.author}}</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +132,74 @@
                 </div>
             </div>
         </div>
+        <div class="row bottom-separator1"></div>
+
+        <div class="row row-title">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>他的测评</h4></div>
+                        <div class="col-md-2 text-right"><a class="title-link" href="#/othersExam/{{userInfo.id}}">更多></a></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3" ng-repeat="item in exam.examDTOs">
+                                <div class="book-bottom-text">
+                                    <div class="row">
+                                        <div class="col-xs-8 col-xs-offset-2">
+                                            <img ng-src="{{item.pictureUrl | formatPictrueUrl}}" class="img-responsive">
+                                        </div>
+                                    </div>
+                                    <div><h4><a href="#readingCenter/bookDetails/{{item.bookId}}/">{{item.name}}</a></h4></div>
+                                    <div>时间:{{item.creationTime}}&nbsp;&nbsp;&nbsp;积分:{{item.point}}</div>
+                                    <div>成绩:{{userInfo.examScore}}  正确率:{{item.passCount/item.questionNum*100}}%</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row bottom-separator"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title">
+                    <div class="row">
+                        <div class="col-md-10"><h4>他的笔记</h4></div>
+                        <div class="col-md-2 text-right"><a class="title-link" href="#/othersNote/{{userInfo.id}}">更多></a></div>
+                    </div>
+                </div>
+                <div class="paragraph">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <!-- Rank of notes -->
+                            <div class="col-md-3" ng-repeat="item in notes">
+                                <div class="row">
+                                    <div class="col-xs-8 col-xs-offset-2">
+                                        <div class="row">
+                                            <img ng-src="{{item.bookPictureUrl | formatPictrueUrl}}" class="img-responsive custom-shadow">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div><h4>{{item.book}}</h4></div>
+                                <div title="{{item.title}}">笔记名：{{item.title | formatSize4}}</div>
+                                <div>作者：{{userInfo.username}}  评论：{{item.commentCount}}条</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row bottom-separator"></div>
+
+
     </div>
     </div>
 </div>
