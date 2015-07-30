@@ -242,8 +242,8 @@ ctrls.controller("statisticsSummaryController", ['$scope' , '$rootScope', '$reso
                 
                 // Push dropdown menu
                 $scope.semestersStatuses.push({ id: i, 
-                                               name: $scope.semesters[i].semester,
-                                               callback: $scope.semesters.updateStatistics });
+                                                name: $scope.semesters[i].semester,
+                                                callback: $scope.semesters.updateStatistics });
             }
             
             // Chooese the latest semester 

@@ -32,20 +32,47 @@ $(document).ready(function(){
 						request.setRequestHeader("Authorization", "bearer " + data.access_token);
 					},
 					success: function(dataLogin){
-						for(var i = 0; i < dataLogin.roles.length; i++){
-							if (dataLogin.roles[i].id == 2) {
-								sessionStorage.setItem("teacherId", dataLogin.id);
-								window.location.href="teacher/prototype/index.html";
-								return;
-							}
-							if (dataLogin.roles[i].id == 5) {
-								sessionStorage.setItem("cmsId", dataLogin.id);
-								window.location.href="cms/index.html";
-								return;
-							}
-						}
-						sessionStorage.setItem("userId", dataLogin.id);
-						window.location.href="student/protype/index.html";
+                        var roleForwardMap = {
+                            ROLE_USER : {
+                                idKey: 'serId',
+                                url: 'student/protype/index.html'                            
+                            },
+                            ROLE_TEACHER : {
+                                idKey: 'teacherId',
+                                url: 'teacher/prototype/index.html'                          
+                            },
+                            ROLE_STUDENT : {
+                                idKey: 'userId',
+                                url: 'student/protype/index.html'                        
+                            },
+                            ROLE_PARENT : {
+                                idKey: 'teacherId',
+                                url: 'teacher/prototype/index.html'                           
+                            },
+                            ROLE_CMS : {
+                                idKey: 'cmsId',
+                                url: 'cms/index.html'                         
+                            },
+                            ROLE_SYSTEM_SUPER_ADMIN : {
+                                idKey: 'cmsId',
+                                url: 'cms/index.html'                    
+                            },
+                            ROLE_SYSTEM_ADMIN : {
+                                idKey: 'cmsId',
+                                url: 'cms/index.html'                        
+                            },
+                            ROLE_SCHOOLE_DISTRICT : {
+                                idKey: 'teacherId',
+                                url: 'teacher/prototype/index.html'                
+                            },
+                            ROLE_GROUP : {
+                                idKey: 'teacherId',
+                                url: 'teacher/prototype/index.html'           
+                            }
+                        }
+                        var roleForward = roleForwardMap[dataLogin.roles[0].name];
+                        sessionStorage.setItem(roleForward.idKey, dataLogin.id);
+                        window.location.href = roleForward.url;
 					}
 				});
 			},
