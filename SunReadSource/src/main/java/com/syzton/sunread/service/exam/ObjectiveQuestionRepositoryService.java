@@ -331,6 +331,7 @@ public class ObjectiveQuestionRepositoryService implements
 				break;
 			}
 			String type = ExcelUtil.getStringFromExcelCell(row.getCell(0));
+			type=type.trim();
 			if("词汇测试".equals(type)||"验证测试".equals(type)){
 				currentQuestion = updateOrSaveQuestionFromRow(failMap,row);
 			}else if("选项".equals(type)){
@@ -424,8 +425,8 @@ public class ObjectiveQuestionRepositoryService implements
 		
 		option.setContent(content);
 		options.add(option);
-		boolean isCorrectAnswer = ExcelUtil.getBoolFromExcelCell(row.getCell(3));
-		if(isCorrectAnswer){
+		String isCorrectAnswer = ExcelUtil.getStringFromExcelCell(row.getCell(3));
+		if("true".equalsIgnoreCase(isCorrectAnswer.trim())){
 			currentQuestion.setCorrectAnswer(option);
 		}
 		currentQuestion.setOptions(options);

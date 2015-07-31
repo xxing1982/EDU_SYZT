@@ -131,7 +131,7 @@ import java.util.Map;
  				continue;
  			}
  			
- 			Teacher teacher = userService.findByTeacherId(user.getId());
+ 			Teacher teacher = userService.findByTeacherId(u.getId());
  			if(teacher == null){
  				failMap.put(i+1, "教师不存在:"+userId);
  				continue;
@@ -160,6 +160,10 @@ import java.util.Map;
  			tc.setClazzId(clazz.getId());
  			tc.setTeacherId(teacher.getId());
  			teacherClazzRepository.save(tc);
+ 			if(teacher.getCurrentClassId()==0){
+ 				teacher.setCurrentClassId(clazz.getId());
+ 				userService.saveTeacher(teacher);
+ 			}
  		}  
  		return failMap;
  	}

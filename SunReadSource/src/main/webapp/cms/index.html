@@ -47,7 +47,7 @@
 					<li><a href="#region">区域</a></li>
 					<li><a href="#edugroup">教育集团</a></li>
 					<li><a href="#school">学校</a></li>
-					<li><a href="#campus">校区</a></li>
+					<li><a href="#campus">学区</a></li>
 					<li><a href="#clazz">班级</a></li>
 					<li><a href="#teacher">老师</a></li>
 					<li><a href="#student">学生</a></li>
@@ -168,15 +168,16 @@
 
     //$("form[enctype='multipart/form-data'] input[type='submit']").die().live('click', function(url){
     	
-    function PostData(url){
+    function PostData(url,id){
     	var xhr = new XMLHttpRequest();
 		var fd = new FormData();
 		// 关联表单数据,可以是自定义参数
 		var fileName = "myfile";
 							
-
+		var inputFileEL = "#myfile";
+		if(id){inputFileEL=id;}
 		fd.append(fileName,
-		$("#myfile")[0].files[0]);
+		$(inputFileEL)[0].files[0]);
 
 
 		xhr.open("POST", url);

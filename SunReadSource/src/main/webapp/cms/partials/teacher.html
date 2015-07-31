@@ -14,6 +14,18 @@
             </div>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col-md-9 leftpart">
+            <div class="input-group search">
+                <form enctype="multipart/form-data" id="form1">
+                    Excel: <input type="file" id="relationFile" name="myfile" onChange="GetURL()" /><br/>
+
+                    <input type="submit" onClick="PostData('/api/upload/excel/teacherclazz','#relationFile')" value="Excel导入老师班级关系" /> 
+                </form>
+            </div>
+        </div>
+    </div>
 
     <chooseschool></chooseschool>
     <table class="table table-bordered table-hover">

@@ -198,7 +198,7 @@ public class CampusRepositoryService implements CampusService{
 				campus = new Campus();
 				campus.setName(campusName);
 			}
-			
+			campus.setEduGroup(group);
 			campus.setHeadmaster(ExcelUtil.getStringFromExcelCell(row.getCell(2)));
 			String province = ExcelUtil.getStringFromExcelCell(row.getCell(3));
 			String city = ExcelUtil.getStringFromExcelCell(row.getCell(4));
