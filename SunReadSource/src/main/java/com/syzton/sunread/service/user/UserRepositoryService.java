@@ -411,6 +411,14 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 //        }
         return teacher ;
     }
+    
+    @Transactional
+    @Override
+    public Teacher saveTeacher(Teacher teacher) {
+        teacher = teacherRepository.save(teacher);
+        return teacher ;
+    }
+    
     @Override
     public Page<Teacher> findTeacherByCampusId(long campusId,Pageable pageable){
         return teacherRepository.findByCampusId(campusId,pageable);
@@ -813,7 +821,42 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		}
 		return false;
 	}
-
+	
+	public String addSuperSystemAdmin(String userId, String password) {
+		User user = userRepository.findByUserId(userId);
+		if ("admin".equals(userId)&&user == null) {
+			SystemAdmin systemAdmin = new SystemAdmin();
+			systemAdmin.setUserId(userId);
+			systemAdmin.setUsername("系统管理员");
+			password = passwordEncoder.encode(password);
+			systemAdmin.setPassword(password);
+			systemAdmin.setAddress("");
+			systemAdmin.setBirthday((new Date()).getTime());
+			systemAdmin.setAge(1);
+			systemAdmin.setEmail("");
+			systemAdmin.setGender(GenderType.male);
+			systemAdmin.setNickname("");
+			systemAdmin.setPhoneNumber("123456");
+			systemAdmin.setPicture("");
+			systemAdmin.setQqId("");
+			systemAdmin.setWechatId("");
+			systemAdmin.setContactPhone("");
+			Role role = roleRepository.findByName("ROLE_SYSTEM_SUPER_ADMIN");
+			if (role == null) {
+				Role systemRole = new Role();
+				systemRole.setName("ROLE_SYSTEM_SUPER_ADMIN");
+				systemRole.setDesc("ROLE_SYSTEM_SUPER_ADMIN");
+				role = roleRepository.save(systemRole);
+			}
+			systemAdmin.addRole(role);
+			systemAdmin.setSuperAdmin(true);
+			systemAdminRepo.save(systemAdmin);
+			return "success";
+		} else {
+			return "该管理员已经存在";
+		}
+	}
+	
 	public String addSystemAdmin(String userId, String password) {
 		User currentUser = getUser();
 		Role superRole = new Role();
@@ -848,7 +891,6 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 				role = roleRepository.save(systemRole);
 			}
 			systemAdmin.addRole(role);
-			systemAdmin.setSuperAdmin(false);
 			systemAdminRepo.save(systemAdmin);
 			return "success";
 		} else {

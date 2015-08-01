@@ -45,6 +45,8 @@ public interface UserService {
     public User getSingleUser(String userName);
 
     public Teacher addTeacher(Teacher teacher);
+    
+    public Teacher saveTeacher(Teacher teacher);
 
     public Teacher findByTeacherId(Long id);
 
@@ -104,6 +106,8 @@ public interface UserService {
     public Page<Admin> getSchoolAdmins(long campusId,boolean isSuperAdmin,Pageable pageable);
 	
 	public Page<Admin> getAllSchoolAdmins(long campusId,Pageable pageable);
+	
+	public String addSuperSystemAdmin(String userId, String password);
 
 
 }

