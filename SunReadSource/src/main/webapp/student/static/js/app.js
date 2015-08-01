@@ -234,12 +234,12 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
         //other's note
         .state('othersNote', {
             url: '/othersNote/:studentId',
-            templateUrl: "partials/readingCenterMyNote.html",
+            templateUrl: "partials/othersNote.html",
             controller: "othersNoteController"
         })
         .state('othersExam', {
             url: '/othersExam/:studentId',
-            templateUrl: "partials/readingCenterMyEvaluating.html",
+            templateUrl: "partials/othersExam.html",
             controller: "othersExamController"
         })
         .state('othersStat',{
