@@ -15,15 +15,6 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 			case 0:
 			testExam = VerifyExam;
 			VerifyExam.get($rootScope.id, $rootScope.exam.bookId, function(data){
-				if (data.questions.length < 1) {
-					$rootScope.modal = {};
-					$rootScope.modal.title="提示";
-					$rootScope.modal.content="目前没有测试题！";
-					$rootScope.modal.click = function(){
-						location.reload();
-					}
-					$('#alert-modal').modal();
-				}
 				if(data.code == 3){
 					$rootScope.modal = {};
 					$rootScope.modal.title="提示";
@@ -32,6 +23,17 @@ ctrls.controller("readingCenterMultipleTestingController", ['$rootScope', '$scop
 						location.reload();
 					}
 					$('#alert-modal').modal();
+					return;
+				}
+				if (data.questions.length < 1) {
+					$rootScope.modal = {};
+					$rootScope.modal.title="提示";
+					$rootScope.modal.content="目前没有测试题！";
+					$rootScope.modal.click = function(){
+						location.reload();
+					}
+					$('#alert-modal').modal();
+					return;
 				}
 				Initial(data.questions);
 				$scope.myAnswer.examType = 'VERIFY';
