@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
+import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.repository.user.StudentRepository;
@@ -170,7 +170,7 @@ public class CoinHistoryController extends BaseController {
 				if ( index < 0 ) { index += 12; }
 				
 				// Update monthlyVerifiedNums
-				this.monthlyCoins[index] ++;
+				this.monthlyCoins[index] += coinHistory.getCoinType() == CoinType.IN ? coinHistory.getNum() : - coinHistory.getNum() ;
 			}
 		}
 	}

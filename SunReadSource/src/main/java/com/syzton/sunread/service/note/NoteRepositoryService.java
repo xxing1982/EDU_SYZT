@@ -18,9 +18,9 @@ import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.model.organization.Campus;
-import com.syzton.sunread.model.pointhistory.PointHistory;
-import com.syzton.sunread.model.pointhistory.PointHistory.PointFrom;
-import com.syzton.sunread.model.pointhistory.PointHistory.PointType;
+import com.syzton.sunread.model.coinhistory.CoinHistory;
+import com.syzton.sunread.model.coinhistory.CoinHistory.CoinFrom;
+import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
@@ -30,7 +30,7 @@ import com.syzton.sunread.repository.note.NoteRepository;
 import com.syzton.sunread.repository.organization.CampusRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
-import com.syzton.sunread.service.pointhistory.PointHistoryService;
+import com.syzton.sunread.service.coinhistory.CoinHistoryService;
 
 
 
@@ -83,11 +83,11 @@ public class NoteRepositoryService implements NoteService {
         this.campusRepository = campusRepository;
     }
     
-    private PointHistoryService pointHistoryService;
+    private CoinHistoryService coinHistoryService;
     
     @Autowired
-    public void PointHistoryService(PointHistoryService pointHistoryService) {
-        this.pointHistoryService = pointHistoryService;
+    public void CoinHistoryService(CoinHistoryService coinHistoryService) {
+        this.coinHistoryService = coinHistoryService;
     }
     
     private SemesterRepository semesterRepository;
@@ -122,13 +122,13 @@ public class NoteRepositoryService implements NoteService {
         note.setUser(user);
         note.setImage(added.getImage());
         
-        // Add pointhistories entity
-        PointHistory pointHistory = new PointHistory();
-        pointHistory.setPointFrom(PointFrom.FROM_NOTE);
-        pointHistory.setPointType(PointType.IN);
-        pointHistory.setNum(campus.getNoteScore());
-        pointHistory.setStudent((Student)user);
-        pointHistoryService.add(pointHistory);
+        // Add coinhistories entity
+        CoinHistory coinHistory = new CoinHistory();
+        coinHistory.setCoinFrom(CoinFrom.FROM_NOTE);
+        coinHistory.setCoinType(CoinType.IN);
+        coinHistory.setNum(campus.getNoteScore());
+        coinHistory.setStudent((Student)user);
+        coinHistoryService.add(coinHistory);
         return repository.save(note);
     }
     
