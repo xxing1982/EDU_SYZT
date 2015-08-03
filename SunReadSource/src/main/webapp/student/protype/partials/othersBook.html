@@ -1,0 +1,182 @@
+<div class="row"  style="margin-left: 15px;margin-right: 15px">
+
+<div class="readingCenter-right">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row readingCenter-right-top">
+            <div class="col-md-4"><img src="../static/img/myBookshelf.png" class="img-responsive img-rounded"></div>
+            <div class="col-md-5"></div>
+            <div class="col-md-3">
+            </div>
+        </div>
+
+        <div class="row readingCenter-right-body page-body container-fluid">
+            <div class="row buttom-separator">
+                <div class="col-xs-7">
+                    <ul id="bookReadStateTabs" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#unreadBooksTab" aria-controls="unreadBooksTab" role="tab" data-toggle="tab">未认证书单（{{shelf.unreadMust+shelf.unreadSelect}}）</a></li>
+                        <li role="presentation"><a href="#readBooksTab" aria-controls="readBooksTab" role="tab" data-toggle="tab">已认证书单（{{shelf.readSelect+shelf.readMust}}）</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group col-xs-4" data-toggle="buttons">
+                    <label class="btn btn-primary active"  ng-click = "selectBookAttributes('0')">
+                        <input type="radio" name="options" id="option1" autocomplete="off"  checked value="0"> 全部
+                    </label>
+                    <label class="btn btn-primary" ng-click = "selectBookAttributes('1')">
+                        <input type="radio" name="options" id="option2" autocomplete="off" value="1"> 必读
+                    </label>
+                    <label class="btn btn-primary" ng-click = "selectBookAttributes('2')">
+                        <input type="radio" name="options" id="option3"  autocomplete="off" value="2"> 选读
+                    </label>
+                </div>
+
+                <!--<div class="col-xs-1">-->
+                    <!--&lt;!&ndash; <span  class="icon-fanhui"></span> &ndash;&gt;-->
+                    <!--<a href="javascript :;" onClick="javascript :history.back(-1);">返回</a>-->
+                <!--</div>-->
+
+                <!-- <div class="col-xs-2">
+                    <bs-dropdown data-menu-type="button"
+                        select-val="selected_status = selectedVal"
+                        preselected-item="selected_status"
+                        data-dropdown-data="statuses">
+                    </bs-dropdown>
+                </div> -->
+
+            </div>
+
+            <div class="row">
+                <div class="tab-content col-md-12">
+                    <!-- unread Tab -->
+                    <div id="unreadBooksTab" class="tab-pane in active" role="tabpanel">
+                        <div class="row buttom-separator">
+                            <!-- unreadBook ng-repeat -->
+                            <div ng-repeat="unreadBook in unreadBooks" class="col-md-4 bookshelf-book clear-padding">
+                                <!--Img Col-->
+                                <div class="col-md-6">
+                                    <a href="#readingCenter/bookDetails/{{unreadBook.bookId}}/"><div ng-show="{{unreadBook.pictureUrl !== undefined}}"><img ng-src='{{imageServer+unreadBook.pictureUrl | formatPictrueUrl}}' class="bookshelfIMG img-responsive custom-shadow"></div></a>
+                                    <!-- <div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{unreadBook.bookAttribute}}></div> -->
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- bookName row -->
+                                    <div class="row hideOverflow" style="overflow: scroll;"><h5>{{unreadBook.bookName}}</h5></div>
+                                    <!-- Details row -->
+                                    <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;">
+                                        <small>作者：{{unreadBook.author | limitTo:8 }}
+                                            <br> 积分：{{unreadBook.point | limitTo:8 }} &nbsp;&nbsp; {{unreadBook.bookAttribute | formatBookAttribute}}</small></p></div>
+                                    <!-- Tests row -->
+                                    <div class="row dropdown">
+                                        <!--<button type="button" class="btn btn-green" ng-click="addBooktoShelf(unreadBook)" type="button">加入书架</button>-->
+                                        <!-- Place Holder -->
+                                        <p class="row"></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom" ng-click="unreadBooksLoadingMore()">{{unreadLoading}}</div>
+                    </div>
+
+                    <!-- readTab -->
+                    <div id="readBooksTab" class="buttom-separator tab-pane" role="tabpanel">
+                        <div class="row buttom-separator">
+                            <div ng-repeat="readBook in readBooks" class="col-md-4 bookshelf-book clear-padding">
+                                <div class="col-md-6">
+                                    <a href="#readingCenter/bookDetails/{{readBook.bookId}}/default"><div ng-show="{{readBook.pictureUrl !== undefined}}"><img ng-src='{{imageServer+readBook.pictureUrl | formatPictrueUrl}}' class="bookshelfIMG  img-responsive custom-shadow"></div></a>
+                                    <!-- <div class="col-md-9 col-md-offset-5 mustRead" ><img src="../static/img/mustRead.png" class="img-responsive" ng-show={{readBook.bookAttribute}}></div> -->
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- bookName row -->
+                                    <div class="row hideOverflow" style="overflow: scroll;"><h5>{{readBook.bookName}}
+                                        <!-- <small>&nbsp;&nbsp; {{readBook.bookAttribute | formatBookAttribute}}</small> -->
+                                    </h5></div>
+
+                                    <!-- Details row -->
+                                    <div class="row"><p style="line-height: 20px;margin-bottom: 5px;margin-top: -3px;">
+                                        <small>作者：{{readBook.author | limitTo:8 }}
+                                            <br> 积分：{{readBook.point | limitTo:8 }} &nbsp;&nbsp; {{readBook.bookAttribute | formatBookAttribute}}</small></p></div>
+
+                                    <!-- Tests row -->
+                                    <div class="row dropdown">
+                                        <!--<button type="button" class="btn btn-green" ng-click="addBooktoShelf(readBook)" type="button">加入书架</button>-->
+                                        <!-- Place Holder -->
+                                        <p class="row"></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom" ng-click="readBooksLoadingMore()">{{readLoading}}</div>
+                    </div><!--End readTab-->
+
+
+                </div>
+            </div><!--End Tab container-fluid-->
+
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+    <!-- Take note modal -->
+    <div class="modal fade" id="book-takenote-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-body">
+
+                        <!-- Row 0 -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="modal-title" id="myModalLabel" >做笔记
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </h4>
+                            </div>
+                        </div>
+
+                        <!-- Row 1 -->
+                        <div class="row title">
+                            <div class="col-md-2">
+                                <img ng-src="{{ noteTake.pictureUrl ? imageServer + noteTake.pictureUrl : null }}" class="img-responsive custom-shadow">
+                            </div>
+                            <div class="col-md-10">
+                                <h4>{{noteTake.name}}</h4>
+                                <p><small style="line-height:20px;">评分：×　×　×　×　× <br/>作者：{{noteTake.author}}<br/>版权：{{noteTake.publisher}}<br/>分值：{{noteTake.point}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字数：{{noteTake.wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：{{noteTake.pageCount}}</h5>
+
+                            </div>
+                        </div>
+
+                        <!-- Input form -->
+                        <div class="row">
+                            <div class="col-md-12 input-textarea-group">
+                                <input class="form-control" placeholder="标题（必填）" ng-model="noteTake.title"/>
+                                <textarea class="form-control message-input" placeholder="正文（不少于20字不大于300字）" ng-model="noteTake.content"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><div class="col-md-12">
+                            <!--                        <img src="../static/img/myBookshelf/addPhoto.png" class="img-responsive">-->
+                            <div id="image-uploader" class="dropzone" style="width:100px"></div>
+                        </div></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <a  class="btn-a" data-dismiss="modal">取消</a>
+                        <button class="btn btn-green" type="button" ng-click="noteTake.send()"  data-dismiss="modal">提交笔记</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+<script>
+    SetReadingCenterRightHeight();
+    SetBookList();
+    $('#bookReadStateTabs').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
+</script>

@@ -247,6 +247,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/statisticsSummary.html",
             controller: "othersStatController"
         })
+        .state('othersBook',{
+            url: '/othersBook/:studentId',
+            templateUrl: "partials/othersBook.html",
+            controller: "othersBookshelfController"
+        })
 
     ;
 
