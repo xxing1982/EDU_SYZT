@@ -184,7 +184,11 @@
 		//xhr.setRequestHeader("Content-Type", "multipart/form-data;boundary=AaB03x");
 		xhr.setRequestHeader("Authorization", "bearer " + sessionStorage.access_token);
 		xhr.onreadystatechange=function(){
-			alert('已成功');
+			 if(xhr.readyState==4){
+			 	if(xmlHttp.status==200){
+			 		alert("已成功");
+			 	}
+			 }
 		}
 		xhr.send(fd);
     	
