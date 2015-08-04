@@ -92,32 +92,27 @@ public class ExamController {
 	private BookService bookService;
 
 	private BookInShelfService shelfService;
-	
+
 	private SemesterService semesterService;
 
 	private ClazzRepository clazzRepository;
 
 	private DictionaryRepository dictionaryRepository;
-	
+
 	private SpeedTestRecordRepository srRepo;
-	
+
 	private ArticleService articleService;
-	
+
 	private CampusService campusService;
-	
-	
 
 	@Autowired
 	public ExamController(ExamService service, TestPassService tService,
 			CoinHistoryService coinService, PointHistoryService pointService,
 			UserService userService, BookService bookService,
-			BookInShelfService shelfService,
-			ClazzRepository clazzRepository,
+			BookInShelfService shelfService, ClazzRepository clazzRepository,
 			DictionaryRepository dictionaryRepository,
-			SemesterService semesterService,
-			SpeedTestRecordRepository srRepo,
-			ArticleService articleService,
-			CampusService campusService) {
+			SemesterService semesterService, SpeedTestRecordRepository srRepo,
+			ArticleService articleService, CampusService campusService) {
 		this.service = service;
 		this.testPassService = tService;
 		this.coinService = coinService;
@@ -129,7 +124,7 @@ public class ExamController {
 		this.clazzRepository = clazzRepository;
 		this.dictionaryRepository = dictionaryRepository;
 		this.srRepo = srRepo;
-		this.articleService=articleService;
+		this.articleService = articleService;
 		this.campusService = campusService;
 	}
 
@@ -169,8 +164,7 @@ public class ExamController {
 
 		return new PageResource<>(pageResult, "page", "size");
 	}
-	
-	
+
 	@RequestMapping(value = "/exam/verifypaper/{studentid}/{bookid}", method = RequestMethod.GET)
 	@ResponseBody
 	public VerifyPaperDTO createVerifyPaper(
@@ -180,19 +174,18 @@ public class ExamController {
 		VerifyPaperDTO dto = new VerifyPaperDTO();
 		if (service.isPassVerifyTest(bookId, studentId)) {
 			dto.setCode("2");
-			dto.setMessage("Student " + studentId
-					+ " have verified the book " + bookId);
+			dto.setMessage("Student " + studentId + " have verified the book "
+					+ bookId);
 			return dto;
 		}
 		List<Exam> list = service.getTodayVerifyTestStatus(bookId, studentId);
 		if (list.size() >= 2) {
 			dto.setCode("3");
-			dto.setMessage(
-					"Student{"
-							+ studentId
-							+ "} verify test with book{"
-							+ bookId
-							+ "} greater than twice, system ignore this verify test request.");
+			dto.setMessage("Student{"
+					+ studentId
+					+ "} verify test with book{"
+					+ bookId
+					+ "} greater than twice, system ignore this verify test request.");
 			return dto;
 		}
 		List<ObjectiveQuestion> questions = service.takeVerifyTest(bookId);
@@ -214,8 +207,6 @@ public class ExamController {
 		LOGGER.debug("Found {} exam entries.", questions.size());
 		return questions;
 	}
-	
-	
 
 	@RequestMapping(value = "/exam/capacitypaper/{level}", method = RequestMethod.GET)
 	@ResponseBody
@@ -243,7 +234,8 @@ public class ExamController {
 
 	@RequestMapping(value = "/exam/verifypaper", method = RequestMethod.POST)
 	@ResponseBody
-	public CollatExamDTO handInVerifyPaper(@Valid @RequestBody VerifyPaperExamDTO dto)
+	public CollatExamDTO handInVerifyPaper(
+			@Valid @RequestBody VerifyPaperExamDTO dto)
 			throws NotFoundException, BookInShelfDuplicateVerifiedException {
 		Exam exam = dto.fromOTD();
 		CollatExamDTO collatExamDto = new CollatExamDTO();
@@ -257,11 +249,11 @@ public class ExamController {
 			return collatExamDto;
 		}
 		List<Exam> list = service.getTodayVerifyTestStatus(studentId, bookId);
-		
+
 		if (list.size() >= 2) {
 			collatExamDto.setCode("3");
-			collatExamDto.setMessage(
-					"Student{"
+			collatExamDto
+					.setMessage("Student{"
 							+ studentId
 							+ "} verify test with book{"
 							+ bookId
@@ -272,77 +264,81 @@ public class ExamController {
 		Student student = userService.findByStudentId(studentId);
 		student.getStatistic().increaseTestPasses();
 		if (examResult.isPass()) {
-			testPassService.hotBookUpdate(bookId, studentId);
-
 			Book book = bookService.findById(bookId);
-			CoinHistory coinHistory = new CoinHistory();
-			coinHistory.setCoinFrom(CoinFrom.FROM_VERIFY_TEST);
-			coinHistory.setCoinType(CoinType.IN);
-			coinHistory.setNum(book.getCoin());
-			coinHistory.setStudent(student);
-			coinService.add(coinHistory);
-			
-			
-			PointHistory pointHistory = new PointHistory();
-			pointHistory.setPointFrom(PointFrom.FROM_VERIFY_TEST);
-			pointHistory.setPointType(PointType.IN);
-			pointHistory.setNum(book.getPoint());
-			pointHistory.setStudent(student);
-			pointService.add(pointHistory);
-
-			student.getStatistic().setCoin(
-					student.getStatistic().getCoin() + book.getCoin());
-			student.getStatistic().setPoint(
-					student.getStatistic().getPoint() + book.getPoint());
-			student.getStatistic().increaseTestPasses();
-
-			Dictionary dictionary = dictionaryRepository.findByTypeAndValue(DictionaryType.CATEGORY,book.getExtra().getCategory());
-
-			Set<CategoryCount> categoryCounts = student.getCategoryCount();
-			if(categoryCounts.size()>0){
-				for(CategoryCount categoryCount : categoryCounts){
-					if(categoryCount.getDictionary().getId() == dictionary.getId()){
-						categoryCount.increaseCount();
-						categoryCounts.add(categoryCount);
+			Dictionary dictionary = dictionaryRepository.findByTypeAndValue(
+					DictionaryType.CATEGORY, book.getExtra().getCategory());
+			if (dictionary != null) {
+				Set<CategoryCount> categoryCounts = student.getCategoryCount();
+				if (categoryCounts.size() > 0) {
+					for (CategoryCount categoryCount : categoryCounts) {
+						if (categoryCount.getDictionary().getId() == dictionary
+								.getId()) {
+							categoryCount.increaseCount();
+							categoryCounts.add(categoryCount);
+						}
 					}
+				} else {
+					CategoryCount categoryCount = new CategoryCount();
+					categoryCount.increaseCount();
+					categoryCount.setDictionary(dictionary);
+					categoryCounts.add(categoryCount);
 				}
-			}else{
-				CategoryCount categoryCount = new CategoryCount();
-				categoryCount.increaseCount();
-				categoryCount.setDictionary(dictionary);
-				categoryCounts.add(categoryCount);
 			}
-
 
 			Clazz clazz = clazzRepository.findOne(student.getClazzId());
 			clazz.getClazzStatistic().increaseTotalReads();
-			clazz.getClazzStatistic().setTotalReadWords(clazz.getClazzStatistic().getTotalReadWords() + book.getWordCount());
+			clazz.getClazzStatistic().setTotalReadWords(
+					clazz.getClazzStatistic().getTotalReadWords()
+							+ book.getWordCount());
 
-			Set<ClazzCategoryCount> clazzCategoryCounts = clazz.getCategoryCount();
-			if(clazzCategoryCounts.size()>0){
-				for(ClazzCategoryCount categoryCount : clazzCategoryCounts){
-					if(categoryCount.getDictionary().getId() == dictionary.getId()){
+			Set<ClazzCategoryCount> clazzCategoryCounts = clazz
+					.getCategoryCount();
+			if (clazzCategoryCounts.size() > 0) {
+				for (ClazzCategoryCount categoryCount : clazzCategoryCounts) {
+					if (categoryCount.getDictionary().getId() == dictionary
+							.getId()) {
 						categoryCount.increaseCount();
 						clazzCategoryCounts.add(categoryCount);
 					}
 				}
-			}else{
-				List<Dictionary> categoryDics = dictionaryRepository.findByType(DictionaryType.CATEGORY);
-				for(Dictionary categoryDic : categoryDics){
-					if (categoryDic.getId() == 0) continue;
+			} else {
+				List<Dictionary> categoryDics = dictionaryRepository
+						.findByType(DictionaryType.CATEGORY);
+				for (Dictionary categoryDic : categoryDics) {
+					if (categoryDic.getId() == 0)
+						continue;
 					ClazzCategoryCount categoryCount = new ClazzCategoryCount();
 					categoryCount.setDictionary(categoryDic);
-					if(categoryDic.getId()==dictionary.getId() ){
+					if (categoryDic.getId() == dictionary.getId()) {
 						categoryCount.increaseCount();
 					}
 					clazzCategoryCounts.add(categoryCount);
 				}
 
 			}
-
+			
 			clazzRepository.save(clazz);
-
 			shelfService.updateReadState(studentId, bookId);
+			testPassService.hotBookUpdate(bookId, studentId);
+
+			
+			CoinHistory coinHistory = new CoinHistory();
+			coinHistory.setCoinFrom(CoinFrom.FROM_VERIFY_TEST);
+			coinHistory.setCoinType(CoinType.IN);
+			coinHistory.setNum(book.getCoin());
+			coinHistory.setStudent(student);
+
+			PointHistory pointHistory = new PointHistory();
+			pointHistory.setPointFrom(PointFrom.FROM_VERIFY_TEST);
+			pointHistory.setPointType(PointType.IN);
+			pointHistory.setNum(book.getPoint());
+			pointHistory.setStudent(student);
+
+			student.getStatistic().setCoin(
+					student.getStatistic().getCoin() + book.getCoin());
+			student.getStatistic().setPoint(
+					student.getStatistic().getPoint() + book.getPoint());
+			student.getStatistic().increaseTestPasses();
 
 		}
 		userService.saveStudent(student);
@@ -366,7 +362,7 @@ public class ExamController {
 
 		return examResult;
 	}
-	
+
 	@RequestMapping(value = "/exam/speedpaper", method = RequestMethod.POST)
 	@ResponseBody
 	public Exam handInSpeedPaper(@Valid @RequestBody SpeedPaperExamDTO dto)
@@ -375,33 +371,33 @@ public class ExamController {
 		LOGGER.debug("hand in exam entrie.");
 
 		Exam examResult = service.handInSpeedTest(exam);
-		if(examResult.isPass()){
+		if (examResult.isPass()) {
 			SpeedTestRecord testRecord = new SpeedTestRecord();
 			testRecord.setArticleId(exam.getArticleId());
 			Article article = articleService.getArticle(exam.getArticleId());
 			int length = article.getContent().length();
 			testRecord.setTime(dto.getTime());
-			testRecord.setSpeed(length*60/dto.getTime());
+			testRecord.setSpeed(length * 60 / dto.getTime());
 			testRecord.setUserId(examResult.getStudentId());
 			testRecord.setScore(examResult.getExamScore());
-			Student student = userService.findByStudentId(examResult.getStudentId());
+			Student student = userService.findByStudentId(examResult
+					.getStudentId());
 			testRecord.setSchoolId(student.getCampusId());
 			srRepo.save(testRecord);
 		}
-		
 
 		LOGGER.debug("return a exam entry result with information: {}", exam);
 
 		return examResult;
 	}
-	
+
 	@RequestMapping(value = "/speedlist/{num}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<SpeedTestRecordDTO> speedList(@PathVariable("num") int num)
 			throws NotFoundException {
 		List<SpeedTestRecord> srs = srRepo.getTopStudent(num);
 		List<SpeedTestRecordDTO> dtos = new ArrayList<SpeedTestRecordDTO>();
-		for(int i=0;i<srs.size();i++){
+		for (int i = 0; i < srs.size(); i++) {
 			SpeedTestRecord sr = srs.get(i);
 			SpeedTestRecordDTO dto = new SpeedTestRecordDTO();
 			dto.setArticleId(sr.getArticleId());
@@ -419,17 +415,18 @@ public class ExamController {
 		}
 		return dtos;
 	}
-	
+
 	@RequestMapping(value = "/speedschoollist/{schoolid}/{num}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<SpeedTestRecordDTO> speedListFromSchool(@PathVariable("schoolid") long schoolId,@PathVariable("num") int num)
-			throws NotFoundException {
+	public List<SpeedTestRecordDTO> speedListFromSchool(
+			@PathVariable("schoolid") long schoolId,
+			@PathVariable("num") int num) throws NotFoundException {
 		List<SpeedTestRecord> srs = srRepo.getTopStudentBySchool(num, schoolId);
 		List<SpeedTestRecordDTO> dtos = new ArrayList<SpeedTestRecordDTO>();
-		
+
 		String schoolName = campusService.findById(schoolId).getName();
-		
-		for(int i=0;i<srs.size();i++){
+
+		for (int i = 0; i < srs.size(); i++) {
 			SpeedTestRecord sr = srs.get(i);
 			long userId = sr.getUserId();
 			Student user = userService.findByStudentId(userId);
@@ -451,10 +448,11 @@ public class ExamController {
 		return dtos;
 
 	}
-	
+
 	@RequestMapping(value = "/speedpersonlist/{userid}/{num}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<SpeedTestRecord> speedListPersonal(@PathVariable("userid") long userId,@PathVariable("num") int num)
+	public List<SpeedTestRecord> speedListPersonal(
+			@PathVariable("userid") long userId, @PathVariable("num") int num)
 			throws NotFoundException {
 		List<SpeedTestRecord> srs = srRepo.getPersonalHistory(num, userId);
 		return srs;
@@ -467,8 +465,8 @@ public class ExamController {
 		Exam exam = paper.fromOTD();
 		Student user = userService.findByStudentId(exam.getStudentId());
 		Set<Answer> answers = exam.getAnswers();
-		for(Answer answer : answers){
-			SubjectiveAnswer subjectAnswer = (SubjectiveAnswer)answer;
+		for (Answer answer : answers) {
+			SubjectiveAnswer subjectAnswer = (SubjectiveAnswer) answer;
 			subjectAnswer.setCampusId(user.getCampusId());
 		}
 		LOGGER.debug("hand in exam entrie.");
@@ -552,50 +550,62 @@ public class ExamController {
 				ExamType.THINK);
 		return examPassDTO;
 	}
-	
+
 	@RequestMapping(value = "/verifyexams/average/{studentid}/{semester}", method = RequestMethod.GET)
 	@ResponseBody
-	public int getAverageVerifyExamsPassRate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId)
-			throws NotFoundException {
+	public int getAverageVerifyExamsPassRate(
+			@PathVariable("studentid") Long studentId,
+			@PathVariable("semester") Long semesterId) throws NotFoundException {
 		Semester semester = semesterService.findOne(semesterId);
-		int passRate = service.findPassVerifyExamPassRate(studentId, semester.getStartTime(), semester.getEndTime());
+		int passRate = service.findPassVerifyExamPassRate(studentId,
+				semester.getStartTime(), semester.getEndTime());
 		return passRate;
 	}
-	
+
 	@RequestMapping(value = "/verifyexams/fistpassrate/{studentid}/{semester}", method = RequestMethod.GET)
 	@ResponseBody
-	public int getFirstPassExamsPassRate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId)
-			throws NotFoundException {
+	public int getFirstPassExamsPassRate(
+			@PathVariable("studentid") Long studentId,
+			@PathVariable("semester") Long semesterId) throws NotFoundException {
 		Semester semester = semesterService.findOne(semesterId);
-		int passRate = service.findFirstPassRate(studentId, semester.getStartTime(), semester.getEndTime());
+		int passRate = service.findFirstPassRate(studentId,
+				semester.getStartTime(), semester.getEndTime());
 		return passRate;
 	}
-	
+
 	@RequestMapping(value = "/verifyexams/secondpassrate/{studentid}/{semester}", method = RequestMethod.GET)
 	@ResponseBody
-	public int getSecondPassExamsPassRate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId)
-			throws NotFoundException {
+	public int getSecondPassExamsPassRate(
+			@PathVariable("studentid") Long studentId,
+			@PathVariable("semester") Long semesterId) throws NotFoundException {
 		Semester semester = semesterService.findOne(semesterId);
-		int passRate = service.findSecondPassRate(studentId, semester.getStartTime(), semester.getEndTime());
+		int passRate = service.findSecondPassRate(studentId,
+				semester.getStartTime(), semester.getEndTime());
 		return passRate;
 	}
-	
+
 	@RequestMapping(value = "/verifyexams/passrate/{studentId}/{semesterId}", method = RequestMethod.GET)
 	@ResponseBody
-	public String getPassRate(@PathVariable("studentId") Long studentId,@PathVariable("semesterId") Long semesterId)
+	public String getPassRate(@PathVariable("studentId") Long studentId,
+			@PathVariable("semesterId") Long semesterId)
 			throws NotFoundException {
 		int average = getAverageVerifyExamsPassRate(studentId, semesterId);
 		int firstpassrate = getFirstPassExamsPassRate(studentId, semesterId);
 		int secondpassrate = getSecondPassExamsPassRate(studentId, semesterId);
-		return "{\"average\":" + average +  ",\"firstpassrate\":" + firstpassrate + ",\"secondpassrate\":" + secondpassrate + "}";
+		return "{\"average\":" + average + ",\"firstpassrate\":"
+				+ firstpassrate + ",\"secondpassrate\":" + secondpassrate + "}";
 	}
-	
+
 	@RequestMapping(value = "/capacityexam/everytypepassrate/{studentid}/{semester}", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<CapacityQuestionType,Integer> getCapacityQuestionPassrate(@PathVariable("studentid") Long studentId,@PathVariable("semester") Long semesterId){
+	public Map<CapacityQuestionType, Integer> getCapacityQuestionPassrate(
+			@PathVariable("studentid") Long studentId,
+			@PathVariable("semester") Long semesterId) {
 		Semester semester = semesterService.findOne(semesterId);
-		Map<CapacityQuestionType,Integer> passRate = service.getStudentCapacityStatus(studentId, semester.getStartTime(), semester.getEndTime());
+		Map<CapacityQuestionType, Integer> passRate = service
+				.getStudentCapacityStatus(studentId, semester.getStartTime(),
+						semester.getEndTime());
 		return passRate;
 	}
-	
+
 }
