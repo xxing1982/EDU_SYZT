@@ -280,6 +280,7 @@ public class ExamController {
 			coinHistory.setCoinType(CoinType.IN);
 			coinHistory.setNum(book.getCoin());
 			coinHistory.setStudent(student);
+			coinService.add(coinHistory);
 			
 			
 			PointHistory pointHistory = new PointHistory();
@@ -287,6 +288,7 @@ public class ExamController {
 			pointHistory.setPointType(PointType.IN);
 			pointHistory.setNum(book.getPoint());
 			pointHistory.setStudent(student);
+			pointService.add(pointHistory);
 
 			student.getStatistic().setCoin(
 					student.getStatistic().getCoin() + book.getCoin());
