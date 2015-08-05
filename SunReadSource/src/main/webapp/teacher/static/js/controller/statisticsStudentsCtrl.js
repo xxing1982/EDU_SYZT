@@ -1,3 +1,3 @@
 ctrls.controller("statisticsStudentsController", ['$scope',function ($scope) {
-//    $scope.
+    $scope.orders = [0, 1];
 }]);

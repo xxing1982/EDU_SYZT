@@ -1,81 +1,45 @@
 <!-- Header bar -->
 <div class="myBlock mt30 page-body">
-    <div class="container-fluid"><div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
-            <div class="row-same-height">
-                <div class="col-xs-8 col-xs-height">
-                    <h5 class="title"><big><a ng-href="#/teachingCenter/addBook" class="dark-gray-2">学生统计</a></big></h5>
+            <div class="leftpart page-body">
+                <div class="container-fluid">
+                    <div class="row-same-height text-center sort-header">
+                        <div class="col-xs-3 col-xs-height col-middle"><h5 class="row title"><big><a class="dark-gray-2">学生统计</a></big></h5></div>
+                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2">积分 <i class="fa fa-sort-asc muted"></i><i class="fa fa-sort-desc"></i></a></p></div>
+                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2">阅读数 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
+                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2">财富值 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
+                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2">笔记数 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
+                        <div class="col-xs-2 col-xs-height col-middle"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div></div>
+    </div>
 </div>
 
 <!-- Items -->
-<div class="myBlock mt20 page-body" ng-repeat="order in orderLoadable.entities.content">
-    <div class="container-fluid"><div class="container-fluid">
-        <div class="row">
-            <div class="row-same-height text-center">
-                <div class="col-xs-3 col-xs-height col-middle"><p class="row title">{{class.campusName}}</p></div>
-                <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{class.name}}</p></div>
-                <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.username}}</p></div>
-                <div class="col-xs-3 col-xs-height col-middle">
-                    <p class="row title" ng-show="!order.editable.editing">任务目标：{{order.task.targetBookNum}}本</p>
-                    <p class="row title" ng-show="order.editable.editing">任务目标：<input type="number" min="1" class="custom-input" style="width:60px" ng-model="order.editable.cached.targetBookNum" />本</p>
-                </div>
-                <div class="col-xs-3 col-xs-height col-middle">
-                    <p class="row title" ng-show="!order.editable.editing">积分：{{order.task.targetPoint}}</p>
-                    <p class="row title" ng-show="order.editable.editing">积分：<input type="number" min="1" class="custom-input" style="width:60px" ng-model="order.editable.cached.targetPoint" /></p>
-                </div>
-                <div class="col-xs-2 col-xs-height col-middle">
-                    <p class="text-right title">
-                        <a ng-show="!order.editable.editing" ng-click="order.editable.toggleEdit(false)">修改</a>
-                        <a ng-show="order.editable.editing" ng-click="order.editable.toggleEdit(false)">取消</a>
-                        <a ng-show="order.editable.editing" ng-click="toggleEditSave(order)">保存</a>
-                    </p>
+<div class="leftpart">
+    <div class="myBlock mt20 page-body" ng-repeat="order in orders">
+        <div class="container-fluid"><div class="container-fluid">
+            <div class="row">
+                <div class="row-same-height text-center">
+                    <div class="col-xs-3 col-xs-height col-middle"><p class="row title">张大父</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">25</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">25</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">15</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">15</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a>查看详情</a></p></div>
                 </div>
             </div>
-        </div>
-    </div></div>
+        </div></div>
+    </div>
 </div>
-
-<p>{{  order }}</p>
-
+    
 <!--right part -->
 <div class="rightpart mt20">
 
-    <!-- 选择地区 -->
-    <div class="row conditionBlock myBlock" ng-repeat="filterGroup in filtersGroups">
-        <div class="container-fluid">
+    <!-- Filter groups -->
+    <div ng-include src="'./partials/statistics/filters.html'"></div>
 
-            <!-- Place holder -->
-            <p class="row"></p>
-
-            <!-- Option title -->
-            <div class="row">
-                <h4 class="text-muted">{{ filterGroup.name }}</h4>
-            </div>
-
-            <!-- filters -->
-            <div class="row" ng-repeat="(filterName, filter) in filterGroup.filters">
-                
-                <!-- Place holder -->
-                <p class="row"></p>
-                
-                <div class="row-same-height">
-                    <div class="col-xs-3 col-xs-height col-middle"> <h5 class="row text-right">{{ filter.name }}：</h5></div>
-                    <div class="col-xs-9 col-xs-height col-middle">
-                        <bs-dropdown ui-if="filter.selected_status" data-menu-type="button"
-                                     select-val="filter.selected_status = selectedVal"
-                                     preselected-item="filter.selected_status"
-                                     data-dropdown-data="filter.statuses">
-                        </bs-dropdown>
-                    </div>
-                </div>   
-            </div>
-
-            <!-- Place holder -->
-            <p class="row"></p>
-        </div>
-    </div>
 </div>

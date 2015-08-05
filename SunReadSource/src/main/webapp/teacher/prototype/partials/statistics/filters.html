@@ -1,0 +1,34 @@
+<!-- Filter groups -->
+<div class="row conditionBlock myBlock" ng-repeat="filterGroup in filtersGroups">
+    <div class="container-fluid">
+
+        <!-- Place holder -->
+        <p class="row"></p>
+
+        <!-- Option title -->
+        <div class="row">
+            <h4 class="text-muted">{{ filterGroup.name }}</h4>
+        </div>
+
+        <!-- Filters -->
+        <div class="row" ng-repeat="(filterName, filter) in filterGroup.filters">
+
+            <!-- Place holder -->
+            <p class="row"></p>
+
+            <div class="row-same-height">
+                <div class="col-xs-3 col-xs-height col-middle"> <h5 class="row text-right">{{ filter.name }}：</h5></div>
+                <div class="col-xs-9 col-xs-height col-middle">
+                    <bs-dropdown ui-if="filter.selected_status" data-menu-type="button"
+                                 select-val="filter.selected_status = selectedVal"
+                                 preselected-item="filter.selected_status"
+                                 data-dropdown-data="filter.statuses">
+                    </bs-dropdown>
+                </div>
+            </div>   
+        </div>
+
+        <!-- Place holder -->
+        <p class="row"></p>
+    </div>
+</div>

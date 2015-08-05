@@ -377,3 +377,19 @@
 }
 
 /*******************reading dynamic buttom****************/
+
+
+/*******************statistics student top****************/
+.sort-header i{
+    width: 0;
+}
+
+.sort-header i.muted{
+    color: #C3C3C3;
+}
+
+.sort-header a:hover i.muted{
+    color: #CCEFF1;
+}
+
+/*******************statistics student buttom****************/
