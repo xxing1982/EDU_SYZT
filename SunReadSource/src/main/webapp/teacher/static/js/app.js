@@ -12,6 +12,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
     .when('/teachingCenter', '/teachingCenter/myTask')
     .when('/teachingCenter/addBook', '/teachingCenter/addBook/quick')
     .when('/statistics', '/statistics/students')
+    .when('/statistics/classes', '/statistics/classes/coins')
     .otherwise('/');
     // $httpProvider.responseInterceptors.push('SecurityHttpInterceptor');
 
@@ -137,14 +138,46 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             controller: "statisticsController",
             controllerAs: "parentCtrl",
         })
-        //students statistics page
-        .state('statistics.students',{
-            url: '/students',
-            parent: 'statistics',
-            templateUrl: 'partials/statistics/students.html',
-            controller: "statisticsStudentsController",
-            controllerAs: "ctrl",
-        })
+            //students statistics page
+            .state('statistics.students',{
+                url: '/students',
+                parent: 'statistics',
+                templateUrl: 'partials/statistics/students.html',
+                controller: "statisticsStudentsController",
+                controllerAs: "ctrl",
+            })
+            //classes statistics page
+            .state('statistics.classes',{
+                url: '/classes',
+                parent: 'statistics',
+                templateUrl: 'partials/statistics/classes.html',
+                controller: "statisticsClassesController",
+                controllerAs: "parentCtrl",
+            })
+                //classes coins statistics page
+                .state('statistics.classes.coins',{
+                    url: '/coins',
+                    parent: 'statistics.classes',
+                    templateUrl: 'partials/statistics/classes/coins.html',
+                    controller: "statisticsClassesController",
+                    controllerAs: "ctrl",
+                })
+                //classes readings statistics page
+                .state('statistics.classes.readings',{
+                    url: '/readings',
+                    parent: 'statistics.classes',
+                    templateUrl: 'partials/statistics/classes/readings.html',
+                    controller: "statisticsClassesController",
+                    controllerAs: "ctrl",
+                })
+                //classes categories statistics page
+                .state('statistics.classes.categories',{
+                    url: '/categories',
+                    parent: 'statistics.classes',
+                    templateUrl: 'partials/statistics/classes/categories.html',
+                    controller: "statisticsClassesCategoriesController",
+                    controllerAs: "ctrl",
+                })
 }]);
 
 routeApp.run(['$rootScope', function($rootScope){

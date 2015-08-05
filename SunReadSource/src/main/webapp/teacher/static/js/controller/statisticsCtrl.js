@@ -1,6 +1,6 @@
 ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', function ($rootScope, $scope, Teacher) {
     
-    $rootScope.staticsticRouteMap = {
+    $rootScope.staticsticsRouteMap = {
         students: /\/statistics\/students.*/,
         classes: /\/statistics\/classes.*/
     }

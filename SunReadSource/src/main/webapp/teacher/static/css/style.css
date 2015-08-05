@@ -393,3 +393,153 @@
 }
 
 /*******************statistics student buttom****************/
+
+/*******************statistics classes top****************/
+
+.statistics-body .tab-content th {
+    text-align: center;
+    color: #98A7BA;
+    border: none;
+}
+
+.statistics-body .tab-content td {
+    border: 1px solid #FFF;
+    background-color: #EAEEF2;
+}
+
+.statistics-body .summary-items {
+    color: #4d4d4d;
+    font-size: 16px;
+    background-color: #EAEEF2;
+    padding: 7px 7px 7px 15px;
+}
+
+.statistics-body .gray {
+    background-color: #E5E5E5;
+}
+
+.statistics-body .orange {
+    background-color: #F8E3C0;
+}
+
+.statistics-body .orange-light {
+    background-color: #FFF6E6;
+}
+.statistics-body .orange-text {
+    color: #FFAF25;
+}
+
+.statistics-body .pink {
+    background-color: #FFBFBF;
+}
+
+.statistics-body .pink-2 {
+    background-color: #FE9494;
+}
+
+.statistics-body .pink-text {
+    color: #FE9494;
+}
+
+.statistics-body .blue {
+    background-color: #D3F2F4;
+}
+
+.statistics-body .blue-text {
+    color: #509BFF;
+}
+
+
+.statistics-body .green {
+    background-color: #C9ECC9;
+}
+
+.statistics-body .bisque {
+    background-color: #E9C9AA;
+}
+
+.statistics-body .purple {
+    background-color: #DCB1EA;
+}
+
+.statistics-body .purple-text {
+    color: #C000FF;
+}
+
+.statistics-body .fr {
+    float: right;
+}
+
+.statistics-body .fl {
+    float: left;
+}
+
+.statistics-body .average-width {
+    width: 44%;
+}
+
+.statistics-body .reading-count-width {
+    width: 100%;
+}
+
+.statistics-body .histogram {
+    height: 200px;
+    position: relative;
+    display: inline-block;
+}
+
+.statistics-body .axis {
+    position: relative;
+    display: inline-block;
+}
+
+.statistics-body .histogram .data {
+    width: 60%;
+    margin-left: 20%;
+    position: relative;
+}
+
+.statistics-body .histogram .number {
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    position: absolute;
+}
+
+.statistics-body #myPieChart {
+    width: 100%;
+    height: 250px;
+}
+
+.statistics-body #myRadarChart {
+    width: 100%;
+    height: 400px;
+}
+
+/** Appended colors **/
+
+.statistics-body .red {
+    background-color: #FF6060;
+}
+
+.statistics-body .red-text {
+    color: #FF6060;
+}
+
+.statistics-body .grandis {
+    background-color: #FEC668;
+}
+
+.statistics-body .grandis-text {
+    color: #FEC668;
+}
+
+.statistics-body .madang-text {
+    color: #86BF86;
+}
+
+.statistics-body .madang {
+    background-color: #86BF86;
+}
+
+/*******************statistics classes buttom****************/

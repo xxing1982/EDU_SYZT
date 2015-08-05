@@ -1,0 +1,12 @@
+<div class="mt30">
+    <div class="container-fluid addBook-body page-body">
+        <div class="row addBookFind">
+            <ul class="col-md-12 nav nav-tabs">
+                <li class="select-tab" ng-class="{myActive:isActive(classesRouteMap.coins)}"><a ui-sref='.coins'>财富值</a></li>
+                <li class="select-tab" ng-class="{myActive:isActive(classesRouteMap.readings)}"><a ui-sref='.readings'>阅读量</a></li>
+                <li class="select-tab" ng-class="{myActive:isActive(classesRouteMap.categories)}"><a ui-sref='.categories'>内容结构分布</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="statistics-body" ui-view></div>

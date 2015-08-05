@@ -1,0 +1,65 @@
+<!-- Description -->
+<div class="page-body">
+    <div class="container-fluid"><div class="container-fluid">
+        <div class="title">
+        <h5>
+            一共<span class="orange-text">{{ classes.length }}</span>个班级，
+            平均阅读量为<span class="orange-text">23</span>本，
+            最高阅读量为<span class="orange-text">26</span>本，
+            最第阅读值为<span class="orange-text">16</span>本。
+        </h5>
+        <h5>
+            平均阅读量为<span class="red-text">33333</span>字数，
+            最高阅读量为<span class="red-text">233336</span>字数，
+            最第阅读值为<span class="red-text">13336</span>字数。
+        </h5>
+        </div>
+    </div></div>
+</div>
+
+<!-- Items -->
+<div class="leftpart" >
+    <div class="myBlock page-body">
+        <div class="container-fluid title"><div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2">
+                    <p>
+                        <i class="fa fa-stop grandis-text"></i> 阅读本数
+                    </p>
+                </div>
+                <div class="col-xs-2">
+                    <p>
+                        <i class="fa fa-stop red-text"></i> 阅读字数
+                    </p>
+                </div>
+            </div>
+            <div class="row-same-height" ng-repeat="class in classes">
+                <div class="col-xs-2 col-xs-height col-middle">
+                    <h5 class="text-right text-muted">{{ class.name }}</h5>
+                </div>
+                <div class="col-xs-10 col-xs-height col-middle">
+                    <h5 class="row">
+                        <div class="fr reading-count-width">&nbsp;
+                            <div class="grandis fl" ng-style="{width: class.rate + '%'}">&nbsp;</div>
+                            <div class="fl">&nbsp;&nbsp;{{ class.num }}</div>
+                        </div>
+                    </h5>
+                    <h5 class="row">
+                        <div class="fr reading-count-width">&nbsp;
+                            <div class="red fl" ng-style="{width: class.rate + '%'}">&nbsp;</div>
+                            <div class="fl">&nbsp;&nbsp;{{ class.word }}</div>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+        </div></div>
+    </div>
+</div>
+
+<!--right part -->
+<div class="rightpart">
+
+    <!-- Filter groups -->
+    <div ng-include src="'./partials/statistics/filters.html'"></div>
+
+</div>

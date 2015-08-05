@@ -1,0 +1,41 @@
+<!-- Description -->
+<div class="page-body">
+    <div class="container-fluid"><div class="container-fluid">
+        <h5 class="title">
+            一共<span class="madang-text">{{ classes.length }}</span>个班级，
+            平均财富值为<span class="madang-text">23</span>金币，
+            最高财富值为<span class="madang-text">26</span>金币，
+            最第财富值为<span class="madang-text">16</span>金币。
+        </h5>
+    </div></div>
+</div>
+
+<!-- Items -->
+<div class="leftpart" >
+    <div class="myBlock page-body">
+        <div class="container-fluid title"><div class="container-fluid">
+            <div class="row">
+                <div class="container-fluid title">
+                    <canvas id="myRadarChart"></canvas>
+                </div>
+            </div>
+            <div class="row text-center">
+                    <p>
+                        <span ng-repeat="data in radarData.datasets">
+                            <i class="fa fa-stop" ng-style="{color: data.strokeColor}"></i>&nbsp;
+                            {{ classes[$index].name }}&nbsp;&nbsp;
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div></div>
+    </div>
+</div>
+
+<!--right part -->
+<div class="rightpart">
+
+    <!-- Filter groups -->
+    <div ng-include src="'./partials/statistics/filters.html'"></div>
+
+</div>
