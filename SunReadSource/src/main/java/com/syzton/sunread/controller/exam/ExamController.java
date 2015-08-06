@@ -286,10 +286,6 @@ public class ExamController {
 			}
 
 			Clazz clazz = clazzRepository.findOne(student.getClazzId());
-			clazz.getClazzStatistic().increaseTotalReads();
-			clazz.getClazzStatistic().setTotalReadWords(
-					clazz.getClazzStatistic().getTotalReadWords()
-							+ book.getWordCount());
 
 			Set<ClazzCategoryCount> clazzCategoryCounts = clazz
 					.getCategoryCount();
@@ -327,19 +323,14 @@ public class ExamController {
 			coinHistory.setCoinType(CoinType.IN);
 			coinHistory.setNum(book.getCoin());
 			coinHistory.setStudent(student);
+			coinService.add(coinHistory);
 
 			PointHistory pointHistory = new PointHistory();
 			pointHistory.setPointFrom(PointFrom.FROM_VERIFY_TEST);
 			pointHistory.setPointType(PointType.IN);
 			pointHistory.setNum(book.getPoint());
 			pointHistory.setStudent(student);
-
-			student.getStatistic().setCoin(
-					student.getStatistic().getCoin() + book.getCoin());
-			student.getStatistic().setPoint(
-					student.getStatistic().getPoint() + book.getPoint());
-			student.getStatistic().increaseTestPasses();
-
+			pointService.add(pointHistory);
 		}
 		userService.saveStudent(student);
 		LOGGER.debug("return a exam entry result with information: {}", exam);
