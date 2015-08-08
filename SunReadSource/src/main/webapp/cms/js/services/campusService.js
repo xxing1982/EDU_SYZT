@@ -32,6 +32,30 @@ campusServices.factory('GetCampus', ['$resource', 'config',
 			);
 	}]);
 
+campusServices.factory('SchoolDistrict',['$resource', 'config', '$http',
+	function($resource, config, $http){
+		var api = {};
+		api.Update = function(data, callback){
+			$http.put(config.HOST + 'campus/' + data.id, data)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
+		api.Delete = function(id, callback){
+			$http.delete(config.HOST + 'schoolDistrict/' + id)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
+		api.Add = function(id, data, callback){
+			$http.post(config.HOST + 'region/' + id + '/schoolDistrict' , data)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
+		return api;
+	}]);
+
 
 campusServices.factory('GetSchoolDistricts', ['$resource', 'config',
 	function($resource, config){

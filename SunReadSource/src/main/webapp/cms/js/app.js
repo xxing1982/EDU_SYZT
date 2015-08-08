@@ -75,10 +75,10 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/school.html",
             controller: 'schoolCtrl'
         })
-        .state('campus',{
-        	url: '/campus',
-            templateUrl: "partials/campus.html"
-            //controller: 'campusCtrl'
+        .state('schoolDistrict',{
+        	url: '/schoolDistrict',
+            templateUrl: "partials/schoolDistrict.html",
+            controller: 'schoolDistrictCtrl'
         })
         .state('clazz',{
         	url: '/clazz',
