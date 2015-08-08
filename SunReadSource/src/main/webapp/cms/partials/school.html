@@ -26,7 +26,7 @@
                 <th>校长寄语</th>
                 <th>所属</th>
                 <th>
-                    <!--<button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal" disabled="disabled">添加</button>-->
+                <button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加</button>
                 </th>
             </tr>
         </thead>
@@ -89,30 +89,70 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <form role="form" name="addForm" novalidate>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">添加</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">用户名</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Username" ng-model="add.userid" required>
+            <form role="form" name="addForm" novalidate>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">学校名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="name" ng-model="add.name" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">密码</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" placeholder="Password" ng-model="add.password" required>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择区域</label>
+                            <div class="col-md-3">
+                                <select class="form-control" ng-model="SelectedProvince" ng-options="s.name for s in provinces" ng-change="c_province()">
+                                    <option>请选择</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" ng-model="SelectedCity" ng-options="sq.name for sq in SelectedProvince.subRegion" ng-change="c_city()">
+                                    <option>请选择</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" ng-model="SelectedRegion" ng-options="sq.name for sq in SelectedCity.subRegion" ng-change="c_region()">
+                                    <option>请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">校长</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="headmaster" ng-model="add.headmaster" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">校长寄语</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="wish" ng-model="add.wish" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">教育集团</label>
+                            <div class="col-md-5">
+                                <select class="form-control" ng-model="SelectedEDU" ng-options="s.name for s in EDU" ng-change="c_EDU()">
+                                    <option>请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">学区</label>
+                            <div class="col-md-5">
+                                <select class="form-control" ng-model="SelectedSD" ng-options="s.name for s in SD" ng-change="c_SD()">
+                                    <option>请选择</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="AddSys()" ng-disabled="addForm.$invalid">Add</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="AddSys()" ng-disabled="addForm.$invalid">Add</button>
+                </div>
             </form>
         </div>
     </div>
@@ -121,32 +161,32 @@
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <form role="form" name="myForm" novalidate>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">修改</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">名称</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="name" ng-model="edit.name">
+            <form role="form" name="myForm" novalidate>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="name" ng-model="edit.name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">校长</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="headmaster" ng-model="edit.headmaster">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">校长</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="headmaster" ng-model="edit.headmaster">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="EditSys()" ng-disabled="myForm.$invalid">Edit</button>
-                <span>{{message}}</span>
-            </div>
-        </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="EditSys()" ng-disabled="myForm.$invalid">Edit</button>
+                    <span>{{message}}</span>
+                </div>
+            </form>
         </div>
     </div>
 </div>

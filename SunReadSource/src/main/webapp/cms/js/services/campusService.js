@@ -15,6 +15,12 @@ campusServices.factory('Campus',['$resource', 'config', '$http',
 				callback(data);
 			});
 		}
+		api.Add = function(id, data, callback){
+			$http.post(config.HOST + 'region/' + id + '/campus' , data)
+			.success(function(data, status, headers, config){
+				callback(data);
+			});
+		}
 		return api;
 	}]);
 
@@ -22,6 +28,14 @@ campusServices.factory('Campus',['$resource', 'config', '$http',
 campusServices.factory('GetCampus', ['$resource', 'config',
 	function($resource, config){
 		return $resource(config.HOST + "campuss?page=:page&size=:size&sortBy=id",
+			{page:'@_page', size:'@_size'}, {}
+			);
+	}]);
+
+
+campusServices.factory('GetSchoolDistricts', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "schoolDistricts?page=:page&size=:size&sortBy=id",
 			{page:'@_page', size:'@_size'}, {}
 			);
 	}]);

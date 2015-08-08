@@ -1,13 +1,40 @@
-ctrls.controller("schoolCtrl",['$scope', '$rootScope', 'Campus', 'Pageable', 'GetCampus', '$stateParams',
-	function($scope, $rootScope, Campus, Pageable, GetCampus, $stateParams){
+ctrls.controller("schoolCtrl",['$scope', '$rootScope', 'Campus', 'Pageable', 'GetCampus', '$stateParams', 'Province', 'GetEduGroup', 'GetSchoolDistricts',
+	function($scope, $rootScope, Campus, Pageable, GetCampus, $stateParams, Province, GetEduGroup, GetSchoolDistricts){
 
 		//add
-		/*$scope.add = {};
+		$scope.add = {};
 		$scope.AddSys = function(){
-			Campus.Add($scope.add.userid, $scope.add.password, function(){
+			Campus.Add($scope.SelectedRegion.id ,$scope.add, function(){
 				$("#addModal").modal('hide');
 			})
-		}*/
+		}
+		Province.GetProvinces(function(data){
+			$scope.provinces = data.content;
+		});
+
+		$scope.c_province = function(){
+			$scope.SelectedCity = "";
+		}
+
+		$scope.c_city = function(){
+			$scope.SelectedRegion = "";
+		}
+
+		$scope.c_region = function(){
+		}
+		
+		GetEduGroup.get({size: 10000, page: 0},function(data){
+			$scope.EDU = data.content;
+		});
+		$scope.c_EDU = function(){
+			$scope.add.eduGroupName = $scope.SelectedEDU.name;
+		}
+		GetSchoolDistricts.get({size: 10000, page: 0},function(data){
+			$scope.SD = data.content;
+		});
+		$scope.c_SD = function(){
+			$scope.add.schoolDistrictName = $scope.SelectedSD.name;
+		}
 
 		//update
 		$scope.edit = {};
