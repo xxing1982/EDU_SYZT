@@ -85,6 +85,11 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: "partials/clazz.html",
             controller: 'ClassCtrl'
         })
+        .state('semester',{
+            url: '/semester',
+            templateUrl: "partials/semester.html",
+            controller: 'semesterCtrl'
+        })
         .state('action',{
             url: '/action',
             templateUrl: "partials/action.html",

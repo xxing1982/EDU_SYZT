@@ -60,10 +60,6 @@ public class SemesterRepositoryService implements SemesterService{
 	public SemesterDTO add(SemesterDTO added,Long campusId) {
         LOGGER.debug("Adding a new Semester with information: {}", added);
         
-        Semester exits = semesterRepo.findOne(added.getId());        
-        if(exits != null){
-            throw new DuplicateException("Semester with id: "+added.getId()+" is already exits..");
-        }
         Campus campus = campusRepository.findOne(campusId);
         if(campus == null)
         	throw new NotFoundException("no campus found with id:"+ campusId);

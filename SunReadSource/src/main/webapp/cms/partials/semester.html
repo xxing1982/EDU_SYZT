@@ -1,6 +1,6 @@
 <!--AdvancedSearch-->
 <div>
-    <h1>学区</h1>
+    <h1>学期</h1>
 </div>
 <div class="advancedSearch">
     <div class="row">
@@ -9,31 +9,34 @@
                 <form enctype="multipart/form-data" id="form1">
                     Excel: <input type="file" id="myfile" name="myfile" onChange="GetURL()" /><br/>
 
-                    <input type="submit" onClick="PostData('/api/upload/excel/school')" value="Excel导入Admin" />
+                    <input type="submit" onClick="PostData('/api/upload/excel/admin')" value="Excel导入Admin" />
                 </form>
             </div>
         </div>
     </div>
 
 
+    <chooseschool></chooseschool>
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>序列号</th>
                 <th>名称</th>
                 <th>创建时间</th>
-                <th>所属地</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
                 <th>
-                    <button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加</button>
+                    <button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal" disabled="disabled">添加</button>
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="placeHolder in searchPageable.entities.content">
                 <td>{{placeHolder.id}}</td>
-                <td>{{placeHolder.name}}</td>
+                <td>{{placeHolder.semester}}</td>
                 <td>{{placeHolder.creationTime}}</td>
-                <td>{{placeHolder.region.name}}</td>
+                <td>{{placeHolder.startTime}}</td>
+                <td>{{placeHolder.endTime}}</td>
                 <td>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
                     <button class="btn btn-primary" ng-click="deleteSys(placeHolder)">删除</button>
@@ -93,35 +96,29 @@
             <div class="modal-body">
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">名称</label>
+                        <label class="col-sm-2 control-label">学期名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="name" ng-model="add.name" required>
+                            <input type="text" class="form-control" placeholder="name" ng-model="add.semester" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">描述</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="describe" ng-model="add.description" required>
+                            <input type="text" class="form-control" placeholder="description" ng-model="add.description">
                         </div>
                     </div>
                     <div class="form-group">
-                            <label class="col-sm-2 control-label">选择区域</label>
-                            <div class="col-md-3">
-                                <select class="form-control" ng-model="SelectedProvince" ng-options="s.name for s in provinces" ng-change="c_province()">
-                                    <option>请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-control" ng-model="SelectedCity" ng-options="sq.name for sq in SelectedProvince.subRegion" ng-change="c_city()">
-                                    <option>请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-control" ng-model="SelectedRegion" ng-options="sq.name for sq in SelectedCity.subRegion" ng-change="c_region()">
-                                    <option>请选择</option>
-                                </select>
-                            </div>
+                        <label class="col-sm-2 control-label">开始时间</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" ng-model="add.startTime" required>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">结束时间</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" ng-model="add.endTime" required>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -145,10 +142,27 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="name" ng-model="edit.name">
+                            <input type="text" class="form-control" placeholder="name" ng-model="edit.semester" required>
                         </div>
                     </div>
-                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">描述</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="description" ng-model="edit.description" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">开始时间</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" ng-model="edit.startTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">结束时间</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" ng-model="edit.endTime" required>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#password").focus();
+	$("#username").focus();
 	$(document).keydown(function(event){
 		//press Enter
 		if(event.keyCode == 13){
