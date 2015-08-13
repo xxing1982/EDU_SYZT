@@ -24,7 +24,7 @@
 			<div ng-repeat="terms in searchPageable.entities.content">
 				<div class="row bookList" ng-init="terms.text_overflow=true;">
 					<div class="col-md-3">
-						<a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl}} class="img-responsive"></a>
+						<a href="#readingCenter/bookDetails/{{terms.id}}/"><img ng-src={{imageServer+terms.pictureUrl | formatPictrueUrl}} class="img-responsive"></a>
 					</div>
 					<div class="col-md-9">
 						<div class="row fsize12"><h4>{{terms.name}}&nbsp;&nbsp;<small>ISBN&nbsp;{{terms.isbn}}</small></h4></div>

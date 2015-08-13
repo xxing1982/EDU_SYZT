@@ -148,3 +148,11 @@ if($stateParams.searchTerm!== ""){
 }
 
 }]);
+
+ctrls.filter('formatPictrueUrl', function () {
+    return function (data) {
+        var url = data.slice(27);
+        if (url.search('/') === 0) return data;
+        return url;
+    };
+});
