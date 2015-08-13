@@ -13,6 +13,13 @@ myDirective.directive('chooseschool', ['Province', function(Province){
 			$scope.isDisabled = true;
 			return;
 		};
+		if (sessionStorage.getItem("cmsRoleId") == 8 || sessionStorage.getItem("cmsRoleId") == 9) {
+			$scope.isDisabled = true;
+			var school = {};
+			school.id = sessionStorage.getItem("campusId");
+			$scope.selectSchool.checkOne(school);
+			return;
+		}
 
 		/*Province.GetProvinces(function(data){
 			$scope.provinces = data.content;

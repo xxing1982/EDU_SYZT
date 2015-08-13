@@ -17,6 +17,7 @@ $(document).ready(function(){
 				request.setRequestHeader("Authorization", "Basic MzUzYjMwMmM0NDU3NGY1NjUwNDU2ODdlNTM0ZTdkNmE6Mjg2OTI0Njk3ZTYxNWE2NzJhNjQ2YTQ5MzU0NTY0NmM=");
 			},
 			success: function(data){
+				sessionStorage.clear();
 				sessionStorage.setItem("access_token", data.access_token);
 				//sessionStorage.setItem("token_type", data.token_type);
 				//sessionStorage.setItem("refresh_token", data.refresh_token);
@@ -34,6 +35,11 @@ $(document).ready(function(){
 						for(var i = 0; i < dataLogin.roles.length; i++){
 							if (dataLogin.roles[i].id >= 6 && dataLogin.roles[i].id <= 9) {
 								sessionStorage.setItem("cmsId", dataLogin.id);
+								sessionStorage.setItem("cmsRoleId", dataLogin.roles[i].id);
+								sessionStorage.setItem("cmsRoleName", dataLogin.roles[i].name);
+								if (dataLogin.campusId != undefined) {
+									sessionStorage.setItem("campusId", dataLogin.campusId);
+								}
 								window.location.href="index.html";
 								return;
 							}
