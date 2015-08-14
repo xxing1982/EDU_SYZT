@@ -198,9 +198,17 @@ public class Campus extends AbstractEntity{
 
 	/**
 	 */
-	public void update(String name,String headmaster) {
-		this.name = name;
-		this.headmaster = headmaster;
+	public void update(String name,String headmaster,String wish, String description, int noteScore ) {
+		if(name.length()>0)
+			this.name = name;
+		if(headmaster.length()>0)
+			this.headmaster = headmaster;
+		if(wish.length()>0)
+			this.wish = wish;
+		if(noteScore > 0)
+			this.noteScore = noteScore;
+		if(description.length()>0)
+			this.description = description;
 	}
     
 	/**

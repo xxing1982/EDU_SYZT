@@ -73,7 +73,7 @@ public class CampusController {
     public CampusDTO update(@Valid @RequestBody CampusDTO dto,@PathVariable("id") long id) throws NotFoundException {
         LOGGER.debug("Adding a new book to shelf entry with information: {}", dto);
         
-        Campus updated = service.update(dto);
+        Campus updated = service.update(dto,id);
         LOGGER.debug("Added a to-do entry with information: {}", updated);
               
        return updated.createDTO();

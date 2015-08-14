@@ -28,7 +28,7 @@ public interface CampusService {
 	
     public Campus deleteById(Long id) throws NotFoundException;
 
-    public Campus update(CampusDTO updated) throws NotFoundException;
+    public Campus update(CampusDTO updated,Long id) throws NotFoundException;
 
     public Campus findById(Long id) throws NotFoundException;
 

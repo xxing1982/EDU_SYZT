@@ -121,13 +121,13 @@ public class CampusRepositoryService implements CampusService{
 
     @Transactional(rollbackFor = {NotFoundException.class})
     @Override
-    public Campus update(CampusDTO updated)throws  NotFoundException{
+    public Campus update(CampusDTO updated,Long id)throws  NotFoundException{
         LOGGER.debug("Updating contact with information: {}", updated);
 
-        Campus model = findById(updated.getId());
+        Campus model = findById(id);
         LOGGER.debug("Found a note entry: {}", model);
 
-        model.update(updated.getName(),updated.getHeadmaster());
+        model.update(updated.getName(),updated.getHeadmaster(),updated.getWish(),updated.getDescription(),updated.getNoteScore());
         return model;
     }
 
