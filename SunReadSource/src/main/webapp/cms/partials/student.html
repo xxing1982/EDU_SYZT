@@ -29,7 +29,7 @@
                 <th>积分</th>
                 <th>等级</th>
                 <th>
-                    <!--<button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal" disabled="disabled">添加</button>-->
+                    <button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal" disabled="disabled">添加</button>
                 </th>
             </tr>
         </thead>
@@ -91,4 +91,92 @@
         </div>
     </div>
 
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form role="form" name="addForm" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加</h4>
+            </div>
+            <div class="modal-body">
+                <div id="avatar" class="col-md-12">
+                    <div class="dropzone img-circle border-shadow dz-clickable" id="image-uploader" ng-style="{'background-image':'url('+add.picture+')'}" style="">
+                        <div class="dz-default dz-message"><span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">登录号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="add.userId" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名字</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="add.username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">昵称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="add.nickname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">手机号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="add.phoneNumber" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">年龄</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" ng-model="add.age" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">生日</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" ng-model="add.birthday" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+                            <input type="number" placeholder="0:男，1:女" class="form-control" ng-model="add.gender" min="0" max="1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" ng-model="add.email" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">地址</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="add.address"required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">班级</label>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="SelectedCLZ" ng-options="s.name for s in CLZ" ng-change="c_CLZ()">
+                                <option>请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="AddSys()" ng-disabled="addForm.$invalid">Add</button>
+            </div>
+            </form>
+        </div>
+    </div>
 </div>

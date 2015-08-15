@@ -1,5 +1,5 @@
-ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', 'GetStudent', '$stateParams',
-	function($scope, $rootScope, Students, Pageable, GetStudent, $stateParams){
+ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', 'GetStudent', '$stateParams', 'Dropzone', 'GetCampus', 'GetClazzs', 'config',
+	function($scope, $rootScope, Students, Pageable, GetStudent, $stateParams, Dropzone, GetCampus, GetClazzs, config){
 		$scope.selectSchool = {
 			isEdit: true,
 			isShowSchool: true,
@@ -10,8 +10,41 @@ ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', '
         			campusid:item.id,
 				}
 				$scope.createPageable();
+
+				GetClazzs.get({campusid: $scope.campusidSelected, size: 10000, page: 0},function(data){
+					$scope.CLZ = data.content;
+				});
 			}
 		};
+
+		$scope.add = {};
+		$scope.add.nickname = "";
+		$scope.add.password = "123456";
+		$scope.add.gradeId = 0;
+		$scope.add.roles = [{
+            "id":3,
+            "name":"ROLE_STUDENT",
+            "desc":"User"
+        }];
+		$scope.add.enabled = true;
+		$scope.add.accountNonExpired = true;
+		$scope.add.accountNonLocked = true;
+		$scope.add.credentialsNonExpired = true;
+		$scope.dropzone = Dropzone(config.USERICON, function(url){
+            $scope.add.picture = url;
+        } );
+		$scope.AddSys = function(){
+			$scope.add.campusId = $scope.campusidSelected;
+			$scope.add.birthday = 1427618967110;
+			$scope.add.gender = $scope.add.gender == 0 ? "male":"famale";
+			Students.Add($scope.add, function(data) {
+    			location.reload();
+  			});
+			
+		}
+		$scope.c_CLZ = function(){
+			$scope.add.clazzId = $scope.SelectedCLZ.id;
+		}
 
 		$scope.deleteSys = function(item){
 			$rootScope.confirm_modal = {};

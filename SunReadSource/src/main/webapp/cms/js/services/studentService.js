@@ -9,6 +9,12 @@ studentServices.factory('Students',['$resource', 'config', '$http',
 				callback(data);
 			})
 		};
+		api.Add = function(data, callback){
+			$http.post(config.HOST + 'students/', data)
+			.success(function(data, status, headers, config){
+				callback(data);
+			})
+		};
 		api.Delete = function(data, callback){
 			$http.delete(config.HOST + 'students/'+ data)
 			.success(function(data, status, headers, config){
