@@ -42,3 +42,17 @@ ctrls.controller("subjectiveQuestionCtrl", ['$scope','$rootScope','$stateParams'
         })
     }
 }]);
+
+ctrls.filter('formatType1', function () {
+    return function (data) {
+        if (data == "FIRST") {
+            return "验证";
+        }
+        else if (data == "SECOND") {
+            return "词汇";
+        }
+
+
+        return data;
+    };
+});

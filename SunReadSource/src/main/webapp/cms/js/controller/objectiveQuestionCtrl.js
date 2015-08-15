@@ -55,3 +55,17 @@ ctrls.controller("objectiveQuestionCtrl", ['$scope','$rootScope','$stateParams',
         })
     }
 }]);
+
+ctrls.filter('formatType', function () {
+    return function (data) {
+        if (data == "VERIFY") {
+            return "验证";
+        }
+        else if (data == "WORD") {
+            return "词汇";
+        }
+
+
+        return data;
+    };
+});

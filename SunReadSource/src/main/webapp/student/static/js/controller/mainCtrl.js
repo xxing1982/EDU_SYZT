@@ -21,7 +21,7 @@ ctrls.controller("mainController", ['$rootScope', '$scope', 'Student', "Bookshel
             $rootScope.student = data;
             // Create a classes entitiy
             Class.get({id: $scope.userInfo.clazzId}, function (classData) {
-                $scope.userInfo.class = classData.name;
+                $scope.userInfo.class = classData.grade + "年" + classData.name;
                 $scope.userInfo.school = classData.campusName;
             });
             /*正在发生

@@ -3,7 +3,7 @@ ctrls.controller("regionCtrl",['$scope', '$rootScope', 'config', 'Province',
 		Province.GetProvinces(function(data){
 			$scope.provinces = data.content;
 		});
-
+		
 		$scope.c_province = function(){
 			$("#add").attr("disabled",true); 
 			$scope.SelectedCity = "";
@@ -18,9 +18,9 @@ ctrls.controller("regionCtrl",['$scope', '$rootScope', 'config', 'Province',
 		$scope.AddSys = function(){
 			$scope.add.province = $scope.SelectedProvince.name;
 			$scope.add.city = $scope.SelectedCity.name;
-			Province.Add($scope.add, function(){
+			Province.Add($scope.add, function(dataP){
 				$("#addModal").modal('hide');
-				location.reload();
+				$scope.SelectedCity.subRegion.push(dataP);
 			})
 		}
 

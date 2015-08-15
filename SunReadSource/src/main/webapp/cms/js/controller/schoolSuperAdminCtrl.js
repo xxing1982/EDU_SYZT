@@ -18,6 +18,7 @@ ctrls.controller("schoolSuperAdminCtrl",['$scope', '$rootScope', 'SuperSchoolAdm
 		$scope.AddSys = function(){
 			SuperSchoolAdmin.Add($scope.campusidSelected, $scope.add.userid, $scope.add.password, function(){
 				$("#addModal").modal('hide');
+				location.reload();
 			})
 		}
 
@@ -39,6 +40,7 @@ ctrls.controller("schoolSuperAdminCtrl",['$scope', '$rootScope', 'SuperSchoolAdm
 
 			SuperSchoolAdmin.Update(item.userId, item.oldpassword, item.newpassword, function(){
 				$("#editModal").modal('hide');
+				location.reload();
 			})
 		}
 
