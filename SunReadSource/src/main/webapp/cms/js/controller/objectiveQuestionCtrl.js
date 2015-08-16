@@ -59,10 +59,10 @@ ctrls.controller("objectiveQuestionCtrl", ['$scope','$rootScope','$stateParams',
 ctrls.filter('formatType', function () {
     return function (data) {
         if (data == "VERIFY") {
-            return "验证";
+            return "验证题";
         }
         else if (data == "WORD") {
-            return "词汇";
+            return "词汇题";
         }
 
 
