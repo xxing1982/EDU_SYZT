@@ -1,5 +1,5 @@
-ctrls.controller("semesterCtrl",['$scope', '$rootScope', 'Semester', 'Pageable', 'GetSemester', '$stateParams',
-	function($scope, $rootScope, Semester, Pageable, GetSemester, $stateParams){
+ctrls.controller("semesterCtrl",['$scope', '$rootScope', 'Semester', 'Pageable', 'GetSemester', '$stateParams', '$filter',
+	function($scope, $rootScope, Semester, Pageable, GetSemester, $stateParams, $filter){
 		$scope.selectSchool = {
 			isEdit: true,
 			isShowSchool: true,
@@ -15,9 +15,12 @@ ctrls.controller("semesterCtrl",['$scope', '$rootScope', 'Semester', 'Pageable',
 
 		//add
 		$scope.add = {};
+		$scope.add.startTime = new Date();
+		$scope.add.endTime = new Date();
 		$scope.AddSys = function(){
-			//$scope.add.startTime = $scope.add.startTime.toLocaleDateString();
-			//$scope.add.endTime = $scope.add.endTime.toLocaleDateString();
+			//$scope.add.startTime = $filter('date')($scope.add.startTime, 'yyyy-MM-dd');
+			$scope.add.startTime = $scope.add.startTime.toLocaleDateString();
+			$scope.add.endTime = $scope.add.endTime.toLocaleDateString();
 			Semester.Add($scope.campusidSelected ,$scope.add, function(){
 				$("#addModal").modal('hide');
 				location.reload();
@@ -26,6 +29,8 @@ ctrls.controller("semesterCtrl",['$scope', '$rootScope', 'Semester', 'Pageable',
 
 		//update
 		$scope.edit = {};
+		$scope.edit.startTime = new Date();
+		$scope.edit.endTime = new Date();
 		$scope.updateSys = function(item){
 			$scope.message = "";
 			var temp = angular.copy(item);

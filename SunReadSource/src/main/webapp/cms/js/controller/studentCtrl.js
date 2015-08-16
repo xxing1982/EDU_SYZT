@@ -12,6 +12,9 @@ ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', '
 				$scope.createPageable();
 
 				GetClazzs.get({campusid: $scope.campusidSelected, size: 10000, page: 0},function(data){
+					for(var i = 0; i < data.content.length; i++){
+						data.content[i].name = data.content[i].grade + "年" + data.content[i].name;
+					}
 					$scope.CLZ = data.content;
 				});
 			}
@@ -21,6 +24,7 @@ ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', '
 		$scope.add.nickname = "";
 		$scope.add.password = "123456";
 		$scope.add.gradeId = 0;
+		//$scope.add.birthday = new Date();
 		$scope.add.roles = [{
             "id":3,
             "name":"ROLE_STUDENT",
@@ -35,7 +39,7 @@ ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', '
         } );
 		$scope.AddSys = function(){
 			$scope.add.campusId = $scope.campusidSelected;
-			$scope.add.birthday = 1427618967110;
+			//$scope.add.birthday = 1427618967110;
 			$scope.add.gender = $scope.add.gender == 0 ? "male":"famale";
 			Students.Add($scope.add, function(data) {
     			location.reload();
@@ -44,6 +48,33 @@ ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', '
 		}
 		$scope.c_CLZ = function(){
 			$scope.add.clazzId = $scope.SelectedCLZ.id;
+		}
+
+
+		//update
+		$scope.edit = {};
+		$scope.updateSys = function(item){
+			$scope.message = "";
+			$scope.selectStudentID = item.id;
+			temp = angular.copy(item);
+			$scope.edit.nickname = temp.nickname;
+			$scope.edit.phoneNumber = temp.phoneNumber;
+			$scope.edit.qqId = temp.qqId;
+			$scope.edit.wechatId = temp.wechatId;
+			$scope.edit.email = temp.email;
+		}
+		$scope.EditSys = function(){
+			$scope.message = "";
+			var item = $scope.edit;
+			if ($scope.repassword != item.password) {
+				$scope.message = "两次密码不一致！";
+				return;
+			}
+
+			Students.Update($scope.selectStudentID, item, function(){
+				$("#editModal").modal('hide');
+				location.reload();
+			})
 		}
 
 		$scope.deleteSys = function(item){

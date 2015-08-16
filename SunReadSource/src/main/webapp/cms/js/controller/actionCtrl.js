@@ -67,3 +67,12 @@ ctrls.controller("ActionCtrl",['$scope', '$rootScope', 'Action', 'Pageable', '$s
 		}
 		$scope.createPageable();
 	}]);
+
+ctrls.filter('fmtSize10', function () {
+    return function (data) {
+        if (data.length > 10) {
+        	return data.substring(0, 10) + "...";
+        }
+        return data;
+    };
+});

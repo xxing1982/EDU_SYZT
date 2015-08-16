@@ -3,8 +3,8 @@ var studentServices = angular.module('studentServices', ['ngResource', 'nourConf
 studentServices.factory('Students',['$resource', 'config', '$http',
 	function($resource, config, $http){
 		var api = {};
-		api.Update = function(data, callback){
-			$http.put(config.HOST + 'eduGroup/' + data.id, data)
+		api.Update = function(id, data, callback){
+			$http.put(config.HOST + 'users/' + id, data)
 			.success(function(data, status, headers, config){
 				callback(data);
 			})
