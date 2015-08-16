@@ -20,7 +20,8 @@
 					<input type="submit" onClick="PostData('/api/upload/excel/book')" value="从Excel导入书籍" /> 
 				</form>
 			</div>
-
+			<br>
+			<button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加</button>
 			<div ng-repeat="terms in searchPageable.entities.content">
 				<div class="row bookList" ng-init="terms.text_overflow=true;">
 					<div class="col-md-3">
@@ -297,47 +298,228 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">{{selectBook.name + " " + selectBook.isbn}}</h4>
 				</div>
-				<div class="modal-body">          
-					<!--<div>
-						用户名：<input type="text" ng-model="selectBook.name" ng-minlength="2" required>
-					</div>-->
-					<div class="form-group">
-						<label>名字:</label>
-						<input type="text" class="form-control" ng-model="selectBook.name" required>
+				<div class="modal-body">
+            	<div id="avatar" class="col-md-12">
+                    <div class="dropzone img-circle border-shadow dz-clickable" id="image-uploader" ng-style="{'background-image':'url('+selectBook.pictureUrl+')'}" style="">
+                        <div class="dz-default dz-message"><span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">书名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="name" ng-model="selectBook.name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">isbn</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="isbn" ng-model="selectBook.isbn" required>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="col-sm-2 control-label">出版日期</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" placeholder="publication date" ng-model="selectBook.publicationDate" required>
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">作者</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="author" ng-model="selectBook.author" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">作者描述</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="author introduction" ng-model="selectBook.authorIntroduction">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">出版社</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="publisher" ng-model="selectBook.publisher" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">页面数</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="selectBook.pageCount" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">字数</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="selectBook.wordCount" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">积分</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="selectBook.point" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">财富</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="selectBook.coin" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">价格</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="selectBook.price" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">等级</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="0" class="form-control" ng-model="selectBook.extra.level" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">最高价格</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="selectBook.highPrice" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">语言</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="language" value="0" ng-model="selectBook.extra.language"> 全部语言
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="language" value="1" ng-model="selectBook.extra.language" > 中文书
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="language" value="2" ng-model="selectBook.extra.language"> 英文书
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">类型</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="literature" value="0" ng-model="selectBook.extra.literature"> 小说及非小说
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="literature" value="1" ng-model="selectBook.extra.literature" > 小说
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="literature" value="2" ng-model="selectBook.extra.literature"> 非小说
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">测试类型</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="testType" value="0" ng-model="selectBook.extra.testType"> 所有类型
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="testType" value="1" ng-model="selectBook.extra.testType" > 认证测试
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="testType" value="2" ng-model="selectBook.extra.testType"> 词汇训练
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="testType" value="3" ng-model="selectBook.extra.testType"> 思维训练
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">年级</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="grade" value="0" ng-model="selectBook.extra.grade"> 全部年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="1" ng-model="selectBook.extra.grade" > 1年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="2" ng-model="selectBook.extra.grade"> 2年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="3" ng-model="selectBook.extra.grade"> 3年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="4" ng-model="selectBook.extra.grade"> 4年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="5" ng-model="selectBook.extra.grade"> 5年级
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">类型</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="category" value="0" ng-model="selectBook.extra.category"> 全部类型
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="1" ng-model="selectBook.extra.category" > 类型一
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="2" ng-model="selectBook.extra.category"> 类型二
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="3" ng-model="selectBook.extra.category"> 类型三
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="4" ng-model="selectBook.extra.category"> 类型四
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="5" ng-model="selectBook.extra.category"> 类型五
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">配套资源</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="resource" value="0" ng-model="selectBook.extra.resource"> 不限制
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="resource" value="1" ng-model="selectBook.extra.resource" > 电子书
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="resource" value="2" ng-model="selectBook.extra.resource"> 音频
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="resource" value="3" ng-model="selectBook.extra.resource"> 视频
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">积分</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="pointRange" value="0" ng-model="selectBook.extra.pointRange"> 全部积分
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pointRange" value="1" ng-model="selectBook.extra.pointRange" > 0-5积分
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pointRange" value="2" ng-model="selectBook.extra.pointRange"> 6-10积分
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pointRange" value="3" ng-model="selectBook.extra.pointRange"> 10-20积分
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pointRange" value="4" ng-model="selectBook.extra.pointRange"> 20以上积分
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    	<label class="col-sm-2 control-label">描述</label>
+                    	<div class="col-sm-10">
+							<textarea class="form-control" rows="3" ng-model="selectBook.description" placeholder="请输入最少20个字" title="请输入最少20个字" ng-minlength="20" required></textarea>
+						</div>
 					</div>
-					<div class="form-group">
-						<label>出版社:</label>
-						<input type="text" class="form-control" ng-model="selectBook.publisher" required>
-					</div>
-					<div class="form-group">
-						<label>作者:</label>
-						<input type="text" class="form-control" ng-model="selectBook.author" required>
-					</div>
-					<div class="form-group">
-						<label>作者描述:</label>
-						<input type="text" class="form-control" ng-model="selectBook.authorIntroduction" required>
-					</div>
-					<div class="form-group">
-						<label>coin:</label>
-						<input type="number" class="form-control" ng-model="selectBook.coin" min="1" required>
-					</div>
-					<div class="form-group">
-						<label>level:</label>
-						<input type="number" class="form-control" ng-model="selectBook.extra.level" min="0" required>
-					</div>
-					<div class="form-group">
-						<label>point:</label>
-						<input type="number" class="form-control" ng-model="selectBook.point" min="1" required>
-					</div>
-					<div class="form-group">
-						<label>price:</label>
-						<input type="number" class="form-control" ng-model="selectBook.price" min="1" required>
-					</div>
-					<div class="form-group">
-						<label>description:</label>
-						<textarea class="form-control" rows="3" ng-model="selectBook.description" placeholder="请输入最少20个字" title="请输入最少20个字" ng-minlength="20" required></textarea>
-					</div>
-				</div>
+                </div>
+            </div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Save</button>
@@ -345,5 +527,243 @@
 			</form>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form role="form" name="addForm" novalidate>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加</h4>
+            </div>
+            <div class="modal-body">
+            	<div id="avatar" class="col-md-12">
+                    <div class="dropzone img-circle border-shadow dz-clickable" id="image-uploader" ng-style="{'background-image':'url('+add.pictureUrl+')'}" style="">
+                        <div class="dz-default dz-message"><span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">书名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="name" ng-model="add.name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">isbn</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="isbn" ng-model="add.isbn" required>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="col-sm-2 control-label">出版日期</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" placeholder="publication date" ng-model="add.publicationDate" required>
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">作者</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="author" ng-model="add.author" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">作者描述</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="author introduction" ng-model="add.authorIntroduction">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">出版社</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="publisher" ng-model="add.publisher" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">页面数</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="add.pageCount" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">字数</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="add.wordCount" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">积分</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="add.point" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">财富</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="add.coin" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">价格</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="add.price" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">等级</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="0" class="form-control" ng-model="add.extra.level" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">最高价格</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control" ng-model="add.highPrice" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">语言</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="language" value="0" ng-model="add.extra.language"> 全部语言
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="language" value="1" ng-model="add.extra.language" > 中文书
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="language" value="2" ng-model="add.extra.language"> 英文书
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">类型</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="literature" value="0" ng-model="add.extra.literature"> 小说及非小说
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="literature" value="1" ng-model="add.extra.literature" > 小说
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="literature" value="2" ng-model="add.extra.literature"> 非小说
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">测试类型</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="testType" value="0" ng-model="add.extra.testType"> 所有类型
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="testType" value="1" ng-model="add.extra.testType" > 认证测试
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="testType" value="2" ng-model="add.extra.testType"> 词汇训练
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="testType" value="3" ng-model="add.extra.testType"> 思维训练
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">年级</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="grade" value="0" ng-model="add.extra.grade"> 全部年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="1" ng-model="add.extra.grade" > 1年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="2" ng-model="add.extra.grade"> 2年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="3" ng-model="add.extra.grade"> 3年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="4" ng-model="add.extra.grade"> 4年级
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="grade" value="5" ng-model="add.extra.grade"> 5年级
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">类型</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="category" value="0" ng-model="add.extra.category"> 全部类型
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="1" ng-model="add.extra.category" > 类型一
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="2" ng-model="add.extra.category"> 类型二
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="3" ng-model="add.extra.category"> 类型三
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="4" ng-model="add.extra.category"> 类型四
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="category" value="5" ng-model="add.extra.category"> 类型五
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">配套资源</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="resource" value="0" ng-model="add.extra.resource"> 不限制
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="resource" value="1" ng-model="add.extra.resource" > 电子书
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="resource" value="2" ng-model="add.extra.resource"> 音频
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="resource" value="3" ng-model="add.extra.resource"> 视频
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">积分</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+  								<input type="radio" name="pointRange" value="0" ng-model="add.extra.pointRange"> 全部积分
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pointRange" value="1" ng-model="add.extra.pointRange" > 0-5积分
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pointRange" value="2" ng-model="add.extra.pointRange"> 6-10积分
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pointRange" value="3" ng-model="add.extra.pointRange"> 10-20积分
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pointRange" value="4" ng-model="add.extra.pointRange"> 20以上积分
+							</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    	<label class="col-sm-2 control-label">描述</label>
+                    	<div class="col-sm-10">
+							<textarea class="form-control" rows="3" ng-model="add.description" placeholder="请输入最少20个字" title="请输入最少20个字" ng-minlength="20" required></textarea>
+						</div>
+					</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="AddSys()" ng-disabled="addForm.$invalid">Add</button>
+            </div>
+            </form>
+        </div>
+    </div>
 </div>
 

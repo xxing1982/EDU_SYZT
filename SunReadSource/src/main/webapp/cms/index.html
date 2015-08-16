@@ -36,11 +36,11 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
+			<div class="col-sm-3 col-md-2 sidebar" ng-controller="indexCtrl">
 				<ul class="nav nav-sidebar">
 					<li ng-class="{active:isActive(routeMap.index)}"><a href="#/">主页</a></li>
 				</ul>
-				<ul class="nav nav-sidebar" ng-controller="indexCtrl">
+				<ul class="nav nav-sidebar">
 					<li ng-class="{active:isActive(routeMap.book)}"><a href="#book">书籍</a></li>
 					<li ng-class="{active:isActive(routeMap.objectivequestion)}"><a href="#objectivequestion">词汇和验证测试试题及选项</a></li>
 					<li ng-class="{active:isActive(routeMap.subjectivequestion)}"><a href="#subjectivequestion">思维测试试题</a></li>
@@ -170,7 +170,6 @@
     <script src="js/app.js"></script>    
     
 	<script src="../student/static/js/lib/tokenInjector.js"></script>
-    <script src="js/index.js"></script>
 
     <script type="text/javascript">
     	function GetURL(){

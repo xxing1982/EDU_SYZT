@@ -69,14 +69,20 @@ bookServices
 bookServices.factory('BookOperation',['config', '$http',
 	function(config, $http){
 		var api = {};
+		api.Add = function(data, callBack){
+			$http.post(config.HOST + 'books/', data)
+			.success(function(data){
+				callBack();
+			});
+		};
 		api.deleteBook = function(bookId, callBack){
 			$http.delete(config.HOST + 'books/' + bookId)
 			.success(function(data){
 				callBack();
 			});
 		};
-		api.updateBook = function(bookId, book, callBack){
-			$http.put(config.HOST + 'books/' + bookId, book)
+		api.updateBook = function(id, book, callBack){
+			$http.put(config.HOST + 'books/' + id, book)
 			.success(function(data){
 				callBack();
 			});

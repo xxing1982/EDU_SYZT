@@ -1,7 +1,7 @@
 //readingCenterAddBookAdvancedSearchCtrl.jsc
 ctrls.controller("readingCenterAddBookAdvancedSearchController", 
-    ['$scope','$rootScope','$stateParams','Pageable','ConditionSearch','QuickSearch','Book','config', 'BookOperation',
-    function ($scope,$rootScope,$stateParams,Pageable,ConditionSearch,QuickSearch,Book, config, BookOperation) {
+    ['$scope','$rootScope','$stateParams','Pageable','ConditionSearch','QuickSearch','Book','config', 'BookOperation', 'Dropzone',
+    function ($scope,$rootScope,$stateParams,Pageable,ConditionSearch,QuickSearch,Book, config, BookOperation, Dropzone) {
 
 
 //    $scope.searchContent="";
@@ -113,9 +113,48 @@ $scope.createPageable = function (){
     };
 
     $scope.Update = function(terms){
-        $scope.selectBook = angular.copy(terms);
+         var temp = angular.copy(terms);
+         $scope.selectBookOfId = temp.id;
+         $scope.selectBook.isbn = temp.isbn;
+         $scope.selectBook.pictureUrl = temp.pictureUrl;
+         $scope.selectBook.name = temp.name;
+         $scope.selectBook.description = temp.description;
+         $scope.selectBook.author = temp.author;
+         $scope.selectBook.publisher = temp.publisher;
+         $scope.selectBook.pageCount = temp.pageCount;
+         $scope.selectBook.wordCount = temp.wordCount;
+         $scope.selectBook.point = temp.point;
+         $scope.selectBook.coin = temp.coin;
+         $scope.selectBook.price = temp.price;
+         $scope.selectBook.highPrice = temp.highPrice;
+         $scope.selectBook.binding = temp.binding;
+         $scope.selectBook.authorIntroduction = temp.authorIntroduction;
+         $scope.selectBook.evaluationNum = temp.evaluationNum;
+         $scope.selectBook.extra = {};
+         $scope.selectBook.extra.level = temp.extra.level;
+         $scope.selectBook.extra.language = temp.extra.language;
+         $scope.selectBook.extra.literature = temp.extra.literature;
+         $scope.selectBook.extra.testType = 0;
+         $scope.selectBook.extra.grade = temp.extra.grade;
+         $scope.selectBook.extra.category = temp.extra.category;
+         $scope.selectBook.extra.resource = 0;
+         $scope.selectBook.extra.pointRange = temp.extra.pointRange;
+         $scope.selectBook.extra.ageRange = temp.extra.ageRange;
         $("#updateBook").modal({backdrop: 'static', keyboard: false});
     };
+
+    $scope.submitForm = function(isValid, isDirty){
+        if (!isValid) {
+            return;
+        };
+        if (!isDirty) {
+            $("#updateBook").modal("hide");
+            return;
+        };
+        BookOperation.updateBook($scope.selectBookOfId, $scope.selectBook, function(){
+            location.reload();
+        })
+    }
 
     $scope.DeleteBook = function(terms){
         $rootScope.confirm_modal = {
@@ -130,18 +169,38 @@ $scope.createPageable = function (){
         $('#confirm-modal').modal('show');
     }
 
-    $scope.submitForm = function(isValid, isDirty){
-        if (!isValid) {
-            return;
+    $scope.add = {};
+    $scope.add.description = "";
+    $scope.add.authorIntroduction = "";
+    $scope.add.binding = "hardback";
+    $scope.add.evaluationNum = 0;
+    $scope.add.extra = {};
+    $scope.add.extra.level = 0;
+    $scope.add.extra.ageRange = 0;
+    $scope.add.extra.language = 0;
+    $scope.add.extra.literature = 0;
+    $scope.add.extra.testType = 0;
+    $scope.add.extra.grade = 0;
+    $scope.add.extra.category = 0;
+    $scope.add.extra.resource = 0;
+    $scope.add.extra.pointRange = 0;
+    //$scope.add.publicationDate = new Date();
+    $scope.dropzone = Dropzone(config.USERICON, function(url){
+        $scope.add.pictureUrl = url;
+    });
+    $scope.AddSys = function(){
+        BookOperation.Add($scope.add, function(data) {
+            $rootScope.modal = {
+            title: "提示",
+            content: "添加成功",
+            click: function(){
+                location.reload();
+            }
         };
-        if (!isDirty) {
-            $("#updateBook").modal("hide");
-            return;
-        };
-        BookOperation.updateBook($scope.selectBook.id, $scope.selectBook, function(){
-            location.reload();
-        })
-    }
+        $('#alert-modal').modal('show');
+        });
+            
+        }
 
     if($stateParams.searchTerm!== ""){
      $scope.searchByName($stateParams.searchTerm);
