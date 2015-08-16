@@ -16,8 +16,8 @@
 
     <div class="input-group search col-md-8">
 
-        <!--<input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.searchTerm">
-        <span class="input-group-addon" ng-click="searchByName()">搜索</span>-->
+        <input type="text" class="form-control" placeholder="请输入书名" ng-model="searchArguments.topic">
+        <span class="input-group-addon" ng-click="searchByName()">搜索</span>
     </div>
     <table class="table table-bordered table-hover">
         <thead>
@@ -27,8 +27,6 @@
                 <th>书名</th>
                 <th>题目</th>
                 <th>题型</th>
-                <th>分数</th>
-                <th>导入时间</th>
                 <th>
                     <!--<button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加</button>-->
                 </th>
@@ -37,12 +35,10 @@
         <tbody>
             <tr ng-repeat="placeHolder in searchPageable.entities.content">
                 <td>{{placeHolder.id}}</td>
-                <td></td>
-                <td></td>
+                <td>{{placeHolder.isbn}}</td>
+                <td>{{placeHolder.bookName}}</td>
                 <td>{{placeHolder.topic}}</td>
                 <td>{{placeHolder.objectiveType | formatType}}</td>
-                <td></td>
-                <td>{{placeHolder.creationTime}}</td>
                 <td>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" ng-click="updateSys(placeHolder)">修改</button>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#showOptionModal" ng-click="ShowOption(placeHolder)">查看选项</button>

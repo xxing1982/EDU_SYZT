@@ -14,8 +14,8 @@ questionServices.factory('Objectivequestions',['$resource', 'config', '$http',
 
 questionServices.factory('GetObjectivequestions', ['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "objectivequestions?page=:page&size=:size&sortBy=id",
-			{page:'@_page', size:'@_size'}, {}
+		return $resource(config.HOST + "objectivequestions/search?topic=:topic&page=:page&size=:size&sortBy=id",
+			{topic:'@_topic', page:'@_page', size:'@_size'}, {}
 			);
 	}]);
 
@@ -33,8 +33,8 @@ questionServices.factory('Option',['$resource', 'config', '$http',
 
 questionServices.factory('GetSubjectivequestions', ['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "subjectivequestions?page=:page&size=:size&sortBy=id",
-			{page:'@_page', size:'@_size'}, {}
+		return $resource(config.HOST + "subjectivequestions/search?topic=:topic&page=:page&size=:size&sortBy=id",
+			{topic:'@_topic', page:'@_page', size:'@_size'}, {}
 			);
 	}]);
 questionServices.factory('Subjectivequestions',['$resource', 'config', '$http',

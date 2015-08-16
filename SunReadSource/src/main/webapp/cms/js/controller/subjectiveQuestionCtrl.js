@@ -4,7 +4,7 @@ ctrls.controller("subjectiveQuestionCtrl", ['$scope','$rootScope','$stateParams'
 
             
     $scope.searchArguments = {
-        searchTerm:""
+        topic:""
     }
 
     $scope.searchByName = function(){
