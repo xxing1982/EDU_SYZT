@@ -2,6 +2,8 @@ package com.syzton.sunread.repository.exam;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +20,5 @@ public interface ObjectiveQuestionRepository extends JpaRepository<ObjectiveQues
 	
 	public ObjectiveQuestion findByTopicAndBookIdAndObjectiveType(String topic,Long bookId,QuestionType type);
 	 
-	public List<ObjectiveQuestion> findByTopicContaining(String str);
+	public Page<ObjectiveQuestion> findByTopicContaining(String topic,Pageable pageable);
 }

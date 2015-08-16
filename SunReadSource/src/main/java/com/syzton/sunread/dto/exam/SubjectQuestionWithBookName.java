@@ -15,6 +15,8 @@ public class SubjectQuestionWithBookName{
 	private SubjectiveQuestionType questionType;
 	
 	private String bookName;
+	
+	private String isbn;
 
 	public SubjectQuestionWithBookName(SubjectiveQuestion sq){
 		this.id = sq.getId();
@@ -22,6 +24,7 @@ public class SubjectQuestionWithBookName{
 		this.questionType = sq.getQuestionType();
 		this.topic = sq.getTopic();
 		this.bookName="";
+		this.isbn="";
 	}
 	public long getId() {
 		return id;
@@ -53,5 +56,11 @@ public class SubjectQuestionWithBookName{
 	}
 	public void setQuestionType(SubjectiveQuestionType questionType) {
 		this.questionType = questionType;
+	}
+	public String getIsbn() {
+		return isbn;
+	}
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 }

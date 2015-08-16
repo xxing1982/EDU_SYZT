@@ -23,6 +23,8 @@ public class ObjectQuestionWithName {
     private Option correctAnswer;
 	
 	private String bookName;
+	
+	private String isbn;
 
 	public ObjectQuestionWithName(ObjectiveQuestion sq){
 		this.id = sq.getId();
@@ -33,6 +35,8 @@ public class ObjectQuestionWithName {
 		this.correctAnswer = sq.getCorrectAnswer();
 		
 		this.bookName="";
+		
+		this.isbn = "";
 	}
 
 	public String getBookName() {
@@ -89,6 +93,14 @@ public class ObjectQuestionWithName {
 
 	public void setCorrectAnswer(Option correctAnswer) {
 		this.correctAnswer = correctAnswer;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 }

@@ -252,6 +252,72 @@ public class QuestionController {
         return new PageResource<>(pageResult,"page","size");
     }
     
+    @RequestMapping(value = "/objectivequestions/search", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<ObjectQuestionWithName> searchObjectiveQuestions(@RequestParam("topic") String topic,@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	sortBy = sortBy==null?"id": sortBy;
+        Pageable pageable = new PageRequest(
+                page,size,new Sort(sortBy)
+        );
+        Page<ObjectiveQuestion> pageResult = objectService.searchObjectiveQuestionByTopic(topic, pageable);
+        PageImpl<ObjectQuestionWithName> pages = new PageImpl<ObjectQuestionWithName>(pageResult);
+        List<ObjectQuestionWithName> list = new ArrayList<ObjectQuestionWithName>();
+        List<ObjectiveQuestion> pageList = pageResult.getContent();
+        for(int i=0;i<pageList.size();i++){
+         ObjectiveQuestion oq = pageList.get(i);
+         ObjectQuestionWithName withBookName = new ObjectQuestionWithName(oq);
+         if(withBookName.getObjectiveType().equals(QuestionType.SPEED)){
+        	 SpeedQuestion sq = objectService.findSpeedQuestionById(withBookName.getId());
+        	 Article article = articleService.getArticle(sq.getArticleId());
+        	 if(article!=null)
+        	 withBookName.setBookName(article.getTopic());
+        	 withBookName.setIsbn("");
+         }else{
+        	 Book book = bookService.findById(oq.getBookId());
+           	 if(book !=null){
+           		 withBookName.setBookName(book.getName());
+           		 withBookName.setIsbn(book.getIsbn());
+           	 }
+         }
+       	
+       	 list.add(withBookName);
+       	 
+        }
+                pages.setContent(list);
+        return new PageResource<>(pages,"page","size");
+    }
+    
+    @RequestMapping(value = "/subjectivequestions/search", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<SubjectQuestionWithBookName> searchSubjectiveQuestions(@RequestParam("topic") String topic,@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	sortBy = sortBy==null?"id": sortBy;
+        Pageable pageable = new PageRequest(
+                page,size,new Sort(sortBy)
+        );
+        
+        Page<SubjectiveQuestion> pageResult = subjectService.searchSubjectiveQuestionByTopic(topic, pageable);
+        PageImpl<SubjectQuestionWithBookName> pages = new PageImpl<SubjectQuestionWithBookName>(pageResult);
+        List<SubjectQuestionWithBookName> list = new ArrayList<SubjectQuestionWithBookName>();
+        List<SubjectiveQuestion> pageList = pageResult.getContent();
+        for(int i=0;i<pageList.size();i++){
+       	 SubjectiveQuestion subjectiveQuestion = pageList.get(i);
+       	 SubjectQuestionWithBookName withBookName = new SubjectQuestionWithBookName(subjectiveQuestion);
+       	 Book book = bookService.findById(subjectiveQuestion.getBookId());
+       	 if(book !=null){
+       		 withBookName.setBookName(book.getName());
+       		 withBookName.setIsbn(book.getIsbn());
+       	 }
+       	 list.add(withBookName);
+       	 
+        }
+        pages.setContent(list);
+        return new PageResource<>(pages,"page","size");
+    }
+    
     @RequestMapping(value = "/options", method = RequestMethod.GET)
     @ResponseBody
     public PageResource<Option> findAllOptions(@RequestParam("page") int page,
@@ -304,10 +370,13 @@ public class QuestionController {
         	 Article article = articleService.getArticle(sq.getArticleId());
         	 if(article!=null)
         	 withBookName.setBookName(article.getTopic());
+        	 withBookName.setIsbn("");
          }else{
         	 Book book = bookService.findById(oq.getBookId());
-           	 if(book !=null)
-           	 withBookName.setBookName(book.getName());
+           	 if(book !=null){
+           		 withBookName.setBookName(book.getName());
+           		 withBookName.setIsbn(book.getIsbn());
+           	 }
          }
        	
        	 list.add(withBookName);
@@ -336,8 +405,10 @@ public class QuestionController {
         	 SubjectiveQuestion subjectiveQuestion = pageList.get(i);
         	 SubjectQuestionWithBookName withBookName = new SubjectQuestionWithBookName(subjectiveQuestion);
         	 Book book = bookService.findById(subjectiveQuestion.getBookId());
-        	 if(book !=null)
-        	 withBookName.setBookName(book.getName());
+        	 if(book !=null){
+        		 withBookName.setBookName(book.getName());
+        		 withBookName.setIsbn(book.getIsbn());
+        	 }
         	 list.add(withBookName);
         	 
          }

@@ -39,6 +39,8 @@ public interface ObjectiveQuestionService {
 	
 	public Page<CapacityQuestion> findAllCapacityQuestion(Pageable pageable) throws NotFoundException;
 	
+	public Page<ObjectiveQuestion> searchObjectiveQuestionByTopic(String topic,Pageable pageable);
+	
 	public CapacityQuestion addCapacityQuestion(CapacityQuestion added);
 
 	public CapacityQuestion deleteCapacityQuestionById(Long id)throws NotFoundException;

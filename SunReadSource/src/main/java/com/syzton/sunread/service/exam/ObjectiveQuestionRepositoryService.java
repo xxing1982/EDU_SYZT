@@ -432,6 +432,12 @@ public class ObjectiveQuestionRepositoryService implements
 		currentQuestion.setOptions(options);
 		repository.save(currentQuestion);
 	}
+
+	@Override
+	public Page<ObjectiveQuestion> searchObjectiveQuestionByTopic(String topic,
+			Pageable pageable) {
+		return repository.findByTopicContaining(topic, pageable);
+	}
 	 
  
 }

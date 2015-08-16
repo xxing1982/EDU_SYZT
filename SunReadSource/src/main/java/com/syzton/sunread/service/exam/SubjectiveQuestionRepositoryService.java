@@ -160,5 +160,11 @@ public class SubjectiveQuestionRepositoryService implements SubjectiveQuestionSe
 		return failMap;
 	}
 
+	@Override
+	public Page<SubjectiveQuestion> searchSubjectiveQuestionByTopic(
+			String topic, Pageable pageable) {
+		return repository.findByTopicContaining(topic, pageable);
+	}
+
 	
 }

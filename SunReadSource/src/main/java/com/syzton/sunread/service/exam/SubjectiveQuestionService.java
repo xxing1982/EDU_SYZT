@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.syzton.sunread.dto.exam.SubjectQuestionWithBookName;
+import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.SubjectiveQuestion;
 
 public interface SubjectiveQuestionService {
@@ -22,6 +23,8 @@ public interface SubjectiveQuestionService {
 	public SubjectiveQuestion deleteById(Long id) throws  NotFoundException;
 	                                            
 	public SubjectiveQuestion update(SubjectiveQuestion updated) throws NotFoundException;
+	
+	public Page<SubjectiveQuestion> searchSubjectiveQuestionByTopic(String topic,Pageable pageable);
 	
 	public Map<Integer,String> batchSaveOrUpdateSubjectQuestionFromExcel(Sheet sheet);
 }
