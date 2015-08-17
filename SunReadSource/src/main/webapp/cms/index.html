@@ -41,23 +41,23 @@
 					<li ng-class="{active:isActive(routeMap.index)}"><a href="#/">主页</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
-					<li ng-class="{active:isActive(routeMap.book)}"><a href="#book">书籍</a></li>
-					<li ng-class="{active:isActive(routeMap.objectivequestion)}"><a href="#objectivequestion">词汇和验证测试试题及选项</a></li>
-					<li ng-class="{active:isActive(routeMap.subjectivequestion)}"><a href="#subjectivequestion">思维测试试题</a></li>
-					<li ng-class="{active:isActive(routeMap.region)}"><a href="#region">区域</a></li>
-					<li ng-class="{active:isActive(routeMap.edugroup)}"><a href="#edugroup">教育集团</a></li>
-					<li ng-class="{active:isActive(routeMap.school)}"><a href="#school">学校</a></li>
-					<li ng-class="{active:isActive(routeMap.schoolDistrict)}"><a href="#schoolDistrict">学区</a></li>
-					<li ng-class="{active:isActive(routeMap.clazz)}"><a href="#clazz">班级</a></li>
-					<li ng-class="{active:isActive(routeMap.teacher)}"><a href="#teacher">老师</a></li>
-					<li ng-class="{active:isActive(routeMap.student)}"><a href="#student">学生</a></li>
-					<li ng-class="{active:isActive(routeMap.gift)}"><a href="#gift">礼品</a></li>
-					<li ng-class="{active:isActive(routeMap.action)}"><a href="#action">活动</a></li>
-					<li ng-class="{active:isActive(routeMap.semester)}"><a href="#semester">学期</a></li>
+					<li ng-show="showMap.index" ng-class="{active:isActive(routeMap.book)}"><a href="#book">书籍</a></li>
+					<li ng-show="showMap.objectivequestion" ng-class="{active:isActive(routeMap.objectivequestion)}"><a href="#objectivequestion">词汇和验证测试试题及选项</a></li>
+					<li ng-show="showMap.subjectivequestion" ng-class="{active:isActive(routeMap.subjectivequestion)}"><a href="#subjectivequestion">思维测试试题</a></li>
+					<li ng-show="showMap.region" ng-class="{active:isActive(routeMap.region)}"><a href="#region">区域</a></li>
+					<li ng-show="showMap.edugroup" ng-class="{active:isActive(routeMap.edugroup)}"><a href="#edugroup">教育集团</a></li>
+					<li ng-show="showMap.school" ng-class="{active:isActive(routeMap.school)}"><a href="#school">学校</a></li>
+					<li ng-show="showMap.schoolDistrict" ng-class="{active:isActive(routeMap.schoolDistrict)}"><a href="#schoolDistrict">学区</a></li>
+					<li ng-show="showMap.clazz" ng-class="{active:isActive(routeMap.clazz)}"><a href="#clazz">班级</a></li>
+					<li ng-show="showMap.teacher" ng-class="{active:isActive(routeMap.teacher)}"><a href="#teacher">老师</a></li>
+					<li ng-show="showMap.student" ng-class="{active:isActive(routeMap.student)}"><a href="#student">学生</a></li>
+					<li ng-show="showMap.gift" ng-class="{active:isActive(routeMap.gift)}"><a href="#gift">礼品</a></li>
+					<li ng-show="showMap.action" ng-class="{active:isActive(routeMap.action)}"><a href="#action">活动</a></li>
+					<li ng-show="showMap.semester" ng-class="{active:isActive(routeMap.semester)}"><a href="#semester">学期</a></li>
 					<!--<li><a href="#admin">Admin</a></li>-->
-					<li ng-class="{active:isActive(routeMap.sysAdmin)}"><a href="#sysAdmin">系统管理员</a></li>
-					<li ng-class="{active:isActive(routeMap.schoolAdmin)}"><a href="#schoolAdmin">学校管理员</a></li>
-					<li ng-class="{active:isActive(routeMap.schoolSuperAdmin)}"><a href="#schoolSuperAdmin">学校超级管理员</a></li>
+					<li ng-show="showMap.sysAdmin" ng-class="{active:isActive(routeMap.sysAdmin)}"><a href="#sysAdmin">系统管理员</a></li>
+					<li ng-show="showMap.schoolAdmin" ng-class="{active:isActive(routeMap.schoolAdmin)}"><a href="#schoolAdmin">学校管理员</a></li>
+					<li ng-show="showMap.schoolSuperAdmin" ng-class="{active:isActive(routeMap.schoolSuperAdmin)}"><a href="#schoolSuperAdmin">学校超级管理员</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" data-ui-view style="margin-top:20px">

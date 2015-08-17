@@ -121,6 +121,7 @@ $scope.createPageable = function (){
          $scope.selectBook.description = temp.description;
          $scope.selectBook.author = temp.author;
          $scope.selectBook.publisher = temp.publisher;
+         $scope.selectBook.publicationDate = new Date(temp.publicationDate);
          $scope.selectBook.pageCount = temp.pageCount;
          $scope.selectBook.wordCount = temp.wordCount;
          $scope.selectBook.point = temp.point;
@@ -151,6 +152,7 @@ $scope.createPageable = function (){
             $("#updateBook").modal("hide");
             return;
         };
+        $scope.selectBook.publicationDate = $scope.selectBook.publicationDate.getTime();
         BookOperation.updateBook($scope.selectBookOfId, $scope.selectBook, function(){
             location.reload();
         })
@@ -184,11 +186,12 @@ $scope.createPageable = function (){
     $scope.add.extra.category = 0;
     $scope.add.extra.resource = 0;
     $scope.add.extra.pointRange = 0;
-    //$scope.add.publicationDate = new Date();
+    $scope.add.publicationDate = new Date();
     $scope.dropzone = Dropzone(config.USERICON, function(url){
         $scope.add.pictureUrl = url;
     });
     $scope.AddSys = function(){
+        $scope.add.publicationDate = $scope.add.publicationDate.getTime();
         BookOperation.Add($scope.add, function(data) {
             $rootScope.modal = {
             title: "提示",

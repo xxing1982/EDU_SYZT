@@ -19,8 +19,8 @@ ctrls.controller("semesterCtrl",['$scope', '$rootScope', 'Semester', 'Pageable',
 		$scope.add.endTime = new Date();
 		$scope.AddSys = function(){
 			//$scope.add.startTime = $filter('date')($scope.add.startTime, 'yyyy-MM-dd');
-			$scope.add.startTime = $scope.add.startTime.toLocaleDateString();
-			$scope.add.endTime = $scope.add.endTime.toLocaleDateString();
+			$scope.add.startTime = $scope.add.startTime.getTime();
+			$scope.add.endTime = $scope.add.endTime.getTime();
 			Semester.Add($scope.campusidSelected ,$scope.add, function(){
 				$("#addModal").modal('hide');
 				location.reload();
@@ -46,6 +46,8 @@ ctrls.controller("semesterCtrl",['$scope', '$rootScope', 'Semester', 'Pageable',
 			var item = $scope.edit;
 			$scope.message = "";
 
+			$scope.edit.startTime = $scope.edit.startTime.getTime();
+			$scope.edit.endTime = $scope.edit.endTime.getTime();
 			Semester.Update($scope.edit, function(){
 				$("#editModal").modal('hide');
 				location.reload();

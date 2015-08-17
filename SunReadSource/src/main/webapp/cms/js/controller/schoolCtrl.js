@@ -45,6 +45,7 @@ ctrls.controller("schoolCtrl",['$scope', '$rootScope', 'Campus', 'Pageable', 'Ge
 			$scope.edit.name = temp.name;
 			$scope.edit.headmaster = temp.headmaster;
 			$scope.edit.wish = temp.wish;
+			$scope.edit.description = temp.description;
 		}
 
 		$scope.EditSys = function(){
