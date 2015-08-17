@@ -92,12 +92,13 @@ public class Semester extends AbstractEntity{
     
 	public SemesterDTO createDTO() {
 		SemesterDTO dto = new SemesterDTO();
+		dto.setId(id);
 		dto.setCampusId(campus.getId());
 		dto.setCampusName(campus.getName());
 		dto.setDescription(description);
 		dto.setSemester(semester);
-		dto.setStartTime(startTime.getMillis());
-		dto.setEndTime(endTime.getMillis());
+		dto.setStartTime(startTime.toDate());
+		dto.setEndTime(endTime.toDate());
 		return dto;
 			
 	}

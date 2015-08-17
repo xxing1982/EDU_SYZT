@@ -88,17 +88,21 @@ public class SemesterRepositoryService implements SemesterService{
 
     @Transactional(rollbackFor = {NotFoundException.class})
 	@Override
-	public SemesterDTO update(SemesterDTO updated) {
+	public SemesterDTO update(SemesterDTO updated,Long id) {
         LOGGER.debug("Updating contact with information: {}", updated);
 
-        Semester model = findOne(updated.getId());
+        Semester model = findOne(id);
         if(model == null)
-            throw new NotFoundException("No Semester found with id: " + updated.getId());
+            throw new NotFoundException("No Semester found with id: " + id);
+        
+        Campus campus = campusRepository.findOne(updated.getCampusId());
+        if(campus == null)
+        	throw new NotFoundException("no campus found with id:"+ updated.getCampusId());
         
         SemesterAssembler assembler = new SemesterAssembler();     
-        model = assembler.fromDTOtoModel(updated);
+        model = assembler.fromDTOtoModel(updated,campus);
         semesterRepo.save(model);
-        return updated;
+        return model.createDTO();
 	}
 
 	@Override

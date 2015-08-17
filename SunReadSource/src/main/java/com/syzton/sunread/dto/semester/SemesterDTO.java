@@ -1,5 +1,7 @@
 package com.syzton.sunread.dto.semester;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 
 /*
@@ -19,10 +21,10 @@ public class SemesterDTO {
 	private String campusName;
 	
 	@NotNull
-	private Long startTime;
+	private Date startTime;
 	
 	@NotNull
-	private Long endTime;
+	private Date endTime;
 	
 	public Long getId() {
 		return id;
@@ -65,19 +67,19 @@ public class SemesterDTO {
 		this.description = description;
 	}
 
-	public Long getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(long startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	public Long getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(long endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}	
 	

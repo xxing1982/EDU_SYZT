@@ -75,7 +75,7 @@ public class SemesterController {
     public SemesterDTO update(@Valid @RequestBody SemesterDTO dto,@PathVariable("id") long id) throws NotFoundException {
         LOGGER.debug("Adding a new semester entry with information: {}", dto);
         
-        SemesterDTO updated = service.update(dto);
+        SemesterDTO updated = service.update(dto,id);
         LOGGER.debug("Added a semester with information: {}", updated);
               
        return updated;

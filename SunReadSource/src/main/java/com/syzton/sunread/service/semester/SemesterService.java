@@ -13,7 +13,7 @@ public interface SemesterService {
     
     public Semester deleteById(long id);
 
-    public SemesterDTO update(SemesterDTO updated);
+    public SemesterDTO update(SemesterDTO updated,Long id);
 
     public Semester findOne(Long id) ;
 
