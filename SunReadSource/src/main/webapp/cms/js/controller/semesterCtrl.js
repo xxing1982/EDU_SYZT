@@ -48,6 +48,7 @@ ctrls.controller("semesterCtrl",['$scope', '$rootScope', 'Semester', 'Pageable',
 
 			$scope.edit.startTime = $scope.edit.startTime.getTime();
 			$scope.edit.endTime = $scope.edit.endTime.getTime();
+			$scope.edit.campusId = $scope.campusidSelected;
 			Semester.Update($scope.edit, function(){
 				$("#editModal").modal('hide');
 				location.reload();
