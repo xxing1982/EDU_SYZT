@@ -50,6 +50,14 @@ ctrls.controller("schoolDistrictCtrl",['$scope', '$rootScope', 'SchoolDistrict',
 			$('#confirm-modal').modal();
 		}
 
+		$scope.searchArguments = {
+        	name:"",
+    	}
+
+	    $scope.searchByName = function(){
+	        $scope.createPageable();
+	    }
+	    
 		$scope.createPageable = function (){
 			$scope.searchPageable = new Pageable();
 

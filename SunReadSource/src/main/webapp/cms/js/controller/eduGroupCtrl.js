@@ -36,6 +36,14 @@ ctrls.controller("eduGroupCtrl",['$scope', '$rootScope', 'EduGropu', 'Pageable',
 			}
 			$('#confirm-modal').modal();
 		}
+		
+		$scope.searchArguments = {
+        	name:"",
+    	}
+
+	    $scope.searchByName = function(){
+	        $scope.createPageable();
+	    }
 
 		$scope.createPageable = function (){
 			$scope.searchPageable = new Pageable();

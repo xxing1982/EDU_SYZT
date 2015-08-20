@@ -20,7 +20,8 @@ teacherServices.factory('Teachers',['$resource', 'config', '$http',
 
 teacherServices.factory('GetTeachers', ['$resource', 'config',
 	function($resource, config){
-		return $resource(config.HOST + "/campuses/:campusid/teachers?page=:page&size=:size&sortBy=id",
-			{campusid:'@_campusid', page:'@_page', size:'@_size'}, {}
+		//return $resource(config.HOST + "/campuses/:campusid/teachers?page=:page&size=:size&sortBy=id",
+		return $resource(config.HOST + "/campuses/:campusid/teachers/search?name=:name&page=:page&size=:size&sortBy=id",
+			{name:'@_name', campusid:'@_campusid', page:'@_page', size:'@_size'}, {}
 			);
 	}]);
