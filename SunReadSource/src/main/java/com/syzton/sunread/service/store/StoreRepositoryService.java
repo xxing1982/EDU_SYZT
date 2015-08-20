@@ -13,6 +13,7 @@ import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.store.ExchangeHistory;
 import com.syzton.sunread.model.store.Gift;
 import com.syzton.sunread.model.store.GiftStatus;
+import com.syzton.sunread.model.store.GiftType;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.coinhistory.CoinHistoryRepository;
@@ -66,8 +67,20 @@ public class StoreRepositoryService implements StoreService {
     @Override
     public void updateGift(Gift gift) {
         Gift  exist = getGift(gift.getId());
-        exist.setName(gift.getName());
-        giftRepository.save(gift);
+        if(gift.getName() != null)
+        	exist.setName(gift.getName());
+        if(gift.getDescription() != null)
+        	exist.setDescription(gift.getDescription());
+        if(gift.getPicture() != null)
+        	exist.setPicture(gift.getPicture());
+        if(gift.getCoin() > 0)
+        	exist.setCoin(gift.getCoin());
+        if(gift.getPrice() > 0)
+        	exist.setPrice(gift.getPrice());
+        if(gift.getGiftType() != null)
+        	exist.setGiftType(gift.getGiftType());
+        
+        giftRepository.save(exist);
     }
 
     @Override

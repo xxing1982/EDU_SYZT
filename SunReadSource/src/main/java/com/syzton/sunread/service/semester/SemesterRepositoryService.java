@@ -98,9 +98,11 @@ public class SemesterRepositoryService implements SemesterService{
         Campus campus = campusRepository.findOne(updated.getCampusId());
         if(campus == null)
         	throw new NotFoundException("no campus found with id:"+ updated.getCampusId());
-        
+        DateTime temp = model.getCreationTime();
         SemesterAssembler assembler = new SemesterAssembler();     
         model = assembler.fromDTOtoModel(updated,campus);
+        model.setId(id);
+        model.setCreationTime(temp);
         semesterRepo.save(model);
         return model.createDTO();
 	}
