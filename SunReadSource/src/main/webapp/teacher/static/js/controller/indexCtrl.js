@@ -1,5 +1,5 @@
-ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window', 'Teacher', 'User', 'ShowAllClass',
-function( $rootScope, $scope, $location, $window, Teacher, User, ShowAllClass) {
+ctrls.controller('headNavCtrl', ['$rootScope', '$scope', '$location', '$window', 'Teacher', 'Admin', 'User', 'ShowAllClass',
+function( $rootScope, $scope, $location, $window, Teacher, Admin, User, ShowAllClass) {
 
     // Route map regexp
     $rootScope.routeMap = {

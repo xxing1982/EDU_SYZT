@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.model.user.Admin;
 import com.syzton.sunread.model.user.SystemAdmin;
+import com.syzton.sunread.model.user.Teacher;
 import com.syzton.sunread.service.user.UserService;
 
 @Controller
@@ -143,6 +145,12 @@ public class AdminController extends BaseController {
     @ResponseBody
     public String deleteSuperSchoolAdmin(@RequestParam("id") long id) {
         return userService.deleteAdminId(id);
+    }
+	
+    @RequestMapping(value = "/admins/{adminId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Admin findByTeacherId(@PathVariable("adminId") Long adminId) {
+        return userService.findByAdminId(adminId);
     }
 	
 	 

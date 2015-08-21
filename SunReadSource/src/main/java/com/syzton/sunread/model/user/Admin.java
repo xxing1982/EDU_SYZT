@@ -19,6 +19,10 @@ public class Admin extends User {
 	
 	private long campusId;
 	
+	private long schoolDistrictId;
+	
+	private long eduGroupId;
+	
 	@JoinColumn(name = "super_admin")
 	private boolean superAdmin;
 	
@@ -30,8 +34,23 @@ public class Admin extends User {
 		this.campusId = campusId;
 	}
 
+		
+	public long getSchoolDistrictId() {
+		return schoolDistrictId;
+	}
+
+	public void setSchoolDistrictId(long schoolDistrictId) {
+		this.schoolDistrictId = schoolDistrictId;
+	}
+
+	public void setEduGroupId(long eduGroupId) {
+		this.eduGroupId = eduGroupId;
+	}
 	
-	
+	public long getEduGroupId() {
+		return eduGroupId;
+	}
+
 	public boolean isSuperAdmin() {
 		return superAdmin;
 	}

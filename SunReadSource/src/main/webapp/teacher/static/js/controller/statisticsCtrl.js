@@ -1,12 +1,13 @@
-ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', function ($rootScope, $scope, Teacher) {
+ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Admin', function ($rootScope, $scope, Teacher, Admin) {
     
     $rootScope.staticsticsRouteMap = {
         students: /\/statistics\/students.*/,
-        classes: /\/statistics\/classes.*/
+        classes: /\/statistics\/classes.*/,
+        campuses: /\/statistics\/campuses.*/
     }
     
     // Get the teacher entity by rootScope id
-    $scope.teacher = Teacher.get({ id: $rootScope.id }, function(){
+    $scope.teacher = eval($rootScope.type).get({ id: $rootScope.id }, function(){
         
     });
     

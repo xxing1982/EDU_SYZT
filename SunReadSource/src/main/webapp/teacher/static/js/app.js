@@ -178,19 +178,28 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
                     controller: "statisticsClassesCategoriesController",
                     controllerAs: "ctrl",
                 })
+            //campuses statistics page
+            .state('statistics.campuses',{
+                url: '/campuses',
+                parent: 'statistics',
+                templateUrl: 'partials/statistics/campuses.html',
+                controller: "statisticsCampusesController",
+                controllerAs: "ctrl",
+            })
 }]);
 
 routeApp.run(['$rootScope', function($rootScope){
 
     // Id cache id from sessionStorage
     var teacherId = sessionStorage.getItem("teacherId"),
-        userId = sessionStorage.getItem("userId");
+        userId = sessionStorage.getItem("userId"),    
+        adminId = sessionStorage.getItem("adminId");
     
-    if ( teacherId || userId ) {
+    if ( teacherId || userId || adminId) {
                 
         // Login successfully 
-        $rootScope.type = teacherId ? 'Teacher' : 'User';
-        $rootScope.id = teacherId ? teacherId : userId;
+        $rootScope.type = teacherId ? 'Teacher' : userId ? 'User' : 'Admin';
+        $rootScope.id = teacherId ? teacherId : userId ? userId : adminId;
         
     } else {
         

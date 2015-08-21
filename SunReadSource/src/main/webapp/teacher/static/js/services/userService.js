@@ -24,6 +24,17 @@ userServices.factory('Teacher',['$resource', 'config',
 		});
 	}]);
 
+userServices.factory('Admin',['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "admins/:id",{},{
+			query:{
+				method: "get",
+				isArray: true
+			}
+		});
+	}]);
+
+
 
 userServices.factory('ShowAllClass',['$resource', 'config',
 	function($resource, config){

@@ -1,0 +1,45 @@
+<!-- Header bar -->
+<div class="myBlock mt30 page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="leftpart page-body">
+                <div class="container-fluid">
+                    <div class="row-same-height text-center sort-header">
+                        <div class="col-xs-3 col-xs-height col-middle"><h5 class="row title"><big><a class="dark-gray-2">学生统计</a></big></h5></div>
+                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2">积分 <i class="fa fa-sort-asc muted"></i><i class="fa fa-sort-desc"></i></a></p></div>
+                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2">阅读数 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
+                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2">财富值 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
+                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2">笔记数 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
+                        <div class="col-xs-2 col-xs-height col-middle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Items -->
+<div class="leftpart">
+    <div class="myBlock mt20 page-body" ng-repeat="order in orders">
+        <div class="container-fluid"><div class="container-fluid">
+            <div class="row">
+                <div class="row-same-height text-center">
+                    <div class="col-xs-3 col-xs-height col-middle"><p class="row title">张大父</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">25</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">25</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">15</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">15</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a>查看详情</a></p></div>
+                </div>
+            </div>
+        </div></div>
+    </div>
+</div>
+    
+<!--right part -->
+<div class="rightpart mt20">
+
+    <!-- Filter groups -->
+    <div ng-include src="'./partials/statistics/filters.html'"></div>
+
+</div>

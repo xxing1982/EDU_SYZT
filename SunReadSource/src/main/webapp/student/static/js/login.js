@@ -62,11 +62,11 @@ $(document).ready(function(){
                                 url: 'cms/index.html'                        
                             },
                             ROLE_SCHOOLE_DISTRICT : {
-                                idKey: 'userId',
+                                idKey: 'adminId',
                                 url: 'teacher/prototype/index.html'                
                             },
                             ROLE_GROUP : {
-                                idKey: 'userId',
+                                idKey: 'adminId',
                                 url: 'teacher/prototype/index.html'           
                             }
                         }
