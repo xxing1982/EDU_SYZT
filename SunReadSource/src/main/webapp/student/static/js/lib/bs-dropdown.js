@@ -6,13 +6,14 @@ ctrls.directive('bsDropdown', function ($compile) {
             items: '=dropdownData',
             doSelect: '&selectVal',
             selectedItem: '=preselectedItem',
-            callback: '=callback'
+            callback: '=callback',
+            disabled: '=disabled'
         },
         link: function (scope, element, attrs) {
             var html = '';
             switch (attrs.menuType) {
                 case "button":
-                    html += '<div class="btn-group"><button class="btn button-label">{{items[selectedItem].name || "请选择"}}</button><button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
+                    html += '<div class="btn-group"><button class="btn button-label" ng-class="{ \'disabled\': disabled }">{{items[selectedItem].name || "请选择"}}</button><button class="btn dropdown-toggle" ng-class="{ \'disabled\': disabled }" data-toggle="dropdown"><span class="caret"></span></button>';
                     break;
                 default:
                     html += '<div class="dropdown"><a class="dropdown-toggle" role="button" data-toggle="dropdown"  href="javascript:;">Dropdown<b class="caret"></b></a>';
@@ -45,6 +46,20 @@ ctrls.directive('bsDropdown', function ($compile) {
                 }
             };
             scope.selectVal(scope.bSelectedItem);
+            
+            scope.$watch("selectedItem", function( newValue, oldValue ) {
+                
+                // Update the bSelectedItem
+                for (var i = 0; i < scope.items.length; i++) {
+                    if (scope.items[i].id === scope.selectedItem) {
+                        scope.bSelectedItem = scope.items[i];
+                        break;
+                    }
+                }
+                
+                // Update the front end
+                scope.selectVal(scope.bSelectedItem);
+            });
         }
     };
 });
