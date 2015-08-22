@@ -18,11 +18,13 @@ ctrls.controller("giftCtrl",['$scope', '$rootScope','Pageable', 'GetGifts', 'Upd
 		$scope.dropzone = Dropzone(config.USERICON, function(url){
             $scope.add.picture = url;
         } );
+		$scope.c_SD_add = function(){
+			$scope.add.giftType = $scope.SelectedSD_add;
+		}
 		$scope.AddSys = function(){
 			$scope.add.exchangeable = true;
 			$scope.add.campusId = $scope.campusidSelected;
 			$scope.add.userId = $rootScope.id;
-			$scope.add.giftType = "TYPE_1";
 			User.get({ id: $scope.id }, function(data) {
     			$scope.add.userName = data.username;
     			$scope.add.$save(function(){
@@ -36,11 +38,19 @@ ctrls.controller("giftCtrl",['$scope', '$rootScope','Pageable', 'GetGifts', 'Upd
 
 		//update
 		$scope.edit = new Gift();
+		$scope.c_SD_edit = function(){
+			$scope.edit.giftType = $scope.SelectedSD_edit;
+		}
 		$scope.updateSys = function(item){
 			$scope.message = "";
 			var temp = angular.copy(item);
 			$scope.edit.id = temp.id;
 			$scope.edit.name = temp.name;
+			$scope.edit.giftType = temp.giftType;
+			$scope.edit.description = temp.description;
+			$scope.edit.coin = temp.coin;
+			$scope.edit.price = temp.price;
+			$scope.SelectedSD_edit = temp.giftType;
 		}
 		$scope.EditSys = function(){
 			UpdateGift.Update($scope.edit, function(){
