@@ -26,4 +26,6 @@ public interface EduGroupService {
     Page<EduGroup> findAll(Pageable pageable);
     
 	public Map<Integer,String> batchSaveOrUpdateEduGroupFromExcel(Sheet sheet);
+	
+	public Page<EduGroup> searchEduGroupByName(String name,Pageable pageable);
 }

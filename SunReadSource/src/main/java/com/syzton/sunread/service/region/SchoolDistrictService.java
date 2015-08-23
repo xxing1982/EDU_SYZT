@@ -28,4 +28,6 @@ public interface SchoolDistrictService {
     Page<SchoolDistrict> findAll(Pageable pageable) throws NotFoundException;
     
     public Map<Integer,String> batchSaveOrUpdateSchoolFromExcel(Sheet sheet);
+    
+    public Page<SchoolDistrict> searchSchoolDistrictsByName(String name,Pageable pageable);
 }

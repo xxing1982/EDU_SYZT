@@ -118,4 +118,9 @@ public class EduGroupRepositoryService implements EduGroupService {
 		}
 		return failMap;
 	}
+
+	@Override
+	public Page<EduGroup> searchEduGroupByName(String name, Pageable pageable) {
+		return repository.findByNameContaining(name, pageable);
+	}
 }

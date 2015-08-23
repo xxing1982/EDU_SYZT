@@ -1,5 +1,8 @@
 package com.syzton.sunread.controller.organization;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
@@ -19,8 +22,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.syzton.sunread.dto.common.PageImpl;
 import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.dto.exam.ObjectQuestionWithName;
 import com.syzton.sunread.dto.organization.EduGroupDTO;
+import com.syzton.sunread.model.book.Book;
+import com.syzton.sunread.model.exam.Article;
+import com.syzton.sunread.model.exam.ObjectiveQuestion;
+import com.syzton.sunread.model.exam.SpeedQuestion;
+import com.syzton.sunread.model.exam.ObjectiveQuestion.QuestionType;
 import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.service.organization.EduGroupService;
 
@@ -83,6 +93,19 @@ public class EduGroupController {
         sortBy = sortBy==null?"id": sortBy;
         Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
         Page<EduGroup> pageResult = service.findAll(pageable);
+
+        return new PageResource<>(pageResult,"page","size");
+    }
+    
+    @RequestMapping(value = "/edugroups/search", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<EduGroup> searchEduGroupsQuestions(@RequestParam("name") String name,@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	sortBy = sortBy==null?"id": sortBy;
+        
+        Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
+        Page<EduGroup> pageResult = service.searchEduGroupByName(name,pageable);
 
         return new PageResource<>(pageResult,"page","size");
     }

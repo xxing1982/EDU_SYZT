@@ -153,4 +153,10 @@ public class SchoolDistrictRepositoryService implements SchoolDistrictService {
 		}
 		return failMap;
     }
+
+	@Override
+	public Page<SchoolDistrict> searchSchoolDistrictsByName(String name,
+			Pageable pageable) {
+		return repository.findByNameContaining(name, pageable);
+	}
 }

@@ -52,6 +52,6 @@ public interface CampusService {
 	Campus add(CampusDTO add, Long regionId);
 
     
-    
+	Page<Campus> searchCampusByName(String name,Pageable pageable);
 
 }

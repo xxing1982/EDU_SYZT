@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.syzton.sunread.model.region.SchoolDistrict;
 import com.syzton.sunread.model.user.Teacher;
 
 /**
@@ -14,6 +15,8 @@ import com.syzton.sunread.model.user.Teacher;
 public interface TeacherRepository extends JpaRepository<Teacher,Long>{
 
     Page<Teacher> findByCampusId(Long campusId,Pageable pageable);
+    
+    public Page<Teacher> findByUserIdContainingOrUsernameContaining(String id,String name,Pageable pageable);
 
 	public Teacher findByUserId(String userId);
 

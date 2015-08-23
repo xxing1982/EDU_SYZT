@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.organization.CampusDTO;
 import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.EduGroup;
 import com.syzton.sunread.service.organization.CampusService;
 
 /**
@@ -118,5 +119,17 @@ public class CampusController {
         return found.createDTO();
     }
     
+    @RequestMapping(value = "/campus/search", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Campus> searchCampusQuestions(@RequestParam("name") String name,@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	sortBy = sortBy==null?"id": sortBy;
+        
+        Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
+        Page<Campus> pageResult = service.searchCampusByName(name,pageable);
+
+        return new PageResource<>(pageResult,"page","size");
+    }
     
 }

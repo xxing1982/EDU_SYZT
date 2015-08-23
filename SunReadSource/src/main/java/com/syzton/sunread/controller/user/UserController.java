@@ -7,6 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javassist.NotFoundException;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
@@ -14,7 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -39,6 +43,7 @@ import com.syzton.sunread.controller.util.SecurityContextUtil;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.user.UserDTO;
 import com.syzton.sunread.dto.user.UserExtraDTO;
+import com.syzton.sunread.model.region.SchoolDistrict;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.Parent;
 import com.syzton.sunread.model.user.Student;
@@ -218,6 +223,18 @@ public class UserController extends BaseController {
         return  new PageResource<>(teacherPage,"page","size") ;
     }
 
+    @RequestMapping(value = "/teachers/search", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<Teacher> searchCampusQuestions(@RequestParam("name") String name,@RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy) throws NotFoundException {
+    	sortBy = sortBy==null?"id": sortBy;
+        
+        Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
+        Page<Teacher> pageResult = userService.searchTeachersByName(name,pageable);
+
+        return new PageResource<>(pageResult,"page","size");
+    }
 
     @RequestMapping(value = "/teachers/{teacherId}", method = RequestMethod.DELETE)
     @ResponseBody

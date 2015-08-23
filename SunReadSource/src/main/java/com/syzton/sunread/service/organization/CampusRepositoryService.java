@@ -239,6 +239,11 @@ public class CampusRepositoryService implements CampusService{
 		}
 		return failMap;
 	}
+
+	@Override
+	public Page<Campus> searchCampusByName(String name, Pageable pageable) {
+		return repository.findByNameContaining(name, pageable);
+	}
     
    
 

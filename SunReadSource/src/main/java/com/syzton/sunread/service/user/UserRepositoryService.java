@@ -423,6 +423,11 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     public Page<Teacher> findTeacherByCampusId(long campusId,Pageable pageable){
         return teacherRepository.findByCampusId(campusId,pageable);
     }
+    
+    @Override
+    public Page<Teacher> searchTeachersByName(String name,Pageable pageable){
+        return teacherRepository.findByUserIdContainingOrUsernameContaining(name, name, pageable)
+    }
 
     @Override
     public Teacher findByTeacherId(Long id) {

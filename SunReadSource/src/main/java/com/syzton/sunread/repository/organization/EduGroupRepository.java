@@ -1,7 +1,10 @@
 package com.syzton.sunread.repository.organization;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.organization.EduGroup;
 
 /**
@@ -9,4 +12,6 @@ import com.syzton.sunread.model.organization.EduGroup;
  */
 public interface EduGroupRepository extends JpaRepository<EduGroup,Long> {
 	public EduGroup findByName(String name);
+	
+	public Page<EduGroup> findByNameContaining(String name,Pageable pageable);
 }
