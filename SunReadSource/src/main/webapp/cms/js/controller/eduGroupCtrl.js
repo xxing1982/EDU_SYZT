@@ -53,6 +53,7 @@ ctrls.controller("eduGroupCtrl",['$scope', '$rootScope', 'EduGropu', 'Pageable',
 
 			$scope.searchPageable.pageNumbers.startPage = 1;
         	$scope.searchPageable.pageNumbers.content.length = 8;
+        	$scope.searchPageable.arguments=$scope.searchArguments;
         	// Set the placeholder elements
         	$scope.searchPageable.placeHolders.placeHoldersElement = {title: ""};
 

@@ -28,7 +28,7 @@ campusServices.factory('Campus',['$resource', 'config', '$http',
 campusServices.factory('GetCampus', ['$resource', 'config',
 	function($resource, config){
 		//return $resource(config.HOST + "campuss?page=:page&size=:size&sortBy=id",
-		return $resource(config.HOST + "campuss/search?name=:name&page=:page&size=:size&sortBy=id",
+		return $resource(config.HOST + "campus/search?name=:name&page=:page&size=:size&sortBy=id",
 			{name:'@_name', page:'@_page', size:'@_size'}, {}
 			);
 	}]);
@@ -61,7 +61,7 @@ campusServices.factory('SchoolDistrict',['$resource', 'config', '$http',
 campusServices.factory('GetSchoolDistricts', ['$resource', 'config',
 	function($resource, config){
 		//return $resource(config.HOST + "schoolDistricts?page=:page&size=:size&sortBy=id",
-		return $resource(config.HOST + "schoolDistricts/search?name=:name&page=:page&size=:size&sortBy=id",
+		return $resource(config.HOST + "schooldistricts/search?name=:name&page=:page&size=:size&sortBy=id",
 			{name:'@_name', page:'@_page', size:'@_size'}, {}
 			);
 	}]);

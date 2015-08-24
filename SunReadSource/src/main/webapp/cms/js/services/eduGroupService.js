@@ -27,7 +27,7 @@ adminServices.factory('EduGropu',['$resource', 'config', '$http',
 adminServices.factory('GetEduGroup', ['$resource', 'config',
 	function($resource, config){
 		//return $resource(config.HOST + "eduGroups?page=:page&size=:size&sortBy=id",
-		return $resource(config.HOST + "eduGroups/search?name=:name&page=:page&size=:size&sortBy=id",
+		return $resource(config.HOST + "edugroups/search?name=:name&page=:page&size=:size&sortBy=id",
 			{name:'@_name', page:'@_page', size:'@_size'}, {}
 			);
 	}]);

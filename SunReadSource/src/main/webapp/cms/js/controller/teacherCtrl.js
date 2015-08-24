@@ -81,4 +81,5 @@ ctrls.controller("TeacherCtrl",['$scope', '$rootScope', 'Teachers', 'Pageable', 
         	$scope.searchPageable.build(GetTeachers);
         	$scope.searchPageable.showPage($stateParams.page === undefined ? 1 : $stateParams.page);
 		}
+	    $scope.createPageable();
 	}]);
