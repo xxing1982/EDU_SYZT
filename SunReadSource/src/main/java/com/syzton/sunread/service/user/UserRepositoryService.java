@@ -425,8 +425,8 @@ public class UserRepositoryService implements UserService,UserDetailsService{
     }
     
     @Override
-    public Page<Teacher> searchTeachersByName(String name,Pageable pageable){
-        return teacherRepository.findByUserIdContainingOrUsernameContaining(name, name, pageable);
+    public Page<Teacher> searchTeachersByName(String name,long campusId,Pageable pageable){
+        return teacherRepository.findByUserIdContainingOrUsernameContainingAndCampusId(name, name, campusId,pageable);
     }
 
     @Override

@@ -16,7 +16,7 @@ public interface TeacherRepository extends JpaRepository<Teacher,Long>{
 
     Page<Teacher> findByCampusId(Long campusId,Pageable pageable);
     
-    public Page<Teacher> findByUserIdContainingOrUsernameContaining(String id,String name,Pageable pageable);
+    public Page<Teacher> findByUserIdContainingOrUsernameContainingAndCampusId(String id,String name,Long campusId,Pageable pageable);
 
 	public Teacher findByUserId(String userId);
 

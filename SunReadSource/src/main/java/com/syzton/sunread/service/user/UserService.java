@@ -109,7 +109,7 @@ public interface UserService {
 	
 	public String addSuperSystemAdmin(String userId, String password);
 
-	Page<Teacher> searchTeachersByName(String name, Pageable pageable);
+	Page<Teacher> searchTeachersByName(String name, long campusId,Pageable pageable);
 
 
 }

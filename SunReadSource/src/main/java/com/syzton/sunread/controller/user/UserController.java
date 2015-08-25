@@ -225,13 +225,13 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/teachers/search", method = RequestMethod.GET)
     @ResponseBody
-    public PageResource<Teacher> searchCampusQuestions(@RequestParam("name") String name,@RequestParam("page") int page,
+    public PageResource<Teacher> searchCampusQuestions(@RequestParam("name") String name,@RequestParam("campusid") long campusid,@RequestParam("page") int page,
             @RequestParam("size") int size,
             @RequestParam("sortBy") String sortBy) throws NotFoundException {
     	sortBy = sortBy==null?"id": sortBy;
         
         Pageable pageable = new PageRequest(page,size,new Sort(sortBy));
-        Page<Teacher> pageResult = userService.searchTeachersByName(name,pageable);
+        Page<Teacher> pageResult = userService.searchTeachersByName(name,campusid,pageable);
 
         return new PageResource<>(pageResult,"page","size");
     }
