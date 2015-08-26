@@ -300,7 +300,7 @@
 				</div>
 				<div class="modal-body">
             	<div id="avatar" class="col-md-12">
-                    <div class="dropzone img-circle border-shadow dz-clickable" id="image-uploader" ng-style="{'background-image':'url('+selectBook.pictureUrl+')'}" style="">
+                    <div class="dropzone img-circle border-shadow dz-clickable" id="image-edit" ng-style="{'background-image':'url('+selectBook.pictureUrl+')'}">
                         <div class="dz-default dz-message"><span></span>
                         </div>
                     </div>
@@ -539,11 +539,11 @@
             </div>
             <div class="modal-body">
             	<div id="avatar" class="col-md-12">
-                    <div class="dropzone img-circle border-shadow dz-clickable" id="image-uploader" ng-style="{'background-image':'url('+add.pictureUrl+')'}" style="">
-                        <div class="dz-default dz-message"><span></span>
-                        </div>
-                    </div>
-                </div>
+                	<div class="dropzone img-circle border-shadow" 
+                     id="image-add" 
+                     ng-style="{'background-image':'url('+add.pictureUrl+')'}">
+                	</div>
+            	</div>
                 <div class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">书名</label>

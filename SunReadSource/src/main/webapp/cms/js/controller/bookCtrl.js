@@ -143,6 +143,9 @@ $scope.createPageable = function (){
          $scope.selectBook.extra.ageRange = temp.extra.ageRange;
         $("#updateBook").modal({backdrop: 'static', keyboard: false});
     };
+    $scope.dropzone1 = Dropzone("image-edit", config.USERICON, function(url){
+        $scope.selectBook.pictureUrl = url;
+    });
 
     $scope.submitForm = function(isValid, isDirty){
         if (!isValid) {
@@ -175,6 +178,7 @@ $scope.createPageable = function (){
     $scope.add.description = "";
     $scope.add.authorIntroduction = "";
     $scope.add.binding = "hardback";
+    $scope.add.pictureUrl = "";
     $scope.add.evaluationNum = 0;
     $scope.add.extra = {};
     $scope.add.extra.level = 0;
@@ -187,8 +191,12 @@ $scope.createPageable = function (){
     $scope.add.extra.resource = 0;
     $scope.add.extra.pointRange = 0;
     $scope.add.publicationDate = new Date();
-    $scope.dropzone = Dropzone(config.USERICON, function(url){
+    $scope.dropzone = Dropzone("image-add", config.USERICON, function(url){
         $scope.add.pictureUrl = url;
+    });
+
+    // Update remove file callback
+    $scope.dropzone.on('removedfile', function(){
     });
     $scope.AddSys = function(){
         $scope.add.publicationDate = $scope.add.publicationDate.getTime();

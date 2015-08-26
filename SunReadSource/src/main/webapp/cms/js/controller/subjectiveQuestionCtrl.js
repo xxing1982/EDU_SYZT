@@ -33,8 +33,14 @@ ctrls.controller("subjectiveQuestionCtrl", ['$scope','$rootScope','$stateParams'
     }
     $scope.createPageable();
 
+
+    $scope.edit = {};
     $scope.updateSys = function(item){
-        $scope.edit = angular.copy(item);
+        var temp = angular.copy(item);
+        $scope.edit.id = temp.id;
+        $scope.edit.topic = temp.topic;
+        $scope.edit.bookId = temp.bookId;
+        $scope.edit.questionType = temp.questionType;
     }
     $scope.EditSys = function(){
         Subjectivequestions.Update($scope.edit, function(){

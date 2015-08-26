@@ -67,7 +67,7 @@
 .modal{
     z-index: 1050;
 }
-#image-uploader{
+#image-uploader,#image-add,#image-edit{
     width: 150px;
     height: 150px;
     margin-left: auto;
@@ -79,13 +79,22 @@
 
 
 #image-uploader .dz-preview,
+#image-add .dz-preview,
+#image-edit .dz-preview,
 #image-uploader .dz-image,
-#image-uploader img {
+#image-add .dz-image,
+#image-edit .dz-image,
+#image-uploader img,
+#image-add img,
+#image-edit img
+ {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
 
-#image-uploader .dz-error-message {
+#image-uploader .dz-error-message,
+#image-add .dz-error-message,
+#image-edit .dz-error-message {
     left: 2%
 }

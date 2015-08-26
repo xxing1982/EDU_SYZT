@@ -36,8 +36,14 @@ ctrls.controller("objectiveQuestionCtrl", ['$scope','$rootScope','$stateParams',
     $scope.ShowOption = function(item){
         $scope.selectQuestion = item.options;
     }
+
+    $scope.edit = {};
     $scope.updateSys = function(item){
-        $scope.edit = angular.copy(item);
+        var temp = angular.copy(item);
+        $scope.edit.id = temp.id;
+        $scope.edit.topic = temp.topic;
+        $scope.edit.bookId = temp.bookId;
+        $scope.edit.objectiveType = temp.objectiveType;
     }
     $scope.EditSys = function(){
         Objectivequestions.Update($scope.edit, function(){
