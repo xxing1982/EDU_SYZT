@@ -45,6 +45,7 @@ ctrls.controller("subjectiveQuestionCtrl", ['$scope','$rootScope','$stateParams'
     $scope.EditSys = function(){
         Subjectivequestions.Update($scope.edit, function(){
             $("#editModal").modal('hide');
+            location.reload();
         })
     }
 }]);

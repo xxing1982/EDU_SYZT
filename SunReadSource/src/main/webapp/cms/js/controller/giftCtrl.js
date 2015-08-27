@@ -15,7 +15,7 @@ ctrls.controller("giftCtrl",['$scope', '$rootScope','Pageable', 'GetGifts', 'Upd
 
 		//add
 		$scope.add = new Gift();
-		$scope.dropzone = Dropzone(config.USERICON, function(url){
+		$scope.dropzone = Dropzone("image-uploader", config.USERICON, function(url){
             $scope.add.picture = url;
         } );
 		$scope.c_SD_add = function(){

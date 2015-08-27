@@ -34,7 +34,7 @@ ctrls.controller("studentCtrl",['$scope', '$rootScope', 'Students','Pageable', '
 		$scope.add.accountNonExpired = true;
 		$scope.add.accountNonLocked = true;
 		$scope.add.credentialsNonExpired = true;
-		$scope.dropzone = Dropzone(config.USERICON, function(url){
+		$scope.dropzone = Dropzone("image-uploader" ,config.USERICON, function(url){
             $scope.add.picture = url;
         } );
 		$scope.AddSys = function(){

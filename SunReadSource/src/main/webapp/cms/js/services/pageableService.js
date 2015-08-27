@@ -10,6 +10,7 @@ var Pageable = function () {
     The properites to of pageable
 */
 Pageable.prototype.page = 1;
+Pageable.prototype.showpage = 1;
 Pageable.prototype.size = 5;
 Pageable.prototype.arguments = {};
 Pageable.prototype.pageNumbers = { startPage: 1,
@@ -74,6 +75,7 @@ Pageable.prototype.showPage = function(page, callback){
             } else {
                 // Update the page of the pageable object
                 pageable.page = page;
+                pageable.showpage = page;
 
                 // Copy the content of data to entities
                 entities.content = data.content.splice(0);

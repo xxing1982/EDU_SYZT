@@ -59,10 +59,10 @@
             </div>
             <div class="col-xs-3">
                 <div class="custom-page-number-group">
-                    <a ng-click="searchPageable.showPage(goto)">上一页</a>
-                    <input type="number" class="custom-page-number-input" ng-model="goto" min="1"/>
-                    <a ng-click="searchPageable.showPage(goto)">下一页</a>
-                </div>
+                                <a ng-click="searchPageable.showPage(searchPageable.showpage)">去第</a>
+                                <input type="number" class="custom-page-number-input" ng-model="searchPageable.showpage" min="1"/>
+                                <a ng-click="searchPageable.showPage(searchPageable.showpage)">页</a>
+                            </div>
             </div>
         </div>
     </div>

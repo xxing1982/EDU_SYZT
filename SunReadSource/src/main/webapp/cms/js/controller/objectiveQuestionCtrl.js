@@ -58,6 +58,7 @@ ctrls.controller("objectiveQuestionCtrl", ['$scope','$rootScope','$stateParams',
     $scope.EditOption = function(){
         Option.Update($scope.edit, function(){
             $("#editOptionModal").modal('hide');
+            location.reload();
         })
     }
 }]);
