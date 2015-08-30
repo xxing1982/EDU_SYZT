@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.syzton.sunread.dto.exam.ObjectQuestionUpdateDTO;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
 import com.syzton.sunread.model.exam.Option;
@@ -23,7 +24,7 @@ public interface ObjectiveQuestionService {
 
 	public ObjectiveQuestion findById(Long id) throws NotFoundException ;
 
-	public ObjectiveQuestion update(ObjectiveQuestion updated) throws NotFoundException;
+	public ObjectiveQuestion update(ObjectQuestionUpdateDTO updated) throws NotFoundException;
 	
 	public Page<Option> findAllOption(Pageable pageable) throws NotFoundException;
 	

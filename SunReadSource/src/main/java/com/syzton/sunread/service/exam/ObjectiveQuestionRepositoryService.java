@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.syzton.sunread.dto.exam.ObjectQuestionUpdateDTO;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.exam.CapacityQuestion;
 import com.syzton.sunread.model.exam.ObjectiveQuestion;
@@ -117,15 +118,38 @@ public class ObjectiveQuestionRepositoryService implements
 	
 	@Transactional(rollbackFor = { NotFoundException.class })
 	@Override
-	public ObjectiveQuestion update(ObjectiveQuestion updated)
+	public ObjectiveQuestion update(ObjectQuestionUpdateDTO updated)
 			throws NotFoundException {
 		LOGGER.debug("Updating contact with information: {}", updated);
 
 		ObjectiveQuestion model = findById(updated.getId());
 		LOGGER.debug("Found a to-do entry: {}", model);
-		model.setCorrectAnswer(updated.getCorrectAnswer());
+		if(updated.getCorrectAnswer().getId()==null){
+			throw new NotFoundException("correct Answer not found");
+		}
+		Option correct = optionRepository.findOne(updated.getCorrectAnswer().getId());
+		if(correct==null){
+			throw new NotFoundException("correct Answer not found");
+		}
+		model.setCorrectAnswer(correct);
 		model.setObjectiveType(updated.getObjectiveType());
-		model.setOptions(updated.getOptions());
+		List<Option> list = updated.getOptions();
+		List<Option> options = new ArrayList<Option>();
+		for(int i=0;i<list.size();i++){
+			Long id = list.get(i).getId();
+			Option option = optionRepository.findOne(id);
+			if(id == null){
+				Option newOption = list.get(i);
+				option = optionRepository.save(newOption);
+			}
+			if(option == null){
+				continue;
+			}
+			option.setTag(list.get(i).getTag());
+			option.setContent(list.get(i).getContent());
+			options.add(option);
+		}
+		model.setOptions(options);
 		model.setBookId(updated.getBookId());
 		model.setTopic(updated.getTopic());
 		

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.dto.common.PageImpl;
 import com.syzton.sunread.dto.common.PageResource;
+import com.syzton.sunread.dto.exam.ObjectQuestionUpdateDTO;
 import com.syzton.sunread.dto.exam.ObjectQuestionWithName;
 import com.syzton.sunread.dto.exam.SubjectQuestionWithBookName;
 import com.syzton.sunread.exception.exam.QuestionNotFoundExcepiton;
@@ -500,11 +501,9 @@ public class QuestionController {
     
     @RequestMapping(value = "/objectivequestion", method = RequestMethod.PUT)
     @ResponseBody
-    public ObjectiveQuestion updateObjectiveQuestion(@Valid @RequestBody ObjectiveQuestion  question) throws NotFoundException {
-        LOGGER.debug("Updating a to-do entry with information: {}", question);
-
-        ObjectiveQuestion updated = objectService.update(question);
-        LOGGER.debug("Updated the information of a to-entry to: {}", updated);
+    public ObjectiveQuestion updateObjectiveQuestion(@Valid @RequestBody ObjectQuestionUpdateDTO  updateQuestion) throws NotFoundException {
+    	
+        ObjectiveQuestion updated = objectService.update(updateQuestion);
 
         return updated;
     }
