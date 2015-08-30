@@ -44,10 +44,17 @@ ctrls.controller("objectiveQuestionCtrl", ['$scope','$rootScope','$stateParams',
         $scope.edit.topic = temp.topic;
         $scope.edit.bookId = temp.bookId;
         $scope.edit.objectiveType = temp.objectiveType;
+        $scope.edit.correctAnswer = temp.correctAnswer;
+        delete $scope.edit.correctAnswer.creationTime;
+        $scope.edit.options = temp.options;
+        for(var i = 0; i < temp.options.length; i++){
+            delete $scope.edit.options[i].creationTime;
+        }
     }
     $scope.EditSys = function(){
         Objectivequestions.Update($scope.edit, function(){
             $("#editModal").modal('hide');
+            location.reload();
         })
     }
 
@@ -56,7 +63,7 @@ ctrls.controller("objectiveQuestionCtrl", ['$scope','$rootScope','$stateParams',
         $scope.editOption = angular.copy(item);
     }
     $scope.EditOption = function(){
-        Option.Update($scope.edit, function(){
+        Option.Update($scope.editOption, function(){
             $("#editOptionModal").modal('hide');
             location.reload();
         })

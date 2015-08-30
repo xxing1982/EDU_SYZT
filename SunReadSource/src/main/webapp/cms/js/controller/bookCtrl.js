@@ -227,3 +227,11 @@ ctrls.filter('formatPictrueUrl', function () {
         return url;
     };
 });
+ctrls.filter('fsize_format', function () {
+    return function (data) {
+        if (data.length > 50) {
+            return data.substring(0,50);
+        };
+        return data;
+    };
+});
