@@ -101,6 +101,7 @@ public class SubjectiveQuestionRepositoryService implements SubjectiveQuestionSe
 		model.setTopic(updated.getTopic());
 		model.setBookId(updated.getBookId());
 		model.setQuestionType(updated.getQuestionType());
+		repository.save(model);
 
 		return model;
 	}
