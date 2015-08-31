@@ -62,7 +62,7 @@ ctrls.directive('bsDropdown', function ($compile) {
                 
                 // Update the front end
                 // FIXME why the items trigger the selectVal
-                scope.selectVal(scope.bSelectedItem, typeof newValue === 'object' ? true : undefined );
+                scope.selectVal(scope.bSelectedItem, typeof newValue === 'object' || oldValue === newValue ? true : undefined );
             };
             
             scope.$watch("selectedItem", updateDropdown);

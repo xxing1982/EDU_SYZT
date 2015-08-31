@@ -224,7 +224,9 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                                                 break;
                                             }
                                         }
-                                        $scope.handle.initOrderLoadable( currentClassId );                     
+                                        if ( $scope.handle.initOrderLoadable) {
+                                            $scope.handle.initOrderLoadable( currentClassId );   
+                                        }
 
                                         // Fallback to 0 to trigger the selected_status events                    
                                         classFilters._2class.selected_status = classStatus;
