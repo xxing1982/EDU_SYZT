@@ -9,3 +9,15 @@ campusServices.factory('Campus', ['$resource', 'config',
             {by:'@by'}, {}
         );
 }]);
+
+campusServices.factory('Campuses', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + ":by/:id/campus",
+            {by:'@by', id:'@id'}, {
+                get: {
+                    method: "get",
+                    isArray: true
+                }
+            }
+        );
+}]);

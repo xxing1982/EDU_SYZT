@@ -11,4 +11,17 @@ classServices.factory('Class',['$resource', 'config',
 		});
 	}]);
 
+classServices.factory('Classes',['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + ":by/:id/clazzs",
+            { by:'@by', id:'@id' }, { 
+                get: {
+				    method: "get",
+				    isArray: true
+			}
+		});
+	}]);
+
+
+
 

@@ -1,5 +1,7 @@
 package com.syzton.sunread.controller.organization;
 
+import java.util.List;
+
 import javassist.NotFoundException;
 
 import javax.validation.Valid;
@@ -130,6 +132,28 @@ public class CampusController {
         Page<Campus> pageResult = service.searchCampusByName(name,pageable);
 
         return new PageResource<>(pageResult,"page","size");
+    }
+    
+  //Get a Campuses by schoolDistrictId
+    @RequestMapping(value = "/schoolDistrict/{schoolDistrictId}/campus", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Campus> findBySchoolDistrict(@PathVariable("schoolDistrictId") Long schoolDistrictId) throws NotFoundException {
+        LOGGER.debug("Finding a campus entry with schoolDistrictId: {}", schoolDistrictId);
+
+        List<Campus> found = service.findBySchoolDistrictId(schoolDistrictId);
+
+        return found;
+    }
+    
+  //Get a Campuses by eduGroupId
+    @RequestMapping(value = "/eduGroup/{eduGroupId}/campus", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Campus> findByEduGroup(@PathVariable("eduGroupId") Long eduGroupId) throws NotFoundException {
+        LOGGER.debug("Finding a campus entry with eduGroupId: {}", eduGroupId);
+
+        List<Campus> found = service.findByEduGroupId(eduGroupId);
+
+        return found;
     }
     
 }

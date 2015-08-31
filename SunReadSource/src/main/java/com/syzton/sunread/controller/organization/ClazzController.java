@@ -159,12 +159,17 @@ public class ClazzController extends BaseController{
         return service.findByGrade(id);
 
     }
+    
+    @RequestMapping(value = "/campus/{id}/clazzs", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Clazz> findClazzsByCampus(@PathVariable("id") long id) throws NotFoundException {
+        return service.findByCampus(id);
+
+    }
+    
     @RequestMapping(value = "/clazzs/{clazzId}/upgrade", method = RequestMethod.PUT)
     @ResponseBody
     public Clazz gradeUpgrade(@PathVariable("clazzId") long clazzId) throws NotFoundException {
         return service.clazzUpgrade(clazzId);
-
     }
-
-
 }

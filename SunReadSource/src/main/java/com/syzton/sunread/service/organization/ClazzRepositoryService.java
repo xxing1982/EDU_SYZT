@@ -208,6 +208,11 @@ public class ClazzRepositoryService implements ClazzService {
     }
     
     @Override
+    public List<Clazz> findByCampus(long campus) {
+        return repository.findByCampus(campus);
+    }
+    
+    @Override
 	public Map<Integer,String> batchSaveOrUpdateClazzFromExcel(Sheet sheet) {
 		Map<Integer,String> failMap = new HashMap<Integer,String>();
 		String currentUserId = UserUtil.getUser();

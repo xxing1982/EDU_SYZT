@@ -11,7 +11,7 @@
         </div>
 
         <!-- Filters -->
-        <div class="row" ng-repeat="(filterName, filter) in filterGroup.filters">
+        <div class="row" ng-repeat="(filterName, filter) in filterGroup.filters" ng-hide="filter.hidden">
 
             <!-- Place holder -->
             <p class="row"></p>

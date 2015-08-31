@@ -41,6 +41,9 @@ public interface ClazzService {
     public ClazzSumStatistic getSumClazzStatistic(int grade) throws NotFoundException;
 
     List<Clazz> findByGrade(int grade);
+    
+    List<Clazz> findByCampus(long grade);
+
 
 	/**
 	 * @param clazzName
@@ -59,5 +62,4 @@ public interface ClazzService {
     public Map<Integer,String> batchSaveOrUpdateClazzFromExcel(Sheet sheet);
 
     Clazz clazzUpgrade(long clazzId) throws NotFoundException;
-
 }

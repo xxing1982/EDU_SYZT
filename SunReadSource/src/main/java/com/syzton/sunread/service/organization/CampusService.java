@@ -1,5 +1,6 @@
 package com.syzton.sunread.service.organization;
 
+import java.util.List;
 import java.util.Map;
 
 import javassist.NotFoundException;
@@ -7,6 +8,7 @@ import javassist.NotFoundException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.syzton.sunread.dto.organization.CampusDTO;
 import com.syzton.sunread.model.organization.Campus;
@@ -53,5 +55,10 @@ public interface CampusService {
 
     
 	Page<Campus> searchCampusByName(String name,Pageable pageable);
+	
+	public List<Campus> findBySchoolDistrictId(Long schoolDistrictId);
+
+	public List<Campus> findByEduGroupId(Long eduGroupId);
+	    
 
 }

@@ -1,6 +1,7 @@
 package com.syzton.sunread.service.organization;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -244,7 +245,14 @@ public class CampusRepositoryService implements CampusService{
 	public Page<Campus> searchCampusByName(String name, Pageable pageable) {
 		return repository.findByNameContaining(name, pageable);
 	}
-    
-   
 
+	@Override
+	public List<Campus> findBySchoolDistrictId(Long schoolDistrictId) {
+		return repository.findBySchoolDistrictId(schoolDistrictId);
+	}
+	
+	@Override
+	public List<Campus> findByEduGroupId(Long eduGroupId) {
+		return repository.findByEduGroupId(eduGroupId);
+	}
 }
