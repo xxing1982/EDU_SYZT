@@ -162,6 +162,11 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                 var gradesList = [],
                     grades = {};
                 
+                // Current class status and grade status in bs-dropdown
+                var classStatus = 1,
+                    currentGrade,
+                    gradeStatus = 1;
+                
                 for ( var i = 0; i < Classes.length; i++ ) {
                     var clazz = Classes[i];
                     clazz.grade += '年级';
@@ -171,10 +176,24 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                     } else {
                         grades[clazz.grade].push(clazz);
                     }
+                    
+                    if ( $scope.teacher.currentClassId 
+                         && clazz.id ===  $scope.teacher.currentClassId ) {
+                        classStatus = grades[clazz.grade].slice().pop().id;
+                        currentGrade = clazz.grade;
+                    }
                 }
                 gradesList.sort(function(a, b) {
                     return b < a;
                 });
+                if ( $scope.teacher.currentClassId ) {
+                    for (var i = 0; i < gradesList.length; i++ ) {
+                        if (gradesList[i] === gradesList) {
+                            gradeStatus = i;
+                            break;
+                        }
+                    }
+                }
                                 
                 // Initlizate the grade filters
                 var statuses = [];
@@ -208,7 +227,7 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                                         $scope.handle.initOrderLoadable( currentClassId );                     
 
                                         // Fallback to 0 to trigger the selected_status events                    
-                                        classFilters._2class.selected_status = 0;
+                                        classFilters._2class.selected_status = classStatus;
                                     }
                                 });
                             }
@@ -217,7 +236,7 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                             classFilters._2class.statuses = statuses;
                                         
                             // Dont forget to select item                           
-                            classFilters._2class.selected_status = 1;
+                            classFilters._2class.selected_status = classStatus;
                         }
                     });
                 }
@@ -225,8 +244,8 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                 // Update the statues of grade
                 classFilters._1grade.statuses = statuses;
                 
-                // Dont forget to select item    
-                classFilters._1grade.selected_status = 1;
+                // Dont forget to select item
+                classFilters._1grade.selected_status = gradeStatus;
             });
         
             // Return the promise to get region
