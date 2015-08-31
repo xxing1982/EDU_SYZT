@@ -9,6 +9,11 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
         campuses: /\/statistics\/campuses.*/
     }
     
+    // Initlizate the handle
+    $scope.handle = {};
+    
+    
+    // Initlizate the filter groups
     $scope.filtersGroups = [
         {
             name: '选择地区',
@@ -136,7 +141,7 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                     
                 case 'Teacher':
                     
-                    // Update campus (Campus dropdown disabled)
+                    // Update campus (Campus and grade dropdown disabled)
                     $scope.Campus = Campus.get( {id: teacher.campusId} ); 
                     classesPromise = $scope.Campus.$promise.then( function(Campus){
                         $scope.Campus = Campus;
@@ -144,6 +149,7 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                         campusFilters._2schoolDistrict.hidden = true;
                         campusFilters._3campus.statuses = [ {id: 1, name: Campus.name} ];
                         campusFilters._3campus.disabled = true;
+                        classFilters._1grade.disabled = true;
                         return Classes.get( {by: 'campus', id: Campus.id } ).$promise;
                     });
                     regionContainerPromise = $scope.Campus.$promise;
@@ -171,36 +177,53 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                 });
                                 
                 // Initlizate the grade filters
-                classFilters._1grade.statuses = [];
+                var statuses = [];
                 for (var i = 0; i < gradesList.length; i++ ) {
-                    classFilters._1grade.statuses.push({ id: i + 1,
-                                                         name: gradesList[i], 
-                                                         callback: function() {
+                    statuses.push({ id: i + 1,
+                                    name: gradesList[i], 
+                                    callback: function() {
                         
                             // Current selected grade
                             var grade = [];
                             if (classFilters._1grade.statuses.length !== 0) {
                                 grade = grades[classFilters._1grade.statuses[ classFilters._1grade.selected_status - 1 ].name];
                             }
+                            
                             // Initlizate clazz filter
-                            classFilters._2class.statuses = [];
+                            var statuses = [];
                             for (var i = 0; i < grade.length; i++ ) {
-                                classFilters._2class.statuses.push({ id: i + 1,
-                                                                     name: grade[i].name, 
-                                                                     callback: function(){
-                                        console.log(classFilters._2class.selected_status)
+                                statuses.push({ id: i + 1,
+                                                name: grade[i].name,
+                                                remoteId: grade[i].id,
+                                                callback: function(){
                                         
+                                        console.log(classFilters._2class.selected_status);
+                                        var currentClassId;
+                                        for (var j = 0; j < classFilters._2class.statuses.length; j++ ) {
+                                            if ( classFilters._2class.selected_status === classFilters._2class.statuses[j].id) {
+                                                currentClassId = classFilters._2class.statuses[j].remoteId;
+                                                break;
+                                            }
+                                        }
+                                        $scope.handle.initOrderLoadable( currentClassId );                     
+
                                         // Fallback to 0 to trigger the selected_status events                    
                                         classFilters._2class.selected_status = 0;
                                     }
                                 });
                             }
                             
+                            // Update bs-dropdown
+                            classFilters._2class.statuses = statuses;
+                                        
                             // Dont forget to select item                           
                             classFilters._2class.selected_status = 1;
                         }
                     });
                 }
+                
+                // Update the statues of grade
+                classFilters._1grade.statuses = statuses;
                 
                 // Dont forget to select item    
                 classFilters._1grade.selected_status = 1;

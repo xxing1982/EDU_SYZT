@@ -27,7 +27,7 @@ ctrls.directive('bsDropdown', function ($compile) {
                     break;
                 }
             }
-            scope.selectVal = function (item) {
+            scope.selectVal = function (item, noCb) {
                 if (item !== undefined) {
                     switch (attrs.menuType) {
                         case "button":
@@ -40,14 +40,14 @@ ctrls.directive('bsDropdown', function ($compile) {
                     scope.doSelect({
                         selectedVal: item.id
                     });
-                    if (item.callback && typeof item.callback === 'function'){
+                    if ( noCb === undefined && this.items && item.callback && typeof item.callback === 'function'){
                         item.callback();
                     }
                 }
             };
             scope.selectVal(scope.bSelectedItem);
             
-            var updateDropdown = function() {
+            var updateDropdown = function(oldValue, newValue) {
                 
                 // Update the bSelectedItem
                 if (scope.items.length === 0 ) {
@@ -61,7 +61,8 @@ ctrls.directive('bsDropdown', function ($compile) {
                 }
                 
                 // Update the front end
-                scope.selectVal(scope.bSelectedItem);
+                // FIXME why the items trigger the selectVal
+                scope.selectVal(scope.bSelectedItem, typeof newValue === 'object' ? true : undefined );
             };
             
             scope.$watch("selectedItem", updateDropdown);

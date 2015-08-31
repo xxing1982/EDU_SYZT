@@ -52,4 +52,6 @@ ctrls.controller("statisticsClassesController", ['$rootScope', '$scope', functio
     
     // Hidden or show some filter
     classFilters._2class.hidden = true;
+    
+    
 }]);

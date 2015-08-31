@@ -282,7 +282,7 @@ public class UserController extends BaseController {
                                                     @RequestParam("size") int size,
                                                     @RequestParam(value = "sortBy", required = false) String sortBy,
                                                     @RequestParam(value = "direction", required = false) String direction) {
-        sortBy = sortBy == null ? "statistic.point" : sortBy;
+        sortBy = sortBy == null ? "statistic.point" : "statistic." + sortBy;
         Pageable pageable = this.getPageable(page,size,sortBy,direction);
         Page<Student> hotReaders = userService.hotReadersInClazz(clazzId, pageable);
 
