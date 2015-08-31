@@ -188,8 +188,8 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                 });
                 if ( $scope.teacher.currentClassId ) {
                     for (var i = 0; i < gradesList.length; i++ ) {
-                        if (gradesList[i] === gradesList) {
-                            gradeStatus = i;
+                        if (gradesList[i] === currentGrade) {
+                            gradeStatus = i + 1;
                             break;
                         }
                     }
