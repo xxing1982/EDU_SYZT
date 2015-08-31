@@ -1,9 +1,9 @@
 <div>
     <div class="sidebar myBlock">
         <ul class="nav-sidebar nav" ng-controller="leftNavCtrl">
-            <li ng-class="{myActive:isActiveLeft(staticsticsRouteMap.students)}"><a ui-sref='.students'><img src="../static/img/myTask.png"></img><span>学生统计</span></a></li>
+            <li ng-class="{myActive:isActiveLeft(staticsticsRouteMap.students)}" ng-if="type === 'Teacher'"><a ui-sref='.students'><img src="../static/img/myTask.png"></img><span>学生统计</span></a></li>
             <li ng-class="{myActive:isActiveLeft(staticsticsRouteMap.classes)}"><a ui-sref='.classes.coins'><img src="../static/img/myTask.png"></img><span>班级比较</span></a></li>
-            <li ng-class="{myActive:isActiveLeft(staticsticsRouteMap.campuses)}"><a ui-sref='.campuses'><img src="../static/img/myTask.png"></img><span>跨校比较</span></a></li>
+            <li ng-class="{myActive:isActiveLeft(staticsticsRouteMap.campuses)}" ng-if="type === 'Admin'"><a ui-sref='.campuses'><img src="../static/img/myTask.png"></img><span>跨校比较</span></a></li>
         </ul>
     </div>
     <div class="container">

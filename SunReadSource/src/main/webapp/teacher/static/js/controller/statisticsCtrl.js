@@ -77,6 +77,8 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
     
         // Get the container of region
         .$promise.then( function(teacher){
+        
+            $scope.teacher = teacher;
             
             // The region container cache 
             var regionContainerPromise,

@@ -188,7 +188,7 @@ routeApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             })
 }]);
 
-routeApp.run(['$rootScope', function($rootScope){
+routeApp.run(['$rootScope', '$state', function($rootScope, $state){
 
     // Id cache id from sessionStorage
     var teacherId = sessionStorage.getItem("teacherId"),
@@ -201,10 +201,20 @@ routeApp.run(['$rootScope', function($rootScope){
         $rootScope.type = teacherId ? 'Teacher' : userId ? 'User' : 'Admin';
         $rootScope.id = teacherId ? teacherId : userId ? userId : adminId;
         
+        $rootScope.$on('$stateChangeStart',
+            function(event, toState, toParams, fromState) {
+                if ( $rootScope.type === 'Admin' 
+                     && ( toState.name === 'main' || toState.name === 'statistics.students' )) { 
+                    event.preventDefault();
+//                    $state.transitionTo('statistics.classes');
+                    // FIXME wtf checkout this http://plnkr.co/edit/aYmykLnWZVUwg4trMmVX?p=preview
+                    window.location.href = "#/statistics/classes";
+                }
+        });
     } else {
         
         // Not login so login first
-        window.location.href="../../login.html";
+        window.location.href = "../../login.html";
     }
     
 }]);
