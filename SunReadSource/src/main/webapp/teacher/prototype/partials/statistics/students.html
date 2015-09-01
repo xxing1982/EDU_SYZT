@@ -5,11 +5,43 @@
             <div class="leftpart page-body">
                 <div class="container-fluid">
                     <div class="row-same-height text-center sort-header">
-                        <div class="col-xs-3 col-xs-height col-middle"><h5 class="row title"><big><a class="dark-gray-2">学生统计</a></big></h5></div>
-                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2" ng-click="sortable.sort('point')">积分 <i class="fa fa-sort-asc muted"></i><i class="fa fa-sort-desc"></i></a></p></div>
-                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2" ng-click="sortable.sort('testPasses')">阅读数 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
-                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2" ng-click="sortable.sort('coin')">财富值 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
-                        <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a class="dark-gray-2" ng-click="sortable.sort('notes')">笔记数 <i class="fa fa-sort-asc"></i><i class="fa fa-sort-desc muted"></i></a></p></div>
+                        <div class="col-xs-3 col-xs-height col-middle">
+                            <h5 class="row title">
+                                <big><a class="dark-gray-2">学生统计</a></big>
+                            </h5>
+                        </div>
+                        <div class="col-xs-2 col-xs-height col-middle">
+                            <p class="row title">
+                                <a class="dark-gray-2" ng-click="sortable.sort('point')">
+                                    积分
+                                    <i class="fa fa-sort-asc" ng-class="{muted: !( sortable.sortBy === 'point' && sortable.direction === 'ASC' ) }"></i><i class="fa fa-sort-desc" ng-class="{muted: !( sortable.sortBy === 'point' && sortable.direction === 'DESC' ) }"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-xs-2 col-xs-height col-middle">
+                            <p class="row title">
+                                <a class="dark-gray-2" ng-click="sortable.sort('testPasses')">
+                                    阅读数
+                                    <i class="fa fa-sort-asc" ng-class="{muted: !( sortable.sortBy === 'testPasses' && sortable.direction === 'ASC' ) }"></i><i class="fa fa-sort-desc" ng-class="{muted: !( sortable.sortBy === 'testPasses' && sortable.direction === 'DESC' ) }"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-xs-2 col-xs-height col-middle">
+                            <p class="row title">
+                                <a class="dark-gray-2" ng-click="sortable.sort('coin')">
+                                    财富值 
+                                    <i class="fa fa-sort-asc" ng-class="{muted: !( sortable.sortBy === 'coin' && sortable.direction === 'ASC' ) }"></i><i class="fa fa-sort-desc" ng-class="{muted: !( sortable.sortBy === 'coin' && sortable.direction === 'DESC' ) }"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-xs-2 col-xs-height col-middle">
+                            <p class="row title">
+                                <a class="dark-gray-2" ng-click="sortable.sort('notes')">
+                                    笔记数 
+                                    <i class="fa fa-sort-asc" ng-class="{muted: !( sortable.sortBy === 'notes' && sortable.direction === 'ASC' ) }"></i><i class="fa fa-sort-desc" ng-class="{muted: !( sortable.sortBy === 'notes' && sortable.direction === 'DESC' ) }"></i>
+                                </a>
+                            </p>
+                        </div>
                         <div class="col-xs-2 col-xs-height col-middle"></div>
                     </div>
                 </div>

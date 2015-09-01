@@ -74,6 +74,7 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                                                
     // Filters util functions
     function getStatuseBySelected_status( statuses, selected_status ){
+        if (selected_status === 0) return statuses[0];
         for ( var i = 0; i < statuses.length; i++ ) {
             if ( statuses[i].id === selected_status ) {
                 return statuses[i];
@@ -219,7 +220,9 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                                                                            classFilters._1grade.selected_status ).name;
                             // UGLY CODE 
                             currentGrade = currentGrade.slice(0, currentGrade.length - 2);            
-                            $scope.handle.getSumStatistic(currentGrade, currentCampusId);
+                            if ($scope.handle.getSumStatistic) {
+                                $scope.handle.getSumStatistic(currentGrade, currentCampusId);
+                            }
                                 
                             // Current selected grade
                             var grade = [];
