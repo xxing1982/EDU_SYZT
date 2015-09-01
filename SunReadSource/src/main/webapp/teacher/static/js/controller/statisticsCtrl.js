@@ -126,7 +126,6 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                         for (var i = 0; i < campuses.length; i++) {
                             campusFilters._3campus.statuses[i] = campuses[i];
                             campusFilters._3campus.statuses[i].callback = function(){
-                                console.log(campusFilters._3campus.selected_status);
                                 classFilters._2class.selected_status = 0;
                                 classFilters._2class.statuses = [];
                                 Classes.get( {by: 'campus', id: campusFilters._3campus.selected_status } ).$promise
@@ -215,8 +214,6 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                                                 name: grade[i].name,
                                                 remoteId: grade[i].id,
                                                 callback: function(){
-                                        
-                                        console.log(classFilters._2class.selected_status);
                                         var currentClassId;
                                         for (var j = 0; j < classFilters._2class.statuses.length; j++ ) {
                                             if ( classFilters._2class.selected_status === classFilters._2class.statuses[j].id) {
