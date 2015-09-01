@@ -4,14 +4,14 @@
         <div class="title">
         <h5>
             一共<span class="orange-text">{{ classes.length }}</span>个班级，
-            平均阅读量为<span class="orange-text">23</span>本，
-            最高阅读量为<span class="orange-text">26</span>本，
-            最第阅读值为<span class="orange-text">16</span>本。
+            平均阅读量为<span class="orange-text">{{ SumStatistic.avgReadNum }}</span>本，
+            最高阅读量为<span class="orange-text">{{ SumStatistic.maxReadNum }}</span>本，
+            最低阅读值为<span class="orange-text">{{ SumStatistic.minReadNum }}</span>本。
         </h5>
         <h5>
-            平均阅读量为<span class="red-text">33333</span>字数，
-            最高阅读量为<span class="red-text">233336</span>字数，
-            最第阅读值为<span class="red-text">13336</span>字数。
+            平均阅读量为<span class="red-text">{{ SumStatistic.avgReadWord }}</span>字数，
+            最高阅读量为<span class="red-text">{{ SumStatistic.maxReadWord }}</span>字数，
+            最低阅读值为<span class="red-text">{{ SumStatistic.minReadWord }}</span>字数。
         </h5>
         </div>
     </div></div>
@@ -40,14 +40,14 @@
                 <div class="col-xs-10 col-xs-height col-middle">
                     <h5 class="row">
                         <div class="fr reading-count-width">&nbsp;
-                            <div class="grandis fl" ng-style="{width: class.rate + '%'}">&nbsp;</div>
-                            <div class="fl">&nbsp;&nbsp;{{ class.num }}</div>
+                            <div class="grandis fl" ng-style="{width: class.readNum / SumStatistic.maxReadNum * 85 + '%'}">&nbsp;</div>
+                            <div class="fl">&nbsp;&nbsp;{{ class.readNum }}</div>
                         </div>
                     </h5>
                     <h5 class="row">
                         <div class="fr reading-count-width">&nbsp;
-                            <div class="red fl" ng-style="{width: class.rate + '%'}">&nbsp;</div>
-                            <div class="fl">&nbsp;&nbsp;{{ class.word }}</div>
+                            <div class="red fl" ng-style="{width: class.readWord / SumStatistic.maxReadWord * 85 + '%'}">&nbsp;</div>
+                            <div class="fl">&nbsp;&nbsp;{{ class.readWord }}</div>
                         </div>
                     </h5>
                 </div>

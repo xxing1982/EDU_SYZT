@@ -9,10 +9,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.syzton.sunread.dto.clazz.ClazzSumStatisticDTO;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import com.syzton.sunread.model.user.Student;
 
 /**
@@ -38,7 +38,7 @@ public interface ClazzService {
     
     public int getAverageReadingBookFromClass(Long clazzId) throws NotFoundException;
 
-    public ClazzSumStatistic getSumClazzStatistic(int grade) throws NotFoundException;
+    public ClazzSumStatisticDTO getSumClazzStatistic(int grade, long campusId) throws NotFoundException;
 
     List<Clazz> findByGrade(int grade);
     

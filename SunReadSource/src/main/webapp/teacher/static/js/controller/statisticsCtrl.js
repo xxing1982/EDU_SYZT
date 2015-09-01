@@ -71,6 +71,15 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
             }
         }
     ]; 
+                                               
+    // Filters util functions
+    function getStatuseBySelected_status( statuses, selected_status ){
+        for ( var i = 0; i < statuses.length; i++ ) {
+            if ( statuses[i].id === selected_status ) {
+                return statuses[i];
+            }
+        }
+    }
     
     // Filters cache
     var districtFilters = $scope.filtersGroups[0].filters,
@@ -126,8 +135,11 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                         for (var i = 0; i < campuses.length; i++) {
                             campusFilters._3campus.statuses[i] = campuses[i];
                             campusFilters._3campus.statuses[i].callback = function(){
-                                classFilters._2class.selected_status = 0;
-                                classFilters._2class.statuses = [];
+
+//                                classFilters._2class.selected_status = 0;
+//                                classFilters._2class.statuses = [];
+                                classFilters._1grade.selected_status = 0;
+                                classFilters._1grade.statuses = [];
                                 Classes.get( {by: 'campus', id: campusFilters._3campus.selected_status } ).$promise
                                     .then(classesPromiseCallback);
                             };
@@ -200,7 +212,15 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                     statuses.push({ id: i + 1,
                                     name: gradesList[i], 
                                     callback: function() {
-                        
+                            
+                            var currentCampusId = getStatuseBySelected_status(campusFilters._3campus.statuses, 
+                                                                            campusFilters._3campus.selected_status ).id,
+                                currentGrade = getStatuseBySelected_status( classFilters._1grade.statuses, 
+                                                                           classFilters._1grade.selected_status ).name;
+                            // UGLY CODE 
+                            currentGrade = currentGrade.slice(0, currentGrade.length - 2);            
+                            $scope.handle.getSumStatistic(currentGrade, currentCampusId);
+                                
                             // Current selected grade
                             var grade = [];
                             if (classFilters._1grade.statuses.length !== 0) {
@@ -215,12 +235,8 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                                                 remoteId: grade[i].id,
                                                 callback: function(){
                                         var currentClassId;
-                                        for (var j = 0; j < classFilters._2class.statuses.length; j++ ) {
-                                            if ( classFilters._2class.selected_status === classFilters._2class.statuses[j].id) {
-                                                currentClassId = classFilters._2class.statuses[j].remoteId;
-                                                break;
-                                            }
-                                        }
+                                        currentClassId = getStatuseBySelected_status( classFilters._2class.statuses, 
+                                                                                      classFilters._2class.selected_status ).remoteId;
                                         if ( $scope.handle.initOrderLoadable) {
                                             $scope.handle.initOrderLoadable( currentClassId );   
                                         }

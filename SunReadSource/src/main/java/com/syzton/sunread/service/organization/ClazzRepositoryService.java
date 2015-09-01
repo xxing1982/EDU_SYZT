@@ -1,8 +1,15 @@
 package com.syzton.sunread.service.organization;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import javax.validation.constraints.Max;
 
 import javassist.NotFoundException;
 
@@ -16,11 +23,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.syzton.sunread.dto.clazz.ClazzSumStatisticDTO;
+import com.syzton.sunread.dto.clazz.ClazzSumStatisticDTO.ClassCategoryData;
+import com.syzton.sunread.dto.clazz.ClazzSumStatisticDTO.ClassSum;
 import com.syzton.sunread.dto.organization.ClazzDTO;
+import com.syzton.sunread.model.book.Dictionary;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.organization.ClazzCategoryCount;
 import com.syzton.sunread.model.organization.ClazzStatistic;
-import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import com.syzton.sunread.model.user.Student;
 import com.syzton.sunread.model.user.User;
 import com.syzton.sunread.repository.organization.CampusRepository;
@@ -195,11 +206,116 @@ public class ClazzRepositoryService implements ClazzService {
 	}
 
     @Override
-    public ClazzSumStatistic getSumClazzStatistic(int grade) throws NotFoundException{
+    public ClazzSumStatisticDTO getSumClazzStatistic(int grade, long campusId) throws NotFoundException{
+    	    	
+    	// Initliazte the clazzSumStatistic instance
+    	ClazzSumStatisticDTO clazzSumStatisticDTO = new ClazzSumStatisticDTO();
+    	clazzSumStatisticDTO.maxCoin = Long.MIN_VALUE;
+    	clazzSumStatisticDTO.minCoin = Long.MAX_VALUE;
+    	clazzSumStatisticDTO.maxReadNum = Long.MIN_VALUE;
+    	clazzSumStatisticDTO.minReadNum = Long.MAX_VALUE;
+    	clazzSumStatisticDTO.maxReadWord = Long.MIN_VALUE;
+    	clazzSumStatisticDTO.minReadWord = Long.MAX_VALUE;
+    	double totalCoin = 0;
+    	double totalReadNum = 0;
+    	double totalReadWord = 0;
+    	
+    	// Initlizate ClassCategoryData of clazzSumStatisticDTO
+    	clazzSumStatisticDTO.classCategoryData = clazzSumStatisticDTO.new ClassCategoryData();
+    	clazzSumStatisticDTO.classCategoryData.labels = new ArrayList<String>();
+    	clazzSumStatisticDTO.classCategoryData.dataList = new ArrayList<ClassCategoryData.Data>();
+    	
+    	// Initlizate categoryCount labelMap
+    	Set<String> labelSet = new TreeSet<String>();
+    	List<TreeMap<String, Integer>> dataMapList = new ArrayList<TreeMap<String, Integer>>();
 
-        ClazzSumStatistic clazzSumStatistic = repository.getSumStatisticClazz(grade);
-
-        return clazzSumStatistic;
+    	// Get clazz list 
+    	List<Clazz> clazzes = repository.findByGradeAndCampus(grade, campusId);
+    	clazzSumStatisticDTO.classSums = new ArrayList<ClazzSumStatisticDTO.ClassSum>();
+    	
+    	for ( Clazz clazz : clazzes ) {
+    		
+    		// Get data from clazzStatistic
+    		ClazzStatistic clazzStatistic = clazz.getClazzStatistic();
+    		long coin = clazzStatistic.getTotalCoin();
+    		long readNum = clazzStatistic.getTotalReads();
+    		long readWord = clazzStatistic.getTotalReadWords();
+    		
+    		// Save data to DTO
+    		ClazzSumStatisticDTO.ClassSum classSum = clazzSumStatisticDTO.new ClassSum();
+    		classSum.name = clazz.getName();
+    		classSum.coin = coin;
+    		classSum.readNum = readNum;
+    		classSum.readWord = readWord;
+    		clazzSumStatisticDTO.classSums.add(classSum);
+    		
+    		// Update clazzSumStatisticDTO maxim minimum variables
+    		clazzSumStatisticDTO.maxCoin = Math.max(clazzSumStatisticDTO.maxCoin, coin);
+    		clazzSumStatisticDTO.minCoin = Math.min(clazzSumStatisticDTO.minCoin, coin);
+    		totalCoin += coin;
+    		clazzSumStatisticDTO.maxReadNum = Math.max(clazzSumStatisticDTO.maxReadNum, readNum);
+    		clazzSumStatisticDTO.minReadNum = Math.min(clazzSumStatisticDTO.minReadNum, readNum);
+    		totalReadNum += readNum;
+    		clazzSumStatisticDTO.maxReadWord = Math.max(clazzSumStatisticDTO.maxReadWord, readWord);
+    		clazzSumStatisticDTO.minReadWord = Math.min(clazzSumStatisticDTO.maxReadWord, readWord);
+    		totalReadWord += readWord;
+    		
+    		// Get data from categoryCount
+    		Set<ClazzCategoryCount> categoryCount = clazz.getCategoryCount();
+    		TreeMap<String, Integer> dataMap = new TreeMap<String, Integer>();
+    		for (ClazzCategoryCount clazzCategoryCount : categoryCount) {
+    			
+    			// Save label to set
+    			Dictionary dictionary = clazzCategoryCount.getDictionary();
+    			String label = dictionary.getName();
+    			labelSet.add(label);
+    			
+    			// Save label to map
+    			int count = clazzCategoryCount.getCount();
+    			dataMap.put(label, count);
+    		}
+    		dataMapList.add(dataMap);
+    	}
+    	
+		// Update clazzSumStatisticDTO average variables
+    	clazzSumStatisticDTO.avgCoin = (long) (totalCoin / clazzes.size());
+    	clazzSumStatisticDTO.avgReadNum = (long) (totalReadNum / clazzes.size());
+    	clazzSumStatisticDTO.avgReadWord = (long) (totalReadWord / clazzes.size());
+    	
+    	
+    	// Save labels to DTO
+		for (String label : labelSet) {
+			clazzSumStatisticDTO.classCategoryData.labels.add(label);
+		}
+    	
+		// Save dataList to DTO
+		clazzSumStatisticDTO.classCategoryData.maxData = Long.MIN_VALUE;
+		clazzSumStatisticDTO.classCategoryData.minData = Long.MAX_VALUE;
+		double totalData = 0;
+		Long dataNum = 0L;
+    	
+		for (TreeMap<String, Integer> dataMap : dataMapList) {
+			ClassCategoryData.Data data = clazzSumStatisticDTO.classCategoryData.new Data();
+			data.data = new ArrayList<Integer>();
+    		for (String label : labelSet) {
+    			
+    			// Save count to data of DTO
+    			Integer count = dataMap.get(label);
+    			count = count == null ? 0 : count;
+    			data.data.add(count);
+    			
+    			// Update total minimum maximum of data
+    			clazzSumStatisticDTO.classCategoryData.maxData = Math.max(clazzSumStatisticDTO.classCategoryData.maxData, count);
+    			clazzSumStatisticDTO.classCategoryData.minData = Math.min(clazzSumStatisticDTO.classCategoryData.minData, count);
+    			totalData += count;  
+    			dataNum ++ ;
+    		}
+			clazzSumStatisticDTO.classCategoryData.dataList.add(data);
+    	}
+		
+		clazzSumStatisticDTO.classCategoryData.avgData = (long) ( totalData / dataNum );
+    	
+    	return clazzSumStatisticDTO;
     }
 
     @Override

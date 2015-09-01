@@ -3,9 +3,9 @@
     <div class="container-fluid"><div class="container-fluid">
         <h5 class="title">
             一共<span class="grandis-text">{{ classes.length }}</span>个班级，
-            平均财富值为<span class="grandis-text">23</span>金币，
-            最高财富值为<span class="grandis-text">26</span>金币，
-            最第财富值为<span class="grandis-text">16</span>金币。
+            平均财富值为<span class="grandis-text">{{  SumStatistic.avgCoin }}</span>金币，
+            最高财富值为<span class="grandis-text">{{  SumStatistic.maxCoin }}</span>金币，
+            最低财富值为<span class="grandis-text">{{  SumStatistic.minCoin }}</span>金币。
         </h5>
     </div></div>
 </div>
@@ -21,8 +21,8 @@
                 <div class="col-md-10">
                     <h5 class="row">
                         <div class="fr reading-count-width">&nbsp;
-                            <div class="grandis fl" ng-style="{width: class.rate + '%'}">&nbsp;</div>
-                            <div class="fl">&nbsp;&nbsp;{{ class.num }}</div>
+                            <div class="grandis fl" ng-style="{width: class.coin / SumStatistic.maxCoin * 85 + '%'}">&nbsp;</div>
+                            <div class="fl">&nbsp;&nbsp;{{ class.coin }}</div>
                         </div>
                     </h5>
                 </div>

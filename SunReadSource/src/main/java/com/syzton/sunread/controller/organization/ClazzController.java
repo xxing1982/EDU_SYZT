@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.controller.BaseController;
+import com.syzton.sunread.dto.clazz.ClazzSumStatisticDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.organization.ClazzDTO;
 import com.syzton.sunread.model.organization.Clazz;
-import com.syzton.sunread.model.organization.ClazzSumStatistic;
 import com.syzton.sunread.service.organization.ClazzService;
 
 @Controller
@@ -147,10 +147,11 @@ public class ClazzController extends BaseController{
         return averagePoint;
     }
 
-    @RequestMapping(value = "/grade/{id}/sumstatistic", method = RequestMethod.GET)
+    @RequestMapping(value = "/sumStatistics", method = RequestMethod.GET)
     @ResponseBody
-    public ClazzSumStatistic sumStatistic(@PathVariable("id") int id) throws NotFoundException {
-        return service.getSumClazzStatistic(id);
+    public ClazzSumStatisticDTO sumStatistic(@RequestParam("grade") int grade,
+    		                                 @RequestParam("campusId") long campusId) throws NotFoundException {
+        return service.getSumClazzStatistic(grade, campusId);
 
     }
     @RequestMapping(value = "/grade/{id}/clazzs", method = RequestMethod.GET)

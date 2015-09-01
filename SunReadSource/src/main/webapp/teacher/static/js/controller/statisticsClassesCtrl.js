@@ -1,42 +1,19 @@
-ctrls.controller("statisticsClassesController", ['$rootScope', '$scope', function ($rootScope, $scope) {
+ctrls.controller("statisticsClassesController", ['$rootScope', '$scope', 'SumStatistic', function ($rootScope, $scope, SumStatistic) {
 
-    // Data get from server
-    $scope.classes = [{
-        name: '五年一班',
-        rate: 80,
-        num: 10,
-        word: 1000
-    }, {
-        name: '五年二班',
-        rate: 90,
-        num: 20,
-        word: 1000,
-    }, {
-        name: '五年三班',
-        rate: 80,
-        num: 19,
-        word: 900,
-    }, {
-        name: '五年四班',
-        rate: 70,
-        num: 18,
-        word: 800,
-    }, {
-        name: '五年五班',
-        rate: 60,
-        num: 17,
-        word: 700,
-    }, {
-        name: '五年六班',
-        rate: 50,
-        num: 16,
-        word: 600,
-    }, {
-        name: '五年九班',
-        rate: 40,
-        num: 15,
-        word: 500,
-    }];
+    // The functin to get sumStatistic 
+    $scope.handle.getSumStatistic = function ( grade, campusId ) {
+        $scope.SumStatistic = SumStatistic.get( {grade: grade, campusId: campusId}, function(){
+            
+            // Apply classes
+            $scope.classes = $scope.SumStatistic.classSums;
+            
+            // Apply classCategoryData
+            if ($scope.handle.renderCategories) {
+                $scope.handle.renderCategories($scope.SumStatistic);
+            }
+            
+        });
+    }
     
     $rootScope.classesRouteMap = {
         coins: /\/statistics\/classes\/coins.*/,
