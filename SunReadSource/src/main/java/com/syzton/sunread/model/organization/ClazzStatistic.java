@@ -28,6 +28,8 @@ public class ClazzStatistic extends AbstractEntity{
     private int totalReadWords;
 
     private int totalCoin;
+    
+    private int totalNote;
 
 
 
@@ -58,6 +60,18 @@ public class ClazzStatistic extends AbstractEntity{
 
     public int getTotalCoin() {
         return totalCoin;
+    }
+    
+    public void increaseTotalNote() {
+        ++this.totalNote;
+    }
+    
+    public void setTotalNote(int totalNote) {
+        this.totalNote = totalNote;
+    }
+
+    public int getTotalNote() {
+        return totalNote;
     }
 
     public int getTotalPoints() {

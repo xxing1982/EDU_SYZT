@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,11 +32,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.syzton.sunread.dto.campus.CampusOrderDTO;
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.exception.common.AuthenticationException;
 import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.organization.Campus;
 import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.organization.ClazzStatistic;
 import com.syzton.sunread.model.security.Role;
 import com.syzton.sunread.model.semester.Semester;
 import com.syzton.sunread.model.task.Task;
@@ -1176,6 +1182,62 @@ public class UserRepositoryService implements UserService,UserDetailsService{
 		} else {
 			return "该管理员已经存在";
 		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	Page<CampusOrderDTO> listToPage( List<CampusOrderDTO> campusOrderDTOList, 
+			                        int page, int size, final String sortBy, 
+			                        final String direction, Pageable pageable) {
+		
+		// FIXME Pageable not work for aggregate functions
+		// Sort by parameters
+		Collections.sort(campusOrderDTOList, new Comparator() {
+			@Override
+			public int compare(Object o1, Object o2) {
+				int directionFlag = direction.equals("DESC") ? -1 : 1;
+				switch (sortBy) {
+					case "point": return directionFlag * ( 
+								  ((CampusOrderDTO)o1).point > ((CampusOrderDTO)o2).point ? 1 : -1);
+					case "testPasses": return directionFlag * (
+							      ((CampusOrderDTO)o1).testPasses > ((CampusOrderDTO)o2).testPasses ? 1 : -1);
+					case "coin": return directionFlag * (
+							      ((CampusOrderDTO)o1).coin > ((CampusOrderDTO)o2).coin ? 1 : -1);
+					case "notes": return directionFlag * (
+							      ((CampusOrderDTO)o1).notes > ((CampusOrderDTO)o2).notes ? 1 : -1);
+					default : return -1;
+				}
+			}
+		});
+		
+		// The page entity
+		Page<CampusOrderDTO> CampusOrderDTOPage = new PageImpl(
+				campusOrderDTOList.subList( page * size, Math.min(page * size + size, campusOrderDTOList.size())),
+				pageable,  campusOrderDTOList.size() );
+		return CampusOrderDTOPage;
+	}
+
+	public Page<CampusOrderDTO> hotCampusesInGradeAndSchoolDistrict(int grade, 
+			long schoolDistrictId, int page, int size, 
+			final String sortBy, final String direction, Pageable pageable) {
+		
+		// Get list of DTO
+		List<CampusOrderDTO> campusOrderDTOList = 
+				campusRepository.hotCampusesInGradeAndSchoolDistrict(grade, schoolDistrictId);
+
+		// Convert list to page
+		return listToPage(campusOrderDTOList, page, size, sortBy, direction, pageable);
+	}
+	
+	public Page<CampusOrderDTO> hotCampusesInGradeAndEduGroup(int grade,
+			long eduGroupId, int page, int size, 
+			final String sortBy, final String direction, Pageable pageable) {
+		
+		// Get list of DTO
+		List<CampusOrderDTO> campusOrderDTOList = 
+				campusRepository.hotCampusesInGradeAndEduGroup(grade, eduGroupId);
+
+		// Convert list to page
+		return listToPage(campusOrderDTOList, page, size, sortBy, direction, pageable);
 	}
 	
 }

@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syzton.sunread.controller.BaseController;
 import com.syzton.sunread.controller.util.SecurityContextUtil;
+import com.syzton.sunread.dto.campus.CampusOrderDTO;
 import com.syzton.sunread.dto.common.PageResource;
 import com.syzton.sunread.dto.user.UserDTO;
 import com.syzton.sunread.dto.user.UserExtraDTO;
@@ -302,6 +303,30 @@ public class UserController extends BaseController {
         Page<Student> hotReaders = userService.hotReadersInGrade(gradeId, pageable);
 
         return new PageResource<>(hotReaders,"page","size") ;
+
+
+    }
+    
+    @RequestMapping(value = "/campus/grade/{grade}/orders", method = RequestMethod.GET)
+    @ResponseBody
+    public PageResource<CampusOrderDTO> campusOrdersInGrade( @PathVariable("grade") int grade,
+		                                                     @RequestParam("page") int page,
+		                                                     @RequestParam("size") int size,
+		                                                     @RequestParam(value = "sortBy", required = false) String sortBy,
+		                                                     @RequestParam(value = "direction", required = false) String direction,
+		                                                     @RequestParam(value = "eduGroupId", required = false) Long eduGroupId,
+		                                                     @RequestParam(value = "schoolDistrictId", required = false) Long schoolDistrictId) {
+        sortBy = sortBy == null ? "point" : sortBy;
+        Pageable pageable = this.getPageable(page, size, sortBy, direction);
+        Page<CampusOrderDTO> hotCampuses = null;
+        if (schoolDistrictId != null) {
+        	hotCampuses = userService.hotCampusesInGradeAndSchoolDistrict( grade, schoolDistrictId, page, size, sortBy, direction, pageable);
+        }
+        if (eduGroupId != null) {
+        	hotCampuses = userService.hotCampusesInGradeAndEduGroup( grade, eduGroupId, page, size, sortBy, direction, pageable);
+        }
+        
+        return new PageResource<>(hotCampuses,"page","size") ;
 
 
     }

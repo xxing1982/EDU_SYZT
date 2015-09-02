@@ -40,6 +40,9 @@ Loadable.prototype.get = function (callback){
     // Make the reference to the loadable
     var loadable = this;
 
+    // Change the state of the loading state
+    loadable.loadingState = stateTexts.loading;
+    
     // Make the reference to the callback
     if (typeof callback === 'function') {
         this.callback = callback; 
@@ -58,7 +61,7 @@ Loadable.prototype.get = function (callback){
                 // Get the last page of the Notes,
                 // Change the state of the loading state and turn on finished
                 loadable.loadingState = stateTexts.nomore;
-                if (!loadable.finished) {
+                if (!loadable.finished || entities.content.length === 0) {
                     entities.content = entities.content.concat(newPage.content);
                 }
                 loadable.finished = true;

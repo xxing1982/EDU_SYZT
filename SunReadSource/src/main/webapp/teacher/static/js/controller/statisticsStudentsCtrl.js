@@ -7,6 +7,7 @@ ctrls.controller("statisticsStudentsController", ['$scope', 'Hotclazz', 'Order',
     
     // Hidden or show some filter
     classFilters._2class.hidden = false;
+    campusFilters._3campus.hidden = false;
         
     // Get the orders pagable by teacher classId
     // The best practice of loadable

@@ -8,7 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.syzton.sunread.dto.campus.CampusOrderDTO;
 import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.Clazz;
+import com.syzton.sunread.model.organization.ClazzStatistic;
 import com.syzton.sunread.model.organization.EduGroup;
 
 /**
@@ -28,4 +31,26 @@ public interface CampusRepository extends JpaRepository<Campus,Long> {
 	
 	@Query("select c from Campus c where c.eduGroup.id = (:eduGroupId)")
 	public List<Campus> findByEduGroupId(@Param("eduGroupId")Long eduGroupId);
+
+	@Query(value = "SELECT new com.syzton.sunread.dto.campus.CampusOrderDTO( "
+							+ "c.campus.name,"
+							+ "avg(c.clazzStatistic.totalPoints),"
+							+ "avg(c.clazzStatistic.totalReads), "
+							+ "avg(c.clazzStatistic.totalCoin),"
+							+ "avg(c.clazzStatistic.totalNote) )"
+		 + "FROM Clazz c "
+		 + "WHERE c.campus.schoolDistrict.id = :schoolDistrictId AND c.grade = :grade "
+		 + "GROUP BY c.campus.name ")
+	public List<CampusOrderDTO> hotCampusesInGradeAndSchoolDistrict(@Param("grade")int grade, @Param("schoolDistrictId")long schoolDistrictId);
+
+	@Query(value = "SELECT new com.syzton.sunread.dto.campus.CampusOrderDTO( "
+							+ "c.campus.name,"
+							+ "avg(c.clazzStatistic.totalPoints),"
+							+ "avg(c.clazzStatistic.totalReads), "
+							+ "avg(c.clazzStatistic.totalCoin),"
+							+ "avg(c.clazzStatistic.totalNote) )"
+		 + "FROM Clazz c "
+		 + "WHERE c.campus.eduGroup.id = :eduGroupId AND c.grade = :grade "
+		 + "GROUP BY c.campus.name ")
+	public List<CampusOrderDTO> hotCampusesInGradeAndEduGroup(@Param("grade")int grade, @Param("eduGroupId")long eduGroupId);
 }

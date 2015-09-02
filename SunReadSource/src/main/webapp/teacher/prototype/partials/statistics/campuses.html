@@ -52,19 +52,24 @@
 
 <!-- Items -->
 <div class="leftpart">
-    <div class="myBlock mt20 page-body" ng-repeat="order in orders">
+    <div class="myBlock mt20 page-body" ng-repeat="order in campusOrderLoadable.entities.content">
         <div class="container-fluid"><div class="container-fluid">
             <div class="row">
                 <div class="row-same-height text-center">
-                    <div class="col-xs-3 col-xs-height col-middle"><p class="row title">张大父</p></div>
-                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">25</p></div>
-                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">25</p></div>
-                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">15</p></div>
-                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">15</p></div>
-                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a>查看详情</a></p></div>
+                    <div class="col-xs-3 col-xs-height col-middle"><p class="row title">{{order.name}}</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.point}}</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.testPasses}}</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.coin}}</p></div>
+                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title">{{order.notes}}</p></div>
+<!--                    <div class="col-xs-2 col-xs-height col-middle"><p class="row title"><a>查看详情</a></p></div>-->
                 </div>
             </div>
         </div></div>
+    </div>
+    
+    <!-- Loadmore -->
+    <div class="myBlock mt20 page-body">
+        <div class="load-more-bottom" ng-click="campusOrderLoadable.get()">{{ campusOrderLoadable.loadingState }}</div>
     </div>
 </div>
     

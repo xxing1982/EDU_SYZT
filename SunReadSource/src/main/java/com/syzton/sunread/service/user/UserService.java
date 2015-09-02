@@ -1,11 +1,13 @@
 package com.syzton.sunread.service.user;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.syzton.sunread.dto.campus.CampusOrderDTO;
 import com.syzton.sunread.dto.user.UserExtraDTO;
 import com.syzton.sunread.model.task.Task;
 import com.syzton.sunread.model.user.Admin;
@@ -110,6 +112,12 @@ public interface UserService {
 	public String addSuperSystemAdmin(String userId, String password);
 
 	Page<Teacher> searchTeachersByName(String name, long campusId,Pageable pageable);
+
+	Page<CampusOrderDTO> hotCampusesInGradeAndSchoolDistrict(int grade, long schoolDistrictId, int page, int size, String sortBy, String direction, Pageable pageable);
+
+	Page<CampusOrderDTO> hotCampusesInGradeAndEduGroup(int grade, long eduGroup, int page, int size, String sortBy, String direction, Pageable pageable);
+
+
 
 
 }

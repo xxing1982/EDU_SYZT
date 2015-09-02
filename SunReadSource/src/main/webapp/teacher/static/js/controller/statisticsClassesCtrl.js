@@ -29,6 +29,7 @@ ctrls.controller("statisticsClassesController", ['$rootScope', '$scope', 'SumSta
     
     // Hidden or show some filter
     classFilters._2class.hidden = true;
+    campusFilters._3campus.hidden = false;
     
     
 }]);

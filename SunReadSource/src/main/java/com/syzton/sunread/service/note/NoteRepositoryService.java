@@ -18,6 +18,7 @@ import com.syzton.sunread.exception.common.NotFoundException;
 import com.syzton.sunread.model.book.Book;
 import com.syzton.sunread.model.note.Note;
 import com.syzton.sunread.model.organization.Campus;
+import com.syzton.sunread.model.organization.Clazz;
 import com.syzton.sunread.model.coinhistory.CoinHistory;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinFrom;
 import com.syzton.sunread.model.coinhistory.CoinHistory.CoinType;
@@ -28,6 +29,7 @@ import com.syzton.sunread.repository.SemesterRepository;
 import com.syzton.sunread.repository.book.BookRepository;
 import com.syzton.sunread.repository.note.NoteRepository;
 import com.syzton.sunread.repository.organization.CampusRepository;
+import com.syzton.sunread.repository.organization.ClazzRepository;
 import com.syzton.sunread.repository.user.StudentRepository;
 import com.syzton.sunread.repository.user.UserRepository;
 import com.syzton.sunread.service.coinhistory.CoinHistoryService;
@@ -76,6 +78,14 @@ public class NoteRepositoryService implements NoteService {
     }
     
     /* Auto wire of campus */
+    private ClazzRepository clazzRepository;
+
+    @Autowired
+    public void ClazzRepositoryService(ClazzRepository clazzRepository) {
+        this.clazzRepository = clazzRepository;
+    }
+    
+    /* Auto wire of campus */
     private CampusRepository campusRepository;
 
     @Autowired
@@ -113,6 +123,7 @@ public class NoteRepositoryService implements NoteService {
         bookRepository.save(book);
         User user = securityContextUtil.getUser();
         Student student = studentRepository.findOne(user.getId());
+        Clazz clazz = clazzRepository.findOne(student.getClazzId());
         Campus campus = campusRepository.findOne( student.getCampusId() );
         Note note = new Note();
         note.setTitle(added.getTitle());
@@ -121,6 +132,12 @@ public class NoteRepositoryService implements NoteService {
         note.setBook(book);
         note.setUser(user);
         note.setImage(added.getImage());
+        
+        // Update statistics
+        student.getStatistic().increaseNotes();
+        clazz.getClazzStatistic().increaseTotalNote();
+        studentRepository.save(student);
+        clazzRepository.save(clazz);
         
         // Add coinhistories entity
         CoinHistory coinHistory = new CoinHistory();

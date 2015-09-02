@@ -218,11 +218,22 @@ ctrls.controller("statisticsController", ['$rootScope', '$scope', 'Teacher', 'Ad
                                                                             campusFilters._3campus.selected_status ).id,
                                 currentGrade = getStatuseBySelected_status( classFilters._1grade.statuses, 
                                                                            classFilters._1grade.selected_status ).name;
-                            // UGLY CODE 
+                            // FIXME UGLY CODE 
                             currentGrade = currentGrade.slice(0, currentGrade.length - 2);            
                             if ($scope.handle.getSumStatistic) {
                                 $scope.handle.getSumStatistic(currentGrade, currentCampusId);
                             }
+                            if ( $scope.handle.initCampusOrderLoadable) {
+                                if ($scope.SchoolDistrict) {
+                                $scope.handle.initCampusOrderLoadable( { grade: currentGrade,
+                                                                         schoolDistrictId: $scope.SchoolDistrict.id } );
+                                }
+                                if ($scope.EduGroup) {
+                                $scope.handle.initCampusOrderLoadable( { grade: currentGrade,
+                                                                         eduGroupId: $scope.EduGroup.id } );
+                                }
+                            }            
+                            
                                 
                             // Current selected grade
                             var grade = [];

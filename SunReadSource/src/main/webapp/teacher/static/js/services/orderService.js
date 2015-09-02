@@ -9,3 +9,10 @@ orderServices.factory('Order', ['$resource', 'config',
             {by:'@by', id:'@id'}, {}
         );
 }]);
+
+orderServices.factory('CampusOrder', ['$resource', 'config',
+	function($resource, config){
+		return $resource(config.HOST + "campus/:by/:id/orders",
+            {by:'@by', id:'@id'}, {}
+        );
+}]);
