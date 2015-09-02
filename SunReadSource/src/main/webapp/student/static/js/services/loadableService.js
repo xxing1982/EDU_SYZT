@@ -40,6 +40,15 @@ Loadable.prototype.get = function (callback){
     // Make the reference to the loadable
     var loadable = this;
 
+    // Change the state of the loading state
+    loadable.loadingState = stateTexts.loading;
+    
+    // Make the reference to the callback
+    if (typeof callback === 'function') {
+        this.callback = callback; 
+    }
+    var getCallback = this.callback;
+    
     // Get the entities of new page
     var newPage = this.Entity.get(
         $.extend({}, {page: this.page, size: this.size}, this.arguments), function(){
@@ -52,7 +61,7 @@ Loadable.prototype.get = function (callback){
                 // Get the last page of the Notes,
                 // Change the state of the loading state and turn on finished
                 loadable.loadingState = stateTexts.nomore;
-                if (!loadable.finished) {
+                if (!loadable.finished || entities.content.length === 0) {
                     entities.content = entities.content.concat(newPage.content);
                 }
                 loadable.finished = true;
@@ -63,11 +72,12 @@ Loadable.prototype.get = function (callback){
                 entities.content = entities.content.concat(newPage.content);
                 loadable.page ++;
             }
+            
+            // Invoke the callback
+            if (getCallback && typeof getCallback === 'function') { getCallback(); };
         });
-
-    // Invoke the callback
-    if (callback && typeof callback === 'function') { callback(); };
 };
+
 
 angular.module('loadableServices', []).
     factory('Loadable', function () {
