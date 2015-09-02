@@ -268,6 +268,7 @@ public class ClazzRepositoryService implements ClazzService {
     			// Save label to set
     			Dictionary dictionary = clazzCategoryCount.getDictionary();
     			String label = dictionary.getName();
+                if (label.equals("所有类别")) continue;
     			labelSet.add(label);
     			
     			// Save label to map
